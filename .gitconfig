@@ -1,0 +1,7 @@
+[user]
+	name = YOUR NAME
+	name = Sary
+	email = saryalter@gmail.com
+[http]
+	sslCAInfo = C:\\ProgramData\\NetFree\\CA\\netfree-ca-bundle-curl.crt
+	sslbackend = openssl
