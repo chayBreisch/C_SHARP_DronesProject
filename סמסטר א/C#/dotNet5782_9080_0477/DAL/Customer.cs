@@ -20,7 +20,7 @@ namespace IDAL
                 return $"{ID}";
             }
         }
-    } 
+    }
 }
 
 
