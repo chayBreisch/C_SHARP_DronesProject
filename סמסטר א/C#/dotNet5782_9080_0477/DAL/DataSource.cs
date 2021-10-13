@@ -23,53 +23,55 @@ namespace DalObject
 
         public static void Initialize()
         {
-            Random r = new Random();
-            int rInt = r.Next(2, 100);
-            //Console.WriteLine($"Enter {rInt} Stations");
-
-
-
-            for (int i = 0; i < rInt; i++)
+            Random rand = new Random();
+            for (int i = 0; i < 2; i++)
             {
-                Stations[i].ID = Config.StationIndex + 1;
-                Stations[i].Name = $"station{i}";
-                Stations[i].Longitude = i;
-                Stations[i].Latitude = i;
-                Stations[i].ChargeSlots = i;
+                Stations[Config.StationIndex].ID = Config.StationIndex + 1;
+                Stations[Config.StationIndex].Name = Config.StationIndex + 1;
+                Stations[Config.StationIndex].Latitude = rand.Next();
+                Stations[Config.StationIndex].Longitude = rand.Next();
+                Stations[Config.StationIndex].ChargeSlots = rand.Next(300);
                 Config.StationIndex++;
             }
 
-
-        //Console.WriteLine($"Enter {rInt} drones");
-        rInt = r.Next(5, 100);
-            for (int i = 0; i < rInt; i++)
+            for (int i = 0; i < 5; i++)
             {
-                
-                Drones[i].ID = Config.StationIndex + 1;
-                Drones[i].Model = $"station{i}";
-                /*Drones[i].MaxWeight = i;
-                Drones[i].Status = i;*/
-                Drones[i].Battery = i;
-                Drones[i].ID = Convert.ToInt32(Console.ReadLine());
+                Drones[Config.DronesIndex].ID = Config.DronesIndex + 1;
+                Drones[Config.DronesIndex].Model = "MarvicAir2";
+                Drones[Config.DronesIndex].MaxWeight = WeightCatagories.Heavy + i;
+                Drones[Config.DronesIndex].Status = DroneStatus.Delivery + i;
+                Drones[Config.DronesIndex].Battery = rand.Next(100);
                 Config.DronesIndex++;
             }
 
-            //Console.WriteLine($"Enter {rInt} customer");
-            rInt = r.Next(10, 100);
-            for (int i = 0; i < rInt; i++)
+            for (int i = 0; i < 10; i++)
             {
-                Customers[i].ID = Convert.ToInt32(Console.ReadLine());
+                Customers[Config.CustomerIndex].ID = Config.CustomerIndex + 1;
+                Customers[Config.CustomerIndex].Name = $"customer{i}";
+                Customers[Config.CustomerIndex].Phone = $"{rand.Next(111111111, 999999999)}";
+                Customers[Config.CustomerIndex].Latitude = rand.Next();
+                Customers[Config.CustomerIndex].Longitude = rand.Next();
                 Config.CustomerIndex++;
             }
 
-            //Console.WriteLine($"Enter {rInt} parcials");
-            rInt = r.Next(10, 100);
-            for (int i = 0; i < rInt; i++)
+            for (int i = 0; i < 10; i++)
             {
-                Parcials[i].ID = Convert.ToInt32(Console.ReadLine());
+                Parcials[Config.ParcialIndex].ID = Config.ParcialIndex + 1;
+                Parcials[Config.ParcialIndex].SenderID = rand.Next() % Config.CustomerIndex;
+                Parcials[Config.ParcialIndex].TargetID = rand.Next() % Config.StationIndex;
+                Parcials[Config.ParcialIndex].Weight = (WeightCatagories)(rand.Next() %3);
+                Parcials[Config.ParcialIndex].Priority = (Priorities)(rand.Next() % 3);
+                Parcials[Config.ParcialIndex].Requested = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
+                Parcials[Config.ParcialIndex].DroneID = rand.Next() % Config.DronesIndex;
+                Parcials[Config.ParcialIndex].Scheduled = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
+                Parcials[Config.ParcialIndex].PickedUp = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
+                Parcials[Config.ParcialIndex].Delivered = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60)); ;
                 Config.ParcialIndex++;
+
             }
+
+
         }
-       
+
     }
 }

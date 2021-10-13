@@ -1,0 +1,12 @@
+H:\סמסטר א\C#\dotNet5782_9080_0477\DAL\bin\Debug\net5.0\DAL.deps.json
+H:\סמסטר א\C#\dotNet5782_9080_0477\DAL\bin\Debug\net5.0\DAL.dll
+H:\סמסטר א\C#\dotNet5782_9080_0477\DAL\bin\Debug\net5.0\ref\DAL.dll
+H:\סמסטר א\C#\dotNet5782_9080_0477\DAL\bin\Debug\net5.0\DAL.pdb
+H:\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.csproj.AssemblyReference.cache
+H:\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+H:\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.AssemblyInfoInputs.cache
+H:\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.AssemblyInfo.cs
+H:\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.csproj.CoreCompileInputs.cache
+H:\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.dll
+H:\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\ref\DAL.dll
+H:\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.pdb
