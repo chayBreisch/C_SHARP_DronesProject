@@ -1,3 +1,5 @@
 [user]
 	name = chayBreisch
 	email = Handesaim3A5@mbjcomp.org.il
+[http]
+	sslCAInfo = C:\\ProgramData\\NetFree\\CA\\netfree-ca-bundle-curl.crt
