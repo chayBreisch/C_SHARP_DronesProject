@@ -49,6 +49,70 @@ namespace DalObject
             }
             return Parcials;
         }
-    }
+        public void AddDrone(Drone newDrone)
+        {
+            DataSource.Drones[DataSource.Config.DronesIndex] = newDrone;
+            DataSource.Config.DronesIndex++;
+        }
+        public void AddStation(Station newStation)
+        {
+            DataSource.Stations[DataSource.Config.StationIndex] = newStation;
+            DataSource.Config.StationIndex++;
+        }
+        public void AddCustomer(Customer newCustomer)
+        {
+            DataSource.Customers[DataSource.Config.CustomerIndex] = newCustomer;
+            DataSource.Config.CustomerIndex++;
+        }
+        public void AddParcial(Parcial newParcial)
+        {
+            DataSource.Parcials[DataSource.Config.ParcialIndex] = newParcial;
+            DataSource.Config.ParcialIndex++;
+        }
+        public void updateDroneConectedToParcial(Drone newDrone, Parcial newParcial)
+        {
+            /*for (int i = 0; i < DataSource.Config.DronesIndex; i++)
+            {
+                if(DataSource.Drones[i].ID == newDrone.ID)
+                {
+                    DataSource.Drones[i] = newDrone;
+                }
+                break;
+            }*/
+        }
+        public void showStations()
+        {
+            for (int i = 0; i < DataSource.Config.StationIndex; i++)
+            {
+                Console.WriteLine($"station {i}: ID: {DataSource.Stations[i].ID}  Name: {DataSource.Stations[i].Name}  " +
+                    $"Longitude: {DataSource.Stations[i].Longitude}  Latitude: {DataSource.Stations[i].Latitude}");
 
+            }
+        }
+        public void showDrones()
+        {
+            for (int i = 0; i < DataSource.Config.DronesIndex; i++)
+            {
+                Console.WriteLine($"drone: {i}: id: {DataSource.Stations[i].ID} Name: {DataSource.Stations[i].Name}" +
+                    $"Longitude: {DataSource.Stations[i].Longitude} Latitude: {DataSource.Stations[i].Latitude}");
+            }
+        }
+        public void showParcial()
+        {
+            for (int i = 0; i < DataSource.Config.ParcialIndex; i++)
+            {
+                Console.WriteLine($"parcial {i}: ID: {DataSource.Parcials[i].ID}  PickedUp: {DataSource.Parcials[i].PickedUp}" +
+                    $" Priority: {DataSource.Parcials[i].Priority} Requested: {DataSource.Parcials[i].Requested} Scheduled: {DataSource.Parcials[i].Scheduled}" +
+                    $" SenderID: {DataSource.Parcials[i].SenderID} TargetID: {DataSource.Parcials[i].TargetID} Weight: {DataSource.Parcials[i].Weight}");
+            }
+        }
+        public void showCustomer()
+        {
+            for (int i = 0; i < DataSource.Config.CustomerIndex; i++)
+            {
+                Console.WriteLine($"customer {i}: ID: {DataSource.Customers[i].ID} Name: {DataSource.Customers[i].Name}" +
+                    $"Longitude: {DataSource.Customers[i].Longitude} Latitude: {DataSource.Customers[i].Latitude} Phone: {DataSource.Customers[i].Phone}");
+            }
+        }
+    }
 }
