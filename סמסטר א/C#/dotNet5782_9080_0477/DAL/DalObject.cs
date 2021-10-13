@@ -107,8 +107,8 @@ namespace DalObject
         public void updateDroneConectedToParcial(Drone newDrone, Parcial newParcial)
         {
             newDrone.Status = DroneStatus.Delivery;
-
-            
+            newParcial.DroneID = newDrone.ID;
+            newParcial.PickedUp = DateTime.Now;
         }
     }
 }
