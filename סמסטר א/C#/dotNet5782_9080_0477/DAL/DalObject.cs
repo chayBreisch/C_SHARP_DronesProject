@@ -104,11 +104,41 @@ namespace DalObject
                     $"Longitude: {DataSource.Customers[i].Longitude} Latitude: {DataSource.Customers[i].Latitude} Phone: {DataSource.Customers[i].Phone}");
             }
         }
-        public void updateDroneConectedToParcial(Drone newDrone, Parcial newParcial)
+        public void updateCollectParcialByDrone(Drone newDrone, Parcial newParcial)
         {
             newDrone.Status = DroneStatus.Delivery;
+            
+        }
+        public void updateConectDroneToParcial(Parcial newParcial)
+        {
+            Drone newDrone = new Drone();
+            for (int i = 0; i < DataSource.Config.DronesIndex; i++)
+            {
+                if(DataSource.Drones[i].Status == DroneStatus.Available)
+                {
+                    newDrone = DataSource.Drones[i];
+                }
+            }
             newParcial.DroneID = newDrone.ID;
+
+        }
+        public void updateSupplyParcialToCustomer(Parcial newParcial)
+        {
             newParcial.PickedUp = DateTime.Now;
+        }
+        public void updateSendDroneToCharge(Drone NewDrone, Station station)
+        {
+            DroneCharge charger = new DroneCharge();
+            NewDrone.Status = DroneStatus.Maintenance;
+            charger.DroneID = NewDrone.ID;
+            charger.StationID = station.ID;
+            DataSource.DroneChargers[DataSource.Config.DroneChargeIndex] = charger;
+            DataSource.Config.DroneChargeIndex++;
+        }
+        public void updateUnChargeDrone(Drone NewDrone)
+        {
+            NewDrone.Status = DroneStatus.Available;
+            ///////////להוריד את העמדת טעינה מהמערך
         }
     }
 }
