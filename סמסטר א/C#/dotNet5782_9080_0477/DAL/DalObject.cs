@@ -69,17 +69,7 @@ namespace DalObject
             DataSource.Parcials[DataSource.Config.ParcialIndex] = newParcial;
             DataSource.Config.ParcialIndex++;
         }
-        public void updateDroneConectedToParcial(Drone newDrone, Parcial newParcial)
-        {
-            /*for (int i = 0; i < DataSource.Config.DronesIndex; i++)
-            {
-                if(DataSource.Drones[i].ID == newDrone.ID)
-                {
-                    DataSource.Drones[i] = newDrone;
-                }
-                break;
-            }*/
-        }
+       
         public void showStations()
         {
             for (int i = 0; i < DataSource.Config.StationIndex; i++)
@@ -97,7 +87,7 @@ namespace DalObject
                     $"Longitude: {DataSource.Stations[i].Longitude} Latitude: {DataSource.Stations[i].Latitude}");
             }
         }
-        public void showParcial()
+        public void showParcials()
         {
             for (int i = 0; i < DataSource.Config.ParcialIndex; i++)
             {
@@ -106,13 +96,19 @@ namespace DalObject
                     $" SenderID: {DataSource.Parcials[i].SenderID} TargetID: {DataSource.Parcials[i].TargetID} Weight: {DataSource.Parcials[i].Weight}");
             }
         }
-        public void showCustomer()
+        public void showCustomers()
         {
             for (int i = 0; i < DataSource.Config.CustomerIndex; i++)
             {
                 Console.WriteLine($"customer {i}: ID: {DataSource.Customers[i].ID} Name: {DataSource.Customers[i].Name}" +
                     $"Longitude: {DataSource.Customers[i].Longitude} Latitude: {DataSource.Customers[i].Latitude} Phone: {DataSource.Customers[i].Phone}");
             }
+        }
+        public void updateDroneConectedToParcial(Drone newDrone, Parcial newParcial)
+        {
+            newDrone.Status = DroneStatus.Delivery;
+
+            
         }
     }
 }
