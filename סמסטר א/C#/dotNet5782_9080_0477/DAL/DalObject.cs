@@ -12,7 +12,7 @@ namespace DalObject
         {
             DataSource.Initialize();
         }
-        public Drone[] GetDrone()
+        public static Drone[] GetDrone()
         {
             Drone[] Drones = new Drone[DataSource.Config.DronesIndex];
             for (int i = 0; i < DataSource.Config.DronesIndex; i++)
@@ -21,8 +21,9 @@ namespace DalObject
             }
             return Drones;
         }
-        public Station[] GetStation()
+        public static Station[] GetStation()
         {
+            
             Station[] Stations = new Station[DataSource.Config.StationIndex];
 
             for (int i = 0; i < DataSource.Config.StationIndex; i++)
@@ -31,7 +32,7 @@ namespace DalObject
             }
             return Stations;
         }
-        public Customer[] GetCustomer()
+        public static Customer[] GetCustomer()
         {
             Customer[] Customers = new Customer[DataSource.Config.CustomerIndex];
             for (int i = 0; i < DataSource.Config.CustomerIndex; i++)
@@ -40,7 +41,7 @@ namespace DalObject
             }
             return Customers;
         }
-        public Parcial[] GetParcial()
+        public static Parcial[] GetParcial()
         {
             Parcial[] Parcials = new Parcial[DataSource.Config.ParcialIndex];
             for (int i = 0; i < DataSource.Config.CustomerIndex; i++)
@@ -49,28 +50,47 @@ namespace DalObject
             }
             return Parcials;
         }
-        public void AddDrone(Drone newDrone)
+        public static void AddDrone(int id, string model, WeightCatagories weight, DroneStatus status, double battery)
         {
+            Drone newDrone = new Drone();
+            newDrone.ID = id;
+            newDrone.Model = model;
+            newDrone.MaxWeight = weight;
+            newDrone.Status = status;
+            newDrone.Battery = battery;
             DataSource.Drones[DataSource.Config.DronesIndex] = newDrone;
             DataSource.Config.DronesIndex++;
         }
-        public void AddStation(Station newStation)
+        public static void AddStation(int id, int name, int longitude, int latitude, int chargeSlots)
         {
+            Station newStation = new Station();
+            newStation.ID = id;
+            newStation.Name = name;
+            newStation.Longitude = longitude;
+            newStation.Latitude = latitude;
+            newStation.ChargeSlots = chargeSlots;
             DataSource.Stations[DataSource.Config.StationIndex] = newStation;
             DataSource.Config.StationIndex++;
         }
-        public void AddCustomer(Customer newCustomer)
+        public static void AddCustomer(int id, string name, string phone, double latitude, double longitude)
         {
+            Customer newCustomer = new Customer();
+            newCustomer.ID = id;
+            newCustomer.Name = name;
+            newCustomer.Phone = phone;
+            newCustomer.Latitude = latitude;
+            newCustomer.Longitude = longitude;
             DataSource.Customers[DataSource.Config.CustomerIndex] = newCustomer;
             DataSource.Config.CustomerIndex++;
         }
-        public void AddParcial(Parcial newParcial)
+        public static void AddParcial(Parcial newParcial)
         {
+
             DataSource.Parcials[DataSource.Config.ParcialIndex] = newParcial;
             DataSource.Config.ParcialIndex++;
         }
-       
-        /*public void showStations()
+
+        /*public static void showStations()
         {
             for (int i = 0; i < DataSource.Config.StationIndex; i++)
             {
@@ -79,7 +99,7 @@ namespace DalObject
 
             }
         }
-        public void showDrones()
+        public static void showDrones()
         {
             for (int i = 0; i < DataSource.Config.DronesIndex; i++)
             {
@@ -87,7 +107,7 @@ namespace DalObject
                     $"Longitude: {DataSource.Stations[i].Longitude} Latitude: {DataSource.Stations[i].Latitude}");
             }
         }
-        public void showParcials()
+        public static void showParcials()
         {
             for (int i = 0; i < DataSource.Config.ParcialIndex; i++)
             {
@@ -96,7 +116,7 @@ namespace DalObject
                     $" SenderID: {DataSource.Parcials[i].SenderID} TargetID: {DataSource.Parcials[i].TargetID} Weight: {DataSource.Parcials[i].Weight}");
             }
         }
-        public void showCustomers()
+        public static void showCustomers()
         {
             for (int i = 0; i < DataSource.Config.CustomerIndex; i++)
             {
@@ -104,29 +124,30 @@ namespace DalObject
                     $"Longitude: {DataSource.Customers[i].Longitude} Latitude: {DataSource.Customers[i].Latitude} Phone: {DataSource.Customers[i].Phone}");
             }
         }*/
-        public void updateCollectParcialByDrone(Drone newDrone, Parcial newParcial)
+        public static void updateCollectParcialByDrone(Drone newDrone, Parcial newParcial)
         {
             newDrone.Status = DroneStatus.Delivery;
-            
+
         }
-        public void updateConectDroneToParcial(Parcial newParcial)
+        public static void updateConectDroneToParcial(Parcial newParcial)
         {
             Drone newDrone = new Drone();
             for (int i = 0; i < DataSource.Config.DronesIndex; i++)
             {
-                if(DataSource.Drones[i].Status == DroneStatus.Available)
+                if (DataSource.Drones[i].Status == DroneStatus.Available)
                 {
                     newDrone = DataSource.Drones[i];
+                    break;
                 }
             }
             newParcial.DroneID = newDrone.ID;
 
         }
-        public void updateSupplyParcialToCustomer(Parcial newParcial)
+        public static void updateSupplyParcialToCustomer(Parcial newParcial)
         {
             newParcial.PickedUp = DateTime.Now;
         }
-        public void updateSendDroneToCharge(Drone NewDrone, Station station)
+        public static void updateSendDroneToCharge(Drone NewDrone, Station station)
         {
             DroneCharge charger = new DroneCharge();
             NewDrone.Status = DroneStatus.Maintenance;
@@ -135,7 +156,7 @@ namespace DalObject
             DataSource.DroneChargers[DataSource.Config.DroneChargeIndex] = charger;
             DataSource.Config.DroneChargeIndex++;
         }
-        public void updateUnChargeDrone(Drone NewDrone)
+        public static void updateUnChargeDrone(Drone NewDrone)
         {
             NewDrone.Status = DroneStatus.Available;
             ///////////להוריד את העמדת טעינה מהמערך

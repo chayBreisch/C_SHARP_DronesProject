@@ -7,7 +7,7 @@ using IDAL.DO;
 
 namespace DalObject
 {
-    struct DataSource
+    public struct DataSource
     {
         internal struct Config
         {
@@ -67,11 +67,11 @@ namespace DalObject
                 Parcials[Config.ParcialIndex].TargetID = rand.Next() % Config.StationIndex;
                 Parcials[Config.ParcialIndex].Weight = (WeightCatagories)(rand.Next() %3);
                 Parcials[Config.ParcialIndex].Priority = (Priorities)(rand.Next() % 3);
-                Parcials[Config.ParcialIndex].Requested = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
+                Parcials[Config.ParcialIndex].Requested = new DateTime();
                 Parcials[Config.ParcialIndex].DroneID = rand.Next() % Config.DronesIndex;
-                Parcials[Config.ParcialIndex].Scheduled = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
-                Parcials[Config.ParcialIndex].PickedUp = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
-                Parcials[Config.ParcialIndex].Delivered = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60)); ;
+                Parcials[Config.ParcialIndex].Scheduled = new DateTime();
+                Parcials[Config.ParcialIndex].PickedUp = new DateTime();
+                Parcials[Config.ParcialIndex].Delivered = new DateTime(); ;
                 Config.ParcialIndex++;
 
             }
