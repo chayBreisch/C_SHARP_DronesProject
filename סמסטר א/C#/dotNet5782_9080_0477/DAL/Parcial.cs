@@ -8,7 +8,7 @@ namespace IDAL
 {
     namespace DO
     {
-        class Parcial
+        struct Parcial
         {
             public int ID { get; set; }
             public int SenderID { get; set; }

@@ -7,9 +7,9 @@ using IDAL.DO;
 
 namespace DalObject
 {
-    class DataSource
+    struct DataSource
     {
-        internal class Config
+        internal struct Config
         {
             static internal int DronesIndex = 0;
             static internal int StationIndex = 0;
