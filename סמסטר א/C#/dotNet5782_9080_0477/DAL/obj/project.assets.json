@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0": {
+      "ConsoleUI/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/ConsoleUI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ConsoleUI.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "ConsoleUI/1.0.0": {
+      "type": "project",
+      "path": "../ConsoleUI/ConsoleUI.csproj",
+      "msbuildProject": "../ConsoleUI/ConsoleUI.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0": [
+      "ConsoleUI >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\ברייש חיה\\.nuget\\packages\\": {},
@@ -40,7 +59,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "H:\\סמסטר א\\C#\\dotNet5782_9080_0477\\ConsoleUI\\ConsoleUI.csproj": {
+              "projectPath": "H:\\סמסטר א\\C#\\dotNet5782_9080_0477\\ConsoleUI\\ConsoleUI.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

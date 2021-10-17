@@ -12,8 +12,8 @@ H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ConsoleUI.Ge
 H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ConsoleUI.AssemblyInfoInputs.cache
 H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ConsoleUI.AssemblyInfo.cs
 H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ConsoleUI.csproj.CoreCompileInputs.cache
-H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ConsoleUI.csproj.CopyComplete
 H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ConsoleUI.dll
 H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ref\ConsoleUI.dll
 H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ConsoleUI.pdb
 H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ConsoleUI.genruntimeconfig.cache
+H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ConsoleUI.csproj.CopyComplete

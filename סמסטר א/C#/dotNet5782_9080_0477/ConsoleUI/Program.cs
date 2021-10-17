@@ -26,6 +26,8 @@ namespace ConsoleUI
                         switch (choice)
                         {
                             case 1:
+                                //Station station = new Station();
+                                
                                 break;
                             case 2:
                                 break;

@@ -26,7 +26,8 @@ namespace DalObject
         public static void Initialize()
         {
             Random rand = new Random();
-            for (int i = 0; i < 2; i++)
+            int r = rand.Next(2,5);
+            for (int i = 0; i < r; i++)
             {
                 Stations[Config.StationIndex].ID = Config.StationIndex + 1;
                 Stations[Config.StationIndex].Name = Config.StationIndex + 1;
@@ -36,7 +37,8 @@ namespace DalObject
                 Config.StationIndex++;
             }
 
-            for (int i = 0; i < 5; i++)
+            r = rand.Next(5, 10);
+            for (int i = 0; i < r; i++)
             {
                 Drones[Config.DronesIndex].ID = Config.DronesIndex + 1;
                 Drones[Config.DronesIndex].Model = "MarvicAir2";
@@ -46,7 +48,8 @@ namespace DalObject
                 Config.DronesIndex++;
             }
 
-            for (int i = 0; i < 10; i++)
+            r = rand.Next(10, 15);
+            for (int i = 0; i < r; i++)
             {
                 Customers[Config.CustomerIndex].ID = Config.CustomerIndex + 1;
                 Customers[Config.CustomerIndex].Name = $"customer{i}";
@@ -56,7 +59,8 @@ namespace DalObject
                 Config.CustomerIndex++;
             }
 
-            for (int i = 0; i < 10; i++)
+            r = rand.Next(10, 15);
+            for (int i = 0; i < r; i++)
             {
                 Parcials[Config.ParcialIndex].ID = Config.ParcialIndex + 1;
                 Parcials[Config.ParcialIndex].SenderID = rand.Next() % Config.CustomerIndex;
