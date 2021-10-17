@@ -1,4 +1,5 @@
 ﻿using System;
+using IDAL.DO;
 
 namespace ConsoleUI
 {
@@ -26,7 +27,7 @@ namespace ConsoleUI
                         switch (choice)
                         {
                             case 1:
-                                //Station station = new Station();
+                                Station station = new Station();
                                 
                                 break;
                             case 2:

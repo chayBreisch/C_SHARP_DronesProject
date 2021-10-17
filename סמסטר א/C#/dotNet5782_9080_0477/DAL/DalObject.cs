@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using IDAL.DO;
 namespace DalObject
 {
-    class DalObject
+    public class DalObject
     {
         public DalObject()
         {
@@ -70,7 +70,7 @@ namespace DalObject
             DataSource.Config.ParcialIndex++;
         }
        
-        public void showStations()
+        /*public void showStations()
         {
             for (int i = 0; i < DataSource.Config.StationIndex; i++)
             {
@@ -103,7 +103,7 @@ namespace DalObject
                 Console.WriteLine($"customer {i}: ID: {DataSource.Customers[i].ID} Name: {DataSource.Customers[i].Name}" +
                     $"Longitude: {DataSource.Customers[i].Longitude} Latitude: {DataSource.Customers[i].Latitude} Phone: {DataSource.Customers[i].Phone}");
             }
-        }
+        }*/
         public void updateCollectParcialByDrone(Drone newDrone, Parcial newParcial)
         {
             newDrone.Status = DroneStatus.Delivery;
