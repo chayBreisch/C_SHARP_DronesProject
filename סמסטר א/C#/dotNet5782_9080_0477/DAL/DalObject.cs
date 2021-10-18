@@ -56,11 +56,34 @@ namespace DalObject
             Drone newDrone = new Drone();
             foreach (var drone in DataSource.Drones)
             {
-                if (drone.ID == id)
-                    return drone;
+                if (drone.ID == id) 
+                    newDrone = drone;
             }
             return newDrone;
         }
+
+        public static Station GetSpecificStation(int id)
+        {
+            Station newStation = new Station();
+            foreach (var station in DataSource.Stations)
+            {
+                if (station.ID == id)
+                    newStation =  station;
+            }
+            return newStation;
+        }
+
+        public static Customer GetSpecificCustomer(int id)
+        {
+            Customer newCustomer = new Customer();
+            foreach (var customer in DataSource.Customers)
+            {
+                if (customer.ID == id)
+                    newCustomer = customer;
+            }
+            return newCustomer;
+        }
+
         public static void AddDrone(int id, string model, WeightCatagories weight, DroneStatus status, double battery)
         {
             Drone newDrone = new Drone();

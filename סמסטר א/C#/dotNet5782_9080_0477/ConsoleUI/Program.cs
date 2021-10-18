@@ -137,6 +137,11 @@ namespace ConsoleUI
                         switch (choice)
                         {
                             case 1:
+                                Console.WriteLine("Enter an id of a station: ");
+                                id = Convert.ToInt32(Console.ReadLine());
+                                Station station = DalObject.DalObject.GetSpecificStation(id);
+                                Console.WriteLine($"id: {station.ID} Name: {station.Name} Longitude: {station.Longitude} Latitude: {station.Latitude} ChargeSlots: {station.ChargeSlots}");
+
                                 break;
                             case 2:
                                 Console.WriteLine("Enter an id of the drone");
@@ -146,6 +151,11 @@ namespace ConsoleUI
 
                                 break;
                             case 3:
+                                Console.WriteLine("Enter an id of a customer: ");
+                                id = Convert.ToInt32(Console.ReadLine());
+                                Customer customer = DalObject.DalObject.GetSpecificCustomer(id);
+                                Console.WriteLine($"ID: {customer.ID} Name: {customer.Name} Phone: {customer.Phone} Longitude: {customer.Longitude} Latitude: {customer.Latitude}");
+
                                 break;
                             case 4:
                                 
