@@ -9,13 +9,14 @@ namespace ConsoleUI
         {
             DalObject.DataSource.Initialize();
             int choice = 0;
-            Console.WriteLine("to add enter 1: ");
-            Console.WriteLine("to update enter 2: ");
-            Console.WriteLine("to show enter 3: ");
-            Console.WriteLine("to show list enter 4: ");
-            Console.WriteLine("to exit enter 5: ");
+            
             while (choice != 5)
             {
+                Console.WriteLine("to add enter 1: ");
+                Console.WriteLine("to update enter 2: ");
+                Console.WriteLine("to show a specific one enter 3: ");
+                Console.WriteLine("to show list enter 4: ");
+                Console.WriteLine("to exit enter 5: ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 
                 switch (choice)
@@ -125,10 +126,43 @@ namespace ConsoleUI
                         }
                         break;
                     case 3:
+
                         Console.WriteLine("to display a station enter 1: ");
                         Console.WriteLine("to display a drone enter 2: ");
                         Console.WriteLine("to display a customer enter 3: ");
                         Console.WriteLine("to display a parcial enter 4: ");
+                        choice = Convert.ToInt32(Console.ReadLine());
+                        //////////////////////////////////////////
+
+                        switch (choice)
+                        {
+                            case 1:
+                                break;
+                            case 2:
+                                Console.WriteLine("Enter an id of the drone");
+                                id = Convert.ToInt32(Console.ReadLine());
+                                Drone drone = DalObject.DalObject.GetSpecificDrone(id);
+                                Console.WriteLine($"ID: {drone.ID} Model: {drone.Model} Status: {drone.Status } MaxWeight: {drone.MaxWeight} Battery: {drone.Battery}");
+
+                                break;
+                            case 3:
+                                break;
+                            case 4:
+                                
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case 4:
+
+
+                        Console.WriteLine("to display the station list enter 1: ");
+                        Console.WriteLine("to display the drone list enter 2: ");
+                        Console.WriteLine("to display the customer list enter 3: ");
+                        Console.WriteLine("to display the parcial list enter 4: ");
+                        Console.WriteLine("to display the list of parcials that are free enter 5: ");
+                        Console.WriteLine("to display the list of station that have free chargers enter 6: ");
                         choice = Convert.ToInt32(Console.ReadLine());
                         switch (choice)
                         {
@@ -159,14 +193,6 @@ namespace ConsoleUI
                             default:
                                 break;
                         }
-                        break;
-                    case 4:
-                        Console.WriteLine("to display the station list enter 1: ");
-                        Console.WriteLine("to display the drone list enter 2: ");
-                        Console.WriteLine("to display the customer list enter 3: ");
-                        Console.WriteLine("to display the parcial list enter 4: ");
-                        Console.WriteLine("to display the list of parcials that are free enter 5: ");
-                        Console.WriteLine("to display the list of station that have free chargers enter 6: ");
                         break;
                     case 5:
                         break;

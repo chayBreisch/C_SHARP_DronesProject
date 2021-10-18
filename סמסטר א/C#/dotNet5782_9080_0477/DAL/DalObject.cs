@@ -50,6 +50,17 @@ namespace DalObject
             }
             return Parcials;
         }
+
+        public static Drone GetSpecificDrone(int id)
+        {
+            Drone newDrone = new Drone();
+            foreach (var drone in DataSource.Drones)
+            {
+                if (drone.ID == id)
+                    return drone;
+            }
+            return newDrone;
+        }
         public static void AddDrone(int id, string model, WeightCatagories weight, DroneStatus status, double battery)
         {
             Drone newDrone = new Drone();
