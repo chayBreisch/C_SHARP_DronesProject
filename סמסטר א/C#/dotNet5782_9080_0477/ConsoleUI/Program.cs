@@ -21,6 +21,7 @@ namespace ConsoleUI
                 
                 switch (choice)
                 {
+
                     case 1:
                         
                         Console.WriteLine("to add a station enter 1: ");
@@ -105,6 +106,8 @@ namespace ConsoleUI
 
                         }
                         break;
+
+
                     case 2:
                         Console.WriteLine("to conect a parcial to a drone enter 1: ");
                         Console.WriteLine("to collect a parcial by a drone enter 2: ");
@@ -125,15 +128,14 @@ namespace ConsoleUI
                                 break;
                         }
                         break;
-                    case 3:
 
+
+                    case 3:
                         Console.WriteLine("to display a station enter 1: ");
                         Console.WriteLine("to display a drone enter 2: ");
                         Console.WriteLine("to display a customer enter 3: ");
                         Console.WriteLine("to display a parcial enter 4: ");
                         choice = Convert.ToInt32(Console.ReadLine());
-                        //////////////////////////////////////////
-
                         switch (choice)
                         {
                             case 1:
@@ -155,18 +157,20 @@ namespace ConsoleUI
                                 id = Convert.ToInt32(Console.ReadLine());
                                 Customer customer = DalObject.DalObject.GetSpecificCustomer(id);
                                 Console.WriteLine($"ID: {customer.ID} Name: {customer.Name} Phone: {customer.Phone} Longitude: {customer.Longitude} Latitude: {customer.Latitude}");
-
                                 break;
                             case 4:
-                                
+                                Console.WriteLine("Enter an id of a parcial: ");
+                                id = Convert.ToInt32(Console.ReadLine());
+                                Parcial parcial = DalObject.DalObject.GetSpecificParcial(id);
+                                Console.WriteLine($"ID: {parcial.ID} Priority: {parcial.Priority} SenderID: {parcial.SenderID} TargetID: {parcial.TargetID} Weight: {parcial.Weight}");
                                 break;
                             default:
                                 break;
                         }
                         break;
+
+
                     case 4:
-
-
                         Console.WriteLine("to display the station list enter 1: ");
                         Console.WriteLine("to display the drone list enter 2: ");
                         Console.WriteLine("to display the customer list enter 3: ");
@@ -199,13 +203,22 @@ namespace ConsoleUI
                                 }
                                 break;
                             case 4:
+                                Parcial[] parcials = DalObject.DalObject.GetParcial();
+                                foreach (var parcial in parcials)
+                                {
+                                    Console.WriteLine($"ID: {parcial.ID} Priority: {parcial.Priority} SenderID: {parcial.SenderID} TargetID: {parcial.TargetID} Weight: {parcial.Weight}");
+                                }
                                 break;
                             default:
                                 break;
                         }
                         break;
+
+
                     case 5:
+                        Console.WriteLine("you wanted to exit.....\nBye Bye");
                         break;
+
 
                     default:
                         Console.WriteLine("not a good choice try again");

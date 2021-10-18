@@ -83,6 +83,16 @@ namespace DalObject
             }
             return newCustomer;
         }
+        public static Parcial GetSpecificParcial(int id)
+        {
+            Parcial newParcial = new Parcial();
+            foreach (var parcial in DataSource.Parcials)
+            {
+                if (parcial.ID == id)
+                    newParcial = parcial;
+            }
+            return newParcial;
+        }
 
         public static void AddDrone(int id, string model, WeightCatagories weight, DroneStatus status, double battery)
         {
