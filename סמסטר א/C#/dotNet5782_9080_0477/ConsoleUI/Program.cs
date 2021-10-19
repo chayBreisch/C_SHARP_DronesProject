@@ -51,16 +51,12 @@ namespace ConsoleUI
                                 id = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("Enter name: ");
                                 string model = Console.ReadLine();
-
-                                //DroneStatus status =  DroneStatus.Available;
                                 Console.WriteLine("Enter maxWeight: ");
                                 string mySring = Console.ReadLine();
                                 WeightCatagories maxWeight = (WeightCatagories)Enum.Parse(typeof(WeightCatagories), mySring);
-
                                 Console.WriteLine("Enter status: ");
                                 mySring = Console.ReadLine();
                                 DroneStatus status = (DroneStatus)Enum.Parse(typeof(DroneStatus), mySring);
-
                                 Console.WriteLine("Enter battery: ");
                                 double battery = Convert.ToInt32(Console.ReadLine());
                                 DalObject.DalObject.AddDrone(id, model, maxWeight, status, battery);
