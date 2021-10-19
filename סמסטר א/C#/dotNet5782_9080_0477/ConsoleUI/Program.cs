@@ -8,28 +8,28 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             DalObject.DataSource.Initialize();
-            int choice = 0;
-            
-            while (choice != 5)
+            int choice = 0, choice1 = 0;
+
+            while (choice1 != 5)
             {
                 Console.WriteLine("to add enter 1: ");
                 Console.WriteLine("to update enter 2: ");
                 Console.WriteLine("to show a specific one enter 3: ");
                 Console.WriteLine("to show list enter 4: ");
                 Console.WriteLine("to exit enter 5: ");
-                choice = Convert.ToInt32(Console.ReadLine());
-                
-                switch (choice)
+                choice1 = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice1)
                 {
 
                     case 1:
-                        
+
                         Console.WriteLine("to add a station enter 1: ");
                         Console.WriteLine("to add a drone enter 2: ");
                         Console.WriteLine("to add a customer enter 3: ");
                         Console.WriteLine("to add a parcial enter 4: ");
                         choice = Convert.ToInt32(Console.ReadLine());
-                        int id = 0, name = 0, longitude= 0, latiude = 0;
+                        int id = 0, name = 0, longitude = 0, latiude = 0;
                         switch (choice)
                         {
 
@@ -44,7 +44,7 @@ namespace ConsoleUI
                                 latiude = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("Enter chargeslots: ");
                                 int chargeslots = Convert.ToInt32(Console.ReadLine());
-                                DalObject.DalObject.AddStation(id, name, longitude, latiude, chargeslots); 
+                                DalObject.DalObject.AddStation(id, name, longitude, latiude, chargeslots);
                                 break;
                             case 2:
                                 Console.WriteLine("Enter an id: ");
@@ -76,8 +76,8 @@ namespace ConsoleUI
                                 double Latitude = Convert.ToDouble(Console.ReadLine());
                                 DalObject.DalObject.AddCustomer(id, Name, phone, Latitude, Longitude);
                                 break;
-                           case 4:
-                                
+                            case 4:
+
                                 Console.WriteLine("Enter an id: ");
                                 id = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("Enter an sender id: ");
@@ -216,7 +216,7 @@ namespace ConsoleUI
                                 Parcial[] parcials = DalObject.DalObject.GetParcial();
                                 foreach (var parcial in parcials)
                                 {
-                                    Console.WriteLine(parcials.ToString());
+                                    Console.WriteLine(parcial.ToString());
                                 }
                                 break;
                             case 5:
@@ -247,7 +247,7 @@ namespace ConsoleUI
             Parcial[] parcels = DalObject.DalObject.GetParcial();
             foreach (var parcel in parcels)
             {
-                if (parcel.DroneID != 0)
+                if (parcel.DroneID == 0)
                 {
                     Console.WriteLine(parcel.ToString());
                 }
@@ -260,7 +260,7 @@ namespace ConsoleUI
             DroneCharge[] droneChargers = DalObject.DalObject.GetDroneCharge();
             for (int i = 0; i < stations.Length; i++)
             {
-                for(int j = 0; j < droneChargers.Length; j++)
+                for (int j = 0; j < droneChargers.Length; j++)
                 {
                     if (stations[i].ID == droneChargers[j].StationID)
                         numOfChargers++;
