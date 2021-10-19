@@ -17,7 +17,7 @@ namespace IDAL
             public int ChargeSlots { get; set; }
             public override string ToString()
             {
-                return $"{ID}";
+                return $"id: {ID} Name: {Name} Longitude: {Longitude} Latitude: {Latitude} ChargeSlots: {ChargeSlots}";
             }
         }
     }

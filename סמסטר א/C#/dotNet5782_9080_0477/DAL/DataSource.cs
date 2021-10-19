@@ -71,7 +71,7 @@ namespace DalObject
                 Parcials[Config.ParcialIndex].DroneID = rand.Next() % Config.DronesIndex;
                 Parcials[Config.ParcialIndex].Scheduled = new DateTime();
                 Parcials[Config.ParcialIndex].PickedUp = new DateTime();
-                Parcials[Config.ParcialIndex].Delivered = new DateTime(); ;
+                Parcials[Config.ParcialIndex].Delivered = new DateTime(); 
                 Config.ParcialIndex++;
 
             }
