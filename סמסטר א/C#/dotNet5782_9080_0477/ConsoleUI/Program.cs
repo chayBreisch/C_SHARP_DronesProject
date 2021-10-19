@@ -44,7 +44,8 @@ namespace ConsoleUI
                                 latiude = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("Enter chargeslots: ");
                                 int chargeslots = Convert.ToInt32(Console.ReadLine());
-                                DalObject.DalObject.AddStation(id, name, longitude, latiude, chargeslots); break;
+                                DalObject.DalObject.AddStation(id, name, longitude, latiude, chargeslots); 
+                                break;
                             case 2:
                                 Console.WriteLine("Enter an id: ");
                                 id = Convert.ToInt32(Console.ReadLine());
@@ -156,27 +157,26 @@ namespace ConsoleUI
                                 Console.WriteLine("Enter an id of a station: ");
                                 id = Convert.ToInt32(Console.ReadLine());
                                 Station station = DalObject.DalObject.GetSpecificStation(id);
-                                Console.WriteLine($"id: {station.ID} Name: {station.Name} Longitude: {station.Longitude} Latitude: {station.Latitude} ChargeSlots: {station.ChargeSlots}");
+                                Console.WriteLine(station.ToString());
 
                                 break;
                             case 2:
                                 Console.WriteLine("Enter an id of the drone");
                                 id = Convert.ToInt32(Console.ReadLine());
                                 Drone drone = DalObject.DalObject.GetSpecificDrone(id);
-                                Console.WriteLine($"ID: {drone.ID} Model: {drone.Model} Status: {drone.Status } MaxWeight: {drone.MaxWeight} Battery: {drone.Battery}");
-
+                                Console.WriteLine(drone.ToString());
                                 break;
                             case 3:
                                 Console.WriteLine("Enter an id of a customer: ");
                                 id = Convert.ToInt32(Console.ReadLine());
                                 Customer customer = DalObject.DalObject.GetSpecificCustomer(id);
-                                Console.WriteLine($"ID: {customer.ID} Name: {customer.Name} Phone: {customer.Phone} Longitude: {customer.Longitude} Latitude: {customer.Latitude}");
+                                Console.WriteLine(customer.ToString());
                                 break;
                             case 4:
                                 Console.WriteLine("Enter an id of a parcial: ");
                                 id = Convert.ToInt32(Console.ReadLine());
                                 Parcial parcial = DalObject.DalObject.GetSpecificParcial(id);
-                                Console.WriteLine($"ID: {parcial.ID} Priority: {parcial.Priority} SenderID: {parcial.SenderID} TargetID: {parcial.TargetID} Weight: {parcial.Weight}");
+                                Console.WriteLine(parcial.ToString());
                                 break;
                             default:
                                 break;
@@ -199,7 +199,6 @@ namespace ConsoleUI
                                 Station[] stations = DalObject.DalObject.GetStation();
                                 foreach (var station in stations)
                                 {
-                                    //Console.WriteLine($"id: {station.ID} Name: {station.Name} Longitude: {station.Longitude} Latitude: {station.Latitude} ChargeSlots: {station.ChargeSlots}" );
                                     Console.WriteLine(station.ToString());
                                 }
                                 break;
@@ -207,7 +206,6 @@ namespace ConsoleUI
                                 Drone[] drones = DalObject.DalObject.GetDrone();
                                 foreach (var drone in drones)
                                 {
-                                    //Console.WriteLine($"ID: {drone.ID} Model: {drone.Model} Status: {drone.Status } MaxWeight: {drone.MaxWeight} Battery: {drone.Battery}");
                                     Console.WriteLine(drone.ToString());
                                 }
                                 break;
@@ -215,7 +213,6 @@ namespace ConsoleUI
                                 Customer[] customers = DalObject.DalObject.GetCustomer();
                                 foreach (var customer in customers)
                                 {
-                                    //Console.WriteLine($"ID: {customer.ID} Name: {customer.Name} Phone: {customer.Phone} Longitude: {customer.Longitude} Latitude: {customer.Latitude}");
                                     Console.WriteLine(customer.ToString());
                                 }
                                 break;
@@ -223,7 +220,7 @@ namespace ConsoleUI
                                 Parcial[] parcials = DalObject.DalObject.GetParcial();
                                 foreach (var parcial in parcials)
                                 {
-                                    Console.WriteLine($"ID: {parcial.ID} Priority: {parcial.Priority} SenderID: {parcial.SenderID} TargetID: {parcial.TargetID} Weight: {parcial.Weight} droneId: {parcial.DroneID}");
+                                    Console.WriteLine(parcials.ToString());
                                 }
                                 break;
                             case 5:
@@ -256,8 +253,7 @@ namespace ConsoleUI
             {
                 if (parcel.DroneID != 0)
                 {
-                    Console.WriteLine($"ID: {parcel.ID} Priority: {parcel.Priority} SenderID: {parcel.SenderID} TargetID: {parcel.TargetID} Weight: {parcel.Weight} droneId: {parcel.DroneID}");
-
+                    Console.WriteLine(parcel.ToString());
                 }
             }
         }
@@ -275,9 +271,9 @@ namespace ConsoleUI
                 }
                 if (numOfChargers < stations[i].ChargeSlots)
                 {
-                    Console.WriteLine($"id: {stations[i].ID} Name: {stations[i].Name} Longitude: {stations[i].Longitude} Latitude: {stations[i].Latitude} ChargeSlots: {stations[i].ChargeSlots}");
+                    Console.WriteLine(stations[i].ToString());
                 }
-            
+
             }
         }
     }
