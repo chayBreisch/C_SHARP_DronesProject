@@ -12,6 +12,9 @@ namespace DalObject
         {
             DataSource.Initialize();
         }
+        //################################################################
+        //functions that returns the basic data arrays from dataSource
+        //################################################################
         public static Drone[] GetDrone()
         {
             Drone[] Drones = new Drone[DataSource.Config.DronesIndex];
@@ -60,6 +63,9 @@ namespace DalObject
             }
             return droneChargers;
         }
+        //#######################################################################
+        //functions that returns the specific item from the dataSource by ID
+        //#######################################################################
         public static Drone GetSpecificDrone(int id)
         {
             Drone newDrone = new Drone();
@@ -81,7 +87,6 @@ namespace DalObject
             }
             return newStation;
         }
-
         public static Customer GetSpecificCustomer(int id)
         {
             Customer newCustomer = new Customer();
@@ -102,7 +107,9 @@ namespace DalObject
             }
             return newParcial;
         }
-
+        //###############################################################
+        //functions that are adding an item to the dataSources array
+        //###############################################################
         public static void AddDrone(int id, string model, WeightCatagories weight, DroneStatus status, double battery)
         {
             Drone newDrone = new Drone();
@@ -148,44 +155,13 @@ namespace DalObject
             DataSource.Config.ParcialIndex++;
         }
 
-        /*public static void showStations()
-        {
-            for (int i = 0; i < DataSource.Config.StationIndex; i++)
-            {
-                Console.WriteLine($"station {i}: ID: {DataSource.Stations[i].ID}  Name: {DataSource.Stations[i].Name}  " +
-                    $"Longitude: {DataSource.Stations[i].Longitude}  Latitude: {DataSource.Stations[i].Latitude}");
-
-            }
-        }
-        public static void showDrones()
-        {
-            for (int i = 0; i < DataSource.Config.DronesIndex; i++)
-            {
-                Console.WriteLine($"drone: {i}: id: {DataSource.Stations[i].ID} Name: {DataSource.Stations[i].Name}" +
-                    $"Longitude: {DataSource.Stations[i].Longitude} Latitude: {DataSource.Stations[i].Latitude}");
-            }
-        }
-        public static void showParcials()
-        {
-            for (int i = 0; i < DataSource.Config.ParcialIndex; i++)
-            {
-                Console.WriteLine($"parcial {i}: ID: {DataSource.Parcials[i].ID}  PickedUp: {DataSource.Parcials[i].PickedUp}" +
-                    $" Priority: {DataSource.Parcials[i].Priority} Requested: {DataSource.Parcials[i].Requested} Scheduled: {DataSource.Parcials[i].Scheduled}" +
-                    $" SenderID: {DataSource.Parcials[i].SenderID} TargetID: {DataSource.Parcials[i].TargetID} Weight: {DataSource.Parcials[i].Weight}");
-            }
-        }
-        public static void showCustomers()
-        {
-            for (int i = 0; i < DataSource.Config.CustomerIndex; i++)
-            {
-                Console.WriteLine($"customer {i}: ID: {DataSource.Customers[i].ID} Name: {DataSource.Customers[i].Name}" +
-                    $"Longitude: {DataSource.Customers[i].Longitude} Latitude: {DataSource.Customers[i].Latitude} Phone: {DataSource.Customers[i].Phone}");
-            }
-        }*/
-
+        //################################################
+        //functions that update the dataSource array 
+        //################################################
         public static void updateConectDroneToParcial(int id)
         {
-            Parcial newParcial = findCorrectParcial(id);
+            //Parcial newParcial = findCorrectParcial(id);
+            Parcial newParcial = GetSpecificParcial(id);
             Drone newDrone = new Drone();
             for (int i = 0; i < DataSource.Config.DronesIndex; i++)
             {
@@ -204,7 +180,8 @@ namespace DalObject
         public static void updateCollectParcialByDrone(int id)
         {
            
-            Parcial newParcial =  findCorrectParcial(id);
+            //Parcial newParcial =  findCorrectParcial(id);
+            Parcial newParcial =  GetSpecificParcial(id);
             if(newParcial.DroneID == 0)
             {
                 Console.WriteLine("you didnt conect a drone");
@@ -215,19 +192,23 @@ namespace DalObject
        
         public static void updateSupplyParcialToCustomer(int id)
         {
-            Parcial newParcial = findCorrectParcial(id);
-            //if (newParcial.PickedUp.)///////////////////////
+            //Parcial newParcial = findCorrectParcial(id);
+            Parcial newParcial = GetSpecificParcial(id);
+
+            //if (newParcial.PickedUp.)////////////////////////////////////////////////////
             {
                 Console.WriteLine("you didnt collect a drone");
             }
             newParcial.Delivered = DateTime.Now;
         }
-        public static void updateSendDroneToCharge(int droneId, int statoinId/*Drone NewDrone, Station station*/)///////////////////////////////////////
+        public static void updateSendDroneToCharge(int droneId, int statoinId)
         {
             DroneCharge droneCharge = new DroneCharge();
             int numOfChargers = 0;
-            Station station = findCorrectStation(statoinId);
-            Drone newDrone = findCorrectDrone(droneId);
+            //Station station = findCorrectStation(statoinId);
+            Station station = GetSpecificStation(statoinId);
+            //Drone newDrone = findCorrectDrone(droneId);
+            Drone newDrone = GetSpecificDrone(droneId);
                 numOfChargers = 0;
                 for (int j = 0; j < DataSource.Config.DroneChargeIndex; j++)
                 {
@@ -247,7 +228,8 @@ namespace DalObject
         }
         public static void updateUnChargeDrone(int id)
         {
-            Drone NewDrone = findCorrectDrone(id);
+            //Drone newDrone = findCorrectDrone(droneId);
+            Drone NewDrone = GetSpecificDrone(id);
             int index = 0;
             for(int i = 0; i < DataSource.Config.DroneChargeIndex; i++)
             {
@@ -266,8 +248,13 @@ namespace DalObject
             NewDrone.Battery = 100;
         }
 
+        //##########################################################
+        //functions that return a specific item from dataSource
+        //##########################################################
 
-        public static Parcial findCorrectParcial(int id)
+        //לכאורה מיותר כי זה כמו הפונקציות getSpecificItem
+
+        /* public static Parcial findCorrectParcial(int id)
         {
             Parcial newParcial = new Parcial();
             for (int i = 0; i < DataSource.Config.ParcialIndex; i++)
@@ -305,6 +292,6 @@ namespace DalObject
                 }
             }
             return newDrone;
-        }
+        }*/
     }
 }
