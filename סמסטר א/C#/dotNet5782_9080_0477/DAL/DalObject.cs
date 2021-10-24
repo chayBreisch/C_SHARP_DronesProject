@@ -256,7 +256,7 @@ namespace DalObject
 
         /* public static Parcial findCorrectParcial(int id)
         {
-            Parcial newParcial = new Parcial();
+            Parcial newParcial = new Parcial(); 
             for (int i = 0; i < DataSource.Config.ParcialIndex; i++)
             {
                 if (DataSource.Parcials[i].ID == id)
