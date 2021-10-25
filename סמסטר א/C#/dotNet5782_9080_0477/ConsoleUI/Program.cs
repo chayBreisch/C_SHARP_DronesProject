@@ -8,19 +8,18 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             DalObject.DataSource.Initialize();
-            int choice = 0, choice1 = 0;
-            int id = 0, name = 0, longitude = 0, latiude = 0;
+            int choice = 0;
 
-            while (choice1 != 5)
+            while (choice != 5)
             {
-                Console.WriteLine("to add enter 1: ");
-                Console.WriteLine("to update enter 2: ");
-                Console.WriteLine("to show a specific one enter 3: ");
-                Console.WriteLine("to show list enter 4: ");
-                Console.WriteLine("to exit enter 5: ");
-                choice1 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("to add enter 1:" +
+                    "\nto update enter 2: " +
+                    "\nto show a specific one enter 3: " +
+                    "\nto show list enter 4: " +
+                    "\nto exit enter 5:  ");
+                choice = Convert.ToInt32(Console.ReadLine());
 
-                switch (choice1)
+                switch (choice)
                 {
 
                     case 1:
@@ -82,10 +81,10 @@ namespace ConsoleUI
 
         public static void optionAdd()
         {
-            Console.WriteLine("to add a station enter 1: ");
-            Console.WriteLine("to add a drone enter 2: ");
-            Console.WriteLine("to add a customer enter 3: ");
-            Console.WriteLine("to add a parcial enter 4: ");
+            Console.WriteLine("to add a station enter 1: " +
+                "\nto add a drone enter 2: " +
+                "\nto add a customer enter 3: " +
+                "\nto add a parcial enter 4: ");
             int choice = Convert.ToInt32(Console.ReadLine());
             int id = 0, name = 0, longitude = 0, latiude = 0;
             switch (choice)
@@ -160,10 +159,10 @@ namespace ConsoleUI
 
         public static void updateOption()
         {
-            Console.WriteLine("to conect a parcial to a drone enter 1: ");
-            Console.WriteLine("to collect a parcial by a drone enter 2: ");
-            Console.WriteLine("to supply a parcial to a customer enter 3: ");
-            Console.WriteLine("to send a drone to charge in a station enter 4: ");
+            Console.WriteLine("to conect a parcial to a drone enter 1: " +
+                "\nto collect a parcial by a drone enter 2: " +
+                "\nto supply a parcial to a customer enter 3: " +
+                "\nto send a drone to charge in a station enter 4: ");
             int choice = Convert.ToInt32(Console.ReadLine());
             int id = 0;
 
@@ -206,10 +205,10 @@ namespace ConsoleUI
 
         public static void showOneItem()
         {
-            Console.WriteLine("to display a station enter 1: ");
-            Console.WriteLine("to display a drone enter 2: ");
-            Console.WriteLine("to display a customer enter 3: ");
-            Console.WriteLine("to display a parcial enter 4: ");
+            Console.WriteLine("to display a station enter 1: " +
+                "\nto display a drone enter 2: " +
+                "\nto display a customer enter 3: " +
+                "\nto display a parcial enter 4: ");
             int choice = Convert.ToInt32(Console.ReadLine());
             int id = 0;
 
@@ -249,12 +248,12 @@ namespace ConsoleUI
 
         public static void showAllItems()
         {
-            Console.WriteLine("to display the station list enter 1: ");
-            Console.WriteLine("to display the drone list enter 2: ");
-            Console.WriteLine("to display the customer list enter 3: ");
-            Console.WriteLine("to display the parcial list enter 4: ");
-            Console.WriteLine("to display the list of parcials that are free enter 5: ");
-            Console.WriteLine("to display the list of station that have free chargers enter 6: ");
+            Console.WriteLine("to display the station list enter 1: " +
+                "\nto display the drone list enter 2: " +
+                "\nto display the customer list enter 3: " +
+                "\nto display the parcial list enter 4: " +
+                "\nto display the list of parcials that are free enter 5: " +
+                "\nto display the list of station that have free chargers enter 6: ");
             int choice = Convert.ToInt32(Console.ReadLine());
             switch (choice)
             {

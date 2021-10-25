@@ -16,3 +16,4 @@ H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ConsoleUI.dl
 H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ref\ConsoleUI.dll
 H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ConsoleUI.pdb
 H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ConsoleUI.genruntimeconfig.cache
+H:\סמסטר א\C#\dotNet5782_9080_0477\ConsoleUI\obj\Debug\net5.0\ConsoleUI.csproj.CopyComplete
