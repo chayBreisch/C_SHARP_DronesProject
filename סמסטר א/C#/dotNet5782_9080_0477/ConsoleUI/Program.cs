@@ -52,7 +52,7 @@ namespace ConsoleUI
             {
                 if (parcel.DroneID == 0)
                 {
-                    Console.WriteLine(parcel.ToString());
+                    Console.WriteLine(parcel);
                 }
             }
         }
@@ -72,7 +72,7 @@ namespace ConsoleUI
                 }
                 if (numOfChargers < stations[i].ChargeSlots)
                 {
-                    Console.WriteLine(stations[i].ToString());
+                    Console.WriteLine(stations[i]);
                 }
 
             }
@@ -218,26 +218,26 @@ namespace ConsoleUI
                     Console.WriteLine("Enter an id of a station: ");
                     id = Convert.ToInt32(Console.ReadLine());
                     Station station = DalObject.DalObject.GetSpecificStation(id);
-                    Console.WriteLine(station.ToString());
+                    Console.WriteLine(station);
 
                     break;
                 case 2:
                     Console.WriteLine("Enter an id of the drone");
                     id = Convert.ToInt32(Console.ReadLine());
                     Drone drone = DalObject.DalObject.GetSpecificDrone(id);
-                    Console.WriteLine(drone.ToString());
+                    Console.WriteLine(drone);
                     break;
                 case 3:
                     Console.WriteLine("Enter an id of a customer: ");
                     id = Convert.ToInt32(Console.ReadLine());
                     Customer customer = DalObject.DalObject.GetSpecificCustomer(id);
-                    Console.WriteLine(customer.ToString());
+                    Console.WriteLine(customer);
                     break;
                 case 4:
                     Console.WriteLine("Enter an id of a parcial: ");
                     id = Convert.ToInt32(Console.ReadLine());
                     Parcial parcial = DalObject.DalObject.GetSpecificParcial(id);
-                    Console.WriteLine(parcial.ToString());
+                    Console.WriteLine(parcial);
                     break;
                 default:
                     break;
@@ -258,33 +258,20 @@ namespace ConsoleUI
             switch (choice)
             {
                 case 1:
-
                     Station[] stations = DalObject.DalObject.GetStation();
-                    foreach (var station in stations)
-                    {
-                        Console.WriteLine(station.ToString());
-                    }
+                    print(stations);
                     break;
                 case 2:
                     Drone[] drones = DalObject.DalObject.GetDrone();
-                    foreach (var drone in drones)
-                    {
-                        Console.WriteLine(drone.ToString());
-                    }
+                    print(drones);
                     break;
                 case 3:
                     Customer[] customers = DalObject.DalObject.GetCustomer();
-                    foreach (var customer in customers)
-                    {
-                        Console.WriteLine(customer.ToString());
-                    }
+                    print(customers);
                     break;
                 case 4:
                     Parcial[] parcials = DalObject.DalObject.GetParcial();
-                    foreach (var parcial in parcials)
-                    {
-                        Console.WriteLine(parcial.ToString());
-                    }
+                    print(parcials);
                     break;
                 case 5:
                     showParcelsWithoutoutDrone();
@@ -294,6 +281,13 @@ namespace ConsoleUI
                     break;
                 default:
                     break;
+            }
+        }
+        public static void print<T>(T[] array)
+        {
+            foreach (var item in array)
+            {
+                Console.WriteLine(item);
             }
         }
     }
