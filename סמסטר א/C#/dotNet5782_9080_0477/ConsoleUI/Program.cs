@@ -1,14 +1,19 @@
 ﻿using System;
 using IDAL.DO;
 using DalObject;
+using System.Collections.Generic;
+
 namespace ConsoleUI
 {
+    
     class Program
     {
         static void Main(string[] args)
         {
-            DalObject.DataSource.Initialize();
-            int choice = 0;
+            DalObject.DalObject dalObject = new DalObject.DalObject();
+
+/*            DalObject.DataSource.Initialize();
+*/            int choice = 0;
 
             while (choice != 5)
             {
@@ -23,16 +28,16 @@ namespace ConsoleUI
                 {
 
                     case 1:
-                        optionAdd();
+                        optionAdd(dalObject);
                         break;
                     case 2:
-                        updateOption();
+                        updateOption(dalObject);
                         break;
                     case 3:
-                        showOneItem();
+                        showOneItem(dalObject);
                         break;
                     case 4:
-                        showAllItems();
+                        showAllItems(dalObject);
                         break;
                     case 5:
                         Console.WriteLine("you wanted to exit.....\nBye Bye");
@@ -45,41 +50,27 @@ namespace ConsoleUI
         }
 
 
-        public static void showParcelsWithoutoutDrone()
+        public static void showParcelsWithoutoutDrone(DalObject.DalObject dalObject)
         {
-            Parcial[] parcels = DalObject.DalObject.GetParcial();
+            IEnumerable <Parcial> parcels = dalObject.GetParcial();
             foreach (var parcel in parcels)
             {
-                if (parcel.DroneID == 0)
-                {
-                    Console.WriteLine(parcel);
-                }
+                 Console.WriteLine(parcel);
             }
         }
 
 
-        public static void showStationWithEmptyChargers()
+        public static void showStationWithEmptyChargers(DalObject.DalObject dalObject)
         {
-            int numOfChargers = 0;
-            Station[] stations = DalObject.DalObject.GetStation();
-            DroneCharge[] droneChargers = DalObject.DalObject.GetDroneCharge();
-            for (int i = 0; i < stations.Length; i++)
+            IEnumerable<Station> stations = dalObject.GetStation();
+            foreach (var station in stations)
             {
-                for (int j = 0; j < droneChargers.Length; j++)
-                {
-                    if (stations[i].ID == droneChargers[j].StationID)
-                        numOfChargers++;
-                }
-                if (numOfChargers < stations[i].ChargeSlots)
-                {
-                    Console.WriteLine(stations[i]);
-                }
-
+                Console.WriteLine(station);
             }
         }
 
 
-        public static void optionAdd()
+        public static void optionAdd(DalObject.DalObject dalObject)
         {
             Console.WriteLine("to add a station enter 1: " +
                 "\nto add a drone enter 2: " +
@@ -101,7 +92,7 @@ namespace ConsoleUI
                     latiude = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("Enter chargeslots: ");
                     int chargeslots = Convert.ToInt32(Console.ReadLine());
-                    DalObject.DalObject.AddStation(id, name, longitude, latiude, chargeslots);
+                    dalObject.AddStation(id, name, longitude, latiude, chargeslots);
                     break;
                 case 2:
                     Console.WriteLine("Enter an id: ");
@@ -116,7 +107,7 @@ namespace ConsoleUI
                     DroneStatus status = (DroneStatus)Enum.Parse(typeof(DroneStatus), mySring);
                     Console.WriteLine("Enter battery: ");
                     double battery = Convert.ToInt32(Console.ReadLine());
-                    DalObject.DalObject.AddDrone(id, model, maxWeight, status, battery);
+                    dalObject.AddDrone(id, model, maxWeight, status, battery);
 
                     break;
                 case 3:
@@ -131,7 +122,7 @@ namespace ConsoleUI
                     double Longitude = Convert.ToDouble(Console.ReadLine());
                     Console.WriteLine("Enter latiude: ");
                     double Latitude = Convert.ToDouble(Console.ReadLine());
-                    DalObject.DalObject.AddCustomer(id, Name, phone, Latitude, Longitude);
+                    dalObject.AddCustomer(id, Name, phone, Latitude, Longitude);
                     break;
                 case 4:
 
@@ -147,7 +138,7 @@ namespace ConsoleUI
                     Console.WriteLine("Enter priority: ");
                     str = Console.ReadLine();
                     Priorities priority = (Priorities)Enum.Parse(typeof(Priorities), str);
-                    DalObject.DalObject.AddParcial(id, senderID, targetID, weight, priority);
+                    dalObject.AddParcial(id, senderID, targetID, weight, priority);
                     break;
                 default:
                     break;
@@ -157,7 +148,7 @@ namespace ConsoleUI
 
 
 
-        public static void updateOption()
+        public static void updateOption(DalObject.DalObject dalObject)
         {
             Console.WriteLine("to conect a parcial to a drone enter 1: " +
                 "\nto collect a parcial by a drone enter 2: " +
@@ -171,30 +162,30 @@ namespace ConsoleUI
                 case 1:
                     Console.WriteLine("Enter id of Parcial to connect: ");
                     id = Convert.ToInt32(Console.ReadLine());
-                    DalObject.DalObject.updateConectDroneToParcial(id);
+                    dalObject.updateConectDroneToParcial(id);
                     break;
                 case 2:
                     Console.WriteLine("Enter id of Parcial to collect: ");
                     id = Convert.ToInt32(Console.ReadLine());
-                    DalObject.DalObject.updateCollectParcialByDrone(id);
+                    dalObject.updateCollectParcialByDrone(id);
                     break;
                 case 3:
                     Console.WriteLine("Enter id of Parcial to supply: ");
                     id = Convert.ToInt32(Console.ReadLine());
-                    DalObject.DalObject.updateSupplyParcialToCustomer(id);
+                    dalObject.updateSupplyParcialToCustomer(id);
                     break;
                 case 4:
-                    showStationWithEmptyChargers();
+                    showStationWithEmptyChargers(dalObject);
                     Console.WriteLine("Enter id of drone to charge: ");
                     int droneId = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("Enter id of station to charge: ");
                     int stationId = Convert.ToInt32(Console.ReadLine());
-                    DalObject.DalObject.updateSendDroneToCharge(droneId, stationId);
+                    dalObject.updateSendDroneToCharge(droneId, stationId);
                     break;
                 case 5:
                     Console.WriteLine("Enter id of drone to uncharge: ");
                     id = Convert.ToInt32(Console.ReadLine());
-                    DalObject.DalObject.updateUnChargeDrone(id);
+                    dalObject.updateUnChargeDrone(id);
                     break;
                 default:
                     break;
@@ -203,7 +194,7 @@ namespace ConsoleUI
 
 
 
-        public static void showOneItem()
+        public static void showOneItem(DalObject.DalObject dalObject)
         {
             Console.WriteLine("to display a station enter 1: " +
                 "\nto display a drone enter 2: " +
@@ -217,26 +208,26 @@ namespace ConsoleUI
                 case 1:
                     Console.WriteLine("Enter an id of a station: ");
                     id = Convert.ToInt32(Console.ReadLine());
-                    Station station = DalObject.DalObject.GetSpecificStation(id);
+                    Station station = dalObject.GetSpecificStation(id);
                     Console.WriteLine(station);
 
                     break;
                 case 2:
                     Console.WriteLine("Enter an id of the drone");
                     id = Convert.ToInt32(Console.ReadLine());
-                    Drone drone = DalObject.DalObject.GetSpecificDrone(id);
+                    Drone drone = dalObject.GetSpecificDrone(id);
                     Console.WriteLine(drone);
                     break;
                 case 3:
                     Console.WriteLine("Enter an id of a customer: ");
                     id = Convert.ToInt32(Console.ReadLine());
-                    Customer customer = DalObject.DalObject.GetSpecificCustomer(id);
+                    Customer customer = dalObject.GetSpecificCustomer(id);
                     Console.WriteLine(customer);
                     break;
                 case 4:
                     Console.WriteLine("Enter an id of a parcial: ");
                     id = Convert.ToInt32(Console.ReadLine());
-                    Parcial parcial = DalObject.DalObject.GetSpecificParcial(id);
+                    Parcial parcial = dalObject.GetSpecificParcial(id);
                     Console.WriteLine(parcial);
                     break;
                 default:
@@ -246,7 +237,7 @@ namespace ConsoleUI
 
 
 
-        public static void showAllItems()
+        public static void showAllItems(DalObject.DalObject dalObject)
         {
             Console.WriteLine("to display the station list enter 1: " +
                 "\nto display the drone list enter 2: " +
@@ -258,32 +249,32 @@ namespace ConsoleUI
             switch (choice)
             {
                 case 1:
-                    Station[] stations = DalObject.DalObject.GetStation();
+                    IEnumerable<Station> stations = dalObject.GetStation();
                     print(stations);
                     break;
                 case 2:
-                    Drone[] drones = DalObject.DalObject.GetDrone();
+                    IEnumerable<Drone> drones = dalObject.GetDrone();
                     print(drones);
                     break;
                 case 3:
-                    Customer[] customers = DalObject.DalObject.GetCustomer();
+                    IEnumerable<Customer > customers = dalObject.GetCustomer();
                     print(customers);
                     break;
                 case 4:
-                    Parcial[] parcials = DalObject.DalObject.GetParcial();
+                    IEnumerable<Parcial > parcials = dalObject.GetParcial();
                     print(parcials);
                     break;
                 case 5:
-                    showParcelsWithoutoutDrone();
+                    showParcelsWithoutoutDrone(dalObject);
                     break;
                 case 6:
-                    showStationWithEmptyChargers();
+                    showStationWithEmptyChargers(dalObject);
                     break;
                 default:
                     break;
             }
         }
-        public static void print<T>(T[] array)
+        public static void print<T>(IEnumerable< T> array)
         {
             foreach (var item in array)
             {

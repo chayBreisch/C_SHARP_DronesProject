@@ -54,18 +54,17 @@ namespace DalObject
                 customer.Longitude = rand.Next();
                 customers.Add(customer);
             }
-            Console.WriteLine("length" + customers.Count);
             r = rand.Next(10, 15);
             for (int i = 0; i < r; i++)
             {
                 Parcial parcel = new Parcial();
                 parcel.ID = parcials.Count + 1;
-                parcel.SenderID = rand.Next() % parcials.Count;
-                parcel.TargetID = rand.Next() % parcials.Count;
+                parcel.SenderID = rand.Next() % (parcials.Count+1);
+                parcel.TargetID = rand.Next() % (parcials.Count + 1);
                 parcel.Weight = (WeightCatagories)(rand.Next() %3);
                 parcel.Priority = (Priorities)(rand.Next() % 3);
                 parcel.Requested = new DateTime();
-                parcel.DroneID = rand.Next() % parcials.Count;
+                parcel.DroneID = rand.Next() % (parcials.Count + 1);
                 parcel.Scheduled = new DateTime();
                 parcel.PickedUp = new DateTime();
                 parcel.Delivered = new DateTime();
