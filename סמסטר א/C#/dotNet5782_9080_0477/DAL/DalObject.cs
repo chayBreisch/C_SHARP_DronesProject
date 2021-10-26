@@ -236,12 +236,15 @@ namespace DalObject
             int index1 = DataSource.drones.FindIndex(d => d.ID == NewDrone.ID);
             DataSource.drones[index1] = NewDrone;
         }
- 
 
 
 
+        //################################################
+        //functions to show information
+        //################################################
 
-        public  IEnumerable<Parcial> showParcelsWithoutoutDrone()
+
+        public IEnumerable<Parcial> showParcelsWithoutoutDrone()
         {
             IEnumerable<Parcial> parcels = GetParcial();
             foreach (var parcel in parcels)
