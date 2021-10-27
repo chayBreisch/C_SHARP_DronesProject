@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
 using IDAL;
-namespace DalObject 
+namespace BlObject 
 {
     public class DalObject : IDal
     {
@@ -190,7 +190,7 @@ namespace DalObject
         {
             Parcial newParcial = GetSpecificParcial(id);
 
-            //if (newParcial.PickedUp.)////////////////////////////////////////////////////
+            //if (newParcial.PickedUp)////////////////////////////////////////////////////
             {
                 Console.WriteLine("you didnt collect a drone");
             }

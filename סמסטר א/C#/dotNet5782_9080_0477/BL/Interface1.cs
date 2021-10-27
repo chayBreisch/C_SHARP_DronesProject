@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL
 {
-    interface InterFaceIbl
+    interface Bl
     {
 
     }

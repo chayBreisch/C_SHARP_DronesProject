@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using IBL.BO;
 using IBL;
-namespace BlObject
+namespace DalObject
 {
-    public class BlObject : InterFaceIbl
+    public class DalObject 
     {
-        public BlObject()
+        public DalObject()
         {
             DataSource.Initialize();
         }
@@ -46,9 +46,9 @@ namespace BlObject
         public IEnumerable<Parcel> GetParcial()
         {
             List<Parcel> parcels = new List<Parcel>();
-            for (int i = 0; i < DataSource.parcials.Count; i++)
+            for (int i = 0; i < DataSource.parcels.Count; i++)
             {
-                parcels.Add(DataSource.parcials[i]);
+                parcels.Add(DataSource.parcels[i]);
             }
             return parcels;
         }
@@ -82,7 +82,7 @@ namespace BlObject
         }
         public Parcel GetSpecificParcial(int id)
         {
-            return DataSource.parcials.FirstOrDefault(parcial => parcial.ID == id);
+            return DataSource.parcels.FirstOrDefault(parcial => parcial.ID == id);
 
         }
         //###############################################################
@@ -106,7 +106,7 @@ namespace BlObject
         public void AddParcial(int id, int senderId, int targetId, WeightCatagories weight, Priorities priority)
         {
             Parcel newParcial = new Parcel(id, senderId, targetId,  weight, priority);
-            DataSource.parcials[DataSource.parcials.Count - 1] = newParcial;
+            DataSource.parcels[DataSource.parcels.Count - 1] = newParcial;
         }
 
         //################################################
@@ -129,7 +129,7 @@ namespace BlObject
             int index1 = DataSource.drones.FindIndex(p => p.ID == newParcial.ID);
             int index = DataSource.drones.FindIndex(d => d.ID == drone.ID);
             DataSource.drones[index] = drone;
-            DataSource.parcials[index1] = newParcial;
+            DataSource.parcels[index1] = newParcial;
         }
 
 
@@ -234,6 +234,30 @@ namespace BlObject
                     yield return station;
                 }
             }
+        }
+
+
+        public int returnLengthDrone()
+        {
+            return DataSource.drones.Count;
+        }
+
+        public int returnLengthStation()
+        {
+            return DataSource.stations.Count;
+        }
+        public int returnLengthCustomer()
+        {
+            return DataSource.customers.Count;
+        }
+        public int returnLengthParcels()
+        {
+            return DataSource.parcels.Count;
+        }
+
+        public int returnLengthDroneCharger()
+        {
+            return DataSource.droneChargers.Count;
         }
     }
 }

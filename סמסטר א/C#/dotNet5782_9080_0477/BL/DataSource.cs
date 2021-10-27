@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IBL.BO;
 
-namespace BlObject
+namespace DalObject
 {
     public struct DataSource
     {
@@ -13,7 +13,7 @@ namespace BlObject
         internal static List<Drone> drones = new List<Drone>();
         internal static List<Station> stations = new List<Station>();
         internal static List<Customer> customers = new List<Customer>();
-        internal static List<Parcel> parcials =  new List<Parcel>();
+        internal static List<Parcel> parcels =  new List<Parcel>();
         internal static List<DroneCharge> droneChargers = new List<DroneCharge>();
 
         public static void Initialize()
@@ -42,10 +42,10 @@ namespace BlObject
             r = rand.Next(10, 15);
             for (int i = 0; i < r; i++)
             {
-                Parcel parcel = new Parcel(parcials.Count + 1, rand.Next() % (parcials.Count + 1), rand.Next() % (parcials.Count + 1),
+                Parcel parcel = new Parcel(parcels.Count + 1, rand.Next() % (parcels.Count + 1), rand.Next() % (parcels.Count + 1),
                     (WeightCatagories)(rand.Next() % 3), (Priorities)(rand.Next() % 3),
-                    new DateTime(), rand.Next() % (parcials.Count + 1), new DateTime(), new DateTime(), new DateTime());
-                parcials.Add(parcel);
+                    new DateTime(), rand.Next() % (parcels.Count + 1), new DateTime(), new DateTime(), new DateTime());
+                parcels.Add(parcel);
 
             }
         }
