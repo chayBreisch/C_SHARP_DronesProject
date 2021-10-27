@@ -7,7 +7,7 @@ using IBL.BO;
 
 namespace DalObject
 {
-    public struct DataSource
+    public class DataSource
     {
         
         internal static List<Drone> drones = new List<Drone>();
