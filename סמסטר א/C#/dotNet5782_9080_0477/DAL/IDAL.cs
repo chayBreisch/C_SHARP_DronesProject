@@ -22,6 +22,7 @@ namespace IDAL
         public void AddStation(int id, int name, int longitude, int latitude, int chargeSlots);
         public void AddCustomer(int id, string name, string phone, double latitude, double longitude);
         public void AddParcial(int id, int senderId, int targetId, WeightCatagories weight, Priorities priority);
+
         public void updateConectDroneToParcial(int id);
         public void updateCollectParcialByDrone(int id);
         public void updateSupplyParcialToCustomer(int id);
