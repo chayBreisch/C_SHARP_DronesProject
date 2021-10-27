@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
 
-namespace DalObject
+namespace BlObject
 {
     public struct DataSource
     {

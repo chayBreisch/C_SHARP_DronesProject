@@ -10,6 +10,22 @@ namespace IBL
     {
         public class Customer
         {
+            public Customer()
+            {
+                ID = 0;
+                Name = "";
+                Phone = "";
+                Longitude = 0;
+                Latitude = 0;
+            }
+            public Customer(int id, string name, string phone, double longitude, double latitude)
+            {
+                ID = id;
+                Name = name;
+                Phone = phone;
+                Longitude = longitude;
+                Latitude = latitude;
+            }
             public int ID { get; set; }
             public string Name { get; set; }
             public string Phone { get; set; }

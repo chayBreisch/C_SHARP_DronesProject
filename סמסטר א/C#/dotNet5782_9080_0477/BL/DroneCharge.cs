@@ -10,6 +10,16 @@ namespace IBL
     {
         public class DroneCharge
         {
+            public DroneCharge()
+            {
+                DroneID = 0;
+                StationID = 0;
+            }
+            public DroneCharge(int droneId, int stationId)
+            {
+                DroneID = droneId;
+                StationID = stationId;
+            }
             public int DroneID { get; set; }
             public int StationID { get; set; }
             public override string ToString()

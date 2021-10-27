@@ -8,8 +8,34 @@ namespace IBL
 {
     namespace BO
     {
-        public class Parcial
+        public class Parcel
         {
+            public Parcel()
+            {
+                ID = 0;
+                SenderID = 0;
+                TargetID = 0;
+                Weight = 0;
+                Priority =0;
+                Requested = new DateTime();
+                DroneID = 0;
+                Scheduled = new DateTime();
+                PickedUp = new DateTime();
+                Delivered = new DateTime();
+            }
+            public Parcel(int id, int senderId, int targetId, WeightCatagories weight, Priorities priority, DateTime requested = new DateTime(), int droneID  = 0, DateTime scheduled = new DateTime(), DateTime pickedUp = new DateTime(), DateTime delivered = new DateTime())
+            { 
+                ID = id;
+                SenderID = senderId;
+                TargetID = targetId;
+                Weight = weight;
+                Priority = priority;
+                Requested = requested;
+                DroneID = droneID;
+                Scheduled = scheduled;
+                PickedUp = pickedUp;
+                Delivered = delivered;
+            }
             public int ID { get; set; }
             public int SenderID { get; set; }
             public int TargetID { get; set; }

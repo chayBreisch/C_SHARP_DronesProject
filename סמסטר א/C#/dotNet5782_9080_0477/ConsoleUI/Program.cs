@@ -1,6 +1,6 @@
 ﻿using System;
 using IDAL.DO;
-using DalObject;
+using BlObject;
 using System.Collections.Generic;
 
 namespace ConsoleUI
@@ -10,7 +10,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            DalObject.DalObject dalObject = new DalObject.DalObject();
+            BlObject.DalObject dalObject = new BlObject.DalObject();
 
 /*            DalObject.DataSource.Initialize();
 */            int choice = 0;
@@ -50,7 +50,7 @@ namespace ConsoleUI
         }
 
 
-        public static void showParcelsWithoutoutDrone(DalObject.DalObject dalObject)
+        public static void showParcelsWithoutoutDrone(BlObject.DalObject dalObject)
         {
             IEnumerable <Parcial> parcels = dalObject.GetParcial();
             foreach (var parcel in parcels)
@@ -60,7 +60,7 @@ namespace ConsoleUI
         }
 
 
-        public static void showStationWithEmptyChargers(DalObject.DalObject dalObject)
+        public static void showStationWithEmptyChargers(BlObject.DalObject dalObject)
         {
             IEnumerable<Station> stations = dalObject.GetStation();
             foreach (var station in stations)
@@ -70,7 +70,7 @@ namespace ConsoleUI
         }
 
 
-        public static void optionAdd(DalObject.DalObject dalObject)
+        public static void optionAdd(BlObject.DalObject dalObject)
         {
             Console.WriteLine("to add a station enter 1: " +
                 "\nto add a drone enter 2: " +
@@ -148,7 +148,7 @@ namespace ConsoleUI
 
 
 
-        public static void updateOption(DalObject.DalObject dalObject)
+        public static void updateOption(BlObject.DalObject dalObject)
         {
             Console.WriteLine("to conect a parcial to a drone enter 1: " +
                 "\nto collect a parcial by a drone enter 2: " +
@@ -194,7 +194,7 @@ namespace ConsoleUI
 
 
 
-        public static void showOneItem(DalObject.DalObject dalObject)
+        public static void showOneItem(BlObject.DalObject dalObject)
         {
             Console.WriteLine("to display a station enter 1: " +
                 "\nto display a drone enter 2: " +
@@ -237,7 +237,7 @@ namespace ConsoleUI
 
 
 
-        public static void showAllItems(DalObject.DalObject dalObject)
+        public static void showAllItems(BlObject.DalObject dalObject)
         {
             Console.WriteLine("to display the station list enter 1: " +
                 "\nto display the drone list enter 2: " +
