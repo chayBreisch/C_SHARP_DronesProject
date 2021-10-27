@@ -29,20 +29,5 @@ namespace IDAL
         public void updateUnChargeDrone(int id);
         public IEnumerable<Parcial> showParcelsWithoutoutDrone();
         public IEnumerable<Station> showStationWithEmptyChargers();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
