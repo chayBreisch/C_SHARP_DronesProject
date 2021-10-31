@@ -5,15 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
 
-namespace BlObject
+namespace DalObject
 {
+    public struct Config
+    {
+        public int Available { get; set; }
+        public int LightHeight { get; set; }
+        public int HeavyHeight { get; set; }
+        public int MidHeight { get; set; }
+        public int ChargingRate { get; set; }
+    }
     public struct DataSource
     {
         
         internal static List<Drone> drones = new List<Drone>();
         internal static List<Station> stations = new List<Station>();
         internal static List<Customer> customers = new List<Customer>();
-        internal static List<Parcial> parcials =  new List<Parcial>();
+        internal static List<Parcel> parcels =  new List<Parcel>();
         internal static List<DroneCharge> droneChargers = new List<DroneCharge>();
 
         public static void Initialize()
@@ -38,8 +46,8 @@ namespace BlObject
                 drone.ID = drones.Count + 1;
                 drone.Model = "MarvicAir2";
                 drone.MaxWeight = WeightCatagories.Heavy + i;
-                drone.Status = DroneStatus.Delivery + i;
-                drone.Battery = rand.Next(100);
+                //drone.Status = DroneStatus.Delivery + i;
+                //drone.Battery = rand.Next(100);
                 drones.Add(drone);
             }
 
@@ -57,18 +65,18 @@ namespace BlObject
             r = rand.Next(10, 15);
             for (int i = 0; i < r; i++)
             {
-                Parcial parcel = new Parcial();
-                parcel.ID = parcials.Count + 1;
-                parcel.SenderID = rand.Next() % (parcials.Count+1);
-                parcel.TargetID = rand.Next() % (parcials.Count + 1);
+                Parcel parcel = new Parcel();
+                parcel.ID = parcels.Count + 1;
+                parcel.SenderID = rand.Next() % (parcels.Count+1);
+                parcel.TargetID = rand.Next() % (parcels.Count + 1);
                 parcel.Weight = (WeightCatagories)(rand.Next() %3);
                 parcel.Priority = (Priorities)(rand.Next() % 3);
                 parcel.Requested = new DateTime();
-                parcel.DroneID = rand.Next() % (parcials.Count + 1);
+                parcel.DroneID = rand.Next() % (parcels.Count + 1);
                 parcel.Scheduled = new DateTime();
                 parcel.PickedUp = new DateTime();
                 parcel.Delivered = new DateTime();
-                parcials.Add(parcel);
+                parcels.Add(parcel);
 
             }
         }

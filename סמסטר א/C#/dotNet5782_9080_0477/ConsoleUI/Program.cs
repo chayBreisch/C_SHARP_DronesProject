@@ -1,6 +1,6 @@
 ﻿using System;
 using IDAL.DO;
-using BlObject;
+using DalObject;
 using System.Collections.Generic;
 
 namespace ConsoleUI
@@ -10,10 +10,11 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            BlObject.DalObject dalObject = new BlObject.DalObject();
+         
+            DalObject.DalObject dalObject = new DalObject.DalObject();
 
-/*            DalObject.DataSource.Initialize();
-*/            int choice = 0;
+/*          DalObject.DataSource.Initialize();
+*/          int choice = 0;
 
             while (choice != 5)
             {
@@ -50,9 +51,9 @@ namespace ConsoleUI
         }
 
 
-        public static void showParcelsWithoutoutDrone(BlObject.DalObject dalObject)
+        public static void showParcelsWithoutoutDrone(DalObject.DalObject dalObject)
         {
-            IEnumerable <Parcial> parcels = dalObject.GetParcial();
+            IEnumerable <Parcel> parcels = dalObject.GetParcel();
             foreach (var parcel in parcels)
             {
                  Console.WriteLine(parcel);
@@ -60,7 +61,7 @@ namespace ConsoleUI
         }
 
 
-        public static void showStationWithEmptyChargers(BlObject.DalObject dalObject)
+        public static void showStationWithEmptyChargers(DalObject.DalObject dalObject)
         {
             IEnumerable<Station> stations = dalObject.GetStation();
             foreach (var station in stations)
@@ -70,7 +71,7 @@ namespace ConsoleUI
         }
 
 
-        public static void optionAdd(BlObject.DalObject dalObject)
+        public static void optionAdd(DalObject.DalObject dalObject)
         {
             Console.WriteLine("to add a station enter 1: " +
                 "\nto add a drone enter 2: " +
@@ -104,10 +105,11 @@ namespace ConsoleUI
                     WeightCatagories maxWeight = (WeightCatagories)Enum.Parse(typeof(WeightCatagories), mySring);
                     Console.WriteLine("Enter status: ");
                     mySring = Console.ReadLine();
-                    DroneStatus status = (DroneStatus)Enum.Parse(typeof(DroneStatus), mySring);
+                    //DroneStatus status = (DroneStatus)Enum.Parse(typeof(DroneStatus), mySring);
                     Console.WriteLine("Enter battery: ");
                     double battery = Convert.ToInt32(Console.ReadLine());
-                    dalObject.AddDrone(id, model, maxWeight, status, battery);
+                    //dalObject.AddDrone(id, model, maxWeight, status, battery);
+                    dalObject.AddDrone(id, model, maxWeight);
 
                     break;
                 case 3:
@@ -138,7 +140,7 @@ namespace ConsoleUI
                     Console.WriteLine("Enter priority: ");
                     str = Console.ReadLine();
                     Priorities priority = (Priorities)Enum.Parse(typeof(Priorities), str);
-                    dalObject.AddParcial(id, senderID, targetID, weight, priority);
+                    dalObject.AddParcel(id, senderID, targetID, weight, priority);
                     break;
                 default:
                     break;
@@ -148,7 +150,7 @@ namespace ConsoleUI
 
 
 
-        public static void updateOption(BlObject.DalObject dalObject)
+        public static void updateOption(DalObject.DalObject dalObject)
         {
             Console.WriteLine("to conect a parcial to a drone enter 1: " +
                 "\nto collect a parcial by a drone enter 2: " +
@@ -194,7 +196,7 @@ namespace ConsoleUI
 
 
 
-        public static void showOneItem(BlObject.DalObject dalObject)
+        public static void showOneItem(DalObject.DalObject dalObject)
         {
             Console.WriteLine("to display a station enter 1: " +
                 "\nto display a drone enter 2: " +
@@ -227,7 +229,7 @@ namespace ConsoleUI
                 case 4:
                     Console.WriteLine("Enter an id of a parcial: ");
                     id = Convert.ToInt32(Console.ReadLine());
-                    Parcial parcial = dalObject.GetSpecificParcial(id);
+                    Parcel parcial = dalObject.GetSpecificParcel(id);
                     Console.WriteLine(parcial);
                     break;
                 default:
@@ -237,7 +239,7 @@ namespace ConsoleUI
 
 
 
-        public static void showAllItems(BlObject.DalObject dalObject)
+        public static void showAllItems(DalObject.DalObject dalObject)
         {
             Console.WriteLine("to display the station list enter 1: " +
                 "\nto display the drone list enter 2: " +
@@ -261,7 +263,7 @@ namespace ConsoleUI
                     print(customers);
                     break;
                 case 4:
-                    IEnumerable<Parcial > parcials = dalObject.GetParcial();
+                    IEnumerable<Parcel > parcials = dalObject.GetParcel();
                     print(parcials);
                     break;
                 case 5:
