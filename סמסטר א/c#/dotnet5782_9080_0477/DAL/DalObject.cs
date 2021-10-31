@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
 using IDAL;
-namespace BlObject 
+using DAL;
+namespace DalObject 
 {
-    public class DalObject : IDal
+    public partial class DalObject : IDal
     {
         public DalObject()
         {
@@ -16,7 +17,7 @@ namespace BlObject
         //################################################################
         //functions that returns the basic data arrays from dataSource
         //################################################################
-        public  IEnumerable <Drone> GetDrone()
+        /*public  IEnumerable <Drone> GetDrone()
         {
             List<Drone> drones = new List<Drone>();
             for (int i = 0; i < DataSource.drones.Count; i++)
@@ -24,8 +25,8 @@ namespace BlObject
                 drones.Add(DataSource.drones[i]);
             }
             return drones;
-        }
-        public  IEnumerable <Station> GetStation()
+        }*/
+        /*public  IEnumerable <Station> GetStation()
         {
             List<Station> stations = new List<Station>();
             for (int i = 0; i < DataSource.stations.Count; i++)
@@ -33,8 +34,8 @@ namespace BlObject
                 stations.Add(DataSource.stations[i]);
             }
             return stations;
-        }
-        public  IEnumerable <Customer> GetCustomer()
+        }*/
+        /*public  IEnumerable <Customer> GetCustomer()
         {
             List<Customer> customers = new List<Customer>();
             for (int i = 0; i < DataSource.customers.Count; i++)
@@ -42,18 +43,18 @@ namespace BlObject
                 customers.Add(DataSource.customers[i]);
             }
             return customers;
-        }
-        public  IEnumerable <Parcial> GetParcial()
+        }*/
+   /*     public  IEnumerable <Parcel> GetParcial()
         {
-            List<Parcial> parcels = new List<Parcial>();
-            for (int i = 0; i < DataSource.parcials.Count; i++)
+            List<Parcel> parcels = new List<Parcel>();
+            for (int i = 0; i < DataSource.parcels.Count; i++)
             {
-                parcels.Add(DataSource.parcials[i]);
+                parcels.Add(DataSource.parcels[i]);
             }
             return parcels;
-        }
+        }*/
 
-        public  IEnumerable <DroneCharge> GetDroneCharge()
+       /* public  IEnumerable <DroneCharge> GetDroneCharge()
         {
             List<DroneCharge> droneChargers = new List<DroneCharge>();
             for (int i = 0; i < DataSource.droneChargers.Count; i++)
@@ -61,65 +62,70 @@ namespace BlObject
                 droneChargers.Add(DataSource.droneChargers[i]);
             }
             return droneChargers;
-        }
+        }*/
         //#######################################################################
         //functions that returns the specific item from the dataSource by ID
         //#######################################################################
-        public  Drone GetSpecificDrone(int id)
+        /*public  Drone GetSpecificDrone(int id)
         {
-            Drone newDrone = new Drone();
-            foreach (var drone in DataSource.drones)
+            try
             {
-                if (drone.ID == id)
-                    newDrone = drone;
+                return DataSource.drones.First(drone => drone.ID == id);
             }
-            return newDrone;
-        }
+            catch(ArgumentNullException e)
+            {
+                throw new Exeptions(id);
+            }
+        }*/
 
-        public  Station GetSpecificStation(int id)
+        /*public  Station GetSpecificStation(int id)
         {
-            Station newStation = new Station();
-            foreach (var station in DataSource.stations)
+            try
             {
-                if (station.ID == id)
-                    newStation = station;
+                return DataSource.stations.First(station => station.ID == id);
             }
-            return newStation;
-        }
-        public  Customer GetSpecificCustomer(int id)
+            catch (ArgumentNullException e)
+            {
+                throw new Exeptions(id);
+            }
+        }*/
+        /*public  Customer GetSpecificCustomer(int id)
         {
-            Customer newCustomer = new Customer();
-            foreach (var customer in DataSource.customers)
+            try
             {
-                if (customer.ID == id)
-                    newCustomer = customer;
+                return DataSource.customers.First(customer => customer.ID == id);
             }
-            return newCustomer;
-        }
-        public  Parcial GetSpecificParcial(int id)
+            catch (ArgumentNullException e)
+            {
+                throw new Exeptions(id);
+            }
+        }*/
+        /*public  Parcel GetSpecificParcial(int id)
         {
-            Parcial newParcial = new Parcial();
-            foreach (var parcial in DataSource.parcials)
+            try
             {
-                if (parcial.ID == id)
-                    newParcial = parcial;
+                return DataSource.parcels.First(parcel => parcel.ID == id);
             }
-            return newParcial;
-        }
+            catch (ArgumentNullException e)
+            {
+                throw new Exeptions(id);
+            }
+        }*/
         //###############################################################
         //functions that are adding an item to the dataSources array
         //###############################################################
-        public  void AddDrone(int id, string model, WeightCatagories weight, DroneStatus status, double battery)
+        /*public  void AddDrone(int id, string model, WeightCatagories weight)
+        //public void AddDrone(int id, string model, WeightCatagories weight, DroneStatus status, double battery)
         {
             Drone newDrone = new Drone();
             newDrone.ID = id;
             newDrone.Model = model;
             newDrone.MaxWeight = weight;
-            newDrone.Status = status;
-            newDrone.Battery = battery;
+           *//* newDrone.Status = status;
+            newDrone.Battery = battery;*//*
             DataSource.drones[DataSource.drones.Count - 1] = newDrone;
-        }
-        public  void AddStation(int id, int name, int longitude, int latitude, int chargeSlots)
+        }*/
+        /*public  void AddStation(int id, int name, int longitude, int latitude, int chargeSlots)
         {
             Station newStation = new Station();
             newStation.ID = id;
@@ -128,8 +134,8 @@ namespace BlObject
             newStation.Latitude = latitude;
             newStation.ChargeSlots = chargeSlots;
             DataSource.stations[DataSource.stations.Count - 1] = newStation;
-        }
-        public  void AddCustomer(int id, string name, string phone, double latitude, double longitude)
+        }*/
+        /*public  void AddCustomer(int id, string name, string phone, double latitude, double longitude)
         {
             Customer newCustomer = new Customer();
             newCustomer.ID = id;
@@ -138,46 +144,46 @@ namespace BlObject
             newCustomer.Latitude = latitude;
             newCustomer.Longitude = longitude;
             DataSource.customers[DataSource.customers.Count - 1] = newCustomer;
-        }
-        public  void AddParcial(int id, int senderId, int targetId, WeightCatagories weight, Priorities priority)
+        }*/
+        /*public  void AddParcial(int id, int senderId, int targetId, WeightCatagories weight, Priorities priority)
         {
-            Parcial newParcial = new Parcial();
+            Parcel newParcial = new Parcel();
             newParcial.ID = id;
             newParcial.SenderID = senderId;
             newParcial.TargetID = targetId;
             newParcial.Weight = weight;
             newParcial.Priority = priority;
-            DataSource.parcials[DataSource.parcials.Count - 1] = newParcial;
-        }
+            DataSource.parcels[DataSource.parcels.Count - 1] = newParcial;
+        }*/
 
         //################################################
         //functions that update the dataSource array 
         //################################################
         public  void updateConectDroneToParcial(int id)
         {
-            Parcial newParcial = GetSpecificParcial(id);
+            Parcel newParcial = GetSpecificParcel(id);
             Drone drone = new Drone();
             for (int i = 0; i < DataSource.drones.Count; i++)
             {
-                if (DataSource.drones[i].Status == DroneStatus.Available)
+               /* if (DataSource.drones[i].Status == DroneStatus.Available)
                 {
                     drone = DataSource.drones[i];
                     drone.Status = DroneStatus.Delivery;
                     break;
-                }
+                }*/
             }
             newParcial.DroneID = drone.ID;
             int index1 = DataSource.drones.FindIndex(p => p.ID == newParcial.ID);
             int index = DataSource.drones.FindIndex(d => d.ID == drone.ID);
             DataSource.drones[index] = drone;
-            DataSource.parcials[index1] = newParcial;
+            DataSource.parcels[index1] = newParcial;
         }
 
 
         public  void updateCollectParcialByDrone(int id)
         {
 
-            Parcial newParcial = GetSpecificParcial(id);
+            Parcel newParcial = GetSpecificParcel(id);
             if (newParcial.DroneID == 0)
             {
                 Console.WriteLine("you didnt conect a drone");
@@ -188,7 +194,7 @@ namespace BlObject
 
         public  void updateSupplyParcialToCustomer(int id)
         {
-            Parcial newParcial = GetSpecificParcial(id);
+            Parcel newParcial = GetSpecificParcel(id);
 
             //if (newParcial.PickedUp)////////////////////////////////////////////////////
             {
@@ -215,7 +221,7 @@ namespace BlObject
 
             }
 
-            newDrone.Status = DroneStatus.Maintenance;
+            //newDrone.Status = DroneStatus.Maintenance;
             DataSource.droneChargers[DataSource.droneChargers.Count - 1] = droneCharge;
         }
         public  void updateUnChargeDrone(int id)
@@ -231,8 +237,8 @@ namespace BlObject
                     break;
                 }
             }
-            NewDrone.Status = DroneStatus.Available;
-            NewDrone.Battery = 100;
+            /*NewDrone.Status = DroneStatus.Available;
+            NewDrone.Battery = 100;*/
             int index1 = DataSource.drones.FindIndex(d => d.ID == NewDrone.ID);
             DataSource.drones[index1] = NewDrone;
         }
@@ -244,9 +250,9 @@ namespace BlObject
         //################################################
 
 
-        public IEnumerable<Parcial> showParcelsWithoutoutDrone()
+        public IEnumerable<Parcel> showParcelsWithoutoutDrone()
         {
-            IEnumerable<Parcial> parcels = GetParcial();
+            IEnumerable<Parcel> parcels = GetParcel();
             foreach (var parcel in parcels)
             {
                 if (parcel.DroneID == 0)
@@ -276,5 +282,15 @@ namespace BlObject
                 }
             }
         }
+
+
+
+
+        public double[] requestElectric()
+        {
+            double[] array = { 0, 10, 20, 30, 40 };
+            return array;
+        }
+
     }
 }
