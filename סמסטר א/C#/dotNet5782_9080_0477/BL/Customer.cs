@@ -12,15 +12,16 @@ namespace IBL
         public class Customer
         {
 
+            IDAL.DO.Customer customer;
 
-
-            public Customer(int id, string name, string phone, double latitude, double longitude)
+            public Customer()
             {
-                IDAL.DO.Customer customer = new IDAL.DO.Customer();
-                dalObject.AddCustomer(customer);
-
+                customer = new IDAL.DO.Customer();         
             }
-
+            public override string ToString()
+            {
+                return $"customer: {customer.Name} : {customer.ID}";
+            }
 
 
 

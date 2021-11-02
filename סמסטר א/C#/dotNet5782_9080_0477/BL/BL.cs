@@ -2,37 +2,42 @@
 using DalObject;
 using IBL.BO;
 using IBL;
-
+using System.Collections.Generic;
 
 namespace BL
 {
     class BL : Bl
     {
-        IBL.BO.Customer customer;
-        IDAL.IDal dalObject = new DalObject.DalObject();
+        IDAL.IDal dalObject;
         public BL()
         {
-            IBL.BO.Customer bo = new IBL.BO.Customer();
-            dalObject = new DalObject.DalObject();
+            IDAL.IDal dalObject = new DalObject.DalObject();
+            double[] arrayEletric = dalObject.requestElectric();
+            double electricAvailable = arrayEletric[0];
+            double electricLightHeight = arrayEletric[1];
+            double electricMidHeight = arrayEletric[2];
+            double electricHeavyHeight = arrayEletric[3];
+            double electricChargingRate = arrayEletric[4];
+            //List<DalObject.DataSource.drones> drones =  dalObject.GetDronesByList();
         }
 
-        public void AddCustomer(int id, string name, string phone, double latitude, double longitude)
-        {
-            Customer newCustomer = new Customer(id, name, phone, latitude, longitude);
-           /* newCustomer.ID = id;
-            newCustomer.Name = name;
-            newCustomer.Phone = phone;
-            newCustomer.Latitude = latitude;
-            newCustomer.Longitude = longitude;*/
-            dalObject.AddCustomer(newCustomer);
-        }
+        /* public void AddCustomer(int id, string name, string phone, double latitude, double longitude)
+         {
+             Customer newCustomer = new Customer(id, name, phone, latitude, longitude);
+            *//* newCustomer.ID = id;
+             newCustomer.Name = name;
+             newCustomer.Phone = phone;
+             newCustomer.Latitude = latitude;
+             newCustomer.Longitude = longitude;*//*
+             dalObject.AddCustomer(newCustomer);
+         }
 
-
+        */
 
         //################################################
         //functions that update the dataSource array 
         //################################################
-        public void updateConectDroneToParcial(int id)
+        /*public void updateConectDroneToParcial(int id)
         {
             Parcel newParcial = dalObject.GetSpecificParcial(id);
             Drone drone = new Drone();
@@ -114,6 +119,6 @@ namespace BL
             NewDrone.Battery = 100;
             int index1 = DataSource.drones.FindIndex(d => d.ID == NewDrone.ID);
             DataSource.drones[index1] = NewDrone;
-        }
+        }*/
     }
 }

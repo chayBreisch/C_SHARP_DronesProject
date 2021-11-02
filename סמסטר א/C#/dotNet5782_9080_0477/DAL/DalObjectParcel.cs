@@ -10,6 +10,11 @@ namespace DalObject
 {
     public partial class DalObject
     {
+
+        public List<Parcel> GetParcelByList()
+        {
+            return DataSource.parcels;
+        }
         public IEnumerable<Parcel> GetParcel()
         {
             List<Parcel> parcels = new List<Parcel>();

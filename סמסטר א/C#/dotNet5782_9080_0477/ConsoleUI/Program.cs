@@ -263,8 +263,8 @@ namespace ConsoleUI
                     print(customers);
                     break;
                 case 4:
-                    IEnumerable<Parcel > parcials = dalObject.GetParcel();
-                    print(parcials);
+                    IEnumerable<Parcel > parcels = dalObject.GetParcel();
+                    print(parcels);
                     break;
                 case 5:
                     showParcelsWithoutoutDrone(dalObject);

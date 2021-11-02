@@ -288,7 +288,7 @@ namespace DalObject
 
         public double[] requestElectric()
         {
-            double[] array = { 0, 10, 20, 30, 40 };
+            double[] array = {  10, 20, 30, 40, 50};
             return array;
         }
 

@@ -10,6 +10,11 @@ namespace DalObject
 {
     public partial class DalObject
     {
+
+        public List<Drone> GetDronesByList()
+        {
+            return DataSource.drones;
+        }
         public IEnumerable<Drone> GetDrone()
         {
             List<Drone> drones = new List<Drone>();

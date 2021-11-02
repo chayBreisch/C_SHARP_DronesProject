@@ -11,6 +11,11 @@ namespace DalObject
 
     public partial class DalObject
     {
+
+        public List<Station> GetStationByList()
+        {
+            return DataSource.stations;
+        }
         public IEnumerable<Station> GetStation()
         {
             List<Station> stations = new List<Station>();
