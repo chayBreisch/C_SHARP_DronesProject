@@ -1,23 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DalObject;
 using IBL.BO;
 using IBL;
-/// <summary>
-/// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////s/לשנות הכל שלא ייגש לdataSource
-/// </summary>
+
+
 namespace BL
 {
     class BL : Bl
     {
-        DalObject.DalObject dalObject;
+        IBL.BO.Customer customer;
+        IDAL.IDal dalObject = new DalObject.DalObject();
         public BL()
         {
+            IBL.BO.Customer bo = new IBL.BO.Customer();
             dalObject = new DalObject.DalObject();
         }
+
+        public void AddCustomer(int id, string name, string phone, double latitude, double longitude)
+        {
+            Customer newCustomer = new Customer(id, name, phone, latitude, longitude);
+           /* newCustomer.ID = id;
+            newCustomer.Name = name;
+            newCustomer.Phone = phone;
+            newCustomer.Latitude = latitude;
+            newCustomer.Longitude = longitude;*/
+            dalObject.AddCustomer(newCustomer);
+        }
+
+
+
         //################################################
         //functions that update the dataSource array 
         //################################################

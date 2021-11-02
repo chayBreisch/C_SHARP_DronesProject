@@ -7,7 +7,7 @@ using DalObject;
 using IDAL.DO;
 namespace IDAL
 {
-    interface IDal
+    public interface IDal
     {
         public IEnumerable<Drone> GetDrone();
         public IEnumerable<Station> GetStation();
@@ -22,7 +22,7 @@ namespace IDAL
         public void AddDrone(int id, string model, WeightCatagories weight);
 
         public void AddStation(int id, int name, int longitude, int latitude, int chargeSlots);
-        public void AddCustomer(int id, string name, string phone, double latitude, double longitude);
+        public void AddCustomer(Customer customer);
         public void AddParcel(int id, int senderId, int targetId, WeightCatagories weight, Priorities priority);
 
         public void updateConectDroneToParcial(int id);

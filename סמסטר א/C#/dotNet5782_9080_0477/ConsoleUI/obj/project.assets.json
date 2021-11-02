@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "BL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BL.dll": {}
+        }
+      },
       "DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -15,6 +28,11 @@
     }
   },
   "libraries": {
+    "BL/1.0.0": {
+      "type": "project",
+      "path": "../BL/BL.csproj",
+      "msbuildProject": "../BL/BL.csproj"
+    },
     "DAL/1.0.0": {
       "type": "project",
       "path": "../DAL/DAL.csproj",
@@ -23,7 +41,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "DAL >= 1.0.0"
+      "BL >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -60,8 +78,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "H:\\סמסטר א\\C#\\dotNet5782_9080_0477\\DAL\\DAL.csproj": {
-              "projectPath": "H:\\סמסטר א\\C#\\dotNet5782_9080_0477\\DAL\\DAL.csproj"
+            "H:\\סמסטר א\\C#\\dotNet5782_9080_0477\\BL\\BL.csproj": {
+              "projectPath": "H:\\סמסטר א\\C#\\dotNet5782_9080_0477\\BL\\BL.csproj"
             }
           }
         }

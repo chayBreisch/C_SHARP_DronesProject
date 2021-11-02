@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using IDAL.DO;
 
 namespace IBL
 {
@@ -12,6 +12,16 @@ namespace IBL
         public class Drone
         {
             public Drone()
+            {
+                IDAL.DO.Drone drone = new IDAL.DO.Drone();
+            }
+
+
+
+
+
+
+           /* public Drone()
             {
                 ID = 0;
                 Model = "";
@@ -35,7 +45,7 @@ namespace IBL
             public override string ToString()
             {
                 return $"ID: {ID}, Model: {Model}, Status: {Status }, MaxWeight: {MaxWeight}, Battery: {Battery}";
-            }
+            }*/
         }
     }
 }

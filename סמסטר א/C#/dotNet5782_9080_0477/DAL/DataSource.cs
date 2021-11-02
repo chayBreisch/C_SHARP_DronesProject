@@ -9,11 +9,16 @@ namespace DalObject
 {
     public struct Config
     {
-        public int Available { get; set; }
+        public static int Available = 10;
+        public static int LightHeight = 20;
+        public static int MidHeight = 30; 
+        public static int HeavyHeight = 40;
+        public static int ChargingRate = 50;
+        /*public bool Available { get; set; }
         public int LightHeight { get; set; }
         public int HeavyHeight { get; set; }
         public int MidHeight { get; set; }
-        public int ChargingRate { get; set; }
+        public int ChargingRate { get; set; }*/
     }
     public struct DataSource
     {

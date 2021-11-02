@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using IDAL.DO;
 namespace IBL
 {
     namespace BO
@@ -11,6 +11,10 @@ namespace IBL
         public class Parcel
         {
             public Parcel()
+            {
+                IDAL.DO.Parcel parcel = new IDAL.DO.Parcel();
+            }
+            /*public Parcel()
             {
                 ID = 0;
                 SenderID = 0;
@@ -49,7 +53,7 @@ namespace IBL
             public override string ToString()
             {
                 return $"ID: {ID}, Priority: {Priority}, SenderID: {SenderID}, TargetID: {TargetID}, Weight: {Weight}, droneId: {DroneID}"; ;
-            }
+            }*/
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using IDAL.DO;
 namespace IBL
 {
     namespace BO
@@ -11,6 +11,11 @@ namespace IBL
         public class Station
         {
             public Station()
+            {
+                IDAL.DO.Station station = new IDAL.DO.Station();
+            }
+
+            /*public Station()
             {
                 ID = 0;
                 Name = 0;
@@ -34,7 +39,7 @@ namespace IBL
             public override string ToString()
             {
                 return $"id: {ID}, Name: {Name}, Longitude: {Longitude}, Latitude: {Latitude}, ChargeSlots: {ChargeSlots}";
-            }
+            }*/
         }
     }
 }
