@@ -10,9 +10,15 @@ namespace IBL
     {
         public class DroneCharge
         {
+            IDAL.DO.DroneCharge droneCharge;
+
             public DroneCharge()
             {
-                IDAL.DO.DroneCharge droneCharge = new IDAL.DO.DroneCharge();
+                droneCharge = new IDAL.DO.DroneCharge();
+            }
+            public override string ToString()
+            {
+                return $"customer: {droneCharge.StationID} : {droneCharge.DroneID}";
             }
 
 

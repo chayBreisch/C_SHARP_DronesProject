@@ -33,5 +33,12 @@ namespace IDAL
         public IEnumerable<Parcel> showParcelsWithoutoutDrone();
         public IEnumerable<Station> showStationWithEmptyChargers();
         public double[] requestElectric();
+        public List<Customer> GetCustomersByList();
+        public List<Station> GetStationByList();
+        public List<Drone> GetDronesByList();
+        public List<DroneCharge> GetDroneChargeByList();
+        public List<Parcel> GetParcelByList();
+
+
     }
 }

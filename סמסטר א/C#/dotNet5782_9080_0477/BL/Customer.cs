@@ -18,6 +18,14 @@ namespace IBL
             {
                 customer = new IDAL.DO.Customer();         
             }
+
+
+            public Location location { get; set; }
+            List<ParcelAtCustomer> parcelSendedByCustomer = new List<ParcelAtCustomer>();
+            List<ParcelAtCustomer> parcelSendedToCustomer = new List<ParcelAtCustomer>();
+
+
+
             public override string ToString()
             {
                 return $"customer: {customer.Name} : {customer.ID}";

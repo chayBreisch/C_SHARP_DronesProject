@@ -9,6 +9,10 @@ namespace DalObject
 {
     public partial class DalObject
     {
+        public List<Customer> GetCustomersByList()
+        {
+            return DataSource.customers;
+        }
         public IEnumerable<Customer> GetCustomer()
         {
             List<Customer> customers = new List<Customer>();
