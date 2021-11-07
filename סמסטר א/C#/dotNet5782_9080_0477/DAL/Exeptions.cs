@@ -8,9 +8,13 @@ namespace DAL
 {
     class Exeptions : Exception
     {
-        public Exeptions(int id): base($"not found {id}")
+        public Exeptions(ulong id): base($"not found {id}")
         {
            
+        }
+        public Exeptions(int id) : base($"not found {id}")
+        {
+
         }
     }
 }

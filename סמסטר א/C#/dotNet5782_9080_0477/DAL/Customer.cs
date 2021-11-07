@@ -10,7 +10,7 @@ namespace IDAL
     {
         public struct Customer
         {
-            public int ID { get; set; }
+            public ulong  ID { get; set; }
             public string Name { get; set; }
             public string Phone { get; set; }
             public double Longitude { get; set; }

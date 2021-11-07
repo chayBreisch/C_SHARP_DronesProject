@@ -37,15 +37,9 @@ namespace DalObject
             }
         }
 
-        public void AddParcel(int id, int senderId, int targetId, WeightCatagories weight, Priorities priority)
+        public void AddParcel(Parcel parcel)
         {
-            Parcel newParcial = new Parcel();
-            newParcial.ID = id;
-            newParcial.SenderID = senderId;
-            newParcial.TargetID = targetId;
-            newParcial.Weight = weight;
-            newParcial.Priority = priority;
-            DataSource.parcels[DataSource.parcels.Count - 1] = newParcial;
+            DataSource.parcels[DataSource.parcels.Count - 1] = parcel;
         }
     }
 }

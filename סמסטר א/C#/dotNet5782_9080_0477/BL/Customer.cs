@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
+using BL;
 
 namespace IBL
 {
@@ -11,10 +12,21 @@ namespace IBL
     {
         public class Customer
         {
-
-            public ulong ID { get; set; }
+            private ulong id;
+            public ulong ID {
+                get
+                { return id; }
+                set
+                {
+                    //if(CheckLongIdIsValid() && CheckValidIdCustomer)
+                    id = value;
+                    //else{
+                    //throw new FormatException("not valid id");
+                    //}
+                }
+                    }
             public string Name { get; set; }
-            public ulong Phone { get; set; }
+            public string Phone { get; set; }
 
 
             public Location location { get; set; }

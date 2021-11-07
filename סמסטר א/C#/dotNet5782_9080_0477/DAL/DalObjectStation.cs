@@ -37,15 +37,9 @@ namespace DalObject
             }
         }
 
-        public void AddStation(int id, int name, int longitude, int latitude, int chargeSlots)
+        public void AddStation(Station station)
         {
-            Station newStation = new Station();
-            newStation.ID = id;
-            newStation.Name = name;
-            newStation.Longitude = longitude;
-            newStation.Latitude = latitude;
-            newStation.ChargeSlots = chargeSlots;
-            DataSource.stations[DataSource.stations.Count - 1] = newStation;
+            DataSource.stations[DataSource.stations.Count - 1] = station;
         }
     }
 }

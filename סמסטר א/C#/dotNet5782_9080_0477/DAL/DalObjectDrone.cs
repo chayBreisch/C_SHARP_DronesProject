@@ -36,17 +36,11 @@ namespace DalObject
                 throw new Exeptions(id);
             }
         }
-        public void AddDrone(int id, string model, WeightCatagories weight)
-        //public void AddDrone(int id, string model, WeightCatagories weight, DroneStatus status, double battery)
+        public void AddDrone(Drone drone)
         {
-            Drone newDrone = new Drone();
-            newDrone.ID = id;
-            newDrone.Model = model;
-            newDrone.MaxWeight = weight;
-            /* newDrone.Status = status;
-             newDrone.Battery = battery;*/
-            DataSource.drones[DataSource.drones.Count - 1] = newDrone;
+            DataSource.drones[DataSource.drones.Count - 1] = drone;
         }
+       
     }
     
 }

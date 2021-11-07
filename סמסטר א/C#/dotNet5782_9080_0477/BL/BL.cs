@@ -3,6 +3,7 @@ using DalObject;
 using IBL.BO;
 using IBL;
 using System.Collections.Generic;
+using IDAL.DO;
 
 namespace BL
 {
@@ -19,12 +20,95 @@ namespace BL
             double electricHeavyHeight = arrayEletric[3];
             double electricChargingRate = arrayEletric[4];
 
-            List<DalObject.DataSource.drones> drones =  dalObject.GetDronesByList();
+            //List<DalObject.DataSource.drones> drones =  dalObject.GetDronesByList();
+        }
+
+
+
+        public void AddCustomer(ulong id, string name, string phone, double longitude, double latitude)
+        {
+            IDAL.DO.Customer customer = new IDAL.DO.Customer();
+            customer.ID = id;
+            customer.Name = name;
+            customer.Phone = phone;
+            customer.Longitude = longitude;
+            customer.Latitude = latitude;
+            dalObject.AddCustomer(customer);
+        }
+
+        public void AddStation(int id, int name, double longitude, double latitude, int ChargeSlots)
+        {
+            IDAL.DO.Station station = new IDAL.DO.Station();
+            station.ID = id;
+            station.Name = name;
+            station.Longitude = longitude;
+            station.Latitude = latitude;
+            station.ChargeSlots = ChargeSlots;
+            dalObject.AddStation(station);
+        }
+
+
+        public void AddDrone(int id, string model, WeightCatagories maxWeight)
+        {
+            IDAL.DO.Drone drone = new IDAL.DO.Drone();
+            drone.ID = id;
+            drone.Model = model;
+            drone.MaxWeight = maxWeight;
+            dalObject.AddDrone(drone);
+        }
+
+        public void AddParcel(int id, int sender, int target, WeightCatagories Weight, Priorities priority)
+        {
+            IDAL.DO.Parcel parcel = new IDAL.DO.Parcel();
+            parcel.ID = id;
+            parcel.SenderID = sender;
+            parcel.TargetID = target;
+            parcel.Weight = Weight;
+            parcel.Priority = priority;
+            dalObject.AddParcel(parcel);
         }
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+        public bool CheckLongIdIsValid(ulong id)
+        {
+            return id > 100000000 && id < 1000000000;
+        }
+
+        public bool CheckValidIdCustomer(ulong id)
+        {
+            int sum = 0, digit;
+            for (int i = 0; i < 9; i++)
+            {
+                digit = (int)(id % 10);
+                if ((i % 2) == 0)
+                {
+                    sum += digit * 2;
+                }
+                else
+                {
+                    sum += digit;
+                }
+                id /= 10;
+            }
+            if ((sum % 10) == 0)
+            {
+                return true;
+            }
+            return false;
+        }
 
 
 

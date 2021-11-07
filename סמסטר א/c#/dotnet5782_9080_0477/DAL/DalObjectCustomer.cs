@@ -23,7 +23,7 @@ namespace DalObject
             return customers;
         }
 
-        public Customer GetSpecificCustomer(int id)
+        public Customer GetSpecificCustomer(ulong id)
         {
             try
             {

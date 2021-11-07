@@ -16,14 +16,14 @@ namespace IDAL
         public IEnumerable<DroneCharge> GetDroneCharge();
         public Drone GetSpecificDrone(int id);
         public Station GetSpecificStation(int id);
-        public Customer GetSpecificCustomer(int id);
+        public Customer GetSpecificCustomer(ulong id);
         public Parcel GetSpecificParcel(int id);
         //public void AddDrone(int id, string model, WeightCatagories weight, DroneStatus status, double battery);
-        public void AddDrone(int id, string model, WeightCatagories weight);
+        public void AddDrone(Drone drone);
 
-        public void AddStation(int id, int name, int longitude, int latitude, int chargeSlots);
+        public void AddStation(Station station);
         public void AddCustomer(Customer customer);
-        public void AddParcel(int id, int senderId, int targetId, WeightCatagories weight, Priorities priority);
+        public void AddParcel(Parcel parcel);
 
         public void updateConectDroneToParcial(int id);
         public void updateCollectParcialByDrone(int id);
