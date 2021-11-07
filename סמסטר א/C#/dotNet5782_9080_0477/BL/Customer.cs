@@ -12,12 +12,9 @@ namespace IBL
         public class Customer
         {
 
-            IDAL.DO.Customer customer;
-
-            public Customer()
-            {
-                customer = new IDAL.DO.Customer();         
-            }
+            public ulong ID { get; set; }
+            public string Name { get; set; }
+            public ulong Phone { get; set; }
 
 
             public Location location { get; set; }
@@ -28,7 +25,7 @@ namespace IBL
 
             public override string ToString()
             {
-                return $"customer: {customer.Name} : {customer.ID}";
+                return $"customer: {ID} : {Name} : {Phone}";
             }
 
 

@@ -10,20 +10,21 @@ namespace IBL
     {
         public class Parcel
         {
-            IDAL.DO.Parcel parcel;
-
-            public Parcel()
-            {
-                parcel = new IDAL.DO.Parcel();
-            }
-
-            public int CustomerSender { get; set; }
-            public int Customerreciever { get; set; }
+            public int ID { get; set; }
+            public Customer Sender { get; set; }
+            public Customer Reciever { get; set; }
+            public WeightCatagories weightCatagories { get; set; }
+            public Priorities priorities { get; set; }
             public Drone drone { get; set; }
+            public DateTime Created { get; set; }
+            public DateTime Conected { get; set; }
+            public DateTime Collected { get; set; } 
+            public DateTime Delivered { get; set; }
+
 
             public override string ToString()
             {
-                return $"customer: {parcel.DroneID} : {parcel.ID}";
+                return $"customer: {ID} : {Sender} : {Reciever} : {drone}";
             }
 
 

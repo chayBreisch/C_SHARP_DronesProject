@@ -18,8 +18,26 @@ namespace BL
             double electricMidHeight = arrayEletric[2];
             double electricHeavyHeight = arrayEletric[3];
             double electricChargingRate = arrayEletric[4];
-            //List<DalObject.DataSource.drones> drones =  dalObject.GetDronesByList();
+
+            List<DalObject.DataSource.drones> drones =  dalObject.GetDronesByList();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         /* public void AddCustomer(int id, string name, string phone, double latitude, double longitude)
          {

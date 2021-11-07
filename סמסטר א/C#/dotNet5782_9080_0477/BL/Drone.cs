@@ -11,21 +11,16 @@ namespace IBL
     {
         public class Drone
         {
-            IDAL.DO.Drone drone;
-
-            public Drone()
-            {
-                drone = new IDAL.DO.Drone();
-            }
-
-
+            public int ID { get; set; }
+            public string Model { get; set; }
+            public WeightCatagories weightCatagories { get; set; }
             public double BatteryStatus { get; set; }
             public DroneStatus droneStatus { get; set; }
             public ParcelInDelivery parcelInDelivery { get; set; }
             public Location location { get; set; }
             public override string ToString()
             {
-                return $"customer: {drone.Model} : {drone.ID}";
+                return $"customer: {ID} : {Model}";
             }
 
 
