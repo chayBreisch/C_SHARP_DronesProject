@@ -17,12 +17,10 @@ namespace DalObject
         }
         public IEnumerable<Parcel> GetParcel()
         {
-            List<Parcel> parcels = new List<Parcel>();
-            for (int i = 0; i < DataSource.parcels.Count; i++)
+            foreach (var parcel in DataSource.parcels)
             {
-                parcels.Add(DataSource.parcels[i]);
+                yield return parcel;
             }
-            return parcels;
         }
 
         public Parcel GetSpecificParcel(int id)

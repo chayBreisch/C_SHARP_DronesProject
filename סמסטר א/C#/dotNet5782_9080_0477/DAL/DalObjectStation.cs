@@ -18,12 +18,10 @@ namespace DalObject
         }
         public IEnumerable<Station> GetStation()
         {
-            List<Station> stations = new List<Station>();
-            for (int i = 0; i < DataSource.stations.Count; i++)
+            foreach (var station in DataSource.stations)
             {
-                stations.Add(DataSource.stations[i]);
+                yield return station;
             }
-            return stations;
         }
         public Station GetSpecificStation(int id)
         {

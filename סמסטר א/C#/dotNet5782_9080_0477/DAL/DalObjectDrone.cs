@@ -17,14 +17,19 @@ namespace DalObject
         }
         public IEnumerable<Drone> GetDrone()
         {
-            List<Drone> drones = new List<Drone>();
-            for (int i = 0; i < DataSource.drones.Count; i++)
+            foreach (var drone in DataSource.drones)
             {
-                drones.Add(DataSource.drones[i]);
+                yield return drone;
             }
-            return drones;
         }
+        public IEnumerable<Customer> GetCustomer()
+        {
 
+            foreach (var customer in DataSource.customers)
+            {
+                yield return customer;
+            }
+        }
         public Drone GetSpecificDrone(int id)
         {
             try

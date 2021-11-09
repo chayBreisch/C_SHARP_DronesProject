@@ -17,12 +17,10 @@ namespace DalObject
         }
         public IEnumerable<DroneCharge> GetDroneCharge()
         {
-            List<DroneCharge> droneChargers = new List<DroneCharge>();
-            for (int i = 0; i < DataSource.droneChargers.Count; i++)
+            foreach (var droneCharge in DataSource.droneChargers)
             {
-                droneChargers.Add(DataSource.droneChargers[i]);
+                yield return droneCharge;
             }
-            return droneChargers;
         }
 
         public void AddDroneCharge(DroneCharge droneCharge)
