@@ -24,5 +24,10 @@ namespace DalObject
             }
             return droneChargers;
         }
+
+        public void AddDroneCharge(DroneCharge droneCharge)
+        {
+            DataSource.droneChargers.Add(droneCharge);
+        }
     }
 }

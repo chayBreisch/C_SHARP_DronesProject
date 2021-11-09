@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    class Exeptions : Exception
+    public class Exeptions : Exception
     {
         public Exeptions(ulong id): base($"not found {id}")
         {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
-using BL;
+
 
 namespace IBL
 {
@@ -18,11 +18,11 @@ namespace IBL
                 { return id; }
                 set
                 {
-                    //if(CheckLongIdIsValid() && CheckValidIdCustomer)
+                    if(BL.BL.CheckLongIdIsValid(value) && BL.BL.CheckValidIdCustomer(value))
                     id = value;
-                    //else{
-                    //throw new FormatException("not valid id");
-                    //}
+                    else{
+                    throw new FormatException("not valid id");
+                    }
                 }
                     }
             public string Name { get; set; }

@@ -39,7 +39,7 @@ namespace DalObject
 
         public void AddParcel(Parcel parcel)
         {
-            DataSource.parcels[DataSource.parcels.Count - 1] = parcel;
+            DataSource.parcels.Add(parcel);
         }
     }
 }

@@ -15,12 +15,11 @@ namespace DalObject
         }
         public IEnumerable<Customer> GetCustomer()
         {
-            List<Customer> customers = new List<Customer>();
-            for (int i = 0; i < DataSource.customers.Count; i++)
+
+            foreach (var customer in DataSource.customers)
             {
-                customers.Add(DataSource.customers[i]);
-            }
-            return customers;
+                yield return customer;
+            }  
         }
 
         public Customer GetSpecificCustomer(ulong id)
@@ -37,7 +36,7 @@ namespace DalObject
 
         public void AddCustomer(Customer newCustomer)
         {     
-            DataSource.customers[DataSource.customers.Count - 1] = newCustomer;
+            DataSource.customers.Add(newCustomer);
         }
     }
 }

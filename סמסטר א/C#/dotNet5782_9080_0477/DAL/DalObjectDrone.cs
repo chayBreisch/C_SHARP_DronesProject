@@ -38,7 +38,7 @@ namespace DalObject
         }
         public void AddDrone(Drone drone)
         {
-            DataSource.drones[DataSource.drones.Count - 1] = drone;
+            DataSource.drones.Add(drone);
         }
        
     }

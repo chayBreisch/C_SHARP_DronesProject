@@ -39,7 +39,8 @@ namespace DalObject
 
         public void AddStation(Station station)
         {
-            DataSource.stations[DataSource.stations.Count - 1] = station;
+
+            DataSource.stations.Add(station);
         }
     }
 }
