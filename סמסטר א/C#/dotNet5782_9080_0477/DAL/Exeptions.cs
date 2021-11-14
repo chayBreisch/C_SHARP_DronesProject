@@ -16,5 +16,9 @@ namespace DAL
         {
 
         }
+        public Exeptions(string id) : base($"dont have enough battery {id}")
+        {
+
+        }
     }
 }

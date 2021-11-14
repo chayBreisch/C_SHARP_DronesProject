@@ -12,10 +12,14 @@ namespace BL
         Random rand = new Random();
         List<IBL.BO.Drone> droneBLList;
         IDAL.IDal dalObject;
+        //############################################################
+        //constructor
+        //############################################################
         public BL()
         {
             droneBLList = new List<IBL.BO.Drone>();
-            IDAL.IDal dalObject = new DalObject.DalObject();
+            //IDAL.IDal dalObject = new DalObject.DalObject();
+            dalObject = Factory.factory("DalObject");
             double[] arrayEletric = dalObject.requestElectric();
             double electricAvailable = arrayEletric[0];
             double electricLightHeight = arrayEletric[1];
@@ -25,8 +29,11 @@ namespace BL
 
             //List<DalObject.DataSource.drones> drones =  dalObject.GetDronesByList();
         }
+        //#############################################################
+        //Add functions
+        //#############################################################
 
-        public void AddCustomer(ulong id, string name, string phone, Location location)
+        public void AddCustomer(ulong id, string name, int phone, Location location)
         {
             IBL.BO.Customer customer = new IBL.BO.Customer();
             customer.ID = id;
@@ -37,7 +44,7 @@ namespace BL
             AddCustomerToDal(id, name, phone, location);
         }
 
-        public void AddCustomerToDal(ulong id, string name, string phone, Location location)
+        public void AddCustomerToDal(ulong id, string name, int phone, Location location)
         {
             IDAL.DO.Customer customer = new IDAL.DO.Customer();
             customer.ID = id;
@@ -75,10 +82,10 @@ namespace BL
 
             IBL.BO.Drone droneBL = new IBL.BO.Drone();
             IDAL.DO.Station station = dalObject.GetSpecificStation(id);
-            
+
             droneBL.Model = model;
             droneBL.ID = id;
-            droneBL.weightCatagories = maxWeight;
+            droneBL.weight = maxWeight;
             droneBL.BatteryStatus = rand.Next(20, 40);
             droneBL.droneStatus = DroneStatus.Maintenance;
             droneBL.location.Longitude = station.Longitude;
@@ -112,7 +119,7 @@ namespace BL
             parcel.Delivered = new DateTime();
             parcel.drone = null;
             AddParcelToDal(sender, target, Weight, priority);
-            
+
         }
 
         public void AddParcelToDal(/*ulong id,*/ ulong sender, ulong target, WeightCatagories Weight, Priorities priority)
@@ -133,6 +140,9 @@ namespace BL
             droneCharge.StationID = stationID;
             dalObject.AddDroneCharge(droneCharge);
         }
+        //####################################################################
+        //Get functions from BL
+        //####################################################################
         public List<IBL.BO.Customer> GetCustomerBL()
         {
 
@@ -141,7 +151,7 @@ namespace BL
             customers.ForEach(s => customers1.Add(convertDalCustomerToBl(s)));
             return customers1;
         }
-        
+
         public List<IBL.BO.Drone> GetDroneBL()
         {
 
@@ -166,8 +176,10 @@ namespace BL
             stations.ForEach(s => stations1.Add(convertDalStationToBl(s)));
             return stations1;
         }
-        
 
+        //#############################################################
+        //Get specific item functions
+        //#############################################################
         public IBL.BO.Drone GetSpecificDroneBL(int id)
         {
             try
@@ -213,15 +225,15 @@ namespace BL
                 throw new DAL.Exeptions(id);
             }
         }
-        public List<IBL.BO.Parcel> getParcelsWithoutoutDrone()
+        public List<IDAL.DO.Parcel> getParcelsWithoutoutDrone()
         {
             IEnumerable<IDAL.DO.Parcel> parcels = dalObject.GetParcel();
-            List<IBL.BO.Parcel> parcels1 = new List<IBL.BO.Parcel>();
+            List<IDAL.DO.Parcel> parcels1 = new List<IDAL.DO.Parcel>();
             foreach (var parcel in parcels)
             {
                 if (parcel.DroneID == 0)
                 {
-                    parcels1.Add(convertDalToParcelBL(parcel));
+                    parcels1.Add(parcel);
                 }
             }
             return parcels1;
@@ -248,8 +260,10 @@ namespace BL
             return stations1;
         }
 
-
-        public IBL.BO.Station convertDalStationToBl(IDAL.DO.Station s)
+        //######################################################################
+        //convert from IDAL.DO to IBL.BO functions
+        //######################################################################
+        private IBL.BO.Station convertDalStationToBl(IDAL.DO.Station s)
         {
             return new IBL.BO.Station
             {
@@ -260,7 +274,7 @@ namespace BL
             };
         }
 
-        public IBL.BO.Customer convertDalCustomerToBl(IDAL.DO.Customer c)
+        private IBL.BO.Customer convertDalCustomerToBl(IDAL.DO.Customer c)
         {
             return new IBL.BO.Customer
             {
@@ -270,12 +284,12 @@ namespace BL
                 location = new Location() { Longitude = c.Longitude, Latitude = c.Latitude }
             };
         }
-        public IBL.BO.Drone convertDalDroneToBl(IDAL.DO.Drone d)
+        private IBL.BO.Drone convertDalDroneToBl(IDAL.DO.Drone d)
         {
             //IBL.BO.Drone drone = dalObject.GetSpecificDrone(d.ID);
             return new IBL.BO.Drone { ID = d.ID, Model = d.Model }; /*+++++++++++++++++*/
         }
-        public IBL.BO.Parcel convertDalToParcelBL(IDAL.DO.Parcel p)
+        private IBL.BO.Parcel convertDalToParcelBL(IDAL.DO.Parcel p)
         {
             IBL.BO.Customer sender = convertDalCustomerToBl(dalObject.GetSpecificCustomer(p.SenderID));
             IBL.BO.Customer target = convertDalCustomerToBl(dalObject.GetSpecificCustomer(p.TargetID));
@@ -296,38 +310,234 @@ namespace BL
         }
 
 
+        //######################################################
+        //update functions
+        //######################################################
 
-
-
-
-
-
-
-        public void updateParcelName(int id, string model)
+        public void updateDrone(IBL.BO.Drone drone)
         {
-            IDAL.DO.Drone drone = dalObject.GetSpecificDrone(id);
-            drone.Model = model;
+            int index = droneBLList.FindIndex(d => d.ID == drone.ID);
+            droneBLList[index] = drone;
         }
 
+
+
+
+        public void updateDataDroneName(int id, string model)
+        {
+            IBL.BO.Drone droneBl = droneBLList.First(d => d.ID == id);
+            droneBl.Model = model;
+            updateDrone(droneBl);
+
+            IDAL.DO.Drone drone = dalObject.GetSpecificDrone(id);
+            drone.Model = model;
+            dalObject.updateDrone(drone);
+        }
+        public void updateDataStation(int id, string name = null, int chargeSlots = -1)
+        {
+            IDAL.DO.Station station = dalObject.GetSpecificStation(id);
+            if (name != null)
+            {
+                station.Name = name;
+            }
+            if (chargeSlots != -1)
+            {
+                station.ChargeSlots = chargeSlots;
+            }
+            dalObject.updateStation(station);
+
+        }
+        public void updateDataCustomer(ulong id, string name = null, int phone = -1)
+        {
+            IDAL.DO.Customer customer = dalObject.GetSpecificCustomer(id);
+            if (name != null)
+            {
+                customer.Name = name;
+            }
+            if (phone != -1)
+            {
+                customer.Phone = phone;
+            }
+            dalObject.updateCustomer(customer);
+        }
+        public void updateSendDroneToCharge(int id)
+        {
+            //check this function////////////////////////////////
+            IDAL.DO.Station station = new IDAL.DO.Station();
+            double dis2 = 0;
+            IBL.BO.Drone droneBL = droneBLList.First(d => d.ID == id);
+            IDAL.DO.Drone drone = dalObject.GetSpecificDrone(id);
+            if (droneBL.droneStatus == DroneStatus.Available)
+            {
+                for (int i = 0; i < dalObject.lengthStation(); i++)
+                {
+                    station = returnStationWithMnDis(droneBL);
+                    if (station.ChargeSlots != 0)
+                    {
+
+                        break;
+                    }
+                }
+                dis2 = distance(droneBL.location.Latitude, droneBL.location.Longitude, station.Latitude, station.Longitude);
+
+                if (dis2 * dalObject.requestElectric()[0] > droneBL.BatteryStatus)
+                {
+                    throw new DAL.Exeptions("dont have enough battery");
+                }
+                if (droneBL.droneStatus == DroneStatus.Available)
+                {
+                    throw new Exception("there is no a station with empty charge slots");
+                }
+                droneBL.BatteryStatus -= dis2 * dalObject.requestElectric()[0];
+                droneBL.location.Latitude = station.Latitude;
+                droneBL.location.Longitude = station.Longitude;
+                droneBL.droneStatus = DroneStatus.Maintenance;
+                station.ChargeSlots -= 1;
+                dalObject.updateStation(station);
+                IDAL.DO.DroneCharge droneCharge = new IDAL.DO.DroneCharge();
+                droneCharge.DroneID = id;
+                droneCharge.StationID = station.ID;
+                dalObject.AddDroneCharge(droneCharge);
+            }
+
+        }
+        public void updateUnchargeDrone(int id, double timeInCharge)
+        {
+            IBL.BO.Drone droneBL = droneBLList.First(d => d.ID == id);
+            if (droneBL.droneStatus != DroneStatus.Maintenance)
+            {
+                throw new Exception("the drone is not in charge");
+            }
+            //droneBL.BatteryStatus = ////////////////////////////////////////////////איך אני יודעצת בטריה
+            droneBL.droneStatus = DroneStatus.Available;
+            IDAL.DO.DroneCharge droneCharge = dalObject.getSpecificDroneChargeByDroneID(droneBL.ID);
+            IDAL.DO.Station station = dalObject.GetSpecificStation(droneCharge.StationID);
+            station.ChargeSlots += 1;
+            dalObject.updateStation(station);
+            dalObject.removeDroneCharge(droneCharge);
+
+        }
+
+        public void updateConectParcelToDrone(int id)
+        {
+            IBL.BO.Drone droneBL = droneBLList.First(d => d.ID == id);
+            if (droneBL.droneStatus != DroneStatus.Available)
+            {
+                throw new Exception("the drone is not free");
+            }
+            IDAL.DO.Parcel currentParcel = new IDAL.DO.Parcel();
+            List<IDAL.DO.Parcel> parcels = getParcelsWithoutoutDrone();
+            for (int i = 0; i < dalObject.lengthParcel(); i++)
+            {
+                currentParcel = new IDAL.DO.Parcel();
+                foreach (var parcel in parcels)
+                {
+                    if (currentParcel.Priority > parcel.Priority)
+                    {
+                        currentParcel = parcel;
+                    }
+                    else if (currentParcel.Priority == parcel.Priority)
+                    {
+                        if ((droneBL.weight - parcel.Weight) < (droneBL.weight - currentParcel.Weight))
+                        {
+                            currentParcel = parcel;
+                        }
+                        /* else if((droneBL.weight - parcel.Weight) == (droneBL.weight - currentParcel.Weight))/////////////////////////////איך אני יודעת מיקום חבילה
+                         {
+                             if(distance(droneBL.location.Longitude, droneBL.location.Latitude, currentParcel.lo, droneBL.location.Latitude) <)
+                         }*/
+                    }
+                }
+                // if(////////////////////////////////////לבדוק אם יצליח להגיע ליעש ולחזור להטענה אם יצטרך)
+            }
+            droneBL.droneStatus = DroneStatus.Delivery;
+            updateDrone(droneBL);
+            currentParcel.DroneID = id;
+            currentParcel.Delivered = DateTime.Now;//////////////////////////לבדוק אם זה זמן השיוך
+            dalObject.updateParcel(currentParcel);
+        }
+
+
+        public void updateCollectParcelByDrone(int id)//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        {
+            //לבדוק אם הרחפן מבצע משלוח ועדיין לא אספו את החבילה
+            IBL.BO.Drone droneBL = droneBLList.First(d => d.ID == id);
+            //double dis2 = distance(droneBL.location.Latitude, droneBL.location.Longitude, station.Latitude, station.Longitude);
+            //droneBL.BatteryStatus -= dis2 * dalObject.requestElectric()[0];
+
+
+        }
+        //###################################################################
+        //help functions
+        //###################################################################
+
+        /*public IDAL.DO.Parcel retunParcelWithHighPriority()
+        {
+            
+            return currentParcel;
+        }*/
+        public IDAL.DO.Station returnStationWithMnDis(IBL.BO.Drone drone)////////////////////////////
+        {
+            double minDis = -1;
+            double dis2 = 0;
+            IEnumerable<IDAL.DO.Station> stations = dalObject.GetStation();
+            IDAL.DO.Station sendStation = new IDAL.DO.Station();
+            foreach (var station in stations)
+            {
+                dis2 = distance(drone.location.Latitude, drone.location.Longitude, station.Latitude, station.Longitude);
+                if (dis2 < minDis || minDis == -1)
+                {
+                    minDis = dis2;
+                    sendStation = station;
+                }
+            }
+            return sendStation;
+        }
+
+
+        static double distance(double x1, double y1, double x2, double y2)
+        {
+            return Math.Sqrt(Math.Pow(x2 - x1, 2) +
+            Math.Pow(y2 - y1, 2) * 1.0);
+        }
+        public bool checkUniqeIDCustomer(ulong id)
+        {
+            int sum = 0;
+            IEnumerable<IDAL.DO.Customer> customers = dalObject.GetCustomer();
+            foreach (var customer in customers)
+            {
+                if(customer.ID == id)
+                {
+                    sum += 1;
+                }
+            }
+            if(sum == 1)
+                return false;
+            return false;
+        }
         public static bool CheckLongIdIsValid(ulong id)
         {
             return id > 100000000 && id < 1000000000;
         }
 
-        public static bool CheckValidIdCustomer(ulong id)
+        public static bool CheckValidIdCustomer(ulong id)///////////////////לבדוק אם גדול מעשר אחרי הכפלה
         {
-            int sum = 0, digit;
+            int sum = 0, digit, digit2 = 0;
             for (int i = 0; i < 9; i++)
             {
                 digit = (int)(id % 10);
                 if ((i % 2) == 0)
                 {
-                    sum += digit * 2;
+                    digit *= 2;
+                    if (digit > 10)
+                    {
+                        digit2 = digit % 10;
+                        digit /= 10;
+                        digit2 += digit;
+                    }
+                    digit = digit2;
                 }
-                else
-                {
-                    sum += digit;
-                }
+                sum += digit;
                 id /= 10;
             }
             if ((sum % 10) == 0)
@@ -340,7 +550,7 @@ namespace BL
 
 
 
-        
+
 
 
 

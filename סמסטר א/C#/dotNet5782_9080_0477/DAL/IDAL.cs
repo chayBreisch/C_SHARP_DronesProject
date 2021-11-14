@@ -12,15 +12,22 @@ namespace IDAL
         public IEnumerable<Drone> GetDrone();
         public IEnumerable<Station> GetStation();
         public IEnumerable<Customer> GetCustomer();
+
+       /* public IEnumerable<Customer> GetCustomer();*/
         public IEnumerable<Parcel> GetParcel();
         public IEnumerable<DroneCharge> GetDroneCharge();
         public Drone GetSpecificDrone(int id);
         public Station GetSpecificStation(int id);
         public Customer GetSpecificCustomer(ulong id);
         public Parcel GetSpecificParcel(int id);
+        public Parcel GetSpecificParcelByDroneIDAndNotCollect(int id);
         //public void AddDrone(int id, string model, WeightCatagories weight, DroneStatus status, double battery);
+        public DroneCharge getSpecificDroneChargeByStationID(int id);
+        public DroneCharge getSpecificDroneChargeByDroneID(int id);
+        public int getIndexOfDroneChargeByDroneID(int id);
+        public int getIndexOfDroneChargeByStationID(int id);
+        public void removeDroneCharge(DroneCharge droneCharge);
         public void AddDrone(Drone drone);
-
         public void AddStation(Station station);
         public void AddCustomer(Customer customer);
         public void AddParcel(Parcel parcel);
@@ -38,6 +45,13 @@ namespace IDAL
         public List<Drone> GetDronesByList();
         public List<DroneCharge> GetDroneChargeByList();
         public List<Parcel> GetParcelByList();
+        public void updateDrone(Drone drone);
+        public void updateStation(Station station);
+        public void updateParcel(Parcel parcel);
+        public void updateDroneCharge(DroneCharge droneCharge);
+        public void updateCustomer(Customer customer);
+        public int lengthStation();
+        public int lengthParcel();
 
 
     }

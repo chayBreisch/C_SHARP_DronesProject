@@ -40,5 +40,14 @@ namespace DalObject
 
             DataSource.stations.Add(station);
         }
+        public void updateStation(Station station)
+        {
+            int index = DataSource.stations.FindIndex(d => d.ID == station.ID);
+            DataSource.stations[index] = station;
+        }
+        public int lengthStation()
+        {
+            return DataSource.stations.Count;
+        }
     }
 }

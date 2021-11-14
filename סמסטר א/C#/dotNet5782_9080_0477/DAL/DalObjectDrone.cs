@@ -22,14 +22,14 @@ namespace DalObject
                 yield return drone;
             }
         }
-        public IEnumerable<Customer> GetCustomer()
+        /*public IEnumerable<Customer> GetCustomer()
         {
 
             foreach (var customer in DataSource.customers)
             {
                 yield return customer;
             }
-        }
+        }*/
         public Drone GetSpecificDrone(int id)
         {
             try
@@ -45,7 +45,12 @@ namespace DalObject
         {
             DataSource.drones.Add(drone);
         }
-       
+
+        public void updateDrone(Drone drone)
+        {
+            int index = DataSource.drones.FindIndex(d => d.ID == drone.ID);
+            DataSource.drones[index] = drone;
+        }
     }
     
 }

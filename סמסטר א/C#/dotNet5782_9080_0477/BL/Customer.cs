@@ -18,7 +18,7 @@ namespace IBL
                 { return id; }
                 set
                 {
-                    if(BL.BL.CheckLongIdIsValid(value) && BL.BL.CheckValidIdCustomer(value))
+                    if(BL.BL.CheckLongIdIsValid(value) && BL.BL.CheckValidIdCustomer(value) /*&& BL.BL.checkUniqeIDCustomer(value)*/)
                     id = value;
                     else{
                     throw new FormatException("not valid id");
@@ -26,7 +26,7 @@ namespace IBL
                 }
                     }
             public string Name { get; set; }
-            public string Phone { get; set; }
+            public int Phone { get; set; }
 
 
             public Location location { get; set; }
