@@ -8,11 +8,11 @@ namespace IBL
 {
     namespace BO
     {
-        public class DroneCharge
+        public class DroneChargeBL
         {
             IDAL.DO.DroneCharge droneCharge;
 
-            public DroneCharge()
+            public DroneChargeBL()
             {
                 droneCharge = new IDAL.DO.DroneCharge();
             }

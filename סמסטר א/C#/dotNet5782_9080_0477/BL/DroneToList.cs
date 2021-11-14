@@ -15,7 +15,7 @@ namespace IBL
             public IDAL.DO.WeightCatagories weightCatagories { get; set; }
             public double BatteryStatus { get; set; }
             public DroneStatus droneStatus { get; set; }
-            public Location location { get; set; }
+            public LocationBL location { get; set; }
             public int NumOfParcelTrans { get; set; }
         }
     }

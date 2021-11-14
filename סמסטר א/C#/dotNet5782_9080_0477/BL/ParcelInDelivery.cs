@@ -14,8 +14,8 @@ namespace IBL
             public IDAL.DO.WeightCatagories weightCatagory { get; set; }
             public IDAL.DO.Priorities priorities { get; set; }
             public bool parcelStatus { get; set; }
-            public Location CollectLocation { get; set; }
-            public Location DeliveryDestinationLocation { get; set; }
+            public LocationBL CollectLocation { get; set; }
+            public LocationBL DeliveryDestinationLocation { get; set; }
             public double TransportDistance { get; set; }
         }
     }

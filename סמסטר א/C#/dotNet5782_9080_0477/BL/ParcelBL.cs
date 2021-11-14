@@ -8,14 +8,14 @@ namespace IBL
 {
     namespace BO
     {
-        public class Parcel
+        public class ParcelBL
         {
             public int ID { get; set; }
-            public Customer Sender { get; set; }
-            public Customer Reciever { get; set; }
+            public CustomerBL Sender { get; set; }
+            public CustomerBL Reciever { get; set; }
             public WeightCatagories weightCatagories { get; set; }
             public Priorities priorities { get; set; }
-            public Drone drone { get; set; }
+            public DroneBL drone { get; set; }
             public DateTime Created { get; set; }
             public DateTime Conected { get; set; }
             public DateTime Collected { get; set; } 

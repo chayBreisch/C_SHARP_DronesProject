@@ -9,7 +9,7 @@ namespace IBL
 {
     namespace BO
     {
-        public class Drone
+        public class DroneBL
         {
             public int ID { get; set; }
             public string Model { get; set; }
@@ -17,7 +17,7 @@ namespace IBL
             public double BatteryStatus { get; set; }
             public DroneStatus droneStatus { get; set; }
             public ParcelInDelivery parcelInDelivery { get; set; }
-            public Location location { get; set; }
+            public LocationBL location { get; set; }
             public override string ToString()
             {
                 return $"customer: {ID} : {Model}";

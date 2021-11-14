@@ -34,7 +34,7 @@ namespace DalObject
                 throw new Exeptions(id);
             }
         }
-        public Parcel GetSpecificParcelByDroneIDAndNotCollect(int id)
+        public Parcel GetSpecificParcelByDroneID(int id)
         {
             try
             {

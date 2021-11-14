@@ -8,14 +8,14 @@ namespace IBL
 {
     namespace BO
     {
-        public class Station
+        public class StationBL
         {
             
 
             public int ID { get; set; }
             public string Name { get; set; }
             public int ChargeSlots { get; set; }
-            public Location location { get; set; }
+            public LocationBL location { get; set; }
             List<DroneInCharger> dronesInCharge = new List<DroneInCharger>();
             public override string ToString()
             {

@@ -10,7 +10,7 @@ namespace IBL
 {
     namespace BO
     {
-        public class Customer
+        public class CustomerBL
         {
             private ulong id;
             public ulong ID {
@@ -29,7 +29,7 @@ namespace IBL
             public int Phone { get; set; }
 
 
-            public Location location { get; set; }
+            public LocationBL location { get; set; }
             List<ParcelAtCustomer> parcelSendedByCustomer = new List<ParcelAtCustomer>();
             List<ParcelAtCustomer> parcelSendedToCustomer = new List<ParcelAtCustomer>();
 
