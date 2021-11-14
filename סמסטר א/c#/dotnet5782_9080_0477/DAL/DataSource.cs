@@ -7,22 +7,22 @@ using IDAL.DO;
 
 namespace DalObject
 {
-    public struct Config
-    {
-        public static int Available = 10;
-        public static int LightHeight = 20;
-        public static int MidHeight = 30; 
-        public static int HeavyHeight = 40;
-        public static int ChargingRate = 50;
-        /*public bool Available { get; set; }
-        public int LightHeight { get; set; }
-        public int HeavyHeight { get; set; }
-        public int MidHeight { get; set; }
-        public int ChargingRate { get; set; }*/
-    }
+   
     public struct DataSource
     {
-        
+        public struct Config
+        {
+            public static int Available = 10;
+            public static int LightHeight = 20;
+            public static int MidHeight = 30;
+            public static int HeavyHeight = 40;
+            public static int ChargingRate = 50;
+            /*public bool Available { get; set; }
+            public int LightHeight { get; set; }
+            public int HeavyHeight { get; set; }
+            public int MidHeight { get; set; }
+            public int ChargingRate { get; set; }*/
+        }
         internal static List<Drone> drones = new List<Drone>();
         internal static List<Station> stations = new List<Station>();
         internal static List<Customer> customers = new List<Customer>();
@@ -62,7 +62,7 @@ namespace DalObject
                 Customer customer = new Customer();
                 customer.ID = (ulong)customers.Count + 1;
                 customer.Name = $"customer{i}";
-                customer.Phone = $"{rand.Next(111111111, 999999999)}";
+                customer.Phone = rand.Next(111111111, 999999999);
                 customer.Latitude = rand.Next();
                 customer.Longitude = rand.Next();
                 customers.Add(customer);

@@ -9,18 +9,19 @@ namespace DalObject
 {
     public partial class DalObject
     {
-        public List<Customer> GetCustomersByList()
-        {
-            return DataSource.customers;
-        }
         public IEnumerable<Customer> GetCustomer()
         {
 
             foreach (var customer in DataSource.customers)
             {
                 yield return customer;
-            }  
+            }
         }
+        public List<Customer> GetCustomersByList()
+        {
+            return DataSource.customers;
+        }
+        
 
         public Customer GetSpecificCustomer(ulong id)
         {
@@ -37,6 +38,11 @@ namespace DalObject
         public void AddCustomer(Customer newCustomer)
         {     
             DataSource.customers.Add(newCustomer);
+        }
+        public void updateCustomer(Customer customer)
+        {
+            int index = DataSource.customers.FindIndex(d => d.ID == customer.ID);
+            DataSource.customers[index] = customer;
         }
     }
 }
