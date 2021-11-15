@@ -15,6 +15,16 @@ namespace BL
         //############################################################
         //constructor
         //############################################################
+        private ParcelStatus findParcelStatus(Parcel parcel)
+        {
+            if (parcel.Requested.Equals(null))
+                return (ParcelStatus)0;
+            else if (parcel.Scheduled.Equals(null))
+                return (ParcelStatus)1;
+            else if (parcel.PickedUp.Equals(null))
+                return (ParcelStatus)2;
+            return (ParcelStatus)3;
+        }
         public BL()
         {
             droneBLList = new List<DroneBL>();
@@ -113,9 +123,9 @@ namespace BL
             parcel.Reciever.ID = target;
             parcel.weightCatagories = Weight;
             parcel.priorities = priority;
-            parcel.Created = DateTime.Now;
-            parcel.Conected = new DateTime();
-            parcel.Collected = new DateTime();
+            parcel.Requesed = DateTime.Now;
+            parcel.Scheduled = new DateTime();
+            parcel.PickedUp = new DateTime();
             parcel.Delivered = new DateTime();
             parcel.drone = null;
             AddParcelToDal(sender, target, Weight, priority);
@@ -145,35 +155,46 @@ namespace BL
         //####################################################################
         public List<CustomerBL> GetCustomerBL()
         {
-
-            List<Customer> customers = dalObject.GetCustomer().Cast<Customer>().ToList();
+            IEnumerable<Customer> customers = dalObject.GetCustomer();
             List<CustomerBL> customers1 = new List<CustomerBL>();
-            customers.ForEach(s => customers1.Add(convertDalCustomerToBl(s)));
+            foreach (var customer in customers)
+            {
+                customers1.Add(convertDalCustomerToBl(customer));
+            }
             return customers1;
         }
 
         public List<DroneBL> GetDroneBL()
         {
 
-            List<Drone> drone = dalObject.GetDrone().Cast<Drone>().ToList();
+            IEnumerable<Drone> drones = dalObject.GetDrone();
             List<DroneBL> drone1 = new List<DroneBL>();
-            drone.ForEach(s => drone1.Add(convertDalDroneToBl(s)));
+            foreach (var drone in drones)
+            {
+                drone1.Add(convertDalDroneToBl(drone));
+            }
             return drone1;
         }
         public List<ParcelBL> GetParcelBL()
         {
 
-            List<Parcel> parcel = dalObject.GetParcel().Cast<Parcel>().ToList();
+            IEnumerable<Parcel> parcels = dalObject.GetParcel();
             List<ParcelBL> parcel1 = new List<ParcelBL>();
-            parcel.ForEach(s => parcel1.Add(convertDalToParcelBL(s)));
+            foreach (var parcel in parcels)
+            {
+                parcel1.Add(convertDalToParcelBL(parcel));
+            }
             return parcel1;
         }
         public List<StationBL> GetStationBL()
         {
 
-            List<Station> stations = dalObject.GetStation().Cast<Station>().ToList();
+            IEnumerable<Station> stations = dalObject.GetStation();
             List<StationBL> stations1 = new List<StationBL>();
-            stations.ForEach(s => stations1.Add(convertDalStationToBl(s)));
+            foreach (var station in stations)
+            {
+                stations1.Add(convertDalStationToBl(station));
+            }
             return stations1;
         }
 
@@ -265,25 +286,46 @@ namespace BL
         //######################################################################
         private StationBL convertDalStationToBl(Station s)
         {
+            List<DroneCharge> droneChargers = dalObject.GetDroneCharge().Cast<DroneCharge>().ToList();
+            droneChargers = droneChargers.FindAll(d => d.StationID == s.ID);
+            List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
+            droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger
+            { ID = d.DroneID, BatteryStatus = droneBLList.First(e => e.ID == d.DroneID).BatteryStatus }));
             return new StationBL
             {
                 ID = s.ID,
                 Name = s.Name,
                 ChargeSlots = s.ChargeSlots,
-                location = new LocationBL() { Longitude = s.Longitude, Latitude = s.Latitude }
+                location = new LocationBL() { Longitude = s.Longitude, Latitude = s.Latitude },
+                dronesInCharge = dronesInCharges
             };
         }
 
         private CustomerBL convertDalCustomerToBl(Customer c)
         {
+            List<ParcelAtCustomer> parcelSendedByCustomers = new List<ParcelAtCustomer>();
+            List<ParcelAtCustomer> parcelSendedToCustomers = new List<ParcelAtCustomer>();
+            List<Parcel> parcels = dalObject.GetParcel().Cast<Parcel>().ToList();
+            parcels.ForEach(p =>
+            {
+                if (p.SenderID == c.ID)
+                    parcelSendedByCustomers.Add(new ParcelAtCustomer { ID = p.ID, weightCatagories = p.Weight, priorities = p.Priority, parcelStatus = findParcelStatus(p) });
+                if(p.TargetID == c.ID)
+                    parcelSendedToCustomers.Add(new ParcelAtCustomer { ID = p.ID, weightCatagories = p.Weight, priorities = p.Priority, parcelStatus = findParcelStatus(p) });
+
+            });
+
             return new CustomerBL
             {
                 ID = c.ID,
                 Name = c.Name,
                 Phone = c.Phone,
-                location = new LocationBL() { Longitude = c.Longitude, Latitude = c.Latitude }
+                location = new LocationBL() { Longitude = c.Longitude, Latitude = c.Latitude },
+                parcelSendedByCustomer = parcelSendedByCustomers,
+                parcelSendedToCustomer = parcelSendedToCustomers
             };
         }
+
         private DroneBL convertDalDroneToBl(Drone d)
         {
             //IBL.BO.Drone drone = dalObject.GetSpecificDrone(d.ID);
@@ -300,21 +342,19 @@ namespace BL
                 Sender = sender,
                 Reciever = target,
                 weightCatagories = p.Weight,
-                Collected = p.PickedUp,
+                priorities = p.Priority,
+                PickedUp = p.PickedUp,
                 drone = drone,
-                Created = p.Requested,
-                Conected = p.Scheduled,
+                Requesed = p.Requested,
+                Scheduled = p.Scheduled,
                 Delivered = p.Delivered,
-                priorities = p.Priority
             };
         }
-
-
         //######################################################
         //update functions
         //######################################################
 
-        
+
         public void updateDrone(DroneBL drone)
         {
             int index = droneBLList.FindIndex(d => d.ID == drone.ID);
@@ -367,7 +407,6 @@ namespace BL
             Station station = new Station();
             double dis2 = 0;
             DroneBL droneBL = droneBLList.First(d => d.ID == id);
-            //Drone drone = dalObject.GetSpecificDrone(id);
             if (droneBL.droneStatus == DroneStatus.Available)
             {
                 for (int i = 0; i < dalObject.lengthStation(); i++)
@@ -392,6 +431,7 @@ namespace BL
                 droneBL.location.Latitude = station.Latitude;
                 droneBL.location.Longitude = station.Longitude;
                 droneBL.droneStatus = DroneStatus.Maintenance;
+                updateDrone(droneBL);
                 station.ChargeSlots -= 1;
                 dalObject.updateStation(station);
                 DroneCharge droneCharge = new DroneCharge();
@@ -433,46 +473,48 @@ namespace BL
             Parcel currentParcel = new Parcel();
             List<Parcel> parcels = getParcelsWithoutoutDrone();
             currentParcel = new Parcel() { Weight = 0 };
-            foreach (var parcel in parcels) { 
+            foreach (var parcel in parcels)
             {
-                if (parcel.Requested.Equals(null))
-                    break;
-                customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
-                customerCurrent = dalObject.GetSpecificCustomer(currentParcel.SenderID);
-                customerReciever = dalObject.GetSpecificCustomer(parcel.TargetID);
-                double disDroneToSenderParcel = distance(droneBL.location, new LocationBL { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude });
-                double disSenderToReciever = distance(new LocationBL { Longitude = customerSender.Longitude, Latitude =  customerSender.Latitude },new LocationBL { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude });
-                double electricity = dalObject.requestElectric()[(int)parcel.Weight];
-                Station station = stationWithMinDisAndEmptySlots(new LocationBL { Latitude = customerReciever.Latitude, Longitude = customerReciever.Longitude });
-                double disRecieverToCharger = distance(new LocationBL { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude }, new LocationBL { Longitude = station.Longitude, Latitude = station.Latitude });
-                
-
-                if (droneBL.BatteryStatus - (electricity * disDroneToSenderParcel + electricity * disSenderToReciever + disRecieverToCharger * electricity) > 0)
                 {
-                    if (parcel.Weight < droneBL.weight)
+                    if (parcel.Requested.Equals(null))
+                        break;
+                    customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
+                    customerCurrent = dalObject.GetSpecificCustomer(currentParcel.SenderID);
+                    customerReciever = dalObject.GetSpecificCustomer(parcel.TargetID);
+                    double disDroneToSenderParcel = distance(droneBL.location, new LocationBL { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude });
+                    double disSenderToReciever = distance(new LocationBL { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude }, new LocationBL { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude });
+                    double electricity = dalObject.requestElectric()[(int)parcel.Weight];
+                    Station station = stationWithMinDisAndEmptySlots(new LocationBL { Latitude = customerReciever.Latitude, Longitude = customerReciever.Longitude });
+                    double disRecieverToCharger = distance(new LocationBL { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude }, new LocationBL { Longitude = station.Longitude, Latitude = station.Latitude });
+
+
+                    if (droneBL.BatteryStatus - (electricity * disDroneToSenderParcel + electricity * disSenderToReciever + disRecieverToCharger * electricity) > 0)
                     {
-                        if (currentParcel.Priority < parcel.Priority)
+                        if (parcel.Weight < droneBL.weight)
                         {
-                            currentParcel = parcel;
-                        }
-                        else if (currentParcel.Priority == parcel.Priority)
-                        {
-                            if (parcel.Weight > currentParcel.Weight)
+                            if (currentParcel.Priority < parcel.Priority)
                             {
                                 currentParcel = parcel;
                             }
-                            else if (parcel.Weight == currentParcel.Weight)
+                            else if (currentParcel.Priority == parcel.Priority)
                             {
-
-                                if (disDroneToSenderParcel < distance(droneBL.location, new LocationBL { Longitude = customerCurrent.Longitude, Latitude = customerCurrent.Latitude }))
+                                if (parcel.Weight > currentParcel.Weight)
                                 {
                                     currentParcel = parcel;
+                                }
+                                else if (parcel.Weight == currentParcel.Weight)
+                                {
+
+                                    if (disDroneToSenderParcel < distance(droneBL.location, new LocationBL { Longitude = customerCurrent.Longitude, Latitude = customerCurrent.Latitude }))
+                                    {
+                                        currentParcel = parcel;
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }}
+            }
             if (currentParcel.Weight == 0)
             {
                 throw new Exception("didn't find a drone for your parcel");
@@ -488,7 +530,7 @@ namespace BL
         {
             DroneBL droneBL = droneBLList.First(d => d.ID == id);
             Parcel parcel = new Parcel();
-            if(droneBL.droneStatus == DroneStatus.Delivery)
+            if (droneBL.droneStatus == DroneStatus.Delivery)
             {
                 parcel = dalObject.GetSpecificParcelByDroneID(droneBL.ID);
                 if (!parcel.PickedUp.Equals(null) || parcel.Scheduled.Equals(null))
@@ -506,7 +548,7 @@ namespace BL
             parcel.PickedUp = DateTime.Now;
             dalObject.updateParcel(parcel);
         }
-        
+
         public void supplyParcelByDrone(int id)
         {
             DroneBL droneBL = droneBLList.First(d => d.ID == id);
@@ -530,6 +572,7 @@ namespace BL
         //###################################################################
         //help functions
         //###################################################################
+
         public Station stationWithMinDisAndEmptySlots(LocationBL location)////////////////////////////
         {
             double minDis = -1;
@@ -549,11 +592,11 @@ namespace BL
         }
 
 
-       /* public static double distance(double x1, double y1, double x2, double y2)
-        {
-            return Math.Sqrt(Math.Pow(x2 - x1, 2) +
-            Math.Pow(y2 - y1, 2) * 1.0);
-        }*/
+        /* public static double distance(double x1, double y1, double x2, double y2)
+         {
+             return Math.Sqrt(Math.Pow(x2 - x1, 2) +
+             Math.Pow(y2 - y1, 2) * 1.0);
+         }*/
         static double distance(LocationBL location1, LocationBL location2)
         {
             return Math.Sqrt(Math.Pow(location2.Longitude - location1.Longitude, 2) +

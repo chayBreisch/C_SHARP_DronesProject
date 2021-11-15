@@ -16,7 +16,7 @@ namespace IBL
             public string Name { get; set; }
             public int ChargeSlots { get; set; }
             public LocationBL location { get; set; }
-            List<DroneInCharger> dronesInCharge = new List<DroneInCharger>();
+            public List<DroneInCharger> dronesInCharge { get; set; }
             public override string ToString()
             {
                 return $"customer: {ID} : {Name} : {ChargeSlots} ";

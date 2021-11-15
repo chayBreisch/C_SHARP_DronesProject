@@ -10,15 +10,17 @@ namespace IBL
     {
         public class ParcelBL
         {
+            public enum ParcelStatus { Requesed, Scheduled, PickedUp, Delivered }
+
             public int ID { get; set; }
             public CustomerBL Sender { get; set; }
             public CustomerBL Reciever { get; set; }
             public WeightCatagories weightCatagories { get; set; }
             public Priorities priorities { get; set; }
             public DroneBL drone { get; set; }
-            public DateTime Created { get; set; }
-            public DateTime Conected { get; set; }
-            public DateTime Collected { get; set; } 
+            public DateTime Requesed { get; set; }
+            public DateTime Scheduled { get; set; }
+            public DateTime PickedUp { get; set; } 
             public DateTime Delivered { get; set; }
 
 

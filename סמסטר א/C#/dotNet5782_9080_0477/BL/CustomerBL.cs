@@ -30,8 +30,8 @@ namespace IBL
 
 
             public LocationBL location { get; set; }
-            List<ParcelAtCustomer> parcelSendedByCustomer = new List<ParcelAtCustomer>();
-            List<ParcelAtCustomer> parcelSendedToCustomer = new List<ParcelAtCustomer>();
+            public List<ParcelAtCustomer> parcelSendedByCustomer { get; set; }
+            public List<ParcelAtCustomer> parcelSendedToCustomer { get; set; }
 
 
 
