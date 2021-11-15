@@ -314,6 +314,7 @@ namespace BL
         //update functions
         //######################################################
 
+        
         public void updateDrone(DroneBL drone)
         {
             int index = droneBLList.FindIndex(d => d.ID == drone.ID);
@@ -421,7 +422,7 @@ namespace BL
             dalObject.removeDroneCharge(droneCharge);
         }
 
-        public void updateConnectParcelToDrone(int id)
+        public void updateConnectParcelToDrone(int id)////////////////////////////////////לנסות לייעל
         {
             DroneBL droneBL = droneBLList.First(d => d.ID == id);
             if (droneBL.droneStatus != DroneStatus.Available)
@@ -483,7 +484,7 @@ namespace BL
             dalObject.updateParcel(currentParcel);
         }
 
-        public void updateCollectParcelByDrone(int id)//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void updateCollectParcelByDrone(int id)
         {
             DroneBL droneBL = droneBLList.First(d => d.ID == id);
             Parcel parcel = new Parcel();
@@ -498,9 +499,6 @@ namespace BL
             }
             Customer customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
             double disDroneToSenderParcel = distance(droneBL.location.Longitude, droneBL.location.Latitude, customerSender.Longitude, customerSender.Latitude);
-
-            //double dis2 = distance(droneBL.location.Latitude, droneBL.location.Longitude, station.Latitude, station.Longitude);
-            //droneBL.BatteryStatus -= dis2 * dalObject.requestElectric()[0];
             droneBL.BatteryStatus -= disDroneToSenderParcel * dalObject.requestElectric()[(int)parcel.Weight];
             droneBL.location.Longitude = customerSender.Longitude;
             droneBL.location.Latitude = customerSender.Latitude;
@@ -508,15 +506,30 @@ namespace BL
             parcel.PickedUp = DateTime.Now;
             dalObject.updateParcel(parcel);
         }
+        
+        public void supplyParcelByDrone(int id)
+        {
+            DroneBL droneBL = droneBLList.First(d => d.ID == id);
+            Parcel parcel = dalObject.GetSpecificParcelByDroneID(id);
+            if (parcel.PickedUp.Equals(null) && !parcel.Delivered.Equals(null))
+            {
+                throw new Exception("can't supply parcel");
+            }
+            Customer customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
+            Customer customerReciever = dalObject.GetSpecificCustomer(parcel.TargetID);
+            double disSenderToReciever = distance(customerSender.Longitude, customerSender.Latitude, customerReciever.Longitude, customerReciever.Latitude);
+            double electricity = dalObject.requestElectric()[(int)parcel.Weight];
+            droneBL.BatteryStatus -= electricity * disSenderToReciever;
+            droneBL.location.Longitude = customerReciever.Longitude;
+            droneBL.location.Latitude = customerReciever.Latitude;
+            droneBL.droneStatus = DroneStatus.Available;
+            updateDrone(droneBL);
+            parcel.Delivered = DateTime.Now;
+            dalObject.updateParcel(parcel);
+        }
         //###################################################################
         //help functions
         //###################################################################
-
-        /*public IDAL.DO.Parcel retunParcelWithHighPriority()
-        {
-            
-            return currentParcel;
-        }*/
         public Station stationWithMinDisAndEmptySlots(LocationBL location)////////////////////////////
         {
             double minDis = -1;
@@ -561,6 +574,7 @@ namespace BL
                 return false;
             return false;
         }
+
         public static bool CheckLongIdIsValid(ulong id)
         {
             return id > 100000000 && id < 1000000000;

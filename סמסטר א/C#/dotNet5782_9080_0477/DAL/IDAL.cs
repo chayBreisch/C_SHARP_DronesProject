@@ -20,7 +20,7 @@ namespace IDAL
         public Station GetSpecificStation(int id);
         public Customer GetSpecificCustomer(ulong id);
         public Parcel GetSpecificParcel(int id);
-        public Parcel GetSpecificParcelByDroneIDAndNotCollect(int id);
+        public Parcel GetSpecificParcelByDroneID(int id);
         //public void AddDrone(int id, string model, WeightCatagories weight, DroneStatus status, double battery);
         public DroneCharge getSpecificDroneChargeByStationID(int id);
         public DroneCharge getSpecificDroneChargeByDroneID(int id);
