@@ -1,13 +1,14 @@
 ﻿using System;
 using DalObject;
 using IBL.BO;
+using DAL;
 using IBL;
 using System.Collections.Generic;
 using IDAL.DO;
 using System.Linq;
 namespace BL
 {
-    class BL : Bl
+    public class BL : Bl
     {
         Random rand = new Random();
         List<DroneBL> droneBLList;
@@ -36,9 +37,51 @@ namespace BL
             double electricMidHeight = arrayEletric[2];
             double electricHeavyHeight = arrayEletric[3];
             double electricChargingRate = arrayEletric[4];
-
-            //List<DalObject.DataSource.drones> drones =  dalObject.GetDronesByList();
         }
+
+        //#############################################################
+        //check validaion id
+        //#############################################################
+        public static void checkUniqeIdDrone(int id)
+        {
+            List<Drone> drones = new List<Drone>();
+            drones.ForEach(d =>
+            {
+                if (d.ID == id)
+                    throw new NotUniqeID(id, "drone");
+            });    
+        }
+
+        public static void checkUniqeIdParcel(int id)
+        {
+            List<Parcel> parcels = new List<Parcel>();
+            parcels.ForEach(p =>
+            {
+                if (p.ID == id)
+                    throw new NotUniqeID(id, "parcel");
+            });
+        }
+
+        public static void checkUniqeIdCustomer(ulong id)
+        {
+            List<Customer> customers = new List<Customer>();
+            customers.ForEach(c =>
+            {
+                if (c.ID == id)
+                    throw new NotUniqeID(id, "customer");
+            });
+        }
+
+        public static void checkUniqeIdStation(int id)
+        {
+            List<Station> stations = new List<Station>();
+            stations.ForEach(s =>
+            {
+                if (s.ID == id)
+                    throw new NotUniqeID(id, "station");
+            });
+        }
+
         //#############################################################
         //Add functions
         //#############################################################
@@ -175,6 +218,7 @@ namespace BL
             }
             return drone1;
         }
+
         public List<ParcelBL> GetParcelBL()
         {
 
@@ -186,6 +230,7 @@ namespace BL
             }
             return parcel1;
         }
+
         public List<StationBL> GetStationBL()
         {
 
@@ -212,6 +257,7 @@ namespace BL
                 throw new DAL.Exeptions(id);
             }
         }
+
         public StationBL GetSpecificStationBL(int id)
         {
             try
@@ -235,6 +281,7 @@ namespace BL
                 throw new DAL.Exeptions(id);
             }
         }
+
         public CustomerBL GetSpecificCustomerBL(ulong id)
         {
             try
@@ -246,6 +293,7 @@ namespace BL
                 throw new DAL.Exeptions(id);
             }
         }
+
         public List<Parcel> getParcelsWithoutoutDrone()
         {
             IEnumerable<Parcel> parcels = dalObject.GetParcel();
@@ -259,6 +307,7 @@ namespace BL
             }
             return parcels1;
         }
+
         public List<StationBL> getStationWithEmptyChargers()
         {
             int numOfChargers = 0;
@@ -310,7 +359,7 @@ namespace BL
             {
                 if (p.SenderID == c.ID)
                     parcelSendedByCustomers.Add(new ParcelAtCustomer { ID = p.ID, weightCatagories = p.Weight, priorities = p.Priority, parcelStatus = findParcelStatus(p) });
-                if(p.TargetID == c.ID)
+                if (p.TargetID == c.ID)
                     parcelSendedToCustomers.Add(new ParcelAtCustomer { ID = p.ID, weightCatagories = p.Weight, priorities = p.Priority, parcelStatus = findParcelStatus(p) });
 
             });
@@ -331,6 +380,7 @@ namespace BL
             //IBL.BO.Drone drone = dalObject.GetSpecificDrone(d.ID);
             return new DroneBL { ID = d.ID, Model = d.Model }; /*+++++++++++++++++*/
         }
+
         private ParcelBL convertDalToParcelBL(Parcel p)
         {
             CustomerBL sender = convertDalCustomerToBl(dalObject.GetSpecificCustomer(p.SenderID));
@@ -361,9 +411,6 @@ namespace BL
             droneBLList[index] = drone;
         }
 
-
-
-
         public void updateDataDroneName(int id, string model)
         {
             DroneBL droneBl = droneBLList.First(d => d.ID == id);
@@ -374,6 +421,7 @@ namespace BL
             drone.Model = model;
             dalObject.updateDrone(drone);
         }
+
         public void updateDataStation(int id, string name = null, int chargeSlots = -1)
         {
             Station station = dalObject.GetSpecificStation(id);
@@ -388,6 +436,7 @@ namespace BL
             dalObject.updateStation(station);
 
         }
+
         public void updateDataCustomer(ulong id, string name = null, int phone = -1)
         {
             Customer customer = dalObject.GetSpecificCustomer(id);
@@ -401,6 +450,7 @@ namespace BL
             }
             dalObject.updateCustomer(customer);
         }
+
         public void updateSendDroneToCharge(int id)
         {
             //check this function////////////////////////////////
@@ -441,6 +491,7 @@ namespace BL
             }
 
         }
+
         public void updateUnchargeDrone(int id, double timeInCharge)
         {
             DroneBL droneBL = new DroneBL();
@@ -456,9 +507,16 @@ namespace BL
             droneBL.BatteryStatus += timeInCharge * dalObject.requestElectric()[4];
             droneBL.droneStatus = DroneStatus.Available;
             DroneCharge droneCharge = dalObject.getSpecificDroneChargeByDroneID(droneBL.ID);
-            Station station = dalObject.GetSpecificStation(droneCharge.StationID);
-            station.ChargeSlots += 1;
-            dalObject.updateStation(station);
+            try
+            {
+                Station station = dalObject.GetSpecificStation(droneCharge.StationID);
+                station.ChargeSlots += 1;
+                dalObject.updateStation(station);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new Exception($"{e} can not find staion ");
+            }
             dalObject.removeDroneCharge(droneCharge);
         }
 
@@ -481,6 +539,7 @@ namespace BL
                     customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
                     customerCurrent = dalObject.GetSpecificCustomer(currentParcel.SenderID);
                     customerReciever = dalObject.GetSpecificCustomer(parcel.TargetID);
+                 
                     double disDroneToSenderParcel = distance(droneBL.location, new LocationBL { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude });
                     double disSenderToReciever = distance(new LocationBL { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude }, new LocationBL { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude });
                     double electricity = dalObject.requestElectric()[(int)parcel.Weight];
@@ -569,6 +628,7 @@ namespace BL
             parcel.Delivered = DateTime.Now;
             dalObject.updateParcel(parcel);
         }
+
         //###################################################################
         //help functions
         //###################################################################
@@ -597,11 +657,13 @@ namespace BL
              return Math.Sqrt(Math.Pow(x2 - x1, 2) +
              Math.Pow(y2 - y1, 2) * 1.0);
          }*/
+
         static double distance(LocationBL location1, LocationBL location2)
         {
             return Math.Sqrt(Math.Pow(location2.Longitude - location1.Longitude, 2) +
             Math.Pow(location2.Latitude - location1.Latitude, 2) * 1.0);
         }
+
         public bool checkUniqeIDCustomer(ulong id)
         {
             int sum = 0;

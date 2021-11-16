@@ -8,9 +8,9 @@ namespace DAL
 {
     public class Exeptions : Exception
     {
-        public Exeptions(ulong id): base($"not found {id}")
+        public Exeptions(ulong id) : base($"not found {id}")
         {
-           
+
         }
         public Exeptions(int id) : base($"not found {id}")
         {
@@ -21,4 +21,18 @@ namespace DAL
 
         }
     }
+    public class NotUniqeID : Exception
+    {
+
+        public NotUniqeID(int id, string type) : base($"{id} is exist int {type}")
+        {
+
+        }
+
+        public NotUniqeID(ulong id, string type) : base($"{id} is exist int {type}")
+        {
+
+        }
+    }
+
 }

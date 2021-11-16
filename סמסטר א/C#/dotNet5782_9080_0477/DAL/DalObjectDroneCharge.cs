@@ -30,7 +30,6 @@ namespace DalObject
         public DroneCharge getSpecificDroneChargeByDroneID(int id)
         {
             return DataSource.droneChargers.First(droneCharge => droneCharge.DroneID == id);
-
         }
         public void removeDroneCharge(DroneCharge droneCharge)
         {
