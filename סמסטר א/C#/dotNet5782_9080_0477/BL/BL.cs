@@ -81,6 +81,15 @@ namespace BL
                     throw new NotUniqeID(id, "station");
             });
         }
+        public static void checkUniqeIdDroneCharge(int droneId, int stationId)
+        {
+            List<DroneCharge> droneCharges = new List<DroneCharge>();
+            droneCharges.ForEach(d =>
+            {
+                if (d.DroneID == droneId && d.StationID == stationId)
+                    throw new NotUniqeID(droneId, stationId, "station");
+            });
+        }
 
         //#############################################################
         //Add functions
@@ -88,6 +97,7 @@ namespace BL
 
         public void AddCustomer(ulong id, string name, int phone, LocationBL location)
         {
+            checkUniqeIdCustomer(id);
             CustomerBL customer = new CustomerBL();
             customer.ID = id;
             customer.Name = name;
@@ -110,6 +120,7 @@ namespace BL
 
         public void AddStation(int id, string name, LocationBL location, int ChargeSlots)
         {
+            checkUniqeIdStation(id);
             StationBL station = new StationBL();
             station.ID = id;
             station.Name = name;
@@ -151,6 +162,7 @@ namespace BL
 
         public void AddDroneToDal(int id, string model, WeightCatagories maxWeight)
         {
+            checkUniqeIdDrone(id);
             Drone drone = new Drone();
             drone.ID = id;
             drone.Model = model;
@@ -178,7 +190,8 @@ namespace BL
         public void AddParcelToDal(/*ulong id,*/ ulong sender, ulong target, WeightCatagories Weight, Priorities priority)
         {
             Parcel parcel = new Parcel();
-            //parcel.ID = id;
+            parcel.ID = dalObject.lengthParcel()+1;
+            checkUniqeIdParcel(parcel.ID);
             parcel.SenderID = sender;
             parcel.TargetID = target;
             parcel.Weight = Weight;
@@ -188,6 +201,7 @@ namespace BL
 
         public void addDroneCharge(int stationID, int droneID)
         {
+            checkUniqeIdDroneCharge(droneID, stationID);
             DroneCharge droneCharge = new DroneCharge();
             droneCharge.DroneID = droneID;
             droneCharge.StationID = stationID;
