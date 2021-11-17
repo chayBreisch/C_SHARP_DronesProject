@@ -8,7 +8,6 @@ using IDAL.DO;
 using System.Linq;
 namespace BL
 {
-    //לעשות פונקציה שמחשבת צריכת חשמל בין שתי אינדקסים
     public class BL : Bl
     {
         Random rand = new Random();
@@ -51,13 +50,10 @@ namespace BL
                             droneBL.location.Latitude = customerSender.Latitude;
                         }
                         Customer customerReciever = dalObject.GetSpecificCustomer(parcel.TargetID);
-                        double disSenderToReciever = distance(new LocationBL { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude }, new LocationBL { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude });
-                        double electricityToReciever = dalObject.requestElectric()[(int)parcel.Weight];
+                        double electricitySenderToReciever = calcElectry(new LocationBL { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude }, new LocationBL { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude }, (int)parcel.Weight);
                         Station station1 = stationWithMinDisAndEmptySlots(new LocationBL { Latitude = customerReciever.Latitude, Longitude = customerReciever.Longitude });
-                        double disRecieverToCharger = distance(new LocationBL { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude }, new LocationBL { Longitude = station1.Longitude, Latitude = station1.Latitude });
-                        double electricityToCharger = dalObject.requestElectric()[0];
-                        double minElectric = (disSenderToReciever * electricityToReciever) + (disRecieverToCharger * electricityToCharger);
-                        int minEle = (int)Math.Round(minElectric);
+                        double electricityRecieverToCharger = calcElectry(new LocationBL { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude }, new LocationBL { Longitude = station1.Longitude, Latitude = station1.Latitude }, 0);
+                        int minEle = (int)Math.Round(electricitySenderToReciever + electricityRecieverToCharger);
                         droneBL.BatteryStatus = rand.Next(minEle, 100);
                     }
                 }
@@ -79,8 +75,7 @@ namespace BL
                     Customer customer = dalObject.GetSpecificCustomer(parcelBL.Sender.ID);
                     droneBL.location = new LocationBL { Latitude = customer.Latitude, Longitude = customer.Longitude };
                     Station station1 = stationWithMinDisAndEmptySlots(droneBL.location);
-                    double disStationToCharger = distance(new LocationBL { Longitude = station1.Longitude, Latitude = station1.Latitude }, droneBL.location);
-                    double electry = disStationToCharger * electricAvailable;
+                    double electry = calcElectry(new LocationBL { Longitude = station1.Longitude, Latitude = station1.Latitude }, droneBL.location, 0);
                     int minElectric = (int)Math.Round(electry);
                     droneBL.BatteryStatus = rand.Next(minElectric, 100);
                 }
@@ -88,6 +83,8 @@ namespace BL
             }
         }
 
+
+        
         //#############################################################
         //check validaion id
         //#############################################################
@@ -536,7 +533,6 @@ namespace BL
         {
             //check this function////////////////////////////////
             Station station = new Station();
-            double dis2 = 0;
             DroneBL droneBL = getSpecificDroneBLFromList(id);
             if (droneBL.droneStatus == DroneStatus.Available)
             {
@@ -548,9 +544,9 @@ namespace BL
                         break;
                     }
                 }
-                dis2 = distance(droneBL.location, new LocationBL { Latitude = station.Latitude, Longitude = station.Longitude });
+                double electric = calcElectry(droneBL.location, new LocationBL { Latitude = station.Latitude, Longitude = station.Longitude }, 0);
 
-                if (dis2 * dalObject.requestElectric()[0] > droneBL.BatteryStatus)
+                if (electric > droneBL.BatteryStatus)
                 {
                     throw new DAL.Exceptions("dont have enough battery");
                 }
@@ -558,7 +554,7 @@ namespace BL
                 {
                     throw new Exception("there is no a station with empty charge slots");
                 }
-                droneBL.BatteryStatus -= dis2 * dalObject.requestElectric()[0];
+                droneBL.BatteryStatus -= electric;
                 droneBL.location.Latitude = station.Latitude;
                 droneBL.location.Longitude = station.Longitude;
                 droneBL.droneStatus = DroneStatus.Maintenance;
@@ -671,10 +667,8 @@ namespace BL
 
             }
             Customer customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
-            double disDroneToSenderParcel = distance(droneBL.location, new LocationBL { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude });
-            droneBL.BatteryStatus -= disDroneToSenderParcel * dalObject.requestElectric()[(int)parcel.Weight];
-            droneBL.location.Longitude = customerSender.Longitude;
-            droneBL.location.Latitude = customerSender.Latitude;
+            droneBL.BatteryStatus -= calcElectry(droneBL.location, new LocationBL { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude }, (int)parcel.Weight);
+            droneBL.location = new LocationBL { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude };
             updateDrone(droneBL);
             parcel.PickedUp = DateTime.Now;
             dalObject.updateParcel(parcel);
@@ -690,11 +684,9 @@ namespace BL
             }
             Customer customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
             Customer customerReciever = dalObject.GetSpecificCustomer(parcel.TargetID);
-            double disSenderToReciever = distance(new LocationBL { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude }, new LocationBL { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude });
-            double electricity = dalObject.requestElectric()[(int)parcel.Weight];
-            droneBL.BatteryStatus -= electricity * disSenderToReciever;
-            droneBL.location.Longitude = customerReciever.Longitude;
-            droneBL.location.Latitude = customerReciever.Latitude;
+            double electricSenderToReciever = calcElectry(new LocationBL { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude }, new LocationBL { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude }, (int)parcel.Weight);
+            droneBL.BatteryStatus -= electricSenderToReciever;
+            droneBL.location = new LocationBL { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude };
             droneBL.droneStatus = DroneStatus.Available;
             updateDrone(droneBL);
             parcel.Delivered = DateTime.Now;
@@ -704,6 +696,13 @@ namespace BL
         //###################################################################
         //help functions
         //###################################################################
+
+        public double calcElectry(LocationBL locatin1, LocationBL location2, int weight)
+        {
+            double distance1 = distance(locatin1, location2);
+            return distance1 * dalObject.requestElectric()[weight];
+        }
+
         private ParcelStatus findParcelStatus(Parcel parcel)
         {
             if (parcel.Requested.Equals(null))
