@@ -27,7 +27,7 @@ namespace DalObject
         {
             try
             {
-                return DataSource.parcels.First(parcel => parcel.ID == id);
+                return DataSource.parcels.Find(parcel => parcel.ID == id);
             }
             catch (ArgumentNullException e)
             {
@@ -38,12 +38,16 @@ namespace DalObject
         {
             try
             {
-                return DataSource.parcels.First(parcel => parcel.DroneID == id);
+                return DataSource.parcels.Find(parcel => parcel.DroneID == id);
             }
             catch (ArgumentNullException e)
             {
                 throw new Exceptions(id);
             }
+        }
+        public Parcel GetParcelByDroneID(int id)
+        {
+            return DataSource.parcels.Find(parcel => parcel.DroneID == id);
         }
         public int lengthParcel()
         {
