@@ -31,7 +31,7 @@ namespace DalObject
             }
             catch (ArgumentNullException e)
             {
-                throw new Exeptions(id);
+                throw new Exceptions(id);
             }
         }
 

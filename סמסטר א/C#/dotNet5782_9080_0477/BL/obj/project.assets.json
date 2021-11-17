@@ -27,25 +27,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ברייש חיה\\.nuget\\packages\\": {},
+    "C:\\Users\\סטפנסקי שרה1\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "H:\\סמסטר א\\C#\\dotNet5782_9080_0477\\BL\\BL.csproj",
+      "projectUniqueName": "H:\\c#\\chayBreisch\\dotNet5782_9080_0477\\סמסטר א\\C#\\dotNet5782_9080_0477\\BL\\BL.csproj",
       "projectName": "BL",
-      "projectPath": "H:\\סמסטר א\\C#\\dotNet5782_9080_0477\\BL\\BL.csproj",
-      "packagesPath": "C:\\Users\\ברייש חיה\\.nuget\\packages\\",
-      "outputPath": "H:\\סמסטר א\\C#\\dotNet5782_9080_0477\\BL\\obj\\",
+      "projectPath": "H:\\c#\\chayBreisch\\dotNet5782_9080_0477\\סמסטר א\\C#\\dotNet5782_9080_0477\\BL\\BL.csproj",
+      "packagesPath": "C:\\Users\\סטפנסקי שרה1\\.nuget\\packages\\",
+      "outputPath": "H:\\c#\\chayBreisch\\dotNet5782_9080_0477\\סמסטר א\\C#\\dotNet5782_9080_0477\\BL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\ברייש חיה\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\סטפנסקי שרה1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -60,8 +60,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "H:\\סמסטר א\\C#\\dotNet5782_9080_0477\\DAL\\DAL.csproj": {
-              "projectPath": "H:\\סמסטר א\\C#\\dotNet5782_9080_0477\\DAL\\DAL.csproj"
+            "H:\\c#\\chayBreisch\\dotNet5782_9080_0477\\סמסטר א\\C#\\dotNet5782_9080_0477\\DAL\\DAL.csproj": {
+              "projectPath": "H:\\c#\\chayBreisch\\dotNet5782_9080_0477\\סמסטר א\\C#\\dotNet5782_9080_0477\\DAL\\DAL.csproj"
             }
           }
         }

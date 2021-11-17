@@ -38,7 +38,7 @@ namespace DalObject
             }
             catch (ArgumentNullException e)
             {
-                throw new Exeptions(id);
+                throw new Exceptions(id);
             }
         }
         public void AddDrone(Drone drone)
