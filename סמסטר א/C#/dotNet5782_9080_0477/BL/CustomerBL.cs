@@ -21,25 +21,46 @@ namespace IBL
                     if(BL.BL.CheckLongIdIsValid(value) && BL.BL.CheckValidIdCustomer(value) /*&& BL.BL.checkUniqeIDCustomer(value)*/)
                     id = value;
                     else{
-                    throw new FormatException("not valid id");
+                    //throw new FormatException("not valid id");
                     }
                 }
                     }
             public string Name { get; set; }
-            public int Phone { get; set; }
+            public string Phone { get; set; }
 
 
-            public LocationBL location { get; set; }
+            public LocationBL Location { get; set; }
             public List<ParcelAtCustomer> parcelSendedByCustomer { get; set; }
             public List<ParcelAtCustomer> parcelSendedToCustomer { get; set; }
 
 
 
+            /* public override string ToString()
+             {
+                 return $"customer: {ID} : {Name} : {Phone}";
+             }
+ */
             public override string ToString()
             {
-                return $"customer: {ID} : {Name} : {Phone}";
-            }
+                string parcelSentedByCustomer = " ";
+                string parcelSentedToCustomer = " ";
 
+                foreach (var p in parcelSendedByCustomer)
+                {
+                    parcelSentedByCustomer += p;
+                    parcelSentedByCustomer += " ";
+                }
+
+                foreach (var p in parcelSendedToCustomer)
+                {
+                    parcelSentedToCustomer += p;
+                    parcelSentedToCustomer += " ";
+                }
+
+
+                return $"customer {Name} : {ID}, {Phone}, Location : {Location}," +
+                    $"parcelsSentedByCustomer: {parcelSentedByCustomer}, parcelsSentedToCustomer: {parcelSentedToCustomer} ";
+            }
 
 
 

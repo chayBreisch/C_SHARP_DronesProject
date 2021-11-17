@@ -21,13 +21,20 @@ namespace DalObject
         {
             return DataSource.customers;
         }
-        
+        public void CheckUniqeCustomer(ulong id)
+        {
+            foreach (var customer in DataSource.customers)
+            {
+                if (customer.ID == id)
+                    throw new NotUniqeID(id, typeof(Customer));
+            }
+        }
 
         public Customer GetSpecificCustomer(ulong id)
         {
             try
             {
-                return DataSource.customers.First(customer => customer.ID == id);
+                return DataSource.customers.Find(customer => customer.ID == id);
             }
             catch (ArgumentNullException e)
             {
@@ -36,7 +43,8 @@ namespace DalObject
         }
 
         public void AddCustomer(Customer newCustomer)
-        {     
+        {
+            CheckUniqeCustomer(newCustomer.ID);
             DataSource.customers.Add(newCustomer);
         }
         public void updateCustomer(Customer customer)

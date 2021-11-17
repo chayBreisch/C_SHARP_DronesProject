@@ -56,7 +56,17 @@ namespace DalObject
 
         public void AddParcel(Parcel parcel)
         {
+            CheckUniqeParcel(parcel.ID);
             DataSource.parcels.Add(parcel);
+        }
+
+        public void CheckUniqeParcel(int id)
+        {
+            foreach (var parcel in DataSource.parcels)
+            {
+                if (parcel.ID == id)
+                    throw new NotUniqeID(id, typeof(Parcel));
+            }
         }
         public void updateParcel(Parcel parcel)
         {

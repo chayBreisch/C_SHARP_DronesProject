@@ -37,7 +37,7 @@ namespace DalObject
             {
                 Station station = new Station();
                 station.ID = stations.Count + 1;
-                station.Name = $"station{stations.Count + 1}";
+                station.Name = stations.Count + 1;
                 station.Latitude = rand.Next();
                 station.Longitude = rand.Next();
                 station.ChargeSlots = rand.Next(300);
@@ -62,7 +62,7 @@ namespace DalObject
                 Customer customer = new Customer();
                 customer.ID = (ulong)customers.Count + 1;
                 customer.Name = $"customer{i}";
-                customer.Phone = rand.Next(111111111, 999999999);
+                customer.Phone = $"customer{rand.Next(111111111, 999999999)}";
                 customer.Latitude = rand.Next();
                 customer.Longitude = rand.Next();
                 customers.Add(customer);

@@ -34,15 +34,25 @@ namespace DalObject
         {
             try
             {
-                return DataSource.drones.First(drone => drone.ID == id);
+                return DataSource.drones.Find(drone => drone.ID == id);
             }
             catch (ArgumentNullException e)
             {
                 throw new Exceptions(id);
             }
         }
+
+        public void CheckUniqeDrone(int id)
+        {
+            foreach (var drone in DataSource.drones)
+            {
+                if (drone.ID == id)
+                    throw new NotUniqeID(id, typeof(Drone));
+            }
+        }
         public void AddDrone(Drone drone)
         {
+            CheckUniqeDrone(drone.ID);
             DataSource.drones.Add(drone);
         }
 

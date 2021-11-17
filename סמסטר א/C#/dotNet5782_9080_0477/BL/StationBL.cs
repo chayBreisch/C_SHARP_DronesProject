@@ -13,13 +13,13 @@ namespace IBL
             
 
             public int ID { get; set; }
-            public string Name { get; set; }
+            public int Name { get; set; }
             public int ChargeSlots { get; set; }
             public LocationBL location { get; set; }
             public List<DroneInCharger> dronesInCharge { get; set; }
             public override string ToString()
             {
-                return $"customer: {ID} : {Name} : {ChargeSlots} ";
+                return $"station: {ID} : {Name} : {ChargeSlots} ";
             }
             /*public Station()
             {

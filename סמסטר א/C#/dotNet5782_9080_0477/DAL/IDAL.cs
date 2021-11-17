@@ -54,6 +54,12 @@ namespace IDAL
         public int lengthStation();
         public int lengthParcel();
 
+        public void CheckUniqestation(int id);
+        public void CheckUniqeParcel(int id);
+        public void checkUniqeIdDroneChargeBL(int droneId, int stationId);
+
+        public void CheckUniqeDrone(int id);
+        public void CheckUniqeCustomer(ulong id);
 
     }
 }

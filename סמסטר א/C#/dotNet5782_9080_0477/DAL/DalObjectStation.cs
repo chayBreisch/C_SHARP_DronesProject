@@ -37,13 +37,22 @@ namespace DalObject
 
         public void AddStation(Station station)
         {
-
+            CheckUniqestation(station.ID);
             DataSource.stations.Add(station);
         }
         public void updateStation(Station station)
         {
             int index = DataSource.stations.FindIndex(d => d.ID == station.ID);
             DataSource.stations[index] = station;
+        }
+
+        public void CheckUniqestation(int id)
+        {
+            foreach (var station in DataSource.stations)
+            {
+                if (station.ID == id)
+                    throw new NotUniqeID(id, typeof(Station));
+            }
         }
         public int lengthStation()
         {

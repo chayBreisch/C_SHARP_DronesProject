@@ -13,16 +13,25 @@ namespace IBL
         {
             public int ID { get; set; }
             public string Model { get; set; }
-            public WeightCatagories weight { get; set; }
+            public WeightCatagories Weight { get; set; }
             public double BatteryStatus { get; set; }
-            public DroneStatus droneStatus { get; set; }
+            public DroneStatus DroneStatus { get; set; }
             public ParcelInDelivery parcelInDelivery { get; set; }
-            public LocationBL location { get; set; }
+            public LocationBL Location { get; set; }
+            /* public override string ToString()
+             {
+                 return $"customer: {ID} : {Model}";
+             }
+ */
             public override string ToString()
             {
-                return $"customer: {ID} : {Model}";
-            }
+                return $"drone  : {ID}, " +
+                    $" battery: {BatteryStatus}, Model: {Model}, MaxWeight: {Weight}, " +
+                    $"DroneStatus : {DroneStatus}, ParcelAtTransfor: {parcelInDelivery}," +
+                    $"Location: {Location}";
 
+                ;
+            }
 
 
 
