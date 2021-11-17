@@ -8,6 +8,7 @@ using IDAL.DO;
 using System.Linq;
 namespace BL
 {
+    //ניסוי
     public class BL : Bl
     {
         Random rand = new Random();
