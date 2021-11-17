@@ -8,6 +8,7 @@ using IDAL.DO;
 using System.Linq;
 namespace BL
 {
+    //bhxuh
     //ניסוי
     public class BL : Bl
     {
