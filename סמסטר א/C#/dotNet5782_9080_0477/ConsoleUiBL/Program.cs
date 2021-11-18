@@ -117,11 +117,11 @@ namespace ConsoleUI_BL
                                     }
                                     break;
                                 default:
-                                    Console.WriteLine("please enter a number b--------------------------------------------------------etween 1-4");
+                                    Console.WriteLine("please enter a number between 1-4");
                                     break;
                             }
                             break;
-                        case 2:
+                        case 2://////////////////לבדוק את הפונקציות וההרצה ולעשות את כל התפיסת שגיאות ולהוסיף מקרה 5
                             Console.WriteLine("to udate Model of drone enter 1");
                             Console.WriteLine("to update data of station enter 2");
                             Console.WriteLine("to update data of customer enter 3");
@@ -154,6 +154,11 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("enter phone");
                                     string phone = Console.ReadLine();
                                     bL.updateDataCustomer(IdCustomer, name, phone);
+                                    break;
+                                case 4:
+                                    Console.WriteLine("enter id");
+                                    id = Convert.ToInt32(Console.ReadLine());
+                                    bL.updateSendDroneToCharge(id);
                                     break;
                                 default:
                                     break;
@@ -218,7 +223,7 @@ namespace ConsoleUI_BL
                             }
 
                             break;
-                        case 4:
+                        case 4://///////////////////////////////////////להוסיף את מקרה 5 ואת מקרה 6
                             Console.WriteLine("to display the stations list enter 1");
                             Console.WriteLine("to display the drones list enter 2");
                             Console.WriteLine("to display the customers list enter 3");
