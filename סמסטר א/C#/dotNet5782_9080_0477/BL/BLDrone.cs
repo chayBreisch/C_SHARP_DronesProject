@@ -79,7 +79,7 @@ namespace BL
             return getSpecificDroneBLFromList(id);
         }
 
-        private DroneBL convertDalDroneToBl(Drone d)
+        public DroneBL convertDalDroneToBl(Drone d)
         {
             return GetSpecificDroneBL(d.ID);
         }

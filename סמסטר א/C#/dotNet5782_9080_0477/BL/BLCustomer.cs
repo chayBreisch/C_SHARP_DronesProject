@@ -79,7 +79,7 @@ namespace BL
             }
         }
 
-        private CustomerBL convertDalCustomerToBl(Customer c)
+        public CustomerBL convertDalCustomerToBl(Customer c)
         {
             List<ParcelAtCustomer> parcelSendedByCustomers = new List<ParcelAtCustomer>();
             List<ParcelAtCustomer> parcelSendedToCustomers = new List<ParcelAtCustomer>();
@@ -87,9 +87,9 @@ namespace BL
             parcels.ForEach(p =>
             {
                 if (p.SenderID == c.ID)
-                    parcelSendedByCustomers.Add(new ParcelAtCustomer { ID = p.ID, weightCatagories = p.Weight, priorities = p.Priority, parcelStatus = findParcelStatus(p) });
+                    parcelSendedByCustomers.Add(new ParcelAtCustomer { ID = p.ID, Weight = p.Weight, Priority = p.Priority, ParcelStatus = findParcelStatus(p) });
                 if (p.TargetID == c.ID)
-                    parcelSendedToCustomers.Add(new ParcelAtCustomer { ID = p.ID, weightCatagories = p.Weight, priorities = p.Priority, parcelStatus = findParcelStatus(p) });
+                    parcelSendedToCustomers.Add(new ParcelAtCustomer { ID = p.ID, Weight = p.Weight, Priority = p.Priority, ParcelStatus = findParcelStatus(p) });
 
             });
 

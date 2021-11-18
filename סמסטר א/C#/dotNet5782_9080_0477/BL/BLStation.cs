@@ -27,7 +27,7 @@ namespace BL
             StationBL station = new StationBL();
             station.ID = id;
             station.Name = name;
-            station.location = new LocationBL(location.Longitude, location.Latitude);
+            station.Location = new LocationBL(location.Longitude, location.Latitude);
             station.ChargeSlots = ChargeSlots;
             AddStationToDal(id, name, location, ChargeSlots);
         }
@@ -94,7 +94,7 @@ namespace BL
             return false;
         }
 
-        private StationBL convertDalStationToBl(Station s)
+        public StationBL convertDalStationToBl(Station s)
         {
             List<DroneCharge> droneChargers = dalObject.GetDroneCharge().Cast<DroneCharge>().ToList();
             droneChargers = droneChargers.FindAll(d => d.StationID == s.ID);
@@ -106,8 +106,8 @@ namespace BL
                 ID = s.ID,
                 Name = s.Name,
                 ChargeSlots = s.ChargeSlots,
-                location = new LocationBL() { Longitude = s.Longitude, Latitude = s.Latitude },
-                dronesInCharge = dronesInCharges
+                Location = new LocationBL() { Longitude = s.Longitude, Latitude = s.Latitude },
+                DronesInCharge = dronesInCharges
             };
         }
 

@@ -8,17 +8,20 @@ namespace IBL
 {
     namespace BO
     {
-        public class CustomerInDelivery
+        public class CustomerAtParcel
         {
             public int ID { get; set; }
             public string CustomerName { get; set; }
 
-            public CustomerInDelivery()
+            public CustomerAtParcel()
             {
                 ID = 0;
                 CustomerName = "";
             }
-
+            public override string ToString()
+            {
+                return $"ID: {ID}, CustomerName: {CustomerName}";
+            }
         }
     }
 }

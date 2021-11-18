@@ -13,6 +13,11 @@ namespace IBL
             public int ID { get; set; }
             public double BatteryStatus { get; set; }
             public LocationBL CurrentLocation { get; set; }
+
+            public override string ToString()
+            {
+                return $"DroneInParcel: ID: {ID}, BatteryStatus: {BatteryStatus}, CurrentLocation: {CurrentLocation}";
+            }
         }
     }
 }

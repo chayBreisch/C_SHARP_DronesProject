@@ -112,7 +112,7 @@ namespace BL
             };
         }
 
-        private ParcelStatus findParcelStatus(Parcel parcel)
+        public ParcelStatus findParcelStatus(Parcel parcel)
         {
             if (parcel.Requested.Equals(null))
                 return (ParcelStatus)0;

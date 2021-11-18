@@ -17,6 +17,12 @@ namespace IBL
             public int SumOfParcelsSendedAndNotProvided { get; set; }
             public int SumOfParcelsRecieved { get; set; }
             public int SumOfParcelsOnTheWay { get; set; }
+
+            public override string ToString()
+            {
+                return $"CustomerToList: ID: {ID}, Name: {Name}, Phone: {Phone}, SumOfParcelsSendedAndProvided: {SumOfParcelsSendedAndProvided}" +
+                    $"SumOfParcelsSendedAndNotProvided: {SumOfParcelsSendedAndNotProvided}, SumOfParcelsRecieved: {SumOfParcelsRecieved}, SumOfParcelsOnTheWay: {SumOfParcelsOnTheWay}";
+            }
         }
     }
 }

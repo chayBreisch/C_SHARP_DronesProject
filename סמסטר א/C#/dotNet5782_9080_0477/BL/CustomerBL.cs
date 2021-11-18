@@ -36,16 +36,9 @@ namespace IBL
             public List<ParcelAtCustomer> parcelSendedByCustomer { get; set; }
             public List<ParcelAtCustomer> parcelSendedToCustomer { get; set; }
 
-
-
-            /* public override string ToString()
-             {
-                 return $"customer: {ID} : {Name} : {Phone}";
-             }
- */
             public override string ToString()
             {
-                /*string parcelSentedByCustomer = " ";
+                string parcelSentedByCustomer = " ";
                 string parcelSentedToCustomer = " ";
 
                 foreach (var p in parcelSendedByCustomer)
@@ -59,10 +52,10 @@ namespace IBL
                     parcelSentedToCustomer += p;
                     parcelSentedToCustomer += " ";
                 }
-*/
 
-                return $"customer {Name} : {ID}, {Phone}, Location : {Location},"/* +
-                    $"parcelsSentedByCustomer: {parcelSentedByCustomer}, parcelsSentedToCustomer: {parcelSentedToCustomer} "*/;
+
+                return $"customer {Name} : {ID}, {Phone}, Location : {Location}," +
+                    $"parcelsSentedByCustomer: {parcelSentedByCustomer}, parcelsSentedToCustomer: {parcelSentedToCustomer} ";
             }
 
 

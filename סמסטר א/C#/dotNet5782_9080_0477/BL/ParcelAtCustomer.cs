@@ -11,10 +11,14 @@ namespace IBL
         public class ParcelAtCustomer
         {
             public int ID { get; set; }
-            public IDAL.DO.WeightCatagories weightCatagories { get; set; }
-            public IDAL.DO.Priorities priorities { get; set; }
-            public ParcelStatus parcelStatus { get; set; }
-            public CustomerInDelivery customerInDelivery { get; set; }
-        }
+            public IDAL.DO.WeightCatagories Weight { get; set; }
+            public IDAL.DO.Priorities Priority { get; set; }
+            public ParcelStatus ParcelStatus { get; set; }
+            public CustomerAtParcel customerAtParcel { get; set; }
+            public override string ToString()
+            {
+                return $"ParcelAtCustomer: ID: {ID}, Weight: {Weight}, Priority: {Priority}, ParcelStatus: {ParcelStatus}, customerAtParcel: {customerAtParcel}";
+            }
+            }
     }
 }

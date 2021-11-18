@@ -13,9 +13,15 @@ namespace IBL
             public int ID { get; set; }
             public string NameCustomerSender { get; set; }
             public string NameCustomerReciver { get; set; }
-            public IDAL.DO.WeightCatagories weightCatagories { get; set; }
-            public IDAL.DO.Priorities priorities { get; set; }
-            public ParcelStatus parcelStatus { get; set; }
+            public IDAL.DO.WeightCatagories Weight { get; set; }
+            public IDAL.DO.Priorities Priority { get; set; }
+            public ParcelStatus ParcelStatus { get; set; }
+
+            public override string ToString()
+            {
+                return $"ParcelToList: ID: {ID}, NameCustomerSender: {NameCustomerSender}, NameCustomerReciver: {NameCustomerReciver}" +
+                    $"Weight: {Weight}, Priority: {Priority}, ParcelStatus: {ParcelStatus}";
+            }
         }
     }
 }

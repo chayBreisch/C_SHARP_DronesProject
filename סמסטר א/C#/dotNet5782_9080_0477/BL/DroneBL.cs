@@ -18,11 +18,6 @@ namespace IBL
             public DroneStatus DroneStatus { get; set; }
             public ParcelInDelivery parcelInDelivery { get; set; }
             public LocationBL Location { get; set; }
-            /* public override string ToString()
-             {
-                 return $"customer: {ID} : {Model}";
-             }
- */
             public override string ToString()
             {
                 return $"drone  : {ID}, " +
@@ -30,7 +25,7 @@ namespace IBL
                     $"DroneStatus : {DroneStatus}, ParcelAtTransfor: {parcelInDelivery}," +
                     $"Location: {Location}";
 
-                ;
+                
             }
 
 

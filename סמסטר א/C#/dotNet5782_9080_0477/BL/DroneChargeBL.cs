@@ -10,43 +10,12 @@ namespace IBL
     {
         public class DroneChargeBL
         {
-            IDAL.DO.DroneCharge droneCharge;
-
-            public DroneChargeBL()
-            {
-                droneCharge = new IDAL.DO.DroneCharge();
-            }
+            public int DroneId { get; set; }
+            public int StationId { get; set; }
             public override string ToString()
             {
-                return $"customer: {droneCharge.StationID} : {droneCharge.DroneID}";
+                return $"droneCharge: DroneId: {DroneId}, StationId: {StationId}";
             }
-
-
-
-
-
-
-
-
-
-
-
-            /*public DroneCharge()
-            {
-                DroneID = 0;
-                StationID = 0;
-            }
-            public DroneCharge(int droneId, int stationId)
-            {
-                DroneID = droneId;
-                StationID = stationId;
-            }
-            public int DroneID { get; set; }
-            public int StationID { get; set; }
-            public override string ToString()
-            {
-                return $"{DroneID}";
-            }*/
         }
     }
 }
