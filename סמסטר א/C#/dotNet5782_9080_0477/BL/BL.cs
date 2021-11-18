@@ -47,7 +47,7 @@ namespace BL
                         droneBL.DroneStatus = DroneStatus.Delivery;
 
                         //check if the parcel of the drone is scheduled and not delivered and not picked up
-                        if (parcel.PickedUp.Equals(null))
+                        if (parcel.PickedUp != new DateTime())
                         {
                             Station station = findClosestStation(new LocationBL(customerSender.Latitude, customerSender.Longitude));
                             droneBL.Location = new LocationBL(station.Latitude,station.Longitude);

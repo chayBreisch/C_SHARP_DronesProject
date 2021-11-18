@@ -41,8 +41,8 @@ namespace BL
             //parcel.ID = id;
             checkIfCustomerWithThisID(sender);
             checkIfCustomerWithThisID(target);
-            parcel.Sender.ID = sender;
-            parcel.Reciever.ID = target;
+            parcel.Sender = GetSpecificCustomerBL(sender);
+            parcel.Reciever = GetSpecificCustomerBL(target);
             parcel.Weight = (WeightCatagories)Weight;
             parcel.Priorities = (Priorities)priority;
             parcel.Requesed = DateTime.Now;
