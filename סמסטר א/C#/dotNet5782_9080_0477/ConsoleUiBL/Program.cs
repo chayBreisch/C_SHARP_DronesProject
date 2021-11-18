@@ -85,13 +85,14 @@ namespace ConsoleUI_BL
                                     break;
                                 case 4:
                                     Console.WriteLine("enter id of sender");
-                                    int SenderId = Convert.ToInt32(Console.ReadLine());
+                                    ulong SenderId = ulong.Parse(Console.ReadLine());
                                     Console.WriteLine("enter id of reciver");
-                                    Id = Convert.ToInt32(Console.ReadLine());
+                                    ulong RecieverId = ulong.Parse(Console.ReadLine());
                                     Console.WriteLine("enter the weight : 1. Light,2. Medium, 3.Heavy");
                                     weight = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("enter the prionity : 1. Reguler,2. Fast, 3.Emergency");
-                                    int prionity = Convert.ToInt32(Console.ReadLine());
+                                    int priority = Convert.ToInt32(Console.ReadLine());
+                                    bL.AddParcel(SenderId, RecieverId, weight, priority);
                                     break;
                                 default:
                                     Console.WriteLine("please enter a number btween 1-4");

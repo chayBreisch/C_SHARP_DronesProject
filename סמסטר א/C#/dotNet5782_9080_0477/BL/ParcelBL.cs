@@ -15,9 +15,9 @@ namespace IBL
             public int ID { get; set; }
             public CustomerBL Sender { get; set; }
             public CustomerBL Reciever { get; set; }
-            public WeightCatagories weightCatagories { get; set; }
-            public Priorities priorities { get; set; }
-            public DroneBL drone { get; set; }
+            public WeightCatagories Weight { get; set; }
+            public Priorities Priorities { get; set; }
+            public DroneBL Drone { get; set; }
             public DateTime Requesed { get; set; }
             public DateTime Scheduled { get; set; }
             public DateTime PickedUp { get; set; } 
@@ -26,7 +26,8 @@ namespace IBL
 
             public override string ToString()
             {
-                return $"customer: {ID} : {Sender} : {Reciever} : {drone}";
+                return $"ID: {ID}, senderId: {Sender.ID}, recieverId: {Reciever.ID},\nWeight: {Weight}, Priorities: {Priorities}";
+                   
             }
 
 

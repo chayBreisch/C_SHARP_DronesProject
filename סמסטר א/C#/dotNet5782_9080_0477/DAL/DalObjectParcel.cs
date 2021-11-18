@@ -51,7 +51,7 @@ namespace DalObject
         }
         public int lengthParcel()
         {
-            return DataSource.stations.Count;
+            return DataSource.parcels.Count;
         }
 
         public void AddParcel(Parcel parcel)

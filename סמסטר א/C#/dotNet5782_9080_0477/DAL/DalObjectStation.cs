@@ -27,7 +27,7 @@ namespace DalObject
         {
             try
             {
-                return DataSource.stations.First(station => station.ID == id);
+                return DataSource.stations.Find(station => station.ID == id);
             }
             catch (ArgumentNullException e)
             {

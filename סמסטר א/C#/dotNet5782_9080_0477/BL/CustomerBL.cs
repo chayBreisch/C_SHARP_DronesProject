@@ -12,19 +12,22 @@ namespace IBL
     {
         public class CustomerBL
         {
-            private ulong id;
-            public ulong ID {
+            /*private ulong id;
+            public ulong ID
+            {
                 get
                 { return id; }
                 set
                 {
-                    if(BL.BL.CheckLongIdIsValid(value) && BL.BL.CheckValidIdCustomer(value) /*&& BL.BL.checkUniqeIDCustomer(value)*/)
-                    id = value;
-                    else{
-                    //throw new FormatException("not valid id");
+                    if (BL.BL.CheckLongIdIsValid(value) && BL.BL.CheckValidIdCustomer(value) *//*&& BL.BL.checkUniqeIDCustomer(value)*//*)
+                        id = value;
+                    else
+                    {
+                        throw new FormatException("not valid id");
                     }
                 }
-                    }
+            }*/
+            public ulong ID { get; set; }
             public string Name { get; set; }
             public string Phone { get; set; }
 
@@ -42,7 +45,7 @@ namespace IBL
  */
             public override string ToString()
             {
-                string parcelSentedByCustomer = " ";
+                /*string parcelSentedByCustomer = " ";
                 string parcelSentedToCustomer = " ";
 
                 foreach (var p in parcelSendedByCustomer)
@@ -56,10 +59,10 @@ namespace IBL
                     parcelSentedToCustomer += p;
                     parcelSentedToCustomer += " ";
                 }
+*/
 
-
-                return $"customer {Name} : {ID}, {Phone}, Location : {Location}," +
-                    $"parcelsSentedByCustomer: {parcelSentedByCustomer}, parcelsSentedToCustomer: {parcelSentedToCustomer} ";
+                return $"customer {Name} : {ID}, {Phone}, Location : {Location},"/* +
+                    $"parcelsSentedByCustomer: {parcelSentedByCustomer}, parcelsSentedToCustomer: {parcelSentedToCustomer} "*/;
             }
 
 

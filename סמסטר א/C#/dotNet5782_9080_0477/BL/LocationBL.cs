@@ -24,6 +24,13 @@ namespace IBL
                 Longitude = 0;
                 Latitude = 0;
             }
+            public override string ToString()
+            {
+                return $"longitude  : {Longitude}, " +
+                    $" latitude: {Latitude}"
+
+                ;
+            }
 
         }
     }

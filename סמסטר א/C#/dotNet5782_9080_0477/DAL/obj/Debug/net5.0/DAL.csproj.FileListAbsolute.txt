@@ -22,3 +22,15 @@ H:\c#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL
 H:\c#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\bin\Debug\net5.0\DAL.dll
 H:\c#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\bin\Debug\net5.0\ref\DAL.dll
 H:\c#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\bin\Debug\net5.0\DAL.pdb
+C:\Users\WIN10\Documents\‏‏חיה\C#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\bin\Debug\net5.0\DAL.deps.json
+C:\Users\WIN10\Documents\‏‏חיה\C#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\bin\Debug\net5.0\DAL.dll
+C:\Users\WIN10\Documents\‏‏חיה\C#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\bin\Debug\net5.0\ref\DAL.dll
+C:\Users\WIN10\Documents\‏‏חיה\C#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\bin\Debug\net5.0\DAL.pdb
+C:\Users\WIN10\Documents\‏‏חיה\C#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.csproj.AssemblyReference.cache
+C:\Users\WIN10\Documents\‏‏חיה\C#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\WIN10\Documents\‏‏חיה\C#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.AssemblyInfoInputs.cache
+C:\Users\WIN10\Documents\‏‏חיה\C#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.AssemblyInfo.cs
+C:\Users\WIN10\Documents\‏‏חיה\C#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.csproj.CoreCompileInputs.cache
+C:\Users\WIN10\Documents\‏‏חיה\C#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.dll
+C:\Users\WIN10\Documents\‏‏חיה\C#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\ref\DAL.dll
+C:\Users\WIN10\Documents\‏‏חיה\C#\chayBreisch\dotNet5782_9080_0477\סמסטר א\C#\dotNet5782_9080_0477\DAL\obj\Debug\net5.0\DAL.pdb

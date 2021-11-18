@@ -8,8 +8,7 @@ using IDAL.DO;
 using System.Linq;
 namespace BL
 {
-    //bhxuh
-    //ניסוי
+   //לשים לב מה עם GET SET IN CUSTOMERBL
     public class BL : Bl
     {
         Random rand = new Random();
@@ -92,19 +91,18 @@ namespace BL
         //#############################################################
         //check validaion id
         //#############################################################
-        public static void checkUniqeIdDrone(int id)
+        public static void checkUniqeIdDrone(int id, IDAL.IDal dalObject)
         {
-            List<Drone> drones = new List<Drone>();
+            List<Drone> drones = dalObject.GetDrone().ToList();
             drones.ForEach(d =>
             {
                 if (d.ID == id)
                     throw new NotUniqeID(id, typeof(Drone));
             });
         }
-
-        public static void checkUniqeIdParcel(int id)
+        public static void checkUniqeIdParcel(int id, IDAL.IDal dalObject)
         {
-            List<Parcel> parcels = new List<Parcel>();
+            List<Parcel> parcels = dalObject.GetParcelByList();
             parcels.ForEach(p =>
             {
                 if (p.ID == id)
@@ -112,9 +110,9 @@ namespace BL
             });
         }
 
-        public static void checkUniqeIdCustomer(ulong id)
+        public static void checkUniqeIdCustomer(ulong id, IDAL.IDal dalObject)
         {
-            List<Customer> customers = new List<Customer>();
+            List<Customer> customers = dalObject.GetCustomer().ToList();
             customers.ForEach(c =>
             {
                 if (c.ID == id)
@@ -122,18 +120,18 @@ namespace BL
             });
         }
 
-        public static void checkUniqeIdStation(int id)
+        public static void checkUniqeIdStation(int id, IDAL.IDal dalObject)
         {
-            List<Station> stations = new List<Station>();
+            List<Station> stations = dalObject.GetStationByList();
             stations.ForEach(s =>
             {
                 if (s.ID == id)
                     throw new NotUniqeID(id, typeof(Station));
             });
         }
-        public static void checkUniqeIdDroneCharge(int droneId, int stationId)
+        public static void checkUniqeIdDroneCharge(int droneId, int stationId, IDAL.IDal dalObject)
         {
-            List<DroneCharge> droneCharges = new List<DroneCharge>();
+            List<DroneCharge> droneCharges = dalObject.GetDroneCharge().ToList();
             droneCharges.ForEach(d =>
             {
                 if (d.DroneID == droneId && d.StationID == stationId)
@@ -147,7 +145,7 @@ namespace BL
 
         public void AddCustomer(ulong id, string name, string phone, LocationBL location)
         {
-            checkUniqeIdCustomer(id);
+            checkUniqeIdCustomer(id, dalObject);
             CustomerBL customer = new CustomerBL();
             customer.ID = id;
             customer.Name = name;
@@ -169,7 +167,7 @@ namespace BL
 
         public void addStation(int id, int name, LocationBL location, int ChargeSlots)
         {
-            checkUniqeIdStation(id);
+            checkUniqeIdStation(id, dalObject);
             StationBL station = new StationBL();
             station.ID = id;
             station.Name = name;
@@ -191,7 +189,7 @@ namespace BL
 
         public void addDrone(int id, string model, int maxWeight, int stationID)
         {
-            checkUniqeIdDrone(id);
+            checkUniqeIdDrone(id, dalObject);
             DroneBL droneBL = new DroneBL();
             Station station = dalObject.GetSpecificStation(id);
 
@@ -218,38 +216,42 @@ namespace BL
             dalObject.AddDrone(drone);
         }
 
-        public void AddParcel(ulong sender, ulong target, WeightCatagories Weight, Priorities priority)
+        public void AddParcel(ulong sender, ulong target, int Weight, int priority)
         {
             ParcelBL parcel = new ParcelBL();
+            parcel.Sender = new CustomerBL();
+            parcel.Reciever = new CustomerBL();
             //parcel.ID = id;
+            checkIfCustomerWithThisID(sender);
+            checkIfCustomerWithThisID(target);
             parcel.Sender.ID = sender;
             parcel.Reciever.ID = target;
-            parcel.weightCatagories = Weight;
-            parcel.priorities = priority;
+            parcel.Weight = (WeightCatagories)Weight;
+            parcel.Priorities = (Priorities)priority;
             parcel.Requesed = DateTime.Now;
             parcel.Scheduled = new DateTime();
             parcel.PickedUp = new DateTime();
             parcel.Delivered = new DateTime();
-            parcel.drone = null;
+            parcel.Drone = null;
             AddParcelToDal(sender, target, Weight, priority);
 
         }
 
-        public void AddParcelToDal(/*ulong id,*/ ulong sender, ulong target, WeightCatagories Weight, Priorities priority)
+        public void AddParcelToDal(/*ulong id,*/ ulong sender, ulong target, int Weight, int priority)
         {
             Parcel parcel = new Parcel();
             parcel.ID = dalObject.lengthParcel() + 1;
-            checkUniqeIdParcel(parcel.ID);
+            checkUniqeIdParcel(parcel.ID, dalObject);
             parcel.SenderID = sender;
             parcel.TargetID = target;
-            parcel.Weight = Weight;
-            parcel.Priority = priority;
+            parcel.Weight = (WeightCatagories) Weight;
+            parcel.Priority = (Priorities)priority;
             dalObject.AddParcel(parcel);
         }
 
         public void addDroneCharge(int stationID, int droneID)
         {
-            checkUniqeIdDroneCharge(droneID, stationID);
+            checkUniqeIdDroneCharge(droneID, stationID, dalObject);
             DroneCharge droneCharge = new DroneCharge();
             droneCharge.DroneID = droneID;
             droneCharge.StationID = stationID;
@@ -471,10 +473,10 @@ namespace BL
                 ID = p.ID,
                 Sender = sender,
                 Reciever = target,
-                weightCatagories = p.Weight,
-                priorities = p.Priority,
+                Weight = p.Weight,
+                Priorities = p.Priority,
                 PickedUp = p.PickedUp,
-                drone = drone,
+                Drone = drone,
                 Requesed = p.Requested,
                 Scheduled = p.Scheduled,
                 Delivered = p.Delivered,
@@ -763,22 +765,31 @@ namespace BL
             Math.Pow(location2.Latitude - location1.Latitude, 2) * 1.0);
         }
 
-        public bool checkUniqeIDCustomer(ulong id)
+        public void checkUniqeIDCustomer(ulong id)
         {
-            int sum = 0;
             IEnumerable<Customer> customers = dalObject.GetCustomer();
             foreach (var customer in customers)
             {
                 if (customer.ID == id)
                 {
-                    sum += 1;
+                    throw new NotUniqeID(id, typeof(Customer));
                 }
             }
-            if (sum == 1)
-                return false;
-            return false;
         }
-
+        public void checkIfCustomerWithThisID(ulong id)
+        {
+            bool check = false;
+            IEnumerable<Customer> customers = dalObject.GetCustomer();
+            foreach (var customer in customers)
+            {
+                if (customer.ID == id)
+                {
+                    check = true;
+                }
+            }
+            if (!check)
+                throw new NotExistObjWithID(id, typeof(Customer));
+        }
         public static bool CheckLongIdIsValid(ulong id)
         {
             return id > 100000000 && id < 1000000000;
