@@ -4,7 +4,6 @@ using BL;
 using DalObject;
 using System.Collections.Generic;
 
-
 namespace ConsoleUI_BL
 {
     class Program
@@ -49,8 +48,14 @@ namespace ConsoleUI_BL
                                     int latitude = Convert.ToInt32(Console.ReadLine());
                                     double Latitude = (double)latitude;
                                     LocationBL location = new LocationBL(Longitude, Latitude);
-
-                                    bL.addStation(Id, Name, location, ChargeSlots);
+                                    try
+                                    {
+                                        bL.addStation(Id, Name, location, ChargeSlots);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine($"{e}\n\n\n\n\n");
+                                    }
 
                                     break;
                                 case 2:
@@ -62,8 +67,14 @@ namespace ConsoleUI_BL
                                     string Model = Console.ReadLine();
                                     Console.WriteLine("number of station for start charging");
                                     int number = Convert.ToInt32(Console.ReadLine());
-
-                                    bL.addDrone(id, Model, weight, number);
+                                    try
+                                    {
+                                        bL.addDrone(id, Model, weight, number);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine($"{e}\n\n\n\n\n");
+                                    }
 
                                     break;
 
@@ -79,8 +90,13 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("enter the Latitude");
                                     double latitude2 = Convert.ToDouble(Console.ReadLine());
                                     LocationBL location1 = new LocationBL(longitude2, latitude2);
-
+                                    try { 
                                     bL.AddCustomer(IdCustomer, NameCustomer, Phone, location1);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine($"{e}\n\n\n\n\n");
+                                    }
 
                                     break;
                                 case 4:
@@ -92,10 +108,16 @@ namespace ConsoleUI_BL
                                     weight = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("enter the prionity : 1. Reguler,2. Fast, 3.Emergency");
                                     int priority = Convert.ToInt32(Console.ReadLine());
+                                    try { 
                                     bL.AddParcel(SenderId, RecieverId, weight, priority);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine($"{e}\n\n\n\n\n");
+                                    }
                                     break;
                                 default:
-                                    Console.WriteLine("please enter a number btween 1-4");
+                                    Console.WriteLine("please enter a number b--------------------------------------------------------etween 1-4");
                                     break;
                             }
                             break;
@@ -137,7 +159,7 @@ namespace ConsoleUI_BL
                                     break;
                             }
                             break;
-                        /*case 3:
+                        case 3:
                             Console.WriteLine("to display a station enter 1");
                             Console.WriteLine("to display a drone enter 2");
                             Console.WriteLine("to display a customer enter 3");
@@ -146,22 +168,22 @@ namespace ConsoleUI_BL
                             switch (choice)
                             {
                                 case 1:
-                                    print<Station>(dalObject.findStation(getStaionId()));
+                                    print<StationBL>(bL.GetSpecificStationBL(getStaionId()));
                                     break;
                                 case 2:
-                                    print<Drone>(dalObject.findDrone(getDroeId()));
+                                    print<DroneBL>(bL.GetSpecificDroneBL(getDroeId()));
                                     break;
                                 case 3:
-                                    print<Customer>(dalObject.findCustomer(getCustomerId()));
+                                    print<CustomerBL>(bL.GetSpecificCustomerBL(getCustomerId()));
                                     break;
                                 case 4:
-                                    DisplayObj<Parcel>(dalObject.findParcel(getParcleId()));
+                                    print<ParcelBL>(bL.GetSpecificParcelBL(getParcleId()));
                                     break;
                                 default:
                                     break;
                             }
 
-                            break;*/
+                            break;
                         case 4:
                             Console.WriteLine("to display the stations list enter 1");
                             Console.WriteLine("to display the drones list enter 2");
