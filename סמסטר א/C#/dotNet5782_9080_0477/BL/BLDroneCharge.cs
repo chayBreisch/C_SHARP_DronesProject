@@ -10,6 +10,13 @@ namespace BL
 {
     public partial class BL
     {
+
+        /// <summary>
+        /// check if the id is uniqe
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="stationId"></param>
+        /// <param name="dalObject"></param>
         public static void checkUniqeIdDroneCharge(int droneId, int stationId, IDAL.IDal dalObject)
         {
             List<DroneCharge> droneCharges = dalObject.GetDroneCharge().ToList();
@@ -19,6 +26,12 @@ namespace BL
                     throw new NotUniqeID(droneId, stationId, typeof(Station));
             });
         }
+
+        /// <summary>
+        /// add a drone charge to the bl
+        /// </summary>
+        /// <param name="stationID"></param>
+        /// <param name="droneID"></param>
         public void addDroneCharge(int stationID, int droneID)
         {
             checkUniqeIdDroneCharge(droneID, stationID, dalObject);

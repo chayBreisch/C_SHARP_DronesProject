@@ -11,7 +11,11 @@ namespace BL
 {
     public partial class BL
     {
-
+        /// <summary>
+        /// check if the id is uniqe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dalObject"></param>
         public static void checkUniqeIdCustomer(ulong id, IDAL.IDal dalObject)
         {
             List<Customer> customers = dalObject.GetCustomer().ToList();
@@ -22,6 +26,11 @@ namespace BL
             });
         }
 
+        /// <summary>
+        /// check if the id is uniqe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dalObject"></param>
         public void checkUniqeIDCustomer(ulong id)
         {
             IEnumerable<Customer> customers = dalObject.GetCustomer();
@@ -33,6 +42,14 @@ namespace BL
                 }
             }
         }
+
+        /// <summary>
+        /// add a customer to the bl
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="phone"></param>
+        /// <param name="location"></param>
         public void AddCustomer(ulong id, string name, string phone, LocationBL location)
         {
             checkUniqeIdCustomer(id, dalObject);
@@ -44,6 +61,13 @@ namespace BL
             AddCustomerToDal(id, name, phone, location);
         }
 
+        /// <summary>
+        /// add a customer to the dal
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="phone"></param>
+        /// <param name="location"></param>
         public void AddCustomerToDal(ulong id, string name, string phone, LocationBL location)
         {
             Customer customer = new Customer();
@@ -55,6 +79,10 @@ namespace BL
             dalObject.AddCustomer(customer);
         }
 
+        /// <summary>
+        /// return all the customers from the dal converted to bl
+        /// </summary>
+        /// <returns> List<CustomerBL> </returns>
         public List<CustomerBL> GetCustomersBL()
         {
             IEnumerable<Customer> customers = dalObject.GetCustomer();
@@ -66,6 +94,11 @@ namespace BL
             return customers1;
         }
 
+        /// <summary>
+        /// returns a specific customer by id from dal converted to bl
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>customerbl</returns>
         public CustomerBL GetSpecificCustomerBL(ulong id)
         {
             try
@@ -79,6 +112,11 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// convert a customer from dal to bl
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns>CustomerBL</returns>
         public CustomerBL convertDalCustomerToBl(Customer c)
         {
             List<ParcelAtCustomer> parcelSendedByCustomers = new List<ParcelAtCustomer>();
@@ -104,6 +142,12 @@ namespace BL
             };
         }
 
+        /// <summary>
+        /// update the customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="phone"></param>
         public void updateDataCustomer(ulong id, string name = null, string phone = null)
         {
             Customer customer = dalObject.GetSpecificCustomer(id);
@@ -118,6 +162,10 @@ namespace BL
             dalObject.updateCustomer(customer);
         }
 
+        /// <summary>
+        /// check if there is a customer with the id
+        /// </summary>
+        /// <param name="id"></param>
         public void checkIfCustomerWithThisID(ulong id)
         {
             bool check = false;
@@ -133,6 +181,11 @@ namespace BL
                 throw new NotExistObjWithID(id, typeof(Customer));
         }
 
+        /// <summary>
+        /// check if the check digit is good
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static bool CheckValidIdCustomer(ulong id)///////////////////לבדוק אם גדול מעשר אחרי הכפלה
         {
             int sum = 0, digit, digit2 = 0;

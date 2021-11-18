@@ -11,6 +11,12 @@ namespace BL
 {
     public partial class BL
     {
+
+        /// <summary>
+        /// check if the id is uniqe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dalObject"></param>
         public static void checkUniqeIdStation(int id, IDAL.IDal dalObject)
         {
             List<Station> stations = dalObject.GetStationByList();
@@ -21,6 +27,13 @@ namespace BL
             });
         }
 
+        /// <summary>
+        /// add a station to the bl
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="location"></param>
+        /// <param name="ChargeSlots"></param>
         public void addStation(int id, int name, LocationBL location, int ChargeSlots)
         {
             checkUniqeIdStation(id, dalObject);
@@ -32,6 +45,13 @@ namespace BL
             AddStationToDal(id, name, location, ChargeSlots);
         }
 
+        /// <summary>
+        /// add a station to the dal
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="location"></param>
+        /// <param name="ChargeSlots"></param>
         public void AddStationToDal(int id, int name, LocationBL location, int ChargeSlots)
         {
             Station station = new Station();
@@ -43,6 +63,10 @@ namespace BL
             dalObject.AddStation(station);
         }
 
+        /// <summary>
+        /// return all the stations from the dal converted to bl
+        /// </summary>
+        /// <returns>List<StationBL></returns>
         public List<StationBL> GetStationsBL()
         {
 
@@ -55,6 +79,11 @@ namespace BL
             return stations1;
         }
 
+        /// <summary>
+        /// returns a specific station by id from dal converted to bl
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Station</returns>
         public StationBL GetSpecificStationBL(int id)
         {
             try
@@ -68,6 +97,10 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// returns the station with empty chargers
+        /// </summary>
+        /// <returns>List<StationBL></returns>
         public List<StationBL> getStationWithEmptyChargers()
         {
             IEnumerable<Station> stations = dalObject.GetStation();
@@ -80,6 +113,11 @@ namespace BL
             return stations1;
         }
 
+        /// <summary>
+        /// returns if the station has empty chargers
+        /// </summary>
+        /// <param name="station"></param>
+        /// <returns>bool</returns>
         public bool checkStationIfEmptyChargers(Station station)
         {
             IEnumerable<DroneCharge> droneChargers = dalObject.GetDroneCharge();
@@ -94,6 +132,11 @@ namespace BL
             return false;
         }
 
+        /// <summary>
+        /// convert a parcel from dal to bl
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public StationBL convertDalStationToBl(Station s)
         {
             List<DroneCharge> droneChargers = dalObject.GetDroneCharge().Cast<DroneCharge>().ToList();
@@ -111,10 +154,16 @@ namespace BL
             };
         }
 
+        /// <summary>
+        /// update the station
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="chargeSlots"></param>
         public void updateDataStation(int id, int name = 0, int chargeSlots = -1)
         {
             Station station = dalObject.GetSpecificStation(id);
-            if (name != null)
+            if (name != 0)
             {
                 station.Name = name;
             }

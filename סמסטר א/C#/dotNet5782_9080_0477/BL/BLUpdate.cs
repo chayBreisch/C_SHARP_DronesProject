@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/// <summary>
+/// //////////////////////////////////////////////add commands//////////////////////////////
+/// </summary>
 namespace BL
 {
     public partial class BL

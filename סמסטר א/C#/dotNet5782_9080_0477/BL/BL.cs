@@ -17,11 +17,13 @@ namespace BL
         //############################################################
         //constructor
         //############################################################
-
+        /// <summary>
+        /// constructor of class BL
+        /// </summary>
         public BL()
         {
             droneBLList = new List<DroneBL>();
-            //IDAL.IDal dalObject = new DalObject.DalObject();
+            //get all the electric rates
             dalObject = Factory.factory("DalObject");
             double[] arrayEletric = dalObject.requestElectric();
             double electricAvailable = arrayEletric[0];
@@ -29,22 +31,29 @@ namespace BL
             double electricMidHeight = arrayEletric[2];
             double electricHeavyHeight = arrayEletric[3];
             double electricChargingRate = arrayEletric[4];
+            //for each drone we check what is the status and reboot in entries
             foreach (var drone in dalObject.GetDrone())
             {
                 DroneBL droneBL = new DroneBL { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight };
                 Parcel parcel = dalObject.GetParcelByDroneID(drone.ID);
                 Customer customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
-
-                if (!parcel.Equals(null))
+                //check if the drone as a parcel
+                if (parcel.SenderID != 0)
+                    //if (!parcel.Equals(null))
                 {
+                    //check if the parcel of the drone is scheduled and not delivered
                     if (!parcel.Scheduled.Equals(null) && parcel.Delivered.Equals(null))
                     {
                         droneBL.DroneStatus = DroneStatus.Delivery;
+
+                        //check if the parcel of the drone is scheduled and not delivered and not picked up
                         if (parcel.PickedUp.Equals(null))
                         {
                             Station station = findClosestStation(new LocationBL(customerSender.Latitude, customerSender.Longitude));
                             droneBL.Location = new LocationBL(station.Latitude,station.Longitude);
                         }
+
+                        //check if the parcel of the drone is scheduled and not delivered and picked up
                         else
                         {
                             droneBL.Location.Longitude = customerSender.Longitude;
@@ -60,10 +69,14 @@ namespace BL
                         droneBL.BatteryStatus = rand.Next(minEle, 100);
                     }
                 }
+
+                //check if drone is not in delivery
                 if (droneBL.DroneStatus != DroneStatus.Delivery)
                 {
                     droneBL.DroneStatus = (DroneStatus)rand.Next(0, 2);
                 }
+
+                //check if drone is in maintenance
                 if (droneBL.DroneStatus == DroneStatus.Maintenance)
                 {
                     int length = dalObject.lengthStation();
@@ -71,6 +84,8 @@ namespace BL
                     droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
                     droneBL.BatteryStatus = rand.Next(0, 21);
                 }
+
+                //check if drone is in available
                 else if (droneBL.DroneStatus == DroneStatus.Available)
                 {
                     List<Parcel> parcelBLsWithSuppliedParcel = dalObject.GetParcel().ToList().FindAll(p => !p.Delivered.Equals(null));
@@ -87,32 +102,32 @@ namespace BL
         }
 
 
-        
+
         //#############################################################
         //check validaion id
         //#############################################################
-        
+
 
         //#############################################################
         //Add functions
         //#############################################################
-                
-       
+
+
         //#############################################################
         //Get functions from BL
         //#############################################################
-       
-     
+
+
         //#############################################################
         //Get specific item functions
         //#############################################################
-        
+
 
         //#############################################################
         //convert from IDAL.DO to IBL.BO functions
         //#############################################################
-       
-       
+
+
         //#############################################################
         //update functions
         //#############################################################
@@ -121,14 +136,23 @@ namespace BL
         //#############################################################
         //help functions
         //#############################################################
-
+        /// <summary>
+        ///calsulate the electricity that a drone needs to get from one location to another
+        /// <param name="locatin1"></param>
+        /// <param name="location2"></param>
+        /// <param name="weight"></param>
+        /// <returns>double</returns>
         public double calcElectry(LocationBL locatin1, LocationBL location2, int weight)
         {
             double distance1 = distance(locatin1, location2);
             return distance1 * dalObject.requestElectric()[weight];
         }
-       
-
+        /// <summary>
+        /// return the stations with the minimum distance from the location and with empty slots
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns>Station</returns>
+        //return the stations with the minimum distance from the location and with empty slots
         public Station stationWithMinDisAndEmptySlots(LocationBL location)////////////////////////////
         {
             double minDis = -1;
@@ -147,6 +171,11 @@ namespace BL
             return sendStation;
         }
 
+        /// <summary>
+        /// return the closest station to the location
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns>Station</returns>
         public Station findClosestStation(LocationBL location)
         {
             double minDis = -1;
@@ -171,6 +200,12 @@ namespace BL
              Math.Pow(y2 - y1, 2) * 1.0);
          }*/
 
+        /// <summary>
+        /// calculate the distance between to locations
+        /// </summary>
+        /// <param name="location1"></param>
+        /// <param name="location2"></param>
+        /// <returns>double</returns>
         static double distance(LocationBL location1, LocationBL location2)
         {
             return Math.Sqrt(Math.Pow(location2.Longitude - location1.Longitude, 2) +
@@ -178,7 +213,11 @@ namespace BL
         }
 
         
-        
+        /// <summary>
+        /// check the range of the id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>bool</returns>
         public static bool CheckLongIdIsValid(ulong id)
         {
             return id > 100000000 && id < 1000000000;

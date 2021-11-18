@@ -11,6 +11,11 @@ namespace BL
 {
     public partial class BL
     {
+        /// <summary>
+        /// check if the id is uniqe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dalObject"></param>
         public static void checkUniqeIdDrone(int id, IDAL.IDal dalObject)
         {
             List<Drone> drones = dalObject.GetDrone().ToList();
@@ -21,6 +26,13 @@ namespace BL
             });
         }
 
+        /// <summary>
+        /// add a drone to the bl
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <param name="maxWeight"></param>
+        /// <param name="stationID"></param>
         public void addDrone(int id, string model, int maxWeight, int stationID)
         {
             checkUniqeIdDrone(id, dalObject);
@@ -40,6 +52,12 @@ namespace BL
             droneBLList.Add(droneBL);
         }
 
+        /// <summary>
+        /// add a drone to the dal
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <param name="maxWeight"></param>
         public void AddDroneToDal(int id, string model, int maxWeight)
         {
 
@@ -50,6 +68,10 @@ namespace BL
             dalObject.AddDrone(drone);
         }
 
+        /// <summary>
+        /// return all the drones from the dal converted to bl
+        /// </summary>
+        /// <returns>List<DroneBL>returns>
         public List<DroneBL> GetDronesBL()
         {
 
@@ -62,6 +84,11 @@ namespace BL
             return drone1;
         }
 
+        /// <summary>
+        /// returns a specific drone by id from dal converted to bl
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>DroneBL</returns>
         public DroneBL getSpecificDroneBLFromList(int id)
         {
             try
@@ -74,22 +101,41 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// returns a specific drone by id from dal converted to bl
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>DroneBL</returns>
         public DroneBL GetSpecificDroneBL(int id)
         {
             return getSpecificDroneBLFromList(id);
         }
 
+        /// <summary>
+        /// convert a drone from dal to bl
+        /// </summary>
+        /// <param name="d"></param>
+        /// <returns>DroneBL</returns>
         public DroneBL convertDalDroneToBl(Drone d)
         {
             return GetSpecificDroneBL(d.ID);
         }
 
+        /// <summary>
+        /// update the drone
+        /// </summary>
+        /// <param name="drone"></param>
         public void updateDrone(DroneBL drone)
         {
             int index = droneBLList.FindIndex(d => d.ID == drone.ID);
             droneBLList[index] = drone;
         }
 
+        /// <summary>
+        /// update the drone model
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
         public void updateDataDroneModel(int id, string model)
         {
             DroneBL droneBl = getSpecificDroneBLFromList(id);

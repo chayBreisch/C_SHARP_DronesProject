@@ -11,6 +11,11 @@ namespace BL
 {
     public partial class BL
     {
+        /// <summary>
+        /// check if the id is uniqe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dalObject"></param>
         public static void checkUniqeIdParcel(int id, IDAL.IDal dalObject)
         {
             List<Parcel> parcels = dalObject.GetParcelByList();
@@ -21,6 +26,13 @@ namespace BL
             });
         }
 
+        /// <summary>
+        /// add a parcel to the bl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="target"></param>
+        /// <param name="Weight"></param>
+        /// <param name="priority"></param>
         public void AddParcel(ulong sender, ulong target, int Weight, int priority)
         {
             ParcelBL parcel = new ParcelBL();
@@ -42,6 +54,13 @@ namespace BL
 
         }
 
+        /// <summary>
+        /// add a parcel to the dal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="target"></param>
+        /// <param name="Weight"></param>
+        /// <param name="priority"></param>
         public void AddParcelToDal(/*ulong id,*/ ulong sender, ulong target, int Weight, int priority)
         {
             Parcel parcel = new Parcel();
@@ -54,6 +73,10 @@ namespace BL
             dalObject.AddParcel(parcel);
         }
 
+        /// <summary>
+        /// return all the parcels from the dal converted to bl
+        /// </summary>
+        /// <returns>List<ParcelBL> </returns>
         public List<ParcelBL> GetParcelsBL()
         {
 
@@ -65,6 +88,12 @@ namespace BL
             }
             return parcel1;
         }
+
+        /// <summary>
+        /// returns a specific parcel by id from dal converted to bl
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Parcel</returns>
         public ParcelBL GetSpecificParcelBL(int id)
         {
             try
@@ -77,6 +106,10 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// return parcels that are not connected to a drone
+        /// </summary>
+        /// <returns> List<Parcel></returns>
         public List<Parcel> getParcelsWithoutoutDrone()
         {
             IEnumerable<Parcel> parcels = dalObject.GetParcel();
@@ -91,7 +124,11 @@ namespace BL
             return parcels1;
         }
 
-
+        /// <summary>
+        /// convert a parcel from dal to bl
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns>ParcelBL</returns>
         public ParcelBL convertDalToParcelBL(Parcel p)
         {
             CustomerBL sender = convertDalCustomerToBl(dalObject.GetSpecificCustomer(p.SenderID));
@@ -112,6 +149,11 @@ namespace BL
             };
         }
 
+        /// <summary>
+        /// returns the status of the parcel
+        /// </summary>
+        /// <param name="parcel"></param>
+        /// <returns>ParcelStatus</returns>
         public ParcelStatus findParcelStatus(Parcel parcel)
         {
             if (parcel.Requested.Equals(null))
