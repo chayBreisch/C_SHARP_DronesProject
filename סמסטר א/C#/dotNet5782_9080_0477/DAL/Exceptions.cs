@@ -33,14 +33,14 @@ namespace DAL
         {
 
         }
-        public NotUniqeID(int droneId,int stationId, Type type) : base($"there is a {type.GetType()} that is charging {droneId} in {stationId} station")
+        public NotUniqeID(int droneId, int stationId, Type type) : base($"there is a {type.GetType()} that is charging {droneId} in {stationId} station")
         {
 
         }
     }
     public class NotExistObjWithID : Exception
     {
-        public NotExistObjWithID(int id, Type type): base($"there is no {type} with ")
+        public NotExistObjWithID(int id, Type type) : base($"there is no {type} with ")
         {
 
         }
@@ -49,6 +49,15 @@ namespace DAL
         {
 
         }
+
+    }
+    public class NotEmptyChargeSlots : Exception
+    {
+        public NotEmptyChargeSlots(int id) : base($"you can't charge your drone in {id} station")
+        {
+
+        }
+
     }
 
 
