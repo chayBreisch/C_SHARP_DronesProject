@@ -37,12 +37,12 @@ namespace BL
                 DroneBL droneBL = new DroneBL { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight };
                 Parcel parcel = dalObject.GetParcelByDroneID(drone.ID);
                 Customer customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
-                //check if the drone as a parcel
+                //check if the drone has a parcel
                 if (parcel.SenderID != 0)
                     //if (!parcel.Equals(null))
                 {
                     //check if the parcel of the drone is scheduled and not delivered
-                    if (!parcel.Scheduled.Equals(null) && parcel.Delivered.Equals(null))
+                    if (parcel.Scheduled != new DateTime() && parcel.Delivered == new DateTime())
                     {
                         droneBL.DroneStatus = DroneStatus.Delivery;
 
@@ -88,7 +88,7 @@ namespace BL
                 //check if drone is in available
                 else if (droneBL.DroneStatus == DroneStatus.Available)
                 {
-                    List<Parcel> parcelBLsWithSuppliedParcel = dalObject.GetParcel().ToList().FindAll(p => !p.Delivered.Equals(null));
+                    List<Parcel> parcelBLsWithSuppliedParcel = dalObject.GetParcel().ToList().FindAll(p => p.Delivered != new DateTime());
                     ParcelBL parcelBL = convertDalToParcelBL(parcelBLsWithSuppliedParcel[rand.Next(0, parcelBLsWithSuppliedParcel.Count)]);
                     Customer customer = dalObject.GetSpecificCustomer(parcelBL.Sender.ID);
                     droneBL.Location = new LocationBL(customer.Latitude, customer.Longitude);

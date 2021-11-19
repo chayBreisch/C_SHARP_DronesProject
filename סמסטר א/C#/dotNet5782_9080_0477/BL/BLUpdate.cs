@@ -93,7 +93,7 @@ namespace BL
             currentParcel = new Parcel() { Weight = 0 };
             foreach (var parcel in parcels)
             {
-                if (parcel.Requested.Equals(null))
+                if (parcel.Requested == new DateTime())
                     break;
                 customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
                 customerCurrent = dalObject.GetSpecificCustomer(currentParcel.SenderID);
@@ -143,7 +143,7 @@ namespace BL
             if (droneBL.DroneStatus == DroneStatus.Delivery)
             {
                 parcel = dalObject.GetSpecificParcelByDroneID(droneBL.ID);
-                if (!parcel.PickedUp.Equals(null) || parcel.Scheduled.Equals(null))
+                if (parcel.PickedUp != new DateTime()|| parcel.Scheduled == new DateTime())
                 {
                     throw new Exception("can't collect parcel");
                 }
@@ -161,7 +161,7 @@ namespace BL
         {
             DroneBL droneBL = getSpecificDroneBLFromList(id);
             Parcel parcel = dalObject.GetSpecificParcelByDroneID(id);
-            if (parcel.PickedUp.Equals(null) && !parcel.Delivered.Equals(null))
+            if (parcel.PickedUp == new DateTime() && parcel.Delivered != new DateTime())
             {
                 throw new Exception("can't supply parcel");
             }

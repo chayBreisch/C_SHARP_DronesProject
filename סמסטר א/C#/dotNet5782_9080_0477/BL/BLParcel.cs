@@ -156,11 +156,11 @@ namespace BL
         /// <returns>ParcelStatus</returns>
         public ParcelStatus findParcelStatus(Parcel parcel)
         {
-            if (parcel.Requested.Equals(null))
+            if (parcel.Requested == new DateTime())
                 return (ParcelStatus)0;
-            else if (parcel.Scheduled.Equals(null))
+            else if (parcel.Scheduled == new DateTime())
                 return (ParcelStatus)1;
-            else if (parcel.PickedUp.Equals(null))
+            else if (parcel.PickedUp == new DateTime())
                 return (ParcelStatus)2;
             return (ParcelStatus)3;
         }
