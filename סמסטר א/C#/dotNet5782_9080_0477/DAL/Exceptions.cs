@@ -59,6 +59,13 @@ namespace DAL
         }
 
     }
+    public class CanNotUpdateDrone : Exception
+    {
+        public CanNotUpdateDrone(int id, string str) : base($"{id}: {str}")
+        {
 
+        }
+
+    }
 
 }
