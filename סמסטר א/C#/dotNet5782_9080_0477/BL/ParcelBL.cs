@@ -26,8 +26,8 @@ namespace IBL
 
             public override string ToString()
             {
-                return $"ID: {ID}, senderId: {Sender.ID}, recieverId: {Reciever.ID},\nWeight: {Weight}, Priorities: {Priorities}" +
-                    $"Drone: {Drone}, Requesed: {Requesed}, Scheduled: {Scheduled}, PickedUp: {PickedUp}, Delivered: {Delivered}";
+                return $"ID: {ID}, senderId: {Sender.ID}, recieverId: {Reciever.ID},Weight: {Weight}, Priorities: {Priorities}" +
+                    $"Drone: {Drone}, Requesed: {Requesed}, Scheduled: {Scheduled}, PickedUp: {PickedUp}, Delivered: {Delivered}\n\n";
 
 
             }
