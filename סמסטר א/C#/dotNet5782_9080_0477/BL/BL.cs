@@ -54,6 +54,7 @@ namespace BL
                         }
 
                         //check if the parcel of the drone is scheduled and not delivered and picked up
+                        //לבדוק מה בנות עשו
                         else
                         {
                             droneBL.Location.Longitude = customerSender.Longitude;
@@ -89,13 +90,16 @@ namespace BL
                 else if (droneBL.DroneStatus == DroneStatus.Available)
                 {
                     List<Parcel> parcelBLsWithSuppliedParcel = dalObject.GetParcel().ToList().FindAll(p => p.Delivered != new DateTime());
-                    ParcelBL parcelBL = convertDalToParcelBL(parcelBLsWithSuppliedParcel[rand.Next(0, parcelBLsWithSuppliedParcel.Count)]);
-                    Customer customer = dalObject.GetSpecificCustomer(parcelBL.Sender.ID);
-                    droneBL.Location = new LocationBL(customer.Latitude, customer.Longitude);
-                    Station station1 = stationWithMinDisAndEmptySlots(droneBL.Location);
-                    double electry = calcElectry(new LocationBL(station1.Longitude, station1.Latitude), droneBL.Location, 0);
-                    int minElectric = (int)Math.Round(electry);
-                    droneBL.BatteryStatus = rand.Next(minElectric, 100);
+                    if (parcelBLsWithSuppliedParcel.Count > 0)
+                    {
+                        ParcelBL parcelBL = convertDalToParcelBL(parcelBLsWithSuppliedParcel[rand.Next(0, parcelBLsWithSuppliedParcel.Count)]);
+                        Customer customer = dalObject.GetSpecificCustomer(parcelBL.Sender.ID);
+                        droneBL.Location = new LocationBL(customer.Latitude, customer.Longitude);
+                        Station station1 = stationWithMinDisAndEmptySlots(droneBL.Location);
+                        double electry = calcElectry(new LocationBL(station1.Longitude, station1.Latitude), droneBL.Location, 0);
+                        int minElectric = (int)Math.Round(electry);
+                        droneBL.BatteryStatus = rand.Next(minElectric, 100);
+                    }
                 }
                 droneBLList.Add(droneBL);
             }

@@ -54,7 +54,7 @@ namespace IBL
                 }
 
 
-                return $"customer {Name} : {ID}, {Phone}, Location : {Location}," +
+                return $"customer ID: {ID}, Name : {Name}, Phone: {Phone}, Location : {Location}," +
                     $"parcelsSentedByCustomer: {parcelSentedByCustomer}, parcelsSentedToCustomer: {parcelSentedToCustomer} ";
             }
 
