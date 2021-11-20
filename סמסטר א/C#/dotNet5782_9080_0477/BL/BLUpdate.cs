@@ -55,7 +55,6 @@ namespace BL
                 droneCharge.StationID = station.ID;
                 dalObject.AddDroneCharge(droneCharge);
             }
-
         }
 
         /// <summary>

@@ -139,7 +139,14 @@ namespace ConsoleUI_BL
                                     int id = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("enter new Model");
                                     string name = Console.ReadLine();
-                                    bL.updateDataDroneModel(id, name);
+                                    try
+                                    {
+                                        bL.updateDataDroneModel(id, name);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine($"{e}\n\n\n\n\n");
+                                    }
                                     break;
                                 case 2:
                                     Console.WriteLine("enter id");
@@ -164,7 +171,14 @@ namespace ConsoleUI_BL
                                     name = Console.ReadLine();
                                     Console.WriteLine("enter phone");
                                     string phone = Console.ReadLine();
-                                    bL.updateDataCustomer(IdCustomer, name, phone);
+                                    try
+                                    {
+                                        bL.updateDataCustomer(IdCustomer, name, phone);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine($"{e}\n\n\n\n\n");
+                                    }
                                     break;
                                 case 4:
                                     Console.WriteLine("enter id");
@@ -265,7 +279,7 @@ namespace ConsoleUI_BL
                                     print<ParcelBL>(bL.GetParcelsBL());
                                     break;
                                 case 5:
-                                    //DisplayNotBelongedParcels(dalObject.GetParcel());
+                                    showParcelsWithoutoutDrone();
                                     break;
                                 case 6:
                                     //displayStationsWithEmptyChargingSlots(dalObject.GetStations(), dalObject.GetDroneCharges());
@@ -308,20 +322,19 @@ namespace ConsoleUI_BL
             List<ParcelBL> parcels = bl.GetParcelsBL();
             foreach (var parcel in parcels)
             {
-                if (parcel.ID == 0)
-                {
-                    Console.WriteLine(parcel.ToString());
+                if (parcel.Drone == null)
+                {   
                     Console.WriteLine(parcel);
                 }
             }
         }
-       /* public static void showStationWithEmptyChargers()
+        /*public static void showStationWithEmptyChargers()
         {
             BL.BL bl = new BL.BL();
             int numOfChargers = 0;
-            List<StationBL> stations = bl.GetStationBL();
+            List<StationBL> stations = bl.GetStationsBL();
             //List< DroneCharge> droneChargers = bl.GetDroneCharge();
-            for (int i = 0; i < stations.Length; i++)
+            for (int i = 0; i < stations.Count; i++)
             {
                 for (int j = 0; j < droneChargers.Length; j++)
                 {

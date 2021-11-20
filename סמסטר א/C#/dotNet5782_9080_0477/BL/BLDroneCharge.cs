@@ -25,7 +25,7 @@ namespace BL
             droneCharges.ForEach(d =>
             {
                 if (d.DroneID == droneId && d.StationID == stationId)
-                    throw new NotUniqeID(droneId, stationId, typeof(Station));
+                    throw new NotUniqeID(droneId, stationId, typeof(DroneCharge));
             });
         }
 
