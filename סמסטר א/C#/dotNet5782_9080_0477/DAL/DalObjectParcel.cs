@@ -47,7 +47,13 @@ namespace DalObject
         }
         public Parcel GetParcelByDroneID(int id)
         {
+            try { 
             return DataSource.parcels.Find(parcel => parcel.DroneID == id);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new Exceptions(id);
+            }
         }
         public int lengthParcel()
         {

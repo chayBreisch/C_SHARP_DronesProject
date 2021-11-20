@@ -11,6 +11,7 @@ namespace ConsoleUI_BL
         //האם צריך לבדוק משקל קטן מ 0
         //באיזה ערך לאתחל את המיקום?
         //אם אני רוצה לראות חבילה איך אני עושה את זה?
+        //לבדוק אם זה בסדר שאני שולחת ArgumentNullException
 
 
         static void Main(string[] args)
@@ -146,7 +147,14 @@ namespace ConsoleUI_BL
                                     int nameOfStation = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("enter number of charge slots");
                                     int chargeSlots = Convert.ToInt32(Console.ReadLine());
-                                    bL.updateDataStation(id, nameOfStation, chargeSlots);
+                                    try
+                                    {
+                                        bL.updateDataStation(id, nameOfStation, chargeSlots);
+                                    }
+                                    catch(Exception e)
+                                    {
+                                        Console.WriteLine($"{e}\n\n\n\n\n");
+                                    }
                                     break;
                                 case 3:
                                     Console.WriteLine("enter id");

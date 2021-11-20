@@ -26,13 +26,28 @@ namespace DalObject
 
         public DroneCharge getSpecificDroneChargeByStationID(int id)
         {
-            return DataSource.droneChargers.First(droneCharge => droneCharge.StationID == id);
+            try
+            {
+                return DataSource.droneChargers.Find(droneCharge => droneCharge.StationID == id);
+            }
+
+            catch (ArgumentNullException e)
+            {
+                throw new Exceptions(id);
+            }
 
         }
 
         public DroneCharge getSpecificDroneChargeByDroneID(int id)
         {
-            return DataSource.droneChargers.First(droneCharge => droneCharge.DroneID == id);
+            try
+            {
+                return DataSource.droneChargers.Find(droneCharge => droneCharge.DroneID == id);
+                }
+            catch (ArgumentNullException e)
+            {
+                throw new Exceptions(id);
+            }
         }
 
         public void removeDroneCharge(DroneCharge droneCharge)
@@ -42,12 +57,26 @@ namespace DalObject
 
         public int getIndexOfDroneChargeByStationID(int id)
         {
-            return DataSource.droneChargers.FindIndex(p => p.StationID == id);
+            try
+            {
+                return DataSource.droneChargers.FindIndex(p => p.StationID == id);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new Exceptions(id);
+            }
         }
 
         public int getIndexOfDroneChargeByDroneID(int id)
         {
-            return DataSource.droneChargers.FindIndex(p => p.DroneID == id);
+            try
+            {
+                return DataSource.droneChargers.FindIndex(p => p.DroneID == id);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new Exceptions(id);
+            }
         }
 
         public void AddDroneCharge(DroneCharge droneCharge)
