@@ -12,7 +12,8 @@ namespace ConsoleUI_BL
         //באיזה ערך לאתחל את המיקום?
         //אם אני רוצה לראות חבילה איך אני עושה את זה?
         //לבדוק אם זה בסדר שאני שולחת ArgumentNullException
-
+        //אף פעם אין מספיק בטריה בשביל לשלוח להטענה
+        //כשמוסיפים רחפן באיזה מצב הוא צריך להיות
 
         static void Main(string[] args)
         {
@@ -168,8 +169,16 @@ namespace ConsoleUI_BL
                                 case 4:
                                     Console.WriteLine("enter id");
                                     id = Convert.ToInt32(Console.ReadLine());
-                                    bL.updateSendDroneToCharge(id);
+                                    try
+                                    {
+                                        bL.updateSendDroneToCharge(id);
+                                    }
+                                    catch(Exception e)
+                                    {
+                                        Console.WriteLine(e);
+                                    }
                                     break;
+
                                 default:
                                     break;
                             }
