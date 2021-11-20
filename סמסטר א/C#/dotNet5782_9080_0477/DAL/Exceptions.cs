@@ -51,21 +51,27 @@ namespace DAL
         }
 
     }
-    public class NotEmptyChargeSlots : Exception
+/*    public class NotEmptyChargeSlots : Exception
     {
         public NotEmptyChargeSlots(int id) : base($"you can't charge your drone in {id} station")
         {
 
         }
 
-    }
-    public class CanNotUpdateDrone : Exception
+    }*/
+    /*public class CanNotUpdateDrone : Exception
     {
         public CanNotUpdateDrone(int id, string str) : base($"{id}: {str}")
         {
 
         }
 
-    }
+    }*/
+    /*public class OutOfRange : Exception
+    {
+        public OutOfRange(string str) : base($"{str} ou of range")
+        {
 
+        }
+    }*/
 }

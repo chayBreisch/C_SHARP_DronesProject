@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
+using static BL.ExceptionsBL;
 
 namespace IBL
 {
@@ -11,10 +11,40 @@ namespace IBL
     {
         public class DroneBL
         {
-            public int ID { get; set; }
+            public DroneBL()
+            {
+                battery = 100;
+            }
+            private double battery { get; set; }
+            private int Id { get; set; }
+
+            public int ID
+            {
+                get
+                {
+                    return Id;
+                }
+                set
+                {
+                    if (value < 0)
+                        throw new OutOfRange("drone id");
+                    Id = value;
+                }
+            }
             public string Model { get; set; }
-            public WeightCatagories Weight { get; set; }
-            public double BatteryStatus { get; set; }
+            public IDAL.DO.WeightCatagories Weight { get; set; }
+            public double BatteryStatus
+            { 
+                get
+                { 
+                    return battery; 
+                }
+                set
+                {
+                    if (value < 0 || value > 100)
+                        throw new OutOfRange("battry");
+                }
+            }
             public DroneStatus DroneStatus { get; set; }
             public ParcelInDelivery parcelInDelivery { get; set; }
             public LocationBL Location { get; set; }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
+using static BL.ExceptionsBL;
+
 namespace IBL
 {
     namespace BO
@@ -11,8 +13,20 @@ namespace IBL
         public class ParcelBL
         {
             public enum ParcelStatus { Requesed, Scheduled, PickedUp, Delivered }
+            private int Id { get; set; }
 
-            public int ID { get; set; }
+            public int ID {
+                get 
+                {
+                    return Id;
+                }
+                set
+                {
+                    if (value < 0)
+                        throw new OutOfRange("parcel id");
+                    Id = value;
+                }
+            }
             public CustomerBL Sender { get; set; }
             public CustomerBL Reciever { get; set; }
             public WeightCatagories Weight { get; set; }

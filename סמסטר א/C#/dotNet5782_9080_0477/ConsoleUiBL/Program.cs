@@ -8,6 +8,9 @@ namespace ConsoleUI_BL
 {
     class Program
     {
+        //האם צריך לבדוק משקל קטן מ 0
+        //באיזה ערך לאתחל את המיקום?
+        //אם אני רוצה לראות חבילה איך אני עושה את זה?
 
 
         static void Main(string[] args)
@@ -56,7 +59,6 @@ namespace ConsoleUI_BL
                                     {
                                         Console.WriteLine($"{e}\n\n\n\n\n");
                                     }
-
                                     break;
                                 case 2:
                                     Console.WriteLine("enter id");
@@ -265,19 +267,15 @@ namespace ConsoleUI_BL
                             Console.WriteLine("input not valid");
                             break;
                     }
-
-
-
-
                 } while (choices != 5);
-
-
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
         }
+
+
         public static void print<T>(List<T> array)
         {
             foreach (var item in array)
@@ -286,46 +284,7 @@ namespace ConsoleUI_BL
             }
         }
 
-        /*namespace ConsoleUI
-        {
-            class Program
-            {
-                static void Main(string[] args)
-                {
-                    BL.BL bL = new BL.BL();
-                    DalObject.DataSource.Initialize();
-                    int choice = 0;
-                    while (choice != 5)
-                    {
-                        Console.WriteLine("to add enter 1:" +
-                            "\nto update enter 2: " +
-                            "\nto show a specific one enter 3: " +
-                            "\nto show list enter 4: " +
-                            "\nto exit enter 5:  ");
-                        choice = Convert.ToInt32(Console.ReadLine());
-                        switch (choice)
-                        {
-                            case 1:
-                                optionAdd();
-                                break;
-                            case 2:
-                                updateOption();
-                                break;
-                            case 3:
-                                showOneItem();
-                                break;
-                            case 4:
-                                showAllItems();
-                                break;
-                            case 5:
-                                Console.WriteLine("you wanted to exit.....\nBye Bye");
-                                break;
-                            default:
-                                Console.WriteLine("not a good choice try again");
-                                break;
-                        }
-                    }
-                }*/
+       
         public static void showParcelsWithoutoutDrone()
         {
             BL.BL bl = new BL.BL();

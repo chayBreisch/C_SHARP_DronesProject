@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using DAL;
 using IDAL.DO;
 using IBL.BO;
+using static BL.ExceptionsBL;
+
 namespace BL
 {
     public partial class BL

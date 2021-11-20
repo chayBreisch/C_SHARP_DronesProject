@@ -73,9 +73,7 @@ namespace DalObject
                 Parcel parcel = new Parcel();
                 parcel.ID = parcels.Count + 1;
                 parcel.SenderID = customers[rand.Next(0, customers.Count)].ID;
-                parcel.TargetID = customers[rand.Next(0, customers.Count)].ID;/*
-                parcel.SenderID = (ulong)(rand.Next(1, 50) % (parcels.Count+1));
-                parcel.TargetID = (ulong)(rand.Next(1, 50) % (parcels.Count + 1));*/
+                parcel.TargetID = customers[rand.Next(0, customers.Count)].ID;
                 parcel.Weight = (WeightCatagories)(rand.Next() %3);
                 parcel.Priority = (Priorities)(rand.Next() % 3);
                 parcel.Requested = new DateTime();

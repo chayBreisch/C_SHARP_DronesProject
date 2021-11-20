@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
-
+using static BL.ExceptionsBL;
 
 namespace IBL
 {
@@ -12,26 +12,23 @@ namespace IBL
     {
         public class CustomerBL
         {
-            /*private ulong id;
+            private ulong Id;
             public ulong ID
             {
                 get
-                { return id; }
+                { return Id; }
                 set
                 {
-                    if (BL.BL.CheckLongIdIsValid(value) && BL.BL.CheckValidIdCustomer(value) *//*&& BL.BL.checkUniqeIDCustomer(value)*//*)
-                        id = value;
+                    if (BL.BL.CheckLongIdIsValid(value)/* && BL.BL.CheckValidIdCustomer(value)*//* && BL.BL.checkUniqeIDCustomer(value)*/)
+                        Id = value;
                     else
                     {
-                        throw new FormatException("not valid id");
+                        throw new OutOfRange("customer id");
                     }
                 }
-            }*/
-            public ulong ID { get; set; }
+            }
             public string Name { get; set; }
             public string Phone { get; set; }
-
-
             public LocationBL Location { get; set; }
             public List<ParcelAtCustomer> parcelSendedByCustomer { get; set; }
             public List<ParcelAtCustomer> parcelSendedToCustomer { get; set; }
