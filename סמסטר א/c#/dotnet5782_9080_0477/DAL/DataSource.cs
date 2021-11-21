@@ -7,16 +7,16 @@ using IDAL.DO;
 
 namespace DalObject
 {
-   
+
     public struct DataSource
     {
         public struct Config
         {
-            public static int Available = 10;
-            public static int LightHeight = 20;
-            public static int MidHeight = 30;
-            public static int HeavyHeight = 40;
-            public static int ChargingRate = 50;
+            public static double Available = 0.1;
+            public static double LightHeight = 0.2;
+            public static double MidHeight = 0.3;
+            public static double HeavyHeight = 0.4;
+            public static double ChargingRate = 0.5;
             /*public bool Available { get; set; }
             public int LightHeight { get; set; }
             public int HeavyHeight { get; set; }
@@ -26,20 +26,26 @@ namespace DalObject
         internal static List<Drone> drones = new List<Drone>();
         internal static List<Station> stations = new List<Station>();
         internal static List<Customer> customers = new List<Customer>();
-        internal static List<Parcel> parcels =  new List<Parcel>();
+        internal static List<Parcel> parcels = new List<Parcel>();
         internal static List<DroneCharge> droneChargers = new List<DroneCharge>();
-
+        public static DateTime randomDay()
+        {
+            Random gen = new Random();
+            DateTime start = new DateTime(1995, 1, 1);
+            int range = (DateTime.Today - start).Days;
+            return start.AddDays(gen.Next(range));
+        }
         public static void Initialize()
         {
             Random rand = new Random();
-            int r = rand.Next(2,5);
+            int r = rand.Next(2, 5);
             for (int i = 0; i < r; i++)
             {
                 Station station = new Station();
                 station.ID = stations.Count + 1;
                 station.Name = stations.Count + 1;
-                station.Latitude = rand.Next();
-                station.Longitude = rand.Next();
+                station.Latitude = rand.Next() % 10;
+                station.Longitude = rand.Next() % 10;
                 station.ChargeSlots = rand.Next(300);
                 stations.Add(station);
             }
@@ -63,8 +69,8 @@ namespace DalObject
                 customer.ID = (ulong)rand.Next(111111111, 999999999);
                 customer.Name = $"customer{i}";
                 customer.Phone = $"customer{rand.Next(111111111, 999999999)}";
-                customer.Latitude = rand.Next();
-                customer.Longitude = rand.Next();
+                customer.Latitude = rand.Next() % 10;
+                customer.Longitude = rand.Next() % 10;
                 customers.Add(customer);
             }
             r = rand.Next(10, 15);
@@ -74,17 +80,17 @@ namespace DalObject
                 parcel.ID = parcels.Count + 1;
                 parcel.SenderID = customers[rand.Next(0, customers.Count)].ID;
                 parcel.TargetID = customers[rand.Next(0, customers.Count)].ID;
-                parcel.Weight = (WeightCatagories)(rand.Next() %3);
+                parcel.Weight = (WeightCatagories)(rand.Next() % 3);
                 parcel.Priority = (Priorities)(rand.Next() % 3);
-                parcel.Requested = new DateTime();
+                parcel.Requested = randomDay();
                 parcel.DroneID = rand.Next() % (parcels.Count + 1);
-                parcel.Scheduled = new DateTime();
-                parcel.PickedUp = new DateTime();
-                parcel.Delivered = new DateTime();
+                parcel.Scheduled = randomDay();
+                parcel.PickedUp = randomDay();
+                parcel.Delivered = randomDay();
                 parcels.Add(parcel);
 
             }
-        }
 
+        }
     }
 }
