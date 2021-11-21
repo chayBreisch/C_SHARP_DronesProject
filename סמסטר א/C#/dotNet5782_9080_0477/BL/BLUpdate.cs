@@ -100,7 +100,7 @@ namespace BL
         /// connect a parcel to the drone
         /// </summary>
         /// <param name="id"></param>
-        public void updateConnectParcelToDrone(int id)////////////////////////////////////לנסות לייעל
+        public void updateConnectParcelToDrone(int id)
         {
             DroneBL droneBL = getSpecificDroneBLFromList(id);
             if (droneBL.DroneStatus != DroneStatus.Available)
@@ -169,13 +169,15 @@ namespace BL
         {
             DroneBL droneBL = getSpecificDroneBLFromList(id);
             Parcel parcel = new Parcel();
+            parcel = dalObject.GetSpecificParcelByDroneID(droneBL.ID);
+            if (parcel.DroneID == 0)
+                throw new CanNotUpdateDrone(id, "drone is didn't connect to a parcel");
             if (droneBL.DroneStatus == DroneStatus.Delivery)
             {
-                parcel = dalObject.GetSpecificParcelByDroneID(droneBL.ID);
                 //check if can collect the parcel
-                if (parcel.PickedUp != new DateTime() || parcel.Scheduled == new DateTime())
+                if (parcel.PickedUp != new DateTime())
                 {
-                    throw new CanNotUpdateDrone(id, "can't collect parcel because parcel is picked up or didn't scheduled");
+                    throw new CanNotUpdateDrone(id, "can't collect parcel because parcel is picked up");
                 }
 
             }
