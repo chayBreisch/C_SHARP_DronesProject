@@ -20,11 +20,8 @@ namespace BL
         public static void checkUniqeIdStation(int id, IDAL.IDal dalObject)
         {
             List<Station> stations = dalObject.GetStationByList();
-            stations.ForEach(s =>
-            {
-                if (s.ID == id)
-                    throw new NotUniqeID(id, typeof(Station));
-            });
+            if (stations.Any(s => s.ID == id))
+                throw new NotUniqeID(id, typeof(Station));
         }
 
         /// <summary>
@@ -172,8 +169,6 @@ namespace BL
                 station.ChargeSlots = chargeSlots;
             }
             dalObject.updateStation(station);
-
         }
-
     }
 }

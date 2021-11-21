@@ -8,13 +8,8 @@ namespace ConsoleUI_BL
 {
     class Program
     {
-        //האם צריך לבדוק משקל קטן מ 0
-        //באיזה ערך לאתחל את המיקום?
-        //אם אני רוצה לראות חבילה איך אני עושה את זה?
-        //לבדוק אם זה בסדר שאני שולחת ArgumentNullException
-        //אף פעם אין מספיק בטריה בשביל לשלוח להטענה
-        //כשמוסיפים רחפן באיזה מצב הוא צריך להיות
-
+        //להוסיף הערות לאינטרפייס
+        //לסדר אקספשיין
         static void Main(string[] args)
         {
             try
@@ -94,8 +89,9 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("enter the Latitude");
                                     double latitude2 = Convert.ToDouble(Console.ReadLine());
                                     LocationBL location1 = new LocationBL(longitude2, latitude2);
-                                    try { 
-                                    bL.AddCustomer(IdCustomer, NameCustomer, Phone, location1);
+                                    try
+                                    {
+                                        bL.AddCustomer(IdCustomer, NameCustomer, Phone, location1);
                                     }
                                     catch (Exception e)
                                     {
@@ -112,8 +108,9 @@ namespace ConsoleUI_BL
                                     weight = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("enter the prionity : 1. Reguler,2. Fast, 3.Emergency");
                                     int priority = Convert.ToInt32(Console.ReadLine());
-                                    try { 
-                                    bL.AddParcel(SenderId, RecieverId, weight, priority);
+                                    try
+                                    {
+                                        bL.AddParcel(SenderId, RecieverId, weight, priority);
                                     }
                                     catch (Exception e)
                                     {
@@ -125,12 +122,16 @@ namespace ConsoleUI_BL
                                     break;
                             }
                             break;
-                        case 2://////////////////לבדוק את הפונקציות וההרצה ולעשות את כל התפיסת שגיאות ולהוסיף מקרה 5
+                        case 2:
                             Console.WriteLine("to udate Model of drone enter 1");
                             Console.WriteLine("to update data of station enter 2");
                             Console.WriteLine("to update data of customer enter 3");
                             Console.WriteLine("to send a drone to charge in a station enter 4");
-                            //Console.WriteLine("to Release a skimmer from charging at a base station enter 5 ");
+                            Console.WriteLine("to uncharge a drone from charger enter 5 ");
+                            Console.WriteLine("to connect a parcel do a drone enter 6");
+                            Console.WriteLine("to collect a parcel do a drone enter 7");
+                            Console.WriteLine("to deliver a parcel do a drone enter 8");
+
                             choice = Convert.ToInt32(Console.ReadLine());
                             switch (choice)
                             {
@@ -159,7 +160,7 @@ namespace ConsoleUI_BL
                                     {
                                         bL.updateDataStation(id, nameOfStation, chargeSlots);
                                     }
-                                    catch(Exception e)
+                                    catch (Exception e)
                                     {
                                         Console.WriteLine($"{e}\n\n\n\n\n");
                                     }
@@ -187,12 +188,61 @@ namespace ConsoleUI_BL
                                     {
                                         bL.updateSendDroneToCharge(id);
                                     }
-                                    catch(Exception e)
+                                    catch (Exception e)
                                     {
                                         Console.WriteLine(e);
                                     }
                                     break;
-
+                                case 5:
+                                    Console.WriteLine("enter id");
+                                    id = Convert.ToInt32(Console.ReadLine());
+                                    Console.WriteLine("enter time in charger");
+                                    double timeInCharger = double.Parse(Console.ReadLine());
+                                    try
+                                    {
+                                        bL.updateUnchargeDrone(id, timeInCharger);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e);
+                                    }
+                                    break;
+                                case 6:
+                                    Console.WriteLine("enter id");
+                                    id = Convert.ToInt32(Console.ReadLine());
+                                    try
+                                    {
+                                        bL.updateConnectParcelToDrone(id);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e);
+                                    }
+                                    break;
+                                case 7:
+                                    Console.WriteLine("enter id");
+                                    id = Convert.ToInt32(Console.ReadLine());
+                                    try
+                                    {
+                                        bL.updateCollectParcelByDrone(id);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e);
+                                    }
+                                    break;
+                                case 8:
+                                    Console.WriteLine("enter id");
+                                    id = Convert.ToInt32(Console.ReadLine());
+                                    try
+                                    {
+                                        bL.updateSupplyParcelByDrone(id);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e);
+                                    }
+                                    break;
                                 default:
                                     break;
                             }
@@ -212,7 +262,7 @@ namespace ConsoleUI_BL
                                     {
                                         Console.WriteLine(bL.GetSpecificStationBL(id));
                                     }
-                                    catch(Exception e)
+                                    catch (Exception e)
                                     {
                                         Console.WriteLine($"{e}\n\n\n\n\n\n");
                                     }
@@ -220,8 +270,9 @@ namespace ConsoleUI_BL
                                 case 2:
                                     Console.WriteLine("enter id drone: ");
                                     id = Convert.ToInt32(Console.ReadLine());
-                                    try { 
-                                    Console.WriteLine(bL.GetSpecificDroneBL(id));
+                                    try
+                                    {
+                                        Console.WriteLine(bL.GetSpecificDroneBL(id));
                                     }
                                     catch (Exception e)
                                     {
@@ -243,8 +294,9 @@ namespace ConsoleUI_BL
                                 case 4:
                                     Console.WriteLine("enter id parcel: ");
                                     id = Convert.ToInt32(Console.ReadLine());
-                                    try { 
-                                    Console.WriteLine(bL.GetSpecificParcelBL(id));
+                                    try
+                                    {
+                                        Console.WriteLine(bL.GetSpecificParcelBL(id));
                                     }
                                     catch (Exception e)
                                     {
@@ -256,7 +308,7 @@ namespace ConsoleUI_BL
                             }
 
                             break;
-                        case 4://///////////////////////////////////////להוסיף את מקרה 5 ואת מקרה 6
+                        case 4:
                             Console.WriteLine("to display the stations list enter 1");
                             Console.WriteLine("to display the drones list enter 2");
                             Console.WriteLine("to display the customers list enter 3");
@@ -267,33 +319,29 @@ namespace ConsoleUI_BL
                             switch (choice)
                             {
                                 case 1:
-                                    print<StationBL>(bL.GetStationsBL());
+                                    print(bL.GetStationsBL());
                                     break;
                                 case 2:
-                                    print<DroneBL>(bL.GetDronesBL());
+                                    print(bL.GetDronesBL());
                                     break;
                                 case 3:
-                                    print<CustomerBL>(bL.GetCustomersBL());
+                                    print(bL.GetCustomersBL());
                                     break;
                                 case 4:
-                                    print<ParcelBL>(bL.GetParcelsBL());
+                                    print(bL.GetParcelsBL());
                                     break;
                                 case 5:
-                                    showParcelsWithoutoutDrone();
+                                    print(bL.GetParcelsWithoutoutDrone());
                                     break;
                                 case 6:
-                                    //displayStationsWithEmptyChargingSlots(dalObject.GetStations(), dalObject.GetDroneCharges());
+                                    print(bL.GetStationWithEmptyChargers());
                                     break;
                                 default:
                                     break;
                             }
-
                             break;
                         case 5:
                             break;
-                        case 6:
-                            break;
-
                         default:
                             Console.WriteLine("input not valid");
                             break;
@@ -306,7 +354,11 @@ namespace ConsoleUI_BL
             }
         }
 
-
+        /// <summary>
+        /// print the list
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="array"></param>
         public static void print<T>(List<T> array)
         {
             foreach (var item in array)
@@ -314,40 +366,5 @@ namespace ConsoleUI_BL
                 Console.WriteLine(item);
             }
         }
-
-       
-        public static void showParcelsWithoutoutDrone()
-        {
-            BL.BL bl = new BL.BL();
-            List<ParcelBL> parcels = bl.GetParcelsBL();
-            foreach (var parcel in parcels)
-            {
-                if (parcel.Drone == null)
-                {   
-                    Console.WriteLine(parcel);
-                }
-            }
-        }
-        /*public static void showStationWithEmptyChargers()
-        {
-            BL.BL bl = new BL.BL();
-            int numOfChargers = 0;
-            List<StationBL> stations = bl.GetStationsBL();
-            //List< DroneCharge> droneChargers = bl.GetDroneCharge();
-            for (int i = 0; i < stations.Count; i++)
-            {
-                for (int j = 0; j < droneChargers.Length; j++)
-                {
-                    if (stations[i].ID == droneChargers[j].StationID)
-                        numOfChargers++;
-                }
-                if (numOfChargers < stations[i].ChargeSlots)
-                {
-                    Console.WriteLine(stations[i].ToString());
-                    Console.WriteLine(stations[i]);
-                }
-
-            }
-        }*/
     }
 }

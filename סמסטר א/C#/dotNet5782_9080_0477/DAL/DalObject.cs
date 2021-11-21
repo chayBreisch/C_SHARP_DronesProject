@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using IDAL.DO;
 using IDAL;
 using DAL;
-namespace DalObject 
+namespace DalObject
 {
     public partial class DalObject : IDal
     {
@@ -44,25 +44,25 @@ namespace DalObject
             }
             return customers;
         }*/
-   /*     public  IEnumerable <Parcel> GetParcial()
-        {
-            List<Parcel> parcels = new List<Parcel>();
-            for (int i = 0; i < DataSource.parcels.Count; i++)
-            {
-                parcels.Add(DataSource.parcels[i]);
-            }
-            return parcels;
-        }*/
+        /*     public  IEnumerable <Parcel> GetParcial()
+             {
+                 List<Parcel> parcels = new List<Parcel>();
+                 for (int i = 0; i < DataSource.parcels.Count; i++)
+                 {
+                     parcels.Add(DataSource.parcels[i]);
+                 }
+                 return parcels;
+             }*/
 
-       /* public  IEnumerable <DroneCharge> GetDroneCharge()
-        {
-            List<DroneCharge> droneChargers = new List<DroneCharge>();
-            for (int i = 0; i < DataSource.droneChargers.Count; i++)
-            {
-                droneChargers.Add(DataSource.droneChargers[i]);
-            }
-            return droneChargers;
-        }*/
+        /* public  IEnumerable <DroneCharge> GetDroneCharge()
+         {
+             List<DroneCharge> droneChargers = new List<DroneCharge>();
+             for (int i = 0; i < DataSource.droneChargers.Count; i++)
+             {
+                 droneChargers.Add(DataSource.droneChargers[i]);
+             }
+             return droneChargers;
+         }*/
         //#######################################################################
         //functions that returns the specific item from the dataSource by ID
         //#######################################################################
@@ -159,18 +159,18 @@ namespace DalObject
         //################################################
         //functions that update the dataSource array 
         //################################################
-        public  void updateConectDroneToParcial(int id)
+        public void updateConectDroneToParcial(int id)
         {
             Parcel newParcial = GetSpecificParcel(id);
             Drone drone = new Drone();
             for (int i = 0; i < DataSource.drones.Count; i++)
             {
-               /* if (DataSource.drones[i].Status == DroneStatus.Available)
-                {
-                    drone = DataSource.drones[i];
-                    drone.Status = DroneStatus.Delivery;
-                    break;
-                }*/
+                /* if (DataSource.drones[i].Status == DroneStatus.Available)
+                 {
+                     drone = DataSource.drones[i];
+                     drone.Status = DroneStatus.Delivery;
+                     break;
+                 }*/
             }
             newParcial.DroneID = drone.ID;
             int index1 = DataSource.drones.FindIndex(p => p.ID == newParcial.ID);
@@ -180,7 +180,7 @@ namespace DalObject
         }
 
 
-        public  void updateCollectParcialByDrone(int id)
+        public void updateCollectParcialByDrone(int id)
         {
 
             Parcel newParcial = GetSpecificParcel(id);
@@ -192,7 +192,7 @@ namespace DalObject
 
         }
 
-        public  void updateSupplyParcialToCustomer(int id)
+        public void updateSupplyParcialToCustomer(int id)
         {
             Parcel newParcial = GetSpecificParcel(id);
 
@@ -202,7 +202,7 @@ namespace DalObject
             }
             newParcial.Delivered = DateTime.Now;
         }
-        public  void updateSendDroneToCharge(int droneId, int statoinId)
+        public void updateSendDroneToCharge(int droneId, int statoinId)
         {
             DroneCharge droneCharge = new DroneCharge();
             int numOfChargers = 0;
@@ -224,7 +224,7 @@ namespace DalObject
             //newDrone.Status = DroneStatus.Maintenance;
             DataSource.droneChargers[DataSource.droneChargers.Count - 1] = droneCharge;
         }
-        public  void updateUnChargeDrone(int id)
+        public void updateUnChargeDrone(int id)
         {
             Drone NewDrone = GetSpecificDrone(id);
             int index = 0;
@@ -263,10 +263,10 @@ namespace DalObject
         }
 
 
-        public  IEnumerable<Station> showStationWithEmptyChargers()
+        public IEnumerable<Station> showStationWithEmptyChargers()
         {
             int numOfChargers = 0;
-            IEnumerable<Station> stations =  GetStation();
+            IEnumerable<Station> stations = GetStation();
             IEnumerable<DroneCharge> droneChargers = GetDroneCharge();
 
             foreach (var station in stations)
@@ -288,7 +288,7 @@ namespace DalObject
 
         public double[] requestElectric()
         {
-            double[] array = {  DataSource.Config.Available, DataSource.Config.LightHeight, DataSource.Config.MidHeight, DataSource.Config.HeavyHeight, DataSource.Config.ChargingRate};
+            double[] array = { DataSource.Config.Available, DataSource.Config.LightHeight, DataSource.Config.MidHeight, DataSource.Config.HeavyHeight, DataSource.Config.ChargingRate };
             return array;
         }
 

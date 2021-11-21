@@ -19,6 +19,6 @@ namespace IBL
             {
                 return $"ParcelAtCustomer: ID: {ID}, Weight: {Weight}, Priority: {Priority}, ParcelStatus: {ParcelStatus}, customerAtParcel: {customerAtParcel}";
             }
-            }
+        }
     }
 }

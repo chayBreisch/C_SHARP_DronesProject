@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static BL.ExceptionsBL;
 
 namespace BL
 {
@@ -19,11 +20,9 @@ namespace BL
         public static void checkUniqeIdDrone(int id, IDAL.IDal dalObject)
         {
             List<Drone> drones = dalObject.GetDrone().ToList();
-            drones.ForEach(d =>
-            {
-                if (d.ID == id)
-                    throw new NotUniqeID(id, typeof(Drone));
-            });
+            if (drones.Any(d => d.ID == id))
+                throw new NotUniqeID(id, typeof(Drone));
+
         }
 
         /// <summary>
@@ -36,6 +35,10 @@ namespace BL
         public void addDrone(int id, string model, int maxWeight, int stationID)
         {
             checkUniqeIdDrone(id, dalObject);
+            if (maxWeight < 1 || maxWeight > 3)
+            {
+                throw new OutOfRange("weight");
+            }
             DroneBL droneBL = new DroneBL();
             Station station = dalObject.GetSpecificStation(id);
 

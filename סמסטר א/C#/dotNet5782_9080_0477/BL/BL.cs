@@ -8,7 +8,7 @@ using IDAL.DO;
 using System.Linq;
 namespace BL
 {
-   //לשים לב מה עם GET SET IN CUSTOMERBL
+    //לשים לב מה עם GET SET IN CUSTOMERBL
     public partial class BL : Bl
     {
         Random rand = new Random();
@@ -35,11 +35,11 @@ namespace BL
             foreach (var drone in dalObject.GetDrone())
             {
                 DroneBL droneBL = new DroneBL { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight };
-                Parcel parcel = dalObject.GetParcelByDroneID(drone.ID);
+                Parcel parcel = dalObject.GetSpecificParcelByDroneID(drone.ID);
                 Customer customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
                 //check if the drone has a parcel
                 if (parcel.SenderID != 0)
-                    //if (!parcel.Equals(null))
+                //if (!parcel.Equals(null))
                 {
                     //check if the parcel of the drone is scheduled and not delivered
                     if (parcel.Scheduled != new DateTime() && parcel.Delivered == new DateTime())
@@ -50,7 +50,7 @@ namespace BL
                         if (parcel.PickedUp != new DateTime())
                         {
                             Station station = findClosestStation(new LocationBL(customerSender.Latitude, customerSender.Longitude));
-                            droneBL.Location = new LocationBL(station.Latitude,station.Longitude);
+                            droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
                         }
 
                         //check if the parcel of the drone is scheduled and not delivered and picked up
@@ -62,10 +62,10 @@ namespace BL
                         }
                         Customer customerReciever = dalObject.GetSpecificCustomer(parcel.TargetID);
                         double electricitySenderToReciever = calcElectry(new LocationBL(customerSender.Longitude, customerSender.Latitude), new LocationBL
-                            (customerReciever.Longitude, customerReciever.Latitude ), (int)parcel.Weight);
-                        Station station1 = stationWithMinDisAndEmptySlots(new LocationBL(customerReciever.Latitude, customerReciever.Longitude ));
+                            (customerReciever.Longitude, customerReciever.Latitude), (int)parcel.Weight);
+                        Station station1 = stationWithMinDisAndEmptySlots(new LocationBL(customerReciever.Latitude, customerReciever.Longitude));
                         double electricityRecieverToCharger = calcElectry(new LocationBL(customerReciever.Longitude, customerReciever.Latitude), new LocationBL
-                            (station1.Longitude, station1.Latitude ), 0);
+                            (station1.Longitude, station1.Latitude), 0);
                         int minEle = (int)Math.Round(electricitySenderToReciever + electricityRecieverToCharger);
                         droneBL.BatteryStatus = rand.Next(minEle, 100);
                     }
@@ -84,6 +84,10 @@ namespace BL
                     Station station = dalObject.GetStation().ToList()[rand.Next(0, length)];
                     droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
                     droneBL.BatteryStatus = rand.Next(0, 21);
+                    DroneCharge droneCharge = new DroneCharge();
+                    droneCharge.DroneID = drone.ID;
+                    droneCharge.StationID = station.ID;
+                    dalObject.AddDroneCharge(droneCharge);
                 }
 
                 //check if drone is in available
@@ -151,6 +155,7 @@ namespace BL
             double distance1 = distance(locatin1, location2);
             return distance1 * dalObject.requestElectric()[weight];
         }
+
         /// <summary>
         /// return the stations with the minimum distance from the location and with empty slots
         /// </summary>
@@ -165,7 +170,7 @@ namespace BL
             Station sendStation = new Station();
             foreach (var station in stations)
             {
-                dis2 = distance(location, new LocationBL(station.Latitude,  station.Longitude));
+                dis2 = distance(location, new LocationBL(station.Latitude, station.Longitude));
                 if (dis2 < minDis || minDis == -1 && station.ChargeSlots != 0)
                 {
                     minDis = dis2;
@@ -198,12 +203,6 @@ namespace BL
             return sendStation;
         }
 
-        /* public static double distance(double x1, double y1, double x2, double y2)
-         {
-             return Math.Sqrt(Math.Pow(x2 - x1, 2) +
-             Math.Pow(y2 - y1, 2) * 1.0);
-         }*/
-
         /// <summary>
         /// calculate the distance between to locations
         /// </summary>
@@ -216,7 +215,7 @@ namespace BL
             Math.Pow(location2.Latitude - location1.Latitude, 2) * 1.0);
         }
 
-        
+
         /// <summary>
         /// check the range of the id
         /// </summary>
@@ -227,118 +226,45 @@ namespace BL
             return id > 100000000 && id < 1000000000;
         }
 
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /* public void AddCustomer(int id, string name, string phone, double latitude, double longitude)
-         {
-             Customer newCustomer = new Customer(id, name, phone, latitude, longitude);
-            *//* newCustomer.ID = id;
-             newCustomer.Name = name;
-             newCustomer.Phone = phone;
-             newCustomer.Latitude = latitude;
-             newCustomer.Longitude = longitude;*//*
-             dalObject.AddCustomer(newCustomer);
-         }
-
-        */
-
-        //################################################
-        //functions that update the dataSource array 
-        //################################################
-        /*public void updateConectDroneToParcial(int id)
+        /// <summary>
+        /// return parcels that are not connected to a drone
+        /// </summary>
+        /// <returns>List<ParcelBL></returns>
+        public List<ParcelBL> GetParcelsWithoutoutDrone()
         {
-            Parcel newParcial = dalObject.GetSpecificParcial(id);
-            Drone drone = new Drone();
-            for (int i = 0; i < DataSource.drones.Count; i++)
+            List<ParcelBL> parcels = GetParcelsBL();
+            List<ParcelBL> parcelsWithOutDrone = new List<ParcelBL>();
+            foreach (var parcel in parcels)
             {
-                if (DataSource.drones[i].Status == DroneStatus.Available)
+                if (parcel.Drone == null)
                 {
-                    drone = DataSource.drones[i];
-                    drone.Status = DroneStatus.Delivery;
-                    break;
+                    parcelsWithOutDrone.Add(parcel);
                 }
             }
-            newParcial.DroneID = drone.ID;
-            int index1 = DataSource.drones.FindIndex(p => p.ID == newParcial.ID);
-            int index = DataSource.drones.FindIndex(d => d.ID == drone.ID);
-            DataSource.drones[index] = drone;
-            DataSource.parcels[index1] = newParcial;
+            return parcelsWithOutDrone;
         }
 
-
-        public void updateCollectParcialByDrone(int id)
+        /// <summary>
+        /// return station with epty chargers
+        /// </summary>
+        /// <returns>List<StationBL></returns>
+        public List<StationBL> GetStationWithEmptyChargers()
         {
-
-            Parcel newParcial = dalObject.GetSpecificParcial(id);
-            if (newParcial.DroneID == 0)
-            {
-                Console.WriteLine("you didnt conect a drone");
-            }
-            newParcial.PickedUp = DateTime.Now;
-
-        }
-
-        public void updateSupplyParcialToCustomer(int id)
-        {
-            Parcel newParcial = dalObject.GetSpecificParcial(id);
-
-            //if (newParcial.PickedUp)////////////////////////////////////////////////////
-            {
-                Console.WriteLine("you didnt collect a drone");
-            }
-            newParcial.Delivered = DateTime.Now;
-        }
-        public void updateSendDroneToCharge(int droneId, int statoinId)
-        {
-            DroneCharge droneCharge = new DroneCharge();
             int numOfChargers = 0;
-            Station station = dalObject.GetSpecificStation(statoinId);
-            Drone newDrone = dalObject.GetSpecificDrone(droneId);
-            numOfChargers = 0;
-            for (int j = 0; j < dalObject.returnLengthDroneCharger(); j++)
+            List<StationBL> stations = GetStationsBL();
+            List<StationBL> stationsWithEmptyChargers = new List<StationBL>();
+            List<DroneCharge> droneChargers = dalObject.GetDroneCharge().ToList();
+            foreach (var station in stations)
             {
-                if (station.ID == DataSource.droneChargers[j].StationID)
-                    numOfChargers++;
-            }
-            if (numOfChargers < station.ChargeSlots)
-            {
-                droneCharge.DroneID = newDrone.ID;
-                droneCharge.StationID = station.ID;
-
-            }
-
-            newDrone.Status = DroneStatus.Maintenance;
-            DataSource.droneChargers[DataSource.droneChargers.Count - 1] = droneCharge;
-        }
-        public void updateUnChargeDrone(int id)
-        {
-            Drone NewDrone = dalObject.GetSpecificDrone(id);
-            int index = 0;
-            for (int i = 0; i < DataSource.droneChargers.Count; i++)
-            {
-                if (DataSource.droneChargers[i].DroneID == NewDrone.ID)
+                foreach (var droneCharger in droneChargers)
                 {
-                    DataSource.droneChargers.RemoveAt(i);
-                    index = i;
-                    break;
+                    if (station.ID == droneCharger.StationID)
+                        numOfChargers++;
                 }
+                if (numOfChargers < station.ChargeSlots)
+                    stationsWithEmptyChargers.Add(station);
             }
-            NewDrone.Status = DroneStatus.Available;
-            NewDrone.Battery = 100;
-            int index1 = DataSource.drones.FindIndex(d => d.ID == NewDrone.ID);
-            DataSource.drones[index1] = NewDrone;
-        }*/
+            return stationsWithEmptyChargers;
+        }
     }
 }

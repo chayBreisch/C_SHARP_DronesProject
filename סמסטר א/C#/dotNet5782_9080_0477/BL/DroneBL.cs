@@ -32,12 +32,26 @@ namespace IBL
                 }
             }
             public string Model { get; set; }
-            public IDAL.DO.WeightCatagories Weight { get; set; }
-            public double BatteryStatus
-            { 
+            private IDAL.DO.WeightCatagories weight { get; set; }
+            public IDAL.DO.WeightCatagories Weight
+            {
                 get
-                { 
-                    return battery; 
+                {
+                    return weight;
+                }
+                set
+                {
+                    if (value < 0)
+                        throw new OutOfRange("weight");
+                    weight = value;
+                }
+            }
+
+            public double BatteryStatus
+            {
+                get
+                {
+                    return battery;
                 }
                 set
                 {
@@ -55,39 +69,7 @@ namespace IBL
                     $" battery: {BatteryStatus}, Model: {Model}, MaxWeight: {Weight}, " +
                     $"DroneStatus : {DroneStatus}, ParcelAtTransfor: {parcelInDelivery}," +
                     $"Location: {Location}";
-
-                
             }
-
-
-
-
-
-            /* public Drone()
-             {
-                 ID = 0;
-                 Model = "";
-                 MaxWeight = 0;
-                 Status = 0;
-                 Battery = 100;
-             }
-             public Drone(int id, string model, WeightCatagories maxWeight, DroneStatus status, double battery)
-             {
-                 ID = id;
-                 Model = model;
-                 MaxWeight = maxWeight;
-                 Status = status;
-                 Battery = battery;
-             }
-             public int ID { get; set; }
-             public string Model { get; set; }
-             public WeightCatagories MaxWeight { get; set; }
-             public DroneStatus Status { get; set; }
-             public double Battery { get; set; }
-             public override string ToString()
-             {
-                 return $"ID: {ID}, Model: {Model}, Status: {Status }, MaxWeight: {MaxWeight}, Battery: {Battery}";
-             }*/
         }
     }
 }

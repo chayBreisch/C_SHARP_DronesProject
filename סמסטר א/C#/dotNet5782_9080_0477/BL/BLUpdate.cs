@@ -67,21 +67,27 @@ namespace BL
             DroneBL droneBL = new DroneBL();
             try
             {
-                droneBL = droneBLList.Find(d => d.ID == id && d.DroneStatus != DroneStatus.Maintenance);
+                droneBL = droneBLList.Find(d => d.ID == id && d.DroneStatus == DroneStatus.Maintenance);
             }
             catch (ArgumentNullException e)
             {
                 throw new CanNotUpdateDrone(id, "can not uncharge drone");
             }
-
-            droneBL.BatteryStatus += timeInCharge * dalObject.requestElectric()[4];
+            if (droneBL == null)
+                throw new CanNotUpdateDrone(id, "can not uncharge drone");
+            double battery = droneBL.BatteryStatus + timeInCharge * dalObject.requestElectric()[4];
+            if (battery < 100)
+                droneBL.BatteryStatus = battery;
+            else
+                droneBL.BatteryStatus = 100;
             droneBL.DroneStatus = DroneStatus.Available;
+            updateDrone(droneBL);
             DroneCharge droneCharge = dalObject.getSpecificDroneChargeByDroneID(droneBL.ID);
             /*try/////////////////////לכאורה מיותר כי כבר בדקתי שהרחפן בהטענה אז חייב להיות מטען ותחנה
             {*/
-                Station station = dalObject.GetSpecificStation(droneCharge.StationID);
-                station.ChargeSlots += 1;
-                dalObject.updateStation(station);
+            Station station = dalObject.GetSpecificStation(droneCharge.StationID);
+            station.ChargeSlots += 1;
+            dalObject.updateStation(station);
             /*}
             catch (ArgumentNullException e)
             {
@@ -108,6 +114,8 @@ namespace BL
             foreach (var parcel in parcels)
             {
                 if (parcel.Requested == new DateTime())
+                    break;
+                if (parcel.Scheduled != new DateTime())
                     break;
                 customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
                 customerCurrent = dalObject.GetSpecificCustomer(currentParcel.SenderID);
@@ -188,9 +196,11 @@ namespace BL
             DroneBL droneBL = getSpecificDroneBLFromList(id);
             Parcel parcel = dalObject.GetSpecificParcelByDroneID(id);
             //check if can supply the parcel
+            if (parcel.Delivered != new DateTime())
+                throw new CanNotUpdateDrone(id, "parcel is delivered already");
             if (parcel.PickedUp == new DateTime() && parcel.Delivered != new DateTime())
             {
-                throw new CanNotUpdateDrone(id, "can't supply parcel because didn't pickrd up or delieverd");
+                throw new CanNotUpdateDrone(id, "can't supply parcel because didn't picked up or delieverd");
             }
             Customer customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
             Customer customerReciever = dalObject.GetSpecificCustomer(parcel.TargetID);

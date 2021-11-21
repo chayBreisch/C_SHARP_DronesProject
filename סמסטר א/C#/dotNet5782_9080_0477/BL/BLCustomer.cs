@@ -19,11 +19,8 @@ namespace BL
         public static void checkUniqeIdCustomer(ulong id, IDAL.IDal dalObject)
         {
             List<Customer> customers = dalObject.GetCustomer().ToList();
-            customers.ForEach(c =>
-            {
-                if (c.ID == id)
-                    throw new NotUniqeID(id, typeof(Customer));
-            });
+            if (customers.Any(c => c.ID == id))
+                throw new NotUniqeID(id, typeof(Customer));
         }
 
         /// <summary>
@@ -212,7 +209,5 @@ namespace BL
             }
             return false;
         }
-
-
     }
 }

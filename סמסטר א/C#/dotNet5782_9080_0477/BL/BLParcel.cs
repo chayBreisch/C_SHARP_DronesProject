@@ -19,11 +19,8 @@ namespace BL
         public static void checkUniqeIdParcel(int id, IDAL.IDal dalObject)
         {
             List<Parcel> parcels = dalObject.GetParcelByList();
-            parcels.ForEach(p =>
-            {
-                if (p.ID == id)
-                    throw new NotUniqeID(id, typeof(Parcel));
-            });
+            if (parcels.Any(p => p.ID == id))
+                throw new NotUniqeID(id, typeof(Parcel));
         }
 
         /// <summary>
@@ -38,7 +35,6 @@ namespace BL
             ParcelBL parcel = new ParcelBL();
             parcel.Sender = new CustomerBL();
             parcel.Reciever = new CustomerBL();
-            //parcel.ID = id;
             checkIfCustomerWithThisID(sender);
             checkIfCustomerWithThisID(target);
             parcel.Sender = GetSpecificCustomerBL(sender);

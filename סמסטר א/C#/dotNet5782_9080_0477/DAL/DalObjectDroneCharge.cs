@@ -11,11 +11,19 @@ namespace DalObject
 
     public partial class DalObject
     {
+        /// <summary>
+        /// returns the droneChargers by list from dal
+        /// </summary>
+        /// <returns>DataSource.droneChargers</returns>
         public List<DroneCharge> GetDroneChargeByList()
         {
             return DataSource.droneChargers;
         }
 
+        /// <summary>
+        /// returns the droneChargers from dal
+        /// </summary>
+        /// <returns>DataSource.droneChargers</returns>
         public IEnumerable<DroneCharge> GetDroneCharge()
         {
             foreach (var droneCharge in DataSource.droneChargers)
@@ -24,6 +32,11 @@ namespace DalObject
             }
         }
 
+        /// <summary>
+        /// return specific drone charge by station id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>droneCharge</returns>
         public DroneCharge getSpecificDroneChargeByStationID(int id)
         {
             try
@@ -38,23 +51,37 @@ namespace DalObject
 
         }
 
+        /// <summary>
+        /// return specific drone charge by drone id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>droneCharge</returns>
         public DroneCharge getSpecificDroneChargeByDroneID(int id)
         {
             try
             {
                 return DataSource.droneChargers.Find(droneCharge => droneCharge.DroneID == id);
-                }
+            }
             catch (ArgumentNullException e)
             {
                 throw new Exceptions(id);
             }
         }
 
+        /// <summary>
+        /// remove a drone charge from dal
+        /// </summary>
+        /// <param name="droneCharge"></param>
         public void removeDroneCharge(DroneCharge droneCharge)
         {
             DataSource.droneChargers.RemoveAt(getIndexOfDroneChargeByStationID(droneCharge.StationID));
         }
 
+        /// <summary>
+        /// get index from specific drone charge by station id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>int</returns>
         public int getIndexOfDroneChargeByStationID(int id)
         {
             try
@@ -67,6 +94,11 @@ namespace DalObject
             }
         }
 
+        /// <summary>
+        /// get index from specific drone charge by station id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>int</returns>
         public int getIndexOfDroneChargeByDroneID(int id)
         {
             try
@@ -79,22 +111,31 @@ namespace DalObject
             }
         }
 
+        /// <summary>
+        /// add drone charge to dal
+        /// </summary>
+        /// <param name="droneCharge"></param>
         public void AddDroneCharge(DroneCharge droneCharge)
         {
             checkUniqeIdDroneChargeBL(droneCharge.DroneID, droneCharge.StationID);
             DataSource.droneChargers.Add(droneCharge);
         }
 
+        /// <summary>
+        /// check uniqe drone charge
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="stationId"></param>
         public void checkUniqeIdDroneChargeBL(int droneId, int stationId)
         {
-
-            foreach (var dronecharge in DataSource.droneChargers)
-            {
-                if (dronecharge.DroneID == droneId && dronecharge.StationID == stationId)
-                    throw new NotUniqeID(droneId, stationId, typeof(Station));
-            }
+            if (DataSource.droneChargers.Any(dronecharge => dronecharge.DroneID == droneId && dronecharge.StationID == stationId))
+                throw new NotUniqeID(droneId, stationId, typeof(Station));
         }
 
+        /// <summary>
+        /// update the drone charge in dal
+        /// </summary>
+        /// <param name="droneCharge"></param>
         public void updateDroneCharge(DroneCharge droneCharge)
         {
             int index = DataSource.droneChargers.FindIndex(d => d.StationID == droneCharge.StationID);

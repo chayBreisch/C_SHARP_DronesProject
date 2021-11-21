@@ -5,23 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using IBL;
 
-/*    public class Factory
-    {
-        public IBL.Bl factory(string obj)
-        {
-            switch (obj)
-            {
-                case "BL":
-                    return new BL();
-                default:
-                    throw new Exception();
-            }
-            return new BL();
-        }
-    }
-}*/
-
-
 namespace BL
 {
     public class Factory

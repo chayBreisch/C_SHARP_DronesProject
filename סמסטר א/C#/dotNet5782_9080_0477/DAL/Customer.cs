@@ -10,7 +10,7 @@ namespace IDAL
     {
         public struct Customer
         {
-            public ulong  ID { get; set; }
+            public ulong ID { get; set; }
             public string Name { get; set; }
             public string Phone { get; set; }
             public double Longitude { get; set; }
@@ -18,7 +18,7 @@ namespace IDAL
             public override string ToString()
             {
                 return $"ID: {ID}, Name: {Name}, Phone: {Phone}, Longitude: {Longitude}, Latitude: {Latitude}";
-                
+
             }
         }
     }

@@ -65,33 +65,25 @@ namespace IBL
         public void updateCollectParcelByDrone(int id);
 
         public void updateSupplyParcelByDrone(int id);
-       // public static void checkUniqeIdDrone(int id, IDAL.IDal dalObject);
+        // public static void checkUniqeIdDrone(int id, IDAL.IDal dalObject);
 
         public void addDrone(int id, string model, int maxWeight, int stationID);
 
         public void AddDroneToDal(int id, string model, int maxWeight);
 
         public List<DroneBL> GetDronesBL();
-
         public DroneBL getSpecificDroneBLFromList(int id);
 
         public DroneBL GetSpecificDroneBL(int id);
+
         public DroneBL convertDalDroneToBl(Drone d);
+
         public void updateDrone(DroneBL drone);
 
         public void updateDataDroneModel(int id, string model);
-        //public static bool CheckValidIdCustomer(ulong id);
 
-        /* public static double distance(double x1, double y1, double x2, double y2)
-         {
-             return Math.Sqrt(Math.Pow(x2 - x1, 2) +
-             Math.Pow(y2 - y1, 2) * 1.0);
-         }*/
+        public List<ParcelBL> GetParcelsWithoutoutDrone();
 
-        //static double distance(LocationBL location1, LocationBL location2);
-
-
-        //public static bool CheckLongIdIsValid(ulong id);
-
+        public List<StationBL> GetStationWithEmptyChargers();
     }
 }

@@ -22,11 +22,8 @@ namespace BL
         public static void checkUniqeIdDroneCharge(int droneId, int stationId, IDAL.IDal dalObject)
         {
             List<DroneCharge> droneCharges = dalObject.GetDroneCharge().ToList();
-            droneCharges.ForEach(d =>
-            {
-                if (d.DroneID == droneId && d.StationID == stationId)
-                    throw new NotUniqeID(droneId, stationId, typeof(DroneCharge));
-            });
+            if (droneCharges.Any(d => d.DroneID == droneId && d.StationID == stationId))
+                throw new NotUniqeID(droneId, stationId, typeof(DroneCharge));
         }
 
         /// <summary>
@@ -36,8 +33,7 @@ namespace BL
         /// <param name="droneID"></param>
         public void addDroneCharge(int stationID, int droneID)
         {
-            ///try////////////////
-            Station station=  dalObject.GetSpecificStation(stationID);
+            Station station = dalObject.GetSpecificStation(stationID);
             if (!checkStationIfEmptyChargers(station))
                 throw new NotEmptyChargeSlots(stationID);
             checkUniqeIdDroneCharge(droneID, stationID, dalObject);
