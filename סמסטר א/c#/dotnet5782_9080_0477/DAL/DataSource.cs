@@ -17,11 +17,6 @@ namespace DalObject
             public static double MidHeight = 0.3;
             public static double HeavyHeight = 0.4;
             public static double ChargingRate = 0.5;
-            /*public bool Available { get; set; }
-            public int LightHeight { get; set; }
-            public int HeavyHeight { get; set; }
-            public int MidHeight { get; set; }
-            public int ChargingRate { get; set; }*/
         }
         internal static List<Drone> drones = new List<Drone>();
         internal static List<Station> stations = new List<Station>();
@@ -57,8 +52,6 @@ namespace DalObject
                 drone.ID = drones.Count + 1;
                 drone.Model = "MarvicAir2";
                 drone.MaxWeight = WeightCatagories.Heavy + i;
-                //drone.Status = DroneStatus.Delivery + i;
-                //drone.Battery = rand.Next(100);
                 drones.Add(drone);
             }
 
@@ -90,7 +83,6 @@ namespace DalObject
                 parcels.Add(parcel);
 
             }
-
         }
     }
 }
