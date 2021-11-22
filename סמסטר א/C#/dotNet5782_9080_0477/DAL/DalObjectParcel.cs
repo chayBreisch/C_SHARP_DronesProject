@@ -10,7 +10,6 @@ namespace DalObject
 {
     public partial class DalObject
     {
-
         /// <summary>
         /// returns the parcels by list from dal
         /// </summary>
