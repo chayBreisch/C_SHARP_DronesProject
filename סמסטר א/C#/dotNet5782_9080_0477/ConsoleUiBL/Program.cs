@@ -12,17 +12,18 @@ namespace ConsoleUI_BL
         //לסדר אקספשיין
         static void Main(string[] args)
         {
-            try
+            int choices = 0;
+            do
             {
-                IBL.Bl bL = new BL.BL();
-                int choices;
-                do
+                try
                 {
+                    IBL.Bl bL = new BL.BL();
                     Console.WriteLine("to add enter 1");
                     Console.WriteLine("to update enter 2");
                     Console.WriteLine("to display enter 3");
                     Console.WriteLine("to display lists enter 4");
                     Console.WriteLine("to exit enter 5");
+
                     choices = Convert.ToInt32(Console.ReadLine());
                     switch (choices)
                     {
@@ -346,12 +347,13 @@ namespace ConsoleUI_BL
                             Console.WriteLine("input not valid");
                             break;
                     }
-                } while (choices != 5);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            } while (choices != 5);
         }
 
         /// <summary>
