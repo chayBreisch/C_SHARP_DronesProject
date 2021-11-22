@@ -19,7 +19,7 @@ namespace IBL
                 { return Id; }
                 set
                 {
-                    if (BL.BL.CheckLongIdIsValid(value))
+                    if (value > 100000000 && value < 1000000000)
                         Id = value;
                     else
                     {

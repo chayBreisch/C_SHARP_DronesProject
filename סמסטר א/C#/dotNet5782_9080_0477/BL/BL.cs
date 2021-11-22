@@ -12,7 +12,7 @@ namespace BL
     public partial class BL : Bl
     {
         Random rand = new Random();
-        List<DroneBL> droneBLList;
+        List<DroneBL> droneBLList = new List<DroneBL>();
         IDAL.IDal dalObject;
         //############################################################
         //constructor
@@ -22,7 +22,6 @@ namespace BL
         /// </summary>
         public BL()
         {
-            droneBLList = new List<DroneBL>();
             //get all the electric rates
             dalObject = Factory.factory("DalObject");
             double[] arrayEletric = dalObject.requestElectric();

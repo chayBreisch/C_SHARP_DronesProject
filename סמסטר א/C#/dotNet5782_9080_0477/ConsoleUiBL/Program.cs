@@ -12,12 +12,12 @@ namespace ConsoleUI_BL
         //לסדר אקספשיין
         static void Main(string[] args)
         {
+            IBL.Bl bL = new BL.BL();
             int choices = 0;
             do
             {
                 try
                 {
-                    IBL.Bl bL = new BL.BL();
                     Console.WriteLine("to add enter 1");
                     Console.WriteLine("to update enter 2");
                     Console.WriteLine("to display enter 3");
