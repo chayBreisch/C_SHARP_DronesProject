@@ -25,14 +25,7 @@ namespace BL
             //find a station to charge
             if (droneBL.DroneStatus == DroneStatus.Available)
             {
-                /*for (int i = 0; i < dalObject.lengthStation(); i++)
-                {*/
                 station = stationWithMinDisAndEmptySlots(droneBL.Location);
-                /*if (station.ChargeSlots != 0)
-                {
-                    break;
-                }*/
-                /*}*/
                 double electric = calcElectry(droneBL.Location, new LocationBL(station.Latitude, station.Longitude), 0);
                 //check if enough electricity to reach the station
                 if (electric > droneBL.BatteryStatus)
