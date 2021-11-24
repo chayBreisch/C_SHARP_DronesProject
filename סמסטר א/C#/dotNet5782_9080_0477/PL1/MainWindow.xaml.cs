@@ -24,7 +24,8 @@ namespace PL1
         {
             InitializeComponent();
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void Button_Click_Parcel(object sender, RoutedEventArgs e)
         {
             new Parcel().Show();
         }
