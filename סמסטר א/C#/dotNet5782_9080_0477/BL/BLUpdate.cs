@@ -106,9 +106,9 @@ namespace BL
             currentParcel = new Parcel() { Weight = 0 };
             foreach (var parcel in parcels)
             {
-                if (parcel.Requested == new DateTime())
+                if (parcel.Requested == null)
                     break;
-                if (parcel.Scheduled != new DateTime())
+                if (parcel.Scheduled != null)
                     break;
                 customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
                 customerCurrent = dalObject.GetSpecificCustomer(currentParcel.SenderID);
@@ -168,7 +168,7 @@ namespace BL
             if (droneBL.DroneStatus == DroneStatus.Delivery)
             {
                 //check if can collect the parcel
-                if (parcel.PickedUp != new DateTime())
+                if (parcel.PickedUp != null)
                 {
                     throw new CanNotUpdateDrone(id, "can't collect parcel because parcel is picked up");
                 }
@@ -191,9 +191,9 @@ namespace BL
             DroneBL droneBL = getSpecificDroneBLFromList(id);
             Parcel parcel = dalObject.GetSpecificParcelByDroneID(id);
             //check if can supply the parcel
-            if (parcel.Delivered != new DateTime())
+            if (parcel.Delivered != null)
                 throw new CanNotUpdateDrone(id, "parcel is delivered already");
-            if (parcel.PickedUp == new DateTime() && parcel.Delivered != new DateTime())
+            if (parcel.PickedUp == null && parcel.Delivered != null)
             {
                 throw new CanNotUpdateDrone(id, "can't supply parcel because didn't picked up or delieverd");
             }

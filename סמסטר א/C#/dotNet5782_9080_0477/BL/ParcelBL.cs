@@ -46,10 +46,10 @@ namespace IBL
             }
             public Priorities Priorities { get; set; }
             public DroneBL Drone { get; set; }
-            public DateTime Requesed { get; set; }
-            public DateTime Scheduled { get; set; }
-            public DateTime PickedUp { get; set; }
-            public DateTime Delivered { get; set; }
+            public DateTime? Requesed { get; set; }
+            public DateTime? Scheduled { get; set; }
+            public DateTime? PickedUp { get; set; }
+            public DateTime? Delivered { get; set; }
 
 
             public override string ToString()

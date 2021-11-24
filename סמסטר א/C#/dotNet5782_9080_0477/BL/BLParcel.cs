@@ -42,9 +42,9 @@ namespace BL
             parcel.Weight = (WeightCatagories)Weight;
             parcel.Priorities = (Priorities)priority;
             parcel.Requesed = DateTime.Now;
-            parcel.Scheduled = new DateTime();
-            parcel.PickedUp = new DateTime();
-            parcel.Delivered = new DateTime();
+            parcel.Scheduled =null;
+            parcel.PickedUp = null;
+            parcel.Delivered = null;
             parcel.Drone = null;
             AddParcelToDal(sender, target, Weight, priority);
 
@@ -152,11 +152,11 @@ namespace BL
         /// <returns>ParcelStatus</returns>
         public ParcelStatus findParcelStatus(Parcel parcel)
         {
-            if (parcel.Requested == new DateTime())
+            if (parcel.Requested == null)
                 return (ParcelStatus)0;
-            else if (parcel.Scheduled == new DateTime())
+            else if (parcel.Scheduled == null)
                 return (ParcelStatus)1;
-            else if (parcel.PickedUp == new DateTime())
+            else if (parcel.PickedUp == null)
                 return (ParcelStatus)2;
             return (ParcelStatus)3;
         }

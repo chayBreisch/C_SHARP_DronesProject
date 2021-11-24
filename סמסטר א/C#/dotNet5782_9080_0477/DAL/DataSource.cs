@@ -71,6 +71,7 @@ namespace DalObject
             {
                 Parcel parcel = new Parcel();
                 parcel.ID = parcels.Count + 1;
+
                 parcel.SenderID = customers[rand.Next(0, customers.Count)].ID;
                 parcel.TargetID = customers[rand.Next(0, customers.Count)].ID;
                 parcel.Weight = (WeightCatagories)(rand.Next() % 3);

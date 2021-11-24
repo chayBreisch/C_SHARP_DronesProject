@@ -41,12 +41,12 @@ namespace BL
                 //if (!parcel.Equals(null))
                 {
                     //check if the parcel of the drone is scheduled and not delivered
-                    if (parcel.Scheduled != new DateTime() && parcel.Delivered == new DateTime())
+                    if (parcel.Scheduled != null && parcel.Delivered == null)
                     {
                         droneBL.DroneStatus = DroneStatus.Delivery;
 
                         //check if the parcel of the drone is scheduled and not delivered and not picked up
-                        if (parcel.PickedUp != new DateTime())
+                        if (parcel.PickedUp != null)
                         {
                             Station station = findClosestStation(new LocationBL(customerSender.Latitude, customerSender.Longitude));
                             droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
@@ -92,7 +92,7 @@ namespace BL
                 //check if drone is in available
                 else if (droneBL.DroneStatus == DroneStatus.Available)
                 {
-                    List<Parcel> parcelBLsWithSuppliedParcel = dalObject.GetParcel().ToList().FindAll(p => p.Delivered != new DateTime());
+                    List<Parcel> parcelBLsWithSuppliedParcel = dalObject.GetParcel().ToList().FindAll(p => p.Delivered != null);
                     if (parcelBLsWithSuppliedParcel.Count > 0)
                     {
                         ParcelBL parcelBL = convertDalToParcelBL(parcelBLsWithSuppliedParcel[rand.Next(0, parcelBLsWithSuppliedParcel.Count)]);
