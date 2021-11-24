@@ -28,6 +28,7 @@ namespace PL1
         private void Button_Click_Parcel(object sender, RoutedEventArgs e)
         {
             new Parcel().Show();
+            Close();
         }
     }
 }
