@@ -9,6 +9,7 @@
     <Grid>
         <Button Content="Parcel" Margin="62,46,588,346" Click="Button_Click_Parcel"/>
         <Button Content="Parcel List" Margin="490,46,160,346"/>
+        <Button Content="Parcel List" Margin="490,46,160,346" Click="Button_Click_ParcelList"/>
 
 
     </Grid>

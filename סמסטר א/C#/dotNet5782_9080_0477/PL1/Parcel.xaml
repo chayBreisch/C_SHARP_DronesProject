@@ -6,13 +6,8 @@
         xmlns:local="clr-namespace:PL1"
         mc:Ignorable="d"
         Title="Parcel" Height="450" Width="800">
-<<<<<<< HEAD
-    <Grid Margin="0,-24,-17,-16">
-        <Button Content="show list" Margin="62,46,588,346" Click="Button_Click_GelListParcel"/>
-=======
     <Grid>
-        
->>>>>>> d3a006329699581d860c395aaf3193481a0e77db
+
 
     </Grid>
 </Window>

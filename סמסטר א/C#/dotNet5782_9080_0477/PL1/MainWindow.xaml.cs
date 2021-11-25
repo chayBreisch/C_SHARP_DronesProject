@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 namespace PL1
 {
     /// <summary>
@@ -24,10 +23,15 @@ namespace PL1
         {
             InitializeComponent();
         }
-
         private void Button_Click_Parcel(object sender, RoutedEventArgs e)
         {
             new Parcel().Show();
+            Close();
+        }
+
+        private void Button_Click_ParcelList(object sender, RoutedEventArgs e)
+        {
+            new ParcelList().Show();
             Close();
         }
     }
