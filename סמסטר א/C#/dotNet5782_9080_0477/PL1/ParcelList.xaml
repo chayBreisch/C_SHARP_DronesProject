@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="ParcelList" Height="450" Width="800">
     <Grid>
-        
+        <Button Content="show list" Margin="62,46,588,346" Click="Button_Click_ShowListParcels"/>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="739,10,0,0" VerticalAlignment="Top" Click="Button_Click_Close"/>
+        <Button Content="Menu" HorizontalAlignment="Left" Margin="699,10,0,0" VerticalAlignment="Top" Click="Button_Click_Menu"/>
     </Grid>
 </Window>

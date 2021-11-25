@@ -30,5 +30,11 @@ namespace PL1
             new Parcel().Show();
             Close();
         }
+
+        private void Button_Click_ParcelList(object sender, RoutedEventArgs e)
+        {
+            new ParcelList().Show();
+            Close();
+        }
     }
 }
