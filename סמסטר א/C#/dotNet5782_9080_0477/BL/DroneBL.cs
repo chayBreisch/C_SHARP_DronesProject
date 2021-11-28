@@ -68,7 +68,7 @@ namespace IBL
                 return $"drone  : {ID}, " +
                     $" battery: {BatteryStatus}, Model: {Model}, MaxWeight: {Weight}, " +
                     $"DroneStatus : {DroneStatus}, ParcelAtTransfor: {parcelInDelivery}," +
-                    $"Location: {Location}";
+                    $"Location: {Location}\n";
             }
         }
     }

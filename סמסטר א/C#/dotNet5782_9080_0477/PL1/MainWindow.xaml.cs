@@ -19,19 +19,37 @@ namespace PL1
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        IBL.Bl bl;
+
+        /// <summary>
+        /// constructor
+        /// </summary>
         public MainWindow()
         {
+            bl = BL.FactoryBL.factory("BL");
             InitializeComponent();
         }
+
+        /// <summary>
+        /// open the drone window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_Parcel(object sender, RoutedEventArgs e)
         {
-            new Parcel().Show();
+            new Parcel(bl).Show();
             Close();
         }
 
-        private void Button_Click_ParcelList(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// open the droneList window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_DroneList(object sender, RoutedEventArgs e)
         {
-            new ParcelList().Show();
+            new DroneList(bl).Show();
             Close();
         }
     }

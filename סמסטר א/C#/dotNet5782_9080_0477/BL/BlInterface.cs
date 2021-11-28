@@ -85,5 +85,9 @@ namespace IBL
         public List<ParcelBL> GetParcelsWithoutoutDrone();
 
         public List<StationBL> GetStationWithEmptyChargers();
+
+        public List<DroneBL> getDronesByDroneStatus(int status);
+        public List<DroneBL> getDronesByDroneWeight(int status);
+
     }
 }

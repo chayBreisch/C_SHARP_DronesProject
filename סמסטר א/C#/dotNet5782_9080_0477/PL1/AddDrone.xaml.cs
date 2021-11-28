@@ -15,14 +15,12 @@ using System.Windows.Shapes;
 namespace PL1
 {
     /// <summary>
-    /// Interaction logic for Parcel.xaml
+    /// Interaction logic for AddDrone.xaml
     /// </summary>
-    public partial class Parcel : Window
+    public partial class AddDrone : Window
     {
-        IBL.Bl blParcel;
-        public Parcel(IBL.Bl bl)
+        public AddDrone(IBL.Bl bl)
         {
-            blParcel = bl;
             InitializeComponent();
         }
     }

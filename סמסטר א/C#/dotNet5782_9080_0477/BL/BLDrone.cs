@@ -150,5 +150,23 @@ namespace BL
             dalObject.updateDrone(drone);
         }
 
+        public List<DroneBL> getDronesByDroneStatus(int status)
+        {
+            IEnumerable<DroneBL> droneQuery =
+            from drone in GetDronesBL()
+            where drone.DroneStatus == (DroneStatus)status
+            select drone;
+            return droneQuery.ToList();
+        }
+        public List<DroneBL> getDronesByDroneWeight(int status)
+        {
+            IEnumerable<DroneBL> droneQuery =
+            from drone in GetDronesBL()
+            where drone.Weight == (WeightCatagories)status
+            select drone;
+            return droneQuery.ToList();
+        }
+
+
     }
 }

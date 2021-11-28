@@ -1,0 +1,62 @@
+﻿<Window x:Class="PL1.DroneList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL1"
+        mc:Ignorable="d"
+        Title="DroneList" Height="640" Width="800">
+
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="400*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,10,0,516" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <ComboBox Name="StatusSelector" Margin="25,22,25,7" Width="146" SelectionChanged="comboBoxSelectDronesByStatus" Height="45" Grid.Column="1" RenderTransformOrigin="1.263,0.687" >
+
+                <ComboBoxItem >Available</ComboBoxItem>
+                <ComboBoxItem >Maintanance</ComboBoxItem>
+                <ComboBoxItem >Delivery</ComboBoxItem>
+            </ComboBox>
+            <Button Content="show list" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click_ShowListDrones" Height="45" Width="146" Margin="0,22,0,0"/>
+            <ComboBox Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.01,-0.281" SelectionChanged="ComboBox_SelectionDroneByWeight" Height="45" Margin="0,22,0,0">
+                <!--<ComboBox HorizontalAlignment="Center" Grid.Column="2" Margin="433,46,0,0" VerticalAlignment="Center" Width="150" SelectionChanged="ComboBox_SelectionDroneByWeight" Height="43">-->
+                <ComboBoxItem >Light</ComboBoxItem>
+                <ComboBoxItem>Medium</ComboBoxItem>
+                <ComboBoxItem>Heavy</ComboBoxItem>
+            </ComboBox>
+            <Button Content="add drone" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Height="45" Width="146" RenderTransformOrigin="0.495,0.148" Margin="0,22,0,0" Click="Button_ClickAddDrone"/>
+
+
+        </Grid>
+        <ListView Grid.Row="1" x:Name="DroneListView"  Height="516" VerticalAlignment="Bottom"/>
+
+
+
+    </Grid>
+
+    <!--<Button Content="show list" HorizontalAlignment="Left" Margin="53,46,0,0" VerticalAlignment="Top" Height="42" Width="145" Click="Button_Click_ShowListDrones"/>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="739,10,0,0" VerticalAlignment="Top" Click="Button_Click_Close"/>
+        <Button Content="Menu" HorizontalAlignment="Left" Margin="699,10,0,0" VerticalAlignment="Top" Click="Button_Click_Menu"/>
+        -->
+    <!--<Button Content="select drones by&#xD;&#xA; there status" HorizontalAlignment="Left" Margin="350,46,0,0" VerticalAlignment="Top" Height="41" Width="124" Click="Button_ClickSelectDronesByStatus"/>-->
+    <!--
+        <ComboBox x:Name="optionList" HorizontalAlignment="Left" Margin="239,46,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="comboBoxSelectDronesByStatus" Height="43" >
+
+            <ComboBoxItem >Available</ComboBoxItem>
+            <ComboBoxItem >Maintanance</ComboBoxItem>
+            <ComboBoxItem >Delivery</ComboBoxItem>
+        </ComboBox>
+    <ComboBox HorizontalAlignment="Left" Margin="433,46,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="ComboBox_SelectionDroneByWeight" Height="43">
+        <ComboBoxItem >Light</ComboBoxItem>
+        <ComboBoxItem>Medium</ComboBoxItem>
+        <ComboBoxItem>Heavy</ComboBoxItem>
+    </ComboBox>-->
+</Window>

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IBL;
 
-namespace BL
+namespace DAL
 {
-    public class Factory
+    public class FactoryDAL
     {
         public static IDAL.IDal factory(string obj)
         {

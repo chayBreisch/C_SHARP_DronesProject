@@ -23,7 +23,7 @@ namespace BL
         public BL()
         {
             //get all the electric rates
-            dalObject = Factory.factory("DalObject");
+            dalObject = FactoryDAL.factory("DalObject");
             double[] arrayEletric = dalObject.requestElectric();
             double electricAvailable = arrayEletric[0];
             double electricLightHeight = arrayEletric[1];
