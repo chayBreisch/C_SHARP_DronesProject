@@ -166,7 +166,5 @@ namespace BL
             select drone;
             return droneQuery.ToList();
         }
-
-
     }
 }

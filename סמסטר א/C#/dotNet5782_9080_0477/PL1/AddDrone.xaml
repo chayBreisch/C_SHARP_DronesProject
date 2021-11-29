@@ -7,6 +7,37 @@
         mc:Ignorable="d"
         Title="AddDrone" Height="450" Width="800">
     <Grid>
-        
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1.3*" />
+                <ColumnDefinition Width="*" />
+                
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Left" Margin="53,0,0,0" Text="enter details of drone" TextWrapping="Wrap" VerticalAlignment="Center" Height="24" Width="135"  FontWeight="Bold" Grid.Column="1"/>
+            <TextBox Margin="30,37,56,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Name="droneId" Grid.Row="1" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="30,10,0,0" Grid.Row="1" Text="enter id drone:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" Grid.Column="1"/>
+            <TextBox Margin="30,37,56,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Name="droneMdel" Grid.Row="2" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="30,10,0,0" Grid.Row="2" Text="enter model drone:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" Grid.Column="1"/>
+            <TextBox Margin="30,37,56,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Name="droneWeight" Grid.Row="3" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="30,10,0,0" Grid.Row="3" Text="enter weight drone:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" Grid.Column="1"/>
+            <TextBox Margin="30,37,56,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Name="numStationtoChargeDrone" Grid.Row="4" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="30,10,0,0" Grid.Row="4" Text="number of station to charge:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" Grid.Column="1"/>
+            <Button Content="add drone" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" RenderTransformOrigin="-0.207,0.023" Width="135" Grid.Column="1"/>
+
+
+        </Grid>
+        <!--("enter id");
+  ("enter the maximal weight : 1. Light,2. Medium, 3.Heavy");
+  ("enter the model");
+  ("number of station for start charging");-->
     </Grid>
 </Window>
