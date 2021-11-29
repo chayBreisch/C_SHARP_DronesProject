@@ -101,8 +101,9 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
+            Hide();
             new AddDrone(blDroneList).Show();
-            Close();
+            
         }
     }
 }

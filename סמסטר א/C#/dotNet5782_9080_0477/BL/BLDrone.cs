@@ -40,19 +40,23 @@ namespace BL
                 throw new OutOfRange("weight");
             }
             DroneBL droneBL = new DroneBL();
-            Station station = dalObject.GetSpecificStation(id);
+            Station station = dalObject.GetSpecificStation(stationID);
+            if (station.ID != 0)
+            {
+                droneBL.Model = model;
+                droneBL.ID = id;
+                droneBL.Weight = (WeightCatagories)maxWeight;
+                droneBL.BatteryStatus = rand.Next(20, 40);
+                droneBL.DroneStatus = DroneStatus.Maintenance;
+                droneBL.Location = new LocationBL(station.Longitude, station.Latitude);
 
-            droneBL.Model = model;
-            droneBL.ID = id;
-            droneBL.Weight = (WeightCatagories)maxWeight;
-            droneBL.BatteryStatus = rand.Next(20, 40);
-            droneBL.DroneStatus = DroneStatus.Maintenance;
-            droneBL.Location = new LocationBL(station.Longitude, station.Latitude);
 
-
-            AddDroneToDal(id, model, maxWeight);
-            addDroneCharge(stationID, id);
-            droneBLList.Add(droneBL);
+                AddDroneToDal(id, model, maxWeight);
+                addDroneCharge(stationID, id);
+                droneBLList.Add(droneBL);
+            }
+            else
+                throw new NoItemWithThisID(stationID, typeof(Station));
         }
 
         /// <summary>

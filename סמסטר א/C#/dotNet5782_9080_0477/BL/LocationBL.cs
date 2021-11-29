@@ -3,31 +3,59 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using static BL.ExceptionsBL;
 namespace IBL
 {
     namespace BO
     {
         public class LocationBL
         {
-            public LocationBL(double longitude, double latitude)
+            public LocationBL(int longitude1, int latitude1)
             {
-                Longitude = longitude;
-                Latitude = latitude;
+                longitude = longitude1;
+                latitude = latitude1;
             }
-            public double Longitude { get; set; }
-            public double Latitude { get; set; }
 
+            private int latitude { get; set; }
+
+            public int Latitude
+            {
+                get
+                {
+                    return latitude;
+                }
+                set
+                {
+                    if (value > 36 || value < 0)
+                        throw new OutOfRange("longitude");
+                    latitude = value;
+                }
+            }
+            private int longitude { get; set; }
+
+            public int Longitude
+            {
+                get
+                {
+                    return longitude;
+                }
+                set
+                {
+                    if (value > 36 || value < 0)
+                        throw new OutOfRange("longitude");
+                    longitude = value;
+                }
+            }
 
             public LocationBL()
             {
-                Longitude = 0;
+                longitude = 0;
                 Latitude = 0;
             }
             public override string ToString()
             {
-                return $"longitude  : {Longitude}, " +
-                    $" latitude: {Latitude}"
+                return $"longitude  : {longitude}, " +
+                    $" latitude: {latitude}"
 
                 ;
             }

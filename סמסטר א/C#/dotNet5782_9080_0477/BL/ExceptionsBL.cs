@@ -31,5 +31,12 @@ namespace BL
 
             }
         }
+        public class NoItemWithThisID : Exception
+        {
+            public NoItemWithThisID(int id ,Type type) : base($"no {type} with {id} id")
+            {
+
+            }
+        }
     }
 }
