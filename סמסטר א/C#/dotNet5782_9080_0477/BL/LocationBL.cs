@@ -10,15 +10,15 @@ namespace IBL
     {
         public class LocationBL
         {
-            public LocationBL(int longitude1, int latitude1)
+            public LocationBL(double longitude1, double latitude1)
             {
                 longitude = longitude1;
                 latitude = latitude1;
             }
 
-            private int latitude { get; set; }
+            private double latitude { get; set; }
 
-            public int Latitude
+            public Double Latitude
             {
                 get
                 {
@@ -31,9 +31,9 @@ namespace IBL
                     latitude = value;
                 }
             }
-            private int longitude { get; set; }
+            private double longitude { get; set; }
 
-            public int Longitude
+            public double Longitude
             {
                 get
                 {
