@@ -60,7 +60,7 @@ namespace DalObject
                         where predicate(drone)
                         select drone).First();
             }
-            catch(Exception e) { }
+            catch (Exception e) { }
             return drone1;
         }
 

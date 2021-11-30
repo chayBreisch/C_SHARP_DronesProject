@@ -56,10 +56,7 @@ namespace DalObject
                              where predicate(customer)
                              select customer).First();
             }
-            catch(Exception e)
-            {
-
-            }
+            catch (Exception e){ }
             return customer1;
         }
 

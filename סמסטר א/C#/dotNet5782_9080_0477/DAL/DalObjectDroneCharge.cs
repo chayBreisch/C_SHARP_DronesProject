@@ -156,7 +156,7 @@ namespace DalObject
                                 where predicate(dronecharge)
                                 select dronecharge).First();
             }
-            catch(Exception e) { }
+            catch (Exception e) { }
             return droneCharge1;
 
         }

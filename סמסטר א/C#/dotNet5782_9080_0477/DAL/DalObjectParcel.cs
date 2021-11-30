@@ -56,10 +56,7 @@ namespace DalObject
                            where predicate(parcel)
                            select parcel).First();
             }
-            catch(Exception e)
-            {
-
-            }
+            catch (Exception e) {}
             return parcel1;
 
         }

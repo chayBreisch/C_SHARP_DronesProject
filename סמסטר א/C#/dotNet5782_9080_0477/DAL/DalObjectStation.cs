@@ -61,7 +61,7 @@ namespace DalObject
                             where predicate(station)
                             select station).First();
             }
-            catch(Exception e) { }
+            catch (Exception e) { }
             return station1;
         }
 
