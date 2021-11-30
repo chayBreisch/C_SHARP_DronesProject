@@ -33,9 +33,11 @@ namespace BL
             //for each drone we check what is the status and reboot in entries
             foreach (var drone in dalObject.GetDrone())
             {
+                Parcel parcel = new Parcel();
                 DroneBL droneBL = new DroneBL { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight };
-                Parcel parcel = dalObject.GetSpecificParcelByDroneID(drone.ID);
-                Customer customerSender = dalObject.GetSpecificCustomer(parcel.SenderID);
+                if (dalObject.checkIfParcelWithDroneId(drone.ID))
+                    parcel = dalObject.getParcelById(p => p.DroneID == drone.ID);
+                Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
                 //check if the drone has a parcel
                 if (parcel.SenderID != 0)
                 //if (!parcel.Equals(null))
@@ -59,7 +61,7 @@ namespace BL
                             droneBL.Location.Longitude = customerSender.Longitude;
                             droneBL.Location.Latitude = customerSender.Latitude;
                         }
-                        Customer customerReciever = dalObject.GetSpecificCustomer(parcel.TargetID);
+                        Customer customerReciever = dalObject.getCustomerById(c => c.ID == parcel.TargetID);
                         double electricitySenderToReciever = calcElectry(new LocationBL(customerSender.Longitude, customerSender.Latitude), new LocationBL
                             (customerReciever.Longitude, customerReciever.Latitude), (int)parcel.Weight);
                         Station station1 = stationWithMinDisAndEmptySlots(new LocationBL(customerReciever.Latitude, customerReciever.Longitude));
@@ -96,7 +98,7 @@ namespace BL
                     if (parcelBLsWithSuppliedParcel.Count > 0)
                     {
                         ParcelBL parcelBL = convertDalToParcelBL(parcelBLsWithSuppliedParcel[rand.Next(0, parcelBLsWithSuppliedParcel.Count)]);
-                        Customer customer = dalObject.GetSpecificCustomer(parcelBL.Sender.ID);
+                        Customer customer = dalObject.getCustomerById(c => c.ID == parcelBL.Sender.ID);
                         droneBL.Location = new LocationBL(customer.Latitude, customer.Longitude);
                         Station station1 = stationWithMinDisAndEmptySlots(droneBL.Location);
                         double electry = calcElectry(new LocationBL(station1.Longitude, station1.Latitude), droneBL.Location, 0);

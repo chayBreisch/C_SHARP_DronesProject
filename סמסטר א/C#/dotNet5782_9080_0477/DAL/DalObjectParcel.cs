@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
 using IDAL;
 using DAL;
+using System.Collections.Generic;
+
 namespace DalObject
 {
     public partial class DalObject
@@ -31,29 +33,47 @@ namespace DalObject
             }
         }
 
-        /// <summary>
-        /// return a specific parcel by parcel id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Parcel</returns>
-        public Parcel GetSpecificParcel(int id)
+       ///
+        /* public Parcel GetSpecificParcel(int id)
+         {
+             try
+             {
+                 return DataSource.parcels.Find(parcel => parcel.ID == id);
+             }
+             catch (ArgumentNullException e)
+             {
+                 throw new Exceptions(id);
+             }
+         }
+ */
+        
+        public Parcel getParcelById(Predicate<Parcel> predicate)
         {
-            try
-            {
-                return DataSource.parcels.Find(parcel => parcel.ID == id);
-            }
-            catch (ArgumentNullException e)
-            {
-                throw new Exceptions(id);
-            }
+            //try todo
+            return (from parcel in DataSource.parcels
+                    where predicate(parcel)
+                    select parcel).First();
+
         }
 
+        /// <summary>
+        /// get the parcels with a specific condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<Parcel> getParceleByCondition(Predicate<Parcel> predicate)
+        {
+            //try todo
+            return (from parcel in DataSource.parcels
+                    where predicate(parcel)
+                    select parcel);
+        }
         /// <summary>
         /// return a specific parcel by drone id
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Parcel</returns>
-        public Parcel GetSpecificParcelByDroneID(int id)
+       /* public Parcel GetSpecificParcelByDroneID(int id)
         {
             try
             {
@@ -63,7 +83,7 @@ namespace DalObject
             {
                 throw new Exceptions(id);
             }
-        }
+        }*/
 
         /// <summary>
         /// return length of parcel list
@@ -102,6 +122,13 @@ namespace DalObject
         {
             int index = DataSource.parcels.FindIndex(d => d.ID == parcel.ID);
             DataSource.parcels[index] = parcel;
+        }
+
+        public bool checkIfParcelWithDroneId(int id)
+        {
+            if (DataSource.parcels.Any(parcel => parcel.DroneID == id))
+                return true;
+            return false;
         }
     }
 }

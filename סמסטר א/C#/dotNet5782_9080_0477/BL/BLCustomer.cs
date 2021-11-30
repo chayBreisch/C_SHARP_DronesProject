@@ -100,7 +100,7 @@ namespace BL
         {
             try
             {
-                return convertDalCustomerToBl(dalObject.GetSpecificCustomer(id));
+                return convertDalCustomerToBl(dalObject.getCustomerById(c => c.ID == id));
             }
             catch (ArgumentNullException e)
             {
@@ -147,7 +147,7 @@ namespace BL
         /// <param name="phone"></param>
         public void updateDataCustomer(ulong id, string name = null, string phone = null)
         {
-            Customer customer = dalObject.GetSpecificCustomer(id);
+            Customer customer = dalObject.getCustomerById( c => c.ID == id);
             if (name != null)
             {
                 customer.Name = name;

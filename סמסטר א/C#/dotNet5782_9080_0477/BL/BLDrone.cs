@@ -40,7 +40,7 @@ namespace BL
                 throw new OutOfRange("weight");
             }
             DroneBL droneBL = new DroneBL();
-            Station station = dalObject.GetSpecificStation(stationID);
+            Station station = dalObject.getStationById(s => s.ID == stationID);
             if (station.ID != 0)
             {
                 droneBL.Model = model;
@@ -125,6 +125,7 @@ namespace BL
         /// <returns>DroneBL</returns>
         public DroneBL convertDalDroneToBl(Drone d)
         {
+            //לבדוק מה עם parcellattransfor
             return GetSpecificDroneBL(d.ID);
         }
 
@@ -149,7 +150,7 @@ namespace BL
             droneBl.Model = model;
             updateDrone(droneBl);
 
-            Drone drone = dalObject.GetSpecificDrone(id);
+            Drone drone = dalObject.getDroneById(d => d.ID == id);
             drone.Model = model;
             dalObject.updateDrone(drone);
         }

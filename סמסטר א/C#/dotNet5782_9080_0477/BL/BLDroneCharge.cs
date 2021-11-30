@@ -33,7 +33,7 @@ namespace BL
         /// <param name="droneID"></param>
         public void addDroneCharge(int stationID, int droneID)
         {
-            Station station = dalObject.GetSpecificStation(stationID);
+            Station station = dalObject.getStationById(s => s.ID == stationID);
             if (!checkStationIfEmptyChargers(station))
                 throw new NotEmptyChargeSlots(stationID);
             checkUniqeIdDroneCharge(droneID, stationID, dalObject);

@@ -85,7 +85,7 @@ namespace BL
         {
             try
             {
-                return convertDalStationToBl(dalObject.GetSpecificStation(id));
+                return convertDalStationToBl(dalObject.getStationById(s => s.ID == id));
             }
             catch (ArgumentNullException e)
             {
@@ -159,7 +159,7 @@ namespace BL
         /// <param name="chargeSlots"></param>
         public void updateDataStation(int id, int name = 0, int chargeSlots = -1)
         {
-            Station station = dalObject.GetSpecificStation(id);
+            Station station = dalObject.getStationById(s => s.ID == id);
             if (name != 0)
             {
                 station.Name = name;

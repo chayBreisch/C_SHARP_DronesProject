@@ -33,11 +33,8 @@ namespace DalObject
             }
         }
 
-        /// <summary>
-        /// returns a specific station from dal
-        /// </summary>
-        /// <returns>station</returns>
-        public Station GetSpecificStation(int id)
+        
+        /*public Station GetSpecificStation(int id)
         {
             try
             {
@@ -47,7 +44,35 @@ namespace DalObject
             {
                 throw new Exceptions(id);
             }
+        }*/
+
+        /// <summary>
+        /// get spscific station by the id
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public Station getStationById(Predicate<Station> predicate)
+        {
+            //try todo
+            return (from station in DataSource.stations
+                    where predicate(station)
+                    select station).First();
+
         }
+
+        /// <summary>
+        /// get the stations with a specific condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<Station> getStationByCondition(Predicate<Station> predicate)
+        {
+            //try todo
+            return (from station in DataSource.stations
+                    where predicate(station)
+                    select station);
+        }
+
 
         /// <summary>
         /// add station to dal

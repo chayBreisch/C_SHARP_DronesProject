@@ -31,7 +31,7 @@ namespace DalObject
                 yield return droneCharge;
             }
         }
-
+/*
         /// <summary>
         /// return specific drone charge by station id
         /// </summary>
@@ -66,7 +66,7 @@ namespace DalObject
             {
                 throw new Exceptions(id);
             }
-        }
+        }*/
 
         /// <summary>
         /// remove a drone charge from dal
@@ -140,6 +140,33 @@ namespace DalObject
         {
             int index = DataSource.droneChargers.FindIndex(d => d.StationID == droneCharge.StationID);
             DataSource.droneChargers[index] = droneCharge;
+        }
+
+        /// <summary>
+        /// get a droneCharge by the id
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public DroneCharge getDroneChargeById(Predicate<DroneCharge> predicate)
+        {
+            //try todo
+            return (from dronecharge in DataSource.droneChargers
+                    where predicate(dronecharge)
+                    select dronecharge).First();
+
+        }
+
+        /// <summary>
+        /// get the dronechargers with a specific condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<DroneCharge> getDroneChargeByCondition(Predicate<DroneCharge> predicate)
+        {
+            //try todo
+            return (from droneCharge in DataSource.droneChargers
+                    where predicate(droneCharge)
+                    select droneCharge);
         }
     }
 }

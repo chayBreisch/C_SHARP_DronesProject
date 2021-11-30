@@ -42,7 +42,7 @@ namespace BL
             parcel.Weight = (WeightCatagories)Weight;
             parcel.Priorities = (Priorities)priority;
             parcel.Requesed = DateTime.Now;
-            parcel.Scheduled =null;
+            parcel.Scheduled = null;
             parcel.PickedUp = null;
             parcel.Delivered = null;
             parcel.Drone = null;
@@ -94,7 +94,7 @@ namespace BL
         {
             try
             {
-                return convertDalToParcelBL(dalObject.GetSpecificParcel(id));
+                return convertDalToParcelBL(dalObject.getParcelById(p => p.ID == id));
             }
             catch (ArgumentNullException e)
             {
@@ -127,9 +127,11 @@ namespace BL
         /// <returns>ParcelBL</returns>
         public ParcelBL convertDalToParcelBL(Parcel p)
         {
-            CustomerBL sender = convertDalCustomerToBl(dalObject.GetSpecificCustomer(p.SenderID));
-            CustomerBL target = convertDalCustomerToBl(dalObject.GetSpecificCustomer(p.TargetID));
-            DroneBL drone = convertDalDroneToBl(dalObject.GetSpecificDrone(p.DroneID));
+            CustomerBL sender = convertDalCustomerToBl(dalObject.getCustomerById(c => c.ID == p.SenderID));
+            CustomerBL target = convertDalCustomerToBl(dalObject.getCustomerById(c => c.ID == p.TargetID));
+            DroneBL drone = new DroneBL();
+            if (p.DroneID != 0)
+                drone = convertDalDroneToBl(dalObject.getDroneById(d => d.ID == p.DroneID));
             return new ParcelBL
             {
                 ID = p.ID,
@@ -160,7 +162,7 @@ namespace BL
                 return (ParcelStatus)2;
             return (ParcelStatus)3;
         }
-        
+
     }
 
 }

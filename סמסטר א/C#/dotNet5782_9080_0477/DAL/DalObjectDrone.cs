@@ -37,7 +37,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Drone</returns>
-        public Drone GetSpecificDrone(int id)
+        /*public Drone GetSpecificDrone(int id)
         {
             try
             {
@@ -47,6 +47,16 @@ namespace DalObject
             {
                 throw new Exceptions(id);
             }
+        }
+*/
+
+        public Drone getDroneById(Predicate<Drone> predicate)
+        {
+            //try ToDO
+            return (from drone in DataSource.drones
+                    where predicate(drone)
+                    select drone).First();
+
         }
 
         /// <summary>
@@ -78,6 +88,18 @@ namespace DalObject
             int index = DataSource.drones.FindIndex(d => d.ID == drone.ID);
             DataSource.drones[index] = drone;
         }
-    }
 
+        /// <summary>
+        /// get the drones with a specific condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<Drone> getDroneByCondition(Predicate<Drone> predicate)
+        {
+            //try todo
+            return (from drone in DataSource.drones
+                    where predicate(drone)
+                    select drone);
+        }
+    }
 }
