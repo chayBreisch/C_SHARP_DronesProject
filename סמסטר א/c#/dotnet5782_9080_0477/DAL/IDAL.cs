@@ -76,7 +76,6 @@ namespace IDAL
         public IEnumerable<Station> getStationByCondition(Predicate<Station> predicate);
         public IEnumerable<Customer> getCustomerByCondition(Predicate<Customer> predicate);
         public IEnumerable<DroneCharge> getDroneChargeByCondition(Predicate<DroneCharge> predicate);
-        public bool checkIfParcelWithDroneId(int id)
-;
+
     }
 }
