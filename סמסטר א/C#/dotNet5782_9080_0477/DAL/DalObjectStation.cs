@@ -54,10 +54,15 @@ namespace DalObject
         public Station getStationById(Predicate<Station> predicate)
         {
             //try todo
-            return (from station in DataSource.stations
-                    where predicate(station)
-                    select station).First();
-
+            Station station1 = new Station();
+            try
+            {
+                station1 = (from station in DataSource.stations
+                            where predicate(station)
+                            select station).First();
+            }
+            catch(Exception e) { }
+            return station1;
         }
 
         /// <summary>

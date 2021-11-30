@@ -33,10 +33,8 @@ namespace BL
             //for each drone we check what is the status and reboot in entries
             foreach (var drone in dalObject.GetDrone())
             {
-                Parcel parcel = new Parcel();
                 DroneBL droneBL = new DroneBL { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight };
-                if (dalObject.checkIfParcelWithDroneId(drone.ID))
-                    parcel = dalObject.getParcelById(p => p.DroneID == drone.ID);
+                Parcel parcel = dalObject.getParcelById(p => p.DroneID == drone.ID);
                 Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
                 //check if the drone has a parcel
                 if (parcel.SenderID != 0)

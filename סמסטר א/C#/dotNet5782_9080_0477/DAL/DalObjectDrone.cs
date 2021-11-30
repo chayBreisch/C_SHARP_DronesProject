@@ -53,10 +53,15 @@ namespace DalObject
         public Drone getDroneById(Predicate<Drone> predicate)
         {
             //try ToDO
-            return (from drone in DataSource.drones
-                    where predicate(drone)
-                    select drone).First();
-
+            Drone drone1 = new Drone();
+            try
+            {
+                drone1 = (from drone in DataSource.drones
+                        where predicate(drone)
+                        select drone).First();
+            }
+            catch(Exception e) { }
+            return drone1;
         }
 
         /// <summary>

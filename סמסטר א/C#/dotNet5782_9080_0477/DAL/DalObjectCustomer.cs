@@ -49,11 +49,18 @@ namespace DalObject
 
         public Customer getCustomerById(Predicate<Customer> predicate)
         {
-            //try todo
-            return (from customer in DataSource.customers
-                    where predicate(customer)
-                    select customer).First();
+            Customer customer1 = new Customer();
+            try
+            {
+                customer1 = (from customer in DataSource.customers
+                             where predicate(customer)
+                             select customer).First();
+            }
+            catch(Exception e)
+            {
 
+            }
+            return customer1;
         }
 
         /// <summary>

@@ -149,10 +149,15 @@ namespace DalObject
         /// <returns></returns>
         public DroneCharge getDroneChargeById(Predicate<DroneCharge> predicate)
         {
-            //try todo
-            return (from dronecharge in DataSource.droneChargers
-                    where predicate(dronecharge)
-                    select dronecharge).First();
+            DroneCharge droneCharge1 = new DroneCharge();
+            try
+            {
+                droneCharge1 = (from dronecharge in DataSource.droneChargers
+                                where predicate(dronecharge)
+                                select dronecharge).First();
+            }
+            catch(Exception e) { }
+            return droneCharge1;
 
         }
 

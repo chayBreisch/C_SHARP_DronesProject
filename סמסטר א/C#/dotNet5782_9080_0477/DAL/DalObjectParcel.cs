@@ -49,10 +49,18 @@ namespace DalObject
         
         public Parcel getParcelById(Predicate<Parcel> predicate)
         {
-            //try todo
-            return (from parcel in DataSource.parcels
-                    where predicate(parcel)
-                    select parcel).First();
+            Parcel parcel1 = new Parcel();
+            try
+            {
+                parcel1 = (from parcel in DataSource.parcels
+                           where predicate(parcel)
+                           select parcel).First();
+            }
+            catch(Exception e)
+            {
+
+            }
+            return parcel1;
 
         }
 
@@ -122,13 +130,6 @@ namespace DalObject
         {
             int index = DataSource.parcels.FindIndex(d => d.ID == parcel.ID);
             DataSource.parcels[index] = parcel;
-        }
-
-        public bool checkIfParcelWithDroneId(int id)
-        {
-            if (DataSource.parcels.Any(parcel => parcel.DroneID == id))
-                return true;
-            return false;
         }
     }
 }
