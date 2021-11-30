@@ -161,7 +161,7 @@ namespace DalObject
         //################################################
         public void updateConectDroneToParcial(int id)
         {
-            Parcel newParcial = GetSpecificParcel(id);
+            Parcel newParcial = getParcelById(p => p.ID == id);
             Drone drone = new Drone();
             for (int i = 0; i < DataSource.drones.Count; i++)
             {
@@ -183,7 +183,7 @@ namespace DalObject
         public void updateCollectParcialByDrone(int id)
         {
 
-            Parcel newParcial = GetSpecificParcel(id);
+            Parcel newParcial = getParcelById(p => p.ID == id);
             if (newParcial.DroneID == 0)
             {
                 Console.WriteLine("you didnt conect a drone");
@@ -194,7 +194,7 @@ namespace DalObject
 
         public void updateSupplyParcialToCustomer(int id)
         {
-            Parcel newParcial = GetSpecificParcel(id);
+            Parcel newParcial = getParcelById(p => p.ID == id);
 
             //if (newParcial.PickedUp)////////////////////////////////////////////////////
             {
@@ -206,8 +206,8 @@ namespace DalObject
         {
             DroneCharge droneCharge = new DroneCharge();
             int numOfChargers = 0;
-            Station station = GetSpecificStation(statoinId);
-            Drone newDrone = GetSpecificDrone(droneId);
+            Station station = getStationById(s => s.ID == statoinId);
+            Drone newDrone = getDroneById(d => d.ID == droneId);
             numOfChargers = 0;
             for (int j = 0; j < DataSource.droneChargers.Count; j++)
             {
@@ -226,7 +226,7 @@ namespace DalObject
         }
         public void updateUnChargeDrone(int id)
         {
-            Drone NewDrone = GetSpecificDrone(id);
+            Drone NewDrone = getDroneById(d => d.ID == id);
             int index = 0;
             for (int i = 0; i < DataSource.droneChargers.Count; i++)
             {

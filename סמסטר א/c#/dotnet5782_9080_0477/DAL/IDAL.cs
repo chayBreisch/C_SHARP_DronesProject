@@ -16,7 +16,7 @@ namespace IDAL
         /* public IEnumerable<Customer> GetCustomer();*/
         public IEnumerable<Parcel> GetParcel();
         public IEnumerable<DroneCharge> GetDroneCharge();
-        public Drone GetSpecificDrone(int id);
+/*        public Drone GetSpecificDrone(int id);
         public Station GetSpecificStation(int id);
         public Customer GetSpecificCustomer(ulong id);
         public Parcel GetSpecificParcel(int id);
@@ -24,7 +24,7 @@ namespace IDAL
 
         //public void AddDrone(int id, string model, WeightCatagories weight, DroneStatus status, double battery);
         public DroneCharge getSpecificDroneChargeByStationID(int id);
-        public DroneCharge getSpecificDroneChargeByDroneID(int id);
+        public DroneCharge getSpecificDroneChargeByDroneID(int id);*/
         public int getIndexOfDroneChargeByDroneID(int id);
         public int getIndexOfDroneChargeByStationID(int id);
         public void removeDroneCharge(DroneCharge droneCharge);
@@ -61,5 +61,22 @@ namespace IDAL
         public void CheckUniqeDrone(int id);
         public void CheckUniqeCustomer(ulong id);
 
+        public Drone getDroneById(Predicate<Drone> predicate);
+
+
+        public Parcel getParcelById(Predicate<Parcel> predicate);
+
+        public Station getStationById(Predicate<Station> predicate);
+
+        public Customer getCustomerById(Predicate<Customer> predicate);
+
+        public DroneCharge getDroneChargeById(Predicate<DroneCharge> predicate);
+        public IEnumerable<Drone> getDroneByCondition(Predicate<Drone> predicate);
+        public IEnumerable<Parcel> getParceleByCondition(Predicate<Parcel> predicate);
+        public IEnumerable<Station> getStationByCondition(Predicate<Station> predicate);
+        public IEnumerable<Customer> getCustomerByCondition(Predicate<Customer> predicate);
+        public IEnumerable<DroneCharge> getDroneChargeByCondition(Predicate<DroneCharge> predicate);
+        public bool checkIfParcelWithDroneId(int id)
+;
     }
 }

@@ -30,7 +30,7 @@ namespace DalObject
             }
         }
 
-        public Customer GetSpecificCustomer(ulong id)
+        /*public Customer GetSpecificCustomer(ulong id)
         {
             try
             {
@@ -40,8 +40,34 @@ namespace DalObject
             {
                 throw new Exceptions(id);
             }
+        }*/
+
+        /// <summary>
+        /// get a customer by the id
+        /// </summary>
+        /// <param name="newCustomer"></param>
+
+        public Customer getCustomerById(Predicate<Customer> predicate)
+        {
+            //try todo
+            return (from customer in DataSource.customers
+                    where predicate(customer)
+                    select customer).First();
+
         }
 
+        /// <summary>
+        /// get the customers with a specific condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<Customer> getCustomerByCondition(Predicate<Customer> predicate)
+        {
+            //try todo
+            return (from customer in DataSource.customers
+                    where predicate(customer)
+                    select customer);
+        }
         public void AddCustomer(Customer newCustomer)
         {
             CheckUniqeCustomer(newCustomer.ID);
