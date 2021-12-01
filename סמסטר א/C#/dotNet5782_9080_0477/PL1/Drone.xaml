@@ -24,9 +24,9 @@
             <Button Content="update" Name="Update" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Row="1" Click="Update_Click"/>
             <Button Content="charge a drone" Name="Charge" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Column="1" Grid.Row="1" Click="Charge_Click"/>
             <Button Content="uncharge a drone" Name="UnCharge" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Column="2" Grid.Row="1" Click="UnCharge_Click"/>
-            <Button Content="send to parcel" Name="Connect" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Column="3" Grid.Row="1"/>
-            <Button Content="collect parcel" Name="Collect" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Column="4" Grid.Row="1"/>
-            <Button Content="supply parcel" Name="Supply" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Column="5" Grid.Row="1"/>
+            <Button Content="send to parcel" Name="Connect" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Column="3" Grid.Row="1" Click="Connect_Click"/>
+            <Button Content="collect parcel" Name="Collect" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Column="4" Grid.Row="1" Click="Collect_Click"/>
+            <Button Content="supply parcel" Name="Supply" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Column="5" Grid.Row="1" Click="Supply_Click"/>
             <TextBlock Name="DroneContainIDModel" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="91"  Height="31" Margin="28,18,0,0" Text="id:  10, model" />
             <TextBox Margin="100,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Name="ModelDrone" Height="31" HorizontalAlignment="Left" Width="75" Grid.ColumnSpan="2" BorderThickness="0"/>
             <TextBlock Name="DroneContain" Grid.Column="1" HorizontalAlignment="Right" Margin="0,18,14,0" Height="31" TextWrapping="Wrap" VerticalAlignment="Top" Width="606" Grid.ColumnSpan="5"/>

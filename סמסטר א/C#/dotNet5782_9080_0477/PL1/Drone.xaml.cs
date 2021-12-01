@@ -41,12 +41,18 @@ namespace PL1
             ModelDrone.Text = drone.Model;
             DroneContain.Text = $", battery: {drone.BatteryStatus}, weight: {drone.Weight},  status: {drone.DroneStatus}, parcelInDelivery: { drone.parcelInDelivery}, location: { drone.Location.ToString() }";
             if (droneBL.DroneStatus != DroneStatus.Available)
+            {
                 Charge.IsEnabled = false;
-            if(droneBL.DroneStatus != DroneStatus.Maintenance)
+                Connect.IsEnabled = false;
+                Collect.IsEnabled = false;
+                Supply.IsEnabled = false;
+            }
+            if (droneBL.DroneStatus != DroneStatus.Maintenance)
             {
                 UnCharge.IsEnabled = false;
                 TimeCharger.Visibility = Visibility.Hidden;
                 TimeChargerBlock.Visibility = Visibility.Hidden;
+                
             }
 
         }
@@ -100,27 +106,29 @@ namespace PL1
             Close();
         }
 
+
+        //###########################################################
+        //actions
+        //###########################################################
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             string model = ModelDrone.Text;
             blDrone.updateDataDroneModel(droneBL.ID, model);
             ModelDrone.Text = droneBL.Model;
             DroneContain.Text = $", battery: {droneBL.BatteryStatus}, weight: {droneBL.Weight},  status: {droneBL.DroneStatus}, parcelInDelivery: { droneBL.parcelInDelivery}, location: { droneBL.Location.ToString() }";
-
-            /*new Drone(blDrone, droneBL).Show();
-            Close();*/
-        }
+                    }
 
         private void Charge_Click(object sender, RoutedEventArgs e)
         {
             blDrone.updateSendDroneToCharge(droneBL.ID);
             DroneContain.Text = $", battery: {droneBL.BatteryStatus}, weight: {droneBL.Weight},  status: {droneBL.DroneStatus}, parcelInDelivery: { droneBL.parcelInDelivery}, location: { droneBL.Location.ToString() }";
             Charge.IsEnabled = false;
+            Connect.IsEnabled = false;
+            Collect.IsEnabled = false;
+            Supply.IsEnabled = false;
             UnCharge.IsEnabled = true;
             TimeCharger.Visibility = Visibility.Visible;
             TimeChargerBlock.Visibility = Visibility.Visible;
-            /*  new Drone(blDrone, droneBL).Show();
-              Close();*/
         }
 
         private void UnCharge_Click(object sender, RoutedEventArgs e)
@@ -132,16 +140,64 @@ namespace PL1
             else
             {
                 Charge.IsEnabled = true;
+                Connect.IsEnabled = true;
+                Collect.IsEnabled = true;
+                Supply.IsEnabled = true;
                 UnCharge.IsEnabled = false;
                 TimeCharger.Visibility = Visibility.Hidden;
                 TimeChargerBlock.Visibility = Visibility.Hidden;
                 blDrone.updateUnchargeDrone(droneBL.ID, time);
                 DroneContain.Text = $", battery: {droneBL.BatteryStatus}, weight: {droneBL.Weight},  status: {droneBL.DroneStatus}, parcelInDelivery: { droneBL.parcelInDelivery}, location: { droneBL.Location.ToString() }";
                 TimeCharger.Text = "";
-                /*new Drone(blDrone, droneBL).Show();
-                Close();*/
             }
+        }
 
+        private void Connect_Click(object sender, RoutedEventArgs e)
+        {
+            bool check = true;
+            try
+            {
+                blDrone.updateConnectParcelToDrone(droneBL.ID);
+            }
+            catch(Exception ex)
+            {
+                check = false;
+                MessageBox.Show(ex.ToString());
+            }
+            if (check)
+                MessageBox.Show("connected succesfully");       
+        }
+
+        private void Collect_Click(object sender, RoutedEventArgs e)
+        {
+            bool check = true;
+            try
+            {
+                blDrone.updateCollectParcelByDrone(droneBL.ID);
+            }
+            catch(Exception ex)
+            {
+                check = false;
+                MessageBox.Show(ex.ToString());
+            }
+            if (check)
+                MessageBox.Show("collected succesfully");
+        }
+
+        private void Supply_Click(object sender, RoutedEventArgs e)
+        {
+            bool check = true;
+            try
+            {
+                blDrone.updateSupplyParcelByDrone(droneBL.ID);
+            }
+            catch(Exception ex)
+            {
+                check = false;
+                MessageBox.Show(ex.ToString());
+            }
+            if (check)
+                MessageBox.Show("connected succesfully");
         }
     }
 }
