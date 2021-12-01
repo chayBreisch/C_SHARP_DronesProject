@@ -38,7 +38,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_Click_Parcel(object sender, RoutedEventArgs e)
         {
-            new Parcel(bl).Show();
+            new Drone(bl).Show();
             Close();
         }
 

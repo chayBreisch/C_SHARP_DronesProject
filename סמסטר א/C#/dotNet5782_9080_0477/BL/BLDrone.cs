@@ -182,5 +182,10 @@ namespace BL
             select drone;
             return droneQuery.ToList();
         }
+
+        public DroneBL getDroneByIndex(int index)
+        {
+            return droneBLList[index];
+        }
     }
 }

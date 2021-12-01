@@ -88,6 +88,7 @@ namespace IBL
 
         public List<DroneBL> getDronesByDroneStatus(int status);
         public List<DroneBL> getDronesByDroneWeight(int status);
+        public DroneBL getDroneByIndex(int index);
 
     }
 }

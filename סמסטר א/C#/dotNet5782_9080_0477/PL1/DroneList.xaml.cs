@@ -105,5 +105,13 @@ namespace PL1
             new AddDrone(blDroneList).Show();
             
         }
+
+        private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListView options = sender as ListView;
+            DroneBL drone = blDroneList.getDroneByIndex(options.SelectedIndex);
+
+            MessageBox.Show(drone.ToString());
+        }
     }
 }
