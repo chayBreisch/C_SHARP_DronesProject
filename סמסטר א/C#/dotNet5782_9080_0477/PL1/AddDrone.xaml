@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AddDrone" Height="450" Width="800">
     <Grid>
-        <Grid >
+        <!--Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -35,7 +35,7 @@
             <Button Content="cancel add drone" Grid.Column="1" HorizontalAlignment="Left" Margin="30,29,0,0" Grid.Row="5" VerticalAlignment="Top" Width="105" Height="27" Click="Button_ClickCancelAddDrone"/>
 
 
-        </Grid>
+        </Grid>-->
         <!--("enter id");
   ("enter the maximal weight : 1. Light,2. Medium, 3.Heavy");
   ("enter the model");

@@ -36,7 +36,7 @@ namespace PL1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click_Parcel(object sender, RoutedEventArgs e)
+        private void Button_Click_Drone(object sender, RoutedEventArgs e)
         {
             new Drone(bl).Show();
             Close();

@@ -102,7 +102,7 @@ namespace PL1
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
             Hide();
-            new AddDrone(blDroneList).Show();
+            new Drone(blDroneList).Show();
             
         }
 
@@ -110,8 +110,9 @@ namespace PL1
         {
             ListView options = sender as ListView;
             DroneBL drone = blDroneList.getDroneByIndex(options.SelectedIndex);
+            new Drone(blDroneList, drone).Show();
 
-            MessageBox.Show(drone.ToString());
+            //MessageBox.Show(drone.ToString());
         }
     }
 }

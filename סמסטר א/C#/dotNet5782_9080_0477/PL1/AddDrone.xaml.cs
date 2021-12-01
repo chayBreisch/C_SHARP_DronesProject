@@ -26,7 +26,7 @@ namespace PL1
             blAddDrone = bl;
         }
 
-        private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
+/*        private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
             int id;
             bool success = Int32.TryParse(droneId.Text, out id);
@@ -67,6 +67,6 @@ namespace PL1
         private void Button_ClickCancelAddDrone(object sender, RoutedEventArgs e)
         {
             Close();
-        }
+        }*/
     }
 }
