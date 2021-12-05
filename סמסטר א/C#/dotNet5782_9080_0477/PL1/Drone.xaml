@@ -9,9 +9,12 @@
     <Grid>
         <Grid Name="actions" Visibility="Visible">
             <Grid.RowDefinitions>
-                <RowDefinition Height="150*" />
-                <RowDefinition Height="100*" />
-                <RowDefinition Height="400*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -23,15 +26,16 @@
             </Grid.ColumnDefinitions>
             <Button Content="update" Name="Update" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Row="1" Click="Update_Click"/>
             <Button Content="charge a drone" Name="Charge" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Column="1" Grid.Row="1" Click="Charge_Click"/>
-            <Button Content="uncharge a drone" Name="UnCharge" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Column="2" Grid.Row="1" Click="UnCharge_Click"/>
-            <Button Content="send to parcel" Name="Connect" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Column="3" Grid.Row="1" Click="Connect_Click"/>
-            <Button Content="collect parcel" Name="Collect" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Column="4" Grid.Row="1" Click="Collect_Click"/>
-            <Button Content="supply parcel" Name="Supply" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Column="5" Grid.Row="1" Click="Supply_Click"/>
-            <TextBlock Name="DroneContainIDModel" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="91"  Height="31" Margin="28,18,0,0" Text="id:  10, model" />
-            <TextBox Margin="100,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Name="ModelDrone" Height="31" HorizontalAlignment="Left" Width="75" Grid.ColumnSpan="2" BorderThickness="0"/>
-            <TextBlock Name="DroneContain" Grid.Column="1" HorizontalAlignment="Right" Margin="0,18,14,0" Height="31" TextWrapping="Wrap" VerticalAlignment="Top" Width="606" Grid.ColumnSpan="5"/>
-            <TextBlock Grid.Column="2" Name="TimeChargerBlock" HorizontalAlignment="Left" Margin="14,10,0,0" Grid.Row="2" Text="time in charger: " TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="85"/>
-            <TextBox Grid.ColumnSpan="2" Name="TimeCharger" BorderThickness="0" Grid.Column="2" HorizontalAlignment="Left" Margin="105,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" Height="17"/>
+            <Button Content="uncharge a drone" Name="UnCharge" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Row="2"  Grid.Column="1" Click="UnCharge_Click"/>
+            <Button Content="send to parcel" Name="Connect" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105"  Grid.Row="2" Click="Connect_Click"/>
+            <Button Content="collect parcel" Name="Collect" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Row="3" Click="Collect_Click"/>
+            <Button Content="supply parcel" Name="Supply" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="104" Grid.Column="1" Grid.Row="3" Click="Supply_Click" />
+            <TextBlock Name="DroneContainIDModel" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="91"  Height="30" Margin="28,34,0,0" Text="id:  10, model" />
+            <TextBox Margin="100,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Name="ModelDrone" Height="31" HorizontalAlignment="Left" Width="75" Grid.ColumnSpan="2" BorderThickness="0"/>
+            <TextBlock Name="DroneContain" Grid.Column="1" HorizontalAlignment="Left" Margin="41,34,0,0" Height="31" TextWrapping="Wrap" VerticalAlignment="Top" Width="606" Grid.ColumnSpan="5"/>
+            <TextBlock Grid.Column="2" Name="TimeChargerBlock" HorizontalAlignment="Left" Margin="10,35,0,0" Grid.Row="2" Text="time in charger: " TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="85"/>
+            <TextBox Name="TimeCharger" BorderThickness="0" Grid.Column="2" HorizontalAlignment="Left" Margin="101,0,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="32" Height="17"/>
+            <Button Content="X" Width="50" Grid.Column="5" Background="Red" HorizontalAlignment="Left" Margin="83,0,0,67" Click="Button_ClickClose"/>
         </Grid>
         <Grid Name="addDrone" Visibility="Hidden">
             <Grid.RowDefinitions>

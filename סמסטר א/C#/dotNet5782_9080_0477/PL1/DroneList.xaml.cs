@@ -33,6 +33,7 @@ namespace PL1
         public DroneList(IBL.Bl bl)
         {
             InitializeComponent();
+            WindowStyle = WindowStyle.None;
             blDroneList = bl;
             DroneListView.ItemsSource = bl.GetDronesBL();
         }
@@ -108,11 +109,43 @@ namespace PL1
 
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            sender.ToString();
             ListView options = sender as ListView;
             DroneBL drone = blDroneList.getDroneByIndex(options.SelectedIndex);
             new Drone(blDroneList, drone).Show();
 
             //MessageBox.Show(drone.ToString());
         }
+
+        private void DroneListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_ClickClose(object sender, RoutedEventArgs e)
+        {
+            new MainWindow().Show();
+            Close();
+        }
+
+        /* private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+         {
+             e.Cancel = false;
+         }*/
+
+        /*  //
+          // source code 
+          // Code Snippet
+          //Disable close button
+          private const int WS_SYSMENU = 0x80000;
+          protected override CreateParams CreateParams
+          {
+              get
+              {
+                  CreateParams cp = base.CreateParams;
+                  cp.Style &= ~WS_SYSMENU;
+                  return cp;
+              }
+          }*/
     }
 }

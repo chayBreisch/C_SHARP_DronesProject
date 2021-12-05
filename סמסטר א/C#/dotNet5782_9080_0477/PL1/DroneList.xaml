@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL1"
         mc:Ignorable="d"
-        Title="DroneList" Height="640" Width="800">
+        Title="DroneList" Height="640" Width="800" >
 
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
@@ -37,8 +37,9 @@
                 <TextBlock TextWrapping="Wrap" Text="drone weight:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" FontWeight="DemiBold" FontSize="20" Margin="10,0,0,0" Width="136"/>
 
             </Border>
+            <Button Content="X" Background="Red" Grid.Column="3" Margin="163,-5,10,0" VerticalAlignment="Top" Click="Button_ClickClose"/>
         </Grid>
-        <ListView Grid.Row="1" x:Name="DroneListView"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick="DroneListView_MouseDoubleClick"/>
+        <ListView Grid.Row="1" x:Name="DroneListView"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick="DroneListView_MouseDoubleClick" SelectionChanged="DroneListView_SelectionChanged"/>
         <Button Content="add drone" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="146" RenderTransformOrigin="0.495,0.148" Margin="419,475,0,0" Click="Button_ClickAddDrone" Grid.Row="1"/>
         <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click_ShowListDrones" Height="45" Width="146" Margin="230,475,0,0" Grid.Row="1"/>
 
