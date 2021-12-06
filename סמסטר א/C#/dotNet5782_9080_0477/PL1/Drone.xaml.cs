@@ -205,6 +205,7 @@ namespace PL1
 
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
+            new DroneList(blDrone).Show();
             Close();
         }
     }

@@ -113,7 +113,7 @@ namespace PL1
             ListView options = sender as ListView;
             DroneBL drone = blDroneList.getDroneByIndex(options.SelectedIndex);
             new Drone(blDroneList, drone).Show();
-
+            Close();
             //MessageBox.Show(drone.ToString());
         }
 
@@ -127,25 +127,5 @@ namespace PL1
             new MainWindow().Show();
             Close();
         }
-
-        /* private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-         {
-             e.Cancel = false;
-         }*/
-
-        /*  //
-          // source code 
-          // Code Snippet
-          //Disable close button
-          private const int WS_SYSMENU = 0x80000;
-          protected override CreateParams CreateParams
-          {
-              get
-              {
-                  CreateParams cp = base.CreateParams;
-                  cp.Style &= ~WS_SYSMENU;
-                  return cp;
-              }
-          }*/
     }
 }
