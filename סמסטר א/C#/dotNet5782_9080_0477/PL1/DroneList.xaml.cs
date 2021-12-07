@@ -51,27 +51,6 @@ namespace PL1
         }
 
         /// <summary>
-        /// close thus window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button_Click_Close(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        /// <summary>
-        /// open the mainWindow
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button_Click_Menu(object sender, RoutedEventArgs e)
-        {
-            new MainWindow().Show();
-            Close();
-        }
-
-        /// <summary>
         /// show the drones with the selected status
         /// </summary>
         /// <param name="sender"></param>
@@ -102,7 +81,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
-            Hide();
+            this.Visibility = Visibility.Hidden;
             new Drone(blDroneList).Show();
             
         }
@@ -111,8 +90,8 @@ namespace PL1
         {
             sender.ToString();
             DroneBL drone = (sender as ListView).SelectedValue as DroneBL;
-            new Drone(blDroneList, drone).Show();
-            Close();
+            this.Visibility = Visibility.Hidden;
+            new Drone(blDroneList, drone, this).Show();
             //MessageBox.Show(drone.ToString());
         }
 
