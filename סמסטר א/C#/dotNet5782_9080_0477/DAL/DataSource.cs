@@ -50,7 +50,7 @@ namespace DalObject
             {
                 Drone drone = new Drone();
                 drone.ID = drones.Count + 1;
-                drone.Model = "MarvicAir2";
+                drone.Model = "Hello World";
                 drone.MaxWeight = (WeightCatagories)((i % 3) + 1);
                 drones.Add(drone);
             }

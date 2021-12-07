@@ -39,9 +39,13 @@ namespace PL1
             WindowStyle = WindowStyle.None;
             addDrone.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
-            DroneContainIDModel.Text = $"id: {drone.ID }, model: ";
-            ModelDrone.Text = drone.Model;
-            DroneContain.Text = $", battery: {Math.Round(drone.BatteryStatus)}%, weight: {drone.Weight},  status: {drone.DroneStatus}, parcelInDelivery: { drone.parcelInDelivery}, { drone.Location.ToString() }";
+            idDrone.Text = drone.ID.ToString();
+            modelDrone.Text = drone.Model;
+            batteryDrone.Text = $"{Math.Round(drone.BatteryStatus).ToString()}%";
+            weightDrone.Text = drone.Weight.ToString();
+            statusDrone.Text = drone.DroneStatus.ToString();
+            //parcelInDeliveryDrone.Text = drone.parcelInDelivery.ToString();
+            locationDrone.Text = $"{drone.Location.Latitude}, {drone.Location.Longitude}";
             if (droneBL.DroneStatus != DroneStatus.Available)
             {
                 Charge.IsEnabled = false;
@@ -112,19 +116,17 @@ namespace PL1
         //###########################################################
         //actions
         //###########################################################
-        private void Update_Click(object sender, RoutedEventArgs e)
+      private void Update_Click(object sender, RoutedEventArgs e)
         {
-            string model = ModelDrone.Text;
+           string model = modelDrone.Text;
             blDrone.updateDataDroneModel(droneBL.ID, model);
-            ModelDrone.Text = droneBL.Model;
-            DroneContain.Text = $", battery: {Math.Round(droneBL.BatteryStatus)}%, weight: {droneBL.Weight},  status: {droneBL.DroneStatus}, parcelInDelivery: { droneBL.parcelInDelivery}, { droneBL.Location.ToString() }";
+            modelDrone.Text = droneBL.Model;
+         }
 
-        }
-
-        private void Charge_Click(object sender, RoutedEventArgs e)
+       private void Charge_Click(object sender, RoutedEventArgs e)
         {
             blDrone.updateSendDroneToCharge(droneBL.ID);
-            DroneContain.Text = $", battery: {Math.Round(droneBL.BatteryStatus)}%, weight: {droneBL.Weight},  status: {droneBL.DroneStatus}, parcelInDelivery: { droneBL.parcelInDelivery}, { droneBL.Location.ToString() }";
+            statusDrone.Text = droneBL.DroneStatus.ToString();
             Charge.IsEnabled = false;
             Connect.IsEnabled = false;
             Collect.IsEnabled = false;
@@ -132,7 +134,7 @@ namespace PL1
             UnCharge.IsEnabled = true;
             TimeCharger.Visibility = Visibility.Visible;
             TimeChargerBlock.Visibility = Visibility.Visible;
-        }
+       }
 
         private void UnCharge_Click(object sender, RoutedEventArgs e)
         {
@@ -150,7 +152,8 @@ namespace PL1
                 TimeCharger.Visibility = Visibility.Hidden;
                 TimeChargerBlock.Visibility = Visibility.Hidden;
                 blDrone.updateUnchargeDrone(droneBL.ID, time);
-                DroneContain.Text = $", battery: {droneBL.BatteryStatus}%, weight: {droneBL.Weight},  status: {droneBL.DroneStatus}, parcelInDelivery: { droneBL.parcelInDelivery}, location: { droneBL.Location.ToString() }";
+                statusDrone.Text = droneBL.DroneStatus.ToString();
+                batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
                 TimeCharger.Text = "";
             }
         }

@@ -116,11 +116,6 @@ namespace PL1
             //MessageBox.Show(drone.ToString());
         }
 
-        private void DroneListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
             new MainWindow().Show();
