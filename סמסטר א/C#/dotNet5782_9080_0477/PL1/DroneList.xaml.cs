@@ -110,8 +110,7 @@ namespace PL1
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             sender.ToString();
-            ListView options = sender as ListView;
-            DroneBL drone = blDroneList.getDroneByIndex(options.SelectedIndex);
+            DroneBL drone = (sender as ListView).SelectedValue as DroneBL;
             new Drone(blDroneList, drone).Show();
             Close();
             //MessageBox.Show(drone.ToString());
