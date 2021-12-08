@@ -92,12 +92,11 @@ namespace PL1
             DroneBL drone = (sender as ListView).SelectedValue as DroneBL;
             this.Visibility = Visibility.Hidden;
             new Drone(blDroneList, drone, this).Show();
-            //MessageBox.Show(drone.ToString());
         }
 
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            new MainWindow().Show();
+            //new MainWindow().Show();
             Close();
         }
     }

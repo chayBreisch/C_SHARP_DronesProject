@@ -199,6 +199,13 @@ namespace BL
             }
             Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
             Customer customerReciever = dalObject.getCustomerById(c=> c.ID == parcel.TargetID);
+            ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
+            parcelInDelivery.ID = parcel.ID;
+            parcelInDelivery.Priority = parcel.Priority;
+            parcelInDelivery.CollectLocation = new LocationBL() { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude };
+            parcelInDelivery.DeliveryDestinationLocation = new LocationBL() { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude };
+            parcelInDelivery.Weight = parcel.Weight;
+            droneBL.parcelInDelivery = parcelInDelivery;
             double electricSenderToReciever = calcElectry(new LocationBL(customerSender.Longitude, customerSender.Latitude), new LocationBL(customerReciever.Longitude, customerReciever.Latitude), (int)parcel.Weight);
             droneBL.BatteryStatus -= electricSenderToReciever;
             droneBL.Location = new LocationBL(customerReciever.Longitude, customerReciever.Latitude);

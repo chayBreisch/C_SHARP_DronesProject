@@ -46,7 +46,10 @@ namespace PL1
             batteryDrone.Text = $"{Math.Round(drone.BatteryStatus).ToString()}%";
             weightDrone.Text = drone.Weight.ToString();
             statusDrone.Text = drone.DroneStatus.ToString();
-            //parcelInDeliveryDrone.Text = drone.parcelInDelivery.ToString();
+            if (drone.parcelInDelivery != null)
+                parcelInDeliveryDrone.Text = drone.parcelInDelivery.ToString();
+            else
+                parcelInDeliveryDrone.Text = "no parcel";
             locationDrone.Text = $"{drone.Location.Latitude}, {drone.Location.Longitude}";
             if (droneBL.DroneStatus != DroneStatus.Available)
             {

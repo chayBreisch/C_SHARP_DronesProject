@@ -52,7 +52,7 @@ namespace DalObject
 
         public Drone getDroneById(Predicate<Drone> predicate)
         {
-            //try ToDO
+            //try TODO
             Drone drone1 = new Drone();
             try
             {
