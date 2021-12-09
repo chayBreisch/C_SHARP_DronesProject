@@ -30,7 +30,7 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid Name="actions" Visibility="Visible">
+        <Grid Name="actions" Visibility="Hidden">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -88,7 +88,7 @@
                 <Label Content="Drone" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
-        <Grid Name="addDrone" Visibility="Hidden" Background="#FFFFD9D5">
+        <Grid Name="addDrone" Visibility="Visible" Background="#FFFFD9D5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -114,7 +114,7 @@
             <TextBlock HorizontalAlignment="Left" Margin="30,10,0,0" Grid.Row="4" Text="number of station to charge:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" Grid.Column="1"/>
             <Button Content="add drone" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top" Margin="175,29,0,0" RenderTransformOrigin="-0.207,0.023" Width="105" Height="27" Grid.Column="1" Click="Button_ClickAddDrone" />
             <Button Content="cancel add drone" Grid.Column="1" HorizontalAlignment="Left" Margin="30,29,0,0" Grid.Row="5" VerticalAlignment="Top" Width="105" Height="27" Click="Button_ClickCancelAddDrone"/>
-            <Button Content="X" Width="50" Grid.Column="2" Background="Red" HorizontalAlignment="Left" Margin="192,0,0,52" Click="Button_ClickClose"/>
+            <Button Content="X" Width="50" Grid.Column="2" Background="Red" HorizontalAlignment="Left" Margin="192,0,0,52" Click="Button_ClickClose" Height="20" VerticalAlignment="Bottom"/>
 
         </Grid>
     </Grid>

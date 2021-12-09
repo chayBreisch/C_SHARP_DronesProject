@@ -22,8 +22,10 @@ namespace PL1
     {
         IBL.Bl blDrone;
         DroneBL droneBL;
-        public Drone(IBL.Bl bl)
+        DroneList DroneList;
+        public Drone(IBL.Bl bl, DroneList droneList)
         {
+            DroneList = droneList;
             blDrone = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -31,7 +33,6 @@ namespace PL1
             addDrone.Visibility = Visibility.Visible;
         }
 
-        DroneList DroneList;
         public Drone(IBL.Bl bl, DroneBL drone, DroneList droneList)
         {
             DroneList = droneList;

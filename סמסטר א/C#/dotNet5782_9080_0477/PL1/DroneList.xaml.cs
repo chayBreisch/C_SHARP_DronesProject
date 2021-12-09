@@ -82,7 +82,7 @@ namespace PL1
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Hidden;
-            new Drone(blDroneList).Show();
+            new Drone(blDroneList, this).Show();
             
         }
 
