@@ -38,8 +38,8 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_Click_DroneList(object sender, RoutedEventArgs e)
         {
-            new DroneList(bl).Show();
-            Close();
+            new DroneList(bl, this).Show();
+            Hide();
         }
     }
 }

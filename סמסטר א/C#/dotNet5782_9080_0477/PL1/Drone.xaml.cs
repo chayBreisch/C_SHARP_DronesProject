@@ -102,10 +102,8 @@ namespace PL1
                 {
                     blDrone.addDrone(id, Model, weight, number);
                     MessageBox.Show("you added succefuly");
-                    //לעשות שיפתח את הקודם
-                    DroneList.Visibility = Visibility.Visible;
-                    //new DroneList(blDrone).Show();
-                    this.Close();
+                    DroneList.Show();
+                    Close();
                 }
                 catch (Exception exce)
                 {
@@ -116,7 +114,7 @@ namespace PL1
 
         private void Button_ClickCancelAddDrone(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
 
@@ -215,9 +213,8 @@ namespace PL1
 
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            DroneList.Visibility = Visibility.Visible;
-            //new DroneList(blDrone).Show();
-            this.Close();
+            DroneList.Show();
+            Close();
         }
     }
 }

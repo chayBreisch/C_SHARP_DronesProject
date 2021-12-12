@@ -26,13 +26,15 @@ namespace PL1
     public partial class DroneList : Window
     {
         IBL.Bl blDroneList;
+        MainWindow mainWindow;
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public DroneList(IBL.Bl bl)
+        public DroneList(IBL.Bl bl, MainWindow main)
         {
             InitializeComponent();
+            mainWindow = main;
             WindowStyle = WindowStyle.None;
             blDroneList = bl;
             DroneListView.ItemsSource = bl.GetDronesBL();
@@ -81,8 +83,9 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Hidden;
+            //this.Visibility = Visibility.Hidden;
             new Drone(blDroneList, this).Show();
+            Hide();
             
         }
 
@@ -90,13 +93,14 @@ namespace PL1
         {
             sender.ToString();
             DroneBL drone = (sender as ListView).SelectedValue as DroneBL;
-            this.Visibility = Visibility.Hidden;
+            //this.Visibility = Visibility.Hidden;
             new Drone(blDroneList, drone, this).Show();
+            Hide();
         }
 
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            //new MainWindow().Show();
+            mainWindow.Show();
             Close();
         }
     }
