@@ -177,6 +177,7 @@ namespace BL
             Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
             droneBL.BatteryStatus -= calcElectry(droneBL.Location, new LocationBL(customerSender.Longitude, customerSender.Latitude), (int)parcel.Weight);
             droneBL.Location = new LocationBL(customerSender.Longitude, customerSender.Latitude);
+            droneBL.DroneStatus = DroneStatus.Delivery;//////////////////////////////////////
             updateDrone(droneBL);
             parcel.PickedUp = DateTime.Now;
             dalObject.updateParcel(parcel);

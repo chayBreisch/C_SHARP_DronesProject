@@ -107,7 +107,7 @@ namespace PL1
                 }
                 catch (Exception exce)
                 {
-                    MessageBox.Show(Convert.ToString(exce));
+                    MessageBox.Show(exce.Message);
                 }
             }
         }
@@ -173,7 +173,7 @@ namespace PL1
             catch(Exception ex)
             {
                 check = false;
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message.ToString());
             }
             if (check)
                 MessageBox.Show("connected succesfully");       
@@ -189,7 +189,7 @@ namespace PL1
             catch(Exception ex)
             {
                 check = false;
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message.ToString());
             }
             if (check)
                 MessageBox.Show("collected succesfully");
@@ -205,7 +205,7 @@ namespace PL1
             catch(Exception ex)
             {
                 check = false;
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message.ToString());
             }
             if (check)
                 MessageBox.Show("supplied succesfully");
