@@ -23,6 +23,12 @@ namespace PL1
         IBL.Bl blDrone;
         DroneBL droneBL;
         DroneList DroneList;
+
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="droneList"></param>
         public Drone(IBL.Bl bl, DroneList droneList)
         {
             DroneList = droneList;
@@ -33,6 +39,12 @@ namespace PL1
             addDrone.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="drone"></param>
+        /// <param name="droneList"></param>
         public Drone(IBL.Bl bl, DroneBL drone, DroneList droneList)
         {
             DroneList = droneList;
@@ -64,17 +76,21 @@ namespace PL1
                 UnCharge.IsEnabled = false;
                 TimeCharger.Visibility = Visibility.Hidden;
                 TimeChargerBlock.Visibility = Visibility.Hidden;
-                
+
             }
 
         }
 
 
-
-
         //###############################################################################
         //add Drone
         //###############################################################################
+
+        /// <summary>
+        /// add drone to the list of drones
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
             int id;
@@ -112,23 +128,42 @@ namespace PL1
             }
         }
 
+        /// <summary>
+        /// close window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCancelAddDrone(object sender, RoutedEventArgs e)
         {
-            Close();
+            droneId.Text = "";
+            droneMdel.Text = "";
+            droneWeight.Text = "";
+            numStationtoChargeDrone.Text = "";
         }
 
 
         //###########################################################
         //actions
         //###########################################################
-      private void Update_Click(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// update the drone model
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Update_Click(object sender, RoutedEventArgs e)
         {
-           string model = modelDrone.Text;
+            string model = modelDrone.Text;
             blDrone.updateDataDroneModel(droneBL.ID, model);
             modelDrone.Text = droneBL.Model;
-         }
+        }
 
-       private void Charge_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// send drone to charge
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Charge_Click(object sender, RoutedEventArgs e)
         {
             blDrone.updateSendDroneToCharge(droneBL.ID);
             statusDrone.Text = droneBL.DroneStatus.ToString();
@@ -139,8 +174,13 @@ namespace PL1
             UnCharge.IsEnabled = true;
             TimeCharger.Visibility = Visibility.Visible;
             TimeChargerBlock.Visibility = Visibility.Visible;
-       }
+        }
 
+        /// <summary>
+        /// uncharge drone 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UnCharge_Click(object sender, RoutedEventArgs e)
         {
             double time;
@@ -163,6 +203,11 @@ namespace PL1
             }
         }
 
+        /// <summary>
+        /// connect the drone to a parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
             bool check = true;
@@ -170,15 +215,20 @@ namespace PL1
             {
                 blDrone.updateConnectParcelToDrone(droneBL.ID);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 check = false;
                 MessageBox.Show(ex.Message.ToString());
             }
             if (check)
-                MessageBox.Show("connected succesfully");       
+                MessageBox.Show("connected succesfully");
         }
 
+        /// <summary>
+        /// collect a parcel with the drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Collect_Click(object sender, RoutedEventArgs e)
         {
             bool check = true;
@@ -186,7 +236,7 @@ namespace PL1
             {
                 blDrone.updateCollectParcelByDrone(droneBL.ID);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 check = false;
                 MessageBox.Show(ex.Message.ToString());
@@ -195,6 +245,11 @@ namespace PL1
                 MessageBox.Show("collected succesfully");
         }
 
+        /// <summary>
+        /// suplly a parcel with the drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Supply_Click(object sender, RoutedEventArgs e)
         {
             bool check = true;
@@ -202,7 +257,7 @@ namespace PL1
             {
                 blDrone.updateSupplyParcelByDrone(droneBL.ID);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 check = false;
                 MessageBox.Show(ex.Message.ToString());
@@ -211,6 +266,11 @@ namespace PL1
                 MessageBox.Show("supplied succesfully");
         }
 
+        /// <summary>
+        /// close the drone window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
             DroneList.Show();

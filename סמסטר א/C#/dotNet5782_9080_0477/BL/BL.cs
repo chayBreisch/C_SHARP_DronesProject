@@ -9,7 +9,7 @@ using System.Linq;
 namespace BL
 {
     //לשים לב מה עם GET SET IN CUSTOMERBL
-    public partial class BL : Bl
+    internal partial class BL : Bl
     {
         Random rand = new Random();
         List<DroneBL> droneBLList = new List<DroneBL>();

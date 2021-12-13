@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL
+    internal partial class BL
     {
         /// <summary>
         /// check if the id is uniqe

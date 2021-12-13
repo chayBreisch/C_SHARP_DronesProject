@@ -10,7 +10,7 @@ using static BL.ExceptionsBL;
 
 namespace BL
 {
-    public partial class BL
+    internal partial class BL
     {
 
         /// <summary>

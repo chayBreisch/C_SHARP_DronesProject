@@ -11,7 +11,7 @@ using static BL.ExceptionsBL;
 /// </summary>
 namespace BL
 {
-    public partial class BL
+    internal partial class BL
     {
         /// <summary>
         /// send a drone a charger in a station

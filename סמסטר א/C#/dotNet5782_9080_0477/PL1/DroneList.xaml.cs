@@ -89,6 +89,11 @@ namespace PL1
             
         }
 
+        /// <summary>
+        /// open the drone window with the specific drone that clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             sender.ToString();
@@ -98,6 +103,11 @@ namespace PL1
             Hide();
         }
 
+        /// <summary>
+        /// close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
             mainWindow.Show();

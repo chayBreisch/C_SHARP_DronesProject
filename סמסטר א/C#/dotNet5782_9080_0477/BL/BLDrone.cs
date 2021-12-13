@@ -10,7 +10,7 @@ using static BL.ExceptionsBL;
 
 namespace BL
 {
-    public partial class BL
+    internal partial class BL
     {
         /// <summary>
         /// check if the id is uniqe
@@ -22,7 +22,6 @@ namespace BL
             List<Drone> drones = dalObject.GetDrone().ToList();
             if (drones.Any(d => d.ID == id))
                 throw new NotUniqeID(id, typeof(Drone));
-
         }
 
         /// <summary>
