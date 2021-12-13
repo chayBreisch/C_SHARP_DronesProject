@@ -22,6 +22,7 @@
 
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Foreground" Value="#FF4B4B4B"/>
                 </Trigger>
             </Style.Triggers>
         </Style>

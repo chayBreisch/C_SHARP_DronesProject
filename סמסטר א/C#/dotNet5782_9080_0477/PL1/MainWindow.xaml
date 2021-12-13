@@ -29,7 +29,5 @@
     <Window.Background>
         <ImageBrush ImageSource="/images/drone2.jpg" ></ImageBrush>
     </Window.Background>
-    
-    
     <Button Content="drone list"  FontSize="30" VerticalAlignment="Top"  Margin="550,151,0,0" HorizontalAlignment="Left" Click="Button_Click_DroneList" Width="151" Height="151"/>
 </Window>
