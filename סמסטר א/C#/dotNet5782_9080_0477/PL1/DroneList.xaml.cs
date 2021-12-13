@@ -113,5 +113,10 @@ namespace PL1
             mainWindow.Show();
             Close();
         }
+
+        private void DroneListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

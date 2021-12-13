@@ -88,7 +88,7 @@
                 <Label Content="Drone" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
-        <Grid Name="addDrone" Visibility="Visible" Background="#FFFFD9D5">
+        <Grid Name="addDrone" Visibility="Visible" Background="#FF859DA2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -104,17 +104,17 @@
 
             </Grid.ColumnDefinitions>
             <TextBlock HorizontalAlignment="Center" Text="enter details of drone" TextWrapping="Wrap" VerticalAlignment="Center" Height="24" Width="195" FontSize="18" FontWeight="Bold" Grid.Column="1"/>
-            <TextBox Background="#FFFFE9ED" Margin="30,37,30,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Name="droneId" Grid.Row="1" Grid.Column="1"/>
+            <TextBox  Background="#FF8D8C7A" Margin="30,37,30,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Name="droneId" Grid.Row="1" Grid.Column="1"/>
             <TextBlock HorizontalAlignment="Left" Margin="30,10,0,0" Grid.Row="1" Text="enter id drone:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" Grid.Column="1"/>
-            <TextBox Background="#FFFFE9ED" Margin="30,37,30,8"  TextWrapping="Wrap" Name="droneMdel" Grid.Row="2" Grid.Column="1"/>
+            <TextBox  Background="#FF8D8C7A" Margin="30,37,30,8"  TextWrapping="Wrap" Name="droneMdel" Grid.Row="2" Grid.Column="1"/>
             <TextBlock HorizontalAlignment="Left" Margin="30,10,0,0" Grid.Row="2" Text="enter model drone:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" Grid.Column="1"/>
-            <ComboBox Name="droneWeight" Background="#FFFFE9ED" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="255"  Height="27" Margin="30,37,30,8" Grid.Row="3">
+            <ComboBox Name="droneWeight"  Background="#FF8D8C7A" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="255"  Height="27" Margin="30,37,30,8" Grid.Row="3">
                 <ComboBoxItem >Light</ComboBoxItem>
                 <ComboBoxItem>Medium</ComboBoxItem>
                 <ComboBoxItem>Heavy</ComboBoxItem>
             </ComboBox>
             <TextBlock HorizontalAlignment="Left" Margin="30,10,0,0" Grid.Row="3" Text="enter weight drone:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" Grid.Column="1"/>
-            <TextBox Background="#FFFFE9ED" Margin="30,37,30,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Name="numStationtoChargeDrone" Grid.Row="4" Grid.Column="1"/>
+            <TextBox  Background="#FF8D8C7A" Margin="30,37,30,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Name="numStationtoChargeDrone" Grid.Row="4" Grid.Column="1"/>
             <TextBlock HorizontalAlignment="Left" Margin="30,10,0,0" Grid.Row="4" Text="number of station to charge:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" Grid.Column="1"/>
             <Button Content="add drone" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top" Margin="175,29,0,0" RenderTransformOrigin="-0.207,0.023" Width="105" Height="27" Grid.Column="1" Click="Button_ClickAddDrone" />
             <Button Content="reset" Grid.Column="1" HorizontalAlignment="Left" Margin="30,29,0,0" Grid.Row="5" VerticalAlignment="Top" Width="105" Height="27" Click="Button_ClickCancelAddDrone"/>
