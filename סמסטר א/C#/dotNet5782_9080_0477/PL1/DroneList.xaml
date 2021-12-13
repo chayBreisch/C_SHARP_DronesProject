@@ -40,7 +40,7 @@
 
         </Grid>
         <ListView Background="#FF8D8C7A" Grid.Row="1" x:Name="DroneListView"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick="DroneListView_MouseDoubleClick" SelectionChanged="DroneListView_SelectionChanged" />
-        <Button Content="add drone" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="50" RenderTransformOrigin="0.495,0.148" Margin="419,475,0,0"  Grid.Row="1" Click="Button_ClickAddDrone" />
+        <Button Content="add drone" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="419,475,0,0"  Grid.Row="1" Click="Button_ClickAddDrone" />
         <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click_ShowListDrones" Height="45" Width="146" Margin="230,475,0,0" Grid.Row="1"/>
 
 
