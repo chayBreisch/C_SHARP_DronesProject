@@ -6,21 +6,6 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class Exceptions : Exception
-    {
-        public Exceptions(ulong id) : base($"not found {id}")
-        {
-
-        }
-        public Exceptions(int id) : base($"not found {id}")
-        {
-
-        }
-        public Exceptions(string id) : base($"dont have enough battery {id}")
-        {
-
-        }
-    }
     public class NotUniqeID : Exception
     {
 

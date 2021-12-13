@@ -90,24 +90,7 @@ namespace DalObject
             }
             catch (ArgumentNullException e)
             {
-                throw new Exceptions(id);
-            }
-        }
-
-        /// <summary>
-        /// get index from specific drone charge by station id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>int</returns>
-        public int getIndexOfDroneChargeByDroneID(int id)
-        {
-            try
-            {
-                return DataSource.droneChargers.FindIndex(p => p.DroneID == id);
-            }
-            catch (ArgumentNullException e)
-            {
-                throw new Exceptions(id);
+                throw new NotExistObjWithID(id, typeof(DroneCharge));
             }
         }
 
@@ -156,7 +139,7 @@ namespace DalObject
                                 where predicate(dronecharge)
                                 select dronecharge).First();
             }
-            catch (Exception e) { }
+            catch (NotExistObjWithID e) { }
             return droneCharge1;
 
         }

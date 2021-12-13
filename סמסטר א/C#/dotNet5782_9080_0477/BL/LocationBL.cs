@@ -27,7 +27,8 @@ namespace IBL
                 set
                 {
                     if (value > 36 || value < 0)
-                        throw new OutOfRange("longitude");
+                        
+                        new OutOfRange("longitude");
                     latitude = value;
                 }
             }
