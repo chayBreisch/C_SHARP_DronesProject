@@ -10,7 +10,7 @@ namespace IBL
 {
     namespace BO
     {
-        public class StationBL
+        public class Station
         {
 
 

@@ -21,7 +21,7 @@ namespace PL1
     public partial class Drone : Window
     {
         IBL.Bl blDrone;
-        DroneBL droneBL;
+        IBL.BO.Drone droneBL;
         DroneList DroneList;
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace PL1
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="droneList"></param>
-        public Drone(IBL.Bl bl, DroneBL drone, DroneList droneList)
+        public Drone(IBL.Bl bl, IBL.BO.Drone drone, DroneList droneList)
         {
             DroneList = droneList;
             blDrone = bl;
@@ -66,15 +66,24 @@ namespace PL1
             locationDrone.Text = $"{drone.Location.Latitude}, {drone.Location.Longitude}";
             if (droneBL.DroneStatus != DroneStatus.Available)
             {
-                Charge.IsEnabled = false;
+                visible.IsChecked = false;
+                hidden.IsChecked = true;
+                //visible.Visibility = Visibility.Hidden;
+                //hidden.Visibility = Visibility.Visible;
+                /*Charge.IsEnabled = false;
                 Connect.IsEnabled = false;
                 Collect.IsEnabled = false;
-                Supply.IsEnabled = false;
+                Supply.IsEnabled = false;*/
             }
             if (droneBL.DroneStatus != DroneStatus.Maintenance)
             {
-                UnCharge.IsEnabled = false;
-                TimeCharger.Visibility = Visibility.Hidden;
+                /* UnCharge.IsEnabled = false;*/
+                //hidden.Visibility = Visibility.Hidden;
+                //visible.Visibility = Visibility.Visible;
+                visible.IsChecked = true;
+                hidden.IsChecked = false;
+
+                //TimeCharger.Visibility = Visibility.Hidden;
                 TimeChargerBlock.Visibility = Visibility.Hidden;
 
             }
@@ -167,12 +176,17 @@ namespace PL1
         {
             blDrone.updateSendDroneToCharge(droneBL.ID);
             statusDrone.Text = droneBL.DroneStatus.ToString();
-            Charge.IsEnabled = false;
+            /*visible.Visibility = Visibility.Hidden;
+            hidden.Visibility = Visibility.Visible;*/
+            visible.IsChecked = false;
+            hidden.IsChecked = true;
+
+            /*Charge.IsEnabled = false;
             Connect.IsEnabled = false;
             Collect.IsEnabled = false;
             Supply.IsEnabled = false;
-            UnCharge.IsEnabled = true;
-            TimeCharger.Visibility = Visibility.Visible;
+            UnCharge.IsEnabled = true;*/
+            //TimeCharger.Visibility = Visibility.Visible;
             TimeChargerBlock.Visibility = Visibility.Visible;
         }
 
@@ -189,12 +203,17 @@ namespace PL1
                 MessageBox.Show("invalid time");
             else
             {
-                Charge.IsEnabled = true;
+                /*visible.Visibility = Visibility.Visible;
+                hidden.Visibility = Visibility.Hidden;*/
+                visible.IsChecked = true;
+                hidden.IsChecked = false;
+
+                /*Charge.IsEnabled = true;
                 Connect.IsEnabled = true;
                 Collect.IsEnabled = true;
                 Supply.IsEnabled = true;
-                UnCharge.IsEnabled = false;
-                TimeCharger.Visibility = Visibility.Hidden;
+                UnCharge.IsEnabled = false;*/
+                //TimeCharger.Visibility = Visibility.Hidden;
                 TimeChargerBlock.Visibility = Visibility.Hidden;
                 blDrone.updateUnchargeDrone(droneBL.ID, time);
                 statusDrone.Text = droneBL.DroneStatus.ToString();

@@ -10,6 +10,15 @@ namespace IBL
     {
         public class ParcelToList
         {
+            public ParcelToList(Parcel parcel, IDAL.IDal dalObject)
+            {
+                ID = parcel.ID;
+                NameCustomerSender = dalObject.getCustomerById(c => c.ID == parcel.Sender.ID).Name;
+                NameCustomerReciver = dalObject.getCustomerById(c => c.ID == parcel.Reciever.ID).Name;
+                Weight = parcel.Weight;
+                Priority = parcel.Priorities;
+
+            }
             public int ID { get; set; }
             public string NameCustomerSender { get; set; }
             public string NameCustomerReciver { get; set; }

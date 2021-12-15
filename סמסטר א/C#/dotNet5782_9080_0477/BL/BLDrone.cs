@@ -19,9 +19,9 @@ namespace BL
         /// <param name="dalObject"></param>
         public static void checkUniqeIdDrone(int id, IDAL.IDal dalObject)
         {
-            List<Drone> drones = dalObject.GetDrone().ToList();
+            List<IDAL.DO.Drone> drones = dalObject.GetDrone().ToList();
             if (drones.Any(d => d.ID == id))
-                throw new NotUniqeID(id, typeof(Drone));
+                throw new NotUniqeID(id, typeof(IDAL.DO.Drone));
         }
 
         /// <summary>
@@ -38,8 +38,8 @@ namespace BL
             {
                 throw new OutOfRange("weight");
             }
-            DroneBL droneBL = new DroneBL();
-            Station station = dalObject.getStationById(s => s.ID == stationID);
+            IBL.BO.Drone droneBL = new IBL.BO.Drone();
+            IDAL.DO.Station station = dalObject.getStationById(s => s.ID == stationID);
             if (station.ID != 0)
             {
                 droneBL.Model = model;
@@ -55,7 +55,7 @@ namespace BL
                 droneBLList.Add(droneBL);
             }
             else
-                throw new NoItemWithThisID(stationID, typeof(Station));
+                throw new NoItemWithThisID(stationID, typeof(IDAL.DO.Station));
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace BL
         public void AddDroneToDal(int id, string model, int maxWeight)
         {
 
-            Drone drone = new Drone();
+            IDAL.DO.Drone drone = new IDAL.DO.Drone();
             drone.ID = id;
             drone.Model = model;
             drone.MaxWeight = (WeightCatagories)maxWeight;
@@ -78,11 +78,11 @@ namespace BL
         /// return all the drones from the dal converted to bl
         /// </summary>
         /// <returns>List<DroneBL>returns>
-        public List<DroneBL> GetDronesBL()
+        public List<IBL.BO.Drone> GetDronesBL()
         {
 
-            IEnumerable<Drone> drones = dalObject.GetDrone();
-            List<DroneBL> drone1 = new List<DroneBL>();
+            IEnumerable<IDAL.DO.Drone> drones = dalObject.GetDrone();
+            List<IBL.BO.Drone> drone1 = new List<IBL.BO.Drone>();
             foreach (var drone in drones)
             {
                 drone1.Add(convertDalDroneToBl(drone));
@@ -95,7 +95,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>DroneBL</returns>
-        public DroneBL getSpecificDroneBLFromList(int id)
+        public IBL.BO.Drone getSpecificDroneBLFromList(int id)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace BL
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(id, typeof(Drone));
+                throw new NotExistObjWithID(id, typeof(IDAL.DO.Drone));
             }
         }
 
@@ -112,7 +112,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>DroneBL</returns>
-        public DroneBL GetSpecificDroneBL(int id)
+        public IBL.BO.Drone GetSpecificDroneBL(int id)
         {
             return getSpecificDroneBLFromList(id);
         }
@@ -122,7 +122,7 @@ namespace BL
         /// </summary>
         /// <param name="d"></param>
         /// <returns>DroneBL</returns>
-        public DroneBL convertDalDroneToBl(Drone d)
+        public IBL.BO.Drone convertDalDroneToBl(IDAL.DO.Drone d)
         {
             //לבדוק מה עם parcellattransfor
             return GetSpecificDroneBL(d.ID);
@@ -132,7 +132,7 @@ namespace BL
         /// update the drone
         /// </summary>
         /// <param name="drone"></param>
-        public void updateDrone(DroneBL drone)
+        public void updateDrone(IBL.BO.Drone drone)
         {
             int index = droneBLList.FindIndex(d => d.ID == drone.ID);
             droneBLList[index] = drone;
@@ -145,11 +145,11 @@ namespace BL
         /// <param name="model"></param>
         public void updateDataDroneModel(int id, string model)
         {
-            DroneBL droneBl = getSpecificDroneBLFromList(id);
+            IBL.BO.Drone droneBl = getSpecificDroneBLFromList(id);
             droneBl.Model = model;
             updateDrone(droneBl);
 
-            Drone drone = dalObject.getDroneById(d => d.ID == id);
+            IDAL.DO.Drone drone = dalObject.getDroneById(d => d.ID == id);
             drone.Model = model;
             dalObject.updateDrone(drone);
         }
@@ -159,9 +159,9 @@ namespace BL
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
-        public List<DroneBL> getDronesByDroneStatus(int status)
+        public List<IBL.BO.Drone> getDronesByDroneStatus(int status)
         {
-            IEnumerable<DroneBL> droneQuery =
+            IEnumerable<IBL.BO.Drone> droneQuery =
             from drone in GetDronesBL()
             where drone.DroneStatus == (DroneStatus)status
             select drone;
@@ -173,9 +173,9 @@ namespace BL
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
-        public List<DroneBL> getDronesByDroneWeight(int status)
+        public List<IBL.BO.Drone> getDronesByDroneWeight(int status)
         {
-            IEnumerable<DroneBL> droneQuery =
+            IEnumerable<IBL.BO.Drone> droneQuery =
             from drone in GetDronesBL()
             where drone.Weight == (WeightCatagories)status
             select drone;

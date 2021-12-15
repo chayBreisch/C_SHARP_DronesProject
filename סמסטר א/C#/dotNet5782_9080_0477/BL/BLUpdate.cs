@@ -20,8 +20,8 @@ namespace BL
         public void updateSendDroneToCharge(int id)
         {
             //check this function////////////////////////////////
-            Station station = new Station();
-            DroneBL droneBL = getSpecificDroneBLFromList(id);
+            IDAL.DO.Station station = new IDAL.DO.Station();
+            IBL.BO.Drone droneBL = getSpecificDroneBLFromList(id);
             //find a station to charge
             if (droneBL.DroneStatus == DroneStatus.Available)
             {
@@ -57,7 +57,7 @@ namespace BL
         /// <param name="timeInCharge"></param>
         public void updateUnchargeDrone(int id, double timeInCharge)
         {
-            DroneBL droneBL = new DroneBL();
+            IBL.BO.Drone droneBL = new IBL.BO.Drone();
             try
             {
                 droneBL = droneBLList.Find(d => d.ID == id && d.DroneStatus == DroneStatus.Maintenance);
@@ -78,7 +78,7 @@ namespace BL
             DroneCharge droneCharge = dalObject.getDroneChargeById(d => d.DroneID == droneBL.ID);
             /*try/////////////////////לכאורה מיותר כי כבר בדקתי שהרחפן בהטענה אז חייב להיות מטען ותחנה
             {*/
-            Station station = dalObject.getStationById(s => s.ID == droneCharge.StationID);
+            IDAL.DO.Station station = dalObject.getStationById(s => s.ID == droneCharge.StationID);
             station.ChargeSlots += 1;
             dalObject.updateStation(station);
             /*}
@@ -95,15 +95,15 @@ namespace BL
         /// <param name="id"></param>
         public void updateConnectParcelToDrone(int id)
         {
-            DroneBL droneBL = getSpecificDroneBLFromList(id);
+            IBL.BO.Drone droneBL = getSpecificDroneBLFromList(id);
             if (droneBL.DroneStatus != DroneStatus.Available)
             {
                 throw new CanNotUpdateDrone(id, "the drone is not free");
             }
-            Customer customerSender, customerCurrent, customerReciever;
-            Parcel currentParcel = new Parcel();
-            List<Parcel> parcels = getParcelsWithoutoutDrone();
-            currentParcel = new Parcel() { Weight = 0 };
+            IDAL.DO.Customer customerSender, customerCurrent, customerReciever;
+            IDAL.DO.Parcel currentParcel = new IDAL.DO.Parcel();
+            List<IDAL.DO.Parcel> parcels = getParcelsWithoutoutDrone();
+            currentParcel = new IDAL.DO.Parcel() { Weight = 0 };
             foreach (var parcel in parcels)
             {
                 if (parcel.Requested == null)
@@ -115,7 +115,7 @@ namespace BL
                 customerReciever = dalObject.getCustomerById(c => c.ID == parcel.TargetID);
                 double disDroneToSenderParcel = distance(droneBL.Location, new LocationBL(customerSender.Longitude, customerSender.Latitude));
                 double electricity = dalObject.requestElectric()[(int)parcel.Weight];
-                Station station = stationWithMinDisAndEmptySlots(new LocationBL(customerReciever.Latitude, customerReciever.Longitude));
+                IDAL.DO.Station station = stationWithMinDisAndEmptySlots(new LocationBL(customerReciever.Latitude, customerReciever.Longitude));
                 double electricSenderToReciever = calcElectry(new LocationBL(customerSender.Longitude, customerSender.Latitude), new LocationBL(customerReciever.Longitude, customerReciever.Latitude), (int)parcel.Weight);
                 double electricRecieverToCharger = calcElectry(new LocationBL(customerReciever.Longitude, customerReciever.Latitude), new LocationBL(station.Longitude, station.Latitude), 0);
                 //check if the drone has enough battery to reach the reciever
@@ -160,8 +160,8 @@ namespace BL
         /// <param name="id"></param>
         public void updateCollectParcelByDrone(int id)
         {
-            DroneBL droneBL = getSpecificDroneBLFromList(id);
-            Parcel parcel = new Parcel();
+            IBL.BO.Drone droneBL = getSpecificDroneBLFromList(id);
+            IDAL.DO.Parcel parcel = new IDAL.DO.Parcel();
             parcel = dalObject.getParcelById(p => p.DroneID == droneBL.ID);
             if (parcel.DroneID == 0)
                 throw new CanNotUpdateDrone(id, "drone is didn't connect to a parcel");
@@ -174,7 +174,7 @@ namespace BL
                 }
 
             }
-            Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
+            IDAL.DO.Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
             droneBL.BatteryStatus -= calcElectry(droneBL.Location, new LocationBL(customerSender.Longitude, customerSender.Latitude), (int)parcel.Weight);
             droneBL.Location = new LocationBL(customerSender.Longitude, customerSender.Latitude);
             droneBL.DroneStatus = DroneStatus.Delivery;//////////////////////////////////////
@@ -189,8 +189,8 @@ namespace BL
         /// <param name="id"></param>
         public void updateSupplyParcelByDrone(int id)
         {
-            DroneBL droneBL = getSpecificDroneBLFromList(id);
-            Parcel parcel = dalObject.getParcelById(p=> p.DroneID == id);
+            IBL.BO.Drone droneBL = getSpecificDroneBLFromList(id);
+            IDAL.DO.Parcel parcel = dalObject.getParcelById(p=> p.DroneID == id);
             //check if can supply the parcel
             if (parcel.Delivered != null)
                 throw new CanNotUpdateDrone(id, "parcel is delivered already");
@@ -198,8 +198,8 @@ namespace BL
             {
                 throw new CanNotUpdateDrone(id, "can't supply parcel because didn't picked up or delieverd");
             }
-            Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
-            Customer customerReciever = dalObject.getCustomerById(c=> c.ID == parcel.TargetID);
+            IDAL.DO.Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
+            IDAL.DO.Customer customerReciever = dalObject.getCustomerById(c=> c.ID == parcel.TargetID);
             ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
             parcelInDelivery.ID = parcel.ID;
             parcelInDelivery.Priority = parcel.Priority;

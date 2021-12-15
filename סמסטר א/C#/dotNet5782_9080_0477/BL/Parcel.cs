@@ -10,7 +10,7 @@ namespace IBL
 {
     namespace BO
     {
-        public class ParcelBL
+        public class Parcel
         {
             public enum ParcelStatus { Requesed, Scheduled, PickedUp, Delivered }
             private int Id { get; set; }
@@ -28,8 +28,8 @@ namespace IBL
                     Id = value;
                 }
             }
-            public CustomerBL Sender { get; set; }
-            public CustomerBL Reciever { get; set; }
+            public Customer Sender { get; set; }
+            public Customer Reciever { get; set; }
             private IDAL.DO.WeightCatagories weight { get; set; }
             public IDAL.DO.WeightCatagories Weight
             {
@@ -45,7 +45,7 @@ namespace IBL
                 }
             }
             public Priorities Priorities { get; set; }
-            public DroneBL Drone { get; set; }
+            public Drone Drone { get; set; }
             public DateTime? Requesed { get; set; }
             public DateTime? Scheduled { get; set; }
             public DateTime? PickedUp { get; set; }

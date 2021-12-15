@@ -10,6 +10,15 @@ namespace IBL
     {
         public class DroneToList
         {
+            public DroneToList(Drone drone)
+            {
+                ID = drone.ID;
+                Model = drone.Model;
+                Weight = drone.Weight;
+                BatteryStatus = drone.BatteryStatus;
+                Location = drone.Location;
+                //NumOfParcelTrans = drone.///////////////////////////////////////////
+            }
             public int ID { get; set; }
             public string Model { get; set; }
             public IDAL.DO.WeightCatagories Weight { get; set; }

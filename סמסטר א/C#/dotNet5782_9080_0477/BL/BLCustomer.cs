@@ -18,9 +18,9 @@ namespace BL
         /// <param name="dalObject"></param>
         public static void checkUniqeIdCustomer(ulong id, IDAL.IDal dalObject)
         {
-            List<Customer> customers = dalObject.GetCustomer().ToList();
+            List<IDAL.DO.Customer> customers = dalObject.GetCustomer().ToList();
             if (customers.Any(c => c.ID == id))
-                throw new NotUniqeID(id, typeof(Customer));
+                throw new NotUniqeID(id, typeof(IDAL.DO.Customer));
         }
 
         /// <summary>
@@ -30,12 +30,12 @@ namespace BL
         /// <param name="dalObject"></param>
         public void checkUniqeIDCustomer(ulong id)
         {
-            IEnumerable<Customer> customers = dalObject.GetCustomer();
+            IEnumerable<IDAL.DO.Customer> customers = dalObject.GetCustomer();
             foreach (var customer in customers)
             {
                 if (customer.ID == id)
                 {
-                    throw new NotUniqeID(id, typeof(Customer));
+                    throw new NotUniqeID(id, typeof(IDAL.DO.Customer));
                 }
             }
         }
@@ -50,7 +50,7 @@ namespace BL
         public void AddCustomer(ulong id, string name, string phone, LocationBL location)
         {
             checkUniqeIdCustomer(id, dalObject);
-            CustomerBL customer = new CustomerBL();
+            IBL.BO.Customer customer = new IBL.BO.Customer();
             customer.ID = id;
             customer.Name = name;
             customer.Phone = phone;
@@ -67,7 +67,7 @@ namespace BL
         /// <param name="location"></param>
         public void AddCustomerToDal(ulong id, string name, string phone, LocationBL location)
         {
-            Customer customer = new Customer();
+            IDAL.DO.Customer customer = new IDAL.DO.Customer();
             customer.ID = id;
             customer.Name = name;
             customer.Phone = phone;
@@ -80,10 +80,10 @@ namespace BL
         /// return all the customers from the dal converted to bl
         /// </summary>
         /// <returns> List<CustomerBL> </returns>
-        public List<CustomerBL> GetCustomersBL()
+        public List<IBL.BO.Customer> GetCustomersBL()
         {
-            IEnumerable<Customer> customers = dalObject.GetCustomer();
-            List<CustomerBL> customers1 = new List<CustomerBL>();
+            IEnumerable<IDAL.DO.Customer> customers = dalObject.GetCustomer();
+            List<IBL.BO.Customer> customers1 = new List<IBL.BO.Customer>();
             foreach (var customer in customers)
             {
                 customers1.Add(convertDalCustomerToBl(customer));
@@ -96,7 +96,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>customerbl</returns>
-        public CustomerBL GetSpecificCustomerBL(ulong id)
+        public IBL.BO.Customer GetSpecificCustomerBL(ulong id)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace BL
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(id, typeof(Customer));
+                throw new NotExistObjWithID(id, typeof(IDAL.DO.Customer));
 
             }
         }
@@ -114,11 +114,11 @@ namespace BL
         /// </summary>
         /// <param name="c"></param>
         /// <returns>CustomerBL</returns>
-        public CustomerBL convertDalCustomerToBl(Customer c)
+        public IBL.BO.Customer convertDalCustomerToBl(IDAL.DO.Customer c)
         {
             List<ParcelAtCustomer> parcelSendedByCustomers = new List<ParcelAtCustomer>();
             List<ParcelAtCustomer> parcelSendedToCustomers = new List<ParcelAtCustomer>();
-            List<Parcel> parcels = dalObject.GetParcel().Cast<Parcel>().ToList();
+            List<IDAL.DO.Parcel> parcels = dalObject.GetParcel().Cast<IDAL.DO.Parcel>().ToList();
             parcels.ForEach(p =>
             {
                 if (p.SenderID == c.ID)
@@ -128,7 +128,7 @@ namespace BL
 
             });
 
-            return new CustomerBL
+            return new IBL.BO.Customer
             {
                 ID = c.ID,
                 Name = c.Name,
@@ -147,7 +147,7 @@ namespace BL
         /// <param name="phone"></param>
         public void updateDataCustomer(ulong id, string name = null, string phone = null)
         {
-            Customer customer = dalObject.getCustomerById( c => c.ID == id);
+            IDAL.DO.Customer customer = dalObject.getCustomerById( c => c.ID == id);
             if (name != null)
             {
                 customer.Name = name;
@@ -166,7 +166,7 @@ namespace BL
         public void checkIfCustomerWithThisID(ulong id)
         {
             bool check = false;
-            IEnumerable<Customer> customers = dalObject.GetCustomer();
+            IEnumerable<IDAL.DO.Customer> customers = dalObject.GetCustomer();
             foreach (var customer in customers)
             {
                 if (customer.ID == id)
@@ -175,7 +175,7 @@ namespace BL
                 }
             }
             if (!check)
-                throw new NotExistObjWithID(id, typeof(Customer));
+                throw new NotExistObjWithID(id, typeof(IDAL.DO.Customer));
         }
 
         /// <summary>

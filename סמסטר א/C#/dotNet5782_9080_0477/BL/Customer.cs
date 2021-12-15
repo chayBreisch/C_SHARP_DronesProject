@@ -10,7 +10,7 @@ namespace IBL
 {
     namespace BO
     {
-        public class CustomerBL
+        public class Customer
         {
             private ulong Id;
             public ulong ID

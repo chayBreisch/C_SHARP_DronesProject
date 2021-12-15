@@ -9,9 +9,9 @@ namespace IBL
 {
     namespace BO
     {
-        public class DroneBL
+        public class Drone
         {
-            public DroneBL()
+            public Drone()
             {
                 battery = 100;
             }

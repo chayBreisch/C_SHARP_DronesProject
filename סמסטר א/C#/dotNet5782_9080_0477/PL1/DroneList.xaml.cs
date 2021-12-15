@@ -48,7 +48,7 @@ namespace PL1
         private void Button_Click_ShowListDrones(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            List<DroneBL> drones = blDroneList.GetDronesBL();
+            List<IBL.BO.Drone> drones = blDroneList.GetDronesBL();
             DroneListView.ItemsSource = drones;
         }
 
@@ -60,7 +60,7 @@ namespace PL1
         private void comboBoxSelectDronesByStatus(object sender, SelectionChangedEventArgs e)
         {
             ComboBox options = sender as ComboBox;
-            List<DroneBL> drones = blDroneList.getDronesByDroneStatus(options.SelectedIndex);
+            List<IBL.BO.Drone> drones = blDroneList.getDronesByDroneStatus(options.SelectedIndex);
             DroneListView.ItemsSource = drones;
         }
 
@@ -72,7 +72,7 @@ namespace PL1
         private void ComboBox_SelectionDroneByWeight(object sender, SelectionChangedEventArgs e)
         {
             ComboBox options = sender as ComboBox;
-            List<DroneBL> drones = blDroneList.getDronesByDroneWeight(options.SelectedIndex + 1);
+            List<IBL.BO.Drone> drones = blDroneList.getDronesByDroneWeight(options.SelectedIndex + 1);
             DroneListView.ItemsSource = drones;
         }
 
@@ -97,7 +97,7 @@ namespace PL1
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             sender.ToString();
-            DroneBL drone = (sender as ListView).SelectedValue as DroneBL;
+            IBL.BO.Drone drone = (sender as ListView).SelectedValue as IBL.BO.Drone;
             //this.Visibility = Visibility.Hidden;
             new Drone(blDroneList, drone, this).Show();
             Hide();
@@ -114,9 +114,5 @@ namespace PL1
             Close();
         }
 
-        private void DroneListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

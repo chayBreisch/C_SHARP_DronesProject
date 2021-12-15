@@ -18,9 +18,9 @@ namespace BL
         /// <param name="dalObject"></param>
         public static void checkUniqeIdParcel(int id, IDAL.IDal dalObject)
         {
-            List<Parcel> parcels = dalObject.GetParcelByList();
+            List<IDAL.DO.Parcel> parcels = dalObject.GetParcelByList();
             if (parcels.Any(p => p.ID == id))
-                throw new NotUniqeID(id, typeof(Parcel));
+                throw new NotUniqeID(id, typeof(IDAL.DO.Parcel));
         }
 
         /// <summary>
@@ -32,9 +32,9 @@ namespace BL
         /// <param name="priority"></param>
         public void AddParcel(ulong sender, ulong target, int Weight, int priority)
         {
-            ParcelBL parcel = new ParcelBL();
-            parcel.Sender = new CustomerBL();
-            parcel.Reciever = new CustomerBL();
+            IBL.BO.Parcel parcel = new IBL.BO.Parcel();
+            parcel.Sender = new IBL.BO.Customer();
+            parcel.Reciever = new IBL.BO.Customer();
             checkIfCustomerWithThisID(sender);
             checkIfCustomerWithThisID(target);
             parcel.Sender = GetSpecificCustomerBL(sender);
@@ -59,7 +59,7 @@ namespace BL
         /// <param name="priority"></param>
         public void AddParcelToDal(/*ulong id,*/ ulong sender, ulong target, int Weight, int priority)
         {
-            Parcel parcel = new Parcel();
+            IDAL.DO.Parcel parcel = new IDAL.DO.Parcel();
             parcel.ID = dalObject.lengthParcel() + 1;
             checkUniqeIdParcel(parcel.ID, dalObject);
             parcel.SenderID = sender;
@@ -73,11 +73,11 @@ namespace BL
         /// return all the parcels from the dal converted to bl
         /// </summary>
         /// <returns>List<ParcelBL> </returns>
-        public List<ParcelBL> GetParcelsBL()
+        public List<IBL.BO.Parcel> GetParcelsBL()
         {
 
-            IEnumerable<Parcel> parcels = dalObject.GetParcel();
-            List<ParcelBL> parcel1 = new List<ParcelBL>();
+            IEnumerable<IDAL.DO.Parcel> parcels = dalObject.GetParcel();
+            List<IBL.BO.Parcel> parcel1 = new List<IBL.BO.Parcel>();
             foreach (var parcel in parcels)
             {
                 parcel1.Add(convertDalToParcelBL(parcel));
@@ -90,7 +90,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Parcel</returns>
-        public ParcelBL GetSpecificParcelBL(int id)
+        public IBL.BO.Parcel GetSpecificParcelBL(int id)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace BL
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(id, typeof(Parcel));
+                throw new NotExistObjWithID(id, typeof(IDAL.DO.Parcel));
             }
         }
 
@@ -106,10 +106,10 @@ namespace BL
         /// return parcels that are not connected to a drone
         /// </summary>
         /// <returns> List<Parcel></returns>
-        public List<Parcel> getParcelsWithoutoutDrone()
+        public List<IDAL.DO.Parcel> getParcelsWithoutoutDrone()
         {
-            IEnumerable<Parcel> parcels = dalObject.GetParcel();
-            List<Parcel> parcels1 = new List<Parcel>();
+            IEnumerable<IDAL.DO.Parcel> parcels = dalObject.GetParcel();
+            List<IDAL.DO.Parcel> parcels1 = new List<IDAL.DO.Parcel>();
             foreach (var parcel in parcels)
             {
                 if (parcel.DroneID == 0)
@@ -125,14 +125,14 @@ namespace BL
         /// </summary>
         /// <param name="p"></param>
         /// <returns>ParcelBL</returns>
-        public ParcelBL convertDalToParcelBL(Parcel p)
+        public IBL.BO.Parcel convertDalToParcelBL(IDAL.DO.Parcel p)
         {
-            CustomerBL sender = convertDalCustomerToBl(dalObject.getCustomerById(c => c.ID == p.SenderID));
-            CustomerBL target = convertDalCustomerToBl(dalObject.getCustomerById(c => c.ID == p.TargetID));
-            DroneBL drone = new DroneBL();
+            IBL.BO.Customer sender = convertDalCustomerToBl(dalObject.getCustomerById(c => c.ID == p.SenderID));
+            IBL.BO.Customer target = convertDalCustomerToBl(dalObject.getCustomerById(c => c.ID == p.TargetID));
+            IBL.BO.Drone drone = new IBL.BO.Drone();
             if (p.DroneID != 0)
                 drone = convertDalDroneToBl(dalObject.getDroneById(d => d.ID == p.DroneID));
-            return new ParcelBL
+            return new IBL.BO.Parcel
             {
                 ID = p.ID,
                 Sender = sender,
@@ -152,7 +152,7 @@ namespace BL
         /// </summary>
         /// <param name="parcel"></param>
         /// <returns>ParcelStatus</returns>
-        public ParcelStatus findParcelStatus(Parcel parcel)
+        public ParcelStatus findParcelStatus(IDAL.DO.Parcel parcel)
         {
             if (parcel.Requested == null)
                 return (ParcelStatus)0;
