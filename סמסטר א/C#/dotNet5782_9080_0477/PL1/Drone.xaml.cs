@@ -23,7 +23,7 @@ namespace PL1
         IBL.Bl blDrone;
         IBL.BO.Drone droneBL;
         DroneList DroneList;
-
+        IBL.BO.Drone drone = new IBL.BO.Drone();
         /// <summary>
         /// constructor
         /// </summary>
@@ -55,7 +55,8 @@ namespace PL1
             addDrone.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
             idDrone.Text = drone.ID.ToString();
-            modelDrone.Text = drone.Model;
+            //modelDrone.Text = drone.Model;
+            modelDrone.DataContext = drone;
             batteryDrone.Text = $"{Math.Round(drone.BatteryStatus).ToString()}%";
             weightDrone.Text = drone.Weight.ToString();
             statusDrone.Text = drone.DroneStatus.ToString();
@@ -142,7 +143,7 @@ namespace PL1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_ClickCancelAddDrone(object sender, RoutedEventArgs e)
+        private void Button_ClickResetAddDrone(object sender, RoutedEventArgs e)
         {
             droneId.Text = "";
             droneMdel.Text = "";
@@ -164,7 +165,7 @@ namespace PL1
         {
             string model = modelDrone.Text;
             blDrone.updateDataDroneModel(droneBL.ID, model);
-            modelDrone.Text = droneBL.Model;
+            //modelDrone.Text = droneBL.Model;
         }
 
         /// <summary>

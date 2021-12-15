@@ -13,8 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
-
+using System.Collections.ObjectModel;
 
 namespace PL1
 {
@@ -27,6 +26,7 @@ namespace PL1
     {
         IBL.Bl blDroneList;
         MainWindow mainWindow;
+        ObservableCollection<IBL.BO.Drone> MyList = new ObservableCollection<IBL.BO.Drone>();
         /// <summary>
         /// constructor
         /// </summary>
@@ -37,7 +37,10 @@ namespace PL1
             mainWindow = main;
             WindowStyle = WindowStyle.None;
             blDroneList = bl;
-            DroneListView.ItemsSource = bl.GetDronesBL();
+            foreach (var item in bl.GetDronesBL())
+                MyList.Add(item);
+            DataContext = MyList;
+            //DroneListView.ItemsSource = bl.GetDronesBL();
         }
 
         /// <summary>
@@ -86,7 +89,7 @@ namespace PL1
             //this.Visibility = Visibility.Hidden;
             new Drone(blDroneList, this).Show();
             Hide();
-            
+
         }
 
         /// <summary>
