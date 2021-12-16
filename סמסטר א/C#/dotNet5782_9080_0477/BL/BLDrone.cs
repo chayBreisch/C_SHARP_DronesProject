@@ -185,11 +185,13 @@ namespace BL
 
         public List <DroneToList> getDroneToList()
         {
-            IEnumerable<IDAL.DO.Drone> drones = dalObject.GetDrone();
+            List<IBL.BO.Drone> drones = droneBLList;
+            //List<IBL.BO.Drone> droneBLList = new List<IBL.BO.Drone>();
+
             List<DroneToList> drone1 = new List<DroneToList>();
             foreach (var drone in drones)
             {
-                drone1.Add(new DroneToList(convertDalDroneToBl(drone), dalObject));
+                drone1.Add(new DroneToList((drone), dalObject));
             }
             return drone1;
         }

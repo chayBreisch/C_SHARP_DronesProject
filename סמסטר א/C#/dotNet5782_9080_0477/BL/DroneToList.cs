@@ -15,6 +15,7 @@ namespace IBL
                 ID = drone.ID;
                 Model = drone.Model;
                 Weight = drone.Weight;
+                DroneStatus = drone.DroneStatus;
                 BatteryStatus = drone.BatteryStatus;
                 Location = drone.Location;
                 NumOfParcelTrans = dalObject.getParcelById(p => p.DroneID == drone.ID).ID;
