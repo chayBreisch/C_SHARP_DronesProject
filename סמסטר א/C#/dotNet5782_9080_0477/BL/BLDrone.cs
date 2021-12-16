@@ -160,13 +160,18 @@ namespace BL
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
-        public List<IBL.BO.Drone> getDronesByDroneStatus(int status)
+        public List<DroneToList> getDronesByDroneStatus(int status)
         {
+            List<DroneToList> droneToLists = new List<DroneToList>();
             IEnumerable<IBL.BO.Drone> droneQuery =
             from drone in GetDronesBL()
             where drone.DroneStatus == (DroneStatus)status
             select drone;
-            return droneQuery.ToList();
+            foreach (var drone in droneQuery)
+            {
+                droneToLists.Add(new DroneToList(drone, dalObject));
+            }
+            return droneToLists;
         }
 
         /// <summary>
@@ -174,24 +179,27 @@ namespace BL
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
-        public List<IBL.BO.Drone> getDronesByDroneWeight(int status)
+        public List<DroneToList> getDronesByDroneWeight(int status)
         {
+            List<DroneToList> droneToLists = new List<DroneToList>();
             IEnumerable<IBL.BO.Drone> droneQuery =
             from drone in GetDronesBL()
             where drone.Weight == (WeightCatagories)status
             select drone;
-            return droneQuery.ToList();
+            foreach (var drone in droneQuery)
+            {
+                droneToLists.Add(new DroneToList(drone, dalObject));
+            }
+            return droneToLists;
         }
 
         public List <DroneToList> getDroneToList()
         {
             List<IBL.BO.Drone> drones = droneBLList;
-            //List<IBL.BO.Drone> droneBLList = new List<IBL.BO.Drone>();
-
             List<DroneToList> drone1 = new List<DroneToList>();
             foreach (var drone in drones)
             {
-                drone1.Add(new DroneToList((drone), dalObject));
+                drone1.Add(new DroneToList(drone, dalObject));
             }
             return drone1;
         }
