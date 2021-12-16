@@ -109,40 +109,6 @@ namespace BL
         }
 
 
-
-        //#############################################################
-        //check validaion id
-        //#############################################################
-
-
-        //#############################################################
-        //Add functions
-        //#############################################################
-
-
-        //#############################################################
-        //Get functions from BL
-        //#############################################################
-
-
-        //#############################################################
-        //Get specific item functions
-        //#############################################################
-
-
-        //#############################################################
-        //convert from IDAL.DO to IBL.BO functions
-        //#############################################################
-
-
-        //#############################################################
-        //update functions
-        //#############################################################
-
-
-        //#############################################################
-        //help functions
-        //#############################################################
         /// <summary>
         ///calsulate the electricity that a drone needs to get from one location to another
         /// <param name="locatin1"></param>
@@ -208,7 +174,7 @@ namespace BL
         /// <param name="location1"></param>
         /// <param name="location2"></param>
         /// <returns>double</returns>
-        static double distance(LocationBL location1, LocationBL location2)
+        public static double distance(LocationBL location1, LocationBL location2)
         {
             return Math.Sqrt(Math.Pow(location2.Longitude - location1.Longitude, 2) +
             Math.Pow(location2.Latitude - location1.Latitude, 2) * 1.0);

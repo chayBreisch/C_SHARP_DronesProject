@@ -10,6 +10,17 @@ namespace IBL
     {
         public class ParcelAtCustomer
         {
+            public ParcelAtCustomer(IBL.BO.Parcel parcel, ulong myId, IDAL.IDal dal)
+            {
+                ID = parcel.ID;
+                Weight = parcel.Weight;
+                Priority = parcel.Priorities;
+                ParcelStatus = parcel.Delivered != null ? ParcelStatus.Requesed : 
+                    parcel.PickedUp != null ? ParcelStatus.pickedUp : 
+                    parcel.Scheduled != null ? ParcelStatus.Scheduled : ParcelStatus.Requesed;
+                customerAtParcel = parcel.Sender.ID == myId ? new CustomerAtParcel(myId, dal.getCustomerById(c => c.ID == myId).Name) :
+                    new CustomerAtParcel(parcel.Reciever.ID, dal.getCustomerById(c => c.ID == parcel.Reciever.ID).Name);
+            }
             public int ID { get; set; }
             public IDAL.DO.WeightCatagories Weight { get; set; }
             public IDAL.DO.Priorities Priority { get; set; }

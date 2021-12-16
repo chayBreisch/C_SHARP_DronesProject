@@ -10,6 +10,11 @@ namespace IBL
     {
         public class DroneInCharger
         {
+            public DroneInCharger(IBL.BO.Drone drone)
+            {
+                ID = drone.ID;
+                BatteryStatus = drone.BatteryStatus;
+            }
             public int ID { get; set; }
             public double BatteryStatus { get; set; }
             public override string ToString()

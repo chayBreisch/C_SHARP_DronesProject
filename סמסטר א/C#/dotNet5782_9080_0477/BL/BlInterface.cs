@@ -41,7 +41,7 @@ namespace IBL
         public List<IDAL.DO.Parcel> getParcelsWithoutoutDrone();
         public BO.Parcel convertDalToParcelBL(IDAL.DO.Parcel p);
 
-        public ParcelStatus findParcelStatus(IDAL.DO.Parcel parcel);///////////////////////////
+        //public ParcelStatus findParcelStatus(IDAL.DO.Parcel parcel);///////////////////////////
         //public static void checkUniqeIdStation(int id, IDAL.IDal dalObject);
 
         public void addStation(int id, int name, LocationBL location, int ChargeSlots);
@@ -56,9 +56,9 @@ namespace IBL
         public BO.Station convertDalStationToBl(IDAL.DO.Station s);////////////////
         public void updateDataStation(int id, int name = 0, int chargeSlots = -1);
 
-        public void updateSendDroneToCharge(int id);
+        public IBL.BO.Drone updateSendDroneToCharge(int id);
 
-        public void updateUnchargeDrone(int id, double timeInCharge);
+        public IBL.BO.Drone updateUnchargeDrone(int id, double timeInCharge);
 
         public void updateConnectParcelToDrone(int id);
 
@@ -80,7 +80,7 @@ namespace IBL
 
         public void updateDrone(BO.Drone drone);
 
-        public void updateDataDroneModel(int id, string model);
+        public IBL.BO.Drone updateDataDroneModel(int id, string model);
 
         public List<BO.Parcel> GetParcelsWithoutoutDrone();
 
@@ -88,6 +88,7 @@ namespace IBL
 
         public List<BO.Drone> getDronesByDroneStatus(int status);
         public List<BO.Drone> getDronesByDroneWeight(int status);
-
+        public List<DroneToList> getDroneToList();
+        public IBL.BO.Drone convertDroneToListToDroneBL(DroneToList droneToList);
     }
 }

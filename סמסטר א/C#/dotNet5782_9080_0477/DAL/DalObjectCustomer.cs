@@ -17,10 +17,6 @@ namespace DalObject
                 yield return customer;
             }
         }
-        public List<Customer> GetCustomersByList()
-        {
-            return DataSource.customers;
-        }
         public void CheckUniqeCustomer(ulong id)
         {
             foreach (var customer in DataSource.customers)

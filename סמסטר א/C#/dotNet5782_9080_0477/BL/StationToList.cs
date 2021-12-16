@@ -14,8 +14,8 @@ namespace IBL
             {
                 ID = station.ID;
                 Name = station.Name;
-                ChargeSlotsFree = station.ChargeSlots;
-                ///////////////////////////////////////////////////////////////
+                ChargeSlotsFree = station.ChargeSlots - station.DronesInCharge.Count;
+                ChargeSlotsBusy = station.DronesInCharge.Count;
             }
             public int ID { get; set; }
             public int Name { get; set; }

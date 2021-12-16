@@ -10,14 +10,14 @@ namespace IBL
     {
         public class DroneToList
         {
-            public DroneToList(Drone drone)
+            public DroneToList(Drone drone, IDAL.IDal dalObject)
             {
                 ID = drone.ID;
                 Model = drone.Model;
                 Weight = drone.Weight;
                 BatteryStatus = drone.BatteryStatus;
                 Location = drone.Location;
-                //NumOfParcelTrans = drone.///////////////////////////////////////////
+                NumOfParcelTrans = dalObject.getParcelById(p => p.DroneID == drone.ID).ID;
             }
             public int ID { get; set; }
             public string Model { get; set; }

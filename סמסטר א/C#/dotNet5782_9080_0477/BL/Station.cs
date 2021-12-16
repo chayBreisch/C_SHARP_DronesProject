@@ -12,9 +12,16 @@ namespace IBL
     {
         public class Station
         {
+            public Station(int id, int name, int chargeslots, LocationBL location, List<DroneInCharger> droneInCharger)
+            {
+                ID = id;
+                Name = name;
+                chargeSlots = chargeslots;
+                Location = location;
+                DronesInCharge = droneInCharger;
+            }
 
-
-            private int Id { get; set; }
+        private int Id { get; set; }
 
             public int ID
             {
