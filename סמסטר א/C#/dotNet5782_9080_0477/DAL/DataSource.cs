@@ -18,7 +18,7 @@ namespace DalObject
             public static double HeavyHeight = 0.4;
             public static double ChargingRate = 0.5;
         }
-        public static List<Drone> drones = new List<Drone>();
+        internal static List<Drone> drones = new List<Drone>();
         internal static List<Station> stations = new List<Station>();
         internal static List<Customer> customers = new List<Customer>();
         internal static List<Parcel> parcels = new List<Parcel>();

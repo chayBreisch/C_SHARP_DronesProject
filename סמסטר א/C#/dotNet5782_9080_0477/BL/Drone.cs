@@ -65,9 +65,9 @@ namespace IBL
             public LocationBL Location { get; set; }
             public override string ToString()
             {
-                return $"drone  : {ID}, " +
-                    $" battery: {BatteryStatus}%, Model: {Model}, MaxWeight: {Weight}, " +
-                    $"DroneStatus : {DroneStatus}, ParcelAtTransfor: {parcelInDelivery}," +
+                return $"drone  : {ID}, \n" +
+                    $" battery: {BatteryStatus}%,\n Model: {Model}, \nMaxWeight: {Weight}, \n" +
+                    $"DroneStatus : {DroneStatus}, \nParcelAtTransfor: {parcelInDelivery},\n" +
                     $"Location: {Location}\n";
             }
         }
