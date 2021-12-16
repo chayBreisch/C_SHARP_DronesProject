@@ -122,9 +122,9 @@ namespace BL
             parcels.ForEach(p =>
             {
                 if (p.SenderID == c.ID)
-                    parcelSendedByCustomers.Add(new ParcelAtCustomer { ID = p.ID, Weight = p.Weight, Priority = p.Priority, ParcelStatus = findParcelStatus(p) });
+                    parcelSendedByCustomers.Add(new ParcelAtCustomer(convertDalToParcelBL(p), c.ID, dalObject));
                 if (p.TargetID == c.ID)
-                    parcelSendedToCustomers.Add(new ParcelAtCustomer { ID = p.ID, Weight = p.Weight, Priority = p.Priority, ParcelStatus = findParcelStatus(p) });
+                    parcelSendedToCustomers.Add(new ParcelAtCustomer(convertDalToParcelBL(p), c.ID, dalObject));
 
             });
 

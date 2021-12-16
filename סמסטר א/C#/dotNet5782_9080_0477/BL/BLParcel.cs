@@ -33,12 +33,12 @@ namespace BL
         public void AddParcel(ulong sender, ulong target, int Weight, int priority)
         {
             IBL.BO.Parcel parcel = new IBL.BO.Parcel();
-            parcel.Sender = new IBL.BO.Customer();
-            parcel.Reciever = new IBL.BO.Customer();
             checkIfCustomerWithThisID(sender);
             checkIfCustomerWithThisID(target);
-            parcel.Sender = GetSpecificCustomerBL(sender);
-            parcel.Reciever = GetSpecificCustomerBL(target);
+            IBL.BO.Customer customer = GetSpecificCustomerBL(sender);
+            parcel.Sender = new CustomerAtParcel(customer.ID, customer.Name);
+            customer = GetSpecificCustomerBL(target);
+            parcel.Reciever = new CustomerAtParcel(customer.ID, customer.Name);
             parcel.Weight = (WeightCatagories)Weight;
             parcel.Priorities = (Priorities)priority;
             parcel.Requesed = DateTime.Now;
@@ -127,27 +127,17 @@ namespace BL
         /// <returns>ParcelBL</returns>
         public IBL.BO.Parcel convertDalToParcelBL(IDAL.DO.Parcel p)
         {
-            IBL.BO.Customer sender = convertDalCustomerToBl(dalObject.getCustomerById(c => c.ID == p.SenderID));
-            IBL.BO.Customer target = convertDalCustomerToBl(dalObject.getCustomerById(c => c.ID == p.TargetID));
+            IDAL.DO.Customer sender = dalObject.getCustomerById(c => c.ID == p.SenderID);
+            IDAL.DO.Customer target = dalObject.getCustomerById(c => c.ID == p.TargetID);
             IBL.BO.Drone drone = new IBL.BO.Drone();
+
             if (p.DroneID != 0)
                 drone = convertDalDroneToBl(dalObject.getDroneById(d => d.ID == p.DroneID));
-            return new IBL.BO.Parcel
-            {
-                ID = p.ID,
-                Sender = sender,
-                Reciever = target,
-                Weight = p.Weight,
-                Priorities = p.Priority,
-                PickedUp = p.PickedUp,
-                Drone = drone,
-                Requesed = p.Requested,
-                Scheduled = p.Scheduled,
-                Delivered = p.Delivered,
-            };
+            return new IBL.BO.Parcel(p.ID, p.Weight, p.Priority, p.Requested, p.Scheduled, p.Delivered, p.PickedUp, drone, sender.ID, target.ID, dalObject);
+
         }
 
-        /// <summary>
+      /*  /// <summary>
         /// returns the status of the parcel
         /// </summary>
         /// <param name="parcel"></param>
@@ -161,7 +151,7 @@ namespace BL
             else if (parcel.PickedUp == null)
                 return (ParcelStatus)2;
             return (ParcelStatus)3;
-        }
+        }*/
 
     }
 

@@ -31,12 +31,11 @@ namespace BL
         /// <param name="ChargeSlots"></param>
         public void addStation(int id, int name, LocationBL location, int ChargeSlots)
         {
-            checkUniqeIdStation(id, dalObject);
-            IBL.BO.Station station = new IBL.BO.Station();
-            station.ID = id;
-            station.Name = name;
-            station.Location = new LocationBL(location.Longitude, location.Latitude);
-            station.ChargeSlots = ChargeSlots;
+            List<DroneCharge> droneChargers = dalObject.GetDroneCharge().Cast<DroneCharge>().ToList();
+            droneChargers = droneChargers.FindAll(d => d.StationID == id);
+            List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
+            droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(getSpecificDroneBLFromList(d.DroneID))));
+            IBL.BO.Station station = new IBL.BO.Station(id, name, ChargeSlots, new LocationBL(location.Longitude, location.Latitude), dronesInCharges);
             AddStationToDal(id, name, location, ChargeSlots);
         }
 
@@ -137,16 +136,8 @@ namespace BL
             List<DroneCharge> droneChargers = dalObject.GetDroneCharge().Cast<DroneCharge>().ToList();
             droneChargers = droneChargers.FindAll(d => d.StationID == s.ID);
             List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
-            droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger
-            { ID = d.DroneID, BatteryStatus = getSpecificDroneBLFromList(d.DroneID).BatteryStatus }));
-            return new IBL.BO.Station
-            {
-                ID = s.ID,
-                Name = s.Name,
-                ChargeSlots = s.ChargeSlots,
-                Location = new LocationBL() { Longitude = s.Longitude, Latitude = s.Latitude },
-                DronesInCharge = dronesInCharges
-            };
+            droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(getSpecificDroneBLFromList(d.DroneID))));
+            return new IBL.BO.Station(s.ID, s.Name, s.ChargeSlots, new LocationBL(s.Longitude, s.Latitude), dronesInCharges);
         }
 
         /// <summary>

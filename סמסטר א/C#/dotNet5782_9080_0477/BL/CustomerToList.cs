@@ -31,7 +31,7 @@ namespace IBL
 
             public override string ToString()
             {
-                return $"CustomerToList: ID: {ID}, Name: {Name}, Phone: {Phone}, SumOfParcelsSendedAndProvided: {SumOfParcelsSendedAndProvided}" +
+                return $"ID: {ID}, Name: {Name}, Phone: {Phone}, SumOfParcelsSendedAndProvided: {SumOfParcelsSendedAndProvided}" +
                     $"SumOfParcelsSendedAndNotProvided: {SumOfParcelsSendedAndNotProvided}, SumOfParcelsRecieved: {SumOfParcelsRecieved}, SumOfParcelsOnTheWay: {SumOfParcelsOnTheWay}";
             }
         }

@@ -26,7 +26,7 @@ namespace PL1
     {
         IBL.Bl blDroneList;
         MainWindow mainWindow;
-        ObservableCollection<IBL.BO.Drone> MyList = new ObservableCollection<IBL.BO.Drone>();
+        ObservableCollection<DroneToList> MyList = new ObservableCollection<DroneToList>();
         /// <summary>
         /// constructor
         /// </summary>
@@ -37,7 +37,7 @@ namespace PL1
             mainWindow = main;
             WindowStyle = WindowStyle.None;
             blDroneList = bl;
-            foreach (var item in bl.GetDronesBL())
+            foreach (var item in bl.getDroneToList())
                 MyList.Add(item);
             DataContext = MyList;
             //DroneListView.ItemsSource = bl.GetDronesBL();
@@ -100,7 +100,8 @@ namespace PL1
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             sender.ToString();
-            IBL.BO.Drone drone = (sender as ListView).SelectedValue as IBL.BO.Drone;
+            DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
+            IBL.BO.Drone drone = blDroneList.convertDroneToListToDroneBL(droneToList);
             //this.Visibility = Visibility.Hidden;
             new Drone(blDroneList, drone, this).Show();
             Hide();

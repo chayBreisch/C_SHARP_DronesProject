@@ -10,12 +10,17 @@ namespace IBL
     {
         public class CustomerAtParcel
         {
-            public int ID { get; set; }
+            public ulong ID { get; set; }
             public string CustomerName { get; set; }
 
+            public CustomerAtParcel(ulong id, string name)
+            {
+                ID = id;
+                CustomerName = name;
+            }
             public CustomerAtParcel()
             {
-                ID = 0;
+                ID = 10000000;
                 CustomerName = "";
             }
             public override string ToString()

@@ -17,7 +17,7 @@ namespace BL
         /// send a drone a charger in a station
         /// </summary>
         /// <param name="id"></param>
-        public void updateSendDroneToCharge(int id)
+        public IBL.BO.Drone updateSendDroneToCharge(int id)
         {
             //check this function////////////////////////////////
             IDAL.DO.Station station = new IDAL.DO.Station();
@@ -47,7 +47,9 @@ namespace BL
                 droneCharge.DroneID = id;
                 droneCharge.StationID = station.ID;
                 dalObject.AddDroneCharge(droneCharge);
+
             }
+            return droneBL;
         }
 
         /// <summary>
@@ -55,7 +57,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="timeInCharge"></param>
-        public void updateUnchargeDrone(int id, double timeInCharge)
+        public IBL.BO.Drone updateUnchargeDrone(int id, double timeInCharge)
         {
             IBL.BO.Drone droneBL = new IBL.BO.Drone();
             try
@@ -87,6 +89,7 @@ namespace BL
                 throw new Exception($"{e} can not find station ");
             }*/
             dalObject.removeDroneCharge(droneCharge);
+            return droneBL;
         }
 
         /// <summary>
@@ -200,12 +203,7 @@ namespace BL
             }
             IDAL.DO.Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
             IDAL.DO.Customer customerReciever = dalObject.getCustomerById(c=> c.ID == parcel.TargetID);
-            ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
-            parcelInDelivery.ID = parcel.ID;
-            parcelInDelivery.Priority = parcel.Priority;
-            parcelInDelivery.CollectLocation = new LocationBL() { Longitude = customerSender.Longitude, Latitude = customerSender.Latitude };
-            parcelInDelivery.DeliveryDestinationLocation = new LocationBL() { Longitude = customerReciever.Longitude, Latitude = customerReciever.Latitude };
-            parcelInDelivery.Weight = parcel.Weight;
+            ParcelInDelivery parcelInDelivery = new ParcelInDelivery(convertDalToParcelBL(parcel), dalObject);
             droneBL.parcelInDelivery = parcelInDelivery;
             double electricSenderToReciever = calcElectry(new LocationBL(customerSender.Longitude, customerSender.Latitude), new LocationBL(customerReciever.Longitude, customerReciever.Latitude), (int)parcel.Weight);
             droneBL.BatteryStatus -= electricSenderToReciever;

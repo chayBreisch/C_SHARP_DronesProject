@@ -10,6 +10,12 @@ namespace IBL
     {
         public class DroneInParcel
         {
+            public DroneInParcel(IBL.BO.Drone drone)
+            {
+                ID = drone.ID;
+                BatteryStatus = drone.BatteryStatus;
+                CurrentLocation = drone.Location;
+            }
             public int ID { get; set; }
             public double BatteryStatus { get; set; }
             public LocationBL CurrentLocation { get; set; }

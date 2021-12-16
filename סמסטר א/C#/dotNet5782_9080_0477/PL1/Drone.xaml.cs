@@ -54,17 +54,16 @@ namespace PL1
             WindowStyle = WindowStyle.None;
             addDrone.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
-            idDrone.Text = drone.ID.ToString();
-            //modelDrone.Text = drone.Model;
-            modelDrone.DataContext = drone;
-            batteryDrone.Text = $"{Math.Round(drone.BatteryStatus).ToString()}%";
-            weightDrone.Text = drone.Weight.ToString();
-            statusDrone.Text = drone.DroneStatus.ToString();
-            if (drone.parcelInDelivery != null)
-                parcelInDeliveryDrone.Text = drone.parcelInDelivery.ToString();
+            idDrone.Text = droneBL.ID.ToString();
+            modelDrone.DataContext = droneBL;
+            batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
+            weightDrone.Text = droneBL.Weight.ToString();
+            statusDrone.Text = droneBL.DroneStatus.ToString();
+            if (droneBL.parcelInDelivery != null)
+                parcelInDeliveryDrone.Text = droneBL.parcelInDelivery.ToString();
             else
                 parcelInDeliveryDrone.Text = "no parcel";
-            locationDrone.Text = $"{drone.Location.Latitude}, {drone.Location.Longitude}";
+            locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
             if (droneBL.DroneStatus != DroneStatus.Available)
             {
                 visible.IsChecked = false;
@@ -163,9 +162,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            string model = modelDrone.Text;
-            blDrone.updateDataDroneModel(droneBL.ID, model);
-            //modelDrone.Text = droneBL.Model;
+            droneBL = blDrone.updateDataDroneModel(droneBL.ID, modelDrone.Text);
         }
 
         /// <summary>
@@ -175,7 +172,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Charge_Click(object sender, RoutedEventArgs e)
         {
-            blDrone.updateSendDroneToCharge(droneBL.ID);
+            droneBL = blDrone.updateSendDroneToCharge(droneBL.ID);
             statusDrone.Text = droneBL.DroneStatus.ToString();
             /*visible.Visibility = Visibility.Hidden;
             hidden.Visibility = Visibility.Visible;*/
@@ -216,10 +213,17 @@ namespace PL1
                 UnCharge.IsEnabled = false;*/
                 //TimeCharger.Visibility = Visibility.Hidden;
                 TimeChargerBlock.Visibility = Visibility.Hidden;
-                blDrone.updateUnchargeDrone(droneBL.ID, time);
-                statusDrone.Text = droneBL.DroneStatus.ToString();
-                batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
-                TimeCharger.Text = "";
+                try
+                {
+                    droneBL = blDrone.updateUnchargeDrone(droneBL.ID, time);
+                    statusDrone.Text = droneBL.DroneStatus.ToString();
+                    batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
+                    TimeCharger.Text = "";
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
