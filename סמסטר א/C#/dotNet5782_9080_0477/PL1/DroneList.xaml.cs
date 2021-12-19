@@ -37,7 +37,7 @@ namespace PL1
             mainWindow = main;
             WindowStyle = WindowStyle.None;
             blDroneList = bl;
-            foreach (var item in bl.getDroneToList())
+            foreach (var item in blDroneList.getDroneToList())
                 MyList.Add(item);
             DataContext = MyList;
             //DroneListView.ItemsSource = bl.GetDronesBL();
@@ -51,7 +51,7 @@ namespace PL1
         private void Button_Click_ShowListDrones(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            List<IBL.BO.Drone> drones = blDroneList.GetDronesBL();
+            List<DroneToList> drones = blDroneList.getDroneToList();
             DroneListView.ItemsSource = drones;
         }
 
@@ -63,7 +63,7 @@ namespace PL1
         private void comboBoxSelectDronesByStatus(object sender, SelectionChangedEventArgs e)
         {
             ComboBox options = sender as ComboBox;
-            List<IBL.BO.Drone> drones = blDroneList.getDronesByDroneStatus(options.SelectedIndex);
+            List<DroneToList> drones = blDroneList.getDronesByDroneStatus(options.SelectedIndex);
             DroneListView.ItemsSource = drones;
         }
 
@@ -75,7 +75,7 @@ namespace PL1
         private void ComboBox_SelectionDroneByWeight(object sender, SelectionChangedEventArgs e)
         {
             ComboBox options = sender as ComboBox;
-            List<IBL.BO.Drone> drones = blDroneList.getDronesByDroneWeight(options.SelectedIndex + 1);
+            List<DroneToList> drones = blDroneList.getDronesByDroneWeight(options.SelectedIndex + 1);
             DroneListView.ItemsSource = drones;
         }
 

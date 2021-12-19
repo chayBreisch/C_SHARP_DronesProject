@@ -37,7 +37,7 @@ namespace BL
                 IDAL.DO.Parcel parcel = dalObject.getParcelById(p => p.DroneID == drone.ID);
                 IDAL.DO.Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
                 //check if the drone has a parcel
-                if (parcel.SenderID != 0)
+                if (parcel.SenderID != 10000000)
                 //if (!parcel.Equals(null))
                 {
                     //check if the parcel of the drone is scheduled and not delivered

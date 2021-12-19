@@ -86,8 +86,8 @@ namespace IBL
 
         public List<BO.Station> GetStationWithEmptyChargers();
 
-        public List<BO.Drone> getDronesByDroneStatus(int status);
-        public List<BO.Drone> getDronesByDroneWeight(int status);
+        public List<DroneToList> getDronesByDroneStatus(int status);
+        public List<DroneToList> getDronesByDroneWeight(int status);
         public List<DroneToList> getDroneToList();
         public IBL.BO.Drone convertDroneToListToDroneBL(DroneToList droneToList);
     }

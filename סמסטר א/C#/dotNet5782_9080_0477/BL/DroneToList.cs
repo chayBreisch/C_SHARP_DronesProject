@@ -15,6 +15,7 @@ namespace IBL
                 ID = drone.ID;
                 Model = drone.Model;
                 Weight = drone.Weight;
+                DroneStatus = drone.DroneStatus;
                 BatteryStatus = drone.BatteryStatus;
                 Location = drone.Location;
                 NumOfParcelTrans = dalObject.getParcelById(p => p.DroneID == drone.ID).ID;
@@ -29,8 +30,8 @@ namespace IBL
 
             public override string ToString()
             {
-                return $"DroneToList: ID: {ID}, Model: {Model}, Weight: {Weight}, BatteryStatus: {BatteryStatus}, DroneStatus: {DroneStatus}," +
-                    $"Location: {Location}, NumOfParcelTrans: {NumOfParcelTrans}";
+                return $"*****************************************\nID: {ID},\n Model: {Model},\n Weight: {Weight}, \nBatteryStatus: {BatteryStatus},\n DroneStatus: {DroneStatus},\n" +
+                    $"Location: {Location}, \nNumOfParcelTrans: {NumOfParcelTrans}\n*****************************************";
             }
         }
     }
