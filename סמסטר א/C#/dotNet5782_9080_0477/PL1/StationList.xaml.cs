@@ -42,6 +42,11 @@ namespace PL1
             //DroneListView.ItemsSource = bl.GetDronesBL();
         }
 
+        /// <summary>
+        /// show station kist with a filter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void chargeSlotsFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox options = sender as ComboBox;
@@ -49,18 +54,34 @@ namespace PL1
             StationListView.ItemsSource = stations;
         }
 
+        /// <summary>
+        /// show all list from station
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
             List<StationToList> stations = blstationList.getStationToList();
             StationListView.ItemsSource = stations;
         }
+
+        /// <summary>
+        /// close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
             mainWindow.Show();
             Close();
         }
 
+        /// <summary>
+        /// pass to a specific station
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StationListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             sender.ToString();
@@ -68,6 +89,17 @@ namespace PL1
             BO.Station station = blstationList.convertStationToListToStationBL(stationList);
             //this.Visibility = Visibility.Hidden;
             new Station(blstationList, station, this).Show();
+            Hide();
+        }
+
+        /// <summary>
+        /// pass to add drone window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_ClickAddStation(object sender, RoutedEventArgs e)
+        {
+            new Station(blstationList, this).Show();
             Hide();
         }
     }

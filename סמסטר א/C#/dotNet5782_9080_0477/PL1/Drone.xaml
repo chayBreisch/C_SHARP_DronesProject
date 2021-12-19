@@ -16,7 +16,7 @@
     </Window.Resources>
 
     <Grid>
-        <Grid Name="actions" Visibility="Visible">
+        <Grid Name="actions" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition  Width="200"/>
@@ -79,7 +79,7 @@
             </Grid>
         </Grid>
 
-        <Grid Name="addDrone" Visibility="Hidden" Background="#FF859DA2">
+        <Grid Name="addDrone" Visibility="Visible" Background="#FF859DA2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -110,9 +110,9 @@
                 <ComboBoxItem>Medium</ComboBoxItem>
                 <ComboBoxItem>Heavy</ComboBoxItem>
             </ComboBox>
-            <TextBlock HorizontalAlignment="Left" Margin="19,0,0,0" Grid.Row="1" Text="enter weight drone:" TextWrapping="Wrap" VerticalAlignment="Center" Width="181" Height="27" FontSize="20" Grid.RowSpan="2"/>
+            <TextBlock HorizontalAlignment="Left" Margin="19,0,0,0" Grid.Column="1" Grid.Row="1" Text="enter weight drone:" TextWrapping="Wrap" VerticalAlignment="Center" Width="181" Height="27" FontSize="20" Grid.RowSpan="2"/>
             <TextBox  Background="#FFFFE9ED" Margin="10,0,41,0"  TextWrapping="Wrap" VerticalAlignment="Center" Height="58" Name="numStationtoChargeDrone" Grid.Row="2"/>
-            <TextBlock HorizontalAlignment="Left" Margin="12,93,0,0" Grid.Row="1" Text="number of station to charge:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" FontSize="20" Grid.Column="1" Grid.RowSpan="2"/>
+            <TextBlock HorizontalAlignment="Left" Margin="12,93,0,0" Grid.Row="1" Text="number of station to charge:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" FontSize="20" Grid.Column="0" Grid.RowSpan="2"/>
             <Button Content="add drone" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" RenderTransformOrigin="-0.207,0.023" Width="120" Height="40" Grid.Column="1" Click="Button_ClickAddDrone" Margin="129,0,0,0" />
             <Button Content="reset" Grid.Column="0" HorizontalAlignment="Left" Margin="148,0,0,0" Grid.Row="3" VerticalAlignment="Center" Width="120" Height="40" Click="Button_ClickResetAddDrone"/>
             <Button Content="X" Width="50" Grid.Column="1" Background="Red" HorizontalAlignment="Left" Margin="350,0,0,89" Click="Button_ClickClose" Height="20" VerticalAlignment="Bottom"/>

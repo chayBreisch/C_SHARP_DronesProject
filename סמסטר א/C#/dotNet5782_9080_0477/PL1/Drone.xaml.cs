@@ -93,8 +93,8 @@ namespace PL1
         {
             int id;
             bool success = Int32.TryParse(droneId.Text, out id);
-            int weight;
-            bool success1 = Int32.TryParse(droneWeight.Text, out weight);
+           // int weight = options.SelectedIndex;
+/*            bool success1 = Int32.TryParse(options.SelectedIndex, out weight);*/
             int number;
             bool success2 = Int32.TryParse(numStationtoChargeDrone.Text, out number);
             string Model = droneMdel.Text;
@@ -102,10 +102,10 @@ namespace PL1
             {
                 MessageBox.Show("not valid id input");
             }
-            else if (!success1)
+            /*else if (!success1)
             {
                 MessageBox.Show("not valid weight input");
-            }
+            }*/
             else if (!success2)
             {
                 MessageBox.Show("not valid station input");
@@ -114,7 +114,7 @@ namespace PL1
             {
                 try
                 {
-                    blDrone.addDrone(id, Model, weight, number);
+                    blDrone.addDrone(id, Model, 1, number);
                     MessageBox.Show("you added succefuly");
                     DroneList.Show();
                     Close();
