@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL
-{
     namespace BO
     {
         public class ParcelAtCustomer
         {
-            public ParcelAtCustomer(IBL.BO.Parcel parcel, ulong myId, IDAL.IDal dal)
+            public ParcelAtCustomer(BO.Parcel parcel, ulong myId, IDAL.IDal dal)
             {
                 ID = parcel.ID;
                 Weight = parcel.Weight;
@@ -32,4 +30,3 @@ namespace IBL
             }
         }
     }
-}

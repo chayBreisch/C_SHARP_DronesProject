@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL;
 using DO;
-using IBL.BO;
+using BO;
 using static BL.ExceptionsBL;
 
 namespace BL

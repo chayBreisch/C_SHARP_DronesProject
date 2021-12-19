@@ -1,5 +1,5 @@
 ﻿using System;
-using IBL.BO;
+using BlApi.BO;
 using BL;
 using DalObject;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace ConsoleUI_BL
         //לסדר אקספשיין
         static void Main(string[] args)
         {
-            IBL.Bl bL = new BL.BL();
+            BlApi.Bl bL = new BL.BL();
             int choices = 0;
             do
             {

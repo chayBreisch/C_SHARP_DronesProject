@@ -1,5 +1,5 @@
 ﻿using System;
-using IBL.BO;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,14 +24,14 @@ namespace PL1
 
     public partial class DroneList : Window
     {
-        IBL.Bl blDroneList;
+        BlApi.Bl blDroneList;
         MainWindow mainWindow;
         ObservableCollection<DroneToList> MyList = new ObservableCollection<DroneToList>();
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public DroneList(IBL.Bl bl, MainWindow main)
+        public DroneList(BlApi.Bl bl, MainWindow main)
         {
             InitializeComponent();
             mainWindow = main;
@@ -101,7 +101,7 @@ namespace PL1
         {
             sender.ToString();
             DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
-            IBL.BO.Drone drone = blDroneList.convertDroneToListToDroneBL(droneToList);
+           BO.Drone drone = blDroneList.convertDroneToListToDroneBL(droneToList);
             //this.Visibility = Visibility.Hidden;
             new Drone(blDroneList, drone, this).Show();
             Hide();

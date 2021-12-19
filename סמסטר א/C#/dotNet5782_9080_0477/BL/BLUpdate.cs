@@ -1,4 +1,4 @@
-﻿using IBL.BO;
+﻿using BO;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -17,11 +17,11 @@ namespace BL
         /// send a drone a charger in a station
         /// </summary>
         /// <param name="id"></param>
-        public IBL.BO.Drone updateSendDroneToCharge(int id)
+        public BO.Drone updateSendDroneToCharge(int id)
         {
             //check this function////////////////////////////////
             DO.Station station = new DO.Station();
-            IBL.BO.Drone droneBL = getSpecificDroneBLFromList(id);
+            BO.Drone droneBL = getSpecificDroneBLFromList(id);
             //find a station to charge
             if (droneBL.DroneStatus == DroneStatus.Available)
             {
@@ -57,9 +57,9 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="timeInCharge"></param>
-        public IBL.BO.Drone updateUnchargeDrone(int id, double timeInCharge)
+        public BO.Drone updateUnchargeDrone(int id, double timeInCharge)
         {
-            IBL.BO.Drone droneBL = new IBL.BO.Drone();
+            BO.Drone droneBL = new BO.Drone();
             try
             {
                 droneBL = droneBLList.Find(d => d.ID == id && d.DroneStatus == DroneStatus.Maintenance);
@@ -98,7 +98,7 @@ namespace BL
         /// <param name="id"></param>
         public void updateConnectParcelToDrone(int id)
         {
-            IBL.BO.Drone droneBL = getSpecificDroneBLFromList(id);
+            BO.Drone droneBL = getSpecificDroneBLFromList(id);
             if (droneBL.DroneStatus != DroneStatus.Available)
             {
                 throw new CanNotUpdateDrone(id, "the drone is not free");
@@ -163,7 +163,7 @@ namespace BL
         /// <param name="id"></param>
         public void updateCollectParcelByDrone(int id)
         {
-            IBL.BO.Drone droneBL = getSpecificDroneBLFromList(id);
+            BO.Drone droneBL = getSpecificDroneBLFromList(id);
             DO.Parcel parcel = new DO.Parcel();
             parcel = dalObject.getParcelById(p => p.DroneID == droneBL.ID);
             if (parcel.DroneID == 0)
@@ -192,7 +192,7 @@ namespace BL
         /// <param name="id"></param>
         public void updateSupplyParcelByDrone(int id)
         {
-            IBL.BO.Drone droneBL = getSpecificDroneBLFromList(id);
+           BO.Drone droneBL = getSpecificDroneBLFromList(id);
             DO.Parcel parcel = dalObject.getParcelById(p=> p.DroneID == id);
             //check if can supply the parcel
             if (parcel.Delivered != null)

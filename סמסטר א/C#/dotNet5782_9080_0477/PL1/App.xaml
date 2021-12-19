@@ -5,7 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style TargetType="Button">
-            <Setter Property="Background" Value="#FFFFE9ED"/>
+            <Setter Property="Background" Value="#FF8D8C7A"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -17,12 +17,12 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FFFFE9ED"/>
+                    <Setter Property="Background" Value="#FFBDBDBD"/>
                 </Trigger>
 
                 <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="#FFFFE9ED"/>
-                    <Setter Property="Foreground" Value="#FFFFE9ED"/>
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Foreground" Value="#FF4B4B4B"/>
                 </Trigger>
             </Style.Triggers>
         </Style>

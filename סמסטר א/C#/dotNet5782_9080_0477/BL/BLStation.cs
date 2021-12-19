@@ -1,5 +1,5 @@
 ﻿using DAL;
-using IBL.BO;
+using BO;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -35,7 +35,7 @@ namespace BL
             droneChargers = droneChargers.FindAll(d => d.StationID == id);
             List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
             droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(getSpecificDroneBLFromList(d.DroneID))));
-            IBL.BO.Station station = new IBL.BO.Station(id, name, ChargeSlots, new LocationBL(location.Longitude, location.Latitude), dronesInCharges);
+            BO.Station station = new BO.Station(id, name, ChargeSlots, new LocationBL(location.Longitude, location.Latitude), dronesInCharges);
             AddStationToDal(id, name, location, ChargeSlots);
         }
 
@@ -61,11 +61,11 @@ namespace BL
         /// return all the stations from the dal converted to bl
         /// </summary>
         /// <returns>List<StationBL></returns>
-        public List<IBL.BO.Station> GetStationsBL()
+        public List<BO.Station> GetStationsBL()
         {
 
             IEnumerable<DO.Station> stations = dalObject.GetStation();
-            List<IBL.BO.Station> stations1 = new List<IBL.BO.Station>();
+            List<BO.Station> stations1 = new List<BO.Station>();
             foreach (var station in stations)
             {
                 stations1.Add(convertDalStationToBl(station));
@@ -78,7 +78,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Station</returns>
-        public IBL.BO.Station GetSpecificStationBL(int id)
+        public BO.Station GetSpecificStationBL(int id)
         {
             try
             {
@@ -95,10 +95,10 @@ namespace BL
         /// returns the station with empty chargers
         /// </summary>
         /// <returns>List<StationBL></returns>
-        public List<IBL.BO.Station> getStationWithEmptyChargers()
+        public List<BO.Station> getStationWithEmptyChargers()
         {
             IEnumerable<DO.Station> stations = dalObject.GetStation();
-            List<IBL.BO.Station> stations1 = new List<IBL.BO.Station>();
+            List<BO.Station> stations1 = new List<BO.Station>();
             foreach (var station in stations)
             {
                 if (checkStationIfEmptyChargers(station))
@@ -131,13 +131,13 @@ namespace BL
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public IBL.BO.Station convertDalStationToBl(DO.Station s)
+        public BO.Station convertDalStationToBl(DO.Station s)
         {
             List<DroneCharge> droneChargers = dalObject.GetDroneCharge().Cast<DroneCharge>().ToList();
             droneChargers = droneChargers.FindAll(d => d.StationID == s.ID);
             List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
             droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(getSpecificDroneBLFromList(d.DroneID))));
-            return new IBL.BO.Station(s.ID, s.Name, s.ChargeSlots, new LocationBL(s.Longitude, s.Latitude), dronesInCharges);
+            return new BO.Station(s.ID, s.Name, s.ChargeSlots, new LocationBL(s.Longitude, s.Latitude), dronesInCharges);
         }
 
         /// <summary>

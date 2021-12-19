@@ -1,4 +1,4 @@
-﻿using IBL.BO;
+﻿using BO;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -6,8 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL
-{
+namespace BlApi { 
     public interface Bl
     {
         public double calcElectry(LocationBL locatin1, LocationBL location2, int weight);
@@ -56,9 +55,9 @@ namespace IBL
         public BO.Station convertDalStationToBl(DO.Station s);////////////////
         public void updateDataStation(int id, int name = 0, int chargeSlots = -1);
 
-        public IBL.BO.Drone updateSendDroneToCharge(int id);
+        public BO.Drone updateSendDroneToCharge(int id);
 
-        public IBL.BO.Drone updateUnchargeDrone(int id, double timeInCharge);
+        public BO.Drone updateUnchargeDrone(int id, double timeInCharge);
 
         public void updateConnectParcelToDrone(int id);
 
@@ -80,7 +79,7 @@ namespace IBL
 
         public void updateDrone(BO.Drone drone);
 
-        public IBL.BO.Drone updateDataDroneModel(int id, string model);
+        public BO.Drone updateDataDroneModel(int id, string model);
 
         public List<BO.Parcel> GetParcelsWithoutoutDrone();
 
@@ -89,7 +88,7 @@ namespace IBL
         public List<DroneToList> getDronesByDroneStatus(int status);
         public List<DroneToList> getDronesByDroneWeight(int status);
         public List<DroneToList> getDroneToList();
-        public IBL.BO.Drone convertDroneToListToDroneBL(DroneToList droneToList);
-
+        public BO.Drone convertDroneToListToDroneBL(DroneToList droneToList);
     }
+
 }

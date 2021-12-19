@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using static BL.ExceptionsBL;
 
-namespace IBL
-{
     namespace BO
     {
         public class Station
@@ -59,4 +57,4 @@ namespace IBL
             }
         }
     }
-}
+
