@@ -1,5 +1,5 @@
 ﻿using DAL;
-using IBL.BO;
+using BO;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -38,7 +38,7 @@ namespace BL
             {
                 throw new OutOfRange("weight");
             }
-            IBL.BO.Drone droneBL = new IBL.BO.Drone();
+            BO.Drone droneBL = new BO.Drone();
             DO.Station station = dalObject.getStationById(s => s.ID == stationID);
             if (station.ID != 0)
             {
@@ -78,11 +78,11 @@ namespace BL
         /// return all the drones from the dal converted to bl
         /// </summary>
         /// <returns>List<DroneBL>returns>
-        public List<IBL.BO.Drone> GetDronesBL()
+        public List<BO.Drone> GetDronesBL()
         {
 
             IEnumerable<DO.Drone> drones = dalObject.GetDrone();
-            List<IBL.BO.Drone> drone1 = new List<IBL.BO.Drone>();
+            List<BO.Drone> drone1 = new List<BO.Drone>();
             foreach (var drone in drones)
             {
                 drone1.Add(convertDalDroneToBl(drone));
@@ -95,7 +95,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>DroneBL</returns>
-        public IBL.BO.Drone getSpecificDroneBLFromList(int id)
+        public BO.Drone getSpecificDroneBLFromList(int id)
         {
             try
             {
@@ -112,7 +112,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>DroneBL</returns>
-        public IBL.BO.Drone GetSpecificDroneBL(int id)
+        public BO.Drone GetSpecificDroneBL(int id)
         {
             return getSpecificDroneBLFromList(id);
         }
@@ -122,7 +122,7 @@ namespace BL
         /// </summary>
         /// <param name="d"></param>
         /// <returns>DroneBL</returns>
-        public IBL.BO.Drone convertDalDroneToBl(DO.Drone d)
+        public BO.Drone convertDalDroneToBl(DO.Drone d)
         {
             //לבדוק מה עם parcellattransfor
             return GetSpecificDroneBL(d.ID);
@@ -132,7 +132,7 @@ namespace BL
         /// update the drone
         /// </summary>
         /// <param name="drone"></param>
-        public void updateDrone(IBL.BO.Drone drone)
+        public void updateDrone(BO.Drone drone)
         {
             int index = droneBLList.FindIndex(d => d.ID == drone.ID);
             droneBLList[index] = drone;
@@ -143,9 +143,9 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
-        public IBL.BO.Drone updateDataDroneModel(int id, string model)
+        public BO.Drone updateDataDroneModel(int id, string model)
         {
-            IBL.BO.Drone droneBl = getSpecificDroneBLFromList(id);
+            BO.Drone droneBl = getSpecificDroneBLFromList(id);
             droneBl.Model = model;
             updateDrone(droneBl);
 
@@ -163,7 +163,7 @@ namespace BL
         public List<DroneToList> getDronesByDroneStatus(int status)
         {
             List<DroneToList> droneToLists = new List<DroneToList>();
-            IEnumerable<IBL.BO.Drone> droneQuery =
+            IEnumerable<BO.Drone> droneQuery =
             from drone in GetDronesBL()
             where drone.DroneStatus == (DroneStatus)status
             select drone;
@@ -182,7 +182,7 @@ namespace BL
         public List<DroneToList> getDronesByDroneWeight(int status)
         {
             List<DroneToList> droneToLists = new List<DroneToList>();
-            IEnumerable<IBL.BO.Drone> droneQuery =
+            IEnumerable<BO.Drone> droneQuery =
             from drone in GetDronesBL()
             where drone.Weight == (WeightCatagories)status
             select drone;
@@ -195,7 +195,7 @@ namespace BL
 
         public List <DroneToList> getDroneToList()
         {
-            List<IBL.BO.Drone> drones = droneBLList;
+            List<BO.Drone> drones = droneBLList;
             List<DroneToList> drone1 = new List<DroneToList>();
             foreach (var drone in drones)
             {
@@ -204,9 +204,9 @@ namespace BL
             return drone1;
         }
 
-        public IBL.BO.Drone convertDroneToListToDroneBL(DroneToList droneToList)
+        public BO.Drone convertDroneToListToDroneBL(DroneToList droneToList)
         {
-            IBL.BO.Drone drone = new IBL.BO.Drone();
+            BO.Drone drone = new BO.Drone();
             drone.ID = droneToList.ID;
             drone.Model = droneToList.Model;
             drone.Location = droneToList.Location;

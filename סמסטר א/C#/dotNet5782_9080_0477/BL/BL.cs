@@ -1,8 +1,8 @@
 ﻿using System;
 using DalObject;
-using IBL.BO;
+using BO;
 using DAL;
-using IBL;
+using BlApi;
 using System.Collections.Generic;
 using DO;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace BL
     internal partial class BL : Bl
     {
         Random rand = new Random();
-        List<IBL.BO.Drone> droneBLList = new List<IBL.BO.Drone>();
+        List<BO.Drone> droneBLList = new List<BO.Drone>();
         IDAL.IDal dalObject;
         //############################################################
         //constructor
@@ -40,7 +40,7 @@ namespace BL
             //for each drone we check what is the status and reboot in entries
             foreach (var drone in dalObject.GetDrone())
             {
-                IBL.BO.Drone droneBL = new IBL.BO.Drone { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight };
+                BO.Drone droneBL = new BO.Drone { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight };
                 DO.Parcel parcel = dalObject.getParcelById(p => p.DroneID == drone.ID);
                 DO.Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
                 //check if the drone has a parcel
@@ -102,7 +102,7 @@ namespace BL
                     List<DO.Parcel> parcelBLsWithSuppliedParcel = dalObject.GetParcel().ToList().FindAll(p => p.Delivered != null);
                     if (parcelBLsWithSuppliedParcel.Count > 0)
                     {
-                        IBL.BO.Parcel parcelBL = convertDalToParcelBL(parcelBLsWithSuppliedParcel[rand.Next(0, parcelBLsWithSuppliedParcel.Count)]);
+                        BO.Parcel parcelBL = convertDalToParcelBL(parcelBLsWithSuppliedParcel[rand.Next(0, parcelBLsWithSuppliedParcel.Count)]);
                         DO.Customer customer = dalObject.getCustomerById(c => c.ID == parcelBL.Sender.ID);
                         droneBL.Location = new LocationBL(customer.Latitude, customer.Longitude);
                         DO.Station station1 = stationWithMinDisAndEmptySlots(droneBL.Location);
@@ -202,10 +202,10 @@ namespace BL
         /// return parcels that are not connected to a drone
         /// </summary>
         /// <returns>List<ParcelBL></returns>
-        public List<IBL.BO.Parcel> GetParcelsWithoutoutDrone()
+        public List<BO.Parcel> GetParcelsWithoutoutDrone()
         {
-            List<IBL.BO.Parcel> parcels = GetParcelsBL();
-            List<IBL.BO.Parcel> parcelsWithOutDrone = new List<IBL.BO.Parcel>();
+            List<BO.Parcel> parcels = GetParcelsBL();
+            List<BO.Parcel> parcelsWithOutDrone = new List<BO.Parcel>();
             foreach (var parcel in parcels)
             {
                 if (parcel.Drone == null)
@@ -220,11 +220,11 @@ namespace BL
         /// return station with epty chargers
         /// </summary>
         /// <returns>List<StationBL></returns>
-        public List<IBL.BO.Station> GetStationWithEmptyChargers()
+        public List<BO.Station> GetStationWithEmptyChargers()
         {
             int numOfChargers = 0;
-            List<IBL.BO.Station> stations = GetStationsBL();
-            List<IBL.BO.Station> stationsWithEmptyChargers = new List<IBL.BO.Station>();
+            List<BO.Station> stations = GetStationsBL();
+            List<BO.Station> stationsWithEmptyChargers = new List<BO.Station>();
             List<DroneCharge> droneChargers = dalObject.GetDroneCharge().ToList();
             foreach (var station in stations)
             {

@@ -1,5 +1,5 @@
 ﻿using DAL;
-using IBL.BO;
+using BO;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -50,7 +50,7 @@ namespace BL
         public void AddCustomer(ulong id, string name, string phone, LocationBL location)
         {
             checkUniqeIdCustomer(id, dalObject);
-            IBL.BO.Customer customer = new IBL.BO.Customer();
+            BO.Customer customer = new BO.Customer();
             customer.ID = id;
             customer.Name = name;
             customer.Phone = phone;
@@ -80,10 +80,10 @@ namespace BL
         /// return all the customers from the dal converted to bl
         /// </summary>
         /// <returns> List<CustomerBL> </returns>
-        public List<IBL.BO.Customer> GetCustomersBL()
+        public List<BO.Customer> GetCustomersBL()
         {
             IEnumerable<DO.Customer> customers = dalObject.GetCustomer();
-            List<IBL.BO.Customer> customers1 = new List<IBL.BO.Customer>();
+            List<BO.Customer> customers1 = new List<BO.Customer>();
             foreach (var customer in customers)
             {
                 customers1.Add(convertDalCustomerToBl(customer));
@@ -96,7 +96,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>customerbl</returns>
-        public IBL.BO.Customer GetSpecificCustomerBL(ulong id)
+        public BO.Customer GetSpecificCustomerBL(ulong id)
         {
             try
             {
@@ -114,7 +114,7 @@ namespace BL
         /// </summary>
         /// <param name="c"></param>
         /// <returns>CustomerBL</returns>
-        public IBL.BO.Customer convertDalCustomerToBl(DO.Customer c)
+        public BO.Customer convertDalCustomerToBl(DO.Customer c)
         {
             List<ParcelAtCustomer> parcelSendedByCustomers = new List<ParcelAtCustomer>();
             List<ParcelAtCustomer> parcelSendedToCustomers = new List<ParcelAtCustomer>();
@@ -128,7 +128,7 @@ namespace BL
 
             });
 
-            return new IBL.BO.Customer
+            return new BO.Customer
             {
                 ID = c.ID,
                 Name = c.Name,

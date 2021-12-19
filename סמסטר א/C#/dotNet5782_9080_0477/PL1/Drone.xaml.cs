@@ -1,4 +1,4 @@
-﻿using IBL.BO;
+﻿using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,16 +20,16 @@ namespace PL1
     /// </summary>
     public partial class Drone : Window
     {
-        IBL.Bl blDrone;
-        IBL.BO.Drone droneBL;
+        BlApi.Bl blDrone;
+        BO.Drone droneBL;
         DroneList DroneList;
-        IBL.BO.Drone drone = new IBL.BO.Drone();
+        BO.Drone drone = new BO.Drone();
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Drone(IBL.Bl bl, DroneList droneList)
+        public Drone(BlApi.Bl bl, DroneList droneList)
         {
             DroneList = droneList;
             blDrone = bl;
@@ -45,7 +45,7 @@ namespace PL1
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="droneList"></param>
-        public Drone(IBL.Bl bl, IBL.BO.Drone drone, DroneList droneList)
+        public Drone(BlApi.Bl bl, BO.Drone drone, DroneList droneList)
         {
             DroneList = droneList;
             blDrone = bl;

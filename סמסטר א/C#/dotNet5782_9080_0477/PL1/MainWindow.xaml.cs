@@ -20,7 +20,7 @@ namespace PL1
     public partial class MainWindow : Window
     {
 
-        IBL.Bl bl;
+        BlApi.Bl bl;
 
         /// <summary>
         /// constructor

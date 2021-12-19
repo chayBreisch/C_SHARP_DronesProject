@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using DO;
 using static BL.ExceptionsBL;
 
-namespace IBL
-{
+
     namespace BO
     {
         public class Parcel
@@ -87,4 +86,4 @@ namespace IBL
             }
         }
     }
-}
+

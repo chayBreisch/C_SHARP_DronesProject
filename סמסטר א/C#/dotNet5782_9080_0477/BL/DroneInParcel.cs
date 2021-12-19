@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL
-{
+
     namespace BO
     {
         public class DroneInParcel
         {
-            public DroneInParcel(IBL.BO.Drone drone)
+            public DroneInParcel(BO.Drone drone)
             {
                 ID = drone.ID;
                 BatteryStatus = drone.BatteryStatus;
@@ -26,4 +25,3 @@ namespace IBL
             }
         }
     }
-}

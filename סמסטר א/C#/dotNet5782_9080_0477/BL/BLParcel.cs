@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using DAL;
-using IBL.BO;
+using BO;
 
 namespace BL
 {
@@ -32,10 +32,10 @@ namespace BL
         /// <param name="priority"></param>
         public void AddParcel(ulong sender, ulong target, int Weight, int priority)
         {
-            IBL.BO.Parcel parcel = new IBL.BO.Parcel();
+            BO.Parcel parcel = new BO.Parcel();
             checkIfCustomerWithThisID(sender);
             checkIfCustomerWithThisID(target);
-            IBL.BO.Customer customer = GetSpecificCustomerBL(sender);
+            BO.Customer customer = GetSpecificCustomerBL(sender);
             parcel.Sender = new CustomerAtParcel(customer.ID, customer.Name);
             customer = GetSpecificCustomerBL(target);
             parcel.Reciever = new CustomerAtParcel(customer.ID, customer.Name);
@@ -73,11 +73,11 @@ namespace BL
         /// return all the parcels from the dal converted to bl
         /// </summary>
         /// <returns>List<ParcelBL> </returns>
-        public List<IBL.BO.Parcel> GetParcelsBL()
+        public List<BO.Parcel> GetParcelsBL()
         {
 
             IEnumerable<DO.Parcel> parcels = dalObject.GetParcel();
-            List<IBL.BO.Parcel> parcel1 = new List<IBL.BO.Parcel>();
+            List<BO.Parcel> parcel1 = new List<BO.Parcel>();
             foreach (var parcel in parcels)
             {
                 parcel1.Add(convertDalToParcelBL(parcel));
@@ -90,7 +90,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Parcel</returns>
-        public IBL.BO.Parcel GetSpecificParcelBL(int id)
+        public BO.Parcel GetSpecificParcelBL(int id)
         {
             try
             {
@@ -125,15 +125,15 @@ namespace BL
         /// </summary>
         /// <param name="p"></param>
         /// <returns>ParcelBL</returns>
-        public IBL.BO.Parcel convertDalToParcelBL(DO.Parcel p)
+        public BO.Parcel convertDalToParcelBL(DO.Parcel p)
         {
             DO.Customer sender = dalObject.getCustomerById(c => c.ID == p.SenderID);
             DO.Customer target = dalObject.getCustomerById(c => c.ID == p.TargetID);
-            IBL.BO.Drone drone = new IBL.BO.Drone();
+            BO.Drone drone = new BO.Drone();
 
             if (p.DroneID != 0)
                 drone = convertDalDroneToBl(dalObject.getDroneById(d => d.ID == p.DroneID));
-            return new IBL.BO.Parcel(p.ID, p.Weight, p.Priority, p.Requested, p.Scheduled, p.Delivered, p.PickedUp, drone, sender.ID, target.ID, dalObject);
+            return new BO.Parcel(p.ID, p.Weight, p.Priority, p.Requested, p.Scheduled, p.Delivered, p.PickedUp, drone, sender.ID, target.ID, dalObject);
 
         }
 
