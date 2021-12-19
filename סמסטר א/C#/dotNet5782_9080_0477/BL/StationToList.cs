@@ -21,7 +21,7 @@ using System.Threading.Tasks;
             public int ChargeSlotsBusy { get; set; }
             public override string ToString()
             {
-                return $"id: {ID}, name: {Name}, chargeSlotsFree: {ChargeSlotsFree}, chargeSlotsBusy: {ChargeSlotsBusy}";
+                return $"*****************************************\nid: {ID},\nname: {Name},\nchargeSlotsFree: {ChargeSlotsFree},\nchargeSlotsBusy: {ChargeSlotsBusy}\n*****************************************";
             }
         }
     }

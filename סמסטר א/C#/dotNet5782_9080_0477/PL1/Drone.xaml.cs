@@ -68,22 +68,11 @@ namespace PL1
             {
                 visible.IsChecked = false;
                 hidden.IsChecked = true;
-                //visible.Visibility = Visibility.Hidden;
-                //hidden.Visibility = Visibility.Visible;
-                /*Charge.IsEnabled = false;
-                Connect.IsEnabled = false;
-                Collect.IsEnabled = false;
-                Supply.IsEnabled = false;*/
             }
             if (droneBL.DroneStatus != DroneStatus.Maintenance)
             {
-                /* UnCharge.IsEnabled = false;*/
-                //hidden.Visibility = Visibility.Hidden;
-                //visible.Visibility = Visibility.Visible;
                 visible.IsChecked = true;
                 hidden.IsChecked = false;
-
-                //TimeCharger.Visibility = Visibility.Hidden;
                 TimeChargerBlock.Visibility = Visibility.Hidden;
 
             }

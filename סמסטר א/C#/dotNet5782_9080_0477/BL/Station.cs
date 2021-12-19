@@ -17,7 +17,14 @@ using static BL.ExceptionsBL;
                 Location = location;
                 DronesInCharge = droneInCharger;
             }
-
+        public Station()
+        {
+            ID = 0;
+            Name = 0;
+            chargeSlots = 0;
+            Location = new LocationBL(-1,-1);
+            DronesInCharge = new List<DroneInCharger>();
+        }
         private int Id { get; set; }
 
             public int ID

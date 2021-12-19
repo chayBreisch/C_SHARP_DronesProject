@@ -206,15 +206,7 @@ namespace BL
 
         public BO.Drone convertDroneToListToDroneBL(DroneToList droneToList)
         {
-            BO.Drone drone = new BO.Drone();
-            drone.ID = droneToList.ID;
-            drone.Model = droneToList.Model;
-            drone.Location = droneToList.Location;
-            drone.Weight = droneToList.Weight;
-            drone.BatteryStatus = droneToList.BatteryStatus;
-            drone.DroneStatus = droneToList.DroneStatus;
-            drone.parcelInDelivery = new ParcelInDelivery(convertDalToParcelBL(dalObject.getParcelById(p => p.ID == droneToList.NumOfParcelTrans)),dalObject);
-            return drone;
+            return getSpecificDroneBLFromList(droneToList.ID);
         }
     }
 }

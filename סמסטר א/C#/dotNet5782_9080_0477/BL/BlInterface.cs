@@ -49,7 +49,7 @@ namespace BlApi {
         public List<BO.Station> GetStationsBL();
         public BO.Station GetSpecificStationBL(int id);
 
-        public List<BO.Station> getStationWithEmptyChargers();
+       // public List<BO.Station> getStationWithEmptyChargers();
 
         public bool checkStationIfEmptyChargers(DO.Station station);
         public BO.Station convertDalStationToBl(DO.Station s);////////////////
@@ -89,6 +89,11 @@ namespace BlApi {
         public List<DroneToList> getDronesByDroneWeight(int status);
         public List<DroneToList> getDroneToList();
         public BO.Drone convertDroneToListToDroneBL(DroneToList droneToList);
+        public List<StationToList> getStationToList();
+        /// //////////////////////////////////////////////////////////////////////
+        public BO.Station convertStationToListToStationBL(StationToList stationToList);
+        public List<StationToList> getStationsByChargeSlots(int status);
+
     }
 
 }

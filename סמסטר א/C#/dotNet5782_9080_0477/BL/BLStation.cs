@@ -95,7 +95,7 @@ namespace BL
         /// returns the station with empty chargers
         /// </summary>
         /// <returns>List<StationBL></returns>
-        public List<BO.Station> getStationWithEmptyChargers()
+       /* public List<BO.Station> getStationWithEmptyChargers()
         {
             IEnumerable<DO.Station> stations = dalObject.GetStation();
             List<BO.Station> stations1 = new List<BO.Station>();
@@ -105,7 +105,7 @@ namespace BL
                     stations1.Add(convertDalStationToBl(station));
             }
             return stations1;
-        }
+        }*/
 
         /// <summary>
         /// returns if the station has empty chargers
@@ -158,6 +158,37 @@ namespace BL
                 station.ChargeSlots = chargeSlots;
             }
             dalObject.updateStation(station);
+        }
+
+        public List<StationToList> getStationsByChargeSlots(int status)
+        {
+            if (status == 0)
+                return (
+                from station in getStationToList()
+                where station.ChargeSlotsFree == (int)status
+                select station).ToList();
+            else
+                return (
+            from station in getStationToList()
+            where station.ChargeSlotsFree != 0
+            select station).ToList();
+        }
+
+
+        public List<StationToList> getStationToList()
+        {
+            List<BO.Station> stations = GetStationsBL();
+            List<StationToList> stations1 = new List<StationToList>();
+            foreach (var station in stations)
+            {
+                stations1.Add(new StationToList(station));
+            }
+            return stations1;
+        }
+
+        public BO.Station convertStationToListToStationBL(StationToList stationToList)
+        {
+            return GetSpecificStationBL(stationToList.ID);
         }
     }
 }

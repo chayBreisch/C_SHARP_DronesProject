@@ -49,5 +49,11 @@ namespace PL1
             new DroneList(bl, this).Show();
             Hide();
         }
+
+        private void Button_ClickStationList(object sender, RoutedEventArgs e)
+        {
+            new StationList(bl, this).Show();
+            Hide();
+        }
     }
 }
