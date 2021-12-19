@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    class ExceptionsBL
+    public class ExceptionsBL
     {
         public class NotEmptyChargeSlots : Exception
         {

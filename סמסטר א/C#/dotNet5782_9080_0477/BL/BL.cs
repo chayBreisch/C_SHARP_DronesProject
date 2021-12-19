@@ -9,8 +9,16 @@ using System.Linq;
 namespace BL
 {
     //לשים לב מה עם GET SET IN CUSTOMERBL
-    internal partial class BL : Bl
+    internal sealed partial class BL : Bl
     {
+        static BL Instance;
+        public static BL GetInstance()
+        {
+            if (Instance == null)
+                return new BL();
+            return Instance;
+
+        }
         Random rand = new Random();
         List<IBL.BO.Drone> droneBLList = new List<IBL.BO.Drone>();
         IDAL.IDal dalObject;

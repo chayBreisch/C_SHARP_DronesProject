@@ -4,22 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IBL;
+using static BL.ExceptionsBL;
 
 namespace BL
 {
     public class FactoryBL
     {
-        public static IBL.Bl factory(string obj)
+        public static IBL.Bl factory()
         {
-            switch (obj)
+            try
             {
-                case "BL":
-                    return new BL();
-                    break;
-                    //default:
-                    //return ;
+                return BL.GetInstance();
             }
-            return new BL();
+            catch (Exception e)
+            {
+                throw new CantReturnBLObject();
+            }
         }
     }
 }

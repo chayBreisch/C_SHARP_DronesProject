@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using IDAL;
+using DalObject;
 namespace DAL
 {
     public class FactoryDAL
@@ -15,12 +16,12 @@ namespace DAL
                 switch (obj)
                 {
                     case "DalObject":
-                        return new DalObject.DalObject();
+                        return DalObject.DalObject.getInstance();
                         break;
                         //default:
                         //return ;
                 }
-                return new DalObject.DalObject();
+                return DalObject.DalObject.getInstance();
             }
             catch (Exception e)
             {

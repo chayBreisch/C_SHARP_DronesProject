@@ -10,6 +10,13 @@ namespace DalObject
 {
     internal partial class DalObject : IDal
     {
+        static DalObject Instance;
+        public static DalObject getInstance()
+        {
+            if (Instance == null)
+                return new DalObject();
+            return Instance;
+        }
         public DalObject()
         {
             DataSource.Initialize();

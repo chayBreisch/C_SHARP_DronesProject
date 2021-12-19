@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BL;
 namespace PL1
 {
     /// <summary>
@@ -27,8 +28,15 @@ namespace PL1
         /// </summary>
         public MainWindow()
         {
-            bl = BL.FactoryBL.factory("BL");
-            InitializeComponent();
+            try
+            {
+                bl = BL.FactoryBL.factory();
+                InitializeComponent();
+            }
+            catch (ExceptionsBL.CantReturnBLObject e)
+            {
+                throw new ExceptionsBL.CantReturnBLObject();
+            }
         }
 
         /// <summary>
