@@ -1,6 +1,6 @@
 ﻿using DAL;
 using IBL.BO;
-using IDAL.DO;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +19,9 @@ namespace BL
         /// <param name="dalObject"></param>
         public static void checkUniqeIdDrone(int id, IDAL.IDal dalObject)
         {
-            List<IDAL.DO.Drone> drones = dalObject.GetDrone().ToList();
+            List<DO.Drone> drones = dalObject.GetDrone().ToList();
             if (drones.Any(d => d.ID == id))
-                throw new NotUniqeID(id, typeof(IDAL.DO.Drone));
+                throw new NotUniqeID(id, typeof(DO.Drone));
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace BL
                 throw new OutOfRange("weight");
             }
             IBL.BO.Drone droneBL = new IBL.BO.Drone();
-            IDAL.DO.Station station = dalObject.getStationById(s => s.ID == stationID);
+            DO.Station station = dalObject.getStationById(s => s.ID == stationID);
             if (station.ID != 0)
             {
                 droneBL.Model = model;
@@ -55,7 +55,7 @@ namespace BL
                 droneBLList.Add(droneBL);
             }
             else
-                throw new NoItemWithThisID(stationID, typeof(IDAL.DO.Station));
+                throw new NoItemWithThisID(stationID, typeof(DO.Station));
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace BL
         public void AddDroneToDal(int id, string model, int maxWeight)
         {
 
-            IDAL.DO.Drone drone = new IDAL.DO.Drone();
+            DO.Drone drone = new DO.Drone();
             drone.ID = id;
             drone.Model = model;
             drone.MaxWeight = (WeightCatagories)maxWeight;
@@ -81,7 +81,7 @@ namespace BL
         public List<IBL.BO.Drone> GetDronesBL()
         {
 
-            IEnumerable<IDAL.DO.Drone> drones = dalObject.GetDrone();
+            IEnumerable<DO.Drone> drones = dalObject.GetDrone();
             List<IBL.BO.Drone> drone1 = new List<IBL.BO.Drone>();
             foreach (var drone in drones)
             {
@@ -103,7 +103,7 @@ namespace BL
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(id, typeof(IDAL.DO.Drone));
+                throw new NotExistObjWithID(id, typeof(DO.Drone));
             }
         }
 
@@ -122,7 +122,7 @@ namespace BL
         /// </summary>
         /// <param name="d"></param>
         /// <returns>DroneBL</returns>
-        public IBL.BO.Drone convertDalDroneToBl(IDAL.DO.Drone d)
+        public IBL.BO.Drone convertDalDroneToBl(DO.Drone d)
         {
             //לבדוק מה עם parcellattransfor
             return GetSpecificDroneBL(d.ID);
@@ -149,7 +149,7 @@ namespace BL
             droneBl.Model = model;
             updateDrone(droneBl);
 
-            IDAL.DO.Drone drone = dalObject.getDroneById(d => d.ID == id);
+            DO.Drone drone = dalObject.getDroneById(d => d.ID == id);
             drone.Model = model;
             dalObject.updateDrone(drone);
             return droneBl;

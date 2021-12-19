@@ -10,15 +10,22 @@ namespace DAL
     {
         public static IDAL.IDal factory(string obj)
         {
-            switch (obj)
+            try
             {
-                case "DalObject":
-                    return new DalObject.DalObject();
-                    break;
-                    //default:
-                    //return ;
+                switch (obj)
+                {
+                    case "DalObject":
+                        return new DalObject.DalObject();
+                        break;
+                        //default:
+                        //return ;
+                }
+                return new DalObject.DalObject();
             }
-            return new DalObject.DalObject();
+            catch (Exception e)
+            {
+                throw new CantReturnDalObject();
+            }
         }
     }
 }

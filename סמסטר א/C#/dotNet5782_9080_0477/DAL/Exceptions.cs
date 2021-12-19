@@ -35,5 +35,13 @@ namespace DAL
 
         }
 
+
+    }
+    public class CantReturnDalObject : Exception
+    {
+        public CantReturnDalObject() : base($"can't return dal object")
+        {
+
+        }
     }
 }

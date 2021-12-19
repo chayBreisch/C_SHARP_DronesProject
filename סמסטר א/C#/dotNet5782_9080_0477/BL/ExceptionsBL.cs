@@ -38,5 +38,19 @@ namespace BL
 
             }
         }
+        public class CantReturnDalObject : DAL.CantReturnDalObject
+        {
+            public CantReturnDalObject() : base()
+            {
+
+            }
+        }
+        public class CantReturnBLObject : Exception
+        {
+            public CantReturnBLObject() : base($"can't return BL object")
+            {
+
+            }
+        }
     }
 }

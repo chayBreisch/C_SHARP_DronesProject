@@ -1,5 +1,5 @@
 ﻿using IBL.BO;
-using IDAL.DO;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +12,9 @@ namespace IBL
     {
         public double calcElectry(LocationBL locatin1, LocationBL location2, int weight);
 
-        public IDAL.DO.Station stationWithMinDisAndEmptySlots(LocationBL location);
+        public DO.Station stationWithMinDisAndEmptySlots(LocationBL location);
 
-        public IDAL.DO.Station findClosestStation(LocationBL location);
+        public DO.Station findClosestStation(LocationBL location);
 
         //public static void checkUniqeIdCustomer(ulong id, IDAL.IDal dalObject);
 
@@ -26,7 +26,7 @@ namespace IBL
         public List<BO.Customer> GetCustomersBL();
 
         public BO.Customer GetSpecificCustomerBL(ulong id);
-        public BO.Customer convertDalCustomerToBl(IDAL.DO.Customer c);
+        public BO.Customer convertDalCustomerToBl(DO.Customer c);
 
         public void updateDataCustomer(ulong id, string name = null, string phone = null);
         public void checkIfCustomerWithThisID(ulong id);
@@ -38,10 +38,10 @@ namespace IBL
         public List<BO.Parcel> GetParcelsBL();
         public BO.Parcel GetSpecificParcelBL(int id);
 
-        public List<IDAL.DO.Parcel> getParcelsWithoutoutDrone();
-        public BO.Parcel convertDalToParcelBL(IDAL.DO.Parcel p);
+        public List<DO.Parcel> getParcelsWithoutoutDrone();
+        public BO.Parcel convertDalToParcelBL(DO.Parcel p);
 
-        //public ParcelStatus findParcelStatus(IDAL.DO.Parcel parcel);///////////////////////////
+        //public ParcelStatus findParcelStatus(DO.Parcel parcel);///////////////////////////
         //public static void checkUniqeIdStation(int id, IDAL.IDal dalObject);
 
         public void addStation(int id, int name, LocationBL location, int ChargeSlots);
@@ -52,8 +52,8 @@ namespace IBL
 
         public List<BO.Station> getStationWithEmptyChargers();
 
-        public bool checkStationIfEmptyChargers(IDAL.DO.Station station);
-        public BO.Station convertDalStationToBl(IDAL.DO.Station s);////////////////
+        public bool checkStationIfEmptyChargers(DO.Station station);
+        public BO.Station convertDalStationToBl(DO.Station s);////////////////
         public void updateDataStation(int id, int name = 0, int chargeSlots = -1);
 
         public IBL.BO.Drone updateSendDroneToCharge(int id);
@@ -76,7 +76,7 @@ namespace IBL
 
         public BO.Drone GetSpecificDroneBL(int id);
 
-        public BO.Drone convertDalDroneToBl(IDAL.DO.Drone d);
+        public BO.Drone convertDalDroneToBl(DO.Drone d);
 
         public void updateDrone(BO.Drone drone);
 

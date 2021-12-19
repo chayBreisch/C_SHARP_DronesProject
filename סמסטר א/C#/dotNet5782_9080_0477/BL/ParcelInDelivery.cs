@@ -18,15 +18,15 @@ namespace IBL
                 isPickedUp = parcel.PickedUp != null;
                 CustomerInDeliverySender = parcel.Sender;
                 CustomerInDeliveryReciever = parcel.Reciever;
-                IDAL.DO.Customer customer = dalObject.getCustomerById(c => c.ID == parcel.Sender.ID);
+                DO.Customer customer = dalObject.getCustomerById(c => c.ID == parcel.Sender.ID);
                 CollectLocation = new LocationBL(customer.Longitude, customer.Latitude);
                 customer = dalObject.getCustomerById(c => c.ID == parcel.Reciever.ID);
                 DeliveryDestinationLocation = new LocationBL(customer.Longitude, customer.Latitude);
                 TransportDistance = BL.BL.distance(CollectLocation, DeliveryDestinationLocation);
             }
             public int ID { get; set; }
-            public IDAL.DO.WeightCatagories Weight { get; set; }
-            public IDAL.DO.Priorities Priority { get; set; }
+            public DO.WeightCatagories Weight { get; set; }
+            public DO.Priorities Priority { get; set; }
             public bool isPickedUp { get; set; }
             public CustomerAtParcel CustomerInDeliverySender { get; set; }
             public CustomerAtParcel CustomerInDeliveryReciever { get; set; }

@@ -22,7 +22,7 @@ namespace IBL
             }
             public int ID { get; set; }
             public string Model { get; set; }
-            public IDAL.DO.WeightCatagories Weight { get; set; }
+            public DO.WeightCatagories Weight { get; set; }
             public double BatteryStatus { get; set; }
             public DroneStatus DroneStatus { get; set; }
             public LocationBL Location { get; set; }

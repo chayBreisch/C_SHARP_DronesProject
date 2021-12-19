@@ -22,8 +22,8 @@ namespace IBL
             public int ID { get; set; }
             public string NameCustomerSender { get; set; }
             public string NameCustomerReciver { get; set; }
-            public IDAL.DO.WeightCatagories Weight { get; set; }
-            public IDAL.DO.Priorities Priority { get; set; }
+            public DO.WeightCatagories Weight { get; set; }
+            public DO.Priorities Priority { get; set; }
             public ParcelStatus ParcelStatus { get; set; }
 
             public override string ToString()

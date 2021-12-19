@@ -3,14 +3,14 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
+using DO;
 using IDAL;
 using DAL;
 using System.Collections.Generic;
 
 namespace DalObject
 {
-    public partial class DalObject
+    internal partial class DalObject
     {
         /// <summary>
         /// returns the parcels by list from dal

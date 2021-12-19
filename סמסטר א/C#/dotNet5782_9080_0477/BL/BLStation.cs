@@ -1,6 +1,6 @@
 ﻿using DAL;
 using IBL.BO;
-using IDAL.DO;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +17,9 @@ namespace BL
         /// <param name="dalObject"></param>
         public static void checkUniqeIdStation(int id, IDAL.IDal dalObject)
         {
-            List<IDAL.DO.Station> stations = dalObject.GetStationByList();
+            List<DO.Station> stations = dalObject.GetStationByList();
             if (stations.Any(s => s.ID == id))
-                throw new NotUniqeID(id, typeof(IDAL.DO.Station));
+                throw new NotUniqeID(id, typeof(DO.Station));
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace BL
         /// <param name="ChargeSlots"></param>
         public void AddStationToDal(int id, int name, LocationBL location, int ChargeSlots)
         {
-            IDAL.DO.Station station = new IDAL.DO.Station();
+            DO.Station station = new DO.Station();
             station.ID = id;
             station.Name = name;
             station.Longitude = location.Longitude;
@@ -64,7 +64,7 @@ namespace BL
         public List<IBL.BO.Station> GetStationsBL()
         {
 
-            IEnumerable<IDAL.DO.Station> stations = dalObject.GetStation();
+            IEnumerable<DO.Station> stations = dalObject.GetStation();
             List<IBL.BO.Station> stations1 = new List<IBL.BO.Station>();
             foreach (var station in stations)
             {
@@ -86,7 +86,7 @@ namespace BL
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(id, typeof(IDAL.DO.Station));
+                throw new NotExistObjWithID(id, typeof(DO.Station));
 
             }
         }
@@ -97,7 +97,7 @@ namespace BL
         /// <returns>List<StationBL></returns>
         public List<IBL.BO.Station> getStationWithEmptyChargers()
         {
-            IEnumerable<IDAL.DO.Station> stations = dalObject.GetStation();
+            IEnumerable<DO.Station> stations = dalObject.GetStation();
             List<IBL.BO.Station> stations1 = new List<IBL.BO.Station>();
             foreach (var station in stations)
             {
@@ -112,7 +112,7 @@ namespace BL
         /// </summary>
         /// <param name="station"></param>
         /// <returns>bool</returns>
-        public bool checkStationIfEmptyChargers(IDAL.DO.Station station)
+        public bool checkStationIfEmptyChargers(DO.Station station)
         {
             IEnumerable<DroneCharge> droneChargers = dalObject.GetDroneCharge();
             int numOfChargers = 0;
@@ -131,7 +131,7 @@ namespace BL
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public IBL.BO.Station convertDalStationToBl(IDAL.DO.Station s)
+        public IBL.BO.Station convertDalStationToBl(DO.Station s)
         {
             List<DroneCharge> droneChargers = dalObject.GetDroneCharge().Cast<DroneCharge>().ToList();
             droneChargers = droneChargers.FindAll(d => d.StationID == s.ID);
@@ -148,7 +148,7 @@ namespace BL
         /// <param name="chargeSlots"></param>
         public void updateDataStation(int id, int name = 0, int chargeSlots = -1)
         {
-            IDAL.DO.Station station = dalObject.getStationById(s => s.ID == id);
+            DO.Station station = dalObject.getStationById(s => s.ID == id);
             if (name != 0)
             {
                 station.Name = name;

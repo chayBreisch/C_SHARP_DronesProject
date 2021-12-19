@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
+using DO;
 using static BL.ExceptionsBL;
 
 namespace IBL
@@ -56,8 +56,8 @@ namespace IBL
             }
             public CustomerAtParcel Sender { get; set; }
             public CustomerAtParcel Reciever { get; set; }
-            private IDAL.DO.WeightCatagories weight { get; set; }
-            public IDAL.DO.WeightCatagories Weight
+            private DO.WeightCatagories weight { get; set; }
+            public DO.WeightCatagories Weight
             {
                 get
                 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
+using DO;
 using DAL;
 using IBL.BO;
 
@@ -18,9 +18,9 @@ namespace BL
         /// <param name="dalObject"></param>
         public static void checkUniqeIdParcel(int id, IDAL.IDal dalObject)
         {
-            List<IDAL.DO.Parcel> parcels = dalObject.GetParcelByList();
+            List<DO.Parcel> parcels = dalObject.GetParcelByList();
             if (parcels.Any(p => p.ID == id))
-                throw new NotUniqeID(id, typeof(IDAL.DO.Parcel));
+                throw new NotUniqeID(id, typeof(DO.Parcel));
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace BL
         /// <param name="priority"></param>
         public void AddParcelToDal(/*ulong id,*/ ulong sender, ulong target, int Weight, int priority)
         {
-            IDAL.DO.Parcel parcel = new IDAL.DO.Parcel();
+            DO.Parcel parcel = new DO.Parcel();
             parcel.ID = dalObject.lengthParcel() + 1;
             checkUniqeIdParcel(parcel.ID, dalObject);
             parcel.SenderID = sender;
@@ -76,7 +76,7 @@ namespace BL
         public List<IBL.BO.Parcel> GetParcelsBL()
         {
 
-            IEnumerable<IDAL.DO.Parcel> parcels = dalObject.GetParcel();
+            IEnumerable<DO.Parcel> parcels = dalObject.GetParcel();
             List<IBL.BO.Parcel> parcel1 = new List<IBL.BO.Parcel>();
             foreach (var parcel in parcels)
             {
@@ -98,7 +98,7 @@ namespace BL
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(id, typeof(IDAL.DO.Parcel));
+                throw new NotExistObjWithID(id, typeof(DO.Parcel));
             }
         }
 
@@ -106,10 +106,10 @@ namespace BL
         /// return parcels that are not connected to a drone
         /// </summary>
         /// <returns> List<Parcel></returns>
-        public List<IDAL.DO.Parcel> getParcelsWithoutoutDrone()
+        public List<DO.Parcel> getParcelsWithoutoutDrone()
         {
-            IEnumerable<IDAL.DO.Parcel> parcels = dalObject.GetParcel();
-            List<IDAL.DO.Parcel> parcels1 = new List<IDAL.DO.Parcel>();
+            IEnumerable<DO.Parcel> parcels = dalObject.GetParcel();
+            List<DO.Parcel> parcels1 = new List<DO.Parcel>();
             foreach (var parcel in parcels)
             {
                 if (parcel.DroneID == 0)
@@ -125,10 +125,10 @@ namespace BL
         /// </summary>
         /// <param name="p"></param>
         /// <returns>ParcelBL</returns>
-        public IBL.BO.Parcel convertDalToParcelBL(IDAL.DO.Parcel p)
+        public IBL.BO.Parcel convertDalToParcelBL(DO.Parcel p)
         {
-            IDAL.DO.Customer sender = dalObject.getCustomerById(c => c.ID == p.SenderID);
-            IDAL.DO.Customer target = dalObject.getCustomerById(c => c.ID == p.TargetID);
+            DO.Customer sender = dalObject.getCustomerById(c => c.ID == p.SenderID);
+            DO.Customer target = dalObject.getCustomerById(c => c.ID == p.TargetID);
             IBL.BO.Drone drone = new IBL.BO.Drone();
 
             if (p.DroneID != 0)
@@ -142,7 +142,7 @@ namespace BL
         /// </summary>
         /// <param name="parcel"></param>
         /// <returns>ParcelStatus</returns>
-        public ParcelStatus findParcelStatus(IDAL.DO.Parcel parcel)
+        public ParcelStatus findParcelStatus(DO.Parcel parcel)
         {
             if (parcel.Requested == null)
                 return (ParcelStatus)0;

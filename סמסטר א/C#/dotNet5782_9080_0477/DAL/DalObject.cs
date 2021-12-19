@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
+using DO;
 using IDAL;
 using DAL;
 namespace DalObject
 {
-    public partial class DalObject : IDal
+    internal partial class DalObject : IDal
     {
         public DalObject()
         {

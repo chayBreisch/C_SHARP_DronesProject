@@ -32,8 +32,8 @@ namespace IBL
                 }
             }
             public string Model { get; set; }
-            private IDAL.DO.WeightCatagories weight { get; set; }
-            public IDAL.DO.WeightCatagories Weight
+            private DO.WeightCatagories weight { get; set; }
+            public DO.WeightCatagories Weight
             {
                 get
                 {

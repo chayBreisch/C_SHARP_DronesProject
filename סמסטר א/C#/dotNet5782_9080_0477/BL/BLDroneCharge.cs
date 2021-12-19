@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
-using IDAL.DO;
+using DO;
 using IBL.BO;
 using static BL.ExceptionsBL;
 
@@ -33,7 +33,7 @@ namespace BL
         /// <param name="droneID"></param>
         public void addDroneCharge(int stationID, int droneID)
         {
-            IDAL.DO.Station station = dalObject.getStationById(s => s.ID == stationID);
+            DO.Station station = dalObject.getStationById(s => s.ID == stationID);
             if (!checkStationIfEmptyChargers(station))
                 throw new NotEmptyChargeSlots(stationID);
             checkUniqeIdDroneCharge(droneID, stationID, dalObject);

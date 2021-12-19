@@ -22,8 +22,8 @@ namespace IBL
                     new CustomerAtParcel(parcel.Reciever.ID, dal.getCustomerById(c => c.ID == parcel.Reciever.ID).Name);
             }
             public int ID { get; set; }
-            public IDAL.DO.WeightCatagories Weight { get; set; }
-            public IDAL.DO.Priorities Priority { get; set; }
+            public DO.WeightCatagories Weight { get; set; }
+            public DO.Priorities Priority { get; set; }
             public ParcelStatus ParcelStatus { get; set; }
             public CustomerAtParcel customerAtParcel { get; set; }
             public override string ToString()

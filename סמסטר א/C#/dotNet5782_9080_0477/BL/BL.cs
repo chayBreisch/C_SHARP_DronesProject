@@ -4,7 +4,7 @@ using IBL.BO;
 using DAL;
 using IBL;
 using System.Collections.Generic;
-using IDAL.DO;
+using DO;
 using System.Linq;
 namespace BL
 {
@@ -23,7 +23,14 @@ namespace BL
         public BL()
         {
             //get all the electric rates
-            dalObject = FactoryDAL.factory("DalObject");
+            try
+            {
+                dalObject = FactoryDAL.factory("DalObject");
+            }
+            catch (DAL.CantReturnDalObject)
+            {
+                throw new CantReturnDalObject();
+            }
             double[] arrayEletric = dalObject.requestElectric();
             double electricAvailable = arrayEletric[0];
             double electricLightHeight = arrayEletric[1];
@@ -34,8 +41,8 @@ namespace BL
             foreach (var drone in dalObject.GetDrone())
             {
                 IBL.BO.Drone droneBL = new IBL.BO.Drone { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight };
-                IDAL.DO.Parcel parcel = dalObject.getParcelById(p => p.DroneID == drone.ID);
-                IDAL.DO.Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
+                DO.Parcel parcel = dalObject.getParcelById(p => p.DroneID == drone.ID);
+                DO.Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
                 //check if the drone has a parcel
                 if (parcel.SenderID != 10000000)
                 //if (!parcel.Equals(null))
@@ -48,7 +55,7 @@ namespace BL
                         //check if the parcel of the drone is scheduled and not delivered and not picked up
                         if (parcel.PickedUp != null)
                         {
-                            IDAL.DO.Station station = findClosestStation(new LocationBL(customerSender.Latitude, customerSender.Longitude));
+                            DO.Station station = findClosestStation(new LocationBL(customerSender.Latitude, customerSender.Longitude));
                             droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
                         }
 
@@ -59,10 +66,10 @@ namespace BL
                             droneBL.Location.Longitude = customerSender.Longitude;
                             droneBL.Location.Latitude = customerSender.Latitude;
                         }
-                        IDAL.DO.Customer customerReciever = dalObject.getCustomerById(c => c.ID == parcel.TargetID);
+                        DO.Customer customerReciever = dalObject.getCustomerById(c => c.ID == parcel.TargetID);
                         double electricitySenderToReciever = calcElectry(new LocationBL(customerSender.Longitude, customerSender.Latitude), new LocationBL
                             (customerReciever.Longitude, customerReciever.Latitude), (int)parcel.Weight);
-                        IDAL.DO.Station station1 = stationWithMinDisAndEmptySlots(new LocationBL(customerReciever.Latitude, customerReciever.Longitude));
+                        DO.Station station1 = stationWithMinDisAndEmptySlots(new LocationBL(customerReciever.Latitude, customerReciever.Longitude));
                         double electricityRecieverToCharger = calcElectry(new LocationBL(customerReciever.Longitude, customerReciever.Latitude), new LocationBL
                             (station1.Longitude, station1.Latitude), 0);
                         int minEle = (int)Math.Round(electricitySenderToReciever + electricityRecieverToCharger);
@@ -80,7 +87,7 @@ namespace BL
                 if (droneBL.DroneStatus == DroneStatus.Maintenance)
                 {
                     int length = dalObject.lengthStation();
-                    IDAL.DO.Station station = dalObject.GetStation().ToList()[rand.Next(0, length)];
+                    DO.Station station = dalObject.GetStation().ToList()[rand.Next(0, length)];
                     droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
                     droneBL.BatteryStatus = rand.Next(0, 21);
                     DroneCharge droneCharge = new DroneCharge();
@@ -92,13 +99,13 @@ namespace BL
                 //check if drone is in available
                 else if (droneBL.DroneStatus == DroneStatus.Available)
                 {
-                    List<IDAL.DO.Parcel> parcelBLsWithSuppliedParcel = dalObject.GetParcel().ToList().FindAll(p => p.Delivered != null);
+                    List<DO.Parcel> parcelBLsWithSuppliedParcel = dalObject.GetParcel().ToList().FindAll(p => p.Delivered != null);
                     if (parcelBLsWithSuppliedParcel.Count > 0)
                     {
                         IBL.BO.Parcel parcelBL = convertDalToParcelBL(parcelBLsWithSuppliedParcel[rand.Next(0, parcelBLsWithSuppliedParcel.Count)]);
-                        IDAL.DO.Customer customer = dalObject.getCustomerById(c => c.ID == parcelBL.Sender.ID);
+                        DO.Customer customer = dalObject.getCustomerById(c => c.ID == parcelBL.Sender.ID);
                         droneBL.Location = new LocationBL(customer.Latitude, customer.Longitude);
-                        IDAL.DO.Station station1 = stationWithMinDisAndEmptySlots(droneBL.Location);
+                        DO.Station station1 = stationWithMinDisAndEmptySlots(droneBL.Location);
                         double electry = calcElectry(new LocationBL(station1.Longitude, station1.Latitude), droneBL.Location, 0);
                         int minElectric = (int)Math.Round(electry);
                         droneBL.BatteryStatus = rand.Next(minElectric, 100);
@@ -127,12 +134,12 @@ namespace BL
         /// <param name="location"></param>
         /// <returns>Station</returns>
         //return the stations with the minimum distance from the location and with empty slots
-        public IDAL.DO.Station stationWithMinDisAndEmptySlots(LocationBL location)////////////////////////////
+        public DO.Station stationWithMinDisAndEmptySlots(LocationBL location)////////////////////////////
         {
             double minDis = -1;
             double dis2 = 0;
-            IEnumerable<IDAL.DO.Station> stations = dalObject.GetStation();
-            IDAL.DO.Station sendStation = new IDAL.DO.Station();
+            IEnumerable<DO.Station> stations = dalObject.GetStation();
+            DO.Station sendStation = new DO.Station();
             foreach (var station in stations)
             {
                 dis2 = distance(location, new LocationBL(station.Latitude, station.Longitude));
@@ -150,12 +157,12 @@ namespace BL
         /// </summary>
         /// <param name="location"></param>
         /// <returns>Station</returns>
-        public IDAL.DO.Station findClosestStation(LocationBL location)
+        public DO.Station findClosestStation(LocationBL location)
         {
             double minDis = -1;
             double dis2 = 0;
-            IEnumerable<IDAL.DO.Station> stations = dalObject.GetStation();
-            IDAL.DO.Station sendStation = new IDAL.DO.Station();
+            IEnumerable<DO.Station> stations = dalObject.GetStation();
+            DO.Station sendStation = new DO.Station();
             foreach (var station in stations)
             {
                 dis2 = distance(location, new LocationBL(station.Latitude, station.Longitude));

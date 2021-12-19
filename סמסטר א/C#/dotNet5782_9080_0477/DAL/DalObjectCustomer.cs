@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using IDAL.DO;
+using DO;
 using DAL;
 
 
 namespace DalObject
 {
-    public partial class DalObject
+    internal partial class DalObject
     {
         public IEnumerable<Customer> GetCustomer()
         {
