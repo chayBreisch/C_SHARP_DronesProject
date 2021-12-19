@@ -38,7 +38,7 @@
 
 
             </Grid>
-            <ListView ItemsSource="{Binding}" Background="#FF8D8C7A" Grid.Row="1" x:Name="StationListView"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" />
+        <ListView ItemsSource="{Binding}" Background="#FF8D8C7A" Grid.Row="1" x:Name="StationListView"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick="StationListView_MouseDoubleClick"/>
             <Button Content="add drone" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="419,475,0,0"  Grid.Row="1"  />
             <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="230,475,0,0" Grid.Row="1" Click="Button_ClickShowList"/>
 

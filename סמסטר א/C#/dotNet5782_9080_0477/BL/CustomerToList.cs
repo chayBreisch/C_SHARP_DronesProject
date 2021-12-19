@@ -11,14 +11,13 @@ using System.Threading.Tasks;
         {
             public CustomerToList(Customer customer, IDAL.IDal dalObject)
             {
-                /////////////
                 ID = customer.ID;
                 Name = customer.Name;
                 Phone = customer.Phone;
                 SumOfParcelsSendedAndNotProvided = dalObject.getParceleByCondition(p => p.SenderID == ID && p.Delivered != null).Count();
                 SumOfParcelsSendedAndNotProvided = dalObject.getParceleByCondition(p => p.SenderID == ID && p.Delivered == null).Count();
-                SumOfParcelsRecieved = dalObject.getParceleByCondition(p => p.SenderID == ID && p.PickedUp != null).Count();
-                SumOfParcelsOnTheWay = dalObject.getParceleByCondition(p => p.SenderID == ID && p.Requested != null && p.PickedUp == null).Count();
+                SumOfParcelsRecieved = dalObject.getParceleByCondition(p => p.TargetID == ID && p.PickedUp != null).Count();
+                SumOfParcelsOnTheWay = dalObject.getParceleByCondition(p => p.TargetID == ID && p.Requested != null && p.PickedUp == null).Count();
             }
             public ulong ID { get; set; }
             public string Name { get; set; }

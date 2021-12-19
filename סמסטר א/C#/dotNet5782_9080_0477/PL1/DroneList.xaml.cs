@@ -101,7 +101,7 @@ namespace PL1
         {
             sender.ToString();
             DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
-           BO.Drone drone = blDroneList.convertDroneToListToDroneBL(droneToList);
+            BO.Drone drone = blDroneList.convertDroneToListToDroneBL(droneToList);
             //this.Visibility = Visibility.Hidden;
             new Drone(blDroneList, drone, this).Show();
             Hide();

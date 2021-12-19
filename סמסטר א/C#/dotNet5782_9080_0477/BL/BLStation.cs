@@ -146,7 +146,7 @@ namespace BL
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="chargeSlots"></param>
-        public void updateDataStation(int id, int name = 0, int chargeSlots = -1)
+        public BO.Station updateDataStation(int id, int name = 0, int chargeSlots = -1)
         {
             DO.Station station = dalObject.getStationById(s => s.ID == id);
             if (name != 0)
@@ -158,6 +158,7 @@ namespace BL
                 station.ChargeSlots = chargeSlots;
             }
             dalObject.updateStation(station);
+            return convertDalStationToBl(station);
         }
 
         public List<StationToList> getStationsByChargeSlots(int status)

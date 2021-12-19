@@ -53,7 +53,7 @@ namespace BlApi {
 
         public bool checkStationIfEmptyChargers(DO.Station station);
         public BO.Station convertDalStationToBl(DO.Station s);////////////////
-        public void updateDataStation(int id, int name = 0, int chargeSlots = -1);
+        public BO.Station updateDataStation(int id, int name = 0, int chargeSlots = -1);
 
         public BO.Drone updateSendDroneToCharge(int id);
 
