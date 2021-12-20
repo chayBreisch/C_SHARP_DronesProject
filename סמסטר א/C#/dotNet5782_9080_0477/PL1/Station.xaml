@@ -55,7 +55,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock HorizontalAlignment="Left" Text="enter details of drone" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="269" FontSize="22" FontWeight="Bold" Grid.ColumnSpan="2" Margin="270,37,0,0"/>
+            <TextBlock HorizontalAlignment="Left" Text="enter details of station" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="269" FontSize="22" FontWeight="Bold" Grid.ColumnSpan="2" Margin="270,37,0,0"/>
             <TextBox  Background="#FFFFE9ED" Margin="10,0,41,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Name="idStation" Grid.Row="1"/>
             <TextBlock HorizontalAlignment="Left" Margin="20,83,0,0" Text="enter id station:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" FontSize="20" Grid.RowSpan="2"/>
             <TextBox  Background="#FFFFE9ED" Margin="10,0,41,54"  TextWrapping="Wrap" Name="nameStationToAdd" Grid.Row="1" Grid.Column="1"/>
@@ -68,7 +68,7 @@
             <TextBox  Background="#FFFFE9ED" Margin="196,0,41,0"  TextWrapping="Wrap" VerticalAlignment="Center" Height="58" Name="latitudeStation" Grid.Row="2" Grid.Column="1"/>
 
             <Button Content="add station" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" RenderTransformOrigin="-0.207,0.023" Width="120" Height="40" Grid.Column="1"  Margin="129,0,0,0" Click="Button_ClickAddStation" />
-            <Button Content="reset" Grid.Column="0" HorizontalAlignment="Left" Margin="148,0,0,0" Grid.Row="3" VerticalAlignment="Center" Width="120" Height="40" />
+            <Button Content="reset" Grid.Column="0" HorizontalAlignment="Left" Margin="148,0,0,0" Grid.Row="3" VerticalAlignment="Center" Width="120" Height="40" Click="Button_ClickReset" />
             <Button Content="X" Width="50" Grid.Column="1" Background="Red" HorizontalAlignment="Left" Margin="350,0,0,89" Click="Button_ClickClose" Height="20" VerticalAlignment="Bottom"/>
 
         </Grid>

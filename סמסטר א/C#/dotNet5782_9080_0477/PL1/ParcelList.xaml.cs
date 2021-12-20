@@ -72,17 +72,34 @@ namespace PL1
             List<ParcelToList> stations = blParcelList.getParcelToList();
             ParcelListView.ItemsSource = stations;
         }
-       /* private void filter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void Button_ClickAddParcel(object sender, RoutedEventArgs e)
         {
-            List<ParcelToList> stations = new List<ParcelToList>();
-            ComboBox options = sender as ComboBox;
-            object weight = parcelWeight.SelectedItem;
-            object priority = parcelPriority.SelectedItem;
-            if (weight == null) weight = -1;
-            if (priority == null) priority = -1;
-            stations = blParcelList.returnParcelToListWithFilter((int)weight, (int)priority).ToList();
-            //stations = blParcelList.getParcelToListByCondition(parcel=> parcel.Weight == (DO.WeightCatagories)options.SelectedIndex).ToList();
-            ParcelListView.ItemsSource = stations;
-        }*/
+            new Parcel(blParcelList, this).Show();
+            Hide();
+        }
+
+        private void ParcelListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            sender.ToString();
+            ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
+            BO.Parcel parcel = blParcelList.convertParcelToListToParcelBL(parcelToList);
+            //this.Visibility = Visibility.Hidden;
+            new Parcel(blParcelList, parcel, this).Show();
+            Hide();
+        }
+
+        /* private void filter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+{
+    List<ParcelToList> stations = new List<ParcelToList>();
+    ComboBox options = sender as ComboBox;
+    object weight = parcelWeight.SelectedItem;
+    object priority = parcelPriority.SelectedItem;
+    if (weight == null) weight = -1;
+    if (priority == null) priority = -1;
+    stations = blParcelList.returnParcelToListWithFilter((int)weight, (int)priority).ToList();
+    //stations = blParcelList.getParcelToListByCondition(parcel=> parcel.Weight == (DO.WeightCatagories)options.SelectedIndex).ToList();
+    ParcelListView.ItemsSource = stations;
+}*/
     }
 }

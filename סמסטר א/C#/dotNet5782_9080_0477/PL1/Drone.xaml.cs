@@ -135,8 +135,8 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickResetAddDrone(object sender, RoutedEventArgs e)
         {
-            droneId.Text = "";
-            droneMdel.Text = "";
+            droneId.Text = null;
+            droneMdel.Text = null;
             droneWeight.Text = "";
             numStationtoChargeDrone.Text = "";
         }
