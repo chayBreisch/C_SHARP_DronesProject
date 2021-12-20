@@ -26,10 +26,12 @@ namespace DalObject
         /// <returns>DataSource.drones</returns>
         public IEnumerable<Drone> GetDrone()
         {
-            foreach (var drone in DataSource.drones)
+            return from drone in DataSource.drones
+                   select drone;
+            /*foreach (var drone in DataSource.drones)
             {
                 yield return drone;
-            }
+            }*/
         }
 
         /// <summary>

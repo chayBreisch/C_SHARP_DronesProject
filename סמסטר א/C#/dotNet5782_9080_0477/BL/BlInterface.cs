@@ -93,6 +93,13 @@ namespace BlApi {
         /// //////////////////////////////////////////////////////////////////////
         public BO.Station convertStationToListToStationBL(StationToList stationToList);
         public List<StationToList> getStationsByChargeSlots(int status);
+        public List<ParcelToList> getParcelToList();
+        public BO.Parcel convertParcelToListToParcelBL(ParcelToList parcelToList);
+
+        public List<CustomerToList> getCustomerToList();
+        public BO.Customer convertCustomerToListToCustomerlBL(CustomerToList customerToList);
+        public List<ParcelToList> getParcelsByPriority(int status);
+        public List<ParcelToList> getParcelsByparcelWeight(int status);
 
     }
 

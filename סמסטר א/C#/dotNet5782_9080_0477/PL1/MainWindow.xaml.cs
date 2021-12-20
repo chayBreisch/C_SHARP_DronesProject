@@ -55,5 +55,17 @@ namespace PL1
             new StationList(bl, this).Show();
             Hide();
         }
+
+        private void Button_ClickParcelList(object sender, RoutedEventArgs e)
+        {
+            new ParcelList(bl, this).Show();
+            Hide();
+        }
+
+        private void Button_ClickCustomerList(object sender, RoutedEventArgs e)
+        {
+            /*new CustomerList(bl, this).Show();
+            Hide();*/
+        }
     }
 }

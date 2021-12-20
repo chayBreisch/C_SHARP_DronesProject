@@ -27,10 +27,12 @@ namespace DalObject
         /// <returns>DataSource.parcels</returns>
         public IEnumerable<Parcel> GetParcel()
         {
-            foreach (var parcel in DataSource.parcels)
+            return from parcel in DataSource.parcels
+                   select parcel;
+         /*   foreach (var parcel in DataSource.parcels)
             {
                 yield return parcel;
-            }
+            }*/
         }
 
        ///

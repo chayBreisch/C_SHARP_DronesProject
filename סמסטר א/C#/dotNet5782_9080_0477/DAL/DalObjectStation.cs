@@ -27,10 +27,12 @@ namespace DalObject
         /// <returns>DataSource.stations</returns>
         public IEnumerable<Station> GetStation()
         {
-            foreach (var station in DataSource.stations)
+            return from station in DataSource.stations
+                   select station;
+         /*   foreach (var station in DataSource.stations)
             {
                 yield return station;
-            }
+            }*/
         }
 
         

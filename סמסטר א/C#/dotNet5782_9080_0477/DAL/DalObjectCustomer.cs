@@ -11,11 +11,12 @@ namespace DalObject
     {
         public IEnumerable<Customer> GetCustomer()
         {
-
-            foreach (var customer in DataSource.customers)
+            return from customer in DataSource.customers
+                   select customer;
+            /*foreach (var customer in DataSource.customers)
             {
                 yield return customer;
-            }
+            }*/
         }
         public void CheckUniqeCustomer(ulong id)
         {

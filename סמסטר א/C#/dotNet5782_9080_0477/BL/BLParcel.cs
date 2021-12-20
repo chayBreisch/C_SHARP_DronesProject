@@ -162,6 +162,39 @@ namespace BL
             return GetSpecificParcelBL(parcelToList.ID);
         }
 
+        /// <summary>
+        /// get parcels by priority
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public List<ParcelToList> getParcelsByPriority(int status)
+        {
+            List<ParcelToList> parcelToList = new List<ParcelToList>();
+            IEnumerable<BO.Parcel> parcelQuery =
+            from parcel in GetParcelsBL()
+            where parcel.Priorities == (Priorities)status
+            select parcel;
+            foreach (var parcel in parcelQuery)
+            {
+                parcelToList.Add(new ParcelToList(parcel, dalObject));
+            }
+            return parcelToList;
+        }
+
+        public List<ParcelToList> getParcelsByparcelWeight(int status)
+        {
+            List<ParcelToList> parcelToList = new List<ParcelToList>();
+            IEnumerable<BO.Parcel> parcelQuery =
+            from parcel in GetParcelsBL()
+            where parcel.Weight == (WeightCatagories)status
+            select parcel;
+            foreach (var parcel in parcelQuery)
+            {
+                parcelToList.Add(new ParcelToList(parcel, dalObject));
+            }
+            return parcelToList;
+        }
+
         /*  /// <summary>
           /// returns the status of the parcel
           /// </summary>

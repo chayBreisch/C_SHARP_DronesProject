@@ -259,14 +259,17 @@ namespace DalObject
 
         public IEnumerable<Parcel> showParcelsWithoutoutDrone()
         {
-            IEnumerable<Parcel> parcels = GetParcel();
-            foreach (var parcel in parcels)
+            //IEnumerable<Parcel> parcels = GetParcel();
+            return from parcel in GetParcel()
+            where parcel.DroneID == 0
+            select parcel;
+        /*    foreach (var parcel in parcels)
             {
                 if (parcel.DroneID == 0)
                 {
                     yield return parcel;
                 }
-            }
+            }*/
         }
 
 
