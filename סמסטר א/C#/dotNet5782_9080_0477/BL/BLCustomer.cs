@@ -179,6 +179,31 @@ namespace BL
         }
 
         /// <summary>
+        /// return all customerToList
+        /// </summary>
+        /// <returns></returns>
+        public List<CustomerToList> getCustomerToList()
+        {
+            List<BO.Customer> customers = GetCustomersBL();
+            List<CustomerToList> customers1 = new List<CustomerToList>();
+            foreach (var customer in customers)
+            {
+                customers1.Add(new CustomerToList(customer, dalObject));
+            }
+            return customers1;
+        }
+
+        /// <summary>
+        /// convert customerToList to customerBL
+        /// </summary>
+        /// <param name="customerToList"></param>
+        /// <returns></returns>
+        public BO.Customer convertCustomerToListToCustomerlBL(CustomerToList customerToList)
+        {
+            return GetSpecificCustomerBL(customerToList.ID);
+        }
+
+        /// <summary>
         /// check if the check digit is good
         /// </summary>
         /// <param name="id"></param>

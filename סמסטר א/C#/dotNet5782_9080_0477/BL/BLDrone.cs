@@ -193,6 +193,11 @@ namespace BL
             return droneToLists;
         }
 
+
+        /// <summary>
+        /// return all droneToList
+        /// </summary>
+        /// <returns></returns>
         public List <DroneToList> getDroneToList()
         {
             List<BO.Drone> drones = droneBLList;
@@ -204,6 +209,11 @@ namespace BL
             return drone1;
         }
 
+        /// <summary>
+        /// convert droneToList to droneBL
+        /// </summary>
+        /// <param name="droneToList"></param>
+        /// <returns></returns>
         public BO.Drone convertDroneToListToDroneBL(DroneToList droneToList)
         {
             return getSpecificDroneBLFromList(droneToList.ID);

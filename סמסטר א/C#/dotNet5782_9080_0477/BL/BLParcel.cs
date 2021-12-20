@@ -137,21 +137,46 @@ namespace BL
 
         }
 
-      /*  /// <summary>
-        /// returns the status of the parcel
+        /// <summary>
+        /// return all ParcelToList
         /// </summary>
-        /// <param name="parcel"></param>
-        /// <returns>ParcelStatus</returns>
-        public ParcelStatus findParcelStatus(DO.Parcel parcel)
+        /// <returns></returns>
+        public List<ParcelToList> getParcelToList()
         {
-            if (parcel.Requested == null)
-                return (ParcelStatus)0;
-            else if (parcel.Scheduled == null)
-                return (ParcelStatus)1;
-            else if (parcel.PickedUp == null)
-                return (ParcelStatus)2;
-            return (ParcelStatus)3;
-        }*/
+            List<BO.Parcel> parcels = GetParcelsBL();
+            List<ParcelToList> parcels1 = new List<ParcelToList>();
+            foreach (var parcel in parcels)
+            {
+                parcels1.Add(new ParcelToList(parcel, dalObject));
+            }
+            return parcels1;
+        }
+
+        /// <summary>
+        /// convert ParcelToList to ParcelBL
+        /// </summary>
+        /// <param name="parcelToList"></param>
+        /// <returns></returns>
+        public BO.Parcel convertParcelToListToParcelBL(ParcelToList parcelToList)
+        {
+            return GetSpecificParcelBL(parcelToList.ID);
+        }
+
+        /*  /// <summary>
+          /// returns the status of the parcel
+          /// </summary>
+          /// <param name="parcel"></param>
+          /// <returns>ParcelStatus</returns>
+          public ParcelStatus findParcelStatus(DO.Parcel parcel)
+          {
+              if (parcel.Requested == null)
+                  return (ParcelStatus)0;
+              else if (parcel.Scheduled == null)
+                  return (ParcelStatus)1;
+              else if (parcel.PickedUp == null)
+                  return (ParcelStatus)2;
+              return (ParcelStatus)3;
+          }*/
 
     }
 

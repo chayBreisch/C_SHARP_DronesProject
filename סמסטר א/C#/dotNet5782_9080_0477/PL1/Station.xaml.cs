@@ -46,6 +46,8 @@ namespace PL1
         public Station(BlApi.Bl bl, BO.Station station, StationList stationList)
         {
             InitializeComponent();
+            actions.Visibility = Visibility.Visible;
+            addStation.Visibility = Visibility.Hidden;
             WindowStyle = WindowStyle.None;
             StationList = stationList;
             blStation = bl;
