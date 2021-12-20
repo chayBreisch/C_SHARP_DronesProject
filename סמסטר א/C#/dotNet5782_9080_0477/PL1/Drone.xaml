@@ -97,19 +97,7 @@
             <TextBlock HorizontalAlignment="Left" Margin="20,83,0,0" Text="enter id drone:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" FontSize="20" Grid.RowSpan="2"/>
             <TextBox  Background="#FFFFE9ED" Margin="10,0,41,54"  TextWrapping="Wrap" Name="droneMdel" Grid.Row="1" Grid.Column="1"/>
             <TextBlock HorizontalAlignment="Left" Margin="36,82,0,0" Text="enter model drone:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" FontSize="20" Grid.Column="1" Grid.RowSpan="2"/>
-            <ComboBox Name="droneWeight"  Background="#FFFFE9ED" HorizontalAlignment="Left" VerticalAlignment="Center" Width="344"  Height="57" Margin="12,0,0,0" Grid.Row="2" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
-                <ComboBox.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleX="2.676"/>
-                        <RotateTransform/>
-                        <TranslateTransform X="0.631"/>
-                    </TransformGroup>
-                </ComboBox.RenderTransform>
-                <ComboBoxItem >Light</ComboBoxItem>
-                <ComboBoxItem>Medium</ComboBoxItem>
-                <ComboBoxItem>Heavy</ComboBoxItem>
-            </ComboBox>
+            <ComboBox Name="droneWeight"  Background="#FFFFE9ED" HorizontalAlignment="Left" VerticalAlignment="Center" Width="344"  Height="57" Margin="12,0,0,0" Grid.Row="2" Grid.Column="1" RenderTransformOrigin="0.5,0.5"/>
             <TextBlock HorizontalAlignment="Left" Margin="19,0,0,0" Grid.Column="1" Grid.Row="1" Text="enter weight drone:" TextWrapping="Wrap" VerticalAlignment="Center" Width="181" Height="27" FontSize="20" Grid.RowSpan="2"/>
             <TextBox  Background="#FFFFE9ED" Margin="10,0,41,0"  TextWrapping="Wrap" VerticalAlignment="Center" Height="58" Name="numStationtoChargeDrone" Grid.Row="2"/>
             <TextBlock HorizontalAlignment="Left" Margin="12,93,0,0" Grid.Row="1" Text="number of station to charge:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" FontSize="20" Grid.Column="0" Grid.RowSpan="2"/>

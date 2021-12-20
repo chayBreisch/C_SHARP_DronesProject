@@ -39,8 +39,8 @@ namespace BL
             parcel.Sender = new CustomerAtParcel(customer.ID, customer.Name);
             customer = GetSpecificCustomerBL(target);
             parcel.Reciever = new CustomerAtParcel(customer.ID, customer.Name);
-            parcel.Weight = (WeightCatagories)Weight;
-            parcel.Priorities = (Priorities)priority;
+            parcel.Weight = (DO.WeightCatagories)Weight;
+            parcel.Priorities = (DO.Priorities)priority;
             parcel.Requesed = DateTime.Now;
             parcel.Scheduled = null;
             parcel.PickedUp = null;
@@ -64,8 +64,8 @@ namespace BL
             checkUniqeIdParcel(parcel.ID, dalObject);
             parcel.SenderID = sender;
             parcel.TargetID = target;
-            parcel.Weight = (WeightCatagories)Weight;
-            parcel.Priority = (Priorities)priority;
+            parcel.Weight = (DO.WeightCatagories)Weight;
+            parcel.Priority = (DO.Priorities)priority;
             dalObject.AddParcel(parcel);
         }
 
@@ -172,7 +172,7 @@ namespace BL
             List<ParcelToList> parcelToList = new List<ParcelToList>();
             IEnumerable<BO.Parcel> parcelQuery =
             from parcel in GetParcelsBL()
-            where parcel.Priorities == (Priorities)status
+            where parcel.Priorities == (DO.Priorities)status
             select parcel;
             foreach (var parcel in parcelQuery)
             {
@@ -181,12 +181,17 @@ namespace BL
             return parcelToList;
         }
 
+        /// <summary>
+        /// get parcels by parcel weight
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
         public List<ParcelToList> getParcelsByparcelWeight(int status)
         {
             List<ParcelToList> parcelToList = new List<ParcelToList>();
             IEnumerable<BO.Parcel> parcelQuery =
             from parcel in GetParcelsBL()
-            where parcel.Weight == (WeightCatagories)status
+            where parcel.Weight == (DO.WeightCatagories)status
             select parcel;
             foreach (var parcel in parcelQuery)
             {
@@ -195,6 +200,25 @@ namespace BL
             return parcelToList;
         }
 
+
+        public IEnumerable<ParcelToList> getParcelToListByCondition(Predicate<ParcelToList> predicate)
+        {
+            //try todo
+            return (from parcel in getParcelToList()
+                    where predicate(parcel)
+                    select parcel);
+        }
+
+
+        public IEnumerable<ParcelToList> returnParcelToListWithFilter(int weight, int prioritty)
+        {
+
+            if (prioritty == -1)
+                return getParcelToListByCondition(parcel => parcel.Weight == (WeightCatagories)prioritty).ToList();
+            else if (weight == -1)
+                return getParcelToListByCondition(parcel => parcel.Priority == (Priorities)weight).ToList();
+            return getParcelToListByCondition(parcel => parcel.Priority == (Priorities)prioritty && parcel.Weight == (WeightCatagories)weight).ToList();
+        }
         /*  /// <summary>
           /// returns the status of the parcel
           /// </summary>

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using DO;
 
 namespace PL1
 {
@@ -62,8 +63,12 @@ namespace PL1
         /// <param name="e"></param>
         private void comboBoxSelectDronesByStatus(object sender, SelectionChangedEventArgs e)
         {
+            List<DroneToList> drones = new List<DroneToList>();
             ComboBox options = sender as ComboBox;
-            List<DroneToList> drones = blDroneList.getDronesByDroneStatus(options.SelectedIndex);
+            if(weightFilter == null)
+                drones = blDroneList.getDroneToListByCondition(drone => drone.DroneStatus == (DroneStatus)(options.SelectedIndex)).ToList();
+            else
+                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(options.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(options.SelectedIndex)).ToList();
             DroneListView.ItemsSource = drones;
         }
 
@@ -75,7 +80,11 @@ namespace PL1
         private void ComboBox_SelectionDroneByWeight(object sender, SelectionChangedEventArgs e)
         {
             ComboBox options = sender as ComboBox;
-            List<DroneToList> drones = blDroneList.getDronesByDroneWeight(options.SelectedIndex + 1);
+            List<DroneToList> drones = new List<DroneToList>();
+            if (statusFilter == null)
+                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(options.SelectedIndex + 1)).ToList();
+            else
+                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(options.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(options.SelectedIndex)).ToList();
             DroneListView.ItemsSource = drones;
         }
 

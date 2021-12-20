@@ -37,6 +37,8 @@ namespace PL1
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
             addDrone.Visibility = Visibility.Visible;
+            droneWeight.ItemsSource = Enum.GetValues(typeof(DO.WeightCatagories));
+           
         }
 
         /// <summary>
@@ -93,7 +95,7 @@ namespace PL1
         {
             int id;
             bool success = Int32.TryParse(droneId.Text, out id);
-           // int weight = options.SelectedIndex;
+           int weight = droneWeight.SelectedIndex;
 /*            bool success1 = Int32.TryParse(options.SelectedIndex, out weight);*/
             int number;
             bool success2 = Int32.TryParse(numStationtoChargeDrone.Text, out number);
@@ -114,7 +116,7 @@ namespace PL1
             {
                 try
                 {
-                    blDrone.addDrone(id, Model, 1, number);
+                    blDrone.addDrone(id, Model, weight, number);
                     MessageBox.Show("you added succefuly");
                     DroneList.Show();
                     Close();

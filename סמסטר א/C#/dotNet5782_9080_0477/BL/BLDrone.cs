@@ -44,7 +44,7 @@ namespace BL
             {
                 droneBL.Model = model;
                 droneBL.ID = id;
-                droneBL.Weight = (WeightCatagories)maxWeight;
+                droneBL.Weight = (DO.WeightCatagories)maxWeight;
                 droneBL.BatteryStatus = rand.Next(20, 40);
                 droneBL.DroneStatus = DroneStatus.Maintenance;
                 droneBL.Location = new LocationBL(station.Longitude, station.Latitude);
@@ -160,7 +160,7 @@ namespace BL
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
-        public List<DroneToList> getDronesByDroneStatus(int status)
+/*        public List<DroneToList> getDronesByDroneStatus(int status)
         {
             List<DroneToList> droneToLists = new List<DroneToList>();
             IEnumerable<BO.Drone> droneQuery =
@@ -184,14 +184,14 @@ namespace BL
             List<DroneToList> droneToLists = new List<DroneToList>();
             IEnumerable<BO.Drone> droneQuery =
             from drone in GetDronesBL()
-            where drone.Weight == (WeightCatagories)status
+            where drone.Weight == (DO.WeightCatagories)status
             select drone;
             foreach (var drone in droneQuery)
             {
                 droneToLists.Add(new DroneToList(drone, dalObject));
             }
             return droneToLists;
-        }
+        }*/
 
 
         /// <summary>
@@ -217,6 +217,19 @@ namespace BL
         public BO.Drone convertDroneToListToDroneBL(DroneToList droneToList)
         {
             return getSpecificDroneBLFromList(droneToList.ID);
+        }
+
+        /// <summary>
+        /// get DroneToList By Condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<DroneToList> getDroneToListByCondition(Predicate<DroneToList> predicate)
+        {
+            //try todo
+            return (from drone in getDroneToList()
+                    where predicate(drone)
+                    select drone);
         }
     }
 }

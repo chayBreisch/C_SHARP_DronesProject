@@ -72,5 +72,17 @@ namespace PL1
             List<ParcelToList> stations = blParcelList.getParcelToList();
             ParcelListView.ItemsSource = stations;
         }
+       /* private void filter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<ParcelToList> stations = new List<ParcelToList>();
+            ComboBox options = sender as ComboBox;
+            object weight = parcelWeight.SelectedItem;
+            object priority = parcelPriority.SelectedItem;
+            if (weight == null) weight = -1;
+            if (priority == null) priority = -1;
+            stations = blParcelList.returnParcelToListWithFilter((int)weight, (int)priority).ToList();
+            //stations = blParcelList.getParcelToListByCondition(parcel=> parcel.Weight == (DO.WeightCatagories)options.SelectedIndex).ToList();
+            ParcelListView.ItemsSource = stations;
+        }*/
     }
 }

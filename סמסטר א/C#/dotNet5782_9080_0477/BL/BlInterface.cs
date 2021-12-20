@@ -85,8 +85,8 @@ namespace BlApi {
 
         public List<BO.Station> GetStationWithEmptyChargers();
 
-        public List<DroneToList> getDronesByDroneStatus(int status);
-        public List<DroneToList> getDronesByDroneWeight(int status);
+        //public List<DroneToList> getDronesByDroneStatus(int status);
+        //public List<DroneToList> getDronesByDroneWeight(int status);
         public List<DroneToList> getDroneToList();
         public BO.Drone convertDroneToListToDroneBL(DroneToList droneToList);
         public List<StationToList> getStationToList();
@@ -100,6 +100,9 @@ namespace BlApi {
         public BO.Customer convertCustomerToListToCustomerlBL(CustomerToList customerToList);
         public List<ParcelToList> getParcelsByPriority(int status);
         public List<ParcelToList> getParcelsByparcelWeight(int status);
+        public IEnumerable<DroneToList> getDroneToListByCondition(Predicate<DroneToList> predicate);
+        public IEnumerable<ParcelToList> getParcelToListByCondition(Predicate<ParcelToList> predicate);
+        public IEnumerable<ParcelToList> returnParcelToListWithFilter(int weight, int prioritty);
 
     }
 
