@@ -83,7 +83,7 @@ namespace PL1
             {
                 try
                 {
-                    blparcel.AddParcel(senderId, recieverId, weightParcel.SelectedIndex, priorityParcel.SelectedIndex);
+                    blparcel.AddParcel(senderId, recieverId, weightParcel.SelectedIndex +1, priorityParcel.SelectedIndex);
                     MessageBox.Show("you added succefuly");
                     parcelList.Show();
                     Close();
