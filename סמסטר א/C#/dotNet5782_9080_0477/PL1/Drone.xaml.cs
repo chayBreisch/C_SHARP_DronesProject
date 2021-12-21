@@ -96,7 +96,6 @@ namespace PL1
             int id;
             bool success = Int32.TryParse(droneId.Text, out id);
            int weight = droneWeight.SelectedIndex;
-/*            bool success1 = Int32.TryParse(options.SelectedIndex, out weight);*/
             int number;
             bool success2 = Int32.TryParse(numStationtoChargeDrone.Text, out number);
             string Model = droneMdel.Text;

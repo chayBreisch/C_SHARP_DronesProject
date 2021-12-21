@@ -23,5 +23,26 @@ namespace PL1
         {
             InitializeComponent();
         }
+
+        private void Button_ClickResetAddCustomer(object sender, RoutedEventArgs e)
+        {
+            customerId.Text = null;
+            customerName.Text = null;
+            customerPhone.Text = null;
+            customerLongitude.Text = null;
+            customerLatitude.Text = null;
+        }
+
+        private void Button_ClickAddCustomer(object sender, RoutedEventArgs e)
+        {
+            int id;
+            string name;
+            string phone;
+            double longitude;
+            double latitude;
+
+        }
+
+
     }
 }
