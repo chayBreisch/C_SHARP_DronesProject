@@ -19,9 +19,49 @@ namespace PL1
     /// </summary>
     public partial class Customer : Window
     {
-        public Customer()
+
+        BlApi.Bl blCustomer;
+        BO.Customer customeBL;
+        CustomerList CustomerList;
+        BO.Customer customer = new BO.Customer();
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="customerList"></param>
+        public Customer(BlApi.Bl bl, CustomerList customerList)
         {
+            CustomerList = customerList;
+            blCustomer = bl;
             InitializeComponent();
+            WindowStyle = WindowStyle.None;
+            actions.Visibility = Visibility.Hidden;
+            addCustomer.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="customer"></param>
+        /// <param name="customerList"></param>
+        public Customer(BlApi.Bl bl, BO.Customer customer, CustomerList customerList)
+        {
+            CustomerList = customerList;
+            blCustomer = bl;
+            customeBL = customer;
+            InitializeComponent();
+            WindowStyle = WindowStyle.None;
+            addCustomer.Visibility = Visibility.Hidden;
+            actions.Visibility = Visibility.Visible;
+            customerId.Text = customeBL.ID.ToString();
+            customerName.Text = customeBL.Name.ToString();
+            customerPhone.Text = customeBL.Phone.ToString();
+            customerLongitude.Text = customeBL.Location.Longitude.ToString();
+            customerLatitude.Text = customeBL.Location.Latitude.ToString();
+          
+
+
         }
 
         private void Button_ClickResetAddCustomer(object sender, RoutedEventArgs e)
@@ -43,6 +83,10 @@ namespace PL1
 
         }
 
-
+        private void Button_ClickClose(object sender, RoutedEventArgs e)
+        {
+            CustomerList.Show();
+            this.Close();
+        }
     }
 }

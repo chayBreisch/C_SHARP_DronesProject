@@ -64,8 +64,8 @@ namespace PL1
 
         private void Button_ClickCustomerList(object sender, RoutedEventArgs e)
         {
-            /*new CustomerList(bl, this).Show();
-            Hide();*/
+            new CustomerList(bl, this).Show();
+            Hide();
         }
     }
 }
