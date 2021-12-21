@@ -70,6 +70,8 @@ namespace PL1
             List<ParcelToList> stations = blParcelList.getParcelToList();
             parcelPriority.SelectedItem = null;
             parcelWeight.SelectedItem = null;
+            //view = (CollectionView)CollectionViewSource.GetDefaultView(blParcelList.getParcelToList());
+
             ParcelListView.ItemsSource = stations;
         }
 
