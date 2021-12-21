@@ -61,7 +61,7 @@ namespace DalObject
                 Customer customer = new Customer();
                 customer.ID = (ulong)rand.Next(111111111, 999999999);
                 customer.Name = $"customer{i}";
-                customer.Phone = $"customer{rand.Next(111111111, 999999999)}";
+                customer.Phone = $"{rand.Next(111111111, 999999999)}";
                 customer.Latitude = rand.Next() % 36;
                 customer.Longitude = rand.Next() % 36;
                 customers.Add(customer);

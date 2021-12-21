@@ -8,7 +8,7 @@
         Title="Customer" Height="450" Width="800">
     <Grid>
 
-        <Grid Name="addCustomer" Visibility="Visible">
+        <Grid Name="actions" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition  Width="200"/>
@@ -33,26 +33,20 @@
                 <Label  FontSize="16" Content="id:" Grid.Row="1" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="Name" Grid.Row="1" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="Phone" Grid.Row="2" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center"/>
-                <Label FontSize="16" Content="Sum Of Parcels Sended And Provided" Grid.Row="4" HorizontalAlignment="Left" Margin="45,21,0,0" VerticalAlignment="Top"/>
 
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="77,0,0,0" Name="idparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="197"/>
-                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="1" HorizontalAlignment="Left" Margin="397,26,0,0" Name="senderidparcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="148"/>
-                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="2" HorizontalAlignment="Left" Name="recieveridparcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Margin="127,32,0,0"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="weightparcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Margin="355,25,0,0"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="77,0,0,0" Name="idcustomer" TextWrapping="Wrap" VerticalAlignment="Center" Width="197"/>
+                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="1" HorizontalAlignment="Left" Margin="397,26,0,0" Name="nameCustomer" TextWrapping="Wrap" VerticalAlignment="Top" Width="148"/>
+                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="2" HorizontalAlignment="Left" Name="phoneCustomr" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Margin="127,32,0,0"/>
 
                 <Label Content="Customer" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
-                <Label  FontSize="16" Content="Sum Of Parcels Sended And Not Provided" Grid.Row="5" HorizontalAlignment="Left" Margin="45,18,0,0" VerticalAlignment="Top"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Margin="382,17,0,0" x:Name="priorityparcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
-                <Label  FontSize="16" Content="drone" Grid.Row="2" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="2" HorizontalAlignment="Left" Margin="382,0,0,0" x:Name="droneparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="172"/>
-                <Label  FontSize="16" Content="Sum Of Parcels Recieved" Grid.Row="3" HorizontalAlignment="Left" Margin="45,28,0,0" VerticalAlignment="Top"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="250,36,0,0" x:Name="statusparcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="172"/>
-                <Label  FontSize="16" Content="Sum Of Parcels On The Way" Grid.Row="6" HorizontalAlignment="Left" Margin="50,11,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.481,2.858"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="6" HorizontalAlignment="Left" Margin="386,15,0,0" x:Name="priorityparcel_Copy" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
+                <Label  FontSize="16" Content="Sum Of parcel Sended By Customer" Grid.Row="3" HorizontalAlignment="Left" Margin="39,0,0,0" VerticalAlignment="Center"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="370,26,0,0" x:Name="SumOfparcelSendedByCustomer" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
+                <Label  FontSize="16" Content="Sum Of parcel Sended To Customer" Grid.Row="4" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.481,2.858"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Margin="370,33,0,0" x:Name="SumOfparcelSendedToCustomer" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
             </Grid>
 
         </Grid>
-        <Grid Name="actions" Visibility="Hidden" Background="#FF859DA2">
+        <Grid Name="addCustomer" Visibility="Hidden" Background="#FF859DA2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -96,12 +90,5 @@
     </Grid>
 </Window>
 
-<!--ulong IdCustomer = ulong.Parse(Console.ReadLine());
-                                    Console.WriteLine("enter name");
-                                    string NameCustomer = Console.ReadLine();
-                                    Console.WriteLine("enter cellPhone");
-                                    string Phone = Console.ReadLine();
-                                    Console.WriteLine("enter the Longitude");
-                                    double longitude2 = Convert.ToDouble(Console.ReadLine());
-                                    Console.WriteLine("enter the Latitude");
-                                    double latitude2 = Convert.ToDouble(Console.ReadLine());-->
+<!--            public List<ParcelAtCustomer> parcelSendedByCustomer { get; set; }
+            public List<ParcelAtCustomer> parcelSendedToCustomer { get; set; }-->
