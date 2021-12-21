@@ -63,6 +63,8 @@ namespace PL1
         {
             ListBox listBox1 = new ListBox();
             List<StationToList> stations = blstationList.getStationToList();
+            chargeSlotsFilter.SelectedItem = null;
+            weightFilter.SelectedItem = null;
             StationListView.ItemsSource = stations;
         }
 
