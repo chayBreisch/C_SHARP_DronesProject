@@ -3,7 +3,9 @@ using BlApi.BO;
 using BL;
 using DalObject;
 using System.Collections.Generic;
-
+//להחליף קומבובוקס לאינאם
+//להחליף את הפילטר לפרדיקייט
+//להחיליף את הביינדינג שיהיה תלוי באיבר פנימי
 namespace ConsoleUI_BL
 {
     class Program

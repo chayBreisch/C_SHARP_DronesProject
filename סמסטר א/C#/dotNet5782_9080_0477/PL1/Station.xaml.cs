@@ -143,6 +143,13 @@ namespace PL1
             Close();
         }
 
-       
+        private void Button_ClickReset(object sender, RoutedEventArgs e)
+        {
+            idStation.Text = null;
+            chargeSlotsStation.Text = null;
+            nameStationToAdd.Text = null;
+            longitudeStation.Text = null;
+            latitudeStation.Text = null;
+        }
     }
 }

@@ -68,13 +68,13 @@ namespace PL1
             locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
             if (droneBL.DroneStatus != DroneStatus.Available)
             {
-                visible.IsChecked = false;
-                hidden.IsChecked = true;
+                Charge.IsEnabled = false;
+                UnCharge.IsEnabled = true;
             }
             if (droneBL.DroneStatus != DroneStatus.Maintenance)
             {
-                visible.IsChecked = true;
-                hidden.IsChecked = false;
+                Charge.IsEnabled = true;
+                UnCharge.IsEnabled = false;
                 TimeChargerBlock.Visibility = Visibility.Hidden;
 
             }
@@ -104,10 +104,6 @@ namespace PL1
             {
                 MessageBox.Show("not valid id input");
             }
-            /*else if (!success1)
-            {
-                MessageBox.Show("not valid weight input");
-            }*/
             else if (!success2)
             {
                 MessageBox.Show("not valid station input");
@@ -135,8 +131,8 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickResetAddDrone(object sender, RoutedEventArgs e)
         {
-            droneId.Text = "";
-            droneMdel.Text = "";
+            droneId.Text = null;
+            droneMdel.Text = null;
             droneWeight.Text = "";
             numStationtoChargeDrone.Text = "";
         }
@@ -167,8 +163,8 @@ namespace PL1
             statusDrone.Text = droneBL.DroneStatus.ToString();
             /*visible.Visibility = Visibility.Hidden;
             hidden.Visibility = Visibility.Visible;*/
-            visible.IsChecked = false;
-            hidden.IsChecked = true;
+            Charge.IsEnabled = false;
+            UnCharge.IsEnabled = true;
 
             /*Charge.IsEnabled = false;
             Connect.IsEnabled = false;
@@ -194,8 +190,8 @@ namespace PL1
             {
                 /*visible.Visibility = Visibility.Visible;
                 hidden.Visibility = Visibility.Hidden;*/
-                visible.IsChecked = true;
-                hidden.IsChecked = false;
+                Charge.IsEnabled = true;
+                UnCharge.IsEnabled = false;
 
                 /*Charge.IsEnabled = true;
                 Connect.IsEnabled = true;
