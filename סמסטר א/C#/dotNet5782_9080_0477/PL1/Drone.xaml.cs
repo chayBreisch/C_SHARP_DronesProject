@@ -123,16 +123,33 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
-            try
+            int id;
+            bool success = Int32.TryParse(droneId.Text, out id);
+           int weight = droneWeight.SelectedIndex;
+            int number;
+            bool success2 = Int32.TryParse(numStationtoChargeDrone.Text, out number);
+            string Model = droneMdel.Text;
+            if (!success)
             {
-                blDrone.addDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
-                MessageBox.Show("you added succefuly");
-                DroneList.Show();
-                Close();
+                MessageBox.Show("not valid id input");
             }
-            catch (Exception exce)
+            else if (!success2)
             {
-                MessageBox.Show(exce.Message);
+                MessageBox.Show("not valid station input");
+            }
+            else
+            {
+                try
+                {
+                    blDrone.addDrone(id, Model, weight, number);
+                    MessageBox.Show("you added succefuly");
+                    DroneList.Show();
+                    Close();
+                }
+                catch (Exception exce)
+                {
+                    MessageBox.Show(exce.Message);
+                }
             }
         }
 
