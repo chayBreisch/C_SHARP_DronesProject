@@ -103,6 +103,8 @@ namespace BlApi {
         public IEnumerable<DroneToList> getDroneToListByCondition(Predicate<DroneToList> predicate);
         public IEnumerable<ParcelToList> getParcelToListByCondition(Predicate<ParcelToList> predicate);
         public IEnumerable<ParcelToList> returnParcelToListWithFilter(int weight, int prioritty);
+        public Array getweightCategoriesEnumItem();
+        public Array getPrioritiesEnumItem();
 
     }
 

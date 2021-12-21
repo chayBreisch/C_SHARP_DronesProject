@@ -11,16 +11,6 @@ namespace DalObject
 
     internal partial class DalObject
     {
-
-        /// <summary>
-        /// returns the stations by list from dal
-        /// </summary>
-        /// <returns>DataSource.stations</returns>
-        public List<Station> GetStationByList()
-        {
-            return DataSource.stations;
-        }
-
         /// <summary>
         /// returns the stations from dal
         /// </summary>

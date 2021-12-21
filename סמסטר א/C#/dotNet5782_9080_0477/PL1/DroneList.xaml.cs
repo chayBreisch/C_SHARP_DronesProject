@@ -41,7 +41,8 @@ namespace PL1
             foreach (var item in blDroneList.getDroneToList())
                 MyList.Add(item);
             DataContext = MyList;
-            //DroneListView.ItemsSource = bl.GetDronesBL();
+            statusFilter.ItemsSource = Enum.GetValues(typeof(DroneStatus));
+            weightFilter.ItemsSource = blDroneList.getweightCategoriesEnumItem();
         }
 
         /// <summary>
@@ -61,18 +62,20 @@ namespace PL1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void comboBoxSelectDronesByStatus(object sender, SelectionChangedEventArgs e)
+        private void comboBoxSelectDrone(object sender, SelectionChangedEventArgs e)
         {
             List<DroneToList> drones = new List<DroneToList>();
             ComboBox options = sender as ComboBox;
-            if(weightFilter == null)
+            if(weightFilter.SelectedItem == null)
                 drones = blDroneList.getDroneToListByCondition(drone => drone.DroneStatus == (DroneStatus)(options.SelectedIndex)).ToList();
+            else if(statusFilter.SelectedItem == null)
+                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(options.SelectedIndex + 1)).ToList();
             else
                 drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(options.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(options.SelectedIndex)).ToList();
             DroneListView.ItemsSource = drones;
         }
 
-        /// <summary>
+    /*    /// <summary>
         /// show drones with selected weight
         /// </summary>
         /// <param name="sender"></param>
@@ -86,7 +89,7 @@ namespace PL1
             else
                 drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(options.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(options.SelectedIndex)).ToList();
             DroneListView.ItemsSource = drones;
-        }
+        }*/
 
         /// <summary>
         /// open the addDrone window

@@ -246,5 +246,14 @@ namespace BL
             }
             return stationsWithEmptyChargers;
         }
+
+        public Array getweightCategoriesEnumItem()
+        {
+            return Enum.GetValues(typeof(WeightCatagories));
+        }
+        public Array getPrioritiesEnumItem()
+        {
+            return Enum.GetValues(typeof(Priorities));
+        }
     }
 }

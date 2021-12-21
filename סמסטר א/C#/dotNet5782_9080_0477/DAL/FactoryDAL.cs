@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL;
-using DalObject;
 namespace DAL
 {
     public class FactoryDAL

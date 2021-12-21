@@ -37,8 +37,8 @@ namespace PL1
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
             addDrone.Visibility = Visibility.Visible;
-            droneWeight.ItemsSource = Enum.GetValues(typeof(DO.WeightCatagories));
-           
+            droneWeight.ItemsSource = blDrone.getweightCategoriesEnumItem();
+            droneWeight.SelectedItem = blDrone.getweightCategoriesEnumItem().GetValue(1);
         }
 
         /// <summary>
