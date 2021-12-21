@@ -85,7 +85,37 @@ namespace PL1
         //###############################################################################
         //add Drone
         //###############################################################################
+        private int getID()
+        {
+            try
+            {
+                return Int32.Parse(droneId.Text);
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("id");
+            }
 
+        }
+
+        private int getStation()
+        {
+            try
+            {
+                return Int32.Parse(numStationtoChargeDrone.Text);
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("station");
+            }
+        }
+
+        private string getModel()
+        {
+            if(droneMdel.Text == "")
+                throw new InValidInput("model");
+            return droneMdel.Text;
+        }
         /// <summary>
         /// add drone to the list of drones
         /// </summary>
@@ -93,34 +123,16 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
-            int id;
-            bool success = Int32.TryParse(droneId.Text, out id);
-           int weight = droneWeight.SelectedIndex;
-/*            bool success1 = Int32.TryParse(options.SelectedIndex, out weight);*/
-            int number;
-            bool success2 = Int32.TryParse(numStationtoChargeDrone.Text, out number);
-            string Model = droneMdel.Text;
-            if (!success)
+            try
             {
-                MessageBox.Show("not valid id input");
+                blDrone.addDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
+                MessageBox.Show("you added succefuly");
+                DroneList.Show();
+                Close();
             }
-            else if (!success2)
+            catch (Exception exce)
             {
-                MessageBox.Show("not valid station input");
-            }
-            else
-            {
-                try
-                {
-                    blDrone.addDrone(id, Model, weight, number);
-                    MessageBox.Show("you added succefuly");
-                    DroneList.Show();
-                    Close();
-                }
-                catch (Exception exce)
-                {
-                    MessageBox.Show(exce.Message);
-                }
+                MessageBox.Show(exce.Message);
             }
         }
 
@@ -207,7 +219,7 @@ namespace PL1
                     batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
                     TimeCharger.Text = "";
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }

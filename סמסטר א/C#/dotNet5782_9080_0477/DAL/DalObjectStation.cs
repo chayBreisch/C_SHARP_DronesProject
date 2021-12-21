@@ -53,7 +53,10 @@ namespace DalObject
                             where predicate(station)
                             select station).First();
             }
-            catch (NotExistObjWithID e) { }
+            catch (Exception e) 
+            {
+                throw new NotExistObjWithID(typeof(Station));
+            }
             return station1;
         }
 
