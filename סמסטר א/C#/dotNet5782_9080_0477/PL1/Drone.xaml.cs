@@ -301,6 +301,12 @@ namespace PL1
             DroneList.Show();
             Close();
         }
+
+        private void Button_openParcel(object sender, RoutedEventArgs e)
+        {
+            if (droneBL.parcelInDelivery != null)
+                new Parcel(blDrone,blDrone.GetSpecificParcelBL(droneBL.parcelInDelivery.ID), this).Show();
+        }
     }
 }
 

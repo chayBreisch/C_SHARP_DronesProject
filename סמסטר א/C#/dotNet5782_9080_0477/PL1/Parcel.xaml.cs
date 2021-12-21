@@ -22,6 +22,7 @@ namespace PL1
         ParcelList parcelList;
         BlApi.Bl blparcel;
         BO.Parcel parcelBL;
+        Drone Drone;
         /// <summary>
         /// constructor add parcel
         /// </summary>
@@ -39,6 +40,29 @@ namespace PL1
             weightParcel.SelectedItem = blparcel.getweightCategoriesEnumItem().GetValue(1);
             priorityParcel.ItemsSource = blparcel.getPrioritiesEnumItem();
             priorityParcel.SelectedItem = blparcel.getweightCategoriesEnumItem().GetValue(0);
+        }
+        /// <summary>
+        /// constructor opened from drone
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="drone"></param>
+
+        public Parcel(BlApi.Bl bl, BO.Parcel parcel, Drone drone)
+        {
+            InitializeComponent();
+            actions.Visibility = Visibility.Visible;
+            addStation.Visibility = Visibility.Hidden;
+            WindowStyle = WindowStyle.None;
+            Drone = drone;
+            blparcel = bl;
+            parcelBL = parcel;
+            idparcel.Text = parcelBL.ID.ToString();
+            senderidparcel.Text = parcelBL.Sender.ID.ToString();
+            recieveridparcel.Text = parcelBL.Reciever.ID.ToString();
+            weightparcel.Text = parcelBL.Weight.ToString();
+            priorityparcel.Text = parcelBL.Priorities.ToString();
+            droneparcel.Text = parcelBL.Drone.ToString();
+            //statusparcel.Text = parcelBL.
         }
 
         /// <summary>
@@ -65,33 +89,42 @@ namespace PL1
             //statusparcel.Text = parcelBL.
         }
 
+        private ulong getSenderId()
+        {
+            try
+            {
+                return ulong.Parse(senderIdParcel.Text);
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("sender id");
+            }
+        }
+
+        private ulong getRecieverId()
+        {
+            try
+            {
+                return ulong.Parse(recieveridparcel.Text);
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("reciever id");
+            }
+        }
+
         private void Button_ClickAddParcel(object sender, RoutedEventArgs e)
         {
-            ulong senderId;
-            bool success = ulong.TryParse(senderIdParcel.Text, out senderId);
-            ulong recieverId;
-            bool success1 = ulong.TryParse(recieverIdParcel.Text, out recieverId);
-            if (!success)
+            try
             {
-                MessageBox.Show("not valid sender id input");
+                blparcel.AddParcel(getSenderId(), getRecieverId(), weightParcel.SelectedIndex + 1, priorityParcel.SelectedIndex);
+                MessageBox.Show("you added succefuly");
+                parcelList.Show();
+                Close();
             }
-            else if (!success1)
+            catch (Exception exce)
             {
-                MessageBox.Show("not valid reciever id input");
-            }
-            else
-            {
-                try
-                {
-                    blparcel.AddParcel(senderId, recieverId, weightParcel.SelectedIndex +1, priorityParcel.SelectedIndex);
-                    MessageBox.Show("you added succefuly");
-                    parcelList.Show();
-                    Close();
-                }
-                catch (Exception exce)
-                {
-                    MessageBox.Show(exce.Message);
-                }
+                MessageBox.Show(exce.Message);
             }
         }
 
