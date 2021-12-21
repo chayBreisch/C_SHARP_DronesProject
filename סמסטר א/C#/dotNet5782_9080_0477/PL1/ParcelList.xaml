@@ -18,16 +18,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox Background="#FFFFE9ED" Name="parcelPriority" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.01,-0.281"  Height="40" Margin="0,27,0,0" SelectionChanged="parcelPriority_SelectionChanged">
-                <ComboBoxItem >Regular</ComboBoxItem>
-                <ComboBoxItem >Fast</ComboBoxItem>
-                <ComboBoxItem >Emergency</ComboBoxItem>
-                </ComboBox>
-            <ComboBox Name="parcelWeight" Grid.Column="3" Background="#FFFFE9ED" HorizontalAlignment="Center" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.01,-0.281"  Height="40" Margin="0,27,0,0" SelectionChanged="parcelWeight_SelectionChanged">
-                <ComboBoxItem >Light</ComboBoxItem>
-                <ComboBoxItem>Medium</ComboBoxItem>
-                <ComboBoxItem>Heavy</ComboBoxItem>
-            </ComboBox>
+            <ComboBox Background="#FFFFE9ED" Name="parcelPriority" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.01,-0.281"  Height="40" Margin="0,27,0,0" SelectionChanged="comboBoxSelectparcel"/>
+            <ComboBox Name="parcelWeight" Grid.Column="3" Background="#FFFFE9ED" HorizontalAlignment="Center" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.01,-0.281"  Height="40" Margin="0,27,0,0" SelectionChanged="comboBoxSelectparcel"/>
             <Border BorderBrush="{x:Null}" Height="45" Width="146" HorizontalAlignment="Right"  Grid.Column="0">
                     <TextBlock TextWrapping="Wrap" Text="parcel priority:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" FontWeight="DemiBold" FontSize="20" Margin="10,0,0,0" Width="136"/>
                 </Border>

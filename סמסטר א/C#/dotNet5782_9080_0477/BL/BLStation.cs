@@ -17,7 +17,7 @@ namespace BL
         /// <param name="dalObject"></param>
         public static void checkUniqeIdStation(int id, IDAL.IDal dalObject)
         {
-            List<DO.Station> stations = dalObject.GetStationByList();
+            IEnumerable<DO.Station> stations = dalObject.GetStation();
             if (stations.Any(s => s.ID == id))
                 throw new NotUniqeID(id, typeof(DO.Station));
         }
@@ -31,7 +31,7 @@ namespace BL
         /// <param name="ChargeSlots"></param>
         public void addStation(int id, int name, LocationBL location, int ChargeSlots)
         {
-            List<DroneCharge> droneChargers = dalObject.GetDroneCharge().Cast<DroneCharge>().ToList();
+            List<DroneCharge> droneChargers = dalObject.GetDroneCharge().ToList();
             droneChargers = droneChargers.FindAll(d => d.StationID == id);
             List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
             droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(getSpecificDroneBLFromList(d.DroneID))));
@@ -133,7 +133,7 @@ namespace BL
         /// <returns></returns>
         public BO.Station convertDalStationToBl(DO.Station s)
         {
-            List<DroneCharge> droneChargers = dalObject.GetDroneCharge().Cast<DroneCharge>().ToList();
+            List<DroneCharge> droneChargers = dalObject.GetDroneCharge().ToList();
             droneChargers = droneChargers.FindAll(d => d.StationID == s.ID);
             List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
             droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(getSpecificDroneBLFromList(d.DroneID))));

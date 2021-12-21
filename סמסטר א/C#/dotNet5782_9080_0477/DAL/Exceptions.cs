@@ -9,7 +9,7 @@ namespace DAL
     public class NotUniqeID : Exception
     {
 
-        public NotUniqeID(int id, Type type) : base($"{id} is exist in {type.GetType()}")
+        public NotUniqeID(int id, Type type) : base($"{id} is exist in {type}")
         {
 
         }
@@ -26,6 +26,10 @@ namespace DAL
     public class NotExistObjWithID : Exception
     {
         public NotExistObjWithID(int id, Type type) : base($"there is no {type} with {id}")
+        {
+
+        }
+        public NotExistObjWithID(Type type) : base($"there is no {type} with this id")
         {
 
         }

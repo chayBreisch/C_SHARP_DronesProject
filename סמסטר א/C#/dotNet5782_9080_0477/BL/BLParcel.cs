@@ -167,7 +167,7 @@ namespace BL
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
-        public List<ParcelToList> getParcelsByPriority(int status)
+       /* public List<ParcelToList> getParcelsByPriority(int status)
         {
             List<ParcelToList> parcelToList = new List<ParcelToList>();
             IEnumerable<BO.Parcel> parcelQuery =
@@ -198,7 +198,7 @@ namespace BL
                 parcelToList.Add(new ParcelToList(parcel, dalObject));
             }
             return parcelToList;
-        }
+        }*/
 
 
         public IEnumerable<ParcelToList> getParcelToListByCondition(Predicate<ParcelToList> predicate)
@@ -218,6 +218,15 @@ namespace BL
             else if (weight == -1)
                 return getParcelToListByCondition(parcel => parcel.Priority == (Priorities)weight).ToList();
             return getParcelToListByCondition(parcel => parcel.Priority == (Priorities)prioritty && parcel.Weight == (WeightCatagories)weight).ToList();
+        }
+
+
+        public IEnumerable<ParcelToList> getPrcelToListByCondition(Predicate<ParcelToList> predicate)
+        {
+            //try todo
+            return (from parcel in getParcelToList()
+                    where predicate(parcel)
+                    select parcel);
         }
         /*  /// <summary>
           /// returns the status of the parcel

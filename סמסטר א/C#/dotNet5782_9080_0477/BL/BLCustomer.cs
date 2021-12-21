@@ -118,7 +118,7 @@ namespace BL
         {
             List<ParcelAtCustomer> parcelSendedByCustomers = new List<ParcelAtCustomer>();
             List<ParcelAtCustomer> parcelSendedToCustomers = new List<ParcelAtCustomer>();
-            List<DO.Parcel> parcels = dalObject.GetParcel().Cast<DO.Parcel>().ToList();
+            List<DO.Parcel> parcels = dalObject.GetParcel().ToList();
             parcels.ForEach(p =>
             {
                 if (p.SenderID == c.ID)

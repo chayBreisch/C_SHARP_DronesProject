@@ -21,10 +21,6 @@ namespace PL1
     /// </summary>
     public partial class ParcelList : Window
     {
-        public ParcelList()
-        {
-            InitializeComponent();
-        }
         BlApi.Bl blParcelList;
         MainWindow mainWindow;
         ObservableCollection<ParcelToList> MyList = new ObservableCollection<ParcelToList>();
@@ -43,7 +39,8 @@ namespace PL1
             foreach (var item in blParcelList.getParcelToList())
                 MyList.Add(item);
             DataContext = MyList;
-            //DroneListView.ItemsSource = bl.GetDronesBL();
+            parcelWeight.ItemsSource = blParcelList.getweightCategoriesEnumItem();
+            parcelPriority.ItemsSource = blParcelList.getPrioritiesEnumItem();
         }
 
         private void Button_ClickClose(object sender, RoutedEventArgs e)
@@ -52,7 +49,7 @@ namespace PL1
             Close();
         }
 
-        private void parcelPriority_SelectionChanged(object sender, SelectionChangedEventArgs e)
+       /* private void parcelPriority_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox options = sender as ComboBox;
             List<ParcelToList> stations = blParcelList.getParcelsByPriority(options.SelectedIndex);
@@ -64,12 +61,14 @@ namespace PL1
             ComboBox options = sender as ComboBox;
             List<ParcelToList> stations = blParcelList.getParcelsByparcelWeight(options.SelectedIndex + 1);
             ParcelListView.ItemsSource = stations;
-        }
+        }*/
 
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
             List<ParcelToList> stations = blParcelList.getParcelToList();
+            parcelPriority.SelectedItem = null;
+            parcelWeight.SelectedItem = null;
             ParcelListView.ItemsSource = stations;
         }
 
@@ -89,6 +88,19 @@ namespace PL1
             Hide();
         }
 
+        private void comboBoxSelectparcel(object sender, SelectionChangedEventArgs e)
+        {
+            List<ParcelToList> drones = new List<ParcelToList>();
+            ComboBox options = sender as ComboBox;
+            if (parcelWeight.SelectedItem == null)
+                drones = blParcelList.getParcelToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex)).ToList();
+            else if (parcelPriority.SelectedItem == null)
+                drones = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1)).ToList();
+            else
+                drones = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1)&& parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex)).ToList();
+
+            ParcelListView.ItemsSource = drones;
+        }
         /* private void filter_SelectionChanged(object sender, SelectionChangedEventArgs e)
 {
     List<ParcelToList> stations = new List<ParcelToList>();

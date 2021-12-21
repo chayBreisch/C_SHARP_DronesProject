@@ -37,8 +37,8 @@ namespace PL1
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
             addDrone.Visibility = Visibility.Visible;
-            droneWeight.ItemsSource = Enum.GetValues(typeof(DO.WeightCatagories));
-           
+            droneWeight.ItemsSource = blDrone.getweightCategoriesEnumItem();
+            droneWeight.SelectedItem = blDrone.getweightCategoriesEnumItem().GetValue(1);
         }
 
         /// <summary>
@@ -85,7 +85,37 @@ namespace PL1
         //###############################################################################
         //add Drone
         //###############################################################################
+        private int getID()
+        {
+            try
+            {
+                return Int32.Parse(droneId.Text);
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("id");
+            }
 
+        }
+
+        private int getStation()
+        {
+            try
+            {
+                return Int32.Parse(numStationtoChargeDrone.Text);
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("station");
+            }
+        }
+
+        private string getModel()
+        {
+            if(droneMdel.Text == "")
+                throw new InValidInput("model");
+            return droneMdel.Text;
+        }
         /// <summary>
         /// add drone to the list of drones
         /// </summary>
@@ -206,7 +236,7 @@ namespace PL1
                     batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
                     TimeCharger.Text = "";
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }

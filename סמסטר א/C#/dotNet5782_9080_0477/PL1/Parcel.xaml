@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Parcel" Height="450" Width="800">
     <Grid>
-        <Grid Name="actions" Visibility="Visible">
+        <Grid Name="actions" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition  Width="200"/>
@@ -47,7 +47,7 @@
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="382,0,0,0" x:Name="statusparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="172"/>
             </Grid>
         </Grid>
-        <Grid Name="addStation" Visibility="Hidden" Background="#FF859DA2">
+        <Grid Name="addStation" Visibility="Visible" Background="#FF859DA2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
