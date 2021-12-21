@@ -31,6 +31,7 @@ namespace BL
         /// <param name="ChargeSlots"></param>
         public void addStation(int id, int name, LocationBL location, int ChargeSlots)
         {
+            checkUniqeIdStation(id, dalObject);
             List<DroneCharge> droneChargers = dalObject.GetDroneCharge().ToList();
             droneChargers = droneChargers.FindAll(d => d.StationID == id);
             List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();

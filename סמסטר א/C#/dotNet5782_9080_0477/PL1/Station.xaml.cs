@@ -67,53 +67,70 @@ namespace PL1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_ClickAddStation(object sender, RoutedEventArgs e)
+        /// 
+
+
+        private int getID()
+        {
+            try
+            {
+                return int.Parse(idStation.Text);
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("id");
+            }
+        }
+
+
+        private BO.LocationBL getLocation()
+        {
+            try
+            {
+                return new BO.LocationBL(int.Parse(longitudeStation.Text), int.Parse(latitudeStation.Text));
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("location");
+            }
+        }
+
+        private int getModel() 
         {
 
-            int id;
-            bool success = Int32.TryParse(idStation.Text, out id);
-            int chargeSlots;
-            bool success1 = Int32.TryParse(chargeSlotsStation.Text, out chargeSlots);
-            int longitude;
-            bool success2 = Int32.TryParse(longitudeStation.Text, out longitude);
-            int latitude;
-            bool success3 = Int32.TryParse(latitudeStation.Text, out latitude);
-            int Model;
-            bool success4 = Int32.TryParse(latitudeStation.Text, out Model);
-            if (!success)
+            if (latitudeStation.Text == "")
+               throw new InValidInput("model");
+            return int.Parse(latitudeStation.Text);
+        }
+
+        private int getchargeSlots()
+        {
+            try
             {
-                MessageBox.Show("not valid id input");
+                return int.Parse(chargeSlotsStation.Text);
             }
-            else if (!success1)
+            catch (Exception e)
             {
-                MessageBox.Show("not valid charge slots input");
+                throw new InValidInput("chargeSlots");
             }
-            else if (!success2)
+        }
+
+        private void Button_ClickAddStation(object sender, RoutedEventArgs e)
+        {
+            
+           
+            try
             {
-                MessageBox.Show("not valid longitude input");
+                blStation.addStation(getID(), getModel(), getLocation(), getchargeSlots());
+                MessageBox.Show("you added succefuly");
+                StationList.Show();
+                Close();
             }
-            else if (!success3)
+            catch (Exception exce)
             {
-                MessageBox.Show("not valid latitude input");
+                MessageBox.Show(exce.Message);
             }
-            else if (!success4)
-            {
-                MessageBox.Show("not valid model input");
-            }
-            else
-            {
-                try
-                {
-                    blStation.addStation(id, Model, new BO.LocationBL(longitude, latitude), chargeSlots);
-                    MessageBox.Show("you added succefuly");
-                    StationList.Show();
-                    Close();
-                }
-                catch (Exception exce)
-                {
-                    MessageBox.Show(exce.Message);
-                }
-            }
+
 
         }
 

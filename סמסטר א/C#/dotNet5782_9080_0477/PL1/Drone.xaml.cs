@@ -112,7 +112,7 @@ namespace PL1
 
         private string getModel()
         {
-            if(droneMdel.Text == "")
+            if (droneMdel.Text == "")
                 throw new InValidInput("model");
             return droneMdel.Text;
         }
@@ -123,34 +123,19 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
-            int id;
-            bool success = Int32.TryParse(droneId.Text, out id);
-           int weight = droneWeight.SelectedIndex;
-            int number;
-            bool success2 = Int32.TryParse(numStationtoChargeDrone.Text, out number);
-            string Model = droneMdel.Text;
-            if (!success)
+
+            try
             {
-                MessageBox.Show("not valid id input");
+                blDrone.addDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
+                MessageBox.Show("you added succefuly");
+                DroneList.Show();
+                Close();
             }
-            else if (!success2)
+            catch (Exception exce)
             {
-                MessageBox.Show("not valid station input");
+                MessageBox.Show(exce.Message);
             }
-            else
-            {
-                try
-                {
-                    blDrone.addDrone(id, Model, weight, number);
-                    MessageBox.Show("you added succefuly");
-                    DroneList.Show();
-                    Close();
-                }
-                catch (Exception exce)
-                {
-                    MessageBox.Show(exce.Message);
-                }
-            }
+
         }
 
         /// <summary>
@@ -315,6 +300,12 @@ namespace PL1
         {
             DroneList.Show();
             Close();
+        }
+
+        private void Button_openParcel(object sender, RoutedEventArgs e)
+        {
+            if (droneBL.parcelInDelivery != null)
+                new Parcel(blDrone,blDrone.GetSpecificParcelBL(droneBL.parcelInDelivery.ID), this).Show();
         }
     }
 }
