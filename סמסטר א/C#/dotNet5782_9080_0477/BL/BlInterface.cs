@@ -98,13 +98,14 @@ namespace BlApi {
 
         public List<CustomerToList> getCustomerToList();
         public BO.Customer convertCustomerToListToCustomerlBL(CustomerToList customerToList);
-        public List<ParcelToList> getParcelsByPriority(int status);
-        public List<ParcelToList> getParcelsByparcelWeight(int status);
+/*        public List<ParcelToList> getParcelsByPriority(int status);
+        public List<ParcelToList> getParcelsByparcelWeight(int status);*/
         public IEnumerable<DroneToList> getDroneToListByCondition(Predicate<DroneToList> predicate);
         public IEnumerable<ParcelToList> getParcelToListByCondition(Predicate<ParcelToList> predicate);
         public IEnumerable<ParcelToList> returnParcelToListWithFilter(int weight, int prioritty);
         public Array getweightCategoriesEnumItem();
         public Array getPrioritiesEnumItem();
+        public IEnumerable<ParcelToList> getPrcelToListByCondition(Predicate<ParcelToList> predicate);
 
     }
 

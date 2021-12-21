@@ -35,10 +35,10 @@ namespace PL1
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
             addStation.Visibility = Visibility.Visible;
-            weightParcel.ItemsSource = Enum.GetValues(typeof(DO.WeightCatagories));
-            weightParcel.SelectedItem = DO.WeightCatagories.Medium;
-            priorityParcel.ItemsSource = Enum.GetValues(typeof(DO.Priorities));
-            priorityParcel.SelectedItem = DO.Priorities.Regular;
+            weightParcel.ItemsSource = blparcel.getweightCategoriesEnumItem();
+            weightParcel.SelectedItem = blparcel.getweightCategoriesEnumItem().GetValue(1);
+            priorityParcel.ItemsSource = blparcel.getPrioritiesEnumItem();
+            priorityParcel.SelectedItem = blparcel.getweightCategoriesEnumItem().GetValue(0);
         }
 
         /// <summary>

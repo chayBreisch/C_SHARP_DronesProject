@@ -54,6 +54,8 @@ namespace PL1
         {
             ListBox listBox1 = new ListBox();
             List<DroneToList> drones = blDroneList.getDroneToList();
+            statusFilter.SelectedItem = null;
+            weightFilter.SelectedItem = null;
             DroneListView.ItemsSource = drones;
         }
 
@@ -67,11 +69,11 @@ namespace PL1
             List<DroneToList> drones = new List<DroneToList>();
             ComboBox options = sender as ComboBox;
             if(weightFilter.SelectedItem == null)
-                drones = blDroneList.getDroneToListByCondition(drone => drone.DroneStatus == (DroneStatus)(options.SelectedIndex)).ToList();
+                drones = blDroneList.getDroneToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex)).ToList();
             else if(statusFilter.SelectedItem == null)
-                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(options.SelectedIndex + 1)).ToList();
+                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1)).ToList();
             else
-                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(options.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(options.SelectedIndex)).ToList();
+                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex)).ToList();
             DroneListView.ItemsSource = drones;
         }
 
