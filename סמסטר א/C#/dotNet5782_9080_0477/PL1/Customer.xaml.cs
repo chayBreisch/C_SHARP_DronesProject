@@ -54,12 +54,14 @@ namespace PL1
             WindowStyle = WindowStyle.None;
             addCustomer.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
-            customerId.Text = customeBL.ID.ToString();
-            customerName.Text = customeBL.Name.ToString();
-            customerPhone.Text = customeBL.Phone.ToString();
-            customerLongitude.Text = customeBL.Location.Longitude.ToString();
-            customerLatitude.Text = customeBL.Location.Latitude.ToString();
+            idcustomer.Text = customeBL.ID.ToString();
+            nameCustomer.Text = customeBL.Name.ToString();
+            phoneCustomr.Text = customeBL.Phone.ToString();
+            SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
+            SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();
+
           
+
 
 
         }
