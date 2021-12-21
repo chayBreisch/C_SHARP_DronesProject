@@ -15,7 +15,7 @@ namespace BL
         public static BL GetInstance()
         {
             if (Instance == null)
-                return new BL();
+                Instance = new BL();
             return Instance;
 
         }
@@ -30,6 +30,7 @@ namespace BL
         /// </summary>
         public BL()
         {
+
             //get all the electric rates
             try
             {
