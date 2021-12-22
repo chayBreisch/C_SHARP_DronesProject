@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,9 @@ namespace PL1
                 MyList.Add(item);
             DataContext = MyList;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+            //view.SortDescriptions.Add(new SortDescription("Weight", ListSortDirection.Ascending));
 
+            // view.SortDescriptions.Add(new SortDescription(null, ListSortDirection.Ascending));
             parcelWeight.ItemsSource = blParcelList.getweightCategoriesEnumItem();
             parcelPriority.ItemsSource = blParcelList.getPrioritiesEnumItem();
         }
@@ -50,19 +53,19 @@ namespace PL1
             Close();
         }
 
-       /* private void parcelPriority_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox options = sender as ComboBox;
-            List<ParcelToList> stations = blParcelList.getParcelsByPriority(options.SelectedIndex);
-            ParcelListView.ItemsSource = stations;
-        }
+        /* private void parcelPriority_SelectionChanged(object sender, SelectionChangedEventArgs e)
+         {
+             ComboBox options = sender as ComboBox;
+             List<ParcelToList> stations = blParcelList.getParcelsByPriority(options.SelectedIndex);
+             ParcelListView.ItemsSource = stations;
+         }
 
-        private void parcelWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox options = sender as ComboBox;
-            List<ParcelToList> stations = blParcelList.getParcelsByparcelWeight(options.SelectedIndex + 1);
-            ParcelListView.ItemsSource = stations;
-        }*/
+         private void parcelWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
+         {
+             ComboBox options = sender as ComboBox;
+             List<ParcelToList> stations = blParcelList.getParcelsByparcelWeight(options.SelectedIndex + 1);
+             ParcelListView.ItemsSource = stations;
+         }*/
 
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
@@ -70,9 +73,18 @@ namespace PL1
             List<ParcelToList> stations = blParcelList.getParcelToList();
             parcelPriority.SelectedItem = null;
             parcelWeight.SelectedItem = null;
+            if (view != null)
+            {
+                view.GroupDescriptions.Clear();
+            }
+            
+
+
+
+
             //view = (CollectionView)CollectionViewSource.GetDefaultView(blParcelList.getParcelToList());
 
-            ParcelListView.ItemsSource = stations;
+            //ParcelListView.ItemsSource = stations;
         }
 
         private void Button_ClickAddParcel(object sender, RoutedEventArgs e)
@@ -100,21 +112,33 @@ namespace PL1
             else if (parcelPriority.SelectedItem == null)
                 drones = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1)).ToList();
             else
-                drones = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1)&& parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex)).ToList();
+                drones = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex)).ToList();
 
             ParcelListView.ItemsSource = drones;
         }
 
         private void Button_ClickGroupBySender(object sender, RoutedEventArgs e)
         {
-            PropertyGroupDescription property = new PropertyGroupDescription("Priority");
-            view.GroupDescriptions.Add(property);
+            if (view != null && view.CanGroup == true)
+            {
+                view.GroupDescriptions.Clear();
+                PropertyGroupDescription property = new PropertyGroupDescription("Priority");
+                view.GroupDescriptions.Add(property);
+            }
+            
         }
 
         private void Button_ClickGroupByWeight(object sender, RoutedEventArgs e)
         {
-            PropertyGroupDescription property = new PropertyGroupDescription("Weight");
-            view.GroupDescriptions.Add(property);
+            if (view != null && view.CanGroup == true)
+            {
+                view.GroupDescriptions.Clear();
+                PropertyGroupDescription property = new PropertyGroupDescription("Weight");
+                view.GroupDescriptions.Add(property);
+            }
+        /*    PropertyGroupDescription property = new PropertyGroupDescription("Weight");
+            view.GroupDescriptions.Add(property);*/
+            //view.SortDescriptions.Clear();
         }
         /* private void filter_SelectionChanged(object sender, SelectionChangedEventArgs e)
 {

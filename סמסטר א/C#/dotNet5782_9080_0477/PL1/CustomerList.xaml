@@ -1,4 +1,4 @@
-﻿<Window x:Class="PL1.CustomerList"
+﻿..............<Window x:Class="PL1.CustomerList"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -18,31 +18,60 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox Background="#FFFFE9ED" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.01,-0.281"  Height="40" Margin="0,27,0,0">
-                <ComboBoxItem >without charge slots</ComboBoxItem>
-                <ComboBoxItem >with free charge slots</ComboBoxItem>
-            </ComboBox>
-            <ComboBox Grid.Column="3" Background="#FFFFE9ED" HorizontalAlignment="Center" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.01,-0.281"  Height="40" Margin="0,27,0,0">
-                <ComboBoxItem >Light</ComboBoxItem>
-                <ComboBoxItem>Medium</ComboBoxItem>
-                <ComboBoxItem>Heavy</ComboBoxItem>
-            </ComboBox>
-            <Border BorderBrush="{x:Null}" Height="45" Width="146" HorizontalAlignment="Right"  Grid.Column="0">
-                <TextBlock TextWrapping="Wrap" Text="charge slots:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" FontWeight="DemiBold" FontSize="20" Margin="10,0,0,0" Width="136"/>
-            </Border>
-            <Border BorderBrush="{x:Null}" Height="45" Width="146" HorizontalAlignment="Right"  Grid.Column="2">
-                <TextBlock TextWrapping="Wrap" Text="drone weight:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" FontWeight="DemiBold" FontSize="20" Margin="10,0,0,0" Width="136"/>
-
-            </Border>
+            <Border BorderBrush="{x:Null}" Height="45" Width="146" HorizontalAlignment="Right"  Grid.Column="0"/>
+            <Border BorderBrush="{x:Null}" Height="45" Width="146" HorizontalAlignment="Right"  Grid.Column="2"/>
             <Button Content="X" Background="Red" Grid.Row="0" Margin="150,-10,0,88" Grid.Column="3"  Click="Button_ClickClose" />
 
 
         </Grid>
-        <ListView Name="CustomerListView" ItemsSource="{Binding}" Background="#FF8D8C7A" Grid.Row="1"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick ="MouseDoubleClick_customerList"/>
         <Button Content="add customer" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="419,475,0,0"  Grid.Row="1"/>
         <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="230,475,0,0" Grid.Row="1" Click="Button_ClickShowList"/>
+        <!-- return $"customer ID: {ID}, Name : {Name}, Phone: {Phone}, Location : {Location}," +
+                    $"parcelsSentedByCustomer: {parcelSentedByCustomer}, parcelsSentedToCustomer: {parcelSentedToCustomer} "; -->
+        <ListView Name="CustomerListView" ItemsSource="{Binding}" Background="#FF8D8C7A" Grid.Row="1"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick ="MouseDoubleClick_customerList">
+
+            <ListView.View>
+                <GridView>
 
 
+                    <GridViewColumn Header="ID" Width="260" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Name" Width="260" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Phone" Width="261" DisplayMemberBinding="{Binding Phone}" />
+                    <!--<GridViewColumn Header="Location" Width="150" DisplayMemberBinding="{Binding Location}" />-->
+                    <!--<GridViewColumn Header="parcelSentedToCustomer" Width="150" DisplayMemberBinding="{Binding parcelSentedToCustomer}" />
+                    <GridViewColumn Header="parcelsSentedByCustomer" Width="150" DisplayMemberBinding="{Binding parcelsSentedByCustomer}" />-->
+
+                </GridView>
+            </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold"  FontSize="14" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="14" Foreground="#FF4B4A4A" FontWeight="Bold"  Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" item(s)" FontSize="14" Foreground="#FF4B4A4A" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
+        <Button Content="group by name" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="157,42,0,0" Click="Button_ClickGroupByName" Grid.RowSpan="2" />
+        <Button Content="group by phone" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="497,42,0,0" Click="Button_ClickGroupByPhone" Grid.RowSpan="2" />
+        <Button Content="sort by phone" HorizontalAlignment="Center" VerticalAlignment="Top"  Height="45" Width="146" Margin="0,42,0,0" Click="Button_ClickOrderByPhone" Grid.RowSpan="2" />
+        <Button Content="sort by name" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="11,42,0,0" Click="Button_ClickOrderByName" Grid.RowSpan="2" />
     </Grid>
 </Window>
 
