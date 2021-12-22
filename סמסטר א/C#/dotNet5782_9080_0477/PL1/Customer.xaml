@@ -8,7 +8,7 @@
         Title="Customer" Height="450" Width="800">
     <Grid>
 
-        <Grid Name="actions" Visibility="Hidden">
+        <Grid Name="actions" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition  Width="200"/>
@@ -46,7 +46,7 @@
             </Grid>
 
         </Grid>
-        <Grid Name="addCustomer" Visibility="Visible" Background="#FF859DA2">
+        <Grid Name="addCustomer" Visibility="Hidden" Background="#FF859DA2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />

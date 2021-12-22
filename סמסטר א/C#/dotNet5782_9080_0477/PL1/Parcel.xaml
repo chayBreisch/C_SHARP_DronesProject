@@ -30,8 +30,8 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Label  FontSize="16" Content="id:" Grid.Row="1" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center"/>
-                <Label FontSize="16" Content="sender id" Grid.Row="2" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Center"/>
-                <Label FontSize="16" Content="reciever id" Grid.Row="3" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Center"/>
+                <Button FontSize="16" Content="sender id" Grid.Row="2" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Center" Click="Button_ClickOpenSender" Width="75"/>
+                <Button FontSize="16" Content="reciever id" Grid.Row="3" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Center" Click="Button_ClickOpenReciever" Width="83"/>
                 <Label FontSize="16" Content="weight" Grid.Row="4" HorizontalAlignment="Left" Margin="45,21,0,0" VerticalAlignment="Top"/>
 
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="77,0,0,0" Name="idparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="197"/>
@@ -42,7 +42,7 @@
                 <Label Content="Parcel" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
                 <Label  FontSize="16" Content="priority" Grid.Row="1" HorizontalAlignment="Left" Margin="325,20,0,0" VerticalAlignment="Top"/>
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="391,0,0,0" x:Name="priorityparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="163"/>
-                <Label  FontSize="16" Content="drone" Grid.Row="2" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center"/>
+                <Button FontSize="16" Content="drone" Grid.Row="2" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center" Click="Button_ClickOpenDrone" Width="52"/>
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="2" HorizontalAlignment="Left" Margin="382,0,0,0" x:Name="droneparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="172"/>
                 <Label  FontSize="16" Content="status" Grid.Row="3" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center"/>
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="382,0,0,0" x:Name="statusparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="172"/>

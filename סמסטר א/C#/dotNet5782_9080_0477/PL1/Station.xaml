@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Station" Height="450" Width="800">
     <Grid>
-        <Grid Name="actions" Visibility="Hidden">
+        <Grid Name="actions" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition  Width="200"/>
@@ -33,16 +33,18 @@
                 <Label FontSize="16" Content="name:" Grid.Row="2" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="chjarge slots:" Grid.Row="3" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="location:" Grid.Row="4" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
+                <Label FontSize="16" Content="drone:" Grid.Row="5" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
 
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="200,0,0,0" Name="idstation" TextWrapping="Wrap" VerticalAlignment="Center" Width="220"/>
                 <TextBox FontSize="16" Text="{Binding Path=Name}" Grid.Row="2" HorizontalAlignment="Left" Margin="231,0,0,0" Name="nameStation" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
                 <TextBox FontSize="16" Text="{Binding Path=ChargeSlots}" Grid.Row="3" HorizontalAlignment="Left" Name="ChargeSlotsStation" TextWrapping="Wrap" VerticalAlignment="Center" Width="137" Margin="283,0,0,0"/>
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="LocationStation" TextWrapping="Wrap" VerticalAlignment="Center" Width="172" Margin="248,0,0,0"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Name="DroneInStation" TextWrapping="Wrap" VerticalAlignment="Center" Width="172" Margin="248,0,0,0"/>
 
-                <Label Content="Drone" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Label Content="station" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
-        <Grid Name="addStation" Visibility="Visible" Background="#FF859DA2">
+        <Grid Name="addStation" Visibility="Hidden" Background="#FF859DA2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
