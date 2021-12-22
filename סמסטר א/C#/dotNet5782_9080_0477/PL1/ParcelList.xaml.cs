@@ -47,6 +47,11 @@ namespace PL1
             parcelPriority.ItemsSource = blParcelList.getPrioritiesEnumItem();
         }
 
+        /// <summary>
+        /// close this window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
             mainWindow.Show();
@@ -67,6 +72,11 @@ namespace PL1
              ParcelListView.ItemsSource = stations;
          }*/
 
+        /// <summary>
+        /// show the all list of parcels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
@@ -82,22 +92,24 @@ namespace PL1
                 DataContext = MyList;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             }
-            
-
-
-
-
-            //view = (CollectionView)CollectionViewSource.GetDefaultView(blParcelList.getParcelToList());
-
-            //ParcelListView.ItemsSource = stations;
         }
 
+        /// <summary>
+        /// add parcel to dataSource list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickAddParcel(object sender, RoutedEventArgs e)
         {
             new Parcel(blParcelList, this).Show();
             Hide();
         }
 
+        /// <summary>
+        /// show specific parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ParcelListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             sender.ToString();
@@ -108,6 +120,11 @@ namespace PL1
             Hide();
         }
 
+        /// <summary>
+        /// return a list of parcel after filtering
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxSelectparcel(object sender, SelectionChangedEventArgs e)
         {
             List<ParcelToList> drones = new List<ParcelToList>();
@@ -128,6 +145,11 @@ namespace PL1
             //ParcelListView.ItemsSource = drones;
         }
 
+        /// <summary>
+        /// grouping the parcel list by priority
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickGroupBySender(object sender, RoutedEventArgs e)
         {
             if (view != null && view.CanGroup == true)
@@ -139,6 +161,11 @@ namespace PL1
             
         }
 
+        /// <summary>
+        /// grouping the parcel list by weight
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickGroupByWeight(object sender, RoutedEventArgs e)
         {
             if (view != null && view.CanGroup == true)

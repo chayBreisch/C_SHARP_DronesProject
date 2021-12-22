@@ -67,9 +67,6 @@ namespace PL1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// 
-
-
         private int getID()
         {
             try
@@ -82,7 +79,10 @@ namespace PL1
             }
         }
 
-
+        /// <summary>
+        /// get location of the station
+        /// </summary>
+        /// <returns></returns>
         private BO.LocationBL getLocation()
         {
             try
@@ -95,7 +95,11 @@ namespace PL1
             }
         }
 
-        private int getModel() 
+        /// <summary>
+        /// get model of the station
+        /// </summary>
+        /// <returns></returns>
+        private int getModel()
         {
 
             if (latitudeStation.Text == "")
@@ -103,6 +107,10 @@ namespace PL1
             return int.Parse(latitudeStation.Text);
         }
 
+        /// <summary>
+        /// get sum charge slots of the station
+        /// </summary>
+        /// <returns></returns>
         private int getchargeSlots()
         {
             try
@@ -115,10 +123,13 @@ namespace PL1
             }
         }
 
+        /// <summary>
+        /// add ststion to dataSource list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickAddStation(object sender, RoutedEventArgs e)
         {
-            
-           
             try
             {
                 blStation.addStation(getID(), getModel(), getLocation(), getchargeSlots());
@@ -130,8 +141,6 @@ namespace PL1
             {
                 MessageBox.Show(exce.Message);
             }
-
-
         }
 
 
@@ -160,6 +169,11 @@ namespace PL1
             Close();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickReset(object sender, RoutedEventArgs e)
         {
             idStation.Text = null;

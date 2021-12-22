@@ -15,7 +15,7 @@
 
             <Grid Grid.Column="1" Background="#FF859DA2">
 
-                <Button Content="X" Width="50" Background="Red" HorizontalAlignment="Left"  Grid.Row="0"  Margin="150,0,0,0" Height="20" VerticalAlignment="Top" Click="Button_ClickClose"  />
+                <Button Content="X" Width="50" Background="Red" HorizontalAlignment="Left"  Grid.Row="0"  Margin="150,0,0,0" Height="20" VerticalAlignment="Top" Click="Button_ClickCloseParcel"  />
                 <Button Content="delete this parcel" Width="124" HorizontalAlignment="Center"  Grid.Row="0"  Margin="0,105,0,0" Height="49" VerticalAlignment="Top" Click="Button_ClickRemoveDrone"/>
 
             </Grid>
