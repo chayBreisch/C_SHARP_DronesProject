@@ -76,6 +76,11 @@ namespace PL1
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
+                MyList = new ObservableCollection<ParcelToList>();
+                foreach (var item in blParcelList.getParcelToList())
+                    MyList.Add(item);
+                DataContext = MyList;
+                view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             }
             
 
@@ -113,8 +118,14 @@ namespace PL1
                 drones = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1)).ToList();
             else
                 drones = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex)).ToList();
+            view.GroupDescriptions.Clear();
 
-            ParcelListView.ItemsSource = drones;
+            MyList = new ObservableCollection<ParcelToList>();
+            foreach (var item in drones)
+                MyList.Add(item);
+            DataContext = MyList;
+            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+            //ParcelListView.ItemsSource = drones;
         }
 
         private void Button_ClickGroupBySender(object sender, RoutedEventArgs e)

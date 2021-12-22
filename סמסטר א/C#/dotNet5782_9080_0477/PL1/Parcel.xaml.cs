@@ -85,7 +85,8 @@ namespace PL1
             recieveridparcel.Text = parcelBL.Reciever.ID.ToString();
             weightparcel.Text = parcelBL.Weight.ToString();
             priorityparcel.Text = parcelBL.Priorities.ToString();
-            droneparcel.Text = parcelBL.Drone.ToString();
+            if(parcelBL.Drone != null)
+                droneparcel.Text = parcelBL.Drone.ToString();
             //statusparcel.Text = parcelBL.
         }
 
@@ -146,6 +147,22 @@ namespace PL1
         {
             parcelList.Show();
             Close();
+        }
+
+        private void Button_ClickRemoveDrone(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                //MessageBox.Show("are you sure you want to remove parcel?");
+                blparcel.removeParcel(parcelBL.ID);
+                parcelList.Show();
+                Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

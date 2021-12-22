@@ -29,13 +29,13 @@ namespace DalObject
         {
             return from parcel in DataSource.parcels
                    select parcel;
-         /*   foreach (var parcel in DataSource.parcels)
-            {
-                yield return parcel;
-            }*/
+            /*   foreach (var parcel in DataSource.parcels)
+               {
+                   yield return parcel;
+               }*/
         }
 
-       ///
+        ///
         /* public Parcel GetSpecificParcel(int id)
          {
              try
@@ -48,7 +48,7 @@ namespace DalObject
              }
          }
  */
-        
+
         public Parcel getParcelById(Predicate<Parcel> predicate)
         {
             Parcel parcel1 = new Parcel();
@@ -58,7 +58,7 @@ namespace DalObject
                            where predicate(parcel)
                            select parcel).First();
             }
-            catch (Exception e) {}
+            catch (Exception e) { }
             return parcel1;
 
         }
@@ -129,6 +129,33 @@ namespace DalObject
         {
             int index = DataSource.parcels.FindIndex(d => d.ID == parcel.ID);
             DataSource.parcels[index] = parcel;
+        }
+
+
+        /// <summary>
+        /// remove parcel from dataSource
+        /// </summary>
+        /// <param name="idRemove"></param>
+        public void RemoveParcel(int idRemove)
+        {
+            DataSource.parcels.RemoveAt(getIndexOfParcel(idRemove));
+        }
+
+        /// <summary>
+        /// return index of parcel in dataSource list
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int getIndexOfParcel(int id)
+        {
+            try
+            {
+                return DataSource.parcels.FindIndex(p => p.ID == id);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotExistObjWithID(id, typeof(Parcel));
+            }
         }
     }
 }
