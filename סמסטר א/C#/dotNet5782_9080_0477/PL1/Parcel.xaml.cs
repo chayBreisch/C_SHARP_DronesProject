@@ -41,12 +41,12 @@ namespace PL1
             priorityParcel.ItemsSource = blparcel.getPrioritiesEnumItem();
             priorityParcel.SelectedItem = blparcel.getweightCategoriesEnumItem().GetValue(0);
         }
+
         /// <summary>
         /// constructor opened from drone
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="drone"></param>
-
         public Parcel(BlApi.Bl bl, BO.Parcel parcel, Drone drone)
         {
             InitializeComponent();
@@ -85,10 +85,15 @@ namespace PL1
             recieveridparcel.Text = parcelBL.Reciever.ID.ToString();
             weightparcel.Text = parcelBL.Weight.ToString();
             priorityparcel.Text = parcelBL.Priorities.ToString();
-            droneparcel.Text = parcelBL.Drone.ToString();
+            if(parcelBL.Drone != null)
+                droneparcel.Text = parcelBL.Drone.ToString();
             //statusparcel.Text = parcelBL.
         }
 
+        /// <summary>
+        /// returns the sender id
+        /// </summary>
+        /// <returns></returns>
         private ulong getSenderId()
         {
             try
@@ -101,6 +106,10 @@ namespace PL1
             }
         }
 
+        /// <summary>
+        /// returns the reciever id
+        /// </summary>
+        /// <returns></returns>
         private ulong getRecieverId()
         {
             try
@@ -113,6 +122,11 @@ namespace PL1
             }
         }
 
+        /// <summary>
+        /// add parcel to dataSource list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickAddParcel(object sender, RoutedEventArgs e)
         {
             try
@@ -128,12 +142,22 @@ namespace PL1
             }
         }
 
+        /// <summary>
+        /// close this window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCloseParcel(object sender, RoutedEventArgs e)
         {
             parcelList.Show();
             Close();
         }
 
+        /// <summary>
+        /// reset the data of the parcel to add
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickResetParcel(object sender, RoutedEventArgs e)
         {
             senderIdParcel.Text = null;
@@ -142,10 +166,24 @@ namespace PL1
             priorityParcel.SelectedItem = DO.Priorities.Regular;
         }
 
-        private void Button_ClickClose(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// remove drone from dataSource list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_ClickRemoveDrone(object sender, RoutedEventArgs e)
         {
-            parcelList.Show();
-            Close();
+            try
+            {
+                //MessageBox.Show("are you sure you want to remove parcel?");
+                blparcel.removeParcel(parcelBL.ID);
+                parcelList.Show();
+                Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

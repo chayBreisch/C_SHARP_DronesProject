@@ -1,4 +1,4 @@
-﻿    <Window x:Class="PL1.ParcelList"
+﻿<Window x:Class="PL1.ParcelList"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:PL1"
         mc:Ignorable="d"
         Title="ParcelList" Height="640" Width="800" >
-        <Grid Name="MainGrid" Background="#FF859DA2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50*"/>
-                <RowDefinition Height="400*"/>
-            </Grid.RowDefinitions>
-            <Grid Background="#FF859DA2" Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,10,0,516" Grid.RowSpan="2">
+    <Grid Name="MainGrid" Background="#FF859DA2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="400*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="#FF859DA2" Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,10,0,516" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -21,20 +21,62 @@
             <ComboBox Background="#FFFFE9ED" Name="parcelPriority" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.01,-0.281"  Height="40" Margin="0,27,0,0" SelectionChanged="comboBoxSelectparcel"/>
             <ComboBox Name="parcelWeight" Grid.Column="3" Background="#FFFFE9ED" HorizontalAlignment="Center" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.01,-0.281"  Height="40" Margin="0,27,0,0" SelectionChanged="comboBoxSelectparcel"/>
             <Border BorderBrush="{x:Null}" Height="45" Width="146" HorizontalAlignment="Right"  Grid.Column="0">
-                    <TextBlock TextWrapping="Wrap" Text="parcel priority:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" FontWeight="DemiBold" FontSize="20" Margin="10,0,0,0" Width="136"/>
-                </Border>
-                <Border BorderBrush="{x:Null}" Height="45" Width="146" HorizontalAlignment="Right"  Grid.Column="2">
-                    <TextBlock TextWrapping="Wrap" Text="parcel weight:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" FontWeight="DemiBold" FontSize="20" Margin="10,0,0,0" Width="136"/>
+                <TextBlock TextWrapping="Wrap" Text="parcel priority:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" FontWeight="DemiBold" FontSize="20" Margin="10,0,0,0" Width="136"/>
+            </Border>
+            <Border BorderBrush="{x:Null}" Height="45" Width="146" HorizontalAlignment="Right"  Grid.Column="2">
+                <TextBlock TextWrapping="Wrap" Text="parcel weight:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" FontWeight="DemiBold" FontSize="20" Margin="10,0,0,0" Width="136"/>
 
-                </Border>
-                <Button Content="X" Background="Red" Grid.Row="0" Margin="150,-10,0,0" Height="20" VerticalAlignment="Top" Grid.Column="3" Click="Button_ClickClose"  />
-
-
-            </Grid>
-        <ListView ItemsSource="{Binding}" x:Name="ParcelListView" Background="#FF8D8C7A" Grid.Row="1"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick="ParcelListView_MouseDoubleClick"/>
-            <Button Content="add parcel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="419,475,0,0"  Grid.Row="1" Click="Button_ClickAddParcel"/>
-            <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="230,475,0,0" Grid.Row="1" Click="Button_ClickShowList"/>
+            </Border>
+            <Button Content="X" Background="Red" Grid.Row="0" Margin="150,-10,0,0" Height="20" VerticalAlignment="Top" Grid.Column="3" Click="Button_ClickClose"  />
 
 
         </Grid>
-    </Window>
+        <Button Content="add parcel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="419,475,0,0"  Grid.Row="1" Click="Button_ClickAddParcel"/>
+        <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="230,475,0,0" Grid.Row="1" Click="Button_ClickShowList"/>
+        <ListView ItemsSource="{Binding}" x:Name="ParcelListView" Background="#FF8D8C7A" Grid.Row="1"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick="ParcelListView_MouseDoubleClick">
+
+            <ListView.View>
+                <GridView>
+
+
+                    <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="NameCustomerSender" Width="150" DisplayMemberBinding="{Binding NameCustomerSender}" />
+                    <GridViewColumn Header="NameCustomerReciver" Width="150" DisplayMemberBinding="{Binding NameCustomerReciver}" />
+                    <GridViewColumn Header="Priority" Width="150" DisplayMemberBinding="{Binding Priority}" />
+                    <GridViewColumn Header="ParcelStatus" Width="150" DisplayMemberBinding="{Binding ParcelStatus}" />
+                    <GridViewColumn Header="Weight" Width="150" DisplayMemberBinding="{Binding Weight}" />
+
+                </GridView>
+            </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold"  FontSize="18" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="18" Foreground="#FF4B4A4A" FontWeight="Bold"  Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" item(s)" FontSize="18" Foreground="#FF4B4A4A" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
+        <Button Content="group by priority" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="43,475,0,0" Grid.Row="1" Click="Button_ClickGroupBySender" />
+        <Button Content="group by weight" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="612,475,0,0" Grid.Row="1" Click="Button_ClickGroupByWeight" />
+
+
+    </Grid>
+
+</Window>

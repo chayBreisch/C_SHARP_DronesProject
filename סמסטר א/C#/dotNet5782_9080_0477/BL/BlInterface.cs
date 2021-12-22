@@ -106,6 +106,7 @@ namespace BlApi {
         public Array getweightCategoriesEnumItem();
         public Array getPrioritiesEnumItem();
         public IEnumerable<ParcelToList> getPrcelToListByCondition(Predicate<ParcelToList> predicate);
+        public void removeParcel(int id);
 
     }
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace PL1
         BlApi.Bl blcustomer;
         MainWindow mainWindow;
         ObservableCollection<CustomerToList> MyList = new ObservableCollection<CustomerToList>();
+        CollectionView view;
 
 
         /// <summary>
@@ -39,13 +41,19 @@ namespace PL1
             foreach (var item in blcustomer.getCustomerToList())
                 MyList.Add(item);
             DataContext = MyList;
+            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+
         }
 
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
-            ListBox listBox1 = new ListBox();
-            List<CustomerToList> customers = blcustomer.getCustomerToList();
-            CustomerListView.ItemsSource = customers;
+           /* ListBox listBox1 = new ListBox();
+            List<CustomerToList> customers = blcustomer.getCustomerToList();*/
+            //CustomerListView.ItemsSource = customers;
+            if (view != null)
+            {
+                view.GroupDescriptions.Clear();
+            }
         }
 
         private void Button_ClickClose(object sender, RoutedEventArgs e)
@@ -62,6 +70,45 @@ namespace PL1
             //this.Visibility = Visibility.Hidden;
             new Customer(blcustomer, customer, this).Show();
             Hide();
+        }
+
+        private void Button_ClickGroupByName(object sender, RoutedEventArgs e)
+        {
+            if (view != null && view.CanGroup == true)
+            {
+                view.GroupDescriptions.Clear();
+                PropertyGroupDescription property = new PropertyGroupDescription("Name");
+                view.GroupDescriptions.Add(property);
+            }
+
+        }
+
+        private void Button_ClickGroupByPhone(object sender, RoutedEventArgs e)
+        {
+            if (view != null && view.CanGroup == true)
+            {
+                view.GroupDescriptions.Clear();
+                PropertyGroupDescription property = new PropertyGroupDescription("Phone");
+                view.GroupDescriptions.Add(property);
+            }
+        }
+
+        private void Button_ClickOrderByPhone(object sender, RoutedEventArgs e)
+        {
+            if (view != null && view.CanGroup == true)
+            {
+                view.GroupDescriptions.Clear();
+                view.SortDescriptions.Add(new SortDescription("Phone", ListSortDirection.Ascending));
+            }
+        }
+
+        private void Button_ClickOrderByName(object sender, RoutedEventArgs e)
+        {
+            if (view != null && view.CanGroup == true)
+            {
+                view.GroupDescriptions.Clear();
+                view.SortDescriptions.Add(new SortDescription("Phone", ListSortDirection.Ascending));
+            }
         }
     }
 }

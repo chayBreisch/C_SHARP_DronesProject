@@ -244,6 +244,14 @@ namespace BL
               return (ParcelStatus)3;
           }*/
 
+        /// <summary>
+        /// remove a parcel from dataSource list
+        /// </summary>
+        /// <param name="parcel"></param>
+        public void removeParcel(int id)
+        {
+            dalObject.RemoveParcel(id);
+        }
     }
 
 }

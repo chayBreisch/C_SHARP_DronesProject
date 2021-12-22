@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Parcel" Height="450" Width="800">
     <Grid>
-        <Grid Name="actions" Visibility="Hidden">
+        <Grid Name="actions" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition  Width="200"/>
@@ -15,7 +15,8 @@
 
             <Grid Grid.Column="1" Background="#FF859DA2">
 
-                <Button Content="X" Width="50" Background="Red" HorizontalAlignment="Left"  Grid.Row="0"  Margin="150,0,0,0" Height="20" VerticalAlignment="Top" Click="Button_ClickClose"  />
+                <Button Content="X" Width="50" Background="Red" HorizontalAlignment="Left"  Grid.Row="0"  Margin="150,0,0,0" Height="20" VerticalAlignment="Top" Click="Button_ClickCloseParcel"  />
+                <Button Content="delete this parcel" Width="124" HorizontalAlignment="Center"  Grid.Row="0"  Margin="0,105,0,0" Height="49" VerticalAlignment="Top" Click="Button_ClickRemoveDrone"/>
 
             </Grid>
 
@@ -47,7 +48,7 @@
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="382,0,0,0" x:Name="statusparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="172"/>
             </Grid>
         </Grid>
-        <Grid Name="addStation" Visibility="Visible" Background="#FF859DA2">
+        <Grid Name="addStation" Visibility="Hidden" Background="#FF859DA2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -77,4 +78,5 @@
 
         </Grid>
     </Grid>
+
 </Window>
