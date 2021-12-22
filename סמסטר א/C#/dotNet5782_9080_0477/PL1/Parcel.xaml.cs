@@ -171,14 +171,17 @@ namespace PL1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_ClickRemoveDrone(object sender, RoutedEventArgs e)
+        private void Button_ClickRemoveParcel(object sender, RoutedEventArgs e)
         {
             try
             {
-                //MessageBox.Show("are you sure you want to remove parcel?");
-                blparcel.removeParcel(parcelBL.ID);
-                parcelList.Show();
-                Close();
+                MessageBoxResult result = MessageBox.Show("are you sure you want to remove parcel?", "remove parcel", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    blparcel.removeParcel(parcelBL.ID);
+                    parcelList.Show();
+                    Close();
+                }
             }
             catch(Exception ex)
             {
