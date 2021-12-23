@@ -33,7 +33,7 @@
         </Grid>
         <Button Content="add parcel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="419,475,0,0"  Grid.Row="1" Click="Button_ClickAddParcel"/>
         <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="230,475,0,0" Grid.Row="1" Click="Button_ClickShowList"/>
-        
+
         <ListView ItemsSource="{Binding}" x:Name="ParcelListView" Background="#FF8D8C7A" Grid.Row="1"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick="ParcelListView_MouseDoubleClick" Foreground="black">
             <ListView.View>
                 <GridView>
@@ -70,8 +70,8 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <Button Content="group by priority" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="43,475,0,0" Grid.Row="1" Click="Button_ClickGroupBySender" />
-        <Button Content="group by weight" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="612,475,0,0" Grid.Row="1" Click="Button_ClickGroupByWeight" />
+        <Button Content="group by receiver" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="43,475,0,0" Grid.Row="1" Click="Button_ClickGroupByReciver" />
+        <Button Content="group by sender" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="606,475,0,0" Grid.Row="1" Click="Button_ClickGroupBySender" />
 
 
     </Grid>
