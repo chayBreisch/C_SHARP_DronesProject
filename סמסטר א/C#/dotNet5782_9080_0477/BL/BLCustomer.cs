@@ -18,7 +18,7 @@ namespace BL
         /// <param name="dalObject"></param>
         public static void checkUniqeIdCustomer(ulong id, IDAL.IDal dalObject)
         {
-            List<DO.Customer> customers = dalObject.GetCustomer().ToList();
+            List<DO.Customer> customers = dalObject.GetCustomers().ToList();
             if (customers.Any(c => c.ID == id))
                 throw new NotUniqeID(id, typeof(DO.Customer));
         }
@@ -30,7 +30,7 @@ namespace BL
         /// <param name="dalObject"></param>
         public void checkUniqeIDCustomer(ulong id)
         {
-            IEnumerable<DO.Customer> customers = dalObject.GetCustomer();
+            IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
             foreach (var customer in customers)
             {
                 if (customer.ID == id)
@@ -82,7 +82,7 @@ namespace BL
         /// <returns> List<CustomerBL> </returns>
         public List<BO.Customer> GetCustomersBL()
         {
-            IEnumerable<DO.Customer> customers = dalObject.GetCustomer();
+            IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
             List<BO.Customer> customers1 = new List<BO.Customer>();
             foreach (var customer in customers)
             {
@@ -118,7 +118,7 @@ namespace BL
         {
             List<ParcelAtCustomer> parcelSendedByCustomers = new List<ParcelAtCustomer>();
             List<ParcelAtCustomer> parcelSendedToCustomers = new List<ParcelAtCustomer>();
-            List<DO.Parcel> parcels = dalObject.GetParcel().ToList();
+            List<DO.Parcel> parcels = dalObject.GetParcels().ToList();
             parcels.ForEach(p =>
             {
                 if (p.SenderID == c.ID)
@@ -166,7 +166,7 @@ namespace BL
         public void checkIfCustomerWithThisID(ulong id)
         {
             bool check = false;
-            IEnumerable<DO.Customer> customers = dalObject.GetCustomer();
+            IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
             foreach (var customer in customers)
             {
                 if (customer.ID == id)

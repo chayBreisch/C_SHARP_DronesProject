@@ -21,7 +21,7 @@ namespace BL
         /// <param name="dalObject"></param>
         public static void checkUniqeIdDroneCharge(int droneId, int stationId, IDAL.IDal dalObject)
         {
-            List<DroneCharge> droneCharges = dalObject.GetDroneCharge().ToList();
+            List<DroneCharge> droneCharges = dalObject.GetDroneCharges().ToList();
             if (droneCharges.Any(d => d.DroneID == droneId && d.StationID == stationId))
                 throw new NotUniqeID(droneId, stationId, typeof(DroneCharge));
         }

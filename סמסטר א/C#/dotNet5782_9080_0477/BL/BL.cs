@@ -47,7 +47,7 @@ namespace BL
             double electricHeavyHeight = arrayEletric[3];
             double electricChargingRate = arrayEletric[4];
             //for each drone we check what is the status and reboot in entries
-            foreach (var drone in dalObject.GetDrone())
+            foreach (var drone in dalObject.GetDrones())
             {
                 BO.Drone droneBL = new BO.Drone { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight };
                 DO.Parcel parcel = dalObject.getParcelById(p => p.DroneID == drone.ID);
@@ -96,7 +96,7 @@ namespace BL
                 if (droneBL.DroneStatus == DroneStatus.Maintenance)
                 {
                     int length = dalObject.lengthStation();
-                    DO.Station station = dalObject.GetStation().ToList()[rand.Next(0, length)];
+                    DO.Station station = dalObject.GetStations().ToList()[rand.Next(0, length)];
                     droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
                     droneBL.BatteryStatus = rand.Next(0, 21);
                     DroneCharge droneCharge = new DroneCharge();
@@ -108,7 +108,7 @@ namespace BL
                 //check if drone is in available
                 else if (droneBL.DroneStatus == DroneStatus.Available)
                 {
-                    List<DO.Parcel> parcelBLsWithSuppliedParcel = dalObject.GetParcel().ToList().FindAll(p => p.Delivered != null);
+                    List<DO.Parcel> parcelBLsWithSuppliedParcel = dalObject.GetParcels().ToList().FindAll(p => p.Delivered != null);
                     if (parcelBLsWithSuppliedParcel.Count > 0)
                     {
                         BO.Parcel parcelBL = convertDalToParcelBL(parcelBLsWithSuppliedParcel[rand.Next(0, parcelBLsWithSuppliedParcel.Count)]);
@@ -147,7 +147,7 @@ namespace BL
         {
             double minDis = -1;
             double dis2 = 0;
-            IEnumerable<DO.Station> stations = dalObject.GetStation();
+            IEnumerable<DO.Station> stations = dalObject.GetStations();
             DO.Station sendStation = new DO.Station();
             foreach (var station in stations)
             {
@@ -170,7 +170,7 @@ namespace BL
         {
             double minDis = -1;
             double dis2 = 0;
-            IEnumerable<DO.Station> stations = dalObject.GetStation();
+            IEnumerable<DO.Station> stations = dalObject.GetStations();
             DO.Station sendStation = new DO.Station();
             foreach (var station in stations)
             {
@@ -234,7 +234,7 @@ namespace BL
             int numOfChargers = 0;
             List<BO.Station> stations = GetStationsBL();
             List<BO.Station> stationsWithEmptyChargers = new List<BO.Station>();
-            List<DroneCharge> droneChargers = dalObject.GetDroneCharge().ToList();
+            List<DroneCharge> droneChargers = dalObject.GetDroneCharges().ToList();
             foreach (var station in stations)
             {
                 foreach (var droneCharger in droneChargers)
