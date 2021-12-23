@@ -166,28 +166,28 @@ namespace DalObject
         //################################################
         //functions that update the dataSource array 
         //################################################
-        public void updateConectDroneToParcial(int id)
+        /*public void updateConectDroneToParcial(int id)
         {
             Parcel newParcial = getParcelById(p => p.ID == id);
             Drone drone = new Drone();
             for (int i = 0; i < DataSource.drones.Count; i++)
             {
-                /* if (DataSource.drones[i].Status == DroneStatus.Available)
+                *//* if (DataSource.drones[i].Status == DroneStatus.Available)
                  {
                      drone = DataSource.drones[i];
                      drone.Status = DroneStatus.Delivery;
                      break;
-                 }*/
+                 }*//*
             }
             newParcial.DroneID = drone.ID;
             int index1 = DataSource.drones.FindIndex(p => p.ID == newParcial.ID);
             int index = DataSource.drones.FindIndex(d => d.ID == drone.ID);
             DataSource.drones[index] = drone;
             DataSource.parcels[index1] = newParcial;
-        }
+        }*/
 
 
-        public void updateCollectParcialByDrone(int id)
+       /* public void updateCollectParcialByDrone(int id)
         {
 
             Parcel newParcial = getParcelById(p => p.ID == id);
@@ -197,9 +197,9 @@ namespace DalObject
             }
             newParcial.PickedUp = DateTime.Now;
 
-        }
+        }*/
 
-        public void updateSupplyParcialToCustomer(int id)
+        /*public void updateSupplyParcialToCustomer(int id)
         {
             Parcel newParcial = getParcelById(p => p.ID == id);
 
@@ -208,8 +208,8 @@ namespace DalObject
                 Console.WriteLine("you didnt collect a drone");
             }
             newParcial.Delivered = DateTime.Now;
-        }
-        public void updateSendDroneToCharge(int droneId, int statoinId)
+        }*/
+        /*public void updateSendDroneToCharge(int droneId, int statoinId)
         {
             DroneCharge droneCharge = new DroneCharge();
             int numOfChargers = 0;
@@ -230,8 +230,8 @@ namespace DalObject
 
             //newDrone.Status = DroneStatus.Maintenance;
             DataSource.droneChargers[DataSource.droneChargers.Count - 1] = droneCharge;
-        }
-        public void updateUnChargeDrone(int id)
+        }*/
+        /*public void updateUnChargeDrone(int id)
         {
             Drone NewDrone = getDroneById(d => d.ID == id);
             int index = 0;
@@ -244,11 +244,11 @@ namespace DalObject
                     break;
                 }
             }
-            /*NewDrone.Status = DroneStatus.Available;
-            NewDrone.Battery = 100;*/
+            *//*NewDrone.Status = DroneStatus.Available;
+            NewDrone.Battery = 100;*//*
             int index1 = DataSource.drones.FindIndex(d => d.ID == NewDrone.ID);
             DataSource.drones[index1] = NewDrone;
-        }
+        }*/
 
 
 
@@ -257,23 +257,23 @@ namespace DalObject
         //################################################
 
 
-        public IEnumerable<Parcel> showParcelsWithoutoutDrone()
+       /* public IEnumerable<Parcel> showParcelsWithoutoutDrone()
         {
             //IEnumerable<Parcel> parcels = GetParcel();
             return from parcel in GetParcel()
             where parcel.DroneID == 0
             select parcel;
-        /*    foreach (var parcel in parcels)
+        *//*    foreach (var parcel in parcels)
             {
                 if (parcel.DroneID == 0)
                 {
                     yield return parcel;
                 }
-            }*/
-        }
+            }*//*
+        }*/
 
 
-        public IEnumerable<Station> showStationWithEmptyChargers()
+        /*public IEnumerable<Station> showStationWithEmptyChargers()
         {
             int numOfChargers = 0;
             IEnumerable<Station> stations = GetStation();
@@ -291,7 +291,7 @@ namespace DalObject
                     yield return station;
                 }
             }
-        }
+        }*/
 
 
 
