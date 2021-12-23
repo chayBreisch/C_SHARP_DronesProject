@@ -15,25 +15,15 @@ using System.Windows.Shapes;
 namespace PL1
 {
     /// <summary>
-    /// Interaction logic for FirstWindow.xaml
+    /// Interaction logic for CheckIDWindow.xaml
     /// </summary>
-    public partial class FirstWindow : Window
+    public partial class CheckIDWindow : Window
     {
-        BlApi.Bl BLObject;
-        public FirstWindow(BlApi.Bl Blobject)
+        public CheckIDWindow()
         {
             InitializeComponent();
-            BLObject = Blobject;
         }
 
-        private void Button_ClickNewCustomer(object sender, RoutedEventArgs e)
-        {
-            new NewCustomerWindow(BLObject);
-        }
 
-        private void Button_ClickWorker(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

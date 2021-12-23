@@ -10,30 +10,52 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PL1
+namespace PL_NewDesign
 {
     /// <summary>
-    /// Interaction logic for FirstWindow.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class FirstWindow : Window
+    public partial class MainWindow : Window
     {
         BlApi.Bl BLObject;
-        public FirstWindow(BlApi.Bl Blobject)
+        public MainWindow()
         {
             InitializeComponent();
-            BLObject = Blobject;
+            BLObject = BL.FactoryBL.factory();
+
         }
 
         private void Button_ClickNewCustomer(object sender, RoutedEventArgs e)
         {
-            new NewCustomerWindow(BLObject);
+            new NewCustomer(BLObject).Show();
+        }
+
+        private void Button_ClickCustomer(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                new CheckTheIDWIndow(BLObject).Show();
+            }
+            catch
+            {
+
+            }
         }
 
         private void Button_ClickWorker(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                new CheckTheIDWIndow(BLObject).Show();
 
+            }
+            catch
+            {
+
+            }
         }
     }
 }

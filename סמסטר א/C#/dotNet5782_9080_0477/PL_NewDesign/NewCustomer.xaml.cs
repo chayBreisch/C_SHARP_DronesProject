@@ -12,18 +12,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL1
+namespace PL_NewDesign
 {
     /// <summary>
-    /// Interaction logic for NewCustomerWindow.xaml
+    /// Interaction logic for NewCustomer.xaml
     /// </summary>
-    public partial class NewCustomerWindow : Window
+    public partial class NewCustomer : Window
     {
-        BlApi.Bl blNewcustomer;
-        public NewCustomerWindow(BlApi.Bl blObject)
+        BlApi.Bl BLObject;
+        public NewCustomer(BlApi.Bl Blobject)
         {
-            blNewcustomer = blObject;
             InitializeComponent();
+            BLObject = Blobject;
+        }
+
+        private void Button_ClickReset(object sender, RoutedEventArgs e)
+        {
+            newID.Text = null;
+            newName.Text = null;
+            newPhone.Text = null;
+            newLong.Text = null;
+            newLat.Text = null;
         }
 
         private void Button_ClickJoin(object sender, RoutedEventArgs e)
@@ -35,7 +44,7 @@ namespace PL1
                 string phone = Convert.ToString(newPhone.Text);
                 double longit = Convert.ToDouble(newLong.Text);
                 double lat = Convert.ToDouble(newLat.Text);
-                blNewcustomer.AddCustomer(id, name, phone, new BO.LocationBL(longit, lat));
+                BLObject.AddCustomer(id, name, phone, new BO.LocationBL(longit, lat));
 
 
             }
@@ -43,15 +52,6 @@ namespace PL1
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void Button_ClickReset(object sender, RoutedEventArgs e)
-        {
-            newID.Text = null;
-            newName.Text = null;
-            newPhone.Text = null;
-            newLong.Text = null;
-            newLat.Text = null;
         }
     }
 }

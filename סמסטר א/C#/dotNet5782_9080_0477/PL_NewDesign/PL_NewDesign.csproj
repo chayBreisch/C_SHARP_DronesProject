@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\drone1.jpg" />
+    <None Remove="images\drone10.jpg" />
+    <None Remove="images\drone11.jpg" />
+    <None Remove="images\drone2.jpg" />
+    <None Remove="images\drone3.jpg" />
+    <None Remove="images\drone4.jpg" />
+    <None Remove="images\drone5.jpg" />
+    <None Remove="images\drone6.jpg" />
+    <None Remove="images\drone7.jpg" />
+    <None Remove="images\drone8.jpg" />
+    <None Remove="images\drone9.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\drone1.jpg" />
+    <Resource Include="images\drone10.jpg" />
+    <Resource Include="images\drone11.jpg" />
+    <Resource Include="images\drone2.jpg" />
+    <Resource Include="images\drone3.jpg" />
+    <Resource Include="images\drone4.jpg" />
+    <Resource Include="images\drone5.jpg" />
+    <Resource Include="images\drone6.jpg" />
+    <Resource Include="images\drone7.jpg" />
+    <Resource Include="images\drone8.jpg" />
+    <Resource Include="images\drone9.jpg" />
+  </ItemGroup>
+
+</Project>

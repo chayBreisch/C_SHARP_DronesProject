@@ -12,28 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL1
+namespace PL_NewDesign
 {
     /// <summary>
-    /// Interaction logic for FirstWindow.xaml
+    /// Interaction logic for WorkerMain.xaml
     /// </summary>
-    public partial class FirstWindow : Window
+    public partial class WorkerMain : Window
     {
-        BlApi.Bl BLObject;
-        public FirstWindow(BlApi.Bl Blobject)
+        public WorkerMain()
         {
             InitializeComponent();
-            BLObject = Blobject;
-        }
-
-        private void Button_ClickNewCustomer(object sender, RoutedEventArgs e)
-        {
-            new NewCustomerWindow(BLObject);
-        }
-
-        private void Button_ClickWorker(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

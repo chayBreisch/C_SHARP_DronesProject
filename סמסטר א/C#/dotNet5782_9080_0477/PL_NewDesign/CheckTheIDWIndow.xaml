@@ -1,0 +1,20 @@
+﻿<Window x:Class="PL_NewDesign.CheckTheIDWIndow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL_NewDesign"
+        mc:Ignorable="d"
+        Title="CheckTheIDWIndow" Height="450" Width="800">
+    <Grid>
+        <Grid Margin="145,89,145,46">
+            <Label Content="user name" HorizontalAlignment="Center" Margin="0,55,0,0" VerticalAlignment="Top" Height="38" Width="150" FontSize="20"/>
+            <TextBox Name="chechName" HorizontalAlignment="Left" Margin="180,90,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" />
+            <Label Content="user ID" HorizontalAlignment="Center" VerticalAlignment="Top" Height="38" Width="150" FontSize="20" Margin="0,131,0,0"/>
+            <TextBox Name="checkID" HorizontalAlignment="Left" Margin="180,163,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" />
+            <Button Content="come in" HorizontalAlignment="Left" Margin="180,224,0,0" VerticalAlignment="Top" Height="37" Width="120" Click="Button_Click" />
+        </Grid>
+
+    </Grid>
+</Window>
+
