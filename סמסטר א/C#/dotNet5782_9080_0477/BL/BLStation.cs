@@ -192,5 +192,18 @@ namespace BL
         {
             return GetSpecificStationBL(stationToList.ID);
         }
+
+        public void removeStation(int id)
+        {
+            /*dalObject.RemoveStation(id);
+
+            BO.Station station = GetSpecificStationBL(getDroneToListByCondition(p => p. == id).ID);
+            if (drone != null)
+            {
+                drone.parcelInDelivery = null;
+                drone.DroneStatus = DroneStatus.Available;
+                updateDrone(drone);
+            }*/
+        }
     }
 }

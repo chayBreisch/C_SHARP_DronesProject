@@ -112,5 +112,32 @@ namespace DalObject
         {
             return DataSource.stations.Count;
         }
+
+        /// <summary>
+        /// remove station fron dataSource
+        /// </summary>
+        /// <param name="idRemove"></param>
+        public void RemoveStation(int idRemove)
+        {
+
+            DataSource.parcels.RemoveAt(getIndexOfStation(idRemove));
+        }
+
+        /// <summary>
+        /// return index of parcel in dataSource list
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int getIndexOfStation(int id)
+        {
+            try
+            {
+                return DataSource.stations.FindIndex(s => s.ID == id);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotExistObjWithID(id, typeof(Station));
+            }
+        }
     }
 }

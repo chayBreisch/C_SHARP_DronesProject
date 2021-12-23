@@ -24,6 +24,7 @@ namespace PL1
         BO.Customer customeBL;
         CustomerList CustomerList;
         BO.Customer customer = new BO.Customer();
+        Parcel parcelWindow;
         /// <summary>
         /// constructor
         /// </summary>
@@ -59,12 +60,24 @@ namespace PL1
             phoneCustomr.Text = customeBL.Phone.ToString();
             SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
             SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();
-
-          
-
-
-
         }
+
+        public Customer(BlApi.Bl bl, BO.Customer customer, Parcel parcel)
+        {
+            parcelWindow = parcel;
+            blCustomer = bl;
+            customeBL = customer;
+            InitializeComponent();
+            WindowStyle = WindowStyle.None;
+            addCustomer.Visibility = Visibility.Hidden;
+            actions.Visibility = Visibility.Visible;
+            idcustomer.Text = customeBL.ID.ToString();
+            nameCustomer.Text = customeBL.Name.ToString();
+            phoneCustomr.Text = customeBL.Phone.ToString();
+            SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
+            SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();
+        }
+
 
         private void Button_ClickResetAddCustomer(object sender, RoutedEventArgs e)
         {
@@ -77,20 +90,21 @@ namespace PL1
 
         private void Button_ClickAddCustomer(object sender, RoutedEventArgs e)
         {
-            int id;
+            /*int id;
             string name;
             string phone;
             double longitude;
-            double latitude;
+            double latitude;*/
 
         }
 
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            CustomerList.Show();
+            if (CustomerList != null)
+                CustomerList.Show();
+            else if (parcelWindow != null)
+                parcelWindow.Show();
             this.Close();
         }
-
-        
     }
 }
