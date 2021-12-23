@@ -120,7 +120,7 @@ namespace DalObject
         public void RemoveStation(int idRemove)
         {
 
-            DataSource.parcels.RemoveAt(getIndexOfStation(idRemove));
+            DataSource.stations.RemoveAt(getIndexOfStation(idRemove));
         }
 
         /// <summary>

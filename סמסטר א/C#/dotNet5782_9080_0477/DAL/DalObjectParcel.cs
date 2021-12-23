@@ -157,5 +157,6 @@ namespace DalObject
                 throw new NotExistObjWithID(id, typeof(Parcel));
             }
         }
+
     }
 }

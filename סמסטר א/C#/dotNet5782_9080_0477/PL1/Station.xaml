@@ -17,6 +17,7 @@
                 <Button Content="update" Name="Update" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.202,-0.618" Height="33" Width="104"  Margin="0,45,0,0" Click="Update_ClickStation"/>
 
                 <Button Content="X" Width="50" Background="Red" HorizontalAlignment="Left"  Grid.Row="0" Click="Button_ClickClose" Margin="150,0,0,0" Height="20" VerticalAlignment="Top"  />
+                <Button Content="remove this station" x:Name="deleteStation" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.202,-0.618" Height="33" Width="104"  Margin="0,137,0,0" Click="deleteStation_Click" />
 
             </Grid>
 
@@ -28,19 +29,27 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Label  FontSize="16" Content="id:" Grid.Row="1" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="name:" Grid.Row="2" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="chjarge slots:" Grid.Row="3" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="location:" Grid.Row="4" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
-                <Label FontSize="16" Content="drone:" Grid.Row="5" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
+                <Label FontSize="16" Content="drone:" Grid.Row="5" HorizontalAlignment="Left" Margin="168,10,0,0" VerticalAlignment="Top"/>
 
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="200,0,0,0" Name="idstation" TextWrapping="Wrap" VerticalAlignment="Center" Width="220"/>
                 <TextBox FontSize="16" Text="{Binding Path=Name}" Grid.Row="2" HorizontalAlignment="Left" Margin="231,0,0,0" Name="nameStation" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
                 <TextBox FontSize="16" Text="{Binding Path=ChargeSlots}" Grid.Row="3" HorizontalAlignment="Left" Name="ChargeSlotsStation" TextWrapping="Wrap" VerticalAlignment="Center" Width="137" Margin="283,0,0,0"/>
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="LocationStation" TextWrapping="Wrap" VerticalAlignment="Center" Width="172" Margin="248,0,0,0"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Name="DroneInStation" TextWrapping="Wrap" VerticalAlignment="Center" Width="172" Margin="248,0,0,0"/>
-
+                <ListView FontSize="16" Grid.Row="5" HorizontalAlignment="Left" Name="DroneInStation" VerticalAlignment="Top" Width="172" Height="100" Margin="248,13,0,0" Grid.RowSpan="2" MouseDoubleClick="MouseDoubleClick_OpenDrone" >
+                    <!--<ListView Name="lvUsers">-->
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding ID}" />
+                            <GridViewColumn Header="BatteryStatus" Width="122" DisplayMemberBinding="{Binding BatteryStatus}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
                 <Label Content="station" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
             </Grid>
         </Grid>

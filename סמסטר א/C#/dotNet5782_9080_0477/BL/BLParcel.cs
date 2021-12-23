@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DO;
 using DAL;
 using BO;
+using static BL.ExceptionsBL;
 
 namespace BL
 {
@@ -260,6 +261,5 @@ namespace BL
                 updateDrone(drone);
             }
         }
-
     }
 }

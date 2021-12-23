@@ -39,7 +39,7 @@ namespace PL1
             weightParcel.ItemsSource = blparcel.getweightCategoriesEnumItem();
             weightParcel.SelectedItem = blparcel.getweightCategoriesEnumItem().GetValue(1);
             priorityParcel.ItemsSource = blparcel.getPrioritiesEnumItem();
-            priorityParcel.SelectedItem = blparcel.getweightCategoriesEnumItem().GetValue(0);
+            priorityParcel.SelectedItem = blparcel.getPrioritiesEnumItem().GetValue(0);
         }
 
         /// <summary>

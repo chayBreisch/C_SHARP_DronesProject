@@ -4,6 +4,7 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static BL.ExceptionsBL;
 
 namespace BL
 {
@@ -162,6 +163,12 @@ namespace BL
             return convertDalStationToBl(station);
         }
 
+
+        /// <summary>
+        /// get stations by charge slots
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
         public List<StationToList> getStationsByChargeSlots(int status)
         {
             if (status == 0)
@@ -176,7 +183,10 @@ namespace BL
             select station).ToList();
         }
 
-
+        /// <summary>
+        /// return list of stationToList
+        /// </summary>
+        /// <returns></returns>
         public List<StationToList> getStationToList()
         {
             List<BO.Station> stations = GetStationsBL();
@@ -188,22 +198,28 @@ namespace BL
             return stations1;
         }
 
+        /// <summary>
+        /// convert stationToList to stationBL
+        /// </summary>
+        /// <param name="stationToList"></param>
+        /// <returns></returns>
         public BO.Station convertStationToListToStationBL(StationToList stationToList)
         {
             return GetSpecificStationBL(stationToList.ID);
         }
 
+        /// <summary>
+        /// remove a station from dataSource list
+        /// </summary>
+        /// <param name="parcel"></param>
         public void removeStation(int id)
         {
-            /*dalObject.RemoveStation(id);
-
-            BO.Station station = GetSpecificStationBL(getDroneToListByCondition(p => p. == id).ID);
-            if (drone != null)
+            List<DroneInCharger> droneInCharger = GetSpecificStationBL(id).DronesInCharge;
+            if (droneInCharger.Count > 0)
             {
-                drone.parcelInDelivery = null;
-                drone.DroneStatus = DroneStatus.Available;
-                updateDrone(drone);
-            }*/
+                throw new CantRemoveItem(typeof(BO.Station));
+            }
+            dalObject.RemoveStation(id);
         }
     }
 }

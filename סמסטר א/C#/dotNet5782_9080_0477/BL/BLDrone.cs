@@ -231,6 +231,5 @@ namespace BL
                     where predicate(drone)
                     select drone);
         }
-
     }
 }

@@ -107,7 +107,6 @@ namespace BlApi {
         public Array getPrioritiesEnumItem();
         public IEnumerable<ParcelToList> getPrcelToListByCondition(Predicate<ParcelToList> predicate);
         public void removeParcel(int id);
-
+        public void removeStation(int id);
     }
-
 }

@@ -25,6 +25,7 @@ namespace PL1
         DroneList DroneList;
         BO.Drone drone = new BO.Drone();
         Parcel parcelWindow;
+        Station stationWindow;
         /// <summary>
         /// constructor
         /// </summary>
@@ -91,6 +92,40 @@ namespace PL1
         public Drone(BlApi.Bl bl, BO.Drone drone, Parcel parcel)
         {
             parcelWindow = parcel;
+            blDrone = bl;
+            droneBL = drone;
+            InitializeComponent();
+            WindowStyle = WindowStyle.None;
+            addDrone.Visibility = Visibility.Hidden;
+            actions.Visibility = Visibility.Visible;
+            idDrone.Text = droneBL.ID.ToString();
+            modelDrone.DataContext = droneBL;
+            batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
+            weightDrone.Text = droneBL.Weight.ToString();
+            statusDrone.Text = droneBL.DroneStatus.ToString();
+            if (droneBL.parcelInDelivery != null)
+                parcelInDeliveryDrone.Text = droneBL.parcelInDelivery.ToString();
+            else
+                parcelInDeliveryDrone.Text = "no parcel";
+            locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
+            if (droneBL.DroneStatus != DroneStatus.Available)
+            {
+                Charge.IsEnabled = false;
+                UnCharge.IsEnabled = true;
+            }
+            if (droneBL.DroneStatus != DroneStatus.Maintenance)
+            {
+                Charge.IsEnabled = true;
+                UnCharge.IsEnabled = false;
+                TimeChargerBlock.Visibility = Visibility.Hidden;
+
+            }
+
+        }
+
+        public Drone(BlApi.Bl bl, BO.Drone drone, Station station)
+        {
+            stationWindow = station;
             blDrone = bl;
             droneBL = drone;
             InitializeComponent();
@@ -339,8 +374,10 @@ namespace PL1
         {
             if (DroneList != null)
                 DroneList.Show();
-            if (parcelWindow != null)
+            else if (parcelWindow != null)
                 parcelWindow.Show();
+            else if (stationWindow != null)
+                stationWindow.Show();
             Close();
         }
 

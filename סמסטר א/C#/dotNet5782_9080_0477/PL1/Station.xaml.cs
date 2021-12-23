@@ -22,6 +22,7 @@ namespace PL1
         StationList StationList;
         BlApi.Bl blStation;
         BO.Station stationBL;
+        BO.Drone droneBL;
         /// <summary>
         /// constructor add statoin
         /// </summary>
@@ -56,6 +57,7 @@ namespace PL1
             nameStation.DataContext = stationBL;
             ChargeSlotsStation.DataContext = stationBL;
             LocationStation.Text = $"{stationBL.Location.Latitude}, {stationBL.Location.Longitude}";
+            DroneInStation.ItemsSource = stationBL.DronesInCharge;
         }
 
         //######################################################
@@ -181,6 +183,44 @@ namespace PL1
             nameStationToAdd.Text = null;
             longitudeStation.Text = null;
             latitudeStation.Text = null;
+        }
+
+        /// <summary>
+        /// open the drone window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MouseDoubleClick_OpenDrone(object sender, RoutedEventArgs e)
+        {
+            sender.ToString();
+            BO.DroneInCharger droneInCharger = (sender as ListView).SelectedValue as BO.DroneInCharger;
+            BO.Drone droneBL = blStation.getSpecificDroneBLFromList(droneInCharger.ID);
+            //this.Visibility = Visibility.Hidden;
+            new Drone(blStation, droneBL, this).Show();
+            Hide();
+        }
+
+        /// <summary>
+        /// remove station
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void deleteStation_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("are you sure you want to remove staton?", "remove station", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    blStation.removeStation(stationBL.ID);
+                    StationList.Show();
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\nyou have to release them before");
+            }
         }
     }
 }

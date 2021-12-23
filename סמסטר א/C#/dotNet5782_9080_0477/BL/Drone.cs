@@ -6,39 +6,39 @@ using System.Threading.Tasks;
 using static BL.ExceptionsBL;
 
 
-    namespace BO
+namespace BO
+{
+    public class Drone
     {
-        public class Drone
+        public Drone()
         {
-            public Drone()
-            {
-                battery = 100;
-            }
-            private double battery { get; set; }
-            private int Id { get; set; }
+            battery = 100;
+        }
+        private double battery { get; set; }
+        private int Id { get; set; }
 
-            public int ID
+        public int ID
+        {
+            get
             {
-                get
-                {
-                    return Id;
-                }
-                set
-                {
-                    if (value < 0)
-                        throw new OutOfRange("drone id");
-                    Id = value;
-                }
+                return Id;
             }
-            public string Model { get; set; }
-            private DO.WeightCatagories weight { get; set; }
-           
-            public DroneStatus DroneStatus { get; set; }
-            public ParcelInDelivery parcelInDelivery { get; set; }
-            public LocationBL Location { get; set; }
+            set
+            {
+                if (value < 0)
+                    throw new OutOfRange("drone id");
+                Id = value;
+            }
+        }
+        public string Model { get; set; }
+        private DO.WeightCatagories weight { get; set; }
+
+        public DroneStatus DroneStatus { get; set; }
+        public ParcelInDelivery parcelInDelivery { get; set; }
+        public LocationBL Location { get; set; }
         public DO.WeightCatagories Weight
         {
-            get{ return weight; }
+            get { return weight; }
             set
             {
                 if (value < 0)
@@ -61,11 +61,11 @@ using static BL.ExceptionsBL;
             }
         }
         public override string ToString()
-            {
-                return $"drone  : {ID}, \n" +
-                    $" battery: {BatteryStatus}%,\n Model: {Model}, \nMaxWeight: {Weight}, \n" +
-                    $"DroneStatus : {DroneStatus}, \nParcelAtTransfor: {parcelInDelivery},\n" +
-                    $"Location: {Location}\n";
-            }
+        {
+            return $"drone  : {ID}, \n" +
+                $" battery: {BatteryStatus}%,\n Model: {Model}, \nMaxWeight: {Weight}, \n" +
+                $"DroneStatus : {DroneStatus}, \nParcelAtTransfor: {parcelInDelivery},\n" +
+                $"Location: {Location}\n";
         }
     }
+}
