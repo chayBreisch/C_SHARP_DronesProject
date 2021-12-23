@@ -55,7 +55,7 @@ namespace PL1
         private void Button_Click_ShowListDrones(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            List<DroneToList> drones = blDroneList.getDroneToList();
+            IEnumerable<DroneToList> drones = blDroneList.getDroneToList();
             statusFilter.SelectedItem = null;
             weightFilter.SelectedItem = null;
             //DroneListView.ItemsSource = drones;
@@ -77,14 +77,14 @@ namespace PL1
         /// <param name="e"></param>
         private void comboBoxSelectDrone(object sender, SelectionChangedEventArgs e)
         {
-            List<DroneToList> drones = new List<DroneToList>();
+            IEnumerable<DroneToList> drones = new List<DroneToList>();
             ComboBox options = sender as ComboBox;
             if(weightFilter.SelectedItem == null)
-                drones = blDroneList.getDroneToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex)).ToList();
+                drones = blDroneList.getDroneToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             else if(statusFilter.SelectedItem == null)
-                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1)).ToList();
+                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
             else
-                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex)).ToList();
+                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             //DroneListView.ItemsSource = drones;
             MyList = new ObservableCollection<DroneToList>();
             foreach (var item in drones)

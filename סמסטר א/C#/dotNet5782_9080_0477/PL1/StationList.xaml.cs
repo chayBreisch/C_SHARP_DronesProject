@@ -50,7 +50,7 @@ namespace PL1
         private void chargeSlotsFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox options = sender as ComboBox;
-            List<StationToList> stations = blstationList.getStationsByChargeSlots(options.SelectedIndex);
+            IEnumerable<StationToList> stations = blstationList.getStationsByChargeSlots(options.SelectedIndex);
             StationListView.ItemsSource = stations;
         }
 
@@ -62,7 +62,7 @@ namespace PL1
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            List<StationToList> stations = blstationList.getStationToList();
+            IEnumerable<StationToList> stations = blstationList.getStationToList();
             chargeSlotsFilter.SelectedItem = null;
             //weightFilter.SelectedItem = null;
             StationListView.ItemsSource = stations;

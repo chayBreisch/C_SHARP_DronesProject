@@ -23,6 +23,7 @@ namespace DAL
 
         }
     }
+
     public class NotExistObjWithID : Exception
     {
         public NotExistObjWithID(int id, Type type) : base($"there is no {type} with {id}")
@@ -38,9 +39,8 @@ namespace DAL
         {
 
         }
-
-
     }
+
     public class CantReturnDalObject : Exception
     {
         public CantReturnDalObject() : base($"can't return dal object")

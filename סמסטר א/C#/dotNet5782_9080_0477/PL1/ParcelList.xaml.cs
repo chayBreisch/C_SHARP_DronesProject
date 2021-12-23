@@ -80,7 +80,7 @@ namespace PL1
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            List<ParcelToList> stations = blParcelList.getParcelToList();
+            IEnumerable<ParcelToList> stations = blParcelList.getParcelToList();
             parcelPriority.SelectedItem = null;
             parcelWeight.SelectedItem = null;
             if (view != null)
@@ -127,14 +127,14 @@ namespace PL1
         /// <param name="e"></param>
         private void comboBoxSelectparcel(object sender, SelectionChangedEventArgs e)
         {
-            List<ParcelToList> parcels = new List<ParcelToList>();
+            IEnumerable<ParcelToList> parcels = new List<ParcelToList>();
             ComboBox options = sender as ComboBox;
             if (parcelWeight.SelectedItem == null)
-                parcels = blParcelList.getParcelToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex)).ToList();
+                parcels = blParcelList.getParcelToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             else if (parcelPriority.SelectedItem == null)
-                parcels = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1)).ToList();
+                parcels = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
             else
-                parcels = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex)).ToList();
+                parcels = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             view.GroupDescriptions.Clear();
 
             MyList = new ObservableCollection<ParcelToList>();

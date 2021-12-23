@@ -211,9 +211,9 @@ namespace BL
         /// return parcels that are not connected to a drone
         /// </summary>
         /// <returns>List<ParcelBL></returns>
-        public List<BO.Parcel> GetParcelsWithoutoutDrone()
+        /*public IEnumerable<BO.Parcel> GetParcelsWithoutoutDrone()
         {
-            List<BO.Parcel> parcels = GetParcelsBL();
+            IEnumerable<BO.Parcel> parcels = GetParcelsBL();
             List<BO.Parcel> parcelsWithOutDrone = new List<BO.Parcel>();
             foreach (var parcel in parcels)
             {
@@ -223,16 +223,16 @@ namespace BL
                 }
             }
             return parcelsWithOutDrone;
-        }
+        }*/
 
         /// <summary>
         /// return station with epty chargers
         /// </summary>
         /// <returns>List<StationBL></returns>
-        public List<BO.Station> GetStationWithEmptyChargers()
+        /*public IEnumerable<BO.Station> GetStationWithEmptyChargers()
         {
             int numOfChargers = 0;
-            List<BO.Station> stations = GetStationsBL();
+            IEnumerable<BO.Station> stations = GetStationsBL();
             List<BO.Station> stationsWithEmptyChargers = new List<BO.Station>();
             List<DroneCharge> droneChargers = dalObject.GetDroneCharges().ToList();
             foreach (var station in stations)
@@ -246,7 +246,7 @@ namespace BL
                     stationsWithEmptyChargers.Add(station);
             }
             return stationsWithEmptyChargers;
-        }
+        }*/
 
         public Array getweightCategoriesEnumItem()
         {

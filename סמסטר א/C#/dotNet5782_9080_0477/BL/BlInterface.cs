@@ -27,18 +27,15 @@ namespace BlApi
         //##############################################################
         //Get list functions
         //##############################################################
-        public List<BO.Customer> GetCustomersBL();
-        public List<DO.Parcel> getParcelsWithoutoutDrone();
-        public List<BO.Station> GetStationsBL();
-        public List<BO.Parcel> GetParcelsBL();
-        public List<BO.Parcel> GetParcelsWithoutoutDrone();
-        public List<BO.Station> GetStationWithEmptyChargers();
-        public List<BO.Drone> GetDronesBL();
-        public List<StationToList> getStationToList();
-        public List<DroneToList> getDroneToList();
-        public List<StationToList> getStationsByChargeSlots(int status);
-        public List<ParcelToList> getParcelToList();
-        public List<CustomerToList> getCustomerToList();
+        public IEnumerable<BO.Customer> GetCustomersBL();
+        public IEnumerable<DO.Parcel> getParcelsWithoutoutDrone();
+        public IEnumerable<BO.Station> GetStationsBL();
+        public IEnumerable<BO.Parcel> GetParcelsBL();
+        public IEnumerable<StationToList> getStationToList();
+        public IEnumerable<DroneToList> getDroneToList();
+        public IEnumerable<StationToList> getStationsByChargeSlots(int status);
+        public IEnumerable<ParcelToList> getParcelToList();
+        public IEnumerable<CustomerToList> getCustomerToList();
         public IEnumerable<DroneToList> getDroneToListByCondition(Predicate<DroneToList> predicate);
         public IEnumerable<ParcelToList> getParcelToListByCondition(Predicate<ParcelToList> predicate);
         public Array getweightCategoriesEnumItem();
@@ -128,6 +125,9 @@ namespace BlApi
         //public List<DroneToList> getDronesByDroneWeight(int status);
         //public List<ParcelToList> getParcelsByPriority(int status);
         //public List<ParcelToList> getParcelsByparcelWeight(int status);
+        //public IEnumerable<BO.Parcel> GetParcelsWithoutoutDrone();
+        //public IEnumerable<BO.Station> GetStationWithEmptyChargers();
+        //public IEnumerable<BO.Drone> GetDronesBL();
 
     }
 }

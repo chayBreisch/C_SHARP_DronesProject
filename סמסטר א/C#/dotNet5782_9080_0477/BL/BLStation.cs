@@ -63,7 +63,7 @@ namespace BL
         /// return all the stations from the dal converted to bl
         /// </summary>
         /// <returns>List<StationBL></returns>
-        public List<BO.Station> GetStationsBL()
+        public IEnumerable<BO.Station> GetStationsBL()
         {
 
             IEnumerable<DO.Station> stations = dalObject.GetStations();
@@ -169,27 +169,27 @@ namespace BL
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
-        public List<StationToList> getStationsByChargeSlots(int status)
+        public IEnumerable<StationToList> getStationsByChargeSlots(int status)
         {
             if (status == 0)
                 return (
                 from station in getStationToList()
                 where station.ChargeSlotsFree == (int)status
-                select station).ToList();
+                select station);
             else
                 return (
             from station in getStationToList()
             where station.ChargeSlotsFree != 0
-            select station).ToList();
+            select station);
         }
 
         /// <summary>
         /// return list of stationToList
         /// </summary>
         /// <returns></returns>
-        public List<StationToList> getStationToList()
+        public IEnumerable<StationToList> getStationToList()
         {
-            List<BO.Station> stations = GetStationsBL();
+            IEnumerable<BO.Station> stations = GetStationsBL();
             List<StationToList> stations1 = new List<StationToList>();
             foreach (var station in stations)
             {

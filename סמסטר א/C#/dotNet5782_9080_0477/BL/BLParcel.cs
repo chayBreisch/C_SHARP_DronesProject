@@ -74,7 +74,7 @@ namespace BL
         /// return all the parcels from the dal converted to bl
         /// </summary>
         /// <returns>List<ParcelBL> </returns>
-        public List<BO.Parcel> GetParcelsBL()
+        public IEnumerable<BO.Parcel> GetParcelsBL()
         {
 
             IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
@@ -107,7 +107,7 @@ namespace BL
         /// return parcels that are not connected to a drone
         /// </summary>
         /// <returns> List<Parcel></returns>
-        public List<DO.Parcel> getParcelsWithoutoutDrone()
+        public IEnumerable<DO.Parcel> getParcelsWithoutoutDrone()
         {
             IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
             List<DO.Parcel> parcels1 = new List<DO.Parcel>();
@@ -142,9 +142,9 @@ namespace BL
         /// return all ParcelToList
         /// </summary>
         /// <returns></returns>
-        public List<ParcelToList> getParcelToList()
+        public IEnumerable<ParcelToList> getParcelToList()
         {
-            List<BO.Parcel> parcels = GetParcelsBL();
+            IEnumerable<BO.Parcel> parcels = GetParcelsBL();
             List<ParcelToList> parcels1 = new List<ParcelToList>();
             foreach (var parcel in parcels)
             {
@@ -215,10 +215,10 @@ namespace BL
         {
 
             if (prioritty == -1)
-                return getParcelToListByCondition(parcel => parcel.Weight == (WeightCatagories)prioritty).ToList();
+                return getParcelToListByCondition(parcel => parcel.Weight == (WeightCatagories)prioritty);
             else if (weight == -1)
-                return getParcelToListByCondition(parcel => parcel.Priority == (Priorities)weight).ToList();
-            return getParcelToListByCondition(parcel => parcel.Priority == (Priorities)prioritty && parcel.Weight == (WeightCatagories)weight).ToList();
+                return getParcelToListByCondition(parcel => parcel.Priority == (Priorities)weight);
+            return getParcelToListByCondition(parcel => parcel.Priority == (Priorities)prioritty && parcel.Weight == (WeightCatagories)weight);
         }
 
 

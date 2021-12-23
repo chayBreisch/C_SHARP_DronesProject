@@ -18,7 +18,7 @@ namespace BL
         /// <param name="dalObject"></param>
         public static void checkUniqeIdCustomer(ulong id, IDAL.IDal dalObject)
         {
-            List<DO.Customer> customers = dalObject.GetCustomers().ToList();
+            IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
             if (customers.Any(c => c.ID == id))
                 throw new NotUniqeID(id, typeof(DO.Customer));
         }
@@ -80,7 +80,7 @@ namespace BL
         /// return all the customers from the dal converted to bl
         /// </summary>
         /// <returns> List<CustomerBL> </returns>
-        public List<BO.Customer> GetCustomersBL()
+        public IEnumerable<BO.Customer> GetCustomersBL()
         {
             IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
             List<BO.Customer> customers1 = new List<BO.Customer>();
@@ -118,8 +118,8 @@ namespace BL
         {
             List<ParcelAtCustomer> parcelSendedByCustomers = new List<ParcelAtCustomer>();
             List<ParcelAtCustomer> parcelSendedToCustomers = new List<ParcelAtCustomer>();
-            List<DO.Parcel> parcels = dalObject.GetParcels().ToList();
-            parcels.ForEach(p =>
+            IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
+            foreach (var p in parcels)
             {
                 if (p.SenderID == c.ID)
                     parcelSendedByCustomers.Add(new ParcelAtCustomer(convertDalToParcelBL(p), c.ID, dalObject));
@@ -182,9 +182,9 @@ namespace BL
         /// return all customerToList
         /// </summary>
         /// <returns></returns>
-        public List<CustomerToList> getCustomerToList()
+        public IEnumerable<CustomerToList> getCustomerToList()
         {
-            List<BO.Customer> customers = GetCustomersBL();
+            IEnumerable<BO.Customer> customers = GetCustomersBL();
             List<CustomerToList> customers1 = new List<CustomerToList>();
             foreach (var customer in customers)
             {

@@ -105,7 +105,7 @@ namespace BL
             }
             DO.Customer customerSender, customerCurrent, customerReciever;
             DO.Parcel currentParcel = new DO.Parcel();
-            List<DO.Parcel> parcels = getParcelsWithoutoutDrone();
+            IEnumerable<DO.Parcel> parcels = getParcelsWithoutoutDrone();
             currentParcel = new DO.Parcel() { Weight = 0 };
             foreach (var parcel in parcels)
             {
