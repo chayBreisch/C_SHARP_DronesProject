@@ -28,7 +28,12 @@
             <TextBox Name="newLat" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" Height="48" Grid.Column="1" Margin="155,78,0,0"/>
         </Grid>
         <Label Content="Enter your details" HorizontalAlignment="Left" Margin="291,54,0,0" FontSize="17" VerticalAlignment="Top" Height="46" Width="145"/>
-        <Button Content="join us" HorizontalAlignment="Left" FontSize="17" Margin="672,371,0,0" VerticalAlignment="Top" Height="35" Width="130" Click="Button_ClickJoin"/>
+        <Button HorizontalAlignment="Left" FontSize="17" Margin="672,371,0,0" VerticalAlignment="Top" Height="35" Width="130" Click="Button_ClickJoin">
+            <Button Content="Button"/>
+        </Button>
+        <Button HorizontalAlignment="Left" FontSize="17" Margin="672,291,0,0" VerticalAlignment="Top" Height="35" Width="130" Click="Button_ClickReset" >
+            <Button Content="reset"/>
+        </Button>
 
     </Grid>
 </Window>
