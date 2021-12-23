@@ -251,7 +251,15 @@ namespace BL
         public void removeParcel(int id)
         {
             dalObject.RemoveParcel(id);
-        }
-    }
 
+            BO.Drone drone = getSpecificDroneBLFromList(dalObject.getParcelById(p => p.ID == id).ID);
+            if (drone != null)
+            {
+                drone.parcelInDelivery = null;
+                drone.DroneStatus = DroneStatus.Available;
+                updateDrone(drone);
+            }
+        }
+
+    }
 }

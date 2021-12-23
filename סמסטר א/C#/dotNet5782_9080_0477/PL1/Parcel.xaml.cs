@@ -86,7 +86,7 @@ namespace PL1
             weightparcel.Text = parcelBL.Weight.ToString();
             priorityparcel.Text = parcelBL.Priorities.ToString();
             if(parcelBL.Drone != null)
-                droneparcel.Text = parcelBL.Drone.ToString();
+                droneparcel.Text = parcelBL.Drone.ID.ToString();
             //statusparcel.Text = parcelBL.
         }
 
@@ -171,19 +171,40 @@ namespace PL1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_ClickRemoveDrone(object sender, RoutedEventArgs e)
+        private void Button_ClickRemoveParcel(object sender, RoutedEventArgs e)
         {
             try
             {
-                //MessageBox.Show("are you sure you want to remove parcel?");
-                blparcel.removeParcel(parcelBL.ID);
-                parcelList.Show();
-                Close();
+                MessageBoxResult result = MessageBox.Show("are you sure you want to remove parcel?", "remove parcel", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    blparcel.removeParcel(parcelBL.ID);
+                    parcelList.Show();
+                    Close();
+                }
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Button_ClickOpenSender(object sender, RoutedEventArgs e)
+        {
+            new Customer(blparcel, blparcel.GetSpecificCustomerBL(parcelBL.Sender.ID), this).Show();
+            Hide();
+        }
+
+        private void Button_ClickOpenReciever(object sender, RoutedEventArgs e)
+        {
+            new Customer(blparcel, blparcel.GetSpecificCustomerBL(parcelBL.Reciever.ID), this).Show();
+            Hide();
+        }
+
+        private void Button_ClickOpenDrone(object sender, RoutedEventArgs e)
+        {
+            new Drone(blparcel, parcelBL.Drone, this).Show();
+            Hide();
         }
     }
 }

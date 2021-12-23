@@ -67,5 +67,7 @@ namespace IDAL
         public IEnumerable<DroneCharge> getDroneChargeByCondition(Predicate<DroneCharge> predicate);
         public void RemoveParcel(int idRemove);
         public int getIndexOfParcel(int id);
+        public void RemoveStation(int idRemove);
+        public int getIndexOfStation(int id);
     }
 }

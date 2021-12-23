@@ -1,0 +1,34 @@
+﻿<Window x:Class="PL1.NewCustomerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL1"
+        mc:Ignorable="d"
+        Title="NewCustomerWindow" Height="450" Width="800">
+    <Grid>
+        <Grid Margin="88,105,161,7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="145*"/>
+                <RowDefinition Height="145*"/>
+            </Grid.RowDefinitions>
+            <TextBox Name="newID" HorizontalAlignment="Center" Margin="0,73,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" Height="48"/>
+            <Label Content="ID" HorizontalAlignment="Left" Margin="79,50,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="88"/>
+            <Label Content="Phone" HorizontalAlignment="Left" Margin="75,44,0,0" Grid.Row="2" VerticalAlignment="Top" Height="35" Width="88"/>
+            <Label Content="Name" HorizontalAlignment="Left" Margin="78,50,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="88" Grid.Column="1"/>
+            <Label Content="Lodation" HorizontalAlignment="Left" Margin="76,44,0,0" Grid.Row="2" VerticalAlignment="Top" Height="35" Width="88" Grid.Column="1"/>
+            <TextBox Name="newName" HorizontalAlignment="Center" Margin="0,73,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" Height="48" Grid.Column="1"/>
+            <TextBox Name="newPhone" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" Height="48" Margin="65,78,0,0"/>
+            <TextBox Name="newLong" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" Height="48" Grid.Column="1" Margin="81,78,0,0"/>
+            <TextBox Name="newLat" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" Height="48" Grid.Column="1" Margin="155,78,0,0"/>
+        </Grid>
+        <Label Content="Enter your details" HorizontalAlignment="Left" Margin="291,54,0,0" FontSize="17" VerticalAlignment="Top" Height="46" Width="145"/>
+        <Button Content="join us" HorizontalAlignment="Left" FontSize="17" Margin="672,371,0,0" VerticalAlignment="Top" Height="35" Width="130" Click="Button_ClickJoin"/>
+
+    </Grid>
+</Window>

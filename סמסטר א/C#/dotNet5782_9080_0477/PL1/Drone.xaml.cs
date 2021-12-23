@@ -24,6 +24,7 @@ namespace PL1
         BO.Drone droneBL;
         DroneList DroneList;
         BO.Drone drone = new BO.Drone();
+        Parcel parcelWindow;
         /// <summary>
         /// constructor
         /// </summary>
@@ -87,7 +88,39 @@ namespace PL1
 
         }
 
+        public Drone(BlApi.Bl bl, BO.Drone drone, Parcel parcel)
+        {
+            parcelWindow = parcel;
+            blDrone = bl;
+            droneBL = drone;
+            InitializeComponent();
+            WindowStyle = WindowStyle.None;
+            addDrone.Visibility = Visibility.Hidden;
+            actions.Visibility = Visibility.Visible;
+            idDrone.Text = droneBL.ID.ToString();
+            modelDrone.DataContext = droneBL;
+            batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
+            weightDrone.Text = droneBL.Weight.ToString();
+            statusDrone.Text = droneBL.DroneStatus.ToString();
+            if (droneBL.parcelInDelivery != null)
+                parcelInDeliveryDrone.Text = droneBL.parcelInDelivery.ToString();
+            else
+                parcelInDeliveryDrone.Text = "no parcel";
+            locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
+            if (droneBL.DroneStatus != DroneStatus.Available)
+            {
+                Charge.IsEnabled = false;
+                UnCharge.IsEnabled = true;
+            }
+            if (droneBL.DroneStatus != DroneStatus.Maintenance)
+            {
+                Charge.IsEnabled = true;
+                UnCharge.IsEnabled = false;
+                TimeChargerBlock.Visibility = Visibility.Hidden;
 
+            }
+
+        }
         //###############################################################################
         //add Drone
         //###############################################################################
@@ -304,14 +337,17 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            DroneList.Show();
+            if (DroneList != null)
+                DroneList.Show();
+            if (parcelWindow != null)
+                parcelWindow.Show();
             Close();
         }
 
         private void Button_openParcel(object sender, RoutedEventArgs e)
         {
             if (droneBL.parcelInDelivery != null)
-                new Parcel(blDrone,blDrone.GetSpecificParcelBL(droneBL.parcelInDelivery.ID), this).Show();
+                new Parcel(blDrone, blDrone.GetSpecificParcelBL(droneBL.parcelInDelivery.ID), this).Show();
         }
     }
 }
