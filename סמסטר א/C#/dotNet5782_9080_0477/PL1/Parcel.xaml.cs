@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +18,11 @@ namespace PL1
     /// <summary>
     /// Interaction logic for Parcel.xaml
     /// </summary>
+    
+
     public partial class Parcel : Window
     {
-        ParcelList parcelList;
+        ParcelList ParentWindow;
         BlApi.Bl blparcel;
         BO.Parcel parcelBL;
         Drone Drone;
@@ -30,7 +33,7 @@ namespace PL1
         /// <param name="droneList"></param>
         public Parcel(BlApi.Bl bl, ParcelList ParcelList)
         {
-            parcelList = ParcelList;
+            ParentWindow = ParcelList;
             blparcel = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -77,7 +80,7 @@ namespace PL1
             actions.Visibility = Visibility.Visible;
             addStation.Visibility = Visibility.Hidden;
             WindowStyle = WindowStyle.None;
-            parcelList = ParcelList;
+            ParentWindow = ParcelList;
             blparcel = bl;
             parcelBL = parcel;
             idparcel.Text = parcelBL.ID.ToString();
@@ -133,7 +136,7 @@ namespace PL1
             {
                 blparcel.AddParcel(getSenderId(), getRecieverId(), weightParcel.SelectedIndex + 1, priorityParcel.SelectedIndex);
                 MessageBox.Show("you added succefuly");
-                parcelList.Show();
+                ParentWindow.Show();
                 Close();
             }
             catch (Exception exce)
@@ -149,7 +152,8 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickCloseParcel(object sender, RoutedEventArgs e)
         {
-            parcelList.Show();
+            ParentWindow.Show();
+            refreshList(this.parcelBL);
             Close();
         }
 
@@ -179,8 +183,9 @@ namespace PL1
                 if (result == MessageBoxResult.OK)
                 {
                     blparcel.removeParcel(parcelBL.ID);
-                    parcelList.Show();
-                    Close();
+                    Button_ClickCloseParcel(sender, e);
+                   /* ParentWindow.Show();
+                    Close();*/
                 }
             }
             catch(Exception ex)
@@ -205,6 +210,57 @@ namespace PL1
         {
             new Drone(blparcel, parcelBL.Drone, this).Show();
             Hide();
+        }
+
+
+
+
+        private void refreshList(BO.Parcel parcel)
+        {
+               // view.GroupDescriptions.Clear();
+
+            if (ParentWindow.parcelPriority.SelectedIndex != -1)
+            {
+                if ((ParentWindow.parcelPriority.SelectedItem.ToString() == parcel.Priorities.ToString()))
+                {
+                    {
+                        ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
+
+/*                        foreach (var item in blparcel.getParcelToListByCondition((P) => P.Priority == parcel.Priorities))
+                            MyList.Add(item);
+                        DataContext = MyList;
+                        ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+                      */  ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToListByCondition((P) => P.Priority == parcel.Priorities);
+                    }
+                }
+            }
+            else if (ParentWindow.parcelWeight.SelectedIndex != -1)
+            {
+                if (ParentWindow.parcelWeight.SelectedItem.ToString() == parcel.Weight.ToString())
+                {
+/*                    ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
+
+                    foreach (var item in blparcel.getParcelToListByCondition((P) => P.Weight == parcel.Weight))
+                        MyList.Add(item);
+                    DataContext = MyList;
+                    ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+*/
+                    ParentWindow.ParcelListView.ItemsSource = blparcel.getDroneToListByCondition((D) => D.Weight == parcel.Weight);
+                }
+
+            }
+            else
+            {
+ /*               ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
+                List<BO.ParcelToList> p = blparcel.getParcelToList();
+                foreach (var item in p)
+                    MyList.Add(item);
+                DataContext = MyList;
+                ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+*/
+                ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToList();
+            }
+
         }
     }
 }

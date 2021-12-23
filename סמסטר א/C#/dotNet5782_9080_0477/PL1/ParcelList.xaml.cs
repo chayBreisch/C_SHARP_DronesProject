@@ -25,7 +25,7 @@ namespace PL1
         BlApi.Bl blParcelList;
         MainWindow mainWindow;
         ObservableCollection<ParcelToList> MyList = new ObservableCollection<ParcelToList>();
-        CollectionView view;
+        public CollectionView view;
         /// <summary>
         /// constructor
         /// </summary>

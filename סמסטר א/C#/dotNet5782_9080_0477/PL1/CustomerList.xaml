@@ -34,12 +34,17 @@
                 <GridView>
 
 
-                    <GridViewColumn Header="ID" Width="260" DisplayMemberBinding="{Binding ID}" />
-                    <GridViewColumn Header="Name" Width="260" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Phone" Width="261" DisplayMemberBinding="{Binding Phone}" />
-                    <!--<GridViewColumn Header="Location" Width="150" DisplayMemberBinding="{Binding Location}" />-->
-                    <!--<GridViewColumn Header="parcelSentedToCustomer" Width="150" DisplayMemberBinding="{Binding parcelSentedToCustomer}" />
-                    <GridViewColumn Header="parcelsSentedByCustomer" Width="150" DisplayMemberBinding="{Binding parcelsSentedByCustomer}" />-->
+                    <GridViewColumn Header="ID" Width="110" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Phone" Width="110" DisplayMemberBinding="{Binding Phone}" />
+                    <GridViewColumn Header="Parcels Sended And Provided" Width="110" DisplayMemberBinding="{Binding SumOfParcelsSendedAndProvided}"/>
+                    <GridViewColumn Header="Parcels Sended And Not Provided" Width="110" DisplayMemberBinding="{Binding SumOfParcelsSendedAndNotProvided}" />
+                    <GridViewColumn Header="Parcels On The Way" Width="110" DisplayMemberBinding="{Binding SumOfParcelsOnTheWay}" />
+                    <GridViewColumn Header="Parcels Recieved" Width="110" DisplayMemberBinding="{Binding ParcelsRecieved}" />
+
+
+
+
 
                 </GridView>
             </ListView.View>
