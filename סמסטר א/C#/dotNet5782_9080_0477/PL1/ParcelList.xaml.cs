@@ -127,18 +127,18 @@ namespace PL1
         /// <param name="e"></param>
         private void comboBoxSelectparcel(object sender, SelectionChangedEventArgs e)
         {
-            List<ParcelToList> drones = new List<ParcelToList>();
+            List<ParcelToList> parcels = new List<ParcelToList>();
             ComboBox options = sender as ComboBox;
             if (parcelWeight.SelectedItem == null)
-                drones = blParcelList.getParcelToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex)).ToList();
+                parcels = blParcelList.getParcelToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex)).ToList();
             else if (parcelPriority.SelectedItem == null)
-                drones = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1)).ToList();
+                parcels = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1)).ToList();
             else
-                drones = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex)).ToList();
+                parcels = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex)).ToList();
             view.GroupDescriptions.Clear();
 
             MyList = new ObservableCollection<ParcelToList>();
-            foreach (var item in drones)
+            foreach (var item in parcels)
                 MyList.Add(item);
             DataContext = MyList;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
@@ -174,21 +174,6 @@ namespace PL1
                 PropertyGroupDescription property = new PropertyGroupDescription("Weight");
                 view.GroupDescriptions.Add(property);
             }
-        /*    PropertyGroupDescription property = new PropertyGroupDescription("Weight");
-            view.GroupDescriptions.Add(property);*/
-            //view.SortDescriptions.Clear();
         }
-        /* private void filter_SelectionChanged(object sender, SelectionChangedEventArgs e)
-{
-List<ParcelToList> stations = new List<ParcelToList>();
-ComboBox options = sender as ComboBox;
-object weight = parcelWeight.SelectedItem;
-object priority = parcelPriority.SelectedItem;
-if (weight == null) weight = -1;
-if (priority == null) priority = -1;
-stations = blParcelList.returnParcelToListWithFilter((int)weight, (int)priority).ToList();
-//stations = blParcelList.getParcelToListByCondition(parcel=> parcel.Weight == (DO.WeightCatagories)options.SelectedIndex).ToList();
-ParcelListView.ItemsSource = stations;
-}*/
     }
 }

@@ -64,7 +64,7 @@ namespace PL1
             ListBox listBox1 = new ListBox();
             List<StationToList> stations = blstationList.getStationToList();
             chargeSlotsFilter.SelectedItem = null;
-            weightFilter.SelectedItem = null;
+            //weightFilter.SelectedItem = null;
             StationListView.ItemsSource = stations;
         }
 
@@ -103,6 +103,12 @@ namespace PL1
         {
             new Station(blstationList, this).Show();
             Hide();
+        }
+
+        private void txtFilter_TextChanged()
+        {
+           // List<BO.Station> stations = blstationList.getStationToList().ChargeSlotsFree >= 0
+
         }
     }
 }

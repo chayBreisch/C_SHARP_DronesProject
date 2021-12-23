@@ -95,19 +95,19 @@ namespace PL1
 
         private void Button_ClickOrderByPhone(object sender, RoutedEventArgs e)
         {
-            if (view != null && view.CanGroup == true)
+            if (view != null && view.CanSort == true)
             {
-                view.GroupDescriptions.Clear();
+                view.SortDescriptions.Clear();
                 view.SortDescriptions.Add(new SortDescription("Phone", ListSortDirection.Ascending));
             }
         }
 
         private void Button_ClickOrderByName(object sender, RoutedEventArgs e)
         {
-            if (view != null && view.CanGroup == true)
+            if (view != null && view.CanSort == true)
             {
-                view.GroupDescriptions.Clear();
-                view.SortDescriptions.Add(new SortDescription("Phone", ListSortDirection.Ascending));
+                view.SortDescriptions.Clear();
+                view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
             }
         }
     }

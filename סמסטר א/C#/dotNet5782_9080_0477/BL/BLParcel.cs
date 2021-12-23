@@ -229,21 +229,21 @@ namespace BL
                     where predicate(parcel)
                     select parcel);
         }
-        /*  /// <summary>
-          /// returns the status of the parcel
-          /// </summary>
-          /// <param name="parcel"></param>
-          /// <returns>ParcelStatus</returns>
-          public ParcelStatus findParcelStatus(DO.Parcel parcel)
-          {
-              if (parcel.Requested == null)
-                  return (ParcelStatus)0;
-              else if (parcel.Scheduled == null)
-                  return (ParcelStatus)1;
-              else if (parcel.PickedUp == null)
-                  return (ParcelStatus)2;
-              return (ParcelStatus)3;
-          }*/
+        /// <summary>
+        /// returns the status of the parcel
+        /// </summary>
+        /// <param name="parcel"></param>
+        /// <returns>ParcelStatus</returns>
+        public ParcelStatus findParcelStatus(BO.Parcel parcel)
+        {
+            if (parcel.Requesed == null)
+                return (ParcelStatus)0;
+            else if (parcel.Scheduled == null)
+                return (ParcelStatus)1;
+            else if (parcel.PickedUp == null)
+                return (ParcelStatus)2;
+            return (ParcelStatus)3;
+        }
 
         /// <summary>
         /// remove a parcel from dataSource list
@@ -251,15 +251,15 @@ namespace BL
         /// <param name="parcel"></param>
         public void removeParcel(int id)
         {
-            dalObject.RemoveParcel(id);
-
-            BO.Drone drone = getSpecificDroneBLFromList(dalObject.getParcelById(p => p.ID == id).ID);
+            BO.Drone drone = getSpecificDroneBLFromList(dalObject.getParcelById(p => p.ID == id).DroneID);
             if (drone != null)
             {
-                drone.parcelInDelivery = null;
+                /*drone.parcelInDelivery = null;
                 drone.DroneStatus = DroneStatus.Available;
-                updateDrone(drone);
+                updateDrone(drone);*/
+                throw new CantRemoveItem(typeof(BO.Parcel));
             }
+            dalObject.RemoveParcel(id);
         }
     }
 }

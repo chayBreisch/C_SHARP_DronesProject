@@ -50,18 +50,33 @@ namespace PL1
             Hide();
         }
 
+        /// <summary>
+        /// open the StationList window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickStationList(object sender, RoutedEventArgs e)
         {
             new StationList(bl, this).Show();
             Hide();
         }
 
+        /// <summary>
+        /// open the ParcelList window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickParcelList(object sender, RoutedEventArgs e)
         {
             new ParcelList(bl, this).Show();
             Hide();
         }
 
+        /// <summary>
+        /// open the CustomerList window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCustomerList(object sender, RoutedEventArgs e)
         {
             new CustomerList(bl, this).Show();

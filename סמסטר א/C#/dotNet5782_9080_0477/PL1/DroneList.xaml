@@ -31,9 +31,47 @@
 
 
         </Grid>
-        <ListView ItemsSource="{Binding}" Background="#FF8D8C7A" Grid.Row="1" x:Name="DroneListView"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick="DroneListView_MouseDoubleClick"/>
+        <ListView ItemsSource="{Binding}" Foreground="Black" Background="#FF8D8C7A" Grid.Row="1" x:Name="DroneListView"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick="DroneListView_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Model" Width="150" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="Weight" Width="120" DisplayMemberBinding="{Binding Weight}" />
+                    <GridViewColumn Header="BatteryStatus" Width="120" DisplayMemberBinding="{Binding BatteryStatus}" />
+                    <GridViewColumn Header="DroneStatus" Width="120" DisplayMemberBinding="{Binding DroneStatus}" />
+                    <GridViewColumn Header="Location" Width="120" DisplayMemberBinding="{Binding Location}" />
+                    <GridViewColumn Header="num of parcel" Width="100" DisplayMemberBinding="{Binding NumOfParcelTrans}" />
+                </GridView>
+            </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold"  FontSize="18" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="18" Foreground="#FF4B4A4A" FontWeight="Bold"  Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" item(s)" FontSize="18" Foreground="#FF4B4A4A" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
         <Button Content="add drone" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="419,475,0,0"  Grid.Row="1" Click="Button_ClickAddDrone" />
         <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click_ShowListDrones" Height="45" Width="146" Margin="230,475,0,0" Grid.Row="1"/>
+        <Button Content="group by status" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="146" Margin="34,475,0,0" Grid.Row="1" Click="Button_Click_GroupingStatus"/>
+        <Button Content="group by weight" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="617,475,0,0"  Grid.Row="1" Click="Button_ClickGroupingWeight"  />
 
 
     </Grid>

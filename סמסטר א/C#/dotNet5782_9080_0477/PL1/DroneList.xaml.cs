@@ -28,6 +28,7 @@ namespace PL1
         BlApi.Bl blDroneList;
         MainWindow mainWindow;
         ObservableCollection<DroneToList> MyList = new ObservableCollection<DroneToList>();
+        CollectionView view;
         /// <summary>
         /// constructor
         /// </summary>
@@ -43,6 +44,7 @@ namespace PL1
             DataContext = MyList;
             statusFilter.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             weightFilter.ItemsSource = blDroneList.getweightCategoriesEnumItem();
+            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
 
         /// <summary>
@@ -56,7 +58,16 @@ namespace PL1
             List<DroneToList> drones = blDroneList.getDroneToList();
             statusFilter.SelectedItem = null;
             weightFilter.SelectedItem = null;
-            DroneListView.ItemsSource = drones;
+            //DroneListView.ItemsSource = drones;
+            if (view != null)
+            {
+                view.GroupDescriptions.Clear();
+                MyList = new ObservableCollection<DroneToList>();
+                foreach (var item in blDroneList.getDroneToList())
+                    MyList.Add(item);
+                DataContext = MyList;
+                view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+            }
         }
 
         /// <summary>
@@ -74,7 +85,12 @@ namespace PL1
                 drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1)).ToList();
             else
                 drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex)).ToList();
-            DroneListView.ItemsSource = drones;
+            //DroneListView.ItemsSource = drones;
+            MyList = new ObservableCollection<DroneToList>();
+            foreach (var item in drones)
+                MyList.Add(item);
+            DataContext = MyList;
+            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
 
     /*    /// <summary>
@@ -132,5 +148,32 @@ namespace PL1
             Close();
         }
 
+        /// <summary>
+        /// grouping list by status
+        /// </summary>
+        private void Button_Click_GroupingStatus(object sender, RoutedEventArgs e)
+        {
+            if (view != null && view.CanGroup == true)
+            {
+                view.GroupDescriptions.Clear();
+                PropertyGroupDescription property = new PropertyGroupDescription("DroneStatus");
+                view.GroupDescriptions.Add(property);
+            }
+        }
+
+        /// <summary>
+        /// grouping list by weight
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_ClickGroupingWeight(object sender, RoutedEventArgs e)
+        {
+            if (view != null && view.CanGroup == true)
+            {
+                view.GroupDescriptions.Clear();
+                PropertyGroupDescription property = new PropertyGroupDescription("Weight");
+                view.GroupDescriptions.Add(property);
+            }
+        }
     }
 }

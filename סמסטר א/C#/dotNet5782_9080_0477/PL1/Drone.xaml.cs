@@ -44,7 +44,7 @@ namespace PL1
         }
 
         /// <summary>
-        /// constructor
+        /// constructor actions
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="drone"></param>
@@ -82,13 +82,19 @@ namespace PL1
             }
 
             //get the time inn charge
-            if(droneBL.DroneStatus == DroneStatus.Maintenance)
+           /* if(droneBL.DroneStatus == DroneStatus.Maintenance)
             {
                 //TimeChargerBlock.Text+= 
-            }
+            }*/
 
         }
 
+        /// <summary>
+        /// constructor actions
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="drone"></param>
+        /// <param name="parcel"></param>
         public Drone(BlApi.Bl bl, BO.Drone drone, Parcel parcel)
         {
             parcelWindow = parcel;
@@ -123,6 +129,12 @@ namespace PL1
 
         }
 
+        /// <summary>
+        /// constructor actions
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="drone"></param>
+        /// <param name="station"></param>
         public Drone(BlApi.Bl bl, BO.Drone drone, Station station)
         {
             stationWindow = station;
@@ -381,6 +393,11 @@ namespace PL1
             Close();
         }
 
+        /// <summary>
+        /// open the parcel window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_openParcel(object sender, RoutedEventArgs e)
         {
             if (droneBL.parcelInDelivery != null)

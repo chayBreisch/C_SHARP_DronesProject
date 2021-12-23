@@ -40,7 +40,7 @@ namespace BlApi {
         public List<DO.Parcel> getParcelsWithoutoutDrone();
         public BO.Parcel convertDalToParcelBL(DO.Parcel p);
 
-        //public ParcelStatus findParcelStatus(DO.Parcel parcel);///////////////////////////
+        public ParcelStatus findParcelStatus(BO.Parcel parcel);
         //public static void checkUniqeIdStation(int id, IDAL.IDal dalObject);
 
         public void addStation(int id, int name, LocationBL location, int ChargeSlots);

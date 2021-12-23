@@ -54,8 +54,8 @@ using static BL.ExceptionsBL;
             }
             public override string ToString()
             {
-                return $"longitude  : {longitude}, " +
-                    $" latitude: {latitude}"
+                return $"({longitude}, " +
+                    $"{latitude})"
 
                 ;
             }
