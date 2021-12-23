@@ -14,10 +14,10 @@ using System.Threading.Tasks;
                 ID = customer.ID;
                 Name = customer.Name;
                 Phone = customer.Phone;
-                SumOfParcelsSendedAndNotProvided = dalObject.getParceleByCondition(p => p.SenderID == ID && p.Delivered != null).Count();
-                SumOfParcelsSendedAndNotProvided = dalObject.getParceleByCondition(p => p.SenderID == ID && p.Delivered == null).Count();
-                SumOfParcelsRecieved = dalObject.getParceleByCondition(p => p.TargetID == ID && p.PickedUp != null).Count();
-                SumOfParcelsOnTheWay = dalObject.getParceleByCondition(p => p.TargetID == ID && p.Requested != null && p.PickedUp == null).Count();
+                SumOfParcelsSendedAndNotProvided = dalObject.getParcelesByCondition(p => p.SenderID == ID && p.Delivered != null).Count();
+                SumOfParcelsSendedAndNotProvided = dalObject.getParcelesByCondition(p => p.SenderID == ID && p.Delivered == null).Count();
+                SumOfParcelsRecieved = dalObject.getParcelesByCondition(p => p.TargetID == ID && p.PickedUp != null).Count();
+                SumOfParcelsOnTheWay = dalObject.getParcelesByCondition(p => p.TargetID == ID && p.Requested != null && p.PickedUp == null).Count();
             }
             public ulong ID { get; set; }
             public string Name { get; set; }

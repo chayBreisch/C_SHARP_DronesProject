@@ -9,7 +9,7 @@ namespace DalObject
 {
     internal partial class DalObject
     {
-        public IEnumerable<Customer> GetCustomer()
+        public IEnumerable<Customer> GetCustomers()
         {
             return from customer in DataSource.customers
                    select customer;
@@ -65,7 +65,7 @@ namespace DalObject
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<Customer> getCustomerByCondition(Predicate<Customer> predicate)
+        public IEnumerable<Customer> getCustomersByCondition(Predicate<Customer> predicate)
         {
             //try todo
             return (from customer in DataSource.customers

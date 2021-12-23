@@ -15,7 +15,7 @@ namespace DalObject
         /// returns the stations from dal
         /// </summary>
         /// <returns>DataSource.stations</returns>
-        public IEnumerable<Station> GetStation()
+        public IEnumerable<Station> GetStations()
         {
             return from station in DataSource.stations
                    select station;
@@ -65,7 +65,7 @@ namespace DalObject
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<Station> getStationByCondition(Predicate<Station> predicate)
+        public IEnumerable<Station> getStationsByCondition(Predicate<Station> predicate)
         {
             //try todo
             return (from station in DataSource.stations

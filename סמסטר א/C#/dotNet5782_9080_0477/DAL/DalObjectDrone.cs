@@ -15,16 +15,16 @@ namespace DalObject
         /// </summary>
         /// <returns>DataSource.drones</returns>
 
-        public List<Drone> GetDronesByList()
+        /*public List<Drone> GetDronesByList()
         {
             return DataSource.drones;
-        }
+        }*/
 
         /// <summary>
         /// returns the drones from dal
         /// </summary>
         /// <returns>DataSource.drones</returns>
-        public IEnumerable<Drone> GetDrone()
+        public IEnumerable<Drone> GetDrones()
         {
             return from drone in DataSource.drones
                    select drone;
@@ -100,7 +100,7 @@ namespace DalObject
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<Drone> getDroneByCondition(Predicate<Drone> predicate)
+        public IEnumerable<Drone> getDronesByCondition(Predicate<Drone> predicate)
         {
             //try todo
             return (from drone in DataSource.drones

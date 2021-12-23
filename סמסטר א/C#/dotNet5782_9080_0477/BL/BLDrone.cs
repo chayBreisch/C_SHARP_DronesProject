@@ -19,7 +19,7 @@ namespace BL
         /// <param name="dalObject"></param>
         public static void checkUniqeIdDrone(int id, IDAL.IDal dalObject)
         {
-            List<DO.Drone> drones = dalObject.GetDrone().ToList();
+            List<DO.Drone> drones = dalObject.GetDrones().ToList();
             if (drones.Any(d => d.ID == id))
                 throw new NotUniqeID(id, typeof(DO.Drone));
         }
@@ -81,7 +81,7 @@ namespace BL
         public List<BO.Drone> GetDronesBL()
         {
 
-            IEnumerable<DO.Drone> drones = dalObject.GetDrone();
+            IEnumerable<DO.Drone> drones = dalObject.GetDrones();
             List<BO.Drone> drone1 = new List<BO.Drone>();
             foreach (var drone in drones)
             {

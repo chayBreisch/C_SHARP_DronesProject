@@ -150,12 +150,12 @@ namespace PL1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_ClickGroupBySender(object sender, RoutedEventArgs e)
+        private void Button_ClickGroupByReciver(object sender, RoutedEventArgs e)
         {
             if (view != null && view.CanGroup == true)
             {
                 view.GroupDescriptions.Clear();
-                PropertyGroupDescription property = new PropertyGroupDescription("Priority");
+                PropertyGroupDescription property = new PropertyGroupDescription("NameCustomerReciver");
                 view.GroupDescriptions.Add(property);
             }
             
@@ -166,12 +166,12 @@ namespace PL1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_ClickGroupByWeight(object sender, RoutedEventArgs e)
+        private void Button_ClickGroupBySender(object sender, RoutedEventArgs e)
         {
             if (view != null && view.CanGroup == true)
             {
                 view.GroupDescriptions.Clear();
-                PropertyGroupDescription property = new PropertyGroupDescription("Weight");
+                PropertyGroupDescription property = new PropertyGroupDescription("NameCustomerSender");
                 view.GroupDescriptions.Add(property);
             }
         }

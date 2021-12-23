@@ -9,65 +9,94 @@ namespace IDAL
 {
     public interface IDal
     {
-        public IEnumerable<Drone> GetDrone();
-        public IEnumerable<Station> GetStation();
-        public IEnumerable<Customer> GetCustomer();
-
-        /* public IEnumerable<Customer> GetCustomer();*/
-        public IEnumerable<Parcel> GetParcel();
-        public IEnumerable<DroneCharge> GetDroneCharge();
-        public int getIndexOfDroneChargeByStationID(int id);
-        public void removeDroneCharge(DroneCharge droneCharge);
+        //##########################################################
+        //Add functions
+        //##########################################################
         public void AddDrone(Drone drone);
         public void AddStation(Station station);
         public void AddCustomer(Customer customer);
         public void AddParcel(Parcel parcel);
         public void AddDroneCharge(DroneCharge droneCharge);
-        public void updateConectDroneToParcial(int id);
-        public void updateCollectParcialByDrone(int id);
-        public void updateSupplyParcialToCustomer(int id);
-        public void updateSendDroneToCharge(int droneId, int statoinId);
-        public void updateUnChargeDrone(int id);
-        public IEnumerable<Parcel> showParcelsWithoutoutDrone();
-        public IEnumerable<Station> showStationWithEmptyChargers();
-        public double[] requestElectric();
 
-        public List<Drone> GetDronesByList();
-        public List<DroneCharge> GetDroneChargeByList();
-        public List<Parcel> GetParcelByList();
+
+        //##########################################################
+        //get list functions
+        //##########################################################
+        public IEnumerable<Drone> GetDrones();
+        public IEnumerable<Station> GetStations();
+        public IEnumerable<Customer> GetCustomers();
+        public IEnumerable<Parcel> GetParcels();
+        public IEnumerable<DroneCharge> GetDroneCharges();
+        public IEnumerable<Drone> getDronesByCondition(Predicate<Drone> predicate);
+        public IEnumerable<Parcel> getParcelesByCondition(Predicate<Parcel> predicate);
+        public IEnumerable<Station> getStationsByCondition(Predicate<Station> predicate);
+        public IEnumerable<Customer> getCustomersByCondition(Predicate<Customer> predicate);
+        public IEnumerable<DroneCharge> getDroneChargesByCondition(Predicate<DroneCharge> predicate);
+
+
+        //#############################################################
+        //get specific item functions
+        //#############################################################
+        public Drone getDroneById(Predicate<Drone> predicate);
+        public Parcel getParcelById(Predicate<Parcel> predicate);
+        public Station getStationById(Predicate<Station> predicate);
+        public Customer getCustomerById(Predicate<Customer> predicate);
+        public DroneCharge getDroneChargeById(Predicate<DroneCharge> predicate);
+
+
+        //#############################################################
+        //update functions
+        //#############################################################
         public void updateDrone(Drone drone);
         public void updateStation(Station station);
         public void updateParcel(Parcel parcel);
-        public void updateDroneCharge(DroneCharge droneCharge);
         public void updateCustomer(Customer customer);
-        public int lengthStation();
-        public int lengthParcel();
 
+
+        //#############################################################
+        //check functions
+        //#############################################################
         public void CheckUniqestation(int id);
         public void CheckUniqeParcel(int id);
         public void checkUniqeIdDroneChargeBL(int droneId, int stationId);
-
         public void CheckUniqeDrone(int id);
         public void CheckUniqeCustomer(ulong id);
 
-        public Drone getDroneById(Predicate<Drone> predicate);
 
-
-        public Parcel getParcelById(Predicate<Parcel> predicate);
-
-        public Station getStationById(Predicate<Station> predicate);
-
-        public Customer getCustomerById(Predicate<Customer> predicate);
-
-        public DroneCharge getDroneChargeById(Predicate<DroneCharge> predicate);
-        public IEnumerable<Drone> getDroneByCondition(Predicate<Drone> predicate);
-        public IEnumerable<Parcel> getParceleByCondition(Predicate<Parcel> predicate);
-        public IEnumerable<Station> getStationByCondition(Predicate<Station> predicate);
-        public IEnumerable<Customer> getCustomerByCondition(Predicate<Customer> predicate);
-        public IEnumerable<DroneCharge> getDroneChargeByCondition(Predicate<DroneCharge> predicate);
+        //#############################################################
+        //remove functions
+        //#############################################################
         public void RemoveParcel(int idRemove);
+        public void removeDroneCharge(DroneCharge droneCharge);
+
+
+        //#############################################################
+        //help functions
+        //#############################################################
+        public int getIndexOfDroneChargeByStationID(int id);
+        public double[] requestElectric();
+        public int lengthStation();
+        public int lengthParcel();
         public int getIndexOfParcel(int id);
         public void RemoveStation(int idRemove);
         public int getIndexOfStation(int id);
+
+
+
+
+
+
+
+        //public IEnumerable<Parcel> showParcelsWithoutoutDrone();
+        //public IEnumerable<Station> showStationWithEmptyChargers();
+        //public List<Drone> GetDronesByList();
+        //public List<DroneCharge> GetDroneChargeByList();
+        //public List<Parcel> GetParcelByList();
+        //public void updateConectDroneToParcial(int id);
+        //public void updateCollectParcialByDrone(int id);
+        //public void updateSupplyParcialToCustomer(int id);
+        //public void updateSendDroneToCharge(int droneId, int statoinId);
+        //public void updateUnChargeDrone(int id);
+        //public void updateDroneCharge(DroneCharge droneCharge);
     }
 }

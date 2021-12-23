@@ -16,16 +16,16 @@ namespace DalObject
         /// returns the parcels by list from dal
         /// </summary>
         /// <returns>DataSource.parcels</returns>
-        public List<Parcel> GetParcelByList()
+        /*public List<Parcel> GetParcelByList()
         {
             return DataSource.parcels;
-        }
+        }*/
 
         /// <summary>
         /// returns the parcels from dal
         /// </summary>
         /// <returns>DataSource.parcels</returns>
-        public IEnumerable<Parcel> GetParcel()
+        public IEnumerable<Parcel> GetParcels()
         {
             return from parcel in DataSource.parcels
                    select parcel;
@@ -68,7 +68,7 @@ namespace DalObject
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<Parcel> getParceleByCondition(Predicate<Parcel> predicate)
+        public IEnumerable<Parcel> getParcelesByCondition(Predicate<Parcel> predicate)
         {
             //try todo
             return (from parcel in DataSource.parcels

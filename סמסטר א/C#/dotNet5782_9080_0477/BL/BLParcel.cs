@@ -19,7 +19,7 @@ namespace BL
         /// <param name="dalObject"></param>
         public static void checkUniqeIdParcel(int id, IDAL.IDal dalObject)
         {
-            List<DO.Parcel> parcels = dalObject.GetParcelByList();
+            IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
             if (parcels.Any(p => p.ID == id))
                 throw new NotUniqeID(id, typeof(DO.Parcel));
         }
@@ -77,7 +77,7 @@ namespace BL
         public List<BO.Parcel> GetParcelsBL()
         {
 
-            IEnumerable<DO.Parcel> parcels = dalObject.GetParcel();
+            IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
             List<BO.Parcel> parcel1 = new List<BO.Parcel>();
             foreach (var parcel in parcels)
             {
@@ -109,7 +109,7 @@ namespace BL
         /// <returns> List<Parcel></returns>
         public List<DO.Parcel> getParcelsWithoutoutDrone()
         {
-            IEnumerable<DO.Parcel> parcels = dalObject.GetParcel();
+            IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
             List<DO.Parcel> parcels1 = new List<DO.Parcel>();
             foreach (var parcel in parcels)
             {
@@ -211,7 +211,7 @@ namespace BL
         }
 
 
-        public IEnumerable<ParcelToList> returnParcelToListWithFilter(int weight, int prioritty)
+        public IEnumerable<ParcelToList> getParcelToListWithFilter(int weight, int prioritty)
         {
 
             if (prioritty == -1)
