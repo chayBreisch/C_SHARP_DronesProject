@@ -32,37 +32,35 @@ using static BL.ExceptionsBL;
             }
             public string Model { get; set; }
             private DO.WeightCatagories weight { get; set; }
-            public DO.WeightCatagories Weight
-            {
-                get
-                {
-                    return weight;
-                }
-                set
-                {
-                    if (value < 0)
-                        throw new OutOfRange("weight");
-                    weight = value;
-                }
-            }
-
-            public double BatteryStatus
-            {
-                get
-                {
-                    return battery;
-                }
-                set
-                {
-                    if (value < 0 || value > 100)
-                        throw new OutOfRange("battry");
-                    battery = value;
-                }
-            }
+           
             public DroneStatus DroneStatus { get; set; }
             public ParcelInDelivery parcelInDelivery { get; set; }
             public LocationBL Location { get; set; }
-            public override string ToString()
+        public DO.WeightCatagories Weight
+        {
+            get{ return weight; }
+            set
+            {
+                if (value < 0)
+                    throw new OutOfRange("weight");
+                weight = value;
+            }
+        }
+
+        public double BatteryStatus
+        {
+            get
+            {
+                return battery;
+            }
+            set
+            {
+                if (value < 0 || value > 100)
+                    throw new OutOfRange("battry");
+                battery = value;
+            }
+        }
+        public override string ToString()
             {
                 return $"drone  : {ID}, \n" +
                     $" battery: {BatteryStatus}%,\n Model: {Model}, \nMaxWeight: {Weight}, \n" +

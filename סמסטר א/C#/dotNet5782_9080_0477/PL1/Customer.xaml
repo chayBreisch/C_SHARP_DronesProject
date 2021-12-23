@@ -8,7 +8,7 @@
         Title="Customer" Height="450" Width="800">
     <Grid>
 
-        <Grid Name="actions" Visibility="Hidden">
+        <Grid Name="actions" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition  Width="200"/>
@@ -17,6 +17,7 @@
             <Grid Grid.Column="1" Background="#FF859DA2">
 
                 <Button Content="X" Width="50" Background="Red" HorizontalAlignment="Left"  Grid.Row="0"  Margin="150,0,0,414" Click="Button_ClickClose" Height="20" VerticalAlignment="Bottom"/>
+                <Button Content="delete customer" HorizontalAlignment="Center" Margin="0,348,0,0" VerticalAlignment="Top" Height="45" Width="98" />
 
             </Grid>
 
@@ -46,7 +47,7 @@
             </Grid>
 
         </Grid>
-        <Grid Name="addCustomer" Visibility="Visible" Background="#FF859DA2">
+        <Grid Name="addCustomer" Visibility="Hidden" Background="#FF859DA2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />

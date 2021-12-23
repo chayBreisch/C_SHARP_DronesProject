@@ -79,6 +79,12 @@ namespace PL1
 
             }
 
+            //get the time inn charge
+            if(droneBL.DroneStatus == DroneStatus.Maintenance)
+            {
+                //TimeChargerBlock.Text+= 
+            }
+
         }
 
 

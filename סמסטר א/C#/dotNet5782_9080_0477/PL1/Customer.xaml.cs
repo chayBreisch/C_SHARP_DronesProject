@@ -77,11 +77,20 @@ namespace PL1
 
         private void Button_ClickAddCustomer(object sender, RoutedEventArgs e)
         {
-            int id;
-            string name;
-            string phone;
-            double longitude;
-            double latitude;
+            try
+            {
+                // ulong id = Convert.ToInt32(idcustomer.Text);
+                ulong id = 45678;
+                string name = Convert.ToString(nameCustomer.Text);
+                string phone = Convert.ToString(phoneCustomr.Text);
+                double longitude = Convert.ToDouble(customerLongitude.Text);
+                double latitude = Convert.ToDouble(customerLatitude.Text);
+                blCustomer.AddCustomer(id, name, phone, new BO.LocationBL(longitude, latitude));
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
@@ -91,6 +100,13 @@ namespace PL1
             this.Close();
         }
 
-        
+        private void Button_ClickDeletCustomer(object sender, RoutedEventArgs e)
+        {
+
+
+
+
+
+        }
     }
 }
