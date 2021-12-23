@@ -17,7 +17,6 @@
             <Grid Grid.Column="1" Background="#FF859DA2">
 
                 <Button Content="X" Width="50" Background="Red" HorizontalAlignment="Left"  Grid.Row="0"  Margin="150,0,0,414" Click="Button_ClickClose" Height="20" VerticalAlignment="Bottom"/>
-                <Button Content="delete customer" HorizontalAlignment="Center" Margin="0,348,0,0" VerticalAlignment="Top" Height="45" Width="98" />
 
             </Grid>
 
@@ -62,16 +61,6 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock HorizontalAlignment="Left" Text="enter your details" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="269" FontSize="22" FontWeight="Bold" Grid.ColumnSpan="2" Margin="270,37,0,0"/>
-            <TextBox  Background="#FFFFE9ED" Margin="34,46,77,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Name="customerId" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
-                <TextBox.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </TextBox.RenderTransform>
-            </TextBox>
             <TextBlock HorizontalAlignment="Left" Margin="41,14,0,0" Text="enter id:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" FontSize="20" RenderTransformOrigin="0.531,1.062" Grid.Row="1"/>
 
             <TextBlock HorizontalAlignment="Left" Margin="41,101,0,0" Grid.Row="1" Text="enter name:" TextWrapping="Wrap" VerticalAlignment="Top" Width="249" Height="27" FontSize="20" Grid.RowSpan="2"/>
@@ -86,6 +75,7 @@
             <TextBox x:Name="customerLongitude" HorizontalAlignment="Left" Margin="15,43,0,0" Grid.Row="2" VerticalAlignment="Top" Width="260" Height="33" Grid.Column="1"/>
             <TextBox  Background="#FFFFE9ED" Margin="226,42,285,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="33" x:Name="customerLatitude" Grid.Row="3" Grid.ColumnSpan="2"/>
             <TextBlock HorizontalAlignment="Left" Margin="280,10,0,0" Grid.Row="3" Text="enter latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="27" FontSize="20" Grid.ColumnSpan="2"/>
+            <TextBox Background="#FFFFE9ED" Margin="34,42,77,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="33" x:Name="customerId" Grid.Row="1"/>
 
         </Grid>
     </Grid>

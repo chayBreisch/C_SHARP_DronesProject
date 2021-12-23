@@ -69,8 +69,8 @@ namespace PL1
             customeBL = customer;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
-            addCustomer.Visibility = Visibility.Hidden;
-            actions.Visibility = Visibility.Visible;
+            addCustomer.Visibility = Visibility.Visible;
+            actions.Visibility = Visibility.Hidden;
             idcustomer.Text = customeBL.ID.ToString();
             nameCustomer.Text = customeBL.Name.ToString();
             phoneCustomr.Text = customeBL.Phone.ToString();
@@ -92,13 +92,13 @@ namespace PL1
         {
             try
             {
-                // ulong id = Convert.ToInt32(idcustomer.Text);
-                ulong id = 45678;
+                ulong id = ulong.Parse(customerId.Text);
                 string name = Convert.ToString(nameCustomer.Text);
                 string phone = Convert.ToString(phoneCustomr.Text);
                 double longitude = Convert.ToDouble(customerLongitude.Text);
                 double latitude = Convert.ToDouble(customerLatitude.Text);
                 blCustomer.AddCustomer(id, name, phone, new BO.LocationBL(longitude, latitude));
+                MessageBox.Show("succesfull add");
             }
             catch(Exception ex)
             {

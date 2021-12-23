@@ -110,5 +110,12 @@ namespace PL1
                 view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
             }
         }
+
+        private void Button_ClickAddCustomer(object sender, RoutedEventArgs e)
+        {
+            new Customer(blcustomer, this).Show();
+            Hide();
+
+        }
     }
 }
