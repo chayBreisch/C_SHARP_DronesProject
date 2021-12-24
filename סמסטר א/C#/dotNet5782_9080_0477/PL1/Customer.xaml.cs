@@ -58,8 +58,10 @@ namespace PL1
             idcustomer.Text = customeBL.ID.ToString();
             nameCustomer.Text = customeBL.Name.ToString();
             phoneCustomr.Text = customeBL.Phone.ToString();
-            SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
-            SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();
+            longCustomer.Text = customeBL.Location.Longitude.ToString();
+            latCustomere.Text = customeBL.Location.Latitude.ToString();
+            sendedBy.ItemsSource = customeBL.parcelSendedByCustomer;
+            sendedTo.ItemsSource = customeBL.parcelSendedToCustomer;
         }
 
         public Customer(BlApi.Bl bl, BO.Customer customer, Parcel parcel)
@@ -74,8 +76,13 @@ namespace PL1
             idcustomer.Text = customeBL.ID.ToString();
             nameCustomer.Text = customeBL.Name.ToString();
             phoneCustomr.Text = customeBL.Phone.ToString();
-            SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
-            SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();
+            longCustomer.Text = customeBL.Location.Longitude.ToString();
+            latCustomere.Text = customeBL.Location.Latitude.ToString();
+            sendedBy.ItemsSource = customeBL.parcelSendedByCustomer;
+            sendedTo.ItemsSource = customeBL.parcelSendedToCustomer;
+
+/*            SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
+            SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();*/
         }
 
 
@@ -116,13 +123,18 @@ namespace PL1
             this.Close();
         }
 
-        private void Button_ClickDeletCustomer(object sender, RoutedEventArgs e)
+
+        private void MouseDoubleClick_Sended(object sender, RoutedEventArgs e)
         {
-
-
-
-
-
+            sender.ToString();
+            BO.ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as BO.ParcelAtCustomer;
+            BO.Parcel parcelBL = blCustomer.GetSpecificParcelBL(parcelAtCustomer.ID);
+            BO.Drone drone = blCustomer.GetSpecificDroneBL(parcelBL.Drone.ID);
+            //new Parcel(blCustomer, parcelBL, new Drone(blCustomer, drone, new DroneList(blCustomer, new MainWindow()))).Show();
+            Hide();
         }
+
+
+     
     }
 }
