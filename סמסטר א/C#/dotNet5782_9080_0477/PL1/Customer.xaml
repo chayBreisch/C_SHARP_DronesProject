@@ -17,33 +17,45 @@
             <Grid Grid.Column="1" Background="#FF859DA2">
 
                 <Button Content="X" Width="50" Background="Red" HorizontalAlignment="Left"  Grid.Row="0"  Margin="150,0,0,414" Click="Button_ClickClose" Height="20" VerticalAlignment="Bottom"/>
-                <Button Content="delete customer" HorizontalAlignment="Center" Margin="0,348,0,0" VerticalAlignment="Top" Height="45" Width="98" />
 
             </Grid>
 
             <Grid Grid.Column="0" Background="#FF8D8C7A">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35"/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="88*"/>
+                    <RowDefinition Height="88*"/>
+                    <RowDefinition Height="107*"/>
+                    <RowDefinition Height="116*"/>
                 </Grid.RowDefinitions>
-                <Label  FontSize="16" Content="id:" Grid.Row="1" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center"/>
-                <Label FontSize="16" Content="Name" Grid.Row="1" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center"/>
-                <Label FontSize="16" Content="Phone" Grid.Row="2" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center"/>
+                <Label  FontSize="16" Content="id:" Grid.Row="1" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Height="31" Width="27"/>
+                <Label FontSize="16" Content="Name" Grid.Row="1" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center" Height="31" Width="52"/>
+                <Label FontSize="16" Content="Phone" Grid.Row="2" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Height="32" Width="55"/>
 
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="77,0,0,0" Name="idcustomer" TextWrapping="Wrap" VerticalAlignment="Center" Width="197"/>
-                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="1" HorizontalAlignment="Left" Margin="397,26,0,0" Name="nameCustomer" TextWrapping="Wrap" VerticalAlignment="Top" Width="148"/>
-                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="2" HorizontalAlignment="Left" Name="phoneCustomr" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Margin="127,32,0,0"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="77,0,0,0" Name="idcustomer" TextWrapping="Wrap" VerticalAlignment="Center" Width="197" Height="23"/>
+                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="1" HorizontalAlignment="Left" Margin="397,26,0,0" Name="nameCustomer" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Height="23"/>
+                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="2" HorizontalAlignment="Left" Name="phoneCustomr" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Margin="127,24,0,0" Height="23"/>
 
-                <Label Content="Customer" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
-                <Label  FontSize="16" Content="Sum Of parcel Sended By Customer" Grid.Row="3" HorizontalAlignment="Left" Margin="39,0,0,0" VerticalAlignment="Center"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="370,26,0,0" x:Name="SumOfparcelSendedByCustomer" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
-                <Label  FontSize="16" Content="Sum Of parcel Sended To Customer" Grid.Row="4" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.481,2.858"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Margin="370,33,0,0" x:Name="SumOfparcelSendedToCustomer" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
+                <Label Content="Customer" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Height="35" Width="100"/>
+                <Label  FontSize="16" Content="parcel Sended By Customer" Grid.Row="3" HorizontalAlignment="Left" Margin="39,12,0,0" VerticalAlignment="Top" Height="31" Width="204"/>
+                <Label  FontSize="16" Content=" parcel Sended To Customer" Grid.Row="4" HorizontalAlignment="Left" Margin="40,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.481,2.858" Height="31" Width="208"/>
+                <Label FontSize="16" Content="Location" Grid.Row="2" HorizontalAlignment="Left" Margin="322,0,0,0" VerticalAlignment="Center" Height="32" Width="70"/>
+                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="2" HorizontalAlignment="Left" Margin="397,27,0,0" x:Name="longCustomer" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Height="21"/>
+                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="2" HorizontalAlignment="Left" Margin="469,27,0,0" x:Name="latCustomere" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Height="21"/>
+                <ListView Grid.Row="3" Margin="278,10,55,10" Name="sendedBy" MouseDoubleClick ="MouseDoubleClick_Sended">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView Grid.Row="4" Margin="278,21,55,8" Name="sendedTo" MouseDoubleClick ="MouseDoubleClick_Sended">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
 
         </Grid>
@@ -57,35 +69,27 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="400*" />
+                <ColumnDefinition Width="357*" />
+                <ColumnDefinition Width="43*"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock HorizontalAlignment="Left" Text="enter your details" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="269" FontSize="22" FontWeight="Bold" Grid.ColumnSpan="2" Margin="270,37,0,0"/>
-            <TextBox  Background="#FFFFE9ED" Margin="34,46,77,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Name="customerId" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
-                <TextBox.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </TextBox.RenderTransform>
-            </TextBox>
             <TextBlock HorizontalAlignment="Left" Margin="41,14,0,0" Text="enter id:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" FontSize="20" RenderTransformOrigin="0.531,1.062" Grid.Row="1"/>
 
-            <TextBlock HorizontalAlignment="Left" Margin="41,101,0,0" Grid.Row="1" Text="enter name:" TextWrapping="Wrap" VerticalAlignment="Top" Width="249" Height="27" FontSize="20" Grid.RowSpan="2"/>
+            <TextBlock HorizontalAlignment="Left" Margin="41,14,0,0" Grid.Row="2" Text="enter name:" TextWrapping="Wrap" VerticalAlignment="Top" Width="249" Height="27" FontSize="20"/>
             <TextBox  Background="#FFFFE9ED" Margin="34,43,77,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Name="customerName" Grid.Row="2"/>
 
             <Button Content="add customer" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" RenderTransformOrigin="-0.207,0.023" Width="120" Height="40" Grid.Column="1"  Margin="129,19,0,0" Click="Button_ClickAddCustomer"/>
             <Button Content="reset" Grid.Column="0" HorizontalAlignment="Left" Margin="166,19,0,0" Grid.Row="4" VerticalAlignment="Top" Width="120" Height="40" Click="Button_ClickResetAddCustomer"/>
-            <Button Content="X" Width="50" Grid.Column="1" Background="Red" HorizontalAlignment="Left" Margin="350,0,0,89" Height="20" VerticalAlignment="Bottom"/>
+            <Button Content="X" Width="91" Grid.Column="2" Background="Red" HorizontalAlignment="Center" Margin="0,-2,0,0" Height="20" VerticalAlignment="Top" Click="Button_ClickClose"/>
             <TextBlock HorizontalAlignment="Left" Margin="15,14,0,0" Text="enter phone:" TextWrapping="Wrap" VerticalAlignment="Top" Width="249" Height="27" FontSize="20" Grid.Column="1" Grid.Row="1"/>
             <TextBox Name="customerPhone" HorizontalAlignment="Left" Margin="15,46,0,0" Grid.Row="1" VerticalAlignment="Top" Width="260" Height="31" Grid.Column="1"/>
             <TextBlock HorizontalAlignment="Left" Margin="15,11,0,0" Text="enter longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Width="249" Height="27" FontSize="20" Grid.Column="1" Grid.Row="2"/>
             <TextBox x:Name="customerLongitude" HorizontalAlignment="Left" Margin="15,43,0,0" Grid.Row="2" VerticalAlignment="Top" Width="260" Height="33" Grid.Column="1"/>
-            <TextBox  Background="#FFFFE9ED" Margin="226,42,285,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="33" x:Name="customerLatitude" Grid.Row="3" Grid.ColumnSpan="2"/>
+            <TextBox  Background="#FFFFE9ED" Margin="226,42,242,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="33" x:Name="customerLatitude" Grid.Row="3" Grid.ColumnSpan="2"/>
             <TextBlock HorizontalAlignment="Left" Margin="280,10,0,0" Grid.Row="3" Text="enter latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="27" FontSize="20" Grid.ColumnSpan="2"/>
+            <TextBox Background="#FFFFE9ED" Margin="34,42,77,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="33" x:Name="customerId" Grid.Row="1"/>
 
         </Grid>
     </Grid>
