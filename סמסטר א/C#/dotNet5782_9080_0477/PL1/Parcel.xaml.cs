@@ -157,7 +157,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickCloseParcel(object sender, RoutedEventArgs e)
         {
-            ParentWindow.Refresh();
+            //ParentWindow.Refresh();
             //refreshList(this.parcelBL);
             //ParentWindow.ParcelListView.Items.Refresh();
             ParentWindow.Show();
@@ -238,55 +238,54 @@ namespace PL1
         /// refrsh the listView in the window
         /// </summary>
         /// <param name="parcel"></param>
-       /* private void refreshList(BO.Parcel parcel)
-        {
-            // view.GroupDescriptions.Clear();
+        /*private void refreshList(BO.Parcel parcel)
+         {
+             // view.GroupDescriptions.Clear();
 
-         /*   if (ParentWindow.parcelPriority.SelectedItem != null)
-            {
-                if ((ParentWindow.parcelPriority.SelectedItem.ToString() == parcel.Priorities.ToString()))
-                {
-                    {
-                        ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
+          /*   if (ParentWindow.parcelPriority.SelectedItem != null)
+             {
+                 if ((ParentWindow.parcelPriority.SelectedItem.ToString() == parcel.Priorities.ToString()))
+                 {
+                     {
+                         ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
 
-                        foreach (var item in blparcel.getParcelToListByCondition((P) => P.Priority == parcel.Priorities))
-                            MyList.Add(item);
-                        DataContext = MyList;
-                        ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+                         foreach (var item in blparcel.getParcelToListByCondition((P) => P.Priority == parcel.Priorities))
+                             MyList.Add(item);
+                         DataContext = MyList;
+                         ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
 
-                        //ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToListByCondition((P) => P.Priority == parcel.Priorities);
-                    }
-                }
-            }
-            else if (ParentWindow.parcelWeight.SelectedItem != null)
-            {
-                if (ParentWindow.parcelWeight.SelectedItem.ToString() == parcel.Weight.ToString())
-                {
-                    ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
+                         //ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToListByCondition((P) => P.Priority == parcel.Priorities);
+                     }
+                 }
+             }
+             else if (ParentWindow.parcelWeight.SelectedItem != null)
+             {
+                 if (ParentWindow.parcelWeight.SelectedItem.ToString() == parcel.Weight.ToString())
+                 {
+                     ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
 
-                    foreach (var item in blparcel.getParcelToListByCondition((P) => P.Weight == parcel.Weight))
-                        MyList.Add(item);
-                    DataContext = MyList;
-                    ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+                     foreach (var item in blparcel.getParcelToListByCondition((P) => P.Weight == parcel.Weight))
+                         MyList.Add(item);
+                     DataContext = MyList;
+                     ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
 
-                    //ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToListByCondition((p) => p.Weight == parcel.Weight);
-                }
+                     //ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToListByCondition((p) => p.Weight == parcel.Weight);
+                 }
 
-            }
-            else
-            {
-                ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
-                IEnumerable<BO.ParcelToList> p = blparcel.getParcelToList();
-                ParentWindow.view.GroupDescriptions.Clear();
+             }
+             else
+             {
+                 ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
+                 IEnumerable<BO.ParcelToList> p = blparcel.getParcelToList();
+                 ParentWindow.view.GroupDescriptions.Clear();
 
-                foreach (var item in p)
-                    MyList.Add(item);
-                DataContext = MyList;
-                ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+                 foreach (var item in p)
+                     MyList.Add(item);
+                 DataContext = MyList;
+                 ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
 
-                //ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToList();
-            }*/
-
+                 //ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToList();
+             }
         }*/
     }
 }

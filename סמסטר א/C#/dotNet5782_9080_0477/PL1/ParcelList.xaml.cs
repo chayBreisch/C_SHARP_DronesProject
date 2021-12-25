@@ -23,7 +23,7 @@ namespace PL1
     public partial class ParcelList : Window
     {
         BlApi.Bl blParcelList;
-        MainWindow mainWindow;
+        Window ParentWindow;
         public ObservableCollection<ParcelToList> MyList = new ObservableCollection<ParcelToList>();
         public CollectionView view;
         /// <summary>
