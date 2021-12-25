@@ -26,17 +26,17 @@ namespace PL1
     public partial class DroneList : Window
     {
         BlApi.Bl blDroneList;
-        MainWindow mainWindow;
+        Window ParentWindow;
         ObservableCollection<DroneToList> MyList = new ObservableCollection<DroneToList>();
         CollectionView view;
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public DroneList(BlApi.Bl bl, MainWindow main)
+        public DroneList(BlApi.Bl bl, Window main)
         {
             InitializeComponent();
-            mainWindow = main;
+            ParentWindow = main;
             WindowStyle = WindowStyle.None;
             blDroneList = bl;
             foreach (var item in blDroneList.getDroneToList())
@@ -144,7 +144,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            mainWindow.Show();
+            ParentWindow.Show();
             Close();
         }
 

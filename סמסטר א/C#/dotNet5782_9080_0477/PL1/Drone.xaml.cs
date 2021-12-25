@@ -22,18 +22,16 @@ namespace PL1
     {
         BlApi.Bl blDrone;
         BO.Drone droneBL;
-        DroneList DroneList;
+        Window ParentWindow;
         BO.Drone drone = new BO.Drone();
-        Parcel parcelWindow;
-        Station stationWindow;
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.Bl bl, DroneList droneList)
+        public Drone(BlApi.Bl bl, Window droneList)
         {
-            DroneList = droneList;
+            ParentWindow = droneList;
             blDrone = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -49,9 +47,9 @@ namespace PL1
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.Bl bl, BO.Drone drone, DroneList droneList)
+        public Drone(BlApi.Bl bl, BO.Drone drone, Window droneList)
         {
-            DroneList = droneList;
+            ParentWindow = droneList;
             blDrone = bl;
             droneBL = drone;
             InitializeComponent();
@@ -95,9 +93,9 @@ namespace PL1
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="parcel"></param>
-        public Drone(BlApi.Bl bl, BO.Drone drone, Parcel parcel)
+       /* public Drone(BlApi.Bl bl, BO.Drone drone, Window parcel)
         {
-            parcelWindow = parcel;
+            ParentWindow = parcel;
             blDrone = bl;
             droneBL = drone;
             InitializeComponent();
@@ -127,7 +125,7 @@ namespace PL1
 
             }
 
-        }
+        }*/
 
         /// <summary>
         /// constructor actions
@@ -135,7 +133,7 @@ namespace PL1
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="station"></param>
-        public Drone(BlApi.Bl bl, BO.Drone drone, Station station)
+       /* public Drone(BlApi.Bl bl, BO.Drone drone, Window station)
         {
             stationWindow = station;
             blDrone = bl;
@@ -167,7 +165,7 @@ namespace PL1
 
             }
 
-        }
+        }*/
         //###############################################################################
         //add Drone
         //###############################################################################
@@ -214,7 +212,7 @@ namespace PL1
             {
                 blDrone.addDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
                 MessageBox.Show("you added succefuly");
-                DroneList.Show();
+                ParentWindow.Show();
                 Close();
             }
             catch (Exception exce)
@@ -384,12 +382,12 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            if (DroneList != null)
-                DroneList.Show();
-            else if (parcelWindow != null)
-                parcelWindow.Show();
-            else if (stationWindow != null)
-                stationWindow.Show();
+            if (ParentWindow != null)
+                ParentWindow.Show();
+            else if (ParentWindow != null)
+                ParentWindow.Show();
+            else if (ParentWindow != null)
+                ParentWindow.Show();
             Close();
         }
 

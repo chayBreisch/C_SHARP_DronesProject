@@ -19,7 +19,7 @@ namespace PL1
     /// </summary>
     public partial class Station : Window
     {
-        StationList StationList;
+        Window ParentWindow;
         BlApi.Bl blStation;
         BO.Station stationBL;
         BO.Drone droneBL;
@@ -28,9 +28,9 @@ namespace PL1
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Station(BlApi.Bl bl, StationList stationList)
+        public Station(BlApi.Bl bl, Window parentWindow)
         {
-            StationList = stationList;
+            ParentWindow = parentWindow;
             blStation = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -43,14 +43,14 @@ namespace PL1
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="station"></param>
-        /// <param name="stationList"></param>
-        public Station(BlApi.Bl bl, BO.Station station, StationList stationList)
+        /// <param name="parentWindow"></param>
+        public Station(BlApi.Bl bl, BO.Station station, Window parentWindow)
         {
             InitializeComponent();
             actions.Visibility = Visibility.Visible;
             addStation.Visibility = Visibility.Hidden;
             WindowStyle = WindowStyle.None;
-            StationList = stationList;
+            ParentWindow = parentWindow;
             blStation = bl;
             stationBL = station;
             idstation.Text = stationBL.ID.ToString();
@@ -136,7 +136,7 @@ namespace PL1
             {
                 blStation.addStation(getID(), getModel(), getLocation(), getchargeSlots());
                 MessageBox.Show("you added succefuly");
-                StationList.Show();
+                ParentWindow.Show();
                 Close();
             }
             catch (Exception exce)
@@ -167,7 +167,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            StationList.Show();
+            ParentWindow.Show();
             Close();
         }
 
@@ -213,7 +213,7 @@ namespace PL1
                 if (result == MessageBoxResult.OK)
                 {
                     blStation.removeStation(stationBL.ID);
-                    StationList.Show();
+                    ParentWindow.Show();
                     Close();
                 }
             }

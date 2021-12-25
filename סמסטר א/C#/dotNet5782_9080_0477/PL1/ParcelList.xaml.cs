@@ -23,17 +23,17 @@ namespace PL1
     public partial class ParcelList : Window
     {
         BlApi.Bl blParcelList;
-        MainWindow mainWindow;
+        Window ParentWindow;
         ObservableCollection<ParcelToList> MyList = new ObservableCollection<ParcelToList>();
         public CollectionView view;
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public ParcelList(BlApi.Bl bl, MainWindow main)
+        public ParcelList(BlApi.Bl bl, Window main)
         {
             InitializeComponent();
-            mainWindow = main;
+            ParentWindow = main;
             WindowStyle = WindowStyle.None;
             blParcelList = bl;
             foreach (var item in blParcelList.getParcelToList())
@@ -54,7 +54,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            mainWindow.Show();
+            ParentWindow.Show();
             Close();
         }
 

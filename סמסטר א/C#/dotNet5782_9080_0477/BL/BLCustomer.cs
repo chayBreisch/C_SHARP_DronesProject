@@ -126,7 +126,7 @@ namespace BL
                 if (p.TargetID == c.ID)
                     parcelSendedToCustomers.Add(new ParcelAtCustomer(convertDalToParcelBL(p), c.ID, dalObject));
 
-            });
+            }
 
             return new BO.Customer
             {

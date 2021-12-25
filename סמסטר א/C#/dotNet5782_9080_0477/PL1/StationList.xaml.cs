@@ -22,7 +22,7 @@ namespace PL1
     public partial class StationList : Window
     {
         BlApi.Bl blstationList;
-        MainWindow mainWindow;
+        Window ParentWindow;
         ObservableCollection<StationToList> MyList = new ObservableCollection<StationToList>();
       
 
@@ -30,10 +30,10 @@ namespace PL1
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public StationList(BlApi.Bl bl, MainWindow main)
+        public StationList(BlApi.Bl bl, Window main)
         {
             InitializeComponent();
-            mainWindow = main;
+            ParentWindow = main;
             WindowStyle = WindowStyle.None;
             blstationList = bl;
             foreach (var item in blstationList.getStationToList())
@@ -75,7 +75,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            mainWindow.Show();
+            ParentWindow.Show();
             Close();
         }
 
