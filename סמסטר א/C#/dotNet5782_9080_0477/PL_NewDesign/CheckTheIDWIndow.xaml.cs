@@ -20,13 +20,15 @@ namespace PL_NewDesign
     public partial class CheckTheIDWIndow : Window
     {
         BlApi.Bl BLObject;
-        public CheckTheIDWIndow(BlApi.Bl Blobject)
+        char C;
+        public CheckTheIDWIndow(BlApi.Bl Blobject, char c)
         {
             InitializeComponent();
             BLObject = Blobject;
+            C = c;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_ClickComeIn(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -34,6 +36,15 @@ namespace PL_NewDesign
                 string name = Convert.ToString(chechName.Text);
                 BO.Customer customer = BLObject.GetSpecificCustomerBL(ID);
                 if(customer.Name != name) { throw new Exception(); }
+                if (C == 'w')
+                {
+                    if (Convert.ToInt32(Microsoft.VisualBasic.Interaction.InputBox("enter worker password")) != 12345) { throw new Exception("wrong password"); }
+                    new WorkerMain().Show();
+                }
+                else
+                {
+                    new CustomerWindow(BLObject, new MainWindow()).Show();
+                }
             }
             catch
             {

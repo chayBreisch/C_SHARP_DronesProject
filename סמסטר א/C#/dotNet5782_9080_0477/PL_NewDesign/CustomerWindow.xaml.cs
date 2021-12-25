@@ -20,10 +20,12 @@ namespace PL_NewDesign
     public partial class CustomerWindow : Window
     {
         BlApi.Bl BLObject;
-        public CustomerWindow(BlApi.Bl Blobject)
+        Window ParentWindow;
+        public CustomerWindow(BlApi.Bl Blobject, Window parentWindow)
         {
             InitializeComponent();
             BLObject = Blobject;
+            ParentWindow = parentWindow;
         }
     }
 }

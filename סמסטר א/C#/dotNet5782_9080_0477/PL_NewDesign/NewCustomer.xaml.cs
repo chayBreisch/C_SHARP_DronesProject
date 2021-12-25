@@ -20,10 +20,12 @@ namespace PL_NewDesign
     public partial class NewCustomer : Window
     {
         BlApi.Bl BLObject;
-        public NewCustomer(BlApi.Bl Blobject)
+        Window ParentWindow;
+        public NewCustomer(BlApi.Bl Blobject, Window parentWindow)
         {
             InitializeComponent();
             BLObject = Blobject;
+            ParentWindow = parentWindow;
         }
 
         private void Button_ClickReset(object sender, RoutedEventArgs e)
@@ -45,13 +47,19 @@ namespace PL_NewDesign
                 double longit = Convert.ToDouble(newLong.Text);
                 double lat = Convert.ToDouble(newLat.Text);
                 BLObject.AddCustomer(id, name, phone, new BO.LocationBL(longit, lat));
-
-
+                ParentWindow.Show();
+                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Button_ClickClose(object sender, RoutedEventArgs e)
+        {
+            ParentWindow.Show();
+            this.Close();
         }
     }
 }

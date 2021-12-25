@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PL_NewDesign"
         mc:Ignorable="d"
         Title="NewCustomer" Height="450" Width="800">
+
     <Grid RenderTransformOrigin="0.538,0.53">
         <Grid Margin="88,105,161,7">
             <Grid.ColumnDefinitions>
@@ -31,6 +32,7 @@
         <Button Content="Join Us" HorizontalAlignment="Left" FontSize="17" Margin="672,371,0,0" VerticalAlignment="Top" Height="35" Width="130" Click="Button_ClickJoin"/>
 
         <Button Content="Reset" HorizontalAlignment="Left" FontSize="17" Margin="672,291,0,0" VerticalAlignment="Top" Height="35" Width="130" Click="Button_ClickReset"/>
+        <Button Content="X" Background="Red" HorizontalAlignment="Left" Margin="749,2,0,0" VerticalAlignment="Top" Width="49" Click="Button_ClickClose"/>
 
     </Grid>
 </Window>

@@ -30,14 +30,14 @@ namespace PL_NewDesign
 
         private void Button_ClickNewCustomer(object sender, RoutedEventArgs e)
         {
-            new NewCustomer(BLObject).Show();
+            new NewCustomer(BLObject, new CustomerWindow(BLObject, new MainWindow())).Show();
         }
 
         private void Button_ClickCustomer(object sender, RoutedEventArgs e)
         {
             try
             {
-                new CheckTheIDWIndow(BLObject).Show();
+                new CheckTheIDWIndow(BLObject, 'c').Show();
             }
             catch
             {
@@ -49,7 +49,7 @@ namespace PL_NewDesign
         {
             try
             {
-                new CheckTheIDWIndow(BLObject).Show();
+                new CheckTheIDWIndow(BLObject, 'w').Show();
 
             }
             catch
