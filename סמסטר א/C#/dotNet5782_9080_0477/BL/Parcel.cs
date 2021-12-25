@@ -14,8 +14,8 @@ namespace BO
         public Parcel(int id, WeightCatagories weight, Priorities priorities, DateTime? requested, DateTime? scheduled, DateTime? delivered, DateTime? pickedUp, Drone drone, ulong SenderId, ulong RecieverId, IDAL.IDal dal)
         {
             ID = id;
-            Sender = new CustomerAtParcel(SenderId, dal.getCustomerById(c => c.ID == SenderId).Name);
-            Reciever = new CustomerAtParcel(RecieverId, dal.getCustomerById(c => c.ID == RecieverId).Name);
+            Sender = new CustomerAtParcel(SenderId, dal.GetCustomerById(c => c.ID == SenderId).Name);
+            Reciever = new CustomerAtParcel(RecieverId, dal.GetCustomerById(c => c.ID == RecieverId).Name);
             Weight = weight;
             Priorities = priorities;
             PickedUp = pickedUp;

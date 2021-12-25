@@ -49,7 +49,7 @@ namespace DalObject
          }
  */
 
-        public Parcel getParcelById(Predicate<Parcel> predicate)
+        public Parcel GetParcelById(Predicate<Parcel> predicate)
         {
             Parcel parcel1 = new Parcel();
             try
@@ -68,7 +68,7 @@ namespace DalObject
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<Parcel> getParcelesByCondition(Predicate<Parcel> predicate)
+        public IEnumerable<Parcel> GetParcelesByCondition(Predicate<Parcel> predicate)
         {
             //try todo
             return (from parcel in DataSource.parcels
@@ -96,7 +96,7 @@ namespace DalObject
         /// return length of parcel list
         /// </summary>
         /// <returns>int</returns>
-        public int lengthParcel()
+        public int LengthParcel()
         {
             return DataSource.parcels.Count;
         }
@@ -107,7 +107,7 @@ namespace DalObject
         /// <param name="parcel"></param>
         public void AddParcel(Parcel parcel)
         {
-            CheckUniqeParcel(parcel.ID);
+            checkUniqeParcel(parcel.ID);
             DataSource.parcels.Add(parcel);
         }
 
@@ -115,7 +115,7 @@ namespace DalObject
         /// checl uniqe parcel
         /// </summary>
         /// <param name="id"></param>
-        public void CheckUniqeParcel(int id)
+        private void checkUniqeParcel(int id)
         {
             if (DataSource.parcels.Any(parcel => parcel.ID == id))
                 throw new NotUniqeID(id, typeof(Parcel));
@@ -125,7 +125,7 @@ namespace DalObject
         /// update parcel in dal
         /// </summary>
         /// <param name="parcel"></param>
-        public void updateParcel(Parcel parcel)
+        public void UpdateParcel(Parcel parcel)
         {
             int index = DataSource.parcels.FindIndex(d => d.ID == parcel.ID);
             DataSource.parcels[index] = parcel;
@@ -146,7 +146,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public int getIndexOfParcel(int id)
+        private int getIndexOfParcel(int id)
         {
             try
             {

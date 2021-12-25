@@ -24,7 +24,7 @@ namespace PL1
     {
         BlApi.Bl blParcelList;
         MainWindow mainWindow;
-        ObservableCollection<ParcelToList> MyList = new ObservableCollection<ParcelToList>();
+        public ObservableCollection<ParcelToList> MyList = new ObservableCollection<ParcelToList>();
         public CollectionView view;
         /// <summary>
         /// constructor
@@ -36,15 +36,15 @@ namespace PL1
             mainWindow = main;
             WindowStyle = WindowStyle.None;
             blParcelList = bl;
-            foreach (var item in blParcelList.getParcelToList())
+            foreach (var item in blParcelList.GetParcelToList())
                 MyList.Add(item);
             DataContext = MyList;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             //view.SortDescriptions.Add(new SortDescription("Weight", ListSortDirection.Ascending));
 
             // view.SortDescriptions.Add(new SortDescription(null, ListSortDirection.Ascending));
-            parcelWeight.ItemsSource = blParcelList.getweightCategoriesEnumItem();
-            parcelPriority.ItemsSource = blParcelList.getPrioritiesEnumItem();
+            parcelWeight.ItemsSource = blParcelList.GetweightCategoriesEnumItem();
+            parcelPriority.ItemsSource = blParcelList.GetPrioritiesEnumItem();
         }
 
         /// <summary>
@@ -80,14 +80,14 @@ namespace PL1
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            IEnumerable<ParcelToList> stations = blParcelList.getParcelToList();
+            IEnumerable<ParcelToList> stations = blParcelList.GetParcelToList();
             parcelPriority.SelectedItem = null;
             parcelWeight.SelectedItem = null;
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
                 MyList = new ObservableCollection<ParcelToList>();
-                foreach (var item in blParcelList.getParcelToList())
+                foreach (var item in blParcelList.GetParcelToList())
                     MyList.Add(item);
                 DataContext = MyList;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
@@ -114,7 +114,7 @@ namespace PL1
         {
             sender.ToString();
             ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
-            BO.Parcel parcel = blParcelList.convertParcelToListToParcelBL(parcelToList);
+            BO.Parcel parcel = blParcelList.ConvertParcelToListToParcelBL(parcelToList);
             //this.Visibility = Visibility.Hidden;
             new Parcel(blParcelList, parcel, this).Show();
             Hide();
@@ -130,11 +130,11 @@ namespace PL1
             IEnumerable<ParcelToList> parcels = new List<ParcelToList>();
             ComboBox options = sender as ComboBox;
             if (parcelWeight.SelectedItem == null)
-                parcels = blParcelList.getParcelToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
+                parcels = blParcelList.GetParcelToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             else if (parcelPriority.SelectedItem == null)
-                parcels = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
+                parcels = blParcelList.GetParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
             else
-                parcels = blParcelList.getParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
+                parcels = blParcelList.GetParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             view.GroupDescriptions.Clear();
 
             MyList = new ObservableCollection<ParcelToList>();
@@ -158,7 +158,7 @@ namespace PL1
                 PropertyGroupDescription property = new PropertyGroupDescription("NameCustomerReciver");
                 view.GroupDescriptions.Add(property);
             }
-            
+
         }
 
         /// <summary>
@@ -174,6 +174,26 @@ namespace PL1
                 PropertyGroupDescription property = new PropertyGroupDescription("NameCustomerSender");
                 view.GroupDescriptions.Add(property);
             }
+        }
+
+        public void Refresh()
+        {
+            IEnumerable<ParcelToList> parcels = new List<ParcelToList>();
+            if (parcelWeight.SelectedItem != null && parcelPriority.SelectedItem != null)
+                parcels = blParcelList.GetParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
+            else if (parcelPriority.SelectedItem != null)
+                parcels = blParcelList.GetParcelToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
+            else if (parcelWeight.SelectedItem != null)
+                parcels = blParcelList.GetParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
+            else
+                parcels = blParcelList.GetParcelToList();
+            view.GroupDescriptions.Clear();
+
+            MyList = new ObservableCollection<ParcelToList>();
+            foreach (var item in parcels)
+                MyList.Add(item);
+            DataContext = MyList;
+            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
     }
 }

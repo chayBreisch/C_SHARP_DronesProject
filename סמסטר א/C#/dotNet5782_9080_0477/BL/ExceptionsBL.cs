@@ -54,7 +54,7 @@ namespace BL
         }
         public class CantRemoveItem : Exception
         {
-            public CantRemoveItem(Type type) : base($"can't remove {type} because its not empty")
+            public CantRemoveItem(Type type) : base($"can't remove {type}")
             {
 
             }

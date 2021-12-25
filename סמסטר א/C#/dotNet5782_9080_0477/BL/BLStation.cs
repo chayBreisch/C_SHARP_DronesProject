@@ -30,13 +30,13 @@ namespace BL
         /// <param name="name"></param>
         /// <param name="location"></param>
         /// <param name="ChargeSlots"></param>
-        public void addStation(int id, int name, LocationBL location, int ChargeSlots)
+        public void AddStation(int id, int name, LocationBL location, int ChargeSlots)
         {
             checkUniqeIdStation(id, dalObject);
             List<DroneCharge> droneChargers = dalObject.GetDroneCharges().ToList();
             droneChargers = droneChargers.FindAll(d => d.StationID == id);
             List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
-            droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(getSpecificDroneBLFromList(d.DroneID))));
+            droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(GetSpecificDroneBL(d.DroneID))));
             BO.Station station = new BO.Station(id, name, ChargeSlots, new LocationBL(location.Longitude, location.Latitude), dronesInCharges);
             AddStationToDal(id, name, location, ChargeSlots);
         }
@@ -48,7 +48,7 @@ namespace BL
         /// <param name="name"></param>
         /// <param name="location"></param>
         /// <param name="ChargeSlots"></param>
-        public void AddStationToDal(int id, int name, LocationBL location, int ChargeSlots)
+        private void AddStationToDal(int id, int name, LocationBL location, int ChargeSlots)
         {
             DO.Station station = new DO.Station();
             station.ID = id;
@@ -63,7 +63,7 @@ namespace BL
         /// return all the stations from the dal converted to bl
         /// </summary>
         /// <returns>List<StationBL></returns>
-        public IEnumerable<BO.Station> GetStationsBL()
+        private IEnumerable<BO.Station> getStationsBL()
         {
 
             IEnumerable<DO.Station> stations = dalObject.GetStations();
@@ -84,7 +84,7 @@ namespace BL
         {
             try
             {
-                return convertDalStationToBl(dalObject.getStationById(s => s.ID == id));
+                return convertDalStationToBl(dalObject.GetStationById(s => s.ID == id));
             }
             catch (ArgumentNullException e)
             {
@@ -114,7 +114,7 @@ namespace BL
         /// </summary>
         /// <param name="station"></param>
         /// <returns>bool</returns>
-        public bool checkStationIfEmptyChargers(DO.Station station)
+        private bool checkStationIfEmptyChargers(DO.Station station)
         {
             IEnumerable<DroneCharge> droneChargers = dalObject.GetDroneCharges();
             int numOfChargers = 0;
@@ -133,12 +133,12 @@ namespace BL
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public BO.Station convertDalStationToBl(DO.Station s)
+        private BO.Station convertDalStationToBl(DO.Station s)
         {
             List<DroneCharge> droneChargers = dalObject.GetDroneCharges().ToList();
             droneChargers = droneChargers.FindAll(d => d.StationID == s.ID);
             List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
-            droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(getSpecificDroneBLFromList(d.DroneID))));
+            droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(GetSpecificDroneBL(d.DroneID))));
             return new BO.Station(s.ID, s.Name, s.ChargeSlots, new LocationBL(s.Longitude, s.Latitude), dronesInCharges);
         }
 
@@ -148,9 +148,9 @@ namespace BL
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="chargeSlots"></param>
-        public BO.Station updateDataStation(int id, int name = 0, int chargeSlots = -1)
+        public BO.Station UpdateDataStation(int id, int name = 0, int chargeSlots = -1)
         {
-            DO.Station station = dalObject.getStationById(s => s.ID == id);
+            DO.Station station = dalObject.GetStationById(s => s.ID == id);
             if (name != 0)
             {
                 station.Name = name;
@@ -159,7 +159,7 @@ namespace BL
             {
                 station.ChargeSlots = chargeSlots;
             }
-            dalObject.updateStation(station);
+            dalObject.UpdateStation(station);
             return convertDalStationToBl(station);
         }
 
@@ -169,16 +169,16 @@ namespace BL
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
-        public IEnumerable<StationToList> getStationsByChargeSlots(int status)
+        public IEnumerable<StationToList> GetStationsByChargeSlots(int status)
         {
             if (status == 0)
                 return (
-                from station in getStationToList()
+                from station in GetStationToList()
                 where station.ChargeSlotsFree == (int)status
                 select station);
             else
                 return (
-            from station in getStationToList()
+            from station in GetStationToList()
             where station.ChargeSlotsFree != 0
             select station);
         }
@@ -187,9 +187,9 @@ namespace BL
         /// return list of stationToList
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<StationToList> getStationToList()
+        public IEnumerable<StationToList> GetStationToList()
         {
-            IEnumerable<BO.Station> stations = GetStationsBL();
+            IEnumerable<BO.Station> stations = getStationsBL();
             List<StationToList> stations1 = new List<StationToList>();
             foreach (var station in stations)
             {
@@ -203,7 +203,7 @@ namespace BL
         /// </summary>
         /// <param name="stationToList"></param>
         /// <returns></returns>
-        public BO.Station convertStationToListToStationBL(StationToList stationToList)
+        public BO.Station ConvertStationToListToStationBL(StationToList stationToList)
         {
             return GetSpecificStationBL(stationToList.ID);
         }
@@ -212,7 +212,7 @@ namespace BL
         /// remove a station from dataSource list
         /// </summary>
         /// <param name="parcel"></param>
-        public void removeStation(int id)
+        public void RemoveStation(int id)
         {
             List<DroneInCharger> droneInCharger = GetSpecificStationBL(id).DronesInCharge;
             if (droneInCharger.Count > 0)

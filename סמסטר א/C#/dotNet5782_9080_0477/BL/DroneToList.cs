@@ -4,32 +4,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    namespace BO
+namespace BO
+{
+    public class DroneToList
     {
-        public class DroneToList
+        public DroneToList(Drone drone, IDAL.IDal dalObject)
         {
-            public DroneToList(Drone drone, IDAL.IDal dalObject)
-            {
-                ID = drone.ID;
-                Model = drone.Model;
-                Weight = drone.Weight;
-                DroneStatus = drone.DroneStatus;
-                BatteryStatus = drone.BatteryStatus;
-                Location = drone.Location;
-                NumOfParcelTrans = dalObject.getParcelById(p => p.DroneID == drone.ID).ID;
-            }
-            public int ID { get; set; }
-            public string Model { get; set; }
-            public DO.WeightCatagories Weight { get; set; }
-            public double BatteryStatus { get; set; }
-            public DroneStatus DroneStatus { get; set; }
-            public LocationBL Location { get; set; }
-            public int NumOfParcelTrans { get; set; }
+            ID = drone.ID;
+            Model = drone.Model;
+            Weight = drone.Weight;
+            DroneStatus = drone.DroneStatus;
+            BatteryStatus = drone.BatteryStatus;
+            Location = drone.Location;
+            NumOfParcelTrans = dalObject.GetParcelById(p => p.DroneID == drone.ID).ID;
+        }
+        public int ID { get; set; }
+        public string Model { get; set; }
+        public DO.WeightCatagories Weight { get; set; }
+        public double BatteryStatus { get; set; }
+        public DroneStatus DroneStatus { get; set; }
+        public LocationBL Location { get; set; }
+        public int NumOfParcelTrans { get; set; }
 
-            public override string ToString()
-            {
-                return $"*****************************************\nID: {ID},\n Model: {Model},\n Weight: {Weight}, \nBatteryStatus: {BatteryStatus},\n DroneStatus: {DroneStatus},\n" +
-                    $"Location: {Location}, \nNumOfParcelTrans: {NumOfParcelTrans}\n*****************************************";
-            }
+        public override string ToString()
+        {
+            return $"*****************************************\nID: {ID},\n Model: {Model},\n Weight: {Weight}, \nBatteryStatus: {BatteryStatus},\n DroneStatus: {DroneStatus},\n" +
+                $"Location: {Location}, \nNumOfParcelTrans: {NumOfParcelTrans}\n*****************************************";
         }
     }
+}

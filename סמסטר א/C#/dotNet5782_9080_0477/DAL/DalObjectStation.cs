@@ -43,7 +43,7 @@ namespace DalObject
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public Station getStationById(Predicate<Station> predicate)
+        public Station GetStationById(Predicate<Station> predicate)
         {
             //try todo
             Station station1 = new Station();
@@ -65,13 +65,13 @@ namespace DalObject
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<Station> getStationsByCondition(Predicate<Station> predicate)
+        /*public IEnumerable<Station> getStationsByCondition(Predicate<Station> predicate)
         {
             //try todo
             return (from station in DataSource.stations
                     where predicate(station)
                     select station);
-        }
+        }*/
 
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace DalObject
         /// <param name="station"></param>
         public void AddStation(Station station)
         {
-            CheckUniqestation(station.ID);
+            checkUniqestation(station.ID);
             DataSource.stations.Add(station);
         }
 
@@ -88,7 +88,7 @@ namespace DalObject
         /// update station in dal
         /// </summary>
         /// <param name="station"></param>
-        public void updateStation(Station station)
+        public void UpdateStation(Station station)
         {
             int index = DataSource.stations.FindIndex(d => d.ID == station.ID);
             DataSource.stations[index] = station;
@@ -98,7 +98,7 @@ namespace DalObject
         /// check uniqe station in dal by id
         /// </summary>
         /// <param name="id"></param>
-        public void CheckUniqestation(int id)
+        private void checkUniqestation(int id)
         {
             if (DataSource.stations.Any(station => station.ID == id))
                 throw new NotUniqeID(id, typeof(Station));
@@ -108,7 +108,7 @@ namespace DalObject
         /// return length of station in dal
         /// </summary>
         /// <returns>int</returns>
-        public int lengthStation()
+        public int LengthStation()
         {
             return DataSource.stations.Count;
         }
@@ -128,7 +128,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public int getIndexOfStation(int id)
+        private int getIndexOfStation(int id)
         {
             try
             {

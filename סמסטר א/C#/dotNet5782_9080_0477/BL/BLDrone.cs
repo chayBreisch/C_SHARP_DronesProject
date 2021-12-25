@@ -31,7 +31,7 @@ namespace BL
         /// <param name="model"></param>
         /// <param name="maxWeight"></param>
         /// <param name="stationID"></param>
-        public void addDrone(int id, string model, int maxWeight, int stationID)
+        public void AddDrone(int id, string model, int maxWeight, int stationID)
         {
             checkUniqeIdDrone(id, dalObject);
             if (maxWeight < 1 || maxWeight > 3)
@@ -39,7 +39,7 @@ namespace BL
                 throw new OutOfRange("weight");
             }
             BO.Drone droneBL = new BO.Drone();
-            DO.Station station = dalObject.getStationById(s => s.ID == stationID);
+            DO.Station station = dalObject.GetStationById(s => s.ID == stationID);
             if (station.ID != 0)
             {
                 droneBL.Model = model;
@@ -50,7 +50,7 @@ namespace BL
                 droneBL.Location = new LocationBL(station.Longitude, station.Latitude);
 
 
-                AddDroneToDal(id, model, maxWeight);
+                addDroneToDal(id, model, maxWeight);
                 addDroneCharge(stationID, id);
                 droneBLList.Add(droneBL);
             }
@@ -64,7 +64,7 @@ namespace BL
         /// <param name="id"></param>
         /// <param name="model"></param>
         /// <param name="maxWeight"></param>
-        public void AddDroneToDal(int id, string model, int maxWeight)
+        private void addDroneToDal(int id, string model, int maxWeight)
         {
 
             DO.Drone drone = new DO.Drone();
@@ -95,7 +95,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>DroneBL</returns>
-        public BO.Drone getSpecificDroneBLFromList(int id)
+        public BO.Drone GetSpecificDroneBL(int id)
         {
             try
             {
@@ -107,22 +107,13 @@ namespace BL
             }
         }
 
-        /// <summary>
-        /// returns a specific drone by id from dal converted to bl
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>DroneBL</returns>
-        public BO.Drone GetSpecificDroneBL(int id)
-        {
-            return getSpecificDroneBLFromList(id);
-        }
 
         /// <summary>
         /// convert a drone from dal to bl
         /// </summary>
         /// <param name="d"></param>
         /// <returns>DroneBL</returns>
-        public BO.Drone convertDalDroneToBl(DO.Drone d)
+        private BO.Drone convertDalDroneToBl(DO.Drone d)
         {
             //לבדוק מה עם parcellattransfor
             return GetSpecificDroneBL(d.ID);
@@ -132,7 +123,7 @@ namespace BL
         /// update the drone
         /// </summary>
         /// <param name="drone"></param>
-        public void updateDrone(BO.Drone drone)
+        private void updateDrone(BO.Drone drone)
         {
             int index = droneBLList.FindIndex(d => d.ID == drone.ID);
             droneBLList[index] = drone;
@@ -143,15 +134,15 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
-        public BO.Drone updateDataDroneModel(int id, string model)
+        public BO.Drone UpdateDataDroneModel(int id, string model)
         {
-            BO.Drone droneBl = getSpecificDroneBLFromList(id);
+            BO.Drone droneBl = GetSpecificDroneBL(id);
             droneBl.Model = model;
             updateDrone(droneBl);
 
-            DO.Drone drone = dalObject.getDroneById(d => d.ID == id);
+            DO.Drone drone = dalObject.GetDroneById(d => d.ID == id);
             drone.Model = model;
-            dalObject.updateDrone(drone);
+            dalObject.UpdateDrone(drone);
             return droneBl;
         }
 
@@ -198,7 +189,7 @@ namespace BL
         /// return all droneToList
         /// </summary>
         /// <returns></returns>
-        public IEnumerable <DroneToList> getDroneToList()
+        public IEnumerable <DroneToList> GetDronesToList()
         {
             List<BO.Drone> drones = droneBLList;
             List<DroneToList> drone1 = new List<DroneToList>();
@@ -214,9 +205,9 @@ namespace BL
         /// </summary>
         /// <param name="droneToList"></param>
         /// <returns></returns>
-        public BO.Drone convertDroneToListToDroneBL(DroneToList droneToList)
+        public BO.Drone ConvertDroneToListToDroneBL(DroneToList droneToList)
         {
-            return getSpecificDroneBLFromList(droneToList.ID);
+            return GetSpecificDroneBL(droneToList.ID);
         }
 
         /// <summary>
@@ -224,10 +215,10 @@ namespace BL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<DroneToList> getDroneToListByCondition(Predicate<DroneToList> predicate)
+        public IEnumerable<DroneToList> GetDroneToListByCondition(Predicate<DroneToList> predicate)
         {
             //try todo
-            return (from drone in getDroneToList()
+            return (from drone in GetDronesToList()
                     where predicate(drone)
                     select drone);
         }

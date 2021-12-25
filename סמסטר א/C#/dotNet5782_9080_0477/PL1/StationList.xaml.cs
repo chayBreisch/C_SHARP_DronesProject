@@ -24,7 +24,7 @@ namespace PL1
         BlApi.Bl blstationList;
         MainWindow mainWindow;
         ObservableCollection<StationToList> MyList = new ObservableCollection<StationToList>();
-      
+
 
         /// <summary>
         /// constructor
@@ -36,7 +36,7 @@ namespace PL1
             mainWindow = main;
             WindowStyle = WindowStyle.None;
             blstationList = bl;
-            foreach (var item in blstationList.getStationToList())
+            foreach (var item in blstationList.GetStationToList())
                 MyList.Add(item);
             DataContext = MyList;
             //DroneListView.ItemsSource = bl.GetDronesBL();
@@ -50,7 +50,7 @@ namespace PL1
         private void chargeSlotsFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox options = sender as ComboBox;
-            IEnumerable<StationToList> stations = blstationList.getStationsByChargeSlots(options.SelectedIndex);
+            IEnumerable<StationToList> stations = blstationList.GetStationsByChargeSlots(options.SelectedIndex);
             StationListView.ItemsSource = stations;
         }
 
@@ -62,7 +62,7 @@ namespace PL1
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            IEnumerable<StationToList> stations = blstationList.getStationToList();
+            IEnumerable<StationToList> stations = blstationList.GetStationToList();
             chargeSlotsFilter.SelectedItem = null;
             //weightFilter.SelectedItem = null;
             StationListView.ItemsSource = stations;
@@ -88,7 +88,7 @@ namespace PL1
         {
             sender.ToString();
             StationToList stationList = (sender as ListView).SelectedValue as StationToList;
-            BO.Station station = blstationList.convertStationToListToStationBL(stationList);
+            BO.Station station = blstationList.ConvertStationToListToStationBL(stationList);
             //this.Visibility = Visibility.Hidden;
             new Station(blstationList, station, this).Show();
             Hide();
@@ -105,10 +105,22 @@ namespace PL1
             Hide();
         }
 
+
+
         private void txtFilter_TextChanged()
         {
-           // List<BO.Station> stations = blstationList.getStationToList().ChargeSlotsFree >= 0
+            // List<BO.Station> stations = blstationList.getStationToList().ChargeSlotsFree >= 0
 
+        }
+
+        public void Refresh()
+        {
+            IEnumerable<StationToList> stations;
+            if (chargeSlotsFilter.SelectedItem != null)
+                stations = blstationList.GetStationsByChargeSlots(chargeSlotsFilter.SelectedIndex);
+            else
+                stations = blstationList.GetStationToList();
+            StationListView.ItemsSource = stations;
         }
     }
 }

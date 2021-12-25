@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-    namespace DO
+namespace DO
+{
+    public struct DroneCharge
     {
-        public struct DroneCharge
+        public int DroneID { get; set; }
+        public int StationID { get; set; }
+        public override string ToString()
         {
-            public int DroneID { get; set; }
-            public int StationID { get; set; }
-            public override string ToString()
-            {
-                return $"{DroneID}";
-            }
+            return $"{DroneID}";
         }
     }
+}

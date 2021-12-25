@@ -28,7 +28,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="dalObject"></param>
-        public void checkUniqeIDCustomer(ulong id)
+        /*public void checkUniqeIDCustomer(ulong id)
         {
             IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
             foreach (var customer in customers)
@@ -38,7 +38,7 @@ namespace BL
                     throw new NotUniqeID(id, typeof(DO.Customer));
                 }
             }
-        }
+        }*/
 
         /// <summary>
         /// add a customer to the bl
@@ -55,7 +55,7 @@ namespace BL
             customer.Name = name;
             customer.Phone = phone;
             customer.Location = new LocationBL(location.Longitude, location.Latitude);
-            AddCustomerToDal(id, name, phone, location);
+            addCustomerToDal(id, name, phone, location);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace BL
         /// <param name="name"></param>
         /// <param name="phone"></param>
         /// <param name="location"></param>
-        public void AddCustomerToDal(ulong id, string name, string phone, LocationBL location)
+        private void addCustomerToDal(ulong id, string name, string phone, LocationBL location)
         {
             DO.Customer customer = new DO.Customer();
             customer.ID = id;
@@ -80,7 +80,7 @@ namespace BL
         /// return all the customers from the dal converted to bl
         /// </summary>
         /// <returns> List<CustomerBL> </returns>
-        public IEnumerable<BO.Customer> GetCustomersBL()
+        private IEnumerable<BO.Customer> getCustomersBL()
         {
             IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
             List<BO.Customer> customers1 = new List<BO.Customer>();
@@ -100,7 +100,7 @@ namespace BL
         {
             try
             {
-                return convertDalCustomerToBl(dalObject.getCustomerById(c => c.ID == id));
+                return convertDalCustomerToBl(dalObject.GetCustomerById(c => c.ID == id));
             }
             catch (ArgumentNullException e)
             {
@@ -114,7 +114,7 @@ namespace BL
         /// </summary>
         /// <param name="c"></param>
         /// <returns>CustomerBL</returns>
-        public BO.Customer convertDalCustomerToBl(DO.Customer c)
+        private BO.Customer convertDalCustomerToBl(DO.Customer c)
         {
             List<ParcelAtCustomer> parcelSendedByCustomers = new List<ParcelAtCustomer>();
             List<ParcelAtCustomer> parcelSendedToCustomers = new List<ParcelAtCustomer>();
@@ -126,7 +126,7 @@ namespace BL
                 if (p.TargetID == c.ID)
                     parcelSendedToCustomers.Add(new ParcelAtCustomer(convertDalToParcelBL(p), c.ID, dalObject));
 
-            });
+            };
 
             return new BO.Customer
             {
@@ -145,7 +145,7 @@ namespace BL
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="phone"></param>
-        public void updateDataCustomer(ulong id, string name = null, string phone = null)
+        /*public void updateDataCustomer(ulong id, string name = null, string phone = null)
         {
             DO.Customer customer = dalObject.getCustomerById( c => c.ID == id);
             if (name != null)
@@ -157,13 +157,13 @@ namespace BL
                 customer.Phone = phone;
             }
             dalObject.updateCustomer(customer);
-        }
+        }*/
 
         /// <summary>
         /// check if there is a customer with the id
         /// </summary>
         /// <param name="id"></param>
-        public void checkIfCustomerWithThisID(ulong id)
+        private void checkIfCustomerWithThisID(ulong id)
         {
             bool check = false;
             IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
@@ -182,9 +182,9 @@ namespace BL
         /// return all customerToList
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<CustomerToList> getCustomerToList()
+        public IEnumerable<CustomerToList> GetCustomerToList()
         {
-            IEnumerable<BO.Customer> customers = GetCustomersBL();
+            IEnumerable<BO.Customer> customers = getCustomersBL();
             List<CustomerToList> customers1 = new List<CustomerToList>();
             foreach (var customer in customers)
             {
@@ -198,7 +198,7 @@ namespace BL
         /// </summary>
         /// <param name="customerToList"></param>
         /// <returns></returns>
-        public BO.Customer convertCustomerToListToCustomerlBL(CustomerToList customerToList)
+        public BO.Customer ConvertCustomerToListToCustomerlBL(CustomerToList customerToList)
         {
             return GetSpecificCustomerBL(customerToList.ID);
         }

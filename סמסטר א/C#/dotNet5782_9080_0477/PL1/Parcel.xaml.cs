@@ -39,10 +39,10 @@ namespace PL1
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
             addStation.Visibility = Visibility.Visible;
-            weightParcel.ItemsSource = blparcel.getweightCategoriesEnumItem();
-            weightParcel.SelectedItem = blparcel.getweightCategoriesEnumItem().GetValue(1);
-            priorityParcel.ItemsSource = blparcel.getPrioritiesEnumItem();
-            priorityParcel.SelectedItem = blparcel.getPrioritiesEnumItem().GetValue(0);
+            weightParcel.ItemsSource = blparcel.GetweightCategoriesEnumItem();
+            weightParcel.SelectedItem = blparcel.GetweightCategoriesEnumItem().GetValue(1);
+            priorityParcel.ItemsSource = blparcel.GetPrioritiesEnumItem();
+            priorityParcel.SelectedItem = blparcel.GetPrioritiesEnumItem().GetValue(0);
         }
 
         /// <summary>
@@ -158,8 +158,10 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickCloseParcel(object sender, RoutedEventArgs e)
         {
-            ParentWindow.Show();
+            ParentWindow.Refresh();
             //refreshList(this.parcelBL);
+            //ParentWindow.ParcelListView.Items.Refresh();
+            ParentWindow.Show();
             Close();
         }
 
@@ -188,7 +190,7 @@ namespace PL1
                 MessageBoxResult result = MessageBox.Show("are you sure you want to remove parcel?", "remove parcel", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.OK)
                 {
-                    blparcel.removeParcel(parcelBL.ID);
+                    blparcel.RemoveParcel(parcelBL.ID);
                     Button_ClickCloseParcel(sender, e);
                     /* ParentWindow.Show();
                      Close();*/
@@ -241,48 +243,50 @@ namespace PL1
         {
             // view.GroupDescriptions.Clear();
 
-            if (ParentWindow.parcelPriority.SelectedIndex != -1)
+         /*   if (ParentWindow.parcelPriority.SelectedItem != null)
             {
                 if ((ParentWindow.parcelPriority.SelectedItem.ToString() == parcel.Priorities.ToString()))
                 {
                     {
                         ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
 
-                        /*                        foreach (var item in blparcel.getParcelToListByCondition((P) => P.Priority == parcel.Priorities))
-                                                    MyList.Add(item);
-                                                DataContext = MyList;
-                                                ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-                                              */
-                        ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToListByCondition((P) => P.Priority == parcel.Priorities);
+                        foreach (var item in blparcel.getParcelToListByCondition((P) => P.Priority == parcel.Priorities))
+                            MyList.Add(item);
+                        DataContext = MyList;
+                        ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+
+                        //ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToListByCondition((P) => P.Priority == parcel.Priorities);
                     }
                 }
             }
-            else if (ParentWindow.parcelWeight.SelectedIndex != -1)
+            else if (ParentWindow.parcelWeight.SelectedItem != null)
             {
                 if (ParentWindow.parcelWeight.SelectedItem.ToString() == parcel.Weight.ToString())
                 {
-                    /*                    ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
+                    ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
 
-                                        foreach (var item in blparcel.getParcelToListByCondition((P) => P.Weight == parcel.Weight))
-                                            MyList.Add(item);
-                                        DataContext = MyList;
-                                        ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-                    */
-                    ParentWindow.ParcelListView.ItemsSource = blparcel.getDroneToListByCondition((D) => D.Weight == parcel.Weight);
+                    foreach (var item in blparcel.getParcelToListByCondition((P) => P.Weight == parcel.Weight))
+                        MyList.Add(item);
+                    DataContext = MyList;
+                    ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+
+                    //ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToListByCondition((p) => p.Weight == parcel.Weight);
                 }
 
             }
             else
             {
-                /*               ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
-                               List<BO.ParcelToList> p = blparcel.getParcelToList();
-                               foreach (var item in p)
-                                   MyList.Add(item);
-                               DataContext = MyList;
-                               ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-               */
-                ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToList();
-            }
+                ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
+                IEnumerable<BO.ParcelToList> p = blparcel.getParcelToList();
+                ParentWindow.view.GroupDescriptions.Clear();
+
+                foreach (var item in p)
+                    MyList.Add(item);
+                DataContext = MyList;
+                ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+
+                //ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToList();
+            }*/
 
         }
     }

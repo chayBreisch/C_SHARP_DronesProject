@@ -40,7 +40,7 @@ namespace BL
             {
                 throw new CantReturnDalObject();
             }
-            double[] arrayEletric = dalObject.requestElectric();
+            double[] arrayEletric = dalObject.RequestElectric();
             double electricAvailable = arrayEletric[0];
             double electricLightHeight = arrayEletric[1];
             double electricMidHeight = arrayEletric[2];
@@ -50,8 +50,8 @@ namespace BL
             foreach (var drone in dalObject.GetDrones())
             {
                 BO.Drone droneBL = new BO.Drone { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight };
-                DO.Parcel parcel = dalObject.getParcelById(p => p.DroneID == drone.ID);
-                DO.Customer customerSender = dalObject.getCustomerById(c => c.ID == parcel.SenderID);
+                DO.Parcel parcel = dalObject.GetParcelById(p => p.DroneID == drone.ID);
+                DO.Customer customerSender = dalObject.GetCustomerById(c => c.ID == parcel.SenderID);
                 //check if the drone has a parcel
                 if (parcel.SenderID != 10000000)
                 //if (!parcel.Equals(null))
@@ -75,7 +75,7 @@ namespace BL
                             droneBL.Location.Longitude = customerSender.Longitude;
                             droneBL.Location.Latitude = customerSender.Latitude;
                         }
-                        DO.Customer customerReciever = dalObject.getCustomerById(c => c.ID == parcel.TargetID);
+                        DO.Customer customerReciever = dalObject.GetCustomerById(c => c.ID == parcel.TargetID);
                         double electricitySenderToReciever = calcElectry(new LocationBL(customerSender.Longitude, customerSender.Latitude), new LocationBL
                             (customerReciever.Longitude, customerReciever.Latitude), (int)parcel.Weight);
                         DO.Station station1 = stationWithMinDisAndEmptySlots(new LocationBL(customerReciever.Latitude, customerReciever.Longitude));
@@ -95,7 +95,7 @@ namespace BL
                 //check if drone is in maintenance
                 if (droneBL.DroneStatus == DroneStatus.Maintenance)
                 {
-                    int length = dalObject.lengthStation();
+                    int length = dalObject.LengthStation();
                     DO.Station station = dalObject.GetStations().ToList()[rand.Next(0, length)];
                     droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
                     droneBL.BatteryStatus = rand.Next(0, 21);
@@ -112,7 +112,7 @@ namespace BL
                     if (parcelBLsWithSuppliedParcel.Count > 0)
                     {
                         BO.Parcel parcelBL = convertDalToParcelBL(parcelBLsWithSuppliedParcel[rand.Next(0, parcelBLsWithSuppliedParcel.Count)]);
-                        DO.Customer customer = dalObject.getCustomerById(c => c.ID == parcelBL.Sender.ID);
+                        DO.Customer customer = dalObject.GetCustomerById(c => c.ID == parcelBL.Sender.ID);
                         droneBL.Location = new LocationBL(customer.Latitude, customer.Longitude);
                         DO.Station station1 = stationWithMinDisAndEmptySlots(droneBL.Location);
                         double electry = calcElectry(new LocationBL(station1.Longitude, station1.Latitude), droneBL.Location, 0);
@@ -131,10 +131,10 @@ namespace BL
         /// <param name="location2"></param>
         /// <param name="weight"></param>
         /// <returns>double</returns>
-        public double calcElectry(LocationBL locatin1, LocationBL location2, int weight)
+        private double calcElectry(LocationBL locatin1, LocationBL location2, int weight)
         {
             double distance1 = distance(locatin1, location2);
-            return distance1 * dalObject.requestElectric()[weight];
+            return distance1 * dalObject.RequestElectric()[weight];
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace BL
         /// <param name="location"></param>
         /// <returns>Station</returns>
         //return the stations with the minimum distance from the location and with empty slots
-        public DO.Station stationWithMinDisAndEmptySlots(LocationBL location)////////////////////////////
+        private DO.Station stationWithMinDisAndEmptySlots(LocationBL location)////////////////////////////
         {
             double minDis = -1;
             double dis2 = 0;
@@ -166,7 +166,7 @@ namespace BL
         /// </summary>
         /// <param name="location"></param>
         /// <returns>Station</returns>
-        public DO.Station findClosestStation(LocationBL location)
+        private DO.Station findClosestStation(LocationBL location)
         {
             double minDis = -1;
             double dis2 = 0;
@@ -248,11 +248,11 @@ namespace BL
             return stationsWithEmptyChargers;
         }*/
 
-        public Array getweightCategoriesEnumItem()
+        public Array GetweightCategoriesEnumItem()
         {
             return Enum.GetValues(typeof(WeightCatagories));
         }
-        public Array getPrioritiesEnumItem()
+        public Array GetPrioritiesEnumItem()
         {
             return Enum.GetValues(typeof(Priorities));
         }

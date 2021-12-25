@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    namespace BO
+namespace BO
+{
+    public class DroneChargeBL
     {
-        public class DroneChargeBL
+        public int DroneId { get; set; }
+        public int StationId { get; set; }
+        public override string ToString()
         {
-            public int DroneId { get; set; }
-            public int StationId { get; set; }
-            public override string ToString()
-            {
-                return $"droneCharge: DroneId: {DroneId}, StationId: {StationId}";
-            }
+            return $"droneCharge: DroneId: {DroneId}, StationId: {StationId}";
         }
     }
+}
 

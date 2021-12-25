@@ -52,7 +52,7 @@ namespace DalObject
         }
 */
 
-        public Drone getDroneById(Predicate<Drone> predicate)
+        public Drone GetDroneById(Predicate<Drone> predicate)
         {
             Drone drone1 = new Drone();
             try
@@ -69,7 +69,7 @@ namespace DalObject
         /// check if uniqe drone 
         /// </summary>
         /// <param name="id"></param>
-        public void CheckUniqeDrone(int id)
+        private void checkUniqeDrone(int id)
         {
             if (DataSource.drones.Any(drone => drone.ID == id))
                 throw new NotUniqeID(id, typeof(Drone));
@@ -81,7 +81,7 @@ namespace DalObject
         /// <param name="drone"></param>
         public void AddDrone(Drone drone)
         {
-            CheckUniqeDrone(drone.ID);
+            checkUniqeDrone(drone.ID);
             DataSource.drones.Add(drone);
         }
 
@@ -89,7 +89,7 @@ namespace DalObject
         /// update the drone in dal
         /// </summary>
         /// <param name="drone"></param>
-        public void updateDrone(Drone drone)
+        public void UpdateDrone(Drone drone)
         {
             int index = DataSource.drones.FindIndex(d => d.ID == drone.ID);
             DataSource.drones[index] = drone;
@@ -100,12 +100,12 @@ namespace DalObject
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<Drone> getDronesByCondition(Predicate<Drone> predicate)
+        /*public IEnumerable<Drone> getDronesByCondition(Predicate<Drone> predicate)
         {
             //try todo
             return (from drone in DataSource.drones
                     where predicate(drone)
                     select drone);
-        }
+        }*/
     }
 }

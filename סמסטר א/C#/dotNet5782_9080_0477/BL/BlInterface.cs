@@ -13,35 +13,24 @@ namespace BlApi
         //##############################################################
         //Add functions
         //##############################################################
-
         public void AddCustomer(ulong id, string name, string phone, LocationBL location);
-        public void AddCustomerToDal(ulong id, string name, string phone, LocationBL location);
         public void AddParcel(ulong sender, ulong target, int Weight, int priority);
-        public void AddParcelToDal(/*ulong id,*/ ulong sender, ulong target, int Weight, int priority);
-        public void addStation(int id, int name, LocationBL location, int ChargeSlots);
-        public void AddStationToDal(int id, int name, LocationBL location, int ChargeSlots);
-        public void addDrone(int id, string model, int maxWeight, int stationID);
-        public void AddDroneToDal(int id, string model, int maxWeight);
+        public void AddStation(int id, int name, LocationBL location, int ChargeSlots);
+        public void AddDrone(int id, string model, int maxWeight, int stationID);
 
 
         //##############################################################
         //Get list functions
         //##############################################################
-        public IEnumerable<BO.Customer> GetCustomersBL();
-        public IEnumerable<DO.Parcel> getParcelsWithoutoutDrone();
-        public IEnumerable<BO.Station> GetStationsBL();
-        public IEnumerable<BO.Parcel> GetParcelsBL();
-        public IEnumerable<StationToList> getStationToList();
-        public IEnumerable<DroneToList> getDroneToList();
-        public IEnumerable<StationToList> getStationsByChargeSlots(int status);
-        public IEnumerable<ParcelToList> getParcelToList();
-        public IEnumerable<CustomerToList> getCustomerToList();
-        public IEnumerable<DroneToList> getDroneToListByCondition(Predicate<DroneToList> predicate);
-        public IEnumerable<ParcelToList> getParcelToListByCondition(Predicate<ParcelToList> predicate);
-        public Array getweightCategoriesEnumItem();
-        public Array getPrioritiesEnumItem();
-        public IEnumerable<ParcelToList> getParcelToListWithFilter(int weight, int prioritty);
-        public IEnumerable<ParcelToList> getPrcelToListByCondition(Predicate<ParcelToList> predicate);
+        public IEnumerable<StationToList> GetStationToList();
+        public IEnumerable<DroneToList> GetDronesToList();
+        public IEnumerable<StationToList> GetStationsByChargeSlots(int status);
+        public IEnumerable<ParcelToList> GetParcelToList();
+        public IEnumerable<CustomerToList> GetCustomerToList();
+        public IEnumerable<DroneToList> GetDroneToListByCondition(Predicate<DroneToList> predicate);
+        public IEnumerable<ParcelToList> GetParcelToListByCondition(Predicate<ParcelToList> predicate);
+        public Array GetweightCategoriesEnumItem();
+        public Array GetPrioritiesEnumItem();
 
 
         //##############################################################
@@ -50,57 +39,40 @@ namespace BlApi
         public BO.Customer GetSpecificCustomerBL(ulong id);
         public BO.Parcel GetSpecificParcelBL(int id);
         public BO.Station GetSpecificStationBL(int id);
-        public BO.Drone getSpecificDroneBLFromList(int id);
         public BO.Drone GetSpecificDroneBL(int id);
+
 
         //##############################################################
         //convert functions
         //##############################################################
-        public BO.Customer convertDalCustomerToBl(DO.Customer c);
-        public BO.Drone convertDalDroneToBl(DO.Drone d);
-        public BO.Drone convertDroneToListToDroneBL(DroneToList droneToList);
-        public BO.Station convertStationToListToStationBL(StationToList stationToList);
-        public BO.Parcel convertParcelToListToParcelBL(ParcelToList parcelToList);
-        public BO.Customer convertCustomerToListToCustomerlBL(CustomerToList customerToList);
-        public BO.Station convertDalStationToBl(DO.Station s);
-        public BO.Parcel convertDalToParcelBL(DO.Parcel p);
+        public BO.Drone ConvertDroneToListToDroneBL(DroneToList droneToList);
+        public BO.Station ConvertStationToListToStationBL(StationToList stationToList);
+        public BO.Parcel ConvertParcelToListToParcelBL(ParcelToList parcelToList);
+        public BO.Customer ConvertCustomerToListToCustomerlBL(CustomerToList customerToList);
 
 
         //##############################################################
         //update functions
         //##############################################################
-        public BO.Station updateDataStation(int id, int name = 0, int chargeSlots = -1);
-        public BO.Drone updateSendDroneToCharge(int id);
-        public BO.Drone updateUnchargeDrone(int id, double timeInCharge);
-        public void updateConnectParcelToDrone(int id);
-        public void updateDataCustomer(ulong id, string name = null, string phone = null);
-        public void updateCollectParcelByDrone(int id);
-        public void updateSupplyParcelByDrone(int id);
-        public void updateDrone(BO.Drone drone);
-        public BO.Drone updateDataDroneModel(int id, string model);
+        public BO.Station UpdateDataStation(int id, int name = 0, int chargeSlots = -1);
+        public BO.Drone UpdateSendDroneToCharge(int id);
+        public BO.Drone UpdateUnchargeDrone(int id, double timeInCharge);
+        public void UpdateConnectParcelToDrone(int id);
+        public void UpdateCollectParcelByDrone(int id);
+        public void UpdateSupplyParcelByDrone(int id);
+        public BO.Drone UpdateDataDroneModel(int id, string model);
 
 
         //##############################################################
         //remove functions
         //##############################################################
-        public void removeParcel(int id);
-        public void removeStation(int id);
-
-
-        //##############################################################
-        //check functions
-        //##############################################################
-        public void checkUniqeIDCustomer(ulong id);
-        public void checkIfCustomerWithThisID(ulong id);
-        public bool checkStationIfEmptyChargers(DO.Station station);
+        public void RemoveParcel(int id);
+        public void RemoveStation(int id);
 
 
         //##############################################################
         //help functions
         //##############################################################
-        public double calcElectry(LocationBL locatin1, LocationBL location2, int weight);
-        public DO.Station stationWithMinDisAndEmptySlots(LocationBL location);
-        public DO.Station findClosestStation(LocationBL location);
         public ParcelStatus findParcelStatus(BO.Parcel parcel);
 
 
@@ -128,6 +100,9 @@ namespace BlApi
         //public IEnumerable<BO.Parcel> GetParcelsWithoutoutDrone();
         //public IEnumerable<BO.Station> GetStationWithEmptyChargers();
         //public IEnumerable<BO.Drone> GetDronesBL();
+        //public IEnumerable<ParcelToList> getParcelToListWithFilter(int weight, int prioritty);
+        //public IEnumerable<ParcelToList> getPrcelToListByCondition(Predicate<ParcelToList> predicate);
+        //public void updateDataCustomer(ulong id, string name = null, string phone = null);
 
     }
 }

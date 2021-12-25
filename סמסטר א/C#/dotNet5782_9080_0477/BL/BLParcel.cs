@@ -47,7 +47,7 @@ namespace BL
             parcel.PickedUp = null;
             parcel.Delivered = null;
             parcel.Drone = null;
-            AddParcelToDal(sender, target, Weight, priority);
+            addParcelToDal(sender, target, Weight, priority);
 
         }
 
@@ -58,10 +58,10 @@ namespace BL
         /// <param name="target"></param>
         /// <param name="Weight"></param>
         /// <param name="priority"></param>
-        public void AddParcelToDal(/*ulong id,*/ ulong sender, ulong target, int Weight, int priority)
+        private void addParcelToDal(/*ulong id,*/ ulong sender, ulong target, int Weight, int priority)
         {
             DO.Parcel parcel = new DO.Parcel();
-            parcel.ID = dalObject.lengthParcel() + 1;
+            parcel.ID = dalObject.LengthParcel() + 1;
             checkUniqeIdParcel(parcel.ID, dalObject);
             parcel.SenderID = sender;
             parcel.TargetID = target;
@@ -74,7 +74,7 @@ namespace BL
         /// return all the parcels from the dal converted to bl
         /// </summary>
         /// <returns>List<ParcelBL> </returns>
-        public IEnumerable<BO.Parcel> GetParcelsBL()
+        private IEnumerable<BO.Parcel> getParcelsBL()
         {
 
             IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
@@ -95,7 +95,7 @@ namespace BL
         {
             try
             {
-                return convertDalToParcelBL(dalObject.getParcelById(p => p.ID == id));
+                return convertDalToParcelBL(dalObject.GetParcelById(p => p.ID == id));
             }
             catch (ArgumentNullException e)
             {
@@ -107,7 +107,7 @@ namespace BL
         /// return parcels that are not connected to a drone
         /// </summary>
         /// <returns> List<Parcel></returns>
-        public IEnumerable<DO.Parcel> getParcelsWithoutoutDrone()
+        private IEnumerable<DO.Parcel> getParcelsWithoutoutDrone()
         {
             IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
             List<DO.Parcel> parcels1 = new List<DO.Parcel>();
@@ -126,14 +126,14 @@ namespace BL
         /// </summary>
         /// <param name="p"></param>
         /// <returns>ParcelBL</returns>
-        public BO.Parcel convertDalToParcelBL(DO.Parcel p)
+        private BO.Parcel convertDalToParcelBL(DO.Parcel p)
         {
-            DO.Customer sender = dalObject.getCustomerById(c => c.ID == p.SenderID);
-            DO.Customer target = dalObject.getCustomerById(c => c.ID == p.TargetID);
+            DO.Customer sender = dalObject.GetCustomerById(c => c.ID == p.SenderID);
+            DO.Customer target = dalObject.GetCustomerById(c => c.ID == p.TargetID);
             BO.Drone drone = new BO.Drone();
 
             if (p.DroneID != 0)
-                drone = convertDalDroneToBl(dalObject.getDroneById(d => d.ID == p.DroneID));
+                drone = convertDalDroneToBl(dalObject.GetDroneById(d => d.ID == p.DroneID));
             return new BO.Parcel(p.ID, p.Weight, p.Priority, p.Requested, p.Scheduled, p.Delivered, p.PickedUp, drone, sender.ID, target.ID, dalObject);
 
         }
@@ -142,9 +142,9 @@ namespace BL
         /// return all ParcelToList
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ParcelToList> getParcelToList()
+        public IEnumerable<ParcelToList> GetParcelToList()
         {
-            IEnumerable<BO.Parcel> parcels = GetParcelsBL();
+            IEnumerable<BO.Parcel> parcels = getParcelsBL();
             List<ParcelToList> parcels1 = new List<ParcelToList>();
             foreach (var parcel in parcels)
             {
@@ -158,7 +158,7 @@ namespace BL
         /// </summary>
         /// <param name="parcelToList"></param>
         /// <returns></returns>
-        public BO.Parcel convertParcelToListToParcelBL(ParcelToList parcelToList)
+        public BO.Parcel ConvertParcelToListToParcelBL(ParcelToList parcelToList)
         {
             return GetSpecificParcelBL(parcelToList.ID);
         }
@@ -202,16 +202,16 @@ namespace BL
         }*/
 
 
-        public IEnumerable<ParcelToList> getParcelToListByCondition(Predicate<ParcelToList> predicate)
+        public IEnumerable<ParcelToList> GetParcelToListByCondition(Predicate<ParcelToList> predicate)
         {
             //try todo
-            return (from parcel in getParcelToList()
+            return (from parcel in GetParcelToList()
                     where predicate(parcel)
                     select parcel);
         }
 
 
-        public IEnumerable<ParcelToList> getParcelToListWithFilter(int weight, int prioritty)
+        /*public IEnumerable<ParcelToList> getParcelToListWithFilter(int weight, int prioritty)
         {
 
             if (prioritty == -1)
@@ -219,16 +219,16 @@ namespace BL
             else if (weight == -1)
                 return getParcelToListByCondition(parcel => parcel.Priority == (Priorities)weight);
             return getParcelToListByCondition(parcel => parcel.Priority == (Priorities)prioritty && parcel.Weight == (WeightCatagories)weight);
-        }
+        }*/
 
 
-        public IEnumerable<ParcelToList> getPrcelToListByCondition(Predicate<ParcelToList> predicate)
+        /*public IEnumerable<ParcelToList> getPrcelToListByCondition(Predicate<ParcelToList> predicate)
         {
             //try todo
             return (from parcel in getParcelToList()
                     where predicate(parcel)
                     select parcel);
-        }
+        }*/
         /// <summary>
         /// returns the status of the parcel
         /// </summary>
@@ -249,9 +249,9 @@ namespace BL
         /// remove a parcel from dataSource list
         /// </summary>
         /// <param name="parcel"></param>
-        public void removeParcel(int id)
+        public void RemoveParcel(int id)
         {
-            BO.Drone drone = getSpecificDroneBLFromList(dalObject.getParcelById(p => p.ID == id).DroneID);
+            BO.Drone drone = GetSpecificDroneBL(dalObject.GetParcelById(p => p.ID == id).DroneID);
             if (drone != null)
             {
                 /*drone.parcelInDelivery = null;

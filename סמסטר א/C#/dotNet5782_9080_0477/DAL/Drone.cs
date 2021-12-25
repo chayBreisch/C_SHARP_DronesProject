@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 
 
-    namespace DO
+namespace DO
+{
+    public struct Drone
     {
-        public struct Drone
+        public int ID { get; set; }
+        public string Model { get; set; }
+        public WeightCatagories MaxWeight { get; set; }
+        public override string ToString()
         {
-            public int ID { get; set; }
-            public string Model { get; set; }
-            public WeightCatagories MaxWeight { get; set; }
-            public override string ToString()
-            {
-                return $"ID: {ID}, Model: {Model},  MaxWeight: {MaxWeight}";
-            }
+            return $"ID: {ID}, Model: {Model},  MaxWeight: {MaxWeight}";
         }
     }
+}
 

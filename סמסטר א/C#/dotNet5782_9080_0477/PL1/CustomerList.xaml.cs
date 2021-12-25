@@ -38,7 +38,7 @@ namespace PL1
             mainWindow = main;
             WindowStyle = WindowStyle.None;
             blcustomer = bl;
-            foreach (var item in blcustomer.getCustomerToList())
+            foreach (var item in blcustomer.GetCustomerToList())
                 MyList.Add(item);
             DataContext = MyList;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
@@ -66,7 +66,7 @@ namespace PL1
         {
             sender.ToString();
             CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
-            BO.Customer customer = blcustomer.convertCustomerToListToCustomerlBL(customerToList);
+            BO.Customer customer = blcustomer.ConvertCustomerToListToCustomerlBL(customerToList);
             //this.Visibility = Visibility.Hidden;
             new Customer(blcustomer, customer, this).Show();
             Hide();

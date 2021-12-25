@@ -39,8 +39,8 @@ namespace PL1
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
             addDrone.Visibility = Visibility.Visible;
-            droneWeight.ItemsSource = blDrone.getweightCategoriesEnumItem();
-            droneWeight.SelectedItem = blDrone.getweightCategoriesEnumItem().GetValue(1);
+            droneWeight.ItemsSource = blDrone.GetweightCategoriesEnumItem();
+            droneWeight.SelectedItem = blDrone.GetweightCategoriesEnumItem().GetValue(1);
         }
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace PL1
 
             try
             {
-                blDrone.addDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
+                blDrone.AddDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
                 MessageBox.Show("you added succefuly");
                 DroneList.Show();
                 Close();
@@ -249,7 +249,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            droneBL = blDrone.updateDataDroneModel(droneBL.ID, modelDrone.Text);
+            droneBL = blDrone.UpdateDataDroneModel(droneBL.ID, modelDrone.Text);
         }
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Charge_Click(object sender, RoutedEventArgs e)
         {
-            droneBL = blDrone.updateSendDroneToCharge(droneBL.ID);
+            droneBL = blDrone.UpdateSendDroneToCharge(droneBL.ID);
             statusDrone.Text = droneBL.DroneStatus.ToString();
             /*visible.Visibility = Visibility.Hidden;
             hidden.Visibility = Visibility.Visible;*/
@@ -302,7 +302,7 @@ namespace PL1
                 TimeChargerBlock.Visibility = Visibility.Hidden;
                 try
                 {
-                    droneBL = blDrone.updateUnchargeDrone(droneBL.ID, time);
+                    droneBL = blDrone.UpdateUnchargeDrone(droneBL.ID, time);
                     statusDrone.Text = droneBL.DroneStatus.ToString();
                     batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
                     TimeCharger.Text = "";
@@ -324,7 +324,7 @@ namespace PL1
             bool check = true;
             try
             {
-                blDrone.updateConnectParcelToDrone(droneBL.ID);
+                blDrone.UpdateConnectParcelToDrone(droneBL.ID);
             }
             catch (Exception ex)
             {
@@ -345,7 +345,7 @@ namespace PL1
             bool check = true;
             try
             {
-                blDrone.updateCollectParcelByDrone(droneBL.ID);
+                blDrone.UpdateCollectParcelByDrone(droneBL.ID);
             }
             catch (Exception ex)
             {
@@ -366,7 +366,7 @@ namespace PL1
             bool check = true;
             try
             {
-                blDrone.updateSupplyParcelByDrone(droneBL.ID);
+                blDrone.UpdateSupplyParcelByDrone(droneBL.ID);
             }
             catch (Exception ex)
             {

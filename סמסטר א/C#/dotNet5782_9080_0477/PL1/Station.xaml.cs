@@ -134,7 +134,7 @@ namespace PL1
         {
             try
             {
-                blStation.addStation(getID(), getModel(), getLocation(), getchargeSlots());
+                blStation.AddStation(getID(), getModel(), getLocation(), getchargeSlots());
                 MessageBox.Show("you added succefuly");
                 StationList.Show();
                 Close();
@@ -157,7 +157,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Update_ClickStation(object sender, RoutedEventArgs e)
         {
-            stationBL = blStation.updateDataStation(stationBL.ID, int.Parse(nameStation.Text), int.Parse(ChargeSlotsStation.Text));
+            stationBL = blStation.UpdateDataStation(stationBL.ID, int.Parse(nameStation.Text), int.Parse(ChargeSlotsStation.Text));
         }
 
         /// <summary>
@@ -167,6 +167,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
+            StationList.Refresh();
             StationList.Show();
             Close();
         }
@@ -194,7 +195,7 @@ namespace PL1
         {
             sender.ToString();
             BO.DroneInCharger droneInCharger = (sender as ListView).SelectedValue as BO.DroneInCharger;
-            BO.Drone droneBL = blStation.getSpecificDroneBLFromList(droneInCharger.ID);
+            BO.Drone droneBL = blStation.GetSpecificDroneBL(droneInCharger.ID);
             //this.Visibility = Visibility.Hidden;
             new Drone(blStation, droneBL, this).Show();
             Hide();
@@ -212,7 +213,7 @@ namespace PL1
                 MessageBoxResult result = MessageBox.Show("are you sure you want to remove staton?", "remove station", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.OK)
                 {
-                    blStation.removeStation(stationBL.ID);
+                    blStation.RemoveStation(stationBL.ID);
                     StationList.Show();
                     Close();
                 }

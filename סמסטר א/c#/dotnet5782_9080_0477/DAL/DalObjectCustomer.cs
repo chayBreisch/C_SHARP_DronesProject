@@ -18,7 +18,7 @@ namespace DalObject
                 yield return customer;
             }*/
         }
-        public void CheckUniqeCustomer(ulong id)
+        private void CheckUniqeCustomer(ulong id)
         {
             foreach (var customer in DataSource.customers)
             {
@@ -44,7 +44,7 @@ namespace DalObject
         /// </summary>
         /// <param name="newCustomer"></param>
 
-        public Customer getCustomerById(Predicate<Customer> predicate)
+        public Customer GetCustomerById(Predicate<Customer> predicate)
         {
             Customer customer1 = new Customer();
             try
@@ -65,22 +65,22 @@ namespace DalObject
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<Customer> getCustomersByCondition(Predicate<Customer> predicate)
+        /*public IEnumerable<Customer> getCustomersByCondition(Predicate<Customer> predicate)
         {
             //try todo
             return (from customer in DataSource.customers
                     where predicate(customer)
                     select customer);
-        }
+        }*/
         public void AddCustomer(Customer newCustomer)
         {
             CheckUniqeCustomer(newCustomer.ID);
             DataSource.customers.Add(newCustomer);
         }
-        public void updateCustomer(Customer customer)
+        /*public void updateCustomer(Customer customer)
         {
             int index = DataSource.customers.FindIndex(d => d.ID == customer.ID);
             DataSource.customers[index] = customer;
-        }
+        }*/
     }
 }

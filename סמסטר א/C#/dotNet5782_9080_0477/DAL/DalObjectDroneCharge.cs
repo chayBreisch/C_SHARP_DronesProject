@@ -74,7 +74,7 @@ namespace DalObject
         /// remove a drone charge from dal
         /// </summary>
         /// <param name="droneCharge"></param>
-        public void removeDroneCharge(DroneCharge droneCharge)
+        public void RemoveDroneCharge(DroneCharge droneCharge)
         {
             DataSource.droneChargers.RemoveAt(getIndexOfDroneChargeByStationID(droneCharge.StationID));
         }
@@ -84,7 +84,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id"></param>
         /// <returns>int</returns>
-        public int getIndexOfDroneChargeByStationID(int id)
+        private int getIndexOfDroneChargeByStationID(int id)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace DalObject
         /// </summary>
         /// <param name="droneId"></param>
         /// <param name="stationId"></param>
-        public void checkUniqeIdDroneChargeBL(int droneId, int stationId)
+        private void checkUniqeIdDroneChargeBL(int droneId, int stationId)
         {
             if (DataSource.droneChargers.Any(dronecharge => dronecharge.DroneID == droneId && dronecharge.StationID == stationId))
                 throw new NotUniqeID(droneId, stationId, typeof(Station));
@@ -132,7 +132,7 @@ namespace DalObject
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public DroneCharge getDroneChargeById(Predicate<DroneCharge> predicate)
+        public DroneCharge GetDroneChargeById(Predicate<DroneCharge> predicate)
         {
             DroneCharge droneCharge1 = new DroneCharge();
             try
@@ -151,12 +151,12 @@ namespace DalObject
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<DroneCharge> getDroneChargesByCondition(Predicate<DroneCharge> predicate)
+        /*public IEnumerable<DroneCharge> getDroneChargesByCondition(Predicate<DroneCharge> predicate)
         {
             //try todo
             return (from droneCharge in DataSource.droneChargers
                     where predicate(droneCharge)
                     select droneCharge);
-        }
+        }*/
     }
 }

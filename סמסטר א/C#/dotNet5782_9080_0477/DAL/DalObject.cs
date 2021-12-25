@@ -296,7 +296,7 @@ namespace DalObject
 
 
 
-        public double[] requestElectric()
+        public double[] RequestElectric()
         {
             double[] array = { DataSource.Config.Available, DataSource.Config.LightHeight, DataSource.Config.MidHeight, DataSource.Config.HeavyHeight, DataSource.Config.ChargingRate };
             return array;

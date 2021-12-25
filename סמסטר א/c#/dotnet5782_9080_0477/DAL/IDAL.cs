@@ -17,7 +17,7 @@ namespace IDAL
         public void AddCustomer(Customer customer);
         public void AddParcel(Parcel parcel);
         public void AddDroneCharge(DroneCharge droneCharge);
-
+  
 
         //##########################################################
         //get list functions
@@ -27,59 +27,44 @@ namespace IDAL
         public IEnumerable<Customer> GetCustomers();
         public IEnumerable<Parcel> GetParcels();
         public IEnumerable<DroneCharge> GetDroneCharges();
-        public IEnumerable<Drone> getDronesByCondition(Predicate<Drone> predicate);
-        public IEnumerable<Parcel> getParcelesByCondition(Predicate<Parcel> predicate);
-        public IEnumerable<Station> getStationsByCondition(Predicate<Station> predicate);
-        public IEnumerable<Customer> getCustomersByCondition(Predicate<Customer> predicate);
-        public IEnumerable<DroneCharge> getDroneChargesByCondition(Predicate<DroneCharge> predicate);
+        public IEnumerable<Parcel> GetParcelesByCondition(Predicate<Parcel> predicate);
 
 
         //#############################################################
         //get specific item functions
         //#############################################################
-        public Drone getDroneById(Predicate<Drone> predicate);
-        public Parcel getParcelById(Predicate<Parcel> predicate);
-        public Station getStationById(Predicate<Station> predicate);
-        public Customer getCustomerById(Predicate<Customer> predicate);
-        public DroneCharge getDroneChargeById(Predicate<DroneCharge> predicate);
+        public Drone GetDroneById(Predicate<Drone> predicate);
+        public Parcel GetParcelById(Predicate<Parcel> predicate);
+        public Station GetStationById(Predicate<Station> predicate);
+        public Customer GetCustomerById(Predicate<Customer> predicate);
+        public DroneCharge GetDroneChargeById(Predicate<DroneCharge> predicate);
 
 
         //#############################################################
         //update functions
         //#############################################################
-        public void updateDrone(Drone drone);
-        public void updateStation(Station station);
-        public void updateParcel(Parcel parcel);
-        public void updateCustomer(Customer customer);
-
-
-        //#############################################################
-        //check functions
-        //#############################################################
-        public void CheckUniqestation(int id);
-        public void CheckUniqeParcel(int id);
-        public void checkUniqeIdDroneChargeBL(int droneId, int stationId);
-        public void CheckUniqeDrone(int id);
-        public void CheckUniqeCustomer(ulong id);
+        public void UpdateDrone(Drone drone);
+        public void UpdateStation(Station station);
+        public void UpdateParcel(Parcel parcel);
 
 
         //#############################################################
         //remove functions
         //#############################################################
         public void RemoveParcel(int idRemove);
-        public void removeDroneCharge(DroneCharge droneCharge);
+        public void RemoveDroneCharge(DroneCharge droneCharge);
+        public void RemoveStation(int idRemove);
 
 
         //#############################################################
         //help functions
         //#############################################################
-        public int getIndexOfDroneChargeByStationID(int id);
-        public double[] requestElectric();
-        public int lengthStation();
-        public int lengthParcel();
-        public int getIndexOfParcel(int id);
-        public void RemoveStation(int idRemove);
-        public int getIndexOfStation(int id);
+        public double[] RequestElectric();
+        public int LengthStation();
+        public int LengthParcel();
+
+
+
 
 
 
@@ -98,5 +83,10 @@ namespace IDAL
         //public void updateSendDroneToCharge(int droneId, int statoinId);
         //public void updateUnChargeDrone(int id);
         //public void updateDroneCharge(DroneCharge droneCharge);
+        //public IEnumerable<Drone> getDronesByCondition(Predicate<Drone> predicate);
+        //public IEnumerable<Station> getStationsByCondition(Predicate<Station> predicate);
+        //public IEnumerable<Customer> getCustomersByCondition(Predicate<Customer> predicate);
+        //public IEnumerable<DroneCharge> getDroneChargesByCondition(Predicate<DroneCharge> predicate);
+        //public void updateCustomer(Customer customer);
     }
 }
