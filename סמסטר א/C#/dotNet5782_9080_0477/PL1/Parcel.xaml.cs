@@ -22,18 +22,17 @@ namespace PL1
 
     public partial class Parcel : Window
     {
-        ParcelList ParentWindow;
+        Window ParentWindow;
         BlApi.Bl blparcel;
         BO.Parcel parcelBL;
-        Drone Drone;
         /// <summary>
         /// constructor add parcel
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Parcel(BlApi.Bl bl, ParcelList ParcelList)
+        public Parcel(BlApi.Bl bl, Window parentWindow)
         {
-            ParentWindow = ParcelList;
+            ParentWindow = parentWindow;
             blparcel = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -49,14 +48,14 @@ namespace PL1
         /// constructor opened from drone
         /// </summary>
         /// <param name="bl"></param>
-        /// <param name="drone"></param>
-        public Parcel(BlApi.Bl bl, BO.Parcel parcel, Drone drone)
+        /// <param name="parentWindow"></param>
+        public Parcel(BlApi.Bl bl, BO.Parcel parcel, Window parentWindow)
         {
             InitializeComponent();
             actions.Visibility = Visibility.Visible;
             addStation.Visibility = Visibility.Hidden;
             WindowStyle = WindowStyle.None;
-            Drone = drone;
+            ParentWindow = parentWindow;
             blparcel = bl;
             parcelBL = parcel;
             idparcel.Text = parcelBL.ID.ToString();
@@ -73,14 +72,14 @@ namespace PL1
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="parcel"></param>
-        /// <param name="ParcelList"></param>
-        public Parcel(BlApi.Bl bl, BO.Parcel parcel, ParcelList ParcelList)
+        /// <param name="parentWindow"></param>
+        /*public Parcel(BlApi.Bl bl, BO.Parcel parcel, Window parentWindow)
         {
             InitializeComponent();
             actions.Visibility = Visibility.Visible;
             addStation.Visibility = Visibility.Hidden;
             WindowStyle = WindowStyle.None;
-            ParentWindow = ParcelList;
+            ParentWindow = parentWindow;
             blparcel = bl;
             parcelBL = parcel;
             idparcel.Text = parcelBL.ID.ToString();
@@ -91,7 +90,7 @@ namespace PL1
             if (parcelBL.Drone != null)
                 droneparcel.Text = parcelBL.Drone.ID.ToString();
             statusparcel.Text = blparcel.findParcelStatus(parcelBL).ToString();
-        }
+        }*/
 
 
 
@@ -239,7 +238,7 @@ namespace PL1
         /// refrsh the listView in the window
         /// </summary>
         /// <param name="parcel"></param>
-        private void refreshList(BO.Parcel parcel)
+       /* private void refreshList(BO.Parcel parcel)
         {
             // view.GroupDescriptions.Clear();
 
@@ -288,6 +287,6 @@ namespace PL1
                 //ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToList();
             }*/
 
-        }
+        }*/
     }
 }

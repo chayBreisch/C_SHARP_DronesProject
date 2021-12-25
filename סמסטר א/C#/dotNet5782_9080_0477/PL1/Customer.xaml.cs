@@ -22,17 +22,16 @@ namespace PL1
 
         BlApi.Bl blCustomer;
         BO.Customer customeBL;
-        CustomerList CustomerList;
+        Window parentWindow;
         BO.Customer customer = new BO.Customer();
-        Parcel parcelWindow;
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="customerList"></param>
-        public Customer(BlApi.Bl bl, CustomerList customerList)
+        public Customer(BlApi.Bl bl, Window ParentWindow)
         {
-            CustomerList = customerList;
+            parentWindow = ParentWindow;
             blCustomer = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -46,9 +45,9 @@ namespace PL1
         /// <param name="bl"></param>
         /// <param name="customer"></param>
         /// <param name="customerList"></param>
-        public Customer(BlApi.Bl bl, BO.Customer customer, CustomerList customerList)
+        public Customer(BlApi.Bl bl, BO.Customer customer, Window ParentWindow)
         {
-            CustomerList = customerList;
+            parentWindow = ParentWindow;
             blCustomer = bl;
             customeBL = customer;
             InitializeComponent();
@@ -64,9 +63,9 @@ namespace PL1
             sendedTo.ItemsSource = customeBL.parcelSendedToCustomer;
         }
 
-        public Customer(BlApi.Bl bl, BO.Customer customer, Parcel parcel)
+      /*  public Customer(BlApi.Bl bl, BO.Customer customer, Window ParentWindow)
         {
-            parcelWindow = parcel;
+            parentWindow = ParentWindow;
             blCustomer = bl;
             customeBL = customer;
             InitializeComponent();
@@ -81,9 +80,9 @@ namespace PL1
             sendedBy.ItemsSource = customeBL.parcelSendedByCustomer;
             sendedTo.ItemsSource = customeBL.parcelSendedToCustomer;
 
-/*            SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
-            SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();*/
-        }
+*//*            SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
+            SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();*//*
+        }*/
 
 
         private void Button_ClickResetAddCustomer(object sender, RoutedEventArgs e)
@@ -116,10 +115,10 @@ namespace PL1
 
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            if (CustomerList != null)
-                CustomerList.Show();
-            else if (parcelWindow != null)
-                parcelWindow.Show();
+            if (parentWindow != null)
+                parentWindow.Show();
+            else if (parentWindow != null)
+                parentWindow.Show();
             this.Close();
         }
 

@@ -23,7 +23,7 @@ namespace PL1
     public partial class CustomerList : Window
     {
         BlApi.Bl blcustomer;
-        MainWindow mainWindow;
+        Window ParentWindow;
         ObservableCollection<CustomerToList> MyList = new ObservableCollection<CustomerToList>();
         CollectionView view;
 
@@ -32,10 +32,10 @@ namespace PL1
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public CustomerList(BlApi.Bl bl, MainWindow main)
+        public CustomerList(BlApi.Bl bl, Window main)
         {
             InitializeComponent();
-            mainWindow = main;
+            ParentWindow = main;
             WindowStyle = WindowStyle.None;
             blcustomer = bl;
             foreach (var item in blcustomer.GetCustomerToList())
@@ -58,7 +58,7 @@ namespace PL1
 
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            mainWindow.Show();
+            ParentWindow.Show();
             this.Close();
         }
 
