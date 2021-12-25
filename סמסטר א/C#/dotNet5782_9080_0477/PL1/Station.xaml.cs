@@ -168,7 +168,7 @@ namespace PL1
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
             ParentWindow.Show();
-            StationList.Show();
+            //StationList.Show();
             Close();
         }
 
@@ -213,7 +213,7 @@ namespace PL1
                 MessageBoxResult result = MessageBox.Show("are you sure you want to remove staton?", "remove station", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.OK)
                 {
-                    blStation.removeStation(stationBL.ID);
+                    blStation.RemoveStation(stationBL.ID);
                     ParentWindow.Show();
                     Close();
                 }
