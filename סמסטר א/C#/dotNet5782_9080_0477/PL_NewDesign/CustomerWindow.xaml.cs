@@ -21,11 +21,19 @@ namespace PL_NewDesign
     {
         BlApi.Bl BLObject;
         Window ParentWindow;
-        public CustomerWindow(BlApi.Bl Blobject, Window parentWindow)
+        BO.Customer Customer;
+        public CustomerWindow(BlApi.Bl Blobject, Window parentWindow, BO.Customer customer)
         {
             InitializeComponent();
             BLObject = Blobject;
             ParentWindow = parentWindow;
+            Customer = customer;
+            headTitle.Content += Customer.Name;
+        }
+
+        private void Button_ClickAllParcels(object sender, RoutedEventArgs e)
+        {
+            theList.SelectedItem = BLObject.GetParcelToListByCondition((P) => { return P.NameCustomerReciver == Customer.Name || P.NameCustomerSender == Customer.Name; });
         }
     }
 }

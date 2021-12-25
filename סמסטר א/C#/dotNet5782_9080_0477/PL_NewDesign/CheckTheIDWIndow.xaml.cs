@@ -43,7 +43,7 @@ namespace PL_NewDesign
                 }
                 else
                 {
-                    new CustomerWindow(BLObject, new MainWindow()).Show();
+                    new CustomerWindow(BLObject, new MainWindow(), BLObject.GetSpecificCustomerBL(ID)).Show();
                 }
             }
             catch
