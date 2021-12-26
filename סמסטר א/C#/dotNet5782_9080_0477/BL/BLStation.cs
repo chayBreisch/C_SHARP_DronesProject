@@ -38,7 +38,7 @@ namespace BL
             List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
             droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(GetSpecificDroneBL(d.DroneID))));
             BO.Station station = new BO.Station(id, name, ChargeSlots, new LocationBL(location.Longitude, location.Latitude), dronesInCharges);
-            AddStationToDal(id, name, location, ChargeSlots);
+            addStationToDal(id, name, location, ChargeSlots);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace BL
         /// <param name="name"></param>
         /// <param name="location"></param>
         /// <param name="ChargeSlots"></param>
-        private void AddStationToDal(int id, int name, LocationBL location, int ChargeSlots)
+        private void addStationToDal(int id, int name, LocationBL location, int ChargeSlots)
         {
             DO.Station station = new DO.Station();
             station.ID = id;
