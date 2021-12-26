@@ -47,7 +47,7 @@ namespace PL_NewDesign
                 double longit = Convert.ToDouble(newLong.Text);
                 double lat = Convert.ToDouble(newLat.Text);
                 BLObject.AddCustomer(id, name, phone, new BO.LocationBL(longit, lat));
-                ParentWindow.Show();
+                new CustomerWindow(BLObject, new MainWindow(), BLObject.GetSpecificCustomerBL(id)).Show();
                 this.Close();
             }
             catch (Exception ex)

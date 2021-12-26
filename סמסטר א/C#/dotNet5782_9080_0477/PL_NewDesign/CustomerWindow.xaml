@@ -8,7 +8,7 @@
         Title="CustomerWindow" Height="450" Width="800">
     <Grid Margin="57,50,58,44">
         <Grid Margin="10,72,163,-21">
-            <ListView>
+            <ListView Margin="155,4,35,-4" Name="theList">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn/>
@@ -20,9 +20,10 @@
             <Button Content="Your Parcels" HorizontalAlignment="Center" Margin="0,246,0,0" VerticalAlignment="Top" Height="52" Width="153"/>
             <Button Content="Send Parcel" HorizontalAlignment="Center" Margin="0,168,0,0" VerticalAlignment="Top" Height="52" Width="153"/>
             <Button Content="Parcel Came To Me" HorizontalAlignment="Center" VerticalAlignment="Top" Height="52" Width="153" Margin="0,89,0,0"/>
-            <Button Content="Parcel Coleccted From ME" HorizontalAlignment="Center" Margin="0,317,0,0" VerticalAlignment="Top" Height="52" Width="153"/>
+            <Button Content="Parcel Coleccted From Me" HorizontalAlignment="Center" Margin="0,317,0,0" VerticalAlignment="Top" Height="52" Width="153"/>
+            <Button Content="All My Parcels" HorizontalAlignment="Center" VerticalAlignment="Top" Height="52" Width="153" Margin="0,7,0,0" Click="Button_ClickAllParcels"/>
         </Grid>
-        <Label Content="Hello " HorizontalAlignment="Left" Margin="297,0,0,0" VerticalAlignment="Top" Height="39" Width="128" FontSize="20"/>
+        <Label Name="headTitle" Content="Hello " HorizontalAlignment="Left" Margin="297,0,0,0" VerticalAlignment="Top" Height="39" Width="128" FontSize="20"/>
 
     </Grid>
 </Window>

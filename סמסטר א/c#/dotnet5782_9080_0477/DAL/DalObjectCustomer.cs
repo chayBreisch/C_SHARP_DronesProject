@@ -18,7 +18,7 @@ namespace DalObject
                 yield return customer;
             }*/
         }
-        private void CheckUniqeCustomer(ulong id)
+        private void checkUniqeCustomer(ulong id)
         {
             foreach (var customer in DataSource.customers)
             {
@@ -74,7 +74,7 @@ namespace DalObject
         }*/
         public void AddCustomer(Customer newCustomer)
         {
-            CheckUniqeCustomer(newCustomer.ID);
+            checkUniqeCustomer(newCustomer.ID);
             DataSource.customers.Add(newCustomer);
         }
         /*public void updateCustomer(Customer customer)

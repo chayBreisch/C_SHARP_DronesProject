@@ -25,12 +25,11 @@ namespace PL_NewDesign
         {
             InitializeComponent();
             BLObject = BL.FactoryBL.factory();
-
         }
 
         private void Button_ClickNewCustomer(object sender, RoutedEventArgs e)
         {
-            new NewCustomer(BLObject, new CustomerWindow(BLObject, new MainWindow())).Show();
+            new NewCustomer(BLObject, new MainWindow()).Show();
         }
 
         private void Button_ClickCustomer(object sender, RoutedEventArgs e)
