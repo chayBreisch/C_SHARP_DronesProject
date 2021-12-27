@@ -208,7 +208,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickOpenSender(object sender, RoutedEventArgs e)
         {
-            new Customer(blparcel, blparcel.GetSpecificCustomerBL(parcelBL.Sender.ID), this).Show();
+            new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), this).Show();
             Hide();
         }
 
@@ -219,7 +219,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickOpenReciever(object sender, RoutedEventArgs e)
         {
-            new Customer(blparcel, blparcel.GetSpecificCustomerBL(parcelBL.Reciever.ID), this).Show();
+            new Customer(blparcel, blparcel.GetSpecificCustomerBL(p=>p.ID == parcelBL.Reciever.ID), this).Show();
             Hide();
         }
 

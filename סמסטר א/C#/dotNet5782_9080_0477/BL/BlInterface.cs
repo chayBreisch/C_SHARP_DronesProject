@@ -36,7 +36,7 @@ namespace BlApi
         //##############################################################
         //Get specific item functions
         //##############################################################
-        public BO.Customer GetSpecificCustomerBL(ulong id);
+        public BO.Customer GetSpecificCustomerBL(Predicate<BO.Customer> predicate);
         public BO.Parcel GetSpecificParcelBL(int id);
         public BO.Station GetSpecificStationBL(int id);
         public BO.Drone GetSpecificDroneBL(int id);

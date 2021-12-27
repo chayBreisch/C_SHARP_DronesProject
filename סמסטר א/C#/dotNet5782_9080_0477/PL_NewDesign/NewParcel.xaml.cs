@@ -33,7 +33,8 @@ namespace PL_NewDesign
         {
             string firsts = targetName.Text;
             customers.Visibility = Visibility.Visible;
-            customers.ItemsSource = BLObject.GetCustomerByCondition(C => { return C.Name.IndexOf(firsts) == 0; });
+            IEnumerable<string>f = BLObject.GetCustomerByCondition(C => C.Name.IndexOf(firsts) == 0);
+            customers.ItemsSource = BLObject.GetCustomerByCondition(C => C.Name.IndexOf(firsts) == 0);
         }
 
 

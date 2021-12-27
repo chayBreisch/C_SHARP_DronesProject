@@ -34,7 +34,7 @@ namespace PL_NewDesign
             {
                 ulong ID = (ulong)Convert.ToInt32(checkID.Text);
                 string name = Convert.ToString(chechName.Text);
-                BO.Customer customer = BLObject.GetSpecificCustomerBL(ID);
+                BO.Customer customer = BLObject.GetSpecificCustomerBL(p=> p.ID == ID);
                 if(customer.Name != name) { throw new Exception(); }
                 if (C == 'w')
                 {
@@ -43,7 +43,7 @@ namespace PL_NewDesign
                 }
                 else
                 {
-                    new CustomerWindow(BLObject, new MainWindow(), BLObject.GetSpecificCustomerBL(ID)).Show();
+                    new CustomerWindow(BLObject, new MainWindow(), BLObject.GetSpecificCustomerBL(p=> p.ID == ID)).Show();
                 }
             }
             catch
