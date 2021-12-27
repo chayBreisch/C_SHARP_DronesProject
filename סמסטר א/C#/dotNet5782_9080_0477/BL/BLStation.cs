@@ -33,11 +33,11 @@ namespace BL
         public void AddStation(int id, int name, LocationBL location, int ChargeSlots)
         {
             checkUniqeIdStation(id, dalObject);
-            List<DroneCharge> droneChargers = dalObject.GetDroneCharges().ToList();
-            droneChargers = droneChargers.FindAll(d => d.StationID == id);
+            /*IEnumerable<DroneCharge> droneChargers = dalObject.GetDroneCharges();
+            droneChargers = droneChargers.Where(d => d.StationID == id);
             List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
-            droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(GetSpecificDroneBL(d.DroneID))));
-            BO.Station station = new BO.Station(id, name, ChargeSlots, new LocationBL(location.Longitude, location.Latitude), dronesInCharges);
+            droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(GetSpecificDroneBL(d.DroneID))));*/
+            //BO.Station station = new BO.Station(id, name, ChargeSlots, new LocationBL(location.Longitude, location.Latitude), dronesInCharges);
             addStationToDal(id, name, location, ChargeSlots);
         }
 
@@ -135,10 +135,10 @@ namespace BL
         /// <returns></returns>
         private BO.Station convertDalStationToBl(DO.Station s)
         {
-            List<DroneCharge> droneChargers = dalObject.GetDroneCharges().ToList();
-            droneChargers = droneChargers.FindAll(d => d.StationID == s.ID);
             List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
-            droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(GetSpecificDroneBL(d.DroneID))));
+            foreach (var d in dalObject.GetDroneCharges())
+                if (d.StationID == s.ID)
+                    dronesInCharges.Add(new DroneInCharger(GetSpecificDroneBL(d.DroneID)));
             return new BO.Station(s.ID, s.Name, s.ChargeSlots, new LocationBL(s.Longitude, s.Latitude), dronesInCharges);
         }
 
@@ -152,13 +152,9 @@ namespace BL
         {
             DO.Station station = dalObject.GetStationById(s => s.ID == id);
             if (name != 0)
-            {
                 station.Name = name;
-            }
             if (chargeSlots != -1)
-            {
                 station.ChargeSlots = chargeSlots;
-            }
             dalObject.UpdateStation(station);
             return convertDalStationToBl(station);
         }
@@ -216,9 +212,7 @@ namespace BL
         {
             List<DroneInCharger> droneInCharger = GetSpecificStationBL(id).DronesInCharge;
             if (droneInCharger.Count > 0)
-            {
                 throw new CantRemoveItem(typeof(BO.Station));
-            }
             dalObject.RemoveStation(id);
         }
     }

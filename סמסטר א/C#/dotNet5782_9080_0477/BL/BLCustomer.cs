@@ -50,11 +50,11 @@ namespace BL
         public void AddCustomer(ulong id, string name, string phone, LocationBL location)
         {
             checkUniqeIdCustomer(id, dalObject);
-            BO.Customer customer = new BO.Customer();
+/*            BO.Customer customer = new BO.Customer();
             customer.ID = id;
             customer.Name = name;
             customer.Phone = phone;
-            customer.Location = new LocationBL(location.Longitude, location.Latitude);
+            customer.Location = new LocationBL(location.Longitude, location.Latitude);*/
             addCustomerToDal(id, name, phone, location);
         }
 
