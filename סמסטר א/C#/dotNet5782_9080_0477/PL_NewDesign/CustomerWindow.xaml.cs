@@ -46,5 +46,15 @@ namespace PL_NewDesign
         {
             new NewParcel(BLObject, Customer).Show();
         }
+
+        private void Button_ClickISend(object sender, RoutedEventArgs e)
+        {
+            theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return Customer.Name == P.NameCustomerSender; });
+        }
+
+        private void Button_ClickIGot(object sender, RoutedEventArgs e)
+        {
+            theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return Customer.Name == P.NameCustomerReciver; });
+        }
     }
 }
