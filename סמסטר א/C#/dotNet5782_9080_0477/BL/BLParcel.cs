@@ -33,10 +33,10 @@ namespace BL
         /// <param name="priority"></param>
         public void AddParcel(ulong sender, ulong target, int Weight, int priority)
         {
-            BO.Parcel parcel = new BO.Parcel();
             checkIfCustomerWithThisID(sender);
             checkIfCustomerWithThisID(target);
-            BO.Customer customer = GetSpecificCustomerBL(sender);
+            //BO.Parcel parcel = new BO.Parcel();
+            /*BO.Customer customer = GetSpecificCustomerBL(sender);
             parcel.Sender = new CustomerAtParcel(customer.ID, customer.Name);
             customer = GetSpecificCustomerBL(target);
             parcel.Reciever = new CustomerAtParcel(customer.ID, customer.Name);
@@ -46,7 +46,7 @@ namespace BL
             parcel.Scheduled = null;
             parcel.PickedUp = null;
             parcel.Delivered = null;
-            parcel.Drone = null;
+            parcel.Drone = null;*/
             addParcelToDal(sender, target, Weight, priority);
 
         }
