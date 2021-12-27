@@ -44,7 +44,7 @@ namespace PL_NewDesign
 
         private void Button_ClickSendParcel(object sender, RoutedEventArgs e)
         {
-            new NewParcel().Show();
+            new NewParcel(BLObject).Show();
         }
     }
 }

@@ -31,7 +31,20 @@ namespace PL_NewDesign
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            customers.ItemsSource = BLObject.
+            string firsts = targetName.Text;
+            customers.Visibility = Visibility.Visible;
+            customers.ItemsSource = BLObject.GetCustomerByCondition(C => { return C.Name.IndexOf(firsts) == 0; });
+        }
+
+
+        private void MouseDoubleClick_chose(object sender, RoutedEventArgs e)
+        {
+            targetName.Text = (sender as ListView).SelectedValue as string;
+            targetName.Visibility = Visibility.Hidden;
         }
     }
+
+
+
+    
 }
