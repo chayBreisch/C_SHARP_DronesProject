@@ -31,9 +31,20 @@ namespace PL_NewDesign
             headTitle.Content += Customer.Name;
         }
 
-        private void Button_ClickAllParcels(object sender, RoutedEventArgs e)
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            theList.SelectedItem = BLObject.GetParcelToListByCondition((P) => { return P.NameCustomerReciver == Customer.Name || P.NameCustomerSender == Customer.Name; });
+
+        }
+
+        private void Button_ClickMyParcels(object sender, RoutedEventArgs e)
+        {
+            theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return Customer.Name == P.NameCustomerReciver || Customer.Name == P.NameCustomerSender; });
+           // foreach(var item in theList)
+        }
+
+        private void Button_ClickSendParcel(object sender, RoutedEventArgs e)
+        {
+            new NewParcel().Show();
         }
     }
 }

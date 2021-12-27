@@ -193,6 +193,16 @@ namespace BL
             return customers1;
         }
 
+        public IEnumerable<BO.Customer> GetCustomerByCondition(Predicate<BO.Customer> predicate)
+        {
+            return (from customer in getCustomersBL()
+                    where predicate(customer)
+                    select customer);
+        }
+
+
+
+
         /// <summary>
         /// convert customerToList to customerBL
         /// </summary>
