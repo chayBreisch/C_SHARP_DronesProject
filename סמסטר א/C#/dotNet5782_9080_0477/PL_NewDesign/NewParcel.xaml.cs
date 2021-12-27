@@ -20,9 +20,11 @@ namespace PL_NewDesign
     public partial class NewParcel : Window
     {
         BlApi.Bl BLObject;
-        public NewParcel(BlApi.Bl blobject)
+        BO.Customer Customer;
+        public NewParcel(BlApi.Bl blobject , BO.Customer customer)
         {
             BLObject = blobject;
+            Customer = customer;
             InitializeComponent();
             weightCombo.ItemsSource = BLObject.GetweightCategoriesEnumItem();
             priorityCombo.ItemsSource = BLObject.GetPrioritiesEnumItem();
@@ -33,14 +35,29 @@ namespace PL_NewDesign
         {
             string firsts = targetName.Text;
             customers.Visibility = Visibility.Visible;
-            customers.ItemsSource = BLObject.GetCustomerByCondition(C => { return C.Name.IndexOf(firsts) == 0; });
+            customers.ItemsSource = BLObject.GetCustomerNamesByCondition(C => { return C.Name.IndexOf(firsts) == 0; });
         }
 
 
         private void MouseDoubleClick_chose(object sender, RoutedEventArgs e)
         {
             targetName.Text = (sender as ListView).SelectedValue as string;
-            targetName.Visibility = Visibility.Hidden;
+            customers.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_ClickSend(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (weightCombo.SelectedItem == null || priorityCombo == null) { throw new Exception("fill the details"); }
+                //if (BLObject.GetCustomerByCondition(P => { return P.Name == targetName.Text; }) == null)
+                BLObject.AddParcel(Customer.ID, Customer.ID, weightCombo.SelectedIndex + 1, priorityCombo.SelectedIndex + 1);
+                this.Close();
+            }
+            catch (Exception E)
+            {
+                MessageBox.Show(E.Message);
+            }
         }
     }
 

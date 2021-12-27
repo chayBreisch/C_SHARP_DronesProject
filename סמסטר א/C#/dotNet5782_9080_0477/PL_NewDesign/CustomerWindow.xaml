@@ -16,11 +16,11 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <Grid Margin="540,-34,-112,1">
-            <Button Content="My Parcels" HorizontalAlignment="Center" Margin="0,246,0,0" VerticalAlignment="Top" Height="52" Width="153" Click="Button_ClickMyParcels"/>
-            <Button Content="Send Parcel" HorizontalAlignment="Center" Margin="0,168,0,0" VerticalAlignment="Top" Height="52" Width="153" Click="Button_ClickSendParcel"/>
-            <Button Content="Parcel Came To Me" HorizontalAlignment="Center" VerticalAlignment="Top" Height="52" Width="153" Margin="0,89,0,0"/>
-            <Button Content="Parcel Coleccted From Me" HorizontalAlignment="Center" Margin="0,317,0,0" VerticalAlignment="Top" Height="52" Width="153"/>
+        <Grid Margin="540,-56,-112,1">
+            <Button Content="My Parcels" HorizontalAlignment="Center" VerticalAlignment="Top" Height="52" Width="153" Click="Button_ClickMyParcels" Margin="0,93,0,0"/>
+            <Button Content="Send Parcel" HorizontalAlignment="Center" Margin="0,330,0,0" VerticalAlignment="Top" Height="55" Width="153" Click="Button_ClickSendParcel"/>
+            <Button Content="Parcels I got" HorizontalAlignment="Center" VerticalAlignment="Top" Height="52" Width="153" Margin="0,173,0,0"/>
+            <Button Content="Parcels I send" HorizontalAlignment="Center" Margin="0,249,0,0" VerticalAlignment="Top" Height="52" Width="153"/>
         </Grid>
         <Label Name="headTitle" Content="Hello " HorizontalAlignment="Left" Margin="297,0,0,0" VerticalAlignment="Top" Height="39" Width="128" FontSize="20"/>
 

@@ -19,7 +19,7 @@
                 </Label.RenderTransform>
             </Label>
             <ComboBox Name="weightCombo" HorizontalAlignment="Left" Margin="198,157,0,0" VerticalAlignment="Top" Width="128" Height="25"/>
-            <Label Content="parcel's weight" HorizontalAlignment="Left" Margin="198,132,0,0" VerticalAlignment="Top" Height="28" Width="128"/>
+            <Label Content="parcel's weight" HorizontalAlignment="Left" Margin="198,134,0,0" VerticalAlignment="Top" Height="28" Width="128"/>
             <Label Content="parcel's priority" HorizontalAlignment="Left" Margin="198,215,0,0" VerticalAlignment="Top" Height="28" Width="128"/>
             <ComboBox Name="priorityCombo" HorizontalAlignment="Left" Margin="198,237,0,0" VerticalAlignment="Top" Width="128" Height="25"/>
             <Label Content="send to" HorizontalAlignment="Left" Margin="424,134,0,0" VerticalAlignment="Top" Width="103" Height="24"/>
@@ -31,7 +31,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Content="Send" HorizontalAlignment="Left" Margin="655,354,0,0" VerticalAlignment="Top" Height="52" Width="149"/>
+            <Button Content="Send" HorizontalAlignment="Left" Margin="655,363,0,0" VerticalAlignment="Top" Height="43" Width="149" Click="Button_ClickSend"/>
         </Grid>
 
     </Grid>

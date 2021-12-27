@@ -75,9 +75,9 @@ namespace BlApi
         //##############################################################
         public ParcelStatus findParcelStatus(BO.Parcel parcel);
 
-        public IEnumerable<string> GetCustomerByCondition(Predicate<BO.Customer> predicate);
+        public IEnumerable<string> GetCustomerNamesByCondition(Predicate<BO.Customer> predicate);
 
-
+        public IEnumerable<BO.Customer> GetCustomerByCondition(Predicate<BO.Customer> predicate);
 
 
 
