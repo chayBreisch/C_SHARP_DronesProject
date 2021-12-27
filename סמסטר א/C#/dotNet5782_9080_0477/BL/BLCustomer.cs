@@ -96,15 +96,17 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>customerbl</returns>
-        public BO.Customer GetSpecificCustomerBL(ulong id)
+        public BO.Customer GetSpecificCustomerBL(Predicate<BO.Customer> predicate)
         {
             try
             {
-                return convertDalCustomerToBl(dalObject.GetCustomerById(c => c.ID == id));
+                return (from customer in getCustomersBL()
+                        where predicate(customer)
+                        select customer).First();
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(id, typeof(DO.Customer));
+                throw new NotExistObjWithID(1, typeof(DO.Customer));
 
             }
         }
@@ -217,7 +219,7 @@ namespace BL
         /// <returns></returns>
         public BO.Customer ConvertCustomerToListToCustomerlBL(CustomerToList customerToList)
         {
-            return GetSpecificCustomerBL(customerToList.ID);
+            return GetSpecificCustomerBL(c => c.ID == customerToList.ID);
         }
 
         /// <summary>
