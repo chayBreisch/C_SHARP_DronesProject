@@ -17,7 +17,7 @@ namespace BO
             Priority = parcel.Priorities;
             ParcelStatus = parcel.Delivered != null ? ParcelStatus.Delivered :
             parcel.PickedUp != null ? ParcelStatus.PickedUp :
-            parcel.Requesed != null ? ParcelStatus.Requesed : ParcelStatus.Scheduled;
+            parcel.Scheduled != null ? ParcelStatus.Scheduled : ParcelStatus.Requesed;
         }
         public int ID { get; set; }
         public string NameCustomerSender { get; set; }
@@ -28,8 +28,8 @@ namespace BO
 
         public override string ToString()
         {
-            return $"*****************************************\nParcelToList: ID: {ID},\n NameCustomerSender: {NameCustomerSender},\n NameCustomerReciver: {NameCustomerReciver}" +
-                $"\nWeight: {Weight},\n Priority: {Priority},\n ParcelStatus: {ParcelStatus}\n*****************************************";
+            return $"ParcelToList: ID: {ID},\n NameCustomerSender: {NameCustomerSender},\n NameCustomerReciver: {NameCustomerReciver}" +
+                $"\nWeight: {Weight},\n Priority: {Priority},\n ParcelStatus: {ParcelStatus}";
         }
     }
 }

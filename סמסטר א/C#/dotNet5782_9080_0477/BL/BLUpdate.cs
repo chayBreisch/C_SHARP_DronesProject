@@ -165,7 +165,7 @@ namespace BL
         {
             BO.Drone droneBL = GetSpecificDroneBL(id);
             DO.Parcel parcel = new DO.Parcel();
-            parcel = dalObject.GetParcelById(p => p.DroneID == droneBL.ID);
+            parcel = dalObject.GetParcelBy(p => p.DroneID == droneBL.ID);
             if (parcel.DroneID == 0)
                 throw new CanNotUpdateDrone(id, "drone is didn't connect to a parcel");
             if (droneBL.DroneStatus == DroneStatus.Delivery)
@@ -193,7 +193,7 @@ namespace BL
         public void UpdateSupplyParcelByDrone(int id)
         {
            BO.Drone droneBL = GetSpecificDroneBL(id);
-            DO.Parcel parcel = dalObject.GetParcelById(p=> p.DroneID == id);
+            DO.Parcel parcel = dalObject.GetParcelBy(p=> p.DroneID == id);
             //check if can supply the parcel
             if (parcel.Delivered != null)
                 throw new CanNotUpdateDrone(id, "parcel is delivered already");

@@ -34,7 +34,7 @@ namespace IDAL
         //get specific item functions
         //#############################################################
         public Drone GetDroneById(Predicate<Drone> predicate);
-        public Parcel GetParcelById(Predicate<Parcel> predicate);
+        public Parcel GetParcelBy(Predicate<Parcel> predicate);
         public Station GetStationById(Predicate<Station> predicate);
         public Customer GetCustomerById(Predicate<Customer> predicate);
         public DroneCharge GetDroneChargeById(Predicate<DroneCharge> predicate);

@@ -67,6 +67,7 @@ namespace BL
             parcel.TargetID = target;
             parcel.Weight = (DO.WeightCatagories)Weight;
             parcel.Priority = (DO.Priorities)priority;
+            parcel.IsActive = true;
             dalObject.AddParcel(parcel);
         }
 
@@ -95,7 +96,7 @@ namespace BL
         {
             try
             {
-                return convertDalToParcelBL(dalObject.GetParcelById(p => p.ID == id));
+                return convertDalToParcelBL(dalObject.GetParcelBy(p => p.ID == id));
             }
             catch (ArgumentNullException e)
             {
@@ -134,7 +135,7 @@ namespace BL
 
             if (p.DroneID != 0)
                 drone = convertDalDroneToBl(dalObject.GetDroneById(d => d.ID == p.DroneID));
-            return new BO.Parcel(p.ID, p.Weight, p.Priority, p.Requested, p.Scheduled, p.Delivered, p.PickedUp, drone, sender.ID, target.ID, dalObject);
+            return new BO.Parcel(p.ID, p.Weight, p.Priority, p.Requested, p.Scheduled, p.Delivered, p.PickedUp, drone, sender.ID, target.ID, p.IsActive, dalObject);
 
         }
 
@@ -251,7 +252,7 @@ namespace BL
         /// <param name="parcel"></param>
         public void RemoveParcel(int id)
         {
-            BO.Drone drone = GetSpecificDroneBL(dalObject.GetParcelById(p => p.ID == id).DroneID);
+            BO.Drone drone = GetSpecificDroneBL(dalObject.GetParcelBy(p => p.ID == id).DroneID);
             if (drone != null)
             {
                 /*drone.parcelInDelivery = null;
@@ -280,7 +281,8 @@ namespace BL
                 Scheduled = parcel.Scheduled,
                 Requested = parcel.Requesed,
                 PickedUp = parcel.PickedUp,
-                Delivered = parcel.PickedUp
+                Delivered = parcel.PickedUp,
+                IsActive = parcel.IsActive
             };
         }
     }

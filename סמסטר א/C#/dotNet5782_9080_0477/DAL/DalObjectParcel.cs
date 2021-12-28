@@ -28,6 +28,7 @@ namespace DalObject
         public IEnumerable<Parcel> GetParcels()
         {
             return from parcel in DataSource.parcels
+                   where parcel.IsActive == true
                    select parcel;
             /*   foreach (var parcel in DataSource.parcels)
                {
@@ -49,13 +50,13 @@ namespace DalObject
          }
  */
 
-        public Parcel GetParcelById(Predicate<Parcel> predicate)
+        public Parcel GetParcelBy(Predicate<Parcel> predicate)
         {
             Parcel parcel1 = new Parcel();
             try
             {
                 parcel1 = (from parcel in DataSource.parcels
-                           where predicate(parcel)
+                           where predicate(parcel) && parcel.IsActive == true
                            select parcel).First();
             }
             catch (Exception e) { }
@@ -72,7 +73,7 @@ namespace DalObject
         {
             //try todo
             return (from parcel in DataSource.parcels
-                    where predicate(parcel)
+                    where predicate(parcel) && parcel.IsActive == true
                     select parcel);
         }
         /// <summary>
@@ -127,7 +128,7 @@ namespace DalObject
         /// <param name="parcel"></param>
         public void UpdateParcel(Parcel parcel)
         {
-            int index = DataSource.parcels.FindIndex(d => d.ID == parcel.ID);
+            int index = getIndexOfParcel(parcel.ID);
             DataSource.parcels[index] = parcel;
         }
 
@@ -138,7 +139,9 @@ namespace DalObject
         /// <param name="idRemove"></param>
         public void RemoveParcel(int idRemove)
         {
-            DataSource.parcels.RemoveAt(getIndexOfParcel(idRemove));
+            Parcel parcel = DataSource.parcels[getIndexOfParcel(idRemove)];
+            parcel.IsActive = false;
+            UpdateParcel(parcel);
         }
 
         /// <summary>

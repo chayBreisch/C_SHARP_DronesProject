@@ -11,7 +11,7 @@ namespace BO
 {
     public class Parcel
     {
-        public Parcel(int id, WeightCatagories weight, Priorities priorities, DateTime? requested, DateTime? scheduled, DateTime? delivered, DateTime? pickedUp, Drone drone, ulong SenderId, ulong RecieverId, IDAL.IDal dal)
+        public Parcel(int id, WeightCatagories weight, Priorities priorities, DateTime? requested, DateTime? scheduled, DateTime? delivered, DateTime? pickedUp, Drone drone, ulong SenderId, ulong RecieverId, bool isActive, IDAL.IDal dal)
         {
             ID = id;
             Sender = new CustomerAtParcel(SenderId, dal.GetCustomerById(c => c.ID == SenderId).Name);
@@ -23,6 +23,7 @@ namespace BO
             Requesed = requested;
             Scheduled = scheduled;
             Delivered = delivered;
+            IsActive = isActive;
         }
         public Parcel()
         {
@@ -75,7 +76,7 @@ namespace BO
         public DateTime? Scheduled { get; set; }
         public DateTime? PickedUp { get; set; }
         public DateTime? Delivered { get; set; }
-
+        public bool IsActive { get; set; }
 
         public override string ToString()
         {

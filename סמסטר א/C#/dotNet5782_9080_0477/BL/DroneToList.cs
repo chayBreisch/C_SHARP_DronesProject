@@ -16,7 +16,7 @@ namespace BO
             DroneStatus = drone.DroneStatus;
             BatteryStatus = drone.BatteryStatus;
             Location = drone.Location;
-            NumOfParcelTrans = dalObject.GetParcelById(p => p.DroneID == drone.ID).ID;
+            NumOfParcelTrans = dalObject.GetParcelBy(p => p.DroneID == drone.ID).ID;
         }
         public int ID { get; set; }
         public string Model { get; set; }
@@ -28,8 +28,8 @@ namespace BO
 
         public override string ToString()
         {
-            return $"*****************************************\nID: {ID},\n Model: {Model},\n Weight: {Weight}, \nBatteryStatus: {BatteryStatus},\n DroneStatus: {DroneStatus},\n" +
-                $"Location: {Location}, \nNumOfParcelTrans: {NumOfParcelTrans}\n*****************************************";
+            return $"ID: {ID},\n Model: {Model},\n Weight: {Weight}, \nBatteryStatus: {BatteryStatus},\n DroneStatus: {DroneStatus},\n" +
+                $"Location: {Location}, \nNumOfParcelTrans: {NumOfParcelTrans}";
         }
     }
 }

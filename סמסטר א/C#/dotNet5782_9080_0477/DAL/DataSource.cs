@@ -71,18 +71,30 @@ namespace DalObject
             {
                 Parcel parcel = new Parcel();
                 parcel.ID = parcels.Count + 1;
-
                 parcel.SenderID = customers[rand.Next(0, customers.Count)].ID;
                 parcel.TargetID = customers[rand.Next(0, customers.Count)].ID;
                 parcel.Weight = (WeightCatagories)(rand.Next() % 3) + 1;
                 parcel.Priority = (Priorities)(rand.Next() % 3);
                 parcel.Requested = randomDay();
-                parcel.DroneID = rand.Next() % (parcels.Count + 1);
                 parcel.Scheduled = randomDay();
-                parcel.PickedUp = randomDay();
-                parcel.Delivered = randomDay();
+                if (parcel.Scheduled < parcel.Requested)
+                    parcel.Scheduled = null;
+                else
+                {
+                    parcel.PickedUp = randomDay();
+                    if (parcel.PickedUp < parcel.Scheduled)
+                        parcel.PickedUp = null;
+                    else
+                    {
+                        parcel.Delivered = randomDay();
+                        if (parcel.Delivered < parcel.PickedUp)
+                            parcel.Delivered = null;
+                    }
+                }
+                parcel.IsActive = true;
+                if (parcel.Scheduled != null)
+                    parcel.DroneID = rand.Next() % (parcels.Count) + 1;
                 parcels.Add(parcel);
-
             }
         }
     }

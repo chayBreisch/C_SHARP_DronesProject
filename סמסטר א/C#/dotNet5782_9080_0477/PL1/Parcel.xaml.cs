@@ -64,17 +64,26 @@ namespace PL1
             weightparcel.Text = parcelBL.Weight.ToString();
             priorityparcel.Text = parcelBL.Priorities.ToString();
             droneparcel.Text = parcelBL.Drone.ToString();
+            if (parcelBL.Drone.ID == 0)
+                droneparcel.Text = "no drone";
             RequesedParcel.Text = parcelBL.Requesed.ToString();
             ScheduledParcel.Text = parcelBL.Scheduled.ToString();
-            if (parcelBL.PickedUp == null)
+            pickedUpParcel.Text = parcelBL.PickedUp.ToString();
+            DeliveredParcel.Text = parcelBL.Delivered.ToString();
+            if (parcelBL.Scheduled == null)
+            {
+                checkBoxPicked.Visibility = Visibility.Hidden;
+                checkBoxDelivered.Visibility = Visibility.Hidden;
+            }
+            else if (parcelBL.PickedUp == null)
             {
                 checkBoxPicked.Visibility = Visibility.Visible;
                 checkBoxDelivered.Visibility = Visibility.Hidden;
 
             }
-            else if(parcelBL.Delivered == null)
+            else if (parcelBL.Delivered == null)
             {
-                pickedUpParcel.Text = parcelBL.PickedUp.ToString();
+                //pickedUpParcel.Text = parcelBL.PickedUp.ToString();
                 checkBoxDelivered.Visibility = Visibility.Visible;
                 checkBoxPicked.Visibility = Visibility.Hidden;
             }
@@ -82,8 +91,6 @@ namespace PL1
             {
                 checkBoxPicked.Visibility = Visibility.Hidden;
                 checkBoxDelivered.Visibility = Visibility.Hidden;
-                pickedUpParcel.Text = parcelBL.PickedUp.ToString();
-                DeliveredParcel.Text = parcelBL.Delivered.ToString();
             }
         }
 
@@ -239,7 +246,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickOpenReciever(object sender, RoutedEventArgs e)
         {
-            new Customer(blparcel, blparcel.GetSpecificCustomerBL(p=>p.ID == parcelBL.Reciever.ID), this).Show();
+            new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID), this).Show();
             Hide();
         }
 

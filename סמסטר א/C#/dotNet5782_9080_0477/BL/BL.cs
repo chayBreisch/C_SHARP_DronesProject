@@ -50,7 +50,7 @@ namespace BL
             foreach (var drone in dalObject.GetDrones())
             {
                 BO.Drone droneBL = new BO.Drone { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight };
-                DO.Parcel parcel = dalObject.GetParcelById(p => p.DroneID == drone.ID);
+                DO.Parcel parcel = dalObject.GetParcelBy(p => p.DroneID == drone.ID);
                 DO.Customer customerSender = dalObject.GetCustomerById(c => c.ID == parcel.SenderID);
                 //check if the drone has a parcel
                 if (parcel.SenderID != 10000000)
@@ -72,8 +72,7 @@ namespace BL
                         //לבדוק מה בנות עשו
                         else
                         {
-                            droneBL.Location.Longitude = customerSender.Longitude;
-                            droneBL.Location.Latitude = customerSender.Latitude;
+                            droneBL.Location = new LocationBL(customerSender.Latitude, customerSender.Longitude);
                         }
                         DO.Customer customerReciever = dalObject.GetCustomerById(c => c.ID == parcel.TargetID);
                         double electricitySenderToReciever = calcElectry(new LocationBL(customerSender.Longitude, customerSender.Latitude), new LocationBL
