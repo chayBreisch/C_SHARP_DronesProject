@@ -66,15 +66,24 @@ namespace PL1
             droneparcel.Text = parcelBL.Drone.ToString();
             RequesedParcel.Text = parcelBL.Requesed.ToString();
             ScheduledParcel.Text = parcelBL.Scheduled.ToString();
-            if (parcelBL.PickedUp != null)
+            if (parcelBL.PickedUp == null)
+            {
+                checkBoxPicked.Visibility = Visibility.Visible;
+                checkBoxDelivered.Visibility = Visibility.Hidden;
+
+            }
+            else if(parcelBL.Delivered == null)
             {
                 pickedUpParcel.Text = parcelBL.PickedUp.ToString();
+                checkBoxDelivered.Visibility = Visibility.Visible;
                 checkBoxPicked.Visibility = Visibility.Hidden;
             }
             else
             {
-                DeliveredParcel.Text = parcelBL.Delivered.ToString();
+                checkBoxPicked.Visibility = Visibility.Hidden;
                 checkBoxDelivered.Visibility = Visibility.Hidden;
+                pickedUpParcel.Text = parcelBL.PickedUp.ToString();
+                DeliveredParcel.Text = parcelBL.Delivered.ToString();
             }
         }
 
