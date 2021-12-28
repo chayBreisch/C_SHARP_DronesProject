@@ -49,6 +49,7 @@ namespace BlApi
         public BO.Station ConvertStationToListToStationBL(StationToList stationToList);
         public BO.Parcel ConvertParcelToListToParcelBL(ParcelToList parcelToList);
         public BO.Customer ConvertCustomerToListToCustomerlBL(CustomerToList customerToList);
+        public DO.Parcel convertParcelBlToDal(BO.Parcel parcel);
 
 
         //##############################################################
@@ -61,6 +62,7 @@ namespace BlApi
         public void UpdateCollectParcelByDrone(int id);
         public void UpdateSupplyParcelByDrone(int id);
         public BO.Drone UpdateDataDroneModel(int id, string model);
+        public void updateParecl(BO.Parcel parcel);
 
 
         //##############################################################

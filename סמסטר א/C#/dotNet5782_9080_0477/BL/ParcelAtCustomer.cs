@@ -14,7 +14,7 @@ namespace BO
             Weight = parcel.Weight;
             Priority = parcel.Priorities;
             ParcelStatus = parcel.Delivered != null ? ParcelStatus.Requesed :
-                parcel.PickedUp != null ? ParcelStatus.pickedUp :
+                parcel.PickedUp != null ? ParcelStatus.PickedUp :
                 parcel.Scheduled != null ? ParcelStatus.Scheduled : ParcelStatus.Requesed;
             customerAtParcel = parcel.Sender.ID == myId ? new CustomerAtParcel(myId, dal.GetCustomerById(c => c.ID == myId).Name) :
                 new CustomerAtParcel(parcel.Reciever.ID, dal.GetCustomerById(c => c.ID == parcel.Reciever.ID).Name);

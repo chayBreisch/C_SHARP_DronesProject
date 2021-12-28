@@ -16,7 +16,7 @@ namespace BO
             Weight = parcel.Weight;
             Priority = parcel.Priorities;
             ParcelStatus = parcel.Delivered != null ? ParcelStatus.Delivered :
-            parcel.PickedUp != null ? ParcelStatus.pickedUp :
+            parcel.PickedUp != null ? ParcelStatus.PickedUp :
             parcel.Requesed != null ? ParcelStatus.Requesed : ParcelStatus.Scheduled;
         }
         public int ID { get; set; }

@@ -261,5 +261,27 @@ namespace BL
             }
             dalObject.RemoveParcel(id);
         }
+
+        public void updateParecl(BO.Parcel parcel)
+        {
+            dalObject.UpdateParcel(convertParcelBlToDal(parcel));
+        }
+
+        public DO.Parcel convertParcelBlToDal(BO.Parcel parcel)
+        {
+            return new DO.Parcel
+            {
+                ID = parcel.ID,
+                Weight = parcel.Weight,
+                SenderID = parcel.Sender.ID,
+                TargetID = parcel.Reciever.ID,
+                Priority = parcel.Priorities,
+                DroneID = parcel.Drone.ID,
+                Scheduled = parcel.Scheduled,
+                Requested = parcel.Requesed,
+                PickedUp = parcel.PickedUp,
+                Delivered = parcel.PickedUp
+            };
+        }
     }
 }

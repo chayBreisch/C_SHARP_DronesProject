@@ -44,11 +44,20 @@
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="391,0,0,0" x:Name="priorityparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="163"/>
                 <Button FontSize="16" Content="drone" Grid.Row="2" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center" Click="Button_ClickOpenDrone" Width="52"/>
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="2" HorizontalAlignment="Left" Margin="382,0,0,0" x:Name="droneparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="172"/>
-                <Label  FontSize="16" Content="status" Grid.Row="3" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="382,0,0,0" x:Name="statusparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="172"/>
+                <Label  FontSize="16" Content="Requesed" Grid.Row="3" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="409,0,0,0" x:Name="RequesedParcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="145"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Margin="409,17,0,0" x:Name="DeliveredParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Margin="409,47,0,0" x:Name="pickedUpParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="413,79,0,0" x:Name="ScheduledParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Grid.RowSpan="2"/>
+                <Label  FontSize="16" Content="Delivered" Grid.Row="5" HorizontalAlignment="Left" Margin="325,7,0,0" VerticalAlignment="Top"/>
+                <Label  FontSize="16" Content="PickedUp" Grid.Row="4" HorizontalAlignment="Left" Margin="325,43,0,0" VerticalAlignment="Top"/>
+                <Label  FontSize="16" Content="Scheduled" Grid.Row="3" HorizontalAlignment="Left" Margin="325,71,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+                <CheckBox x:Name="checkBoxPicked" HorizontalAlignment="Left" Margin="309,54,0,0" Grid.Row="4" VerticalAlignment="Top" Checked="checkBoxPicked_Checked"/>
+                <CheckBox x:Name="checkBoxDelivered" HorizontalAlignment="Left" Margin="309,17,0,0" Grid.Row="5" VerticalAlignment="Top" Checked="checkBoxDelivered_Checked"/>
+                <!--Requesed, Scheduled, pickedUp, Delivered-->
             </Grid>
         </Grid>
-        <Grid Name="addStation" Visibility="Visible" Background="#FF859DA2">
+        <Grid Name="addStation" Visibility="Hidden" Background="#FF859DA2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />

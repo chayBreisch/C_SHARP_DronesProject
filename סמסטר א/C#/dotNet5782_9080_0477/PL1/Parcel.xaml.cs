@@ -64,7 +64,18 @@ namespace PL1
             weightparcel.Text = parcelBL.Weight.ToString();
             priorityparcel.Text = parcelBL.Priorities.ToString();
             droneparcel.Text = parcelBL.Drone.ToString();
-            //statusparcel.Text = parcelBL.
+            RequesedParcel.Text = parcelBL.Requesed.ToString();
+            ScheduledParcel.Text = parcelBL.Scheduled.ToString();
+            if (parcelBL.PickedUp != null)
+            {
+                pickedUpParcel.Text = parcelBL.PickedUp.ToString();
+                checkBoxPicked.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                DeliveredParcel.Text = parcelBL.Delivered.ToString();
+                checkBoxDelivered.Visibility = Visibility.Hidden;
+            }
         }
 
         /// <summary>
@@ -232,6 +243,23 @@ namespace PL1
         {
             new Drone(blparcel, parcelBL.Drone, this).Show();
             Hide();
+        }
+
+        private void checkBoxPicked_Checked(object sender, RoutedEventArgs e)
+        {
+            checkBoxPicked.Visibility = Visibility.Hidden;
+            checkBoxDelivered.Visibility = Visibility.Visible;
+            parcelBL.PickedUp = DateTime.Now;
+            pickedUpParcel.Text = parcelBL.PickedUp.ToString();
+            blparcel.updateParecl(parcelBL);
+        }
+
+        private void checkBoxDelivered_Checked(object sender, RoutedEventArgs e)
+        {
+            checkBoxDelivered.Visibility = Visibility.Hidden;
+            parcelBL.Delivered = DateTime.Now;
+            DeliveredParcel.Text = parcelBL.Delivered.ToString();
+            blparcel.updateParecl(parcelBL);
         }
 
         /// <summary>
