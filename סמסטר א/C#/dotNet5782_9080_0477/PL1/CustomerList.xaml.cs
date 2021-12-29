@@ -47,9 +47,11 @@ namespace PL1
 
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
-           /* ListBox listBox1 = new ListBox();
-            List<CustomerToList> customers = blcustomer.getCustomerToList();*/
-            //CustomerListView.ItemsSource = customers;
+            MyList = new ObservableCollection<CustomerToList>();
+            foreach (var item in blcustomer.GetCustomerToList())
+                MyList.Add(item);
+            DataContext = MyList;
+            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
@@ -116,6 +118,15 @@ namespace PL1
             new Customer(blcustomer, this).Show();
             Hide();
 
+        }
+
+        private void Button_Click_ShowRemovedCustomers(object sender, RoutedEventArgs e)
+        {
+            MyList = new ObservableCollection<CustomerToList>();
+            foreach (var item in blcustomer.GetDeletedCustomerToList())
+                MyList.Add(item);
+            DataContext = MyList;
+            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
     }
 }

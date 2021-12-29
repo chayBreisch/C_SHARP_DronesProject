@@ -32,6 +32,7 @@ namespace BlApi
         public Array GetweightCategoriesEnumItem();
         public Array GetPrioritiesEnumItem();
         public IEnumerable<StationToList> GetDeletedStationToList();
+        public IEnumerable<CustomerToList> GetDeletedCustomerToList();
         public BO.Drone GetSpecificDroneBLWithDeleted(int id);
 
 
@@ -72,6 +73,7 @@ namespace BlApi
         //##############################################################
         public void RemoveParcel(int id);
         public void RemoveStation(int id);
+        public void RemoveCustomer(ulong id);
         public void RemoveDrone(int id);
 
 

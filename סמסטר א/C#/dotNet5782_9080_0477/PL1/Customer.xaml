@@ -43,14 +43,14 @@
                 <Label FontSize="16" Content="Location" Grid.Row="2" HorizontalAlignment="Left" Margin="322,0,0,0" VerticalAlignment="Center" Height="32" Width="70"/>
                 <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="2" HorizontalAlignment="Left" Margin="397,27,0,0" x:Name="longCustomer" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Height="21"/>
                 <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="2" HorizontalAlignment="Left" Margin="469,27,0,0" x:Name="latCustomere" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Height="21"/>
-                <ListView Grid.Row="3" Margin="278,10,55,10" Name="sendedBy" MouseDoubleClick ="MouseDoubleClick_Sended">
+                <ListView Grid.Row="3" Margin="278,10,55,10" Name="sendedBy" Foreground="Black" MouseDoubleClick ="MouseDoubleClick_Sended">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <ListView Grid.Row="4" Margin="278,21,55,8" Name="sendedTo" MouseDoubleClick ="MouseDoubleClick_Sended">
+                <ListView Grid.Row="4" Margin="278,21,55,8" Name="sendedTo" Foreground="Black" MouseDoubleClick ="MouseDoubleClick_Sended">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn/>

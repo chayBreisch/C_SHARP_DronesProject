@@ -129,13 +129,27 @@ namespace PL1
             BO.ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as BO.ParcelAtCustomer;
             BO.Parcel parcelBL = blCustomer.GetSpecificParcelBL(parcelAtCustomer.ID);
             BO.Drone drone = blCustomer.GetSpecificDroneBLWithDeleted(parcelBL.Drone.ID);
-            //new Parcel(blCustomer, parcelBL, new Drone(blCustomer, drone, new DroneList(blCustomer, new MainWindow()))).Show();
+            new Parcel(blCustomer, parcelBL, new Drone(blCustomer, drone, new DroneList(blCustomer, new MainWindow()))).Show();
             Hide();
         }
 
         private void Button_Click_DeleteCustomer(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("are you sure you want to remove customer?", "remove customer", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    blCustomer.RemoveCustomer(customeBL.ID);
+                    Button_ClickClose(sender, e);
+                    /* ParentWindow.Show();
+                     Close();*/
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("can't remove parcel because it's connected to a drone");
+            }
         }
     }
 }

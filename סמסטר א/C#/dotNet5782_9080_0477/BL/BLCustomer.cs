@@ -51,11 +51,11 @@ namespace BL
         public void AddCustomer(ulong id, string name, string phone, LocationBL location)
         {
             checkUniqeIdCustomer(id, dalObject);
-/*            BO.Customer customer = new BO.Customer();
-            customer.ID = id;
-            customer.Name = name;
-            customer.Phone = phone;
-            customer.Location = new LocationBL(location.Longitude, location.Latitude);*/
+            /*            BO.Customer customer = new BO.Customer();
+                        customer.ID = id;
+                        customer.Name = name;
+                        customer.Phone = phone;
+                        customer.Location = new LocationBL(location.Longitude, location.Latitude);*/
             addCustomerToDal(id, name, phone, location);
         }
 
@@ -74,6 +74,7 @@ namespace BL
             customer.Phone = phone;
             customer.Longitude = location.Longitude;
             customer.Latitude = location.Latitude;
+            customer.IsActive = true;
             dalObject.AddCustomer(customer);
         }
 
@@ -138,7 +139,8 @@ namespace BL
                 Phone = c.Phone,
                 Location = new LocationBL() { Longitude = c.Longitude, Latitude = c.Latitude },
                 parcelSendedByCustomer = parcelSendedByCustomers,
-                parcelSendedToCustomer = parcelSendedToCustomers
+                parcelSendedToCustomer = parcelSendedToCustomers,
+                IsActive = c.IsActive
             };
         }
 
@@ -182,7 +184,7 @@ namespace BL
         }
 
         /// <summary>
-        /// return all customerToList
+        /// return active customerToList
         /// </summary>
         /// <returns></returns>
         public IEnumerable<CustomerToList> GetCustomerToList()
@@ -191,11 +193,33 @@ namespace BL
             List<CustomerToList> customers1 = new List<CustomerToList>();
             foreach (var customer in customers)
             {
-                customers1.Add(new CustomerToList(customer, dalObject));
+                if (customer.IsActive)
+                    customers1.Add(new CustomerToList(customer, dalObject));
             }
             return customers1;
         }
 
+        /// <summary>
+        /// return not active customerToList
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<CustomerToList> GetDeletedCustomerToList()
+        {
+            IEnumerable<BO.Customer> customers = getCustomersBL();
+            List<CustomerToList> customers1 = new List<CustomerToList>();
+            foreach (var customer in customers)
+            {
+                if (!customer.IsActive)
+                    customers1.Add(new CustomerToList(customer, dalObject));
+            }
+            return customers1;
+        }
+
+        /// <summary>
+        /// return name of customers by condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<string> GetCustomerNamesByCondition(Predicate<BO.Customer> predicate)
         {
             return (from customer in getCustomersBL()
@@ -204,6 +228,7 @@ namespace BL
         }
 
 
+        
         public IEnumerable<BO.Customer> GetCustomerByCondition(Predicate<BO.Customer> predicate)
         {
             return (from customer in getCustomersBL()

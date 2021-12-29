@@ -13,10 +13,6 @@ namespace DalObject
         {
             return from customer in DataSource.customers
                    select customer;
-            /*foreach (var customer in DataSource.customers)
-            {
-                yield return customer;
-            }*/
         }
         private void checkUniqeCustomer(ulong id)
         {

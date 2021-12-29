@@ -77,6 +77,7 @@
         <Button Content="group by phone" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="606,42,0,0" Click="Button_ClickGroupByPhone" Grid.RowSpan="2" />
         <Button Content="sort by phone" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="419,42,0,0" Click="Button_ClickOrderByPhone" Grid.RowSpan="2" />
         <Button Content="sort by name" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="11,42,0,0" Click="Button_ClickOrderByName" Grid.RowSpan="2" />
+        <Button Content="show removed customers" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="606,475,0,0"  Grid.Row="1" Click="Button_Click_ShowRemovedCustomers"/>
     </Grid>
 </Window>
 
