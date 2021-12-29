@@ -82,5 +82,33 @@ namespace DalObject
             int index = DataSource.customers.FindIndex(d => d.ID == customer.ID);
             DataSource.customers[index] = customer;
         }*/
+        public void RemoveCustomer(ulong idRemove)
+        {
+            Customer customer = DataSource.customers[getIndexOfCustomer(idRemove)];
+            customer.IsActive = false;
+            UpdateCustomer(customer);
+        }
+
+        /// <summary>
+        /// return index of parcel in dataSource list
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private int getIndexOfCustomer(ulong id)
+        {
+            try
+            {
+                return DataSource.customers.FindIndex(p => p.ID == id);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotExistObjWithID(id, typeof(Parcel));
+            }
+        }
+        public void UpdateCustomer(Customer customer)
+        {
+            int index = getIndexOfCustomer(customer.ID);
+            DataSource.customers[index] = customer;
+        }
     }
 }
