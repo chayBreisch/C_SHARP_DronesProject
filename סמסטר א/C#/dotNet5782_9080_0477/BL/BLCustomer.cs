@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static BL.ExceptionsBL;
 
 namespace BL
 {
@@ -252,6 +253,11 @@ namespace BL
                 return true;
             }
             return false;
+        }
+
+        public void RemoveCustomer(ulong id)
+        {
+            dalObject.RemoveCustomer(id);
         }
     }
 }

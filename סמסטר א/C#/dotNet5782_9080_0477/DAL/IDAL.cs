@@ -45,6 +45,7 @@ namespace IDAL
         //update functions
         //#############################################################
         public void UpdateDrone(Drone drone);
+        public void UpdateCustomer(Customer customer);
         public void UpdateStation(Station station);
         public void UpdateParcel(Parcel parcel);
 
@@ -55,6 +56,7 @@ namespace IDAL
         public void RemoveParcel(int idRemove);
         public void RemoveDroneCharge(DroneCharge droneCharge);
         public void RemoveStation(int idRemove);
+        public void RemoveCustomer(ulong idRemove);
         public void RemoveDrone(int idRemove);
 
 
@@ -64,7 +66,6 @@ namespace IDAL
         public double[] RequestElectric();
         public int LengthStation();
         public int LengthParcel();
-
 
 
 

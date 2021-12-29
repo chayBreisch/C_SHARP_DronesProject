@@ -133,7 +133,9 @@ namespace PL1
             Hide();
         }
 
+        private void Button_Click_DeleteCustomer(object sender, RoutedEventArgs e)
+        {
 
-     
+        }
     }
 }

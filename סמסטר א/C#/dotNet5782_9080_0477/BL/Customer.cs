@@ -30,7 +30,7 @@ namespace BO
         public LocationBL Location { get; set; }
         public List<ParcelAtCustomer> parcelSendedByCustomer { get; set; }
         public List<ParcelAtCustomer> parcelSendedToCustomer { get; set; }
-
+        public bool IsActive { get; set; }
         public override string ToString()
         {
             string parcelSentedByCustomer = " ";
