@@ -235,8 +235,11 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickOpenSender(object sender, RoutedEventArgs e)
         {
-            new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), this).Show();
-            Hide();
+            if (blparcel.findParcelStatus(parcelBL) == BO.ParcelStatus.Scheduled || blparcel.findParcelStatus(parcelBL) == BO.ParcelStatus.PickedUp)
+            {
+                new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), this).Show();
+                Hide();
+            }
         }
 
         /// <summary>
@@ -246,8 +249,11 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickOpenReciever(object sender, RoutedEventArgs e)
         {
-            new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID), this).Show();
-            Hide();
+            if (blparcel.findParcelStatus(parcelBL) == BO.ParcelStatus.Scheduled || blparcel.findParcelStatus(parcelBL) == BO.ParcelStatus.PickedUp)
+            {
+                new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID), this).Show();
+                Hide();
+            }
         }
 
         /// <summary>
@@ -257,8 +263,11 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickOpenDrone(object sender, RoutedEventArgs e)
         {
-            new Drone(blparcel, parcelBL.Drone, this).Show();
-            Hide();
+            if (parcelBL.Drone.ID != 0)
+            {
+                new Drone(blparcel, parcelBL.Drone, this).Show();
+                Hide();
+            }
         }
 
         private void checkBoxPicked_Checked(object sender, RoutedEventArgs e)

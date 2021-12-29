@@ -252,13 +252,13 @@ namespace BL
         /// <returns>ParcelStatus</returns>
         public ParcelStatus findParcelStatus(BO.Parcel parcel)
         {
-            if (parcel.Requesed == null)
-                return (ParcelStatus)0;
-            else if (parcel.Scheduled == null)
-                return (ParcelStatus)1;
-            else if (parcel.PickedUp == null)
+            if (parcel.Delivered != null)
+                return (ParcelStatus)3;
+            else if (parcel.PickedUp != null)
                 return (ParcelStatus)2;
-            return (ParcelStatus)3;
+            else if (parcel.Scheduled != null)
+                return (ParcelStatus)1;
+            return (ParcelStatus)0;
         }
 
         /// <summary>

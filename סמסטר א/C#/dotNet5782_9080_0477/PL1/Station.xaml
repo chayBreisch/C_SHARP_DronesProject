@@ -42,7 +42,7 @@
                 <TextBox FontSize="16" Text="{Binding Path=Name}" Grid.Row="2" HorizontalAlignment="Left" Margin="231,0,0,0" Name="nameStation" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
                 <TextBox FontSize="16" Text="{Binding Path=ChargeSlots}" Grid.Row="3" HorizontalAlignment="Left" Name="ChargeSlotsStation" TextWrapping="Wrap" VerticalAlignment="Center" Width="137" Margin="283,0,0,0"/>
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="LocationStation" TextWrapping="Wrap" VerticalAlignment="Center" Width="172" Margin="248,0,0,0"/>
-                <ListView FontSize="16" Grid.Row="5" HorizontalAlignment="Left" Name="DroneInStation" VerticalAlignment="Top" Width="172" Height="100" Margin="248,13,0,0" Grid.RowSpan="2" MouseDoubleClick="MouseDoubleClick_OpenDrone" >
+                <ListView FontSize="16" Grid.Row="5" HorizontalAlignment="Left" Name="DroneInStation" Foreground="Black" VerticalAlignment="Top" Width="172" Height="100" Margin="248,13,0,0" Grid.RowSpan="2" MouseDoubleClick="MouseDoubleClick_OpenDrone" >
                     <!--<ListView Name="lvUsers">-->
                     <ListView.View>
                         <GridView>
