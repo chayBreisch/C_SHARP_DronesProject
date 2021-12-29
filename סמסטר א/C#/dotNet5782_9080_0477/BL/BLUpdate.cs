@@ -163,7 +163,7 @@ namespace BL
         /// <param name="id"></param>
         public void UpdateCollectParcelByDrone(int id)
         {
-            BO.Drone droneBL = GetSpecificDroneBL(id);
+            BO.Drone droneBL = GetSpecificDroneBLWithDeleted(id);
             DO.Parcel parcel = new DO.Parcel();
             parcel = dalObject.GetParcelBy(p => p.DroneID == droneBL.ID);
             if (parcel.DroneID == 0)
@@ -192,7 +192,7 @@ namespace BL
         /// <param name="id"></param>
         public void UpdateSupplyParcelByDrone(int id)
         {
-           BO.Drone droneBL = GetSpecificDroneBL(id);
+           BO.Drone droneBL = GetSpecificDroneBLWithDeleted(id);
             DO.Parcel parcel = dalObject.GetParcelBy(p=> p.DroneID == id);
             //check if can supply the parcel
             if (parcel.Delivered != null)

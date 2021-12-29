@@ -56,6 +56,7 @@ namespace BL
             station.Longitude = location.Longitude;
             station.Latitude = location.Latitude;
             station.ChargeSlots = ChargeSlots;
+            station.IsActive = true;
             dalObject.AddStation(station);
         }
 
@@ -84,7 +85,7 @@ namespace BL
         {
             try
             {
-                return convertDalStationToBl(dalObject.GetStationById(s => s.ID == id));
+                return convertDalStationToBl(dalObject.GetStationById(s => s.ID == id && s.IsActive == true));
             }
             catch (ArgumentNullException e)
             {
@@ -138,8 +139,8 @@ namespace BL
             List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
             foreach (var d in dalObject.GetDroneCharges())
                 if (d.StationID == s.ID)
-                    dronesInCharges.Add(new DroneInCharger(GetSpecificDroneBL(d.DroneID)));
-            return new BO.Station(s.ID, s.Name, s.ChargeSlots, new LocationBL(s.Longitude, s.Latitude), dronesInCharges);
+                    dronesInCharges.Add(new DroneInCharger(GetSpecificDroneBLWithDeleted(d.DroneID)));
+            return new BO.Station(s.ID, s.Name, s.ChargeSlots, new LocationBL(s.Longitude, s.Latitude), s.IsActive, dronesInCharges);
         }
 
         /// <summary>
@@ -211,9 +212,31 @@ namespace BL
         public void RemoveStation(int id)
         {
             List<DroneInCharger> droneInCharger = GetSpecificStationBL(id).DronesInCharge;
-            if (droneInCharger.Count > 0)
-                throw new CantRemoveItem(typeof(BO.Station));
+            /*if (droneInCharger.Count > 0)
+                throw new CantRemoveItem(typeof(BO.Station));*/
             dalObject.RemoveStation(id);
+        }
+        private IEnumerable<BO.Station> getDeletedStationsBL()
+        {
+
+            IEnumerable<DO.Station> stations = dalObject.GetDeletedStations();
+            List<BO.Station> stations1 = new List<BO.Station>();
+            foreach (var station in stations)
+            {
+                stations1.Add(convertDalStationToBl(station));
+            }
+            return stations1;
+        }
+
+        public IEnumerable<StationToList> GetDeletedStationToList()
+        {
+            IEnumerable<BO.Station> stations = getDeletedStationsBL();
+            List<StationToList> stations1 = new List<StationToList>();
+            foreach (var station in stations)
+            {
+                stations1.Add(new StationToList(station));
+            }
+            return stations1;
         }
     }
 }

@@ -27,6 +27,7 @@ namespace DalObject
         public IEnumerable<Drone> GetDrones()
         {
             return from drone in DataSource.drones
+                   where drone.IsActive == true
                    select drone;
             /*foreach (var drone in DataSource.drones)
             {
@@ -58,8 +59,8 @@ namespace DalObject
             try
             {
                 drone1 = (from drone in DataSource.drones
-                        where predicate(drone)
-                        select drone).First();
+                          where predicate(drone)
+                          select drone).First();
             }
             catch (Exception e) { }
             return drone1;
@@ -107,5 +108,24 @@ namespace DalObject
                     where predicate(drone)
                     select drone);
         }*/
+        private int getIndexOfDrone(int id)
+        {
+            try
+            {
+                return DataSource.drones.FindIndex(p => p.ID == id);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotExistObjWithID(id, typeof(Drone));
+            }
+        }
+
+
+        public void RemoveDrone(int idRemove)
+        {
+            Drone drone = DataSource.drones[getIndexOfDrone(idRemove)];
+            drone.IsActive = false;
+            UpdateDrone(drone);
+        }
     }
 }

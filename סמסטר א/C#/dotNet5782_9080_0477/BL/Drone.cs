@@ -60,6 +60,8 @@ namespace BO
                 battery = value;
             }
         }
+
+        public bool IsActive { get; set; }
         public override string ToString()
         {
             return $"drone  : {ID}, \n" +

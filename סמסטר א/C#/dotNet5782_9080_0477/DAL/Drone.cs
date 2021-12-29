@@ -13,6 +13,7 @@ namespace DO
         public int ID { get; set; }
         public string Model { get; set; }
         public WeightCatagories MaxWeight { get; set; }
+        public bool IsActive { get; set; }
         public override string ToString()
         {
             return $"ID: {ID}, Model: {Model},  MaxWeight: {MaxWeight}";

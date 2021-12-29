@@ -46,6 +46,7 @@
         </ListView>
         <Button Content="add station" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="419,475,0,0"  Grid.Row="1" Click="Button_ClickAddStation"  />
         <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="230,475,0,0" Grid.Row="1" Click="Button_ClickShowList"/>
+        <Button Content="show deleted stations" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="36,475,0,0" Grid.Row="1" Click="Button_Click_ShowDeletedStations" />
 
 
     </Grid>

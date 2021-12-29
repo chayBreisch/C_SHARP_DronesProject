@@ -49,7 +49,7 @@ namespace BL
             //for each drone we check what is the status and reboot in entries
             foreach (var drone in dalObject.GetDrones())
             {
-                BO.Drone droneBL = new BO.Drone { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight };
+                BO.Drone droneBL = new BO.Drone { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight, IsActive = drone.IsActive };
                 DO.Parcel parcel = dalObject.GetParcelBy(p => p.DroneID == drone.ID);
                 DO.Customer customerSender = dalObject.GetCustomerById(c => c.ID == parcel.SenderID);
                 //check if the drone has a parcel
@@ -59,6 +59,7 @@ namespace BL
                     //check if the parcel of the drone is scheduled and not delivered
                     if (parcel.Scheduled != null && parcel.Delivered == null)
                     {
+                        droneBL.parcelInDelivery = new ParcelInDelivery(convertDalToParcelBL(parcel), dalObject);
                         droneBL.DroneStatus = DroneStatus.Delivery;
 
                         //check if the parcel of the drone is scheduled and not delivered and not picked up

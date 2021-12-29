@@ -42,6 +42,7 @@ namespace DalObject
                 station.Latitude = rand.Next() % 10;
                 station.Longitude = rand.Next() % 10;
                 station.ChargeSlots = rand.Next(300);
+                station.IsActive = true;
                 stations.Add(station);
             }
 
@@ -52,6 +53,7 @@ namespace DalObject
                 drone.ID = drones.Count + 1;
                 drone.Model = "Hello World";
                 drone.MaxWeight = (WeightCatagories)((i % 3) + 1);
+                drone.IsActive = true;
                 drones.Add(drone);
             }
 
@@ -93,7 +95,7 @@ namespace DalObject
                 }
                 parcel.IsActive = true;
                 if (parcel.Scheduled != null)
-                    parcel.DroneID = rand.Next() % (parcels.Count) + 1;
+                    parcel.DroneID = rand.Next() % (drones.Count) + 1;
                 parcels.Add(parcel);
             }
         }

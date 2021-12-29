@@ -15,9 +15,10 @@
 
             <Grid Grid.Column="1" Background="#FF859DA2">
                 <Button Content="update" Name="Update" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.202,-0.618" Height="33" Width="104"  Margin="0,45,0,0" Click="Update_ClickStation"/>
+                <Button Content="delete this station" Name="deleteStation" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.202,-0.618" Height="33" Width="104"  Margin="0,123,0,0" Click="deleteStation_Click"/>
 
                 <Button Content="X" Width="50" Background="Red" HorizontalAlignment="Left"  Grid.Row="0" Click="Button_ClickClose" Margin="150,0,0,0" Height="20" VerticalAlignment="Top"  />
-                <!--<Button Content="remove this station" x:Name="deleteStation" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.202,-0.618" Height="33" Width="104"  Margin="0,137,0,0" Click="deleteStation_Click" />-->
+                <!--<button content="remove this station" x:name="deletestation" horizontalalignment="center" verticalalignment="top" rendertransformorigin="0.202,-0.618" height="33" width="104"  margin="0,137,0,0" click="deletestation_click" />-->
 
             </Grid>
 
@@ -33,7 +34,7 @@
                 </Grid.RowDefinitions>
                 <Label  FontSize="16" Content="id:" Grid.Row="1" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="name:" Grid.Row="2" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
-                <Label FontSize="16" Content="chjarge slots:" Grid.Row="3" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
+                <Label FontSize="16" Content="charge slots:" Grid.Row="3" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="location:" Grid.Row="4" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="drone:" Grid.Row="5" HorizontalAlignment="Left" Margin="168,10,0,0" VerticalAlignment="Top"/>
 

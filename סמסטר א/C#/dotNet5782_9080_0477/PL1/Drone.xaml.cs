@@ -68,22 +68,27 @@ namespace PL1
             locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
             if (droneBL.DroneStatus != DroneStatus.Available)
             {
-                Charge.IsEnabled = false;
+                Supply.IsEnabled = false;
                 UnCharge.IsEnabled = true;
             }
             if (droneBL.DroneStatus != DroneStatus.Maintenance)
             {
-                Charge.IsEnabled = true;
+                Supply.IsEnabled = true;
                 UnCharge.IsEnabled = false;
                 TimeChargerBlock.Visibility = Visibility.Hidden;
 
             }
-
-            //get the time inn charge
-           /* if(droneBL.DroneStatus == DroneStatus.Maintenance)
+            if (droneBL.IsActive == false)
             {
-                //TimeChargerBlock.Text+= 
-            }*/
+                Connect.IsEnabled = false;
+                Charge.IsEnabled = false;
+                Update.IsEnabled = false;
+            }
+            //get the time inn charge
+            /* if(droneBL.DroneStatus == DroneStatus.Maintenance)
+             {
+                 //TimeChargerBlock.Text+= 
+             }*/
 
         }
 
@@ -261,7 +266,7 @@ namespace PL1
             statusDrone.Text = droneBL.DroneStatus.ToString();
             /*visible.Visibility = Visibility.Hidden;
             hidden.Visibility = Visibility.Visible;*/
-            Charge.IsEnabled = false;
+            Supply.IsEnabled = false;
             UnCharge.IsEnabled = true;
 
             /*Charge.IsEnabled = false;
@@ -288,7 +293,7 @@ namespace PL1
             {
                 /*visible.Visibility = Visibility.Visible;
                 hidden.Visibility = Visibility.Hidden;*/
-                Charge.IsEnabled = true;
+                Supply.IsEnabled = true;
                 UnCharge.IsEnabled = false;
 
                 /*Charge.IsEnabled = true;
@@ -400,6 +405,25 @@ namespace PL1
         {
             if (droneBL.parcelInDelivery != null)
                 new Parcel(blDrone, blDrone.GetSpecificParcelBL(droneBL.parcelInDelivery.ID), this).Show();
+        }
+
+        private void Button_Click_DeleteDrone(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("are you sure you want to remove sdrone?", "remove parcel", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    blDrone.RemoveDrone(droneBL.ID);
+                    Button_ClickClose(sender, e);
+                    /* ParentWindow.Show();
+                     Close();*/
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("can't remove parcel because it's connected to a drone");
+            }
         }
     }
 }

@@ -252,7 +252,7 @@ namespace BL
         /// <param name="parcel"></param>
         public void RemoveParcel(int id)
         {
-            BO.Drone drone = GetSpecificDroneBL(dalObject.GetParcelBy(p => p.ID == id).DroneID);
+            BO.Drone drone = GetSpecificDroneBLWithDeleted(dalObject.GetParcelBy(p => p.ID == id).DroneID);
             if (drone != null)
             {
                 /*drone.parcelInDelivery = null;

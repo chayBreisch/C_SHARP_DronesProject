@@ -37,6 +37,7 @@ namespace BO
             Requesed = null;
             Scheduled = null;
             Delivered = null;
+            IsActive = true;
         }
 
         private int Id { get; set; }

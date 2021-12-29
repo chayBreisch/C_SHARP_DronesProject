@@ -122,5 +122,13 @@ namespace PL1
                 stations = blstationList.GetStationToList();
             StationListView.ItemsSource = stations;
         }
+
+        private void Button_Click_ShowDeletedStations(object sender, RoutedEventArgs e)
+        {
+            ListBox listBox1 = new ListBox();
+            IEnumerable<StationToList> stations = blstationList.GetDeletedStationToList();
+            chargeSlotsFilter.SelectedItem = null;
+            StationListView.ItemsSource = stations;
+        }
     }
 }

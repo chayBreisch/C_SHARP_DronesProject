@@ -28,6 +28,7 @@ namespace IDAL
         public IEnumerable<Parcel> GetParcels();
         public IEnumerable<DroneCharge> GetDroneCharges();
         public IEnumerable<Parcel> GetParcelesByCondition(Predicate<Parcel> predicate);
+        public IEnumerable<Station> GetDeletedStations();
 
 
         //#############################################################
@@ -54,6 +55,7 @@ namespace IDAL
         public void RemoveParcel(int idRemove);
         public void RemoveDroneCharge(DroneCharge droneCharge);
         public void RemoveStation(int idRemove);
+        public void RemoveDrone(int idRemove);
 
 
         //#############################################################

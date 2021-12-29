@@ -39,7 +39,7 @@ namespace BL
                 throw new OutOfRange("weight");
             }
             BO.Drone droneBL = new BO.Drone();
-            DO.Station station = dalObject.GetStationById(s => s.ID == stationID);
+            DO.Station station = dalObject.GetStationById(s => s.ID == stationID && s.IsActive == true);
             if (station.ID != 0)
             {
                 droneBL.Model = model;
@@ -48,6 +48,7 @@ namespace BL
                 droneBL.BatteryStatus = rand.Next(20, 40);
                 droneBL.DroneStatus = DroneStatus.Maintenance;
                 droneBL.Location = new LocationBL(station.Longitude, station.Latitude);
+                droneBL.IsActive = true;
 
 
                 addDroneToDal(id, model, maxWeight);
@@ -71,6 +72,7 @@ namespace BL
             drone.ID = id;
             drone.Model = model;
             drone.MaxWeight = (WeightCatagories)maxWeight;
+            drone.IsActive = true;
             dalObject.AddDrone(drone);
         }
 
@@ -99,7 +101,7 @@ namespace BL
         {
             try
             {
-                return droneBLList.Find(drone => drone.ID == id);
+                return droneBLList.Find(drone => drone.ID == id && drone.IsActive == true);
             }
             catch (ArgumentNullException e)
             {
@@ -107,7 +109,17 @@ namespace BL
             }
         }
 
-
+        public BO.Drone GetSpecificDroneBLWithDeleted(int id)
+        {
+            try
+            {
+                return droneBLList.Find(drone => drone.ID == id);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotExistObjWithID(id, typeof(DO.Drone));
+            }
+        }
         /// <summary>
         /// convert a drone from dal to bl
         /// </summary>
@@ -116,7 +128,7 @@ namespace BL
         private BO.Drone convertDalDroneToBl(DO.Drone d)
         {
             //לבדוק מה עם parcellattransfor
-            return GetSpecificDroneBL(d.ID);
+            return GetSpecificDroneBLWithDeleted(d.ID);
         }
 
         /// <summary>
@@ -140,7 +152,7 @@ namespace BL
             droneBl.Model = model;
             updateDrone(droneBl);
 
-            DO.Drone drone = dalObject.GetDroneById(d => d.ID == id);
+            DO.Drone drone = dalObject.GetDroneById(d => d.ID == id && d.IsActive == true);
             drone.Model = model;
             dalObject.UpdateDrone(drone);
             return droneBl;
@@ -207,7 +219,7 @@ namespace BL
         /// <returns></returns>
         public BO.Drone ConvertDroneToListToDroneBL(DroneToList droneToList)
         {
-            return GetSpecificDroneBL(droneToList.ID);
+            return GetSpecificDroneBLWithDeleted(droneToList.ID);
         }
 
         /// <summary>
@@ -221,6 +233,12 @@ namespace BL
             return (from drone in GetDronesToList()
                     where predicate(drone)
                     select drone);
+        }
+
+        public void RemoveDrone(int id)
+        {
+            dalObject.RemoveDrone(id);
+            droneBLList[id - 1].IsActive = false;
         }
     }
 }

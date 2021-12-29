@@ -31,6 +31,8 @@ namespace BlApi
         public IEnumerable<ParcelToList> GetParcelToListByCondition(Predicate<ParcelToList> predicate);
         public Array GetweightCategoriesEnumItem();
         public Array GetPrioritiesEnumItem();
+        public IEnumerable<StationToList> GetDeletedStationToList();
+        public BO.Drone GetSpecificDroneBLWithDeleted(int id);
 
 
         //##############################################################
@@ -70,6 +72,7 @@ namespace BlApi
         //##############################################################
         public void RemoveParcel(int id);
         public void RemoveStation(int id);
+        public void RemoveDrone(int id);
 
 
         //##############################################################

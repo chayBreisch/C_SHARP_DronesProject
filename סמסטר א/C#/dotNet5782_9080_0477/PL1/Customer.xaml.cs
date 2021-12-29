@@ -128,7 +128,7 @@ namespace PL1
             sender.ToString();
             BO.ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as BO.ParcelAtCustomer;
             BO.Parcel parcelBL = blCustomer.GetSpecificParcelBL(parcelAtCustomer.ID);
-            BO.Drone drone = blCustomer.GetSpecificDroneBL(parcelBL.Drone.ID);
+            BO.Drone drone = blCustomer.GetSpecificDroneBLWithDeleted(parcelBL.Drone.ID);
             //new Parcel(blCustomer, parcelBL, new Drone(blCustomer, drone, new DroneList(blCustomer, new MainWindow()))).Show();
             Hide();
         }

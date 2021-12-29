@@ -18,6 +18,7 @@ namespace DalObject
         public IEnumerable<Station> GetStations()
         {
             return from station in DataSource.stations
+                   where station.IsActive == true
                    select station;
          /*   foreach (var station in DataSource.stations)
             {
@@ -53,7 +54,7 @@ namespace DalObject
                             where predicate(station)
                             select station).First();
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 throw new NotExistObjWithID(typeof(Station));
             }
@@ -90,7 +91,7 @@ namespace DalObject
         /// <param name="station"></param>
         public void UpdateStation(Station station)
         {
-            int index = DataSource.stations.FindIndex(d => d.ID == station.ID);
+            int index = getIndexOfStation(station.ID);
             DataSource.stations[index] = station;
         }
 
@@ -119,8 +120,9 @@ namespace DalObject
         /// <param name="idRemove"></param>
         public void RemoveStation(int idRemove)
         {
-
-            DataSource.stations.RemoveAt(getIndexOfStation(idRemove));
+            Station station = DataSource.stations[getIndexOfStation(idRemove)];
+            station.IsActive = false;
+            UpdateStation(station);
         }
 
         /// <summary>
@@ -138,6 +140,16 @@ namespace DalObject
             {
                 throw new NotExistObjWithID(id, typeof(Station));
             }
+        }
+        public IEnumerable<Station> GetDeletedStations()
+        {
+            return from station in DataSource.stations
+                   where station.IsActive == false
+                   select station;
+         /*   foreach (var station in DataSource.stations)
+            {
+                yield return station;
+            }*/
         }
     }
 }

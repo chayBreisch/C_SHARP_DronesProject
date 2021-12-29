@@ -16,9 +16,6 @@ namespace DAL
                 {
                     case "DalObject":
                         return DalObject.DalObject.getInstance();
-                        break;
-                        //default:
-                        //return ;
                 }
                 return DalObject.DalObject.getInstance();
             }

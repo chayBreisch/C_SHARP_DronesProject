@@ -224,7 +224,7 @@ namespace PL1
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\nparcel is connected to a drone");
+                MessageBox.Show("can't remove parcel because it's connected to a drone");
             }
         }
 

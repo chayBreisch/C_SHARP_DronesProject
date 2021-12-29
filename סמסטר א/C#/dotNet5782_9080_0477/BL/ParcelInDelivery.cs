@@ -35,9 +35,9 @@ namespace BO
 
         public override string ToString()
         {
-            return $"ParcelInDelivery: ID: {ID}, Weight: {Weight}, Priority: {Priority}, ParcelStatus: {isPickedUp}" +
+            return $"ID: {ID}, Weight: {Weight}, Priority: {Priority}, ParcelStatus: {isPickedUp}" +
                 $", CollectLocation: {CollectLocation}, CollectLocation: {CollectLocation}, DeliveryDestinationLocation: {DeliveryDestinationLocation}" +
-                $"TransportDistance: {TransportDistance}";
+                $"TransportDistance: {Math.Floor(TransportDistance)}";
         }
     }
 }
