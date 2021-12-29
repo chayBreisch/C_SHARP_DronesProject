@@ -55,7 +55,6 @@ namespace PL1
         private void Button_Click_ShowListDrones(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            IEnumerable<DroneToList> drones = blDroneList.GetDronesToList();
             statusFilter.SelectedItem = null;
             weightFilter.SelectedItem = null;
             //DroneListView.ItemsSource = drones;
@@ -193,6 +192,23 @@ namespace PL1
                 MyList.Add(item);
             DataContext = MyList;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+        }
+
+        private void Button_Click_ShowDeletedCustomers(object sender, RoutedEventArgs e)
+        {
+            ListBox listBox1 = new ListBox();
+            statusFilter.SelectedItem = null;
+            weightFilter.SelectedItem = null;
+            //DroneListView.ItemsSource = drones;
+            if (view != null)
+            {
+                view.GroupDescriptions.Clear();
+                MyList = new ObservableCollection<DroneToList>();
+                foreach (var item in blDroneList.GetDeletedDroneToList())
+                    MyList.Add(item);
+                DataContext = MyList;
+                view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+            }
         }
     }
 }

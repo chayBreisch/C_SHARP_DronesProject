@@ -235,6 +235,14 @@ namespace BL
                     select drone);
         }
 
+        public IEnumerable<DroneToList> GetDeletedDroneToList()
+        {
+            //try todo
+            return (from drone in GetDronesToList()
+                    where GetSpecificDroneBL(drone.ID) == null
+                    select drone);
+        }
+
         public void RemoveDrone(int id)
         {
             dalObject.RemoveDrone(id);

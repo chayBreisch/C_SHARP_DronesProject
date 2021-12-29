@@ -68,10 +68,11 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <Button Content="add drone" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="419,475,0,0"  Grid.Row="1" Click="Button_ClickAddDrone" />
-        <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click_ShowListDrones" Height="45" Width="146" Margin="230,475,0,0" Grid.Row="1"/>
-        <Button Content="group by status" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="146" Margin="34,475,0,0" Grid.Row="1" Click="Button_Click_GroupingStatus"/>
-        <Button Content="group by weight" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="617,475,0,0"  Grid.Row="1" Click="Button_ClickGroupingWeight"  />
+        <Button Content="add drone" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="332,475,0,0"  Grid.Row="1" Click="Button_ClickAddDrone" />
+        <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click_ShowListDrones" Height="45" Width="146" Margin="181,475,0,0" Grid.Row="1"/>
+        <Button Content="group by status" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="146" Margin="30,475,0,0" Grid.Row="1" Click="Button_Click_GroupingStatus"/>
+        <Button Content="group by weight" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="483,475,0,0"  Grid.Row="1" Click="Button_ClickGroupingWeight"  />
+        <Button Content="show deleted drones" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="633,475,0,0"  Grid.Row="1" Click="Button_Click_ShowDeletedCustomers" />
 
 
     </Grid>
