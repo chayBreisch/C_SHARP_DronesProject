@@ -34,6 +34,7 @@ namespace BlApi
         public IEnumerable<StationToList> GetDeletedStationToList();
         public IEnumerable<DroneToList> GetDeletedDroneToList();
         public IEnumerable<CustomerToList> GetDeletedCustomerToList();
+        public IEnumerable<ParcelToList> GetDeletedParcelToList();
         public BO.Drone GetSpecificDroneBLWithDeleted(int id);
 
 

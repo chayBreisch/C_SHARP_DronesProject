@@ -140,7 +140,7 @@ namespace BL
         }
 
         /// <summary>
-        /// return all ParcelToList
+        /// return active ParcelToList
         /// </summary>
         /// <returns></returns>
         public IEnumerable<ParcelToList> GetParcelToList()
@@ -150,6 +150,21 @@ namespace BL
             foreach (var parcel in parcels)
             {
                 parcels1.Add(new ParcelToList(parcel, dalObject));
+            }
+            return parcels1;
+        }
+
+        /// <summary>
+        /// return all ParcelToList
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ParcelToList> GetDeletedParcelToList()
+        {
+            IEnumerable<DO.Parcel> parcels = dalObject.GetDeletedParcels();
+            List<ParcelToList> parcels1 = new List<ParcelToList>();
+            foreach (var parcel in parcels)
+            {
+                parcels1.Add(new ParcelToList(convertDalToParcelBL(parcel), dalObject));
             }
             return parcels1;
         }

@@ -30,12 +30,18 @@ namespace DalObject
             return from parcel in DataSource.parcels
                    where parcel.IsActive == true
                    select parcel;
-            /*   foreach (var parcel in DataSource.parcels)
-               {
-                   yield return parcel;
-               }*/
         }
 
+        /// <summary>
+        /// get deleted parcels
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Parcel> GetDeletedParcels()
+        {
+            return from parcel in DataSource.parcels
+                   where parcel.IsActive == false
+                   select parcel;
+        }
         ///
         /* public Parcel GetSpecificParcel(int id)
          {

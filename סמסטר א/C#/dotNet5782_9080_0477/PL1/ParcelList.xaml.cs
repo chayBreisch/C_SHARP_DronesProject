@@ -80,7 +80,6 @@ namespace PL1
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            IEnumerable<ParcelToList> stations = blParcelList.GetParcelToList();
             parcelPriority.SelectedItem = null;
             parcelWeight.SelectedItem = null;
             if (view != null)
@@ -176,6 +175,9 @@ namespace PL1
             }
         }
 
+        /// <summary>
+        /// refresh the list
+        /// </summary>
         public void Refresh()
         {
             IEnumerable<ParcelToList> parcels = new List<ParcelToList>();
@@ -194,6 +196,27 @@ namespace PL1
                 MyList.Add(item);
             DataContext = MyList;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+        }
+
+        /// <summary>
+        /// show deleted parcels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_ShowDeletedParcels(object sender, RoutedEventArgs e)
+        {
+            ListBox listBox1 = new ListBox();
+            parcelPriority.SelectedItem = null;
+            parcelWeight.SelectedItem = null;
+            if (view != null)
+            {
+                view.GroupDescriptions.Clear();
+                MyList = new ObservableCollection<ParcelToList>();
+                foreach (var item in blParcelList.GetDeletedParcelToList())
+                    MyList.Add(item);
+                DataContext = MyList;
+                view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+            }
         }
     }
 }
