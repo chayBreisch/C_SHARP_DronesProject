@@ -1,0 +1,53 @@
+﻿<Window x:Class="PL.StationList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="StationList" Height="640" Width="800" >
+    <Grid Name="MainGrid" Background="#FF859DA2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="400*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="#FF859DA2" Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,10,0,516" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <ComboBox Background="#FFFFE9ED" Name="chargeSlotsFilter" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.01,-0.281"  Height="40" Margin="0,27,0,0" SelectionChanged="chargeSlotsFilter_SelectionChanged">
+                <ComboBoxItem >without charge slots</ComboBoxItem>
+                <ComboBoxItem >with free charge slots</ComboBoxItem>
+            </ComboBox>
+            <Border BorderBrush="{x:Null}" Height="45" Width="146" HorizontalAlignment="Right"  Grid.Column="0">
+                <TextBlock TextWrapping="Wrap" Text="charge slots:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" FontWeight="DemiBold" FontSize="20" Margin="10,0,0,0" Width="136"/>
+            </Border>
+            <Border BorderBrush="{x:Null}" Height="45" Width="146" HorizontalAlignment="Right"  Grid.Column="2">
+                <TextBlock TextWrapping="Wrap" Text="filter by free chargers" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" FontWeight="DemiBold" FontSize="20" Width="200"/>
+
+            </Border>
+            <Button Content="X" Background="Red" Click="Button_ClickClose"  Grid.Row="0" Margin="150,-10,0,0" Height="20" VerticalAlignment="Top" Grid.Column="3"  />
+            <TextBox Grid.Column="3" Name="txtFilter"  HorizontalAlignment="Center" Margin="0,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Height="40"/>
+
+            <!--TextChanged="txtFilter_TextChanged"-->
+        </Grid>
+        <ListView ItemsSource="{Binding}" Foreground="Black" Background="#FF8D8C7A" Grid.Row="1" x:Name="StationListView"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick="StationListView_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="200" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="ChargeSlotsFree" Width="200" DisplayMemberBinding="{Binding ChargeSlotsFree}" />
+                    <GridViewColumn Header="ChargeSlotsBusy" Width="200" DisplayMemberBinding="{Binding ChargeSlotsBusy}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="add station" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="419,475,0,0"  Grid.Row="1" Click="Button_ClickAddStation"  />
+        <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="230,475,0,0" Grid.Row="1" Click="Button_ClickShowList"/>
+        <Button Content="show deleted stations" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="36,475,0,0" Grid.Row="1" Click="Button_Click_ShowDeletedStations" />
+
+
+    </Grid>
+</Window>

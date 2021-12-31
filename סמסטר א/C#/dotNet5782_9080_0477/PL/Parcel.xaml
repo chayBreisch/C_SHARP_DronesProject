@@ -1,0 +1,119 @@
+﻿<Window x:Class="PL.Parcel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="Parcel" Height="450" Width="800">
+    <Grid>
+        <Grid Name="actions" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition  Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1" Background="#FF859DA2">
+
+                <Button Content="X" Width="50" Background="Red" HorizontalAlignment="Left"  Grid.Row="0"  Margin="150,0,0,0" Height="20" VerticalAlignment="Top" Click="Button_ClickCloseParcel"  />
+                <Button Content="delete this parcel" Width="124" HorizontalAlignment="Center"  Grid.Row="0"  Margin="0,105,0,0" Height="49" VerticalAlignment="Top" Click="Button_ClickRemoveParcel"/>
+
+            </Grid>
+
+            <Grid Grid.Column="0" Background="#FF8D8C7A">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label  FontSize="16" Content="id:" Grid.Row="1" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center"/>
+                <Button FontSize="16" Content="sender id" Grid.Row="2" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Center" Click="Button_ClickOpenSender" Width="75"/>
+                <Button FontSize="16" Content="reciever id" Grid.Row="3" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Center" Click="Button_ClickOpenReciever" Width="83"/>
+                <Label FontSize="16" Content="weight" Grid.Row="4" HorizontalAlignment="Left" Margin="45,21,0,0" VerticalAlignment="Top"/>
+
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="77,0,0,0" Name="idparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="197"/>
+                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="2" HorizontalAlignment="Left" Margin="125,0,0,0" Name="senderidparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="149"/>
+                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="3" HorizontalAlignment="Left" Name="recieveridparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="141" Margin="133,0,0,0"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="weightparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="166" Margin="108,0,0,0"/>
+
+                <Label Content="Parcel" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Label  FontSize="16" Content="priority" Grid.Row="1" HorizontalAlignment="Left" Margin="325,20,0,0" VerticalAlignment="Top"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="391,0,0,0" x:Name="priorityparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="163"/>
+                <Button FontSize="16" Content="drone" Grid.Row="2" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center" Click="Button_ClickOpenDrone" Width="52"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="2" HorizontalAlignment="Left" Margin="382,0,0,0" x:Name="droneparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="172"/>
+                <Label  FontSize="16" Content="Requesed" Grid.Row="3" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="409,0,0,0" x:Name="RequesedParcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="145"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Margin="409,17,0,0" x:Name="DeliveredParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Margin="409,47,0,0" x:Name="pickedUpParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="413,79,0,0" x:Name="ScheduledParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Grid.RowSpan="2"/>
+                <Label  FontSize="16" Content="Delivered" Grid.Row="5" HorizontalAlignment="Left" Margin="325,7,0,0" VerticalAlignment="Top"/>
+                <Label  FontSize="16" Content="PickedUp" Grid.Row="4" HorizontalAlignment="Left" Margin="325,43,0,0" VerticalAlignment="Top"/>
+                <Label  FontSize="16" Content="Scheduled" Grid.Row="3" HorizontalAlignment="Left" Margin="325,71,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+                <CheckBox x:Name="checkBoxPicked" HorizontalAlignment="Left" Margin="309,54,0,0" Grid.Row="4" VerticalAlignment="Top" Checked="checkBoxPicked_Checked"/>
+                <CheckBox x:Name="checkBoxDelivered" HorizontalAlignment="Left" Margin="309,17,0,0" Grid.Row="5" VerticalAlignment="Top" Checked="checkBoxDelivered_Checked"/>
+                <!--Requesed, Scheduled, pickedUp, Delivered-->
+            </Grid>
+        </Grid>
+        <Grid Name="addParcel" Visibility="Hidden" Background="#FF859DA2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock HorizontalAlignment="Left" Text="enter details of station" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="269" FontSize="22" FontWeight="Bold" Grid.ColumnSpan="2" Margin="270,37,0,0"/>
+            <TextBox  Background="#FFFFE9ED" Margin="34,0,18,0"  TextWrapping="Wrap" VerticalAlignment="Center" Height="46" Name="senderIdParcel" Grid.Row="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="41,108,0,0" Text="enter sender id:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" FontSize="20" RenderTransformOrigin="0.531,1.062" Grid.RowSpan="2"/>
+
+            <TextBlock HorizontalAlignment="Left" Margin="41,101,0,0" Grid.Row="1" Text="enter reciever id:" TextWrapping="Wrap" VerticalAlignment="Top" Width="249" Height="27" FontSize="20" Grid.RowSpan="2"/>
+            <TextBox  Background="#FFFFE9ED" Margin="34,25,18,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="46" Name="recieverIdParcel" Grid.Row="2"/>
+
+            <Button Content="add parcel" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" RenderTransformOrigin="-0.207,0.023" Width="120" Height="40" Grid.Column="1"  Margin="129,0,0,0" Click="Button_ClickAddParcel"/>
+            <Button Content="reset" Grid.Column="0" HorizontalAlignment="Left" Margin="148,0,0,0" Grid.Row="3" VerticalAlignment="Center" Width="120" Height="40" Click="Button_ClickResetParcel" />
+            <Button Content="X" Width="50" Grid.Column="1" Background="Red" HorizontalAlignment="Left" Margin="350,0,0,89" Height="20" VerticalAlignment="Bottom" Click="Button_ClickCloseParcel"/>
+            <TextBlock HorizontalAlignment="Left" Margin="15,4,0,0" Text="enter weight parcel:" TextWrapping="Wrap" VerticalAlignment="Top" Width="249" Height="27" FontSize="20" Grid.Column="1" Grid.Row="1"/>
+            <ComboBox Name="weightParcel" HorizontalAlignment="Left" Margin="15,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="348" Height="46" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="15,103,0,0" Text="enter priority parcel:" TextWrapping="Wrap" VerticalAlignment="Top" Width="249" Height="27" FontSize="20" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"/>
+            <ComboBox x:Name="priorityParcel" HorizontalAlignment="Left" Margin="15,22,0,0" Grid.Row="2" VerticalAlignment="Top" Width="348" Height="46" Grid.Column="1"/>
+
+        </Grid>
+
+        <Grid Name="CustomerSendParcel" Visibility="Visible">
+            <Label Content="Enter parcel details" HorizontalAlignment="Left" Margin="286,66,0,0" VerticalAlignment="Top" Height="52" Width="232" FontSize="20">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-1.641"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-0.745"/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <ComboBox Name="weightCombo" HorizontalAlignment="Left" Margin="198,157,0,0" VerticalAlignment="Top" Width="128" Height="25"/>
+            <Label Content="parcel's weight" HorizontalAlignment="Left" Margin="198,134,0,0" VerticalAlignment="Top" Height="28" Width="128"/>
+            <Label Content="parcel's priority" HorizontalAlignment="Left" Margin="198,215,0,0" VerticalAlignment="Top" Height="28" Width="128"/>
+            <ComboBox Name="priorityCombo" HorizontalAlignment="Left" Margin="198,237,0,0" VerticalAlignment="Top" Width="128" Height="25"/>
+            <Label Content="send to" HorizontalAlignment="Left" Margin="424,134,0,0" VerticalAlignment="Top" Width="103" Height="24"/>
+            <TextBox Name="targetName" HorizontalAlignment="Left" Margin="426,157,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Height="25" TextChanged="TextBox_TextChanged"/>
+            <ListView Name="customers" Margin="424,187,215,153" MouseDoubleClick="MouseDoubleClick_chose">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Content="Send" HorizontalAlignment="Left" Margin="655,363,0,0" VerticalAlignment="Top" Height="43" Width="149" Click="Button_ClickSend"/>
+
+        </Grid>
+    </Grid>
+
+</Window>

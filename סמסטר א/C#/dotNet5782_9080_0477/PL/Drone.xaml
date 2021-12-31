@@ -1,0 +1,143 @@
+﻿<Window x:Class="PL.Drone"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="Drone" Height="450" Width="800">
+
+    <Window.Resources>
+        <SolidColorBrush  Color="#FF859DA2" x:Key="txtColor" />
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource txtColor}" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid Name="actions" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition  Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1" Background="#FF859DA2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="57.006"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="57.006"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Content="update" Name="Update" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.202,-0.618" Height="33" Width="104" Grid.Row="1" Click="Update_Click" Margin="0,16,0,0"/>
+                <Button IsEnabled="{Binding ElementName=Supply, Path=IsEnabled}" Content="charge a drone"  Name="Charge" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Click="Charge_Click"  Grid.Row="5"/>
+                <Button  Content="uncharge a drone" Name="UnCharge" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105"  Grid.Row="6" Click="UnCharge_Click"/>
+                <Button IsEnabled="{Binding ElementName=Supply, Path=IsEnabled}" Content="send to parcel" Name="Connect" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105"  Grid.Row="2" Click="Connect_Click"/>
+                <Button IsEnabled="{Binding ElementName=Supply, Path=IsEnabled}" Content="collect parcel" Name="Collect" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Row="3"  Click="Collect_Click"/>
+                <Button  Content="supply parcel" Name="Supply" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="104" Grid.Row="4" Click="Supply_Click" />
+                <Button Content="X" Width="50" Background="Red" HorizontalAlignment="Left"  Grid.Row="0" Click="Button_ClickClose" Margin="150,0,0,0" Height="20" VerticalAlignment="Top"  />
+                <TextBlock Visibility="Visible" Name="TimeChargerBlock" HorizontalAlignment="Left" Grid.Row="7" Text="time in charger:" TextWrapping="Wrap" VerticalAlignment="Center" Height="33" Width="85" Margin="53,0,0,0"/>
+                <TextBox Visibility="{Binding ElementName=TimeChargerBlock, Path=Visibility}" Name="TimeCharger" Background="#FF8D8C7A" BorderThickness="0" HorizontalAlignment="Left" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" Height="14" Margin="139,14,0,0" />
+            </Grid>
+
+            <Grid Grid.Column="0" Background="#FF8D8C7A">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label  FontSize="16" Content="id:" Grid.Row="1" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
+                <Label FontSize="16" Content="Model:" Grid.Row="2" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
+                <Label FontSize="16" Content="battery:" Grid.Row="3" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
+                <Label FontSize="16" Content="weight:" Grid.Row="4" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
+                <Label FontSize="16" Content="status:" Grid.Row="5" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
+                <Label FontSize="16" Content="location:" Grid.Row="6" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="200,0,0,0" Name="idDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="220"/>
+                <TextBox FontSize="16" Text="{Binding Path=Model}" Grid.Row="2" HorizontalAlignment="Left" Margin="231,0,0,0" Name="modelDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Name="batteryDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="240,0,0,0"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="weightDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="240,0,0,0"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Margin="231,0,0,0" Name="statusDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="6" HorizontalAlignment="Left" Margin="260,0,0,0" Name="locationDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="160"/>
+                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="7" HorizontalAlignment="Left" Margin="300,0,0,0" Name="parcelInDeliveryDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+                <Label Content="Drone" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Button Content="parcelInDelivery" FontSize="16" HorizontalAlignment="Left" Margin="168,0,0,13" Grid.Row="7" VerticalAlignment="Bottom" Height="23" Width="127" Click="Button_openParcel"/>
+                <!--<Label FontSize="16" Content="parcelInDelivery:" Grid.Row="7" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>-->
+            </Grid>
+            <Button Content="delete this drone" Height="33" Width="105" HorizontalAlignment="Left" Margin="466,386,0,0" VerticalAlignment="Top" Click="Button_Click_DeleteDrone"/>
+        </Grid>
+
+        <Grid Name="addDrone" Visibility="Hidden" Background="#FF859DA2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock HorizontalAlignment="Left" Text="enter details of drone" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="269" FontSize="22" FontWeight="Bold" Grid.ColumnSpan="2" Margin="270,37,0,0"/>
+            <TextBox  Background="#FFFFE9ED" Margin="10,0,41,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Name="droneId" Grid.Row="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="20,83,0,0" Text="enter id drone:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" FontSize="20" Grid.RowSpan="2"/>
+            <TextBox  Background="#FFFFE9ED" Margin="10,0,41,54"  TextWrapping="Wrap" Name="droneMdel" Grid.Row="1" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="36,82,0,0" Text="enter model drone:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" FontSize="20" Grid.Column="1" Grid.RowSpan="2"/>
+            <ComboBox Name="droneWeight"  Background="#FFFFE9ED" HorizontalAlignment="Left" VerticalAlignment="Center" Width="344"  Height="57" Margin="12,0,0,0" Grid.Row="2" Grid.Column="1" RenderTransformOrigin="0.5,0.5"/>
+            <TextBlock HorizontalAlignment="Left" Margin="19,0,0,0" Grid.Column="1" Grid.Row="1" Text="enter weight drone:" TextWrapping="Wrap" VerticalAlignment="Center" Width="181" Height="27" FontSize="20" Grid.RowSpan="2"/>
+            <TextBox  Background="#FFFFE9ED" Margin="10,0,41,0"  TextWrapping="Wrap" VerticalAlignment="Center" Height="58" Name="numStationtoChargeDrone" Grid.Row="2"/>
+            <TextBlock HorizontalAlignment="Left" Margin="12,93,0,0" Grid.Row="1" Text="number of station to charge:" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="27" FontSize="20" Grid.Column="0" Grid.RowSpan="2"/>
+            <Button Content="add drone" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" RenderTransformOrigin="-0.207,0.023" Width="120" Height="40" Grid.Column="1" Click="Button_ClickAddDrone" Margin="129,0,0,0" />
+            <Button Content="reset" Grid.Column="0" HorizontalAlignment="Left" Margin="148,0,0,0" Grid.Row="3" VerticalAlignment="Center" Width="120" Height="40" Click="Button_ClickResetAddDrone"/>
+            <Button Content="X" Grid.Column="1" Background="Red" Margin="350,0,0,89" Click="Button_ClickClose" HorizontalAlignment="Left" Width="50" Height="20" VerticalAlignment="Bottom"/>
+
+        </Grid>
+    </Grid>
+    <!--<Grid>
+        <Grid>
+            <ComboBox Name="PrioritySelector" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="150" SelectionChanged="PrioritySelector_SelectionChanged" Grid.Column="0" Margin="617,69,0,0" Height="31" />
+            <ComboBox Name="MaxWeightSelector" VerticalAlignment="Top" SelectionChanged="MaxWeightSelector_SelectionChanged" Grid.Column="0" Margin="617,21,0,0" HorizontalAlignment="Left" Width="148" Height="30"/>
+            <ListView x:Name="ParcelsListView" Margin="0,144,0,0">
+                <ListView.View>
+                    <GridView>
+
+
+                        <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding ID}" />
+                        <GridViewColumn Header="weightCategories" Width="150" DisplayMemberBinding="{Binding weightCategories}" />
+                        <GridViewColumn Header="NameOfCustomerReciver" Width="150" DisplayMemberBinding="{Binding NameOfCustomerReciver}" />
+                        <GridViewColumn Header="NameOfCustomerSended" Width="150" DisplayMemberBinding="{Binding NameOfCustomerSended}" />
+                        <GridViewColumn Header="parcelStatus" Width="150" DisplayMemberBinding="{Binding parcelStatus}" />
+                        <GridViewColumn Header="pritorities" Width="150" DisplayMemberBinding="{Binding pritorities}" />
+
+                    </GridView>
+                </ListView.View>
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+            </ListView>
+            <Button Content="Group By Sender" HorizontalAlignment="Left" Margin="26,27,0,0" VerticalAlignment="Top" Width="100" Height="35" Click="Button_Click" />
+            <Label Content="Priority" HorizontalAlignment="Left" Margin="550,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.537,-0.217" Width="74"/>
+            <Label Content="Weight" HorizontalAlignment="Left" Margin="548,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.259,0.347"/>
+            <Button Content="All List" HorizontalAlignment="Left" Margin="26,78,0,0" VerticalAlignment="Top" Width="116" Height="22" Click="Button_Click_1"/>
+            <Button Content="Group By Reciver" HorizontalAlignment="Left" Margin="154,27,0,0" VerticalAlignment="Top" RenderTransformOrigin="-5.376,-2.148" Width="119" Height="35" Click="Button_Click_2"/>
+        </Grid>-->
+
+</Window>

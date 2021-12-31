@@ -50,8 +50,9 @@ namespace PL_NewDesign
             try
             {
                 if (weightCombo.SelectedItem == null || priorityCombo == null) { throw new Exception("fill the details"); }
-                //if (BLObject.GetCustomerByCondition(P => { return P.Name == targetName.Text; }) == null)
-                BLObject.AddParcel(Customer.ID, Customer.ID, weightCombo.SelectedIndex + 1, priorityCombo.SelectedIndex + 1);
+
+                
+                BLObject.AddParcel(Customer.ID, BLObject.GetSpecificCustomerBL(C => { return C.Name == targetName.Text; }).ID, weightCombo.SelectedIndex + 1, priorityCombo.SelectedIndex + 1);
                 this.Close();
             }
             catch (Exception E)
