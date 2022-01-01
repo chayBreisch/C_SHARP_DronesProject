@@ -42,7 +42,8 @@ namespace PL
         }
 
 
-        public Customer(BlApi.Bl blobject, Window parentWindow, char c){
+        public Customer(BlApi.Bl blobject, Window parentWindow, char c)
+        {
             ParentWindow = parentWindow;
             BLObject = blobject;
             InitializeComponent();
@@ -88,26 +89,26 @@ namespace PL
             }
         }
 
-      /*  public Customer(BlApi.Bl bl, BO.Customer customer, Window ParentWindow)
-        {
-            parentWindow = ParentWindow;
-            blCustomer = bl;
-            customeBL = customer;
-            InitializeComponent();
-            WindowStyle = WindowStyle.None;
-            addCustomer.Visibility = Visibility.Visible;
-            actions.Visibility = Visibility.Hidden;
-            idcustomer.Text = customeBL.ID.ToString();
-            nameCustomer.Text = customeBL.Name.ToString();
-            phoneCustomr.Text = customeBL.Phone.ToString();
-            longCustomer.Text = customeBL.Location.Longitude.ToString();
-            latCustomere.Text = customeBL.Location.Latitude.ToString();
-            sendedBy.ItemsSource = customeBL.parcelSendedByCustomer;
-            sendedTo.ItemsSource = customeBL.parcelSendedToCustomer;
+        /*  public Customer(BlApi.Bl bl, BO.Customer customer, Window ParentWindow)
+          {
+              parentWindow = ParentWindow;
+              blCustomer = bl;
+              customeBL = customer;
+              InitializeComponent();
+              WindowStyle = WindowStyle.None;
+              addCustomer.Visibility = Visibility.Visible;
+              actions.Visibility = Visibility.Hidden;
+              idcustomer.Text = customeBL.ID.ToString();
+              nameCustomer.Text = customeBL.Name.ToString();
+              phoneCustomr.Text = customeBL.Phone.ToString();
+              longCustomer.Text = customeBL.Location.Longitude.ToString();
+              latCustomere.Text = customeBL.Location.Latitude.ToString();
+              sendedBy.ItemsSource = customeBL.parcelSendedByCustomer;
+              sendedTo.ItemsSource = customeBL.parcelSendedToCustomer;
 
-*//*            SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
-            SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();*//*
-        }*/
+  *//*            SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
+              SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();*//*
+          }*/
 
 
         private void Button_ClickResetAddCustomer(object sender, RoutedEventArgs e)
@@ -132,7 +133,7 @@ namespace PL
                 MessageBox.Show("succesfull add");
                 this.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -181,22 +182,43 @@ namespace PL
         private void Button_ClickMyParcels(object sender, RoutedEventArgs e)
         {
             theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver || customeBL.Name == P.NameCustomerSender; });
-            // foreach(var item in theList)
+            List<CheckBox> checks = new List<CheckBox>(GetListOfCheckBoxes(theList));
+            CheckBoxes.ItemsSource = checks;
         }
 
         private void Button_ClickSendParcel(object sender, RoutedEventArgs e)
         {
             new Parcel(BLObject, customeBL).Show();
+
         }
 
         private void Button_ClickISend(object sender, RoutedEventArgs e)
         {
             theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return customeBL.Name == P.NameCustomerSender; });
+         
         }
 
         private void Button_ClickIGot(object sender, RoutedEventArgs e)
         {
             theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver; });
+            
         }
+
+
+
+
+        private List<CheckBox> GetListOfCheckBoxes(ListView listView)
+        {
+            List<CheckBox> checkBoxesList = new List<CheckBox>();
+            for (int i = 0; i < listView.Items.Count; i++)
+            {
+                checkBoxesList.Add(new CheckBox());
+            }
+            return checkBoxesList;
+        }
+
+
+
+
     }
 }

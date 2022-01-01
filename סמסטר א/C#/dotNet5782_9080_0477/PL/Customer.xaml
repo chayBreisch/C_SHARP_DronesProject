@@ -8,7 +8,7 @@
         Title="Customer" Height="450" Width="800">
     <Grid>
 
-        <Grid Name="actions" Visibility="Hidden">
+        <Grid Name="actions" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition  Width="200"/>
@@ -94,10 +94,21 @@
 
         </Grid>
 
-        <Grid Name="CustomerPage" Visibility="Visible">
-            <Grid Margin="57,50,58,44">
+        <Grid Name="CustomerPage" Visibility="Hidden"5>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="791*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Margin="48,50,58,44" Grid.Column="1">
                 <Grid Margin="10,72,163,-21">
                     <ListView Margin="155,4,35,-4" Name="theList">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <ListView Name="CheckBoxes" Margin="412,4,0,-4">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn/>

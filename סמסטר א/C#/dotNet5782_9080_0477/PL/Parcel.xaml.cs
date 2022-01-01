@@ -38,6 +38,7 @@ namespace PL
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
+            CustomerSendParcel.Visibility = Visibility.Hidden;
             addParcel.Visibility = Visibility.Visible;
             weightParcel.ItemsSource = BLObject.GetweightCategoriesEnumItem();
             weightParcel.SelectedItem = BLObject.GetweightCategoriesEnumItem().GetValue(1);
@@ -53,6 +54,7 @@ namespace PL
         public Parcel(BlApi.Bl bl, BO.Parcel parcel, Window parentWindow)
         {
             InitializeComponent();
+            CustomerSendParcel.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
             addParcel.Visibility = Visibility.Hidden;
             WindowStyle = WindowStyle.None;
