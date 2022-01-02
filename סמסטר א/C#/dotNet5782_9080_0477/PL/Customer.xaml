@@ -108,7 +108,7 @@
                                 <GridViewColumn Header="Check" Width="100">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <CheckBox Content="{Binding content}"/>
+                                            <CheckBox Content="{Binding content}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

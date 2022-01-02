@@ -182,12 +182,11 @@ namespace PL
         private void Button_ClickMyParcels(object sender, RoutedEventArgs e)
         {
             List<BO.Parcel> parcels = new List<BO.Parcel>(BLObject.GetParcelsByCondition(P => { return customeBL.ID == P.Reciever.ID || customeBL.ID == P.Sender.ID; }));
-            foreach (var parcel in parcels)
-            {
-                //getContent(parcel);
-            }
             theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver || customeBL.Name == P.NameCustomerSender; });
-
+            foreach (var item in theList.Items)
+            {
+                getContent((BO.ParcelToList)item);
+            }
         }
 
         private void Button_ClickSendParcel(object sender, RoutedEventArgs e)
@@ -206,19 +205,29 @@ namespace PL
             theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver; });
         }
 
-/*        private void getContent(BO.Parcel parcel)
+        private void getContent(BO.ParcelToList parcel)
         {
-            if (parcel.Reciever.ID == customeBL.ID)
+            if (parcel.NameCustomerReciver == customeBL.Name)
             {
                 parcel.content = "Goted";
+                parcel.pathTo = "g";
             }
             else
             {
                 parcel.content = "Collected";
+                parcel.pathTo = "c";
             }
             BLObject.updateParecl(parcel);
-        }*/
+        }
 
+        private void g(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("g");
+        }
 
+        private void c(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("c");
+        }
     }
 }
