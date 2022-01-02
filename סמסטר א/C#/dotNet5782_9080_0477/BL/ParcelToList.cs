@@ -15,6 +15,8 @@ namespace BO
             NameCustomerReciver = dalObject.GetCustomerById(c => c.ID == parcel.Reciever.ID).Name;
             Weight = parcel.Weight;
             Priority = parcel.Priorities;
+            content = parcel.content;
+            pathTo = parcel.pathTo;
             ParcelStatus = parcel.Delivered != null ? ParcelStatus.Delivered :
             parcel.PickedUp != null ? ParcelStatus.PickedUp :
             parcel.Scheduled != null ? ParcelStatus.Scheduled : ParcelStatus.Requesed;
@@ -25,6 +27,8 @@ namespace BO
         public DO.WeightCatagories Weight { get; set; }
         public DO.Priorities Priority { get; set; }
         public ParcelStatus ParcelStatus { get; set; }
+        public string content { get; set; }
+        public string pathTo { get; set; }
 
         public override string ToString()
         {

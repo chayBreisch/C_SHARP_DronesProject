@@ -227,6 +227,14 @@ namespace BL
         }
 
 
+        public IEnumerable<BO.Parcel> GetParcelsByCondition(Predicate<BO.Parcel> predicate)
+        {
+            return (from parcel in getParcelsBL()
+                    where predicate(parcel)
+                    select parcel);
+        }
+
+
         /*public IEnumerable<ParcelToList> getParcelToListWithFilter(int weight, int prioritty)
         {
 
@@ -281,6 +289,11 @@ namespace BL
         public void updateParecl(BO.Parcel parcel)
         {
             dalObject.UpdateParcel(convertParcelBlToDal(parcel));
+        }
+
+        public void updateParecl(BO.ParcelToList parcel)
+        {
+            dalObject.UpdateParcel(convertParcelBlToDal(ConvertParcelToListToParcelBL(parcel)));
         }
 
         public DO.Parcel convertParcelBlToDal(BO.Parcel parcel)

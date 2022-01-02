@@ -29,6 +29,8 @@ namespace BlApi
         public IEnumerable<CustomerToList> GetCustomerToList();
         public IEnumerable<DroneToList> GetDroneToListByCondition(Predicate<DroneToList> predicate);
         public IEnumerable<ParcelToList> GetParcelToListByCondition(Predicate<ParcelToList> predicate);
+        public IEnumerable<BO.Parcel> GetParcelsByCondition(Predicate<BO.Parcel> predicate);
+        public void updateParecl(BO.ParcelToList parcel);
         public Array GetweightCategoriesEnumItem();
         public Array GetPrioritiesEnumItem();
         public IEnumerable<StationToList> GetDeletedStationToList();

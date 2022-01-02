@@ -181,9 +181,13 @@ namespace PL
 
         private void Button_ClickMyParcels(object sender, RoutedEventArgs e)
         {
+            List<BO.Parcel> parcels = new List<BO.Parcel>(BLObject.GetParcelsByCondition(P => { return customeBL.ID == P.Reciever.ID || customeBL.ID == P.Sender.ID; }));
+            foreach (var parcel in parcels)
+            {
+                getContent(parcel);
+            }
             theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver || customeBL.Name == P.NameCustomerSender; });
-            List<CheckBox> checks = new List<CheckBox>(GetListOfCheckBoxes(theList));
-            CheckBoxes.ItemsSource = checks;
+
         }
 
         private void Button_ClickSendParcel(object sender, RoutedEventArgs e)
@@ -195,29 +199,25 @@ namespace PL
         private void Button_ClickISend(object sender, RoutedEventArgs e)
         {
             theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return customeBL.Name == P.NameCustomerSender; });
-         
         }
 
         private void Button_ClickIGot(object sender, RoutedEventArgs e)
         {
             theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver; });
-            
         }
 
-
-
-
-        private List<CheckBox> GetListOfCheckBoxes(ListView listView)
+        private void getContent(BO.Parcel parcel)
         {
-            List<CheckBox> checkBoxesList = new List<CheckBox>();
-            for (int i = 0; i < listView.Items.Count; i++)
+            if (parcel.Reciever.ID == customeBL.ID)
             {
-                checkBoxesList.Add(new CheckBox());
+                parcel.content = "Goted";
             }
-            return checkBoxesList;
+            else
+            {
+                parcel.content = "Collected";
+            }
+            BLObject.updateParecl(parcel);
         }
-
-
 
 
     }
