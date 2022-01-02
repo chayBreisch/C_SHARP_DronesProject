@@ -78,8 +78,6 @@ namespace BO
         public DateTime? PickedUp { get; set; }
         public DateTime? Delivered { get; set; }
         public bool IsActive { get; set; }
-        public string content { get; set; }
-        public string pathTo { get; set; }
 
         public override string ToString()
         {

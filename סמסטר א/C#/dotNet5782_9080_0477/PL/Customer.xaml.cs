@@ -184,7 +184,7 @@ namespace PL
             List<BO.Parcel> parcels = new List<BO.Parcel>(BLObject.GetParcelsByCondition(P => { return customeBL.ID == P.Reciever.ID || customeBL.ID == P.Sender.ID; }));
             foreach (var parcel in parcels)
             {
-                getContent(parcel);
+                //getContent(parcel);
             }
             theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver || customeBL.Name == P.NameCustomerSender; });
 
@@ -206,7 +206,7 @@ namespace PL
             theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver; });
         }
 
-        private void getContent(BO.Parcel parcel)
+/*        private void getContent(BO.Parcel parcel)
         {
             if (parcel.Reciever.ID == customeBL.ID)
             {
@@ -217,7 +217,7 @@ namespace PL
                 parcel.content = "Collected";
             }
             BLObject.updateParecl(parcel);
-        }
+        }*/
 
 
     }
