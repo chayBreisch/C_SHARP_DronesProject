@@ -19,7 +19,6 @@ namespace PL1
     /// </summary>
     public partial class Station : Window
     {
-        Window ParentWindow;
         BlApi.Bl blStation;
         BO.Station stationBL;
         BO.Drone droneBL;
@@ -28,9 +27,8 @@ namespace PL1
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Station(BlApi.Bl bl, Window parentWindow)
+        public Station(BlApi.Bl bl)
         {
-            ParentWindow = parentWindow;
             blStation = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -43,14 +41,12 @@ namespace PL1
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="station"></param>
-        /// <param name="parentWindow"></param>
-        public Station(BlApi.Bl bl, BO.Station station, Window parentWindow)
+        public Station(BlApi.Bl bl, BO.Station station)
         {
             InitializeComponent();
             actions.Visibility = Visibility.Visible;
             addStation.Visibility = Visibility.Hidden;
             WindowStyle = WindowStyle.None;
-            ParentWindow = parentWindow;
             blStation = bl;
             stationBL = station;
             idstation.Text = stationBL.ID.ToString();
@@ -136,7 +132,7 @@ namespace PL1
             {
                 blStation.AddStation(getID(), getModel(), getLocation(), getchargeSlots());
                 MessageBox.Show("you added succefuly");
-                ParentWindow.Show();
+                //ParentWindow.Show();
                 Close();
             }
             catch (Exception exce)
@@ -167,7 +163,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            ParentWindow.Show();
+            //ParentWindow.Show();
             //StationList.Show();
             Close();
         }
@@ -197,8 +193,12 @@ namespace PL1
             BO.DroneInCharger droneInCharger = (sender as ListView).SelectedValue as BO.DroneInCharger;
             BO.Drone droneBL = blStation.GetSpecificDroneBL(droneInCharger.ID);
             //this.Visibility = Visibility.Hidden;
-            new Drone(blStation, droneBL, this).Show();
-            Hide();
+            /*new Drone(blStation, droneBL).Show();
+            Hide();*/
+            var win = new Drone(blStation, droneBL);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace PL1
                 if (result == MessageBoxResult.OK)
                 {
                     blStation.RemoveStation(stationBL.ID);
-                    ParentWindow.Show();
+                    //ParentWindow.Show();
                     Close();
                 }
             }

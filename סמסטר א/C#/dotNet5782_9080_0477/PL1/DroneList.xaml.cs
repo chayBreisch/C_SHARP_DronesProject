@@ -26,17 +26,15 @@ namespace PL1
     public partial class DroneList : Window
     {
         BlApi.Bl blDroneList;
-        Window ParentWindow;
         ObservableCollection<DroneToList> MyList = new ObservableCollection<DroneToList>();
         CollectionView view;
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public DroneList(BlApi.Bl bl, Window main)
+        public DroneList(BlApi.Bl bl)
         {
             InitializeComponent();
-            ParentWindow = main;
             WindowStyle = WindowStyle.None;
             blDroneList = bl;
             foreach (var item in blDroneList.GetDronesToList())
@@ -116,9 +114,12 @@ namespace PL1
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
             //this.Visibility = Visibility.Hidden;
-            new Drone(blDroneList, this).Show();
-            Hide();
-
+            /* new Drone(blDroneList, this).Show();
+             Hide();*/
+            var win = new Drone(blDroneList);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -132,8 +133,12 @@ namespace PL1
             DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
             BO.Drone drone = blDroneList.ConvertDroneToListToDroneBL(droneToList);
             //this.Visibility = Visibility.Hidden;
-            new Drone(blDroneList, drone, this).Show();
-            Hide();
+            /*new Drone(blDroneList, drone).Show();
+            Hide();*/
+            var win = new Drone(blDroneList, drone);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -143,7 +148,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            ParentWindow.Show();
+            //new MainWindow().Show();
             Close();
         }
 

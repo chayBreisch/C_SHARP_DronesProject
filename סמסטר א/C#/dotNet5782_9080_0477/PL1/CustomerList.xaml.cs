@@ -23,7 +23,6 @@ namespace PL1
     public partial class CustomerList : Window
     {
         BlApi.Bl blcustomer;
-        Window ParentWindow;
         ObservableCollection<CustomerToList> MyList = new ObservableCollection<CustomerToList>();
         CollectionView view;
 
@@ -32,10 +31,9 @@ namespace PL1
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public CustomerList(BlApi.Bl bl, Window main)
+        public CustomerList(BlApi.Bl bl)
         {
             InitializeComponent();
-            ParentWindow = main;
             WindowStyle = WindowStyle.None;
             blcustomer = bl;
             foreach (var item in blcustomer.GetCustomerToList())
@@ -60,8 +58,8 @@ namespace PL1
 
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            ParentWindow.Show();
-            this.Close();
+            //new MainWindow().Show();
+            Close();
         }
 
         private void MouseDoubleClick_customerList(object sender, RoutedEventArgs e)
@@ -70,8 +68,12 @@ namespace PL1
             CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
             BO.Customer customer = blcustomer.ConvertCustomerToListToCustomerlBL(customerToList);
             //this.Visibility = Visibility.Hidden;
-            new Customer(blcustomer, customer, this).Show();
-            Hide();
+            /*new Customer(blcustomer, customer, this).Show();
+            Hide();*/
+            var win = new Customer(blcustomer, customer);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         private void Button_ClickGroupByName(object sender, RoutedEventArgs e)
@@ -115,8 +117,12 @@ namespace PL1
 
         private void Button_ClickAddCustomer(object sender, RoutedEventArgs e)
         {
-            new Customer(blcustomer, this).Show();
-            Hide();
+            /*new Customer(blcustomer, this).Show();
+            Hide();*/
+            var win = new Customer(blcustomer);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
 
         }
 

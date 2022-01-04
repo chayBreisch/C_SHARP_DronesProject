@@ -22,16 +22,14 @@ namespace PL1
     {
         BlApi.Bl blDrone;
         BO.Drone droneBL;
-        Window ParentWindow;
         BO.Drone drone = new BO.Drone();
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.Bl bl, Window droneList)
+        public Drone(BlApi.Bl bl)
         {
-            ParentWindow = droneList;
             blDrone = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -47,9 +45,8 @@ namespace PL1
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.Bl bl, BO.Drone drone, Window droneList)
+        public Drone(BlApi.Bl bl, BO.Drone drone)
         {
-            ParentWindow = droneList;
             blDrone = bl;
             droneBL = drone;
             InitializeComponent();
@@ -217,7 +214,6 @@ namespace PL1
             {
                 blDrone.AddDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
                 MessageBox.Show("you added succefuly");
-                ParentWindow.Show();
                 Close();
             }
             catch (Exception exce)
@@ -387,12 +383,6 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            if (ParentWindow != null)
-                ParentWindow.Show();
-            else if (ParentWindow != null)
-                ParentWindow.Show();
-            else if (ParentWindow != null)
-                ParentWindow.Show();
             Close();
         }
 
@@ -404,7 +394,7 @@ namespace PL1
         private void Button_openParcel(object sender, RoutedEventArgs e)
         {
             if (droneBL.parcelInDelivery != null)
-                new Parcel(blDrone, blDrone.GetSpecificParcelBL(droneBL.parcelInDelivery.ID), this).Show();
+                new Parcel(blDrone, blDrone.GetSpecificParcelBL(droneBL.parcelInDelivery.ID)).Show();
         }
 
         private void Button_Click_DeleteDrone(object sender, RoutedEventArgs e)
@@ -416,8 +406,6 @@ namespace PL1
                 {
                     blDrone.RemoveDrone(droneBL.ID);
                     Button_ClickClose(sender, e);
-                    /* ParentWindow.Show();
-                     Close();*/
                 }
             }
             catch (Exception ex)

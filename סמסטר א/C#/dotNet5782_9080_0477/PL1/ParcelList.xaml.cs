@@ -23,17 +23,15 @@ namespace PL1
     public partial class ParcelList : Window
     {
         BlApi.Bl blParcelList;
-        Window ParentWindow;
         public ObservableCollection<ParcelToList> MyList = new ObservableCollection<ParcelToList>();
         public CollectionView view;
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public ParcelList(BlApi.Bl bl, Window main)
+        public ParcelList(BlApi.Bl bl)
         {
             InitializeComponent();
-            ParentWindow = main;
             WindowStyle = WindowStyle.None;
             blParcelList = bl;
             foreach (var item in blParcelList.GetParcelToList())
@@ -54,7 +52,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            ParentWindow.Show();
+            //new MainWindow().Show();
             Close();
         }
 
@@ -100,8 +98,10 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickAddParcel(object sender, RoutedEventArgs e)
         {
-            new Parcel(blParcelList, this).Show();
-            Hide();
+            var win = new Parcel(blParcelList);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -114,9 +114,10 @@ namespace PL1
             sender.ToString();
             ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
             BO.Parcel parcel = blParcelList.ConvertParcelToListToParcelBL(parcelToList);
-            //this.Visibility = Visibility.Hidden;
-            new Parcel(blParcelList, parcel, this).Show();
-            Hide();
+            var win = new Parcel(blParcelList, parcel);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         /// <summary>

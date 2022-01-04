@@ -46,8 +46,12 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_Click_DroneList(object sender, RoutedEventArgs e)
         {
-            new DroneList(bl, this).Show();
-            Hide();
+            var win = new DroneList(bl);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
+           /* new DroneList(bl).Show();
+            Hide();*/
         }
 
         /// <summary>
@@ -57,8 +61,13 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickStationList(object sender, RoutedEventArgs e)
         {
-            new StationList(bl, this).Show();
-            Hide();
+            var win = new StationList(bl);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
+            /* new StationList(bl).Show();
+             Hide()*/
+            ;
         }
 
         /// <summary>
@@ -68,8 +77,12 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickParcelList(object sender, RoutedEventArgs e)
         {
-            new ParcelList(bl, this).Show();
-            Hide();
+           // var win = new ParcelList(bl);
+            Visibility = Visibility.Hidden;
+            new ParcelList(bl).ShowDialog();
+            Visibility = Visibility.Visible;
+            /*new ParcelList(bl).Show();
+            Hide();*/
         }
 
         /// <summary>
@@ -79,8 +92,12 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickCustomerList(object sender, RoutedEventArgs e)
         {
-            new CustomerList(bl, this).Show();
-            Hide();
+            var win = new CustomerList(bl);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
+            /*new CustomerList(bl).Show();
+            Hide();*/
         }
     }
 }

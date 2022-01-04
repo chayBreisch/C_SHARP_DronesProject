@@ -22,16 +22,14 @@ namespace PL1
 
         BlApi.Bl blCustomer;
         BO.Customer customeBL;
-        Window parentWindow;
         BO.Customer customer = new BO.Customer();
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="customerList"></param>
-        public Customer(BlApi.Bl bl, Window ParentWindow)
+        public Customer(BlApi.Bl bl)
         {
-            parentWindow = ParentWindow;
             blCustomer = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -45,9 +43,8 @@ namespace PL1
         /// <param name="bl"></param>
         /// <param name="customer"></param>
         /// <param name="customerList"></param>
-        public Customer(BlApi.Bl bl, BO.Customer customer, Window ParentWindow)
+        public Customer(BlApi.Bl bl, BO.Customer customer)
         {
-            parentWindow = ParentWindow;
             blCustomer = bl;
             customeBL = customer;
             InitializeComponent();
@@ -115,11 +112,7 @@ namespace PL1
 
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            if (parentWindow != null)
-                parentWindow.Show();
-            else if (parentWindow != null)
-                parentWindow.Show();
-            this.Close();
+            Close();
         }
 
 
@@ -129,8 +122,12 @@ namespace PL1
             BO.ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as BO.ParcelAtCustomer;
             BO.Parcel parcelBL = blCustomer.GetSpecificParcelBL(parcelAtCustomer.ID);
             BO.Drone drone = blCustomer.GetSpecificDroneBLWithDeleted(parcelBL.Drone.ID);
-            new Parcel(blCustomer, parcelBL, new Drone(blCustomer, drone, new DroneList(blCustomer, new MainWindow()))).Show();
-            Hide();
+            /*new Parcel(blCustomer, parcelBL).Show();
+            Hide();*/
+            var win = new Parcel(blCustomer, parcelBL);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         private void Button_Click_DeleteCustomer(object sender, RoutedEventArgs e)

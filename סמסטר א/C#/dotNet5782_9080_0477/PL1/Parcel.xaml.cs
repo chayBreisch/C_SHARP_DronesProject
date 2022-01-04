@@ -22,7 +22,6 @@ namespace PL1
 
     public partial class Parcel : Window
     {
-        Window ParentWindow;
         BlApi.Bl blparcel;
         BO.Parcel parcelBL;
         /// <summary>
@@ -30,9 +29,8 @@ namespace PL1
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Parcel(BlApi.Bl bl, Window parentWindow)
+        public Parcel(BlApi.Bl bl)
         {
-            ParentWindow = parentWindow;
             blparcel = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -49,13 +47,12 @@ namespace PL1
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="parentWindow"></param>
-        public Parcel(BlApi.Bl bl, BO.Parcel parcel, Window parentWindow)
+        public Parcel(BlApi.Bl bl, BO.Parcel parcel)
         {
             InitializeComponent();
             actions.Visibility = Visibility.Visible;
             addStation.Visibility = Visibility.Hidden;
             WindowStyle = WindowStyle.None;
-            ParentWindow = parentWindow;
             blparcel = bl;
             parcelBL = parcel;
             idparcel.Text = parcelBL.ID.ToString();
@@ -168,7 +165,6 @@ namespace PL1
                 }
                 blparcel.AddParcel(getSenderId(), getRecieverId(), weightParcel.SelectedIndex + 1, priorityParcel.SelectedIndex);
                 MessageBox.Show("you added succefuly");
-                ParentWindow.Show();
                 Close();
             }
             catch (Exception exce)
@@ -184,10 +180,6 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickCloseParcel(object sender, RoutedEventArgs e)
         {
-            //ParentWindow.Refresh();
-            //refreshList(this.parcelBL);
-            //ParentWindow.ParcelListView.Items.Refresh();
-            ParentWindow.Show();
             Close();
         }
 
@@ -218,8 +210,7 @@ namespace PL1
                 {
                     blparcel.RemoveParcel(parcelBL.ID);
                     Button_ClickCloseParcel(sender, e);
-                    /* ParentWindow.Show();
-                     Close();*/
+                    //Close();
                 }
             }
             catch (Exception ex)
@@ -237,8 +228,13 @@ namespace PL1
         {
             if (blparcel.findParcelStatus(parcelBL) == BO.ParcelStatus.Scheduled || blparcel.findParcelStatus(parcelBL) == BO.ParcelStatus.PickedUp)
             {
-                new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), this).Show();
-                Hide();
+
+                var win = new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID));
+                Visibility = Visibility.Hidden;
+                win.ShowDialog();
+                Visibility = Visibility.Visible;
+              /*  new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), this).Show();
+                Hide();*/
             }
         }
 
@@ -251,8 +247,12 @@ namespace PL1
         {
             if (blparcel.findParcelStatus(parcelBL) == BO.ParcelStatus.Scheduled || blparcel.findParcelStatus(parcelBL) == BO.ParcelStatus.PickedUp)
             {
-                new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID), this).Show();
-                Hide();
+                var win = new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID));
+                Visibility = Visibility.Hidden;
+                win.ShowDialog();
+                Visibility = Visibility.Visible;
+                /*new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID), this).Show();
+                Hide();*/
             }
         }
 
@@ -265,8 +265,12 @@ namespace PL1
         {
             if (parcelBL.Drone.ID != 0)
             {
-                new Drone(blparcel, parcelBL.Drone, this).Show();
-                Hide();
+                var win = new Drone(blparcel, parcelBL.Drone);
+                Visibility = Visibility.Hidden;
+                win.ShowDialog();
+                Visibility = Visibility.Visible;
+                /*new Drone(blparcel, parcelBL.Drone, this).Show();
+                Hide();*/
             }
         }
 

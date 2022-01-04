@@ -22,7 +22,6 @@ namespace PL1
     public partial class StationList : Window
     {
         BlApi.Bl blstationList;
-        Window ParentWindow;
         ObservableCollection<StationToList> MyList = new ObservableCollection<StationToList>();
 
 
@@ -30,10 +29,9 @@ namespace PL1
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public StationList(BlApi.Bl bl, Window main)
+        public StationList(BlApi.Bl bl)
         {
             InitializeComponent();
-            ParentWindow = main;
             WindowStyle = WindowStyle.None;
             blstationList = bl;
             foreach (var item in blstationList.GetStationToList())
@@ -75,7 +73,7 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            ParentWindow.Show();
+            //new MainWindow().Show();
             Close();
         }
 
@@ -90,8 +88,12 @@ namespace PL1
             StationToList stationList = (sender as ListView).SelectedValue as StationToList;
             BO.Station station = blstationList.ConvertStationToListToStationBL(stationList);
             //this.Visibility = Visibility.Hidden;
-            new Station(blstationList, station, this).Show();
-            Hide();
+            /*new Station(blstationList, station, this).Show();
+            Hide();*/
+            var win = new Station(blstationList, station);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -101,8 +103,12 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickAddStation(object sender, RoutedEventArgs e)
         {
-            new Station(blstationList, this).Show();
-            Hide();
+            /*new Station(blstationList, this).Show();
+            Hide();*/
+            var win = new Station(blstationList);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
 
