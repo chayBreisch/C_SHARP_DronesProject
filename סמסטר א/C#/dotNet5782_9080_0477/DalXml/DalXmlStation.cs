@@ -102,8 +102,8 @@ namespace DalXml
         {
             XElement stationRoot = XMLTools.LoadData(dir + stationFilePath);
             XElement stationElement = (from p in stationRoot.Elements()
-                                    where Convert.ToInt32(p.Element("ID").Value) == station.ID
-                                    select p).FirstOrDefault();
+                                       where Convert.ToInt32(p.Element("ID").Value) == station.ID
+                                       select p).FirstOrDefault();
             stationElement.Element("ID").Value = station.ID.ToString();
             stationElement.Element("ChargeSlots").Value = station.ChargeSlots.ToString();
             stationElement.Element("Latitude").Value = station.Latitude.ToString();
@@ -114,57 +114,21 @@ namespace DalXml
         }
 
 
+        /*
+        public int LengthStation()
+        {
+            return XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath).ToList().Count;
+        }
+        */
 
+       /* public IEnumerable<Station> GetDeletedStations()
+        {
+            IEnumerable<Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath);
+            return from station in stationList
+                   where station.IsActive == false
+                   orderby station.ID
+                   select station;
+        }*/
 
-
-
-
-
-
-
-
-
-
-
-        /* private void checkUniqeStation(int id)
-         {
-             if (GetStations().Any(station => station.ID == id))
-                 throw new NotUniqeID(id, typeof(Station));
-         }
-
-         public void RemoveStation(int id)
-         {
-             IEnumerable<Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath);
-             if (!stationList.Any(d => d.ID == id))
-             {
-                 throw new NotExistObjWithID(id, typeof(Station));
-             }
-             Station station = GetStationById(s => s.ID == id);
-             station.IsActive = false;
-             UpdateStation(station);
-         }
-         public void UpdateStation(Station station)
-         {
-             List<Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath).ToList();
-             int index = stationList.FindIndex(d => d.ID == station.ID);
-             if (index == -1)
-                 throw new NotExistObjWithID(station.ID, typeof(Station));
-             stationList[index] = station;
-             XMLTools.SaveListToXMLSerializer<Station>(stationList, dir + stationFilePath);
-         }
-
-         public IEnumerable<Station> GetDeletedStations()
-         {
-             IEnumerable<Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath);
-             return from station in stationList
-                    where station.IsActive == false
-                    orderby station.ID
-                    select station;
-         }
-
-         public int LengthStation()
-         {
-             return XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath).ToList().Count;
-         }*/
     }
 }
