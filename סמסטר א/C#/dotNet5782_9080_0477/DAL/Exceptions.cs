@@ -34,6 +34,10 @@ namespace DAL
         {
 
         }
+        public NotExistObjWithID(int id, Type type) : base($"there is no {type} with {id}")
+        {
+
+        }
         public NotExistObjWithID(Type type, Exception e) : base($"there is no {type} with this id")
         {
 
@@ -52,6 +56,13 @@ namespace DAL
 
         }
         public CantReturnDalObject(Exception e) : base($"can't return dal object")
+        {
+
+        }
+    }
+    public class EmptyList : Exception
+    {
+        public EmptyList(Type t) : base($"{t} empty list")
         {
 
         }

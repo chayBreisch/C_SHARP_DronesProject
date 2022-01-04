@@ -16,6 +16,7 @@ namespace BL
             }
 
         }
+
         public class CanNotUpdateDrone : Exception
         {
             public CanNotUpdateDrone(int id, string str) : base($"{id}: {str}")
@@ -27,6 +28,7 @@ namespace BL
 
             }
         }
+
         public class OutOfRange : Exception
         {
             public OutOfRange(string str) : base($"{str} out of range")
@@ -34,6 +36,7 @@ namespace BL
 
             }
         }
+
         public class NoItemWithThisID : Exception
         {
             public NoItemWithThisID(int id ,Type type) : base($"no {type} with {id} id")
@@ -41,13 +44,7 @@ namespace BL
 
             }
         }
-        /*public class CantReturnDalObject : DAL.CantReturnDalObject
-        {
-            public CantReturnDalObject() : base()
-            {
 
-            }
-        }*/
         public class CantReturnBLObject : Exception
         {
             public CantReturnBLObject(Exception e) : base($"can't return BL object")
@@ -55,6 +52,7 @@ namespace BL
 
             }
         }
+
         public class CantRemoveItem : Exception
         {
             public CantRemoveItem(Type type) : base($"can't remove {type}")

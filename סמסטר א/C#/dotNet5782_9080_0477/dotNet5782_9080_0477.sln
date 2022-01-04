@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL1", "PL1\PL1.csproj", "{D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL_NewDesign", "PL_NewDesign\PL_NewDesign.csproj", "{AE8562B2-25E4-4BAA-9992-83D8AA98A8A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{2C7B5BAA-8204-4F3B-8AE0-0B6285A5928A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{2C7B5BAA-8204-4F3B-8AE0-0B6285A5928A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{2C210C1F-596F-44AB-94EE-FB276312F42F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{2C7B5BAA-8204-4F3B-8AE0-0B6285A5928A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C7B5BAA-8204-4F3B-8AE0-0B6285A5928A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C7B5BAA-8204-4F3B-8AE0-0B6285A5928A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C210C1F-596F-44AB-94EE-FB276312F42F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C210C1F-596F-44AB-94EE-FB276312F42F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C210C1F-596F-44AB-94EE-FB276312F42F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C210C1F-596F-44AB-94EE-FB276312F42F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
