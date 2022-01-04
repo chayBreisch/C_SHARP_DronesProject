@@ -14,7 +14,7 @@ namespace BO
             ID = customer.ID;
             Name = customer.Name;
             Phone = customer.Phone;
-            SumOfParcelsSendedAndNotProvided = dalObject.GetParcelesByCondition(p => p.SenderID == ID && p.Delivered != null).Count();
+            SumOfParcelsSendedAndNotProvided = dalObject.GetParcelesByCondition(p => p.SenderID == ID && p.Delivered != null).Count();//GetParcels
             SumOfParcelsSendedAndNotProvided = dalObject.GetParcelesByCondition(p => p.SenderID == ID && p.Delivered == null).Count();
             SumOfParcelsRecieved = dalObject.GetParcelesByCondition(p => p.TargetID == ID && p.PickedUp != null).Count();
             SumOfParcelsOnTheWay = dalObject.GetParcelesByCondition(p => p.TargetID == ID && p.Requested != null && p.PickedUp == null).Count();
