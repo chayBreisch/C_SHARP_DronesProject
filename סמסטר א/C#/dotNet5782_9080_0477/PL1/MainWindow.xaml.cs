@@ -35,7 +35,7 @@ namespace PL1
             }
             catch (ExceptionsBL.CantReturnBLObject e)
             {
-                throw new ExceptionsBL.CantReturnBLObject();
+                throw new ExceptionsBL.CantReturnBLObject(e);
             }
         }
 

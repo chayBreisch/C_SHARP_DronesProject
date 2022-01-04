@@ -66,7 +66,7 @@ namespace BL
             }
             catch (ArgumentNullException e)
             {
-                throw new CanNotUpdateDrone(id, "can not uncharge drone");
+                throw new CanNotUpdateDrone(id, "can not uncharge drone", e);
             }
             if (droneBL == null)
                 throw new CanNotUpdateDrone(id, "can not uncharge drone");

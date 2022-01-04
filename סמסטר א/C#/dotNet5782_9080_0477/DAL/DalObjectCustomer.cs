@@ -98,7 +98,7 @@ namespace DalObject
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(id, typeof(Parcel));
+                throw new NotExistObjWithID(id, typeof(Parcel), e);
             }
         }
         public void UpdateCustomer(Customer customer)

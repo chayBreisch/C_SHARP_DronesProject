@@ -89,7 +89,7 @@ namespace BL
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(id, typeof(DO.Station));
+                throw new NotExistObjWithID(id, typeof(DO.Station), e);
 
             }
         }

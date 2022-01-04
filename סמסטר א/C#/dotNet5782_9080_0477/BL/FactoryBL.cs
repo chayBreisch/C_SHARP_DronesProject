@@ -18,7 +18,7 @@ namespace BL
             }
             catch (Exception e)
             {
-                throw new CantReturnBLObject();
+                throw new CantReturnBLObject(e);
             }
         }
     }

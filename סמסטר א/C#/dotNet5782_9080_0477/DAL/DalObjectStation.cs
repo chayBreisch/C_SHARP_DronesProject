@@ -56,7 +56,7 @@ namespace DalObject
             }
             catch (Exception e)
             {
-                throw new NotExistObjWithID(typeof(Station));
+                throw new NotExistObjWithID(typeof(Station), e);
             }
             return station1;
         }
@@ -138,7 +138,7 @@ namespace DalObject
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(id, typeof(Station));
+                throw new NotExistObjWithID(id, typeof(Station), e);
             }
         }
         public IEnumerable<Station> GetDeletedStations()

@@ -22,7 +22,10 @@ namespace BL
             {
 
             }
+            public CanNotUpdateDrone(int id, string str, Exception e) : base($"{id}: {str}")
+            {
 
+            }
         }
         public class OutOfRange : Exception
         {
@@ -38,16 +41,16 @@ namespace BL
 
             }
         }
-        public class CantReturnDalObject : DAL.CantReturnDalObject
+        /*public class CantReturnDalObject : DAL.CantReturnDalObject
         {
             public CantReturnDalObject() : base()
             {
 
             }
-        }
+        }*/
         public class CantReturnBLObject : Exception
         {
-            public CantReturnBLObject() : base($"can't return BL object")
+            public CantReturnBLObject(Exception e) : base($"can't return BL object")
             {
 
             }

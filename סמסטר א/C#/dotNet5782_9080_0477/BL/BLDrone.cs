@@ -105,7 +105,7 @@ namespace BL
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(id, typeof(DO.Drone));
+                throw new NotExistObjWithID(id, typeof(DO.Drone), e);
             }
         }
 
@@ -117,7 +117,7 @@ namespace BL
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(id, typeof(DO.Drone));
+                throw new NotExistObjWithID(id, typeof(DO.Drone), e);
             }
         }
         /// <summary>

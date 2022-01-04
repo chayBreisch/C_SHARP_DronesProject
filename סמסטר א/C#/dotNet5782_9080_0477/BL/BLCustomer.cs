@@ -108,7 +108,7 @@ namespace BL
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(1, typeof(DO.Customer));
+                throw new NotExistObjWithID(1, typeof(DO.Customer), e);
 
             }
         }

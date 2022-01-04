@@ -21,7 +21,7 @@ namespace DAL
             }
             catch (Exception e)
             {
-                throw new CantReturnDalObject();
+                throw new CantReturnDalObject(e);
             }
         }
     }

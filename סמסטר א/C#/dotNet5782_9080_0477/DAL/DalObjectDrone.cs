@@ -116,7 +116,7 @@ namespace DalObject
             }
             catch (ArgumentNullException e)
             {
-                throw new NotExistObjWithID(id, typeof(Drone));
+                throw new NotExistObjWithID(id, typeof(Drone), e);
             }
         }
 
