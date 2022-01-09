@@ -10,12 +10,20 @@ namespace DalXml
 {
     public partial class DalXml
     {
+        /// <summary>
+        /// check uniqe parcel
+        /// </summary>
+        /// <param name="id"></param>
         private void checkUniqeParcel(int id)
         {
             if (GetParcels().Any(parcel => parcel.ID == id))
                 throw new NotUniqeID(id, typeof(Parcel));
         }
 
+        /// <summary>
+        /// add parcel
+        /// </summary>
+        /// <param name="parcel"></param>
         public void AddParcel(Parcel parcel)
         {
             IEnumerable<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(dir + parcelFilePath);
@@ -24,6 +32,10 @@ namespace DalXml
             XMLTools.SaveListToXMLSerializer<Parcel>(parcelList, dir + parcelFilePath);
         }
 
+        /// <summary>
+        /// remove parcel
+        /// </summary>
+        /// <param name="id"></param>
         public void RemoveParcel(int id)
         {
             IEnumerable<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(dir + parcelFilePath);
@@ -35,6 +47,11 @@ namespace DalXml
             parcel.IsActive = false;
             UpdateParcel(parcel);
         }
+
+        /// <summary>
+        /// update parcel
+        /// </summary>
+        /// <param name="parcel"></param>
         public void UpdateParcel(Parcel parcel)
         {
             List<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(dir + parcelFilePath).ToList();
@@ -46,6 +63,12 @@ namespace DalXml
             parcelList[index] = parcel;
             XMLTools.SaveListToXMLSerializer<Parcel>(parcelList, dir + parcelFilePath);
         }
+
+        /// <summary>
+        /// get parcel by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Parcel GetParcelBy(int id)
         {
             try
@@ -62,6 +85,11 @@ namespace DalXml
 
         }
 
+        /// <summary>
+        /// get all parcels
+        /// </summary>
+        /// <param name="predicat"></param>
+        /// <returns></returns>
         public IEnumerable<Parcel> GetParcels(Predicate<Parcel> predicat = null)
         {
             IEnumerable<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(dir + parcelFilePath);
@@ -72,6 +100,10 @@ namespace DalXml
                    select parcel;
         }
 
+        /// <summary>
+        /// get deleted parcels
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Parcel> GetDeletedParcels()
         {
             IEnumerable<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(dir + parcelFilePath);
@@ -81,6 +113,10 @@ namespace DalXml
                    select parcel;
         }
 
+        /// <summary>
+        /// get count parcels
+        /// </summary>
+        /// <returns></returns>
         public int LengthParcel()
         {
             return XMLTools.LoadListFromXMLSerializer<Parcel>(dir + parcelFilePath).ToList().Count;

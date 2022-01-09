@@ -10,12 +10,20 @@ namespace DalXml
 {
     public partial class DalXml
     {
+        /// <summary>
+        /// check uniqe drone
+        /// </summary>
+        /// <param name="id"></param>
         private void checkUniqeDrone(int id)
         {
             if (GetDrones().Any(drone => drone.ID == id))
                 throw new NotUniqeID(id, typeof(Drone));
         }
 
+        /// <summary>
+        /// add drone 
+        /// </summary>
+        /// <param name="drone"></param>
         public void AddDrone(Drone drone)
         {
             IEnumerable<Drone> droneList = XMLTools.LoadListFromXMLSerializer<Drone>(dir + droneFilePath);
@@ -24,6 +32,10 @@ namespace DalXml
             XMLTools.SaveListToXMLSerializer<Drone>(droneList, dir + droneFilePath);
         }
 
+        /// <summary>
+        /// remove drone
+        /// </summary>
+        /// <param name="id"></param>
         public void RemoveDrone(int id)
         {
             IEnumerable<Drone> droneList = XMLTools.LoadListFromXMLSerializer<Drone>(dir + droneFilePath);
@@ -36,6 +48,10 @@ namespace DalXml
             UpdateDrone(drone);
         }
 
+        /// <summary>
+        /// update drone
+        /// </summary>
+        /// <param name="drone"></param>
         public void UpdateDrone(Drone drone)
         {
             List<Drone> droneList = XMLTools.LoadListFromXMLSerializer<Drone>(dir + droneFilePath).ToList();
@@ -48,6 +64,11 @@ namespace DalXml
             XMLTools.SaveListToXMLSerializer<Drone>(droneList, dir + droneFilePath);
         }
 
+        /// <summary>
+        /// get drone by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Drone GetDroneById(int id)
         {
             try
@@ -64,6 +85,11 @@ namespace DalXml
 
         }
 
+        /// <summary>
+        /// get all drones
+        /// </summary>
+        /// <param name="predicat"></param>
+        /// <returns></returns>
         public IEnumerable<Drone> GetDrones(Predicate<Drone> predicat = null)
         {
             IEnumerable<Drone> droneList = XMLTools.LoadListFromXMLSerializer<Drone>(dir + droneFilePath);

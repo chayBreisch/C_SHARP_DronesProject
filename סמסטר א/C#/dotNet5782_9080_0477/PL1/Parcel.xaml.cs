@@ -268,6 +268,7 @@ namespace PL1
                 var win = new Drone(blparcel, parcelBL.Drone);
                 Visibility = Visibility.Hidden;
                 win.ShowDialog();
+
                 Visibility = Visibility.Visible;
                 /*new Drone(blparcel, parcelBL.Drone, this).Show();
                 Hide();*/
