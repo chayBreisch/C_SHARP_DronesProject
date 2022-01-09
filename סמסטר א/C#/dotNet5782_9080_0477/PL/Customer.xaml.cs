@@ -210,24 +210,26 @@ namespace PL
             if (parcel.NameCustomerReciver == customeBL.Name)
             {
                 parcel.content = "Goted";
-                parcel.pathTo = "g";
             }
             else
             {
                 parcel.content = "Collected";
-                parcel.pathTo = "c";
             }
             BLObject.updateParecl(parcel);
         }
 
-        private void g(object sender, RoutedEventArgs e)
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("g");
+            MessageBox.Show($"{sender.ToString().Substring(sender.ToString().IndexOf(':') + 1, "Collected".Length)}");
+            cl((CheckBox)sender);
         }
 
-        private void c(object sender, RoutedEventArgs e)
+        private void cl(CheckBox c)
         {
-            MessageBox.Show("c");
+            c.IsEnabled = false;
         }
+
+       
     }
 }
