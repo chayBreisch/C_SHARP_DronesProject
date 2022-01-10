@@ -48,7 +48,7 @@ namespace DalXml
 
         /// <summary>
         /// get station by id
-        /// /// </summary>
+        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public Station GetStationById(int id)

@@ -101,7 +101,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// get all delted parcels
+        /// get deleted parcels
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Parcel> GetDeletedParcels()
