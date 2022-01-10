@@ -19,9 +19,9 @@ namespace PL
     /// </summary>
     public partial class Checking : Window
     {
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         char CheckIdentity;
-        public Checking(BlApi.Bl Blobject, char c)
+        public Checking(BlApi.IBL Blobject, char c)
         {
             InitializeComponent();
             BLObject = Blobject;

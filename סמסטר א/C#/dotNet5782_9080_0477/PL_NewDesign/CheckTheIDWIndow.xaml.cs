@@ -19,9 +19,9 @@ namespace PL_NewDesign
     /// </summary>
     public partial class CheckTheIDWIndow : Window
     {
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         char C;
-        public CheckTheIDWIndow(BlApi.Bl Blobject, char c)
+        public CheckTheIDWIndow(BlApi.IBL Blobject, char c)
         {
             InitializeComponent();
             BLObject = Blobject;

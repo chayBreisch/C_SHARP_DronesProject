@@ -20,13 +20,13 @@ namespace PL
     /// </summary>
     public partial class WorkerMain : Window
     {
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         Window ParentWindow;
 
         /// <summary>
         /// constructor
         /// </summary>
-        public WorkerMain(BlApi.Bl blobject, Window parentWindow)
+        public WorkerMain(BlApi.IBL blobject, Window parentWindow)
         {
             try
             {

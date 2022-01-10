@@ -8,7 +8,7 @@
         Title="Customer" Height="450" Width="800">
     <Grid>
 
-        <Grid Name="actions" Visibility="Hidden">
+        <Grid Name="actions" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition  Width="200"/>

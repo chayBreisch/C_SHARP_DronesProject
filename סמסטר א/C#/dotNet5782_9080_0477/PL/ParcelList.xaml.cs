@@ -22,7 +22,7 @@ namespace PL
     /// </summary>
     public partial class ParcelList : Window
     {
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         Window ParentWindow;
         public ObservableCollection<ParcelToList> MyList = new ObservableCollection<ParcelToList>();
         public CollectionView view;
@@ -30,13 +30,13 @@ namespace PL
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public ParcelList(BlApi.Bl bl, Window main)
+        public ParcelList(BlApi.IBL bl, Window main)
         {
             InitializeComponent();
             ParentWindow = main;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
-            foreach (var item in BLObject.GetParcelToList())
+            foreach (var item in BLObject.GetParcelsToList())
                 MyList.Add(item);
             DataContext = MyList;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
@@ -86,7 +86,7 @@ namespace PL
             {
                 view.GroupDescriptions.Clear();
                 MyList = new ObservableCollection<ParcelToList>();
-                foreach (var item in BLObject.GetParcelToList())
+                foreach (var item in BLObject.GetParcelsToList())
                     MyList.Add(item);
                 DataContext = MyList;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
@@ -129,11 +129,11 @@ namespace PL
             IEnumerable<ParcelToList> parcels = new List<ParcelToList>();
             ComboBox options = sender as ComboBox;
             if (parcelWeight.SelectedItem == null)
-                parcels = BLObject.GetParcelToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
+                parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             else if (parcelPriority.SelectedItem == null)
-                parcels = BLObject.GetParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
+                parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
             else
-                parcels = BLObject.GetParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
+                parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             view.GroupDescriptions.Clear();
 
             MyList = new ObservableCollection<ParcelToList>();
@@ -182,13 +182,13 @@ namespace PL
         {
             IEnumerable<ParcelToList> parcels = new List<ParcelToList>();
             if (parcelWeight.SelectedItem != null && parcelPriority.SelectedItem != null)
-                parcels = BLObject.GetParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
+                parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             else if (parcelPriority.SelectedItem != null)
-                parcels = BLObject.GetParcelToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
+                parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             else if (parcelWeight.SelectedItem != null)
-                parcels = BLObject.GetParcelToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
+                parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
             else
-                parcels = BLObject.GetParcelToList();
+                parcels = BLObject.GetParcelsToList();
             view.GroupDescriptions.Clear();
 
             MyList = new ObservableCollection<ParcelToList>();
@@ -212,7 +212,7 @@ namespace PL
             {
                 view.GroupDescriptions.Clear();
                 MyList = new ObservableCollection<ParcelToList>();
-                foreach (var item in BLObject.GetDeletedParcelToList())
+                foreach (var item in BLObject.GetDeletedParcelsToList())
                     MyList.Add(item);
                 DataContext = MyList;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);

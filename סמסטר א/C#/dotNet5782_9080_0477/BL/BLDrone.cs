@@ -227,7 +227,7 @@ namespace BL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<DroneToList> GetDroneToListByCondition(Predicate<DroneToList> predicate)
+        public IEnumerable<DroneToList> GetDronesToListByCondition(Predicate<DroneToList> predicate)
         {
             //try todo
             return (from drone in GetDronesToList()
@@ -235,7 +235,7 @@ namespace BL
                     select drone);
         }
 
-        public IEnumerable<DroneToList> GetDeletedDroneToList()
+        public IEnumerable<DroneToList> GetDeletedDronesToList()
         {
             //try todo
             return (from drone in GetDronesToList()

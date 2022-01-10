@@ -25,14 +25,14 @@ namespace PL1
 
     public partial class DroneList : Window
     {
-        BlApi.Bl blDroneList;
+        BlApi.IBL blDroneList;
         ObservableCollection<DroneToList> MyList = new ObservableCollection<DroneToList>();
         CollectionView view;
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public DroneList(BlApi.Bl bl)
+        public DroneList(BlApi.IBL bl)
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -77,11 +77,11 @@ namespace PL1
             IEnumerable<DroneToList> drones = new List<DroneToList>();
             ComboBox options = sender as ComboBox;
             if(weightFilter.SelectedItem == null)
-                drones = blDroneList.GetDroneToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
+                drones = blDroneList.GetDronesToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             else if(statusFilter.SelectedItem == null)
-                drones = blDroneList.GetDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
+                drones = blDroneList.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
             else
-                drones = blDroneList.GetDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
+                drones = blDroneList.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             //DroneListView.ItemsSource = drones;
             MyList = new ObservableCollection<DroneToList>();
             foreach (var item in drones)
@@ -184,11 +184,11 @@ namespace PL1
         {
             IEnumerable<DroneToList> drones = new List<DroneToList>();
             if (weightFilter.SelectedItem != null && statusFilter.SelectedItem != null)
-                drones = blDroneList.GetDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
+                drones = blDroneList.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             else if (statusFilter.SelectedItem != null)
-                drones = blDroneList.GetDroneToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
+                drones = blDroneList.GetDronesToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             else if (weightFilter.SelectedItem != null)
-                drones = blDroneList.GetDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
+                drones = blDroneList.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
             else
                 drones = blDroneList.GetDronesToList();
             //DroneListView.ItemsSource = drones;
@@ -209,7 +209,7 @@ namespace PL1
             {
                 view.GroupDescriptions.Clear();
                 MyList = new ObservableCollection<DroneToList>();
-                foreach (var item in blDroneList.GetDeletedDroneToList())
+                foreach (var item in blDroneList.GetDeletedDronesToList())
                     MyList.Add(item);
                 DataContext = MyList;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);

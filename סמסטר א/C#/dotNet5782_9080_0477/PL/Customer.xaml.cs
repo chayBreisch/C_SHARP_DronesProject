@@ -20,7 +20,7 @@ namespace PL
     public partial class Customer : Window
     {
 
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         BO.Customer customeBL;
         Window ParentWindow;
         BO.Customer customer = new BO.Customer();
@@ -30,7 +30,7 @@ namespace PL
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="customerList"></param>
-        public Customer(BlApi.Bl bl, Window parentWindow)
+        public Customer(BlApi.IBL bl, Window parentWindow)
         {
             this.ParentWindow = parentWindow;
             BLObject = bl;
@@ -42,7 +42,7 @@ namespace PL
         }
 
 
-        public Customer(BlApi.Bl blobject, Window parentWindow, char c)
+        public Customer(BlApi.IBL blobject, Window parentWindow, char c)
         {
             ParentWindow = parentWindow;
             BLObject = blobject;
@@ -59,7 +59,7 @@ namespace PL
         /// <param name="bl"></param>
         /// <param name="customer"></param>
         /// <param name="customerList"></param>
-        public Customer(BlApi.Bl bl, BO.Customer customer, Window parentWindow, char c)
+        public Customer(BlApi.IBL bl, BO.Customer customer, Window parentWindow, char c)
         {
             CheckIdentity = c;
             this.ParentWindow = parentWindow;
@@ -182,7 +182,7 @@ namespace PL
         private void Button_ClickMyParcels(object sender, RoutedEventArgs e)
         {
             List<BO.Parcel> parcels = new List<BO.Parcel>(BLObject.GetParcelsByCondition(P => { return customeBL.ID == P.Reciever.ID || customeBL.ID == P.Sender.ID; }));
-            theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver || customeBL.Name == P.NameCustomerSender; });
+            theList.ItemsSource = BLObject.GetParcelsToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver || customeBL.Name == P.NameCustomerSender; });
             foreach (var item in theList.Items)
             {
                 getContent((BO.ParcelToList)item);
@@ -197,12 +197,12 @@ namespace PL
 
         private void Button_ClickISend(object sender, RoutedEventArgs e)
         {
-            theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return customeBL.Name == P.NameCustomerSender; });
+            theList.ItemsSource = BLObject.GetParcelsToListByCondition(P => { return customeBL.Name == P.NameCustomerSender; });
         }
 
         private void Button_ClickIGot(object sender, RoutedEventArgs e)
         {
-            theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver; });
+            theList.ItemsSource = BLObject.GetParcelsToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver; });
         }
 
         private void getContent(BO.ParcelToList parcel)

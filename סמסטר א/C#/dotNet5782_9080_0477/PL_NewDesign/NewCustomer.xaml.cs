@@ -19,9 +19,9 @@ namespace PL_NewDesign
     /// </summary>
     public partial class NewCustomer : Window
     {
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         Window ParentWindow;
-        public NewCustomer(BlApi.Bl Blobject, Window parentWindow)
+        public NewCustomer(BlApi.IBL Blobject, Window parentWindow)
         {
             InitializeComponent();
             BLObject = Blobject;

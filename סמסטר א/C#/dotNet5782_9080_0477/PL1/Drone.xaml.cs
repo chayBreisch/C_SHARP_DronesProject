@@ -20,7 +20,7 @@ namespace PL1
     /// </summary>
     public partial class Drone : Window
     {
-        BlApi.Bl blDrone;
+        BlApi.IBL blDrone;
         BO.Drone droneBL;
         BO.Drone drone = new BO.Drone();
         /// <summary>
@@ -28,7 +28,7 @@ namespace PL1
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.Bl bl)
+        public Drone(BlApi.IBL bl)
         {
             blDrone = bl;
             InitializeComponent();
@@ -45,7 +45,7 @@ namespace PL1
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.Bl bl, BO.Drone drone)
+        public Drone(BlApi.IBL bl, BO.Drone drone)
         {
             blDrone = bl;
             droneBL = drone;
@@ -218,9 +218,9 @@ namespace PL1
             }
             catch (Exception exce)
             {
-                MessageBox.Show(exce.Message);
+                MessageBox.Show("can not add drone");
             }
-
+            MessageBox.Show("added drone sucssesfully");
         }
 
         /// <summary>
@@ -248,7 +248,16 @@ namespace PL1
         /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            droneBL = blDrone.UpdateDataDroneModel(droneBL.ID, modelDrone.Text);
+            try
+            {
+                droneBL = blDrone.UpdateDataDroneModel(droneBL.ID, modelDrone.Text);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("can not update drone");
+            }
+            MessageBox.Show("you updated sucssesfully");
         }
 
         /// <summary>
@@ -258,7 +267,14 @@ namespace PL1
         /// <param name="e"></param>
         private void Charge_Click(object sender, RoutedEventArgs e)
         {
-            droneBL = blDrone.UpdateSendDroneToCharge(droneBL.ID);
+            try
+            {
+                droneBL = blDrone.UpdateSendDroneToCharge(droneBL.ID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("can not charge drone");
+            }
             statusDrone.Text = droneBL.DroneStatus.ToString();
             /*visible.Visibility = Visibility.Hidden;
             hidden.Visibility = Visibility.Visible;*/
@@ -272,6 +288,7 @@ namespace PL1
             UnCharge.IsEnabled = true;*/
             //TimeCharger.Visibility = Visibility.Visible;
             TimeChargerBlock.Visibility = Visibility.Visible;
+            MessageBox.Show("the drone is sended to charge succesfully");
         }
 
         /// <summary>
@@ -308,9 +325,10 @@ namespace PL1
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("can not uncharge drone");
                 }
             }
+            MessageBox.Show("the drone is uncharged sucssesfully");
         }
 
         /// <summary>
@@ -328,7 +346,7 @@ namespace PL1
             catch (Exception ex)
             {
                 check = false;
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show("can not connect drone");
             }
             if (check)
                 MessageBox.Show("connected succesfully");
@@ -349,7 +367,7 @@ namespace PL1
             catch (Exception ex)
             {
                 check = false;
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show("can not collect drone");
             }
             if (check)
                 MessageBox.Show("collected succesfully");
@@ -370,7 +388,7 @@ namespace PL1
             catch (Exception ex)
             {
                 check = false;
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show("can not supply drone");
             }
             if (check)
                 MessageBox.Show("supplied succesfully");
@@ -412,6 +430,7 @@ namespace PL1
             {
                 MessageBox.Show("can't remove parcel because it's connected to a drone");
             }
+            MessageBox.Show("drone removed sucssesfully");
         }
     }
 }

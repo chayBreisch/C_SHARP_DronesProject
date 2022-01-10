@@ -9,7 +9,7 @@ using System.Linq;
 namespace BL
 {
     //לשים לב מה עם GET SET IN CUSTOMERBL
-    internal sealed partial class BL : Bl
+    internal sealed partial class BL : IBL
     {
         static BL Instance;
         public static BL GetInstance()

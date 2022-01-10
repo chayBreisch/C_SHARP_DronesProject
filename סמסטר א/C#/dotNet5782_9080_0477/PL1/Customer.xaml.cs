@@ -20,7 +20,7 @@ namespace PL1
     public partial class Customer : Window
     {
 
-        BlApi.Bl blCustomer;
+        BlApi.IBL blCustomer;
         BO.Customer customeBL;
         BO.Customer customer = new BO.Customer();
         /// <summary>
@@ -28,7 +28,7 @@ namespace PL1
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="customerList"></param>
-        public Customer(BlApi.Bl bl)
+        public Customer(BlApi.IBL bl)
         {
             blCustomer = bl;
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace PL1
         /// <param name="bl"></param>
         /// <param name="customer"></param>
         /// <param name="customerList"></param>
-        public Customer(BlApi.Bl bl, BO.Customer customer)
+        public Customer(BlApi.IBL bl, BO.Customer customer)
         {
             blCustomer = bl;
             customeBL = customer;
@@ -147,6 +147,7 @@ namespace PL1
             {
                 MessageBox.Show("can't remove parcel because it's connected to a drone");
             }
+            MessageBox.Show("customer removed sucssesfully");
         }
     }
 }

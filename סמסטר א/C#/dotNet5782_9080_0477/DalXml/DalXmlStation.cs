@@ -11,6 +11,11 @@ namespace DalXml
 {
     public partial class DalXml
     {
+        /// <summary>
+        /// get stations
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<Station> GetStations(Predicate<Station> predicate = null) //predicate = (p => p.IsActive == false); אם רוצים מחוקים לשלוח 
         {
 
@@ -41,7 +46,11 @@ namespace DalXml
                    select station;
         }
 
-
+        /// <summary>
+        /// get station by id
+        /// /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Station GetStationById(int id)
         {
             XElement stationRoot = XMLTools.LoadData(dir + stationFilePath);
@@ -67,6 +76,10 @@ namespace DalXml
             return t;
         }
 
+        /// <summary>
+        /// add station
+        /// </summary>
+        /// <param name="station"></param>
         public void AddStation(Station station)
         {
             try
@@ -91,6 +104,10 @@ namespace DalXml
             }
         }
 
+        /// <summary>
+        /// remove station
+        /// </summary>
+        /// <param name="id"></param>
         public void RemoveStation(int id)
         {
             Station station = GetStationById(id);
@@ -98,6 +115,10 @@ namespace DalXml
             UpdateStation(station);
         }
 
+        /// <summary>
+        /// update station details
+        /// </summary>
+        /// <param name="station"></param>
         public void UpdateStation(Station station)
         {
             XElement stationRoot = XMLTools.LoadData(dir + stationFilePath);

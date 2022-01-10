@@ -22,14 +22,14 @@ namespace PL1
 
     public partial class Parcel : Window
     {
-        BlApi.Bl blparcel;
+        BlApi.IBL blparcel;
         BO.Parcel parcelBL;
         /// <summary>
         /// constructor add parcel
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Parcel(BlApi.Bl bl)
+        public Parcel(BlApi.IBL bl)
         {
             blparcel = bl;
             InitializeComponent();
@@ -47,7 +47,7 @@ namespace PL1
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="parentWindow"></param>
-        public Parcel(BlApi.Bl bl, BO.Parcel parcel)
+        public Parcel(BlApi.IBL bl, BO.Parcel parcel)
         {
             InitializeComponent();
             actions.Visibility = Visibility.Visible;
@@ -217,6 +217,7 @@ namespace PL1
             {
                 MessageBox.Show("can't remove parcel because it's connected to a drone");
             }
+            MessageBox.Show("parcel removed sucssesfully");
         }
 
         /// <summary>

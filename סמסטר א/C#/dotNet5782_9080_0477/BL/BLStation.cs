@@ -170,12 +170,12 @@ namespace BL
         {
             if (status == 0)
                 return (
-                from station in GetStationToList()
+                from station in GetStationsToList()
                 where station.ChargeSlotsFree == (int)status
                 select station);
             else
                 return (
-            from station in GetStationToList()
+            from station in GetStationsToList()
             where station.ChargeSlotsFree != 0
             select station);
         }
@@ -184,7 +184,7 @@ namespace BL
         /// return list of stationToList
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<StationToList> GetStationToList()
+        public IEnumerable<StationToList> GetStationsToList()
         {
             IEnumerable<BO.Station> stations = getStationsBL();
             List<StationToList> stations1 = new List<StationToList>();
@@ -228,7 +228,7 @@ namespace BL
             return stations1;
         }
 
-        public IEnumerable<StationToList> GetDeletedStationToList()
+        public IEnumerable<StationToList> GetDeletedStationsToList()
         {
             IEnumerable<BO.Station> stations = getDeletedStationsBL();
             List<StationToList> stations1 = new List<StationToList>();

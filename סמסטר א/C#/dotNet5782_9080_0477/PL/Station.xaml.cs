@@ -20,7 +20,7 @@ namespace PL
     public partial class Station : Window
     {
         Window ParentWindow;
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         BO.Station stationBL;
         BO.Drone droneBL;
         /// <summary>
@@ -28,7 +28,7 @@ namespace PL
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Station(BlApi.Bl bl, Window parentWindow)
+        public Station(BlApi.IBL bl, Window parentWindow)
         {
             ParentWindow = parentWindow;
             BLObject = bl;
@@ -44,7 +44,7 @@ namespace PL
         /// <param name="bl"></param>
         /// <param name="station"></param>
         /// <param name="parentWindow"></param>
-        public Station(BlApi.Bl bl, BO.Station station, Window parentWindow)
+        public Station(BlApi.IBL bl, BO.Station station, Window parentWindow)
         {
             InitializeComponent();
             actions.Visibility = Visibility.Visible;
