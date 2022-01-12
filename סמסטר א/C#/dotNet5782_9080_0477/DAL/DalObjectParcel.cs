@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using IDAL;
-using DAL;
 using System.Collections.Generic;
+using DALException;
 
 namespace DalObject
 {

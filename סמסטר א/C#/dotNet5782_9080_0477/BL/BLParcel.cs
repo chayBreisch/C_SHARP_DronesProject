@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DO;
-using DAL;
 using BO;
 using static BL.ExceptionsBL;
+using DALException;
 
 namespace BL
 {

@@ -40,7 +40,7 @@
                     <GridViewColumn Header="Parcels Sended And Provided" Width="110" DisplayMemberBinding="{Binding SumOfParcelsSendedAndProvided}"/>
                     <GridViewColumn Header="Parcels Sended And Not Provided" Width="110" DisplayMemberBinding="{Binding SumOfParcelsSendedAndNotProvided}" />
                     <GridViewColumn Header="Parcels On The Way" Width="110" DisplayMemberBinding="{Binding SumOfParcelsOnTheWay}" />
-                    <GridViewColumn Header="Parcels Recieved" Width="110" DisplayMemberBinding="{Binding ParcelsRecieved}" />
+                    <GridViewColumn Header="Parcels Recieved" Width="110" DisplayMemberBinding="{Binding SumOfParcelsRecieved}" />
 
 
 

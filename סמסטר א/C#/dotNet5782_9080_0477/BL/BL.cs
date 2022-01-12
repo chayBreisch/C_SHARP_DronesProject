@@ -1,11 +1,13 @@
 ﻿using System;
 using DalObject;
 using BO;
-using DAL;
 using BlApi;
 using System.Collections.Generic;
 using DO;
 using System.Linq;
+using DALException;
+using DAL;
+
 namespace BL
 {
     //לשים לב מה עם GET SET IN CUSTOMERBL
@@ -36,7 +38,7 @@ namespace BL
             {
                 dalObject = FactoryDAL.factory("DalObject");
             }
-            catch (DAL.CantReturnDalObject)
+            catch (DALException.CantReturnDalObject)
             {
                 throw new CantReturnDalObject();
             }

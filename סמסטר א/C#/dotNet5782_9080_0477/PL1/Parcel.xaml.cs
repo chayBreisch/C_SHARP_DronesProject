@@ -211,13 +211,13 @@ namespace PL1
                     blparcel.RemoveParcel(parcelBL.ID);
                     Button_ClickCloseParcel(sender, e);
                     //Close();
+                    MessageBox.Show("parcel removed sucssesfully");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("can't remove parcel because it's connected to a drone");
             }
-            MessageBox.Show("parcel removed sucssesfully");
         }
 
         /// <summary>
@@ -234,8 +234,8 @@ namespace PL1
                 Visibility = Visibility.Hidden;
                 win.ShowDialog();
                 Visibility = Visibility.Visible;
-              /*  new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), this).Show();
-                Hide();*/
+                /*  new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), this).Show();
+                  Hide();*/
             }
         }
 

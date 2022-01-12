@@ -214,13 +214,13 @@ namespace PL1
             {
                 blDrone.AddDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
                 MessageBox.Show("you added succefuly");
+                MessageBox.Show("added drone sucssesfully");
                 Close();
             }
             catch (Exception exce)
             {
                 MessageBox.Show("can not add drone");
             }
-            MessageBox.Show("added drone sucssesfully");
         }
 
         /// <summary>
@@ -251,13 +251,13 @@ namespace PL1
             try
             {
                 droneBL = blDrone.UpdateDataDroneModel(droneBL.ID, modelDrone.Text);
+                MessageBox.Show("you updated sucssesfully");
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show("can not update drone");
             }
-            MessageBox.Show("you updated sucssesfully");
         }
 
         /// <summary>
@@ -270,6 +270,8 @@ namespace PL1
             try
             {
                 droneBL = blDrone.UpdateSendDroneToCharge(droneBL.ID);
+                TimeChargerBlock.Visibility = Visibility.Visible;
+                MessageBox.Show("the drone is sended to charge succesfully");
             }
             catch (Exception ex)
             {
@@ -287,8 +289,6 @@ namespace PL1
             Supply.IsEnabled = false;
             UnCharge.IsEnabled = true;*/
             //TimeCharger.Visibility = Visibility.Visible;
-            TimeChargerBlock.Visibility = Visibility.Visible;
-            MessageBox.Show("the drone is sended to charge succesfully");
         }
 
         /// <summary>
@@ -322,13 +322,13 @@ namespace PL1
                     statusDrone.Text = droneBL.DroneStatus.ToString();
                     batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
                     TimeCharger.Text = "";
+                    MessageBox.Show("the drone is uncharged sucssesfully");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("can not uncharge drone");
                 }
             }
-            MessageBox.Show("the drone is uncharged sucssesfully");
         }
 
         /// <summary>
@@ -424,13 +424,13 @@ namespace PL1
                 {
                     blDrone.RemoveDrone(droneBL.ID);
                     Button_ClickClose(sender, e);
+                    MessageBox.Show("drone removed sucssesfully");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("can't remove parcel because it's connected to a drone");
             }
-            MessageBox.Show("drone removed sucssesfully");
         }
     }
 }

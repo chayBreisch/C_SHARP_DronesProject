@@ -60,26 +60,26 @@ namespace PL1
             sendedTo.ItemsSource = customeBL.parcelSendedToCustomer;
         }
 
-      /*  public Customer(BlApi.Bl bl, BO.Customer customer, Window ParentWindow)
-        {
-            parentWindow = ParentWindow;
-            blCustomer = bl;
-            customeBL = customer;
-            InitializeComponent();
-            WindowStyle = WindowStyle.None;
-            addCustomer.Visibility = Visibility.Visible;
-            actions.Visibility = Visibility.Hidden;
-            idcustomer.Text = customeBL.ID.ToString();
-            nameCustomer.Text = customeBL.Name.ToString();
-            phoneCustomr.Text = customeBL.Phone.ToString();
-            longCustomer.Text = customeBL.Location.Longitude.ToString();
-            latCustomere.Text = customeBL.Location.Latitude.ToString();
-            sendedBy.ItemsSource = customeBL.parcelSendedByCustomer;
-            sendedTo.ItemsSource = customeBL.parcelSendedToCustomer;
+        /*  public Customer(BlApi.Bl bl, BO.Customer customer, Window ParentWindow)
+          {
+              parentWindow = ParentWindow;
+              blCustomer = bl;
+              customeBL = customer;
+              InitializeComponent();
+              WindowStyle = WindowStyle.None;
+              addCustomer.Visibility = Visibility.Visible;
+              actions.Visibility = Visibility.Hidden;
+              idcustomer.Text = customeBL.ID.ToString();
+              nameCustomer.Text = customeBL.Name.ToString();
+              phoneCustomr.Text = customeBL.Phone.ToString();
+              longCustomer.Text = customeBL.Location.Longitude.ToString();
+              latCustomere.Text = customeBL.Location.Latitude.ToString();
+              sendedBy.ItemsSource = customeBL.parcelSendedByCustomer;
+              sendedTo.ItemsSource = customeBL.parcelSendedToCustomer;
 
-*//*            SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
-            SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();*//*
-        }*/
+  *//*            SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
+              SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();*//*
+          }*/
 
 
         private void Button_ClickResetAddCustomer(object sender, RoutedEventArgs e)
@@ -103,7 +103,7 @@ namespace PL1
                 blCustomer.AddCustomer(id, name, phone, new BO.LocationBL(longitude, latitude));
                 MessageBox.Show("succesfull add");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -141,13 +141,13 @@ namespace PL1
                     Button_ClickClose(sender, e);
                     /* ParentWindow.Show();
                      Close();*/
+                    MessageBox.Show("customer removed sucssesfully");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("can't remove parcel because it's connected to a drone");
             }
-            MessageBox.Show("customer removed sucssesfully");
         }
     }
 }

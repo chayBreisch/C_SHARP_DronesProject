@@ -156,12 +156,12 @@ namespace PL1
             try
             {
                 stationBL = blStation.UpdateDataStation(stationBL.ID, int.Parse(nameStation.Text), int.Parse(ChargeSlotsStation.Text));
+                MessageBox.Show("station updated sucssesfully");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("can not update station");
             }
-            MessageBox.Show("station updated sucssesfully");
         }
 
         /// <summary>
@@ -223,6 +223,7 @@ namespace PL1
                 {
                     blStation.RemoveStation(stationBL.ID);
                     //ParentWindow.Show();
+                    MessageBox.Show("station deleted sucssesully");
                     Close();
                 }
             }
@@ -230,7 +231,6 @@ namespace PL1
             {
                 MessageBox.Show(ex.Message + "\nyou have to release them before");
             }
-            MessageBox.Show("station deleted sucssesully");
         }
     }
 }

@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using IDAL;
-using DAL;
+using DALException;
+
 namespace DalObject
 {
     internal partial class DalObject
