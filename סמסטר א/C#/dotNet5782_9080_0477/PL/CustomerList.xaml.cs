@@ -26,6 +26,7 @@ namespace PL
         Window ParentWindow;
         ObservableCollection<CustomerToList> MyList = new ObservableCollection<CustomerToList>();
         CollectionView view;
+        internal static PLLists PLLists;
 
 
         /// <summary>
@@ -35,12 +36,14 @@ namespace PL
         public CustomerList(BlApi.Bl bl, Window main)
         {
             InitializeComponent();
+            PLLists = new PLLists();
+            CustomerListView.ItemsSource = PLLists.Customers;
             ParentWindow = main;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
-            foreach (var item in BLObject.GetCustomerToList())
-                MyList.Add(item);
-            DataContext = MyList;
+            /*foreach (var item in BLObject.GetCustomerToList())
+                MyList.Add(item);*/
+            DataContext = PLLists.Customers;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
 
         }
@@ -48,9 +51,9 @@ namespace PL
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             MyList = new ObservableCollection<CustomerToList>();
-            foreach (var item in BLObject.GetCustomerToList())
-                MyList.Add(item);
-            DataContext = MyList;
+            /*foreach (var item in BLObject.GetCustomerToList())
+                MyList.Add(item);*/
+            DataContext = PLLists.Customers;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             if (view != null)
             {
@@ -123,9 +126,9 @@ namespace PL
         private void Button_Click_ShowRemovedCustomers(object sender, RoutedEventArgs e)
         {
             MyList = new ObservableCollection<CustomerToList>();
-            foreach (var item in BLObject.GetDeletedCustomerToList())
-                MyList.Add(item);
-            DataContext = MyList;
+            /*foreach (var item in BLObject.GetDeletedCustomerToList())
+                MyList.Add(item);*/
+            DataContext = PLLists.Customers;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
     }
