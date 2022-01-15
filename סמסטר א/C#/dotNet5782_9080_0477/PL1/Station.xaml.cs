@@ -19,7 +19,7 @@ namespace PL1
     /// </summary>
     public partial class Station : Window
     {
-        BlApi.Bl blStation;
+        BlApi.IBL blStation;
         BO.Station stationBL;
         BO.Drone droneBL;
         /// <summary>
@@ -27,7 +27,7 @@ namespace PL1
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Station(BlApi.Bl bl)
+        public Station(BlApi.IBL bl)
         {
             blStation = bl;
             InitializeComponent();
@@ -41,7 +41,7 @@ namespace PL1
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="station"></param>
-        public Station(BlApi.Bl bl, BO.Station station)
+        public Station(BlApi.IBL bl, BO.Station station)
         {
             InitializeComponent();
             actions.Visibility = Visibility.Visible;
@@ -101,7 +101,7 @@ namespace PL1
         {
 
             if (latitudeStation.Text == "")
-               throw new InValidInput("model");
+                throw new InValidInput("model");
             return int.Parse(latitudeStation.Text);
         }
 
@@ -153,7 +153,15 @@ namespace PL1
         /// <param name="e"></param>
         private void Update_ClickStation(object sender, RoutedEventArgs e)
         {
-            stationBL = blStation.UpdateDataStation(stationBL.ID, int.Parse(nameStation.Text), int.Parse(ChargeSlotsStation.Text));
+            try
+            {
+                stationBL = blStation.UpdateDataStation(stationBL.ID, int.Parse(nameStation.Text), int.Parse(ChargeSlotsStation.Text));
+                MessageBox.Show("station updated sucssesfully");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("can not update station");
+            }
         }
 
         /// <summary>
@@ -215,6 +223,7 @@ namespace PL1
                 {
                     blStation.RemoveStation(stationBL.ID);
                     //ParentWindow.Show();
+                    MessageBox.Show("station deleted sucssesully");
                     Close();
                 }
             }

@@ -21,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         public MainWindow()
         {
             try {

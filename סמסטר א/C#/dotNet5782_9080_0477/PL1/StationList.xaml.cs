@@ -21,7 +21,7 @@ namespace PL1
     /// </summary>
     public partial class StationList : Window
     {
-        BlApi.Bl blstationList;
+        BlApi.IBL blstationList;
         ObservableCollection<StationToList> MyList = new ObservableCollection<StationToList>();
 
 
@@ -29,12 +29,12 @@ namespace PL1
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public StationList(BlApi.Bl bl)
+        public StationList(BlApi.IBL bl)
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             blstationList = bl;
-            foreach (var item in blstationList.GetStationToList())
+            foreach (var item in blstationList.GetStationsToList())
                 MyList.Add(item);
             DataContext = MyList;
             //DroneListView.ItemsSource = bl.GetDronesBL();
@@ -60,7 +60,7 @@ namespace PL1
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            IEnumerable<StationToList> stations = blstationList.GetStationToList();
+            IEnumerable<StationToList> stations = blstationList.GetStationsToList();
             chargeSlotsFilter.SelectedItem = null;
             //weightFilter.SelectedItem = null;
             StationListView.ItemsSource = stations;
@@ -125,14 +125,14 @@ namespace PL1
             if (chargeSlotsFilter.SelectedItem != null)
                 stations = blstationList.GetStationsByChargeSlots(chargeSlotsFilter.SelectedIndex);
             else
-                stations = blstationList.GetStationToList();
+                stations = blstationList.GetStationsToList();
             StationListView.ItemsSource = stations;
         }
 
         private void Button_Click_ShowDeletedStations(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            IEnumerable<StationToList> stations = blstationList.GetDeletedStationToList();
+            IEnumerable<StationToList> stations = blstationList.GetDeletedStationsToList();
             chargeSlotsFilter.SelectedItem = null;
             StationListView.ItemsSource = stations;
         }

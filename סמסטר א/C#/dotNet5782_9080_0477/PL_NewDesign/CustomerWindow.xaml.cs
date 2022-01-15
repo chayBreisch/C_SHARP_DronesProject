@@ -19,10 +19,10 @@ namespace PL_NewDesign
     /// </summary>
     public partial class CustomerWindow : Window
     {
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         Window ParentWindow;
         BO.Customer Customer;
-        public CustomerWindow(BlApi.Bl Blobject, Window parentWindow, BO.Customer customer)
+        public CustomerWindow(BlApi.IBL Blobject, Window parentWindow, BO.Customer customer)
         {
             InitializeComponent();
             BLObject = Blobject;
@@ -38,7 +38,7 @@ namespace PL_NewDesign
 
         private void Button_ClickMyParcels(object sender, RoutedEventArgs e)
         {
-            theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return Customer.Name == P.NameCustomerReciver || Customer.Name == P.NameCustomerSender; });
+            theList.ItemsSource = BLObject.GetParcelsToListByCondition(P => { return Customer.Name == P.NameCustomerReciver || Customer.Name == P.NameCustomerSender; });
            // foreach(var item in theList)
         }
 
@@ -49,12 +49,12 @@ namespace PL_NewDesign
 
         private void Button_ClickISend(object sender, RoutedEventArgs e)
         {
-            theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return Customer.Name == P.NameCustomerSender; });
+            theList.ItemsSource = BLObject.GetParcelsToListByCondition(P => { return Customer.Name == P.NameCustomerSender; });
         }
 
         private void Button_ClickIGot(object sender, RoutedEventArgs e)
         {
-            theList.ItemsSource = BLObject.GetParcelToListByCondition(P => { return Customer.Name == P.NameCustomerReciver; });
+            theList.ItemsSource = BLObject.GetParcelsToListByCondition(P => { return Customer.Name == P.NameCustomerReciver; });
         }
     }
 }

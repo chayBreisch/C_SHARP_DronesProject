@@ -1,5 +1,4 @@
-﻿using DAL;
-using BO;
+﻿using BO;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static BL.ExceptionsBL;
+using DALException;
 
 namespace BL
 {
@@ -187,7 +187,7 @@ namespace BL
         /// return active customerToList
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<CustomerToList> GetCustomerToList()
+        public IEnumerable<CustomerToList> GetCustomersToList()
         {
             IEnumerable<BO.Customer> customers = getCustomersBL();
             List<CustomerToList> customers1 = new List<CustomerToList>();
@@ -203,7 +203,7 @@ namespace BL
         /// return not active customerToList
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<CustomerToList> GetDeletedCustomerToList()
+        public IEnumerable<CustomerToList> GetDeletedCustomersToList()
         {
             IEnumerable<BO.Customer> customers = getCustomersBL();
             List<CustomerToList> customers1 = new List<CustomerToList>();

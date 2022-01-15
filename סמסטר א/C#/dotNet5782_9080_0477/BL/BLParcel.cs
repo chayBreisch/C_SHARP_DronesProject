@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DO;
-using DAL;
 using BO;
 using static BL.ExceptionsBL;
+using DALException;
 
 namespace BL
 {
@@ -143,7 +143,7 @@ namespace BL
         /// return active ParcelToList
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ParcelToList> GetParcelToList()
+        public IEnumerable<ParcelToList> GetParcelsToList()
         {
             IEnumerable<BO.Parcel> parcels = getParcelsBL();
             List<ParcelToList> parcels1 = new List<ParcelToList>();
@@ -158,7 +158,7 @@ namespace BL
         /// return all ParcelToList
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ParcelToList> GetDeletedParcelToList()
+        public IEnumerable<ParcelToList> GetDeletedParcelsToList()
         {
             IEnumerable<DO.Parcel> parcels = dalObject.GetDeletedParcels();
             List<ParcelToList> parcels1 = new List<ParcelToList>();
@@ -218,10 +218,10 @@ namespace BL
         }*/
 
 
-        public IEnumerable<ParcelToList> GetParcelToListByCondition(Predicate<ParcelToList> predicate)
+        public IEnumerable<ParcelToList> GetParcelsToListByCondition(Predicate<ParcelToList> predicate)
         {
             //try todo
-            return (from parcel in GetParcelToList()
+            return (from parcel in GetParcelsToList()
                     where predicate(parcel)
                     select parcel);
         }

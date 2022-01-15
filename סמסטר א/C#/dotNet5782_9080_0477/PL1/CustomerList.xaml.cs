@@ -22,7 +22,7 @@ namespace PL1
     /// </summary>
     public partial class CustomerList : Window
     {
-        BlApi.Bl blcustomer;
+        BlApi.IBL blcustomer;
         ObservableCollection<CustomerToList> MyList = new ObservableCollection<CustomerToList>();
         CollectionView view;
 
@@ -31,12 +31,12 @@ namespace PL1
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public CustomerList(BlApi.Bl bl)
+        public CustomerList(BlApi.IBL bl)
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             blcustomer = bl;
-            foreach (var item in blcustomer.GetCustomerToList())
+            foreach (var item in blcustomer.GetCustomersToList())
                 MyList.Add(item);
             DataContext = MyList;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
@@ -46,7 +46,7 @@ namespace PL1
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             MyList = new ObservableCollection<CustomerToList>();
-            foreach (var item in blcustomer.GetCustomerToList())
+            foreach (var item in blcustomer.GetCustomersToList())
                 MyList.Add(item);
             DataContext = MyList;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
@@ -129,7 +129,7 @@ namespace PL1
         private void Button_Click_ShowRemovedCustomers(object sender, RoutedEventArgs e)
         {
             MyList = new ObservableCollection<CustomerToList>();
-            foreach (var item in blcustomer.GetDeletedCustomerToList())
+            foreach (var item in blcustomer.GetDeletedCustomersToList())
                 MyList.Add(item);
             DataContext = MyList;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);

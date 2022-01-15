@@ -1,5 +1,4 @@
-﻿using DAL;
-using BO;
+﻿using BO;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static BL.ExceptionsBL;
+using DALException;
 
 namespace BL
 {
@@ -227,7 +227,7 @@ namespace BL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<DroneToList> GetDroneToListByCondition(Predicate<DroneToList> predicate)
+        public IEnumerable<DroneToList> GetDronesToListByCondition(Predicate<DroneToList> predicate)
         {
             //try todo
             return (from drone in GetDronesToList()
@@ -235,7 +235,7 @@ namespace BL
                     select drone);
         }
 
-        public IEnumerable<DroneToList> GetDeletedDroneToList()
+        public IEnumerable<DroneToList> GetDeletedDronesToList()
         {
             //try todo
             return (from drone in GetDronesToList()

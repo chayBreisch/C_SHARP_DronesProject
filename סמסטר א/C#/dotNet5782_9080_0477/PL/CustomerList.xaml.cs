@@ -22,7 +22,7 @@ namespace PL
     /// </summary>
     public partial class CustomerList : Window
     {
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         Window ParentWindow;
         ObservableCollection<CustomerToList> MyList = new ObservableCollection<CustomerToList>();
         CollectionView view;
@@ -33,7 +33,7 @@ namespace PL
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public CustomerList(BlApi.Bl bl, Window main)
+        public CustomerList(BlApi.IBL bl, Window main)
         {
             InitializeComponent();
             PLLists = new PLLists();

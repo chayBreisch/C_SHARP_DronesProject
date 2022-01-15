@@ -10,7 +10,7 @@ namespace BL
 {
     public class FactoryBL
     {
-        public static BlApi.Bl factory()
+        public static BlApi.IBL factory()
         {
             try
             {

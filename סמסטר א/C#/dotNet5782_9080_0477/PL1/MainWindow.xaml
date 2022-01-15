@@ -31,10 +31,10 @@
     </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Button Content="drone list"  FontSize="30" VerticalAlignment="Top"  Margin="0,217,0,0" HorizontalAlignment="Center" Click="Button_Click_DroneList" Width="152" Height="151"/>
         <Button Content="station list"  FontSize="30" VerticalAlignment="Top"  Margin="0,217,0,0" HorizontalAlignment="Center" Width="152" Height="151" Grid.Column="1" Click="Button_ClickStationList" />
