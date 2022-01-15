@@ -23,8 +23,9 @@ namespace PL
     {
         BlApi.IBL BLObject;
         Window ParentWindow;
-        ObservableCollection<StationToList> MyList = new ObservableCollection<StationToList>();
-
+        //ObservableCollection<StationToList> MyList = new ObservableCollection<StationToList>();
+        internal static PLLists PLLists;
+        CollectionView view;
 
         /// <summary>
         /// constructor
@@ -36,9 +37,9 @@ namespace PL
             ParentWindow = main;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
-            foreach (var item in BLObject.GetStationsToList())
-                MyList.Add(item);
-            DataContext = MyList;
+           /* foreach (var item in BLObject.GetStationsToList())
+                MyList.Add(item);*/
+            DataContext = PLLists.Stations;
             //DroneListView.ItemsSource = bl.GetDronesBL();
         }
 
@@ -65,7 +66,7 @@ namespace PL
             IEnumerable<StationToList> stations = BLObject.GetStationsToList();
             chargeSlotsFilter.SelectedItem = null;
             //weightFilter.SelectedItem = null;
-            StationListView.ItemsSource = stations;
+            StationListView.ItemsSource = PLLists.Stations;
         }
 
         /// <summary>

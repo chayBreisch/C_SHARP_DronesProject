@@ -24,8 +24,9 @@ namespace PL
     {
         BlApi.IBL BLObject;
         Window ParentWindow;
-        public ObservableCollection<ParcelToList> MyList = new ObservableCollection<ParcelToList>();
-        public CollectionView view;
+        //public ObservableCollection<ParcelToList> MyList = new ObservableCollection<ParcelToList>();
+        CollectionView view;
+        internal static PLLists PLLists;
         /// <summary>
         /// constructor
         /// </summary>
@@ -33,12 +34,13 @@ namespace PL
         public ParcelList(BlApi.IBL bl, Window main)
         {
             InitializeComponent();
+            PLLists = new PLLists();
             ParentWindow = main;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
-            foreach (var item in BLObject.GetParcelsToList())
-                MyList.Add(item);
-            DataContext = MyList;
+          /*  foreach (var item in BLObject.GetParcelsToList())
+                MyList.Add(item);*/
+            DataContext = PLLists.Parcels;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             //view.SortDescriptions.Add(new SortDescription("Weight", ListSortDirection.Ascending));
 
@@ -85,10 +87,10 @@ namespace PL
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
-                MyList = new ObservableCollection<ParcelToList>();
+                /*MyList = new ObservableCollection<ParcelToList>();
                 foreach (var item in BLObject.GetParcelsToList())
-                    MyList.Add(item);
-                DataContext = MyList;
+                    MyList.Add(item);*/
+                DataContext = PLLists.Parcels;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             }
         }
@@ -136,10 +138,10 @@ namespace PL
                 parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             view.GroupDescriptions.Clear();
 
-            MyList = new ObservableCollection<ParcelToList>();
+            /*MyList = new ObservableCollection<ParcelToList>();
             foreach (var item in parcels)
-                MyList.Add(item);
-            DataContext = MyList;
+                MyList.Add(item);*/
+            DataContext = PLLists.Parcels;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             //ParcelListView.ItemsSource = drones;
         }
@@ -191,10 +193,10 @@ namespace PL
                 parcels = BLObject.GetParcelsToList();
             view.GroupDescriptions.Clear();
 
-            MyList = new ObservableCollection<ParcelToList>();
+            /*MyList = new ObservableCollection<ParcelToList>();
             foreach (var item in parcels)
-                MyList.Add(item);
-            DataContext = MyList;
+                MyList.Add(item);*/
+            DataContext = PLLists.Parcels;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
 
@@ -211,10 +213,10 @@ namespace PL
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
-                MyList = new ObservableCollection<ParcelToList>();
+               /* MyList = new ObservableCollection<ParcelToList>();
                 foreach (var item in BLObject.GetDeletedParcelsToList())
-                    MyList.Add(item);
-                DataContext = MyList;
+                    MyList.Add(item);*/
+                DataContext = PLLists.Parcels;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             }
         }
