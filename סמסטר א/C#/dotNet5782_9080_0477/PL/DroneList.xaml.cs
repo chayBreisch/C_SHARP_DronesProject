@@ -27,7 +27,8 @@ namespace PL
     {
         BlApi.IBL BLObject;
         Window ParentWindow;
-        ObservableCollection<DroneToList> MyList = new ObservableCollection<DroneToList>();
+        //ObservableCollection<DroneToList> MyList = new ObservableCollection<DroneToList>();
+        internal static PLLists PLLists;
         CollectionView view;
         /// <summary>
         /// constructor
@@ -36,12 +37,13 @@ namespace PL
         public DroneList(BlApi.IBL bl, Window main)
         {
             InitializeComponent();
+            PLLists = new PLLists();
             ParentWindow = main;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
-            foreach (var item in BLObject.GetDronesToList())
-                MyList.Add(item);
-            DataContext = MyList;
+            /*foreach (var item in BLObject.GetDronesToList())
+                MyList.Add(item);*/
+            DataContext = PLLists.Drones;
             statusFilter.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             weightFilter.ItemsSource = BLObject.GetweightCategoriesEnumItem();
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
@@ -61,10 +63,10 @@ namespace PL
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
-                MyList = new ObservableCollection<DroneToList>();
+                /*MyList = new ObservableCollection<DroneToList>();
                 foreach (var item in BLObject.GetDronesToList())
-                    MyList.Add(item);
-                DataContext = MyList;
+                    MyList.Add(item);*/
+                DataContext = PLLists.Drones;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             }
         }
@@ -85,10 +87,10 @@ namespace PL
             else
                 drones = BLObject.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             //DroneListView.ItemsSource = drones;
-            MyList = new ObservableCollection<DroneToList>();
+            /*MyList = new ObservableCollection<DroneToList>();
             foreach (var item in drones)
-                MyList.Add(item);
-            DataContext = MyList;
+                MyList.Add(item);*/
+            DataContext = PLLists.Drones;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
 
@@ -187,10 +189,10 @@ namespace PL
             else
                 drones = BLObject.GetDronesToList();
             //DroneListView.ItemsSource = drones;
-            MyList = new ObservableCollection<DroneToList>();
+           /* MyList = new ObservableCollection<DroneToList>();
             foreach (var item in drones)
-                MyList.Add(item);
-            DataContext = MyList;
+                MyList.Add(item);*/
+            DataContext = PLLists.Drones;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
 
@@ -203,10 +205,10 @@ namespace PL
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
-                MyList = new ObservableCollection<DroneToList>();
+               /* MyList = new ObservableCollection<DroneToList>();
                 foreach (var item in BLObject.GetDeletedDronesToList())
-                    MyList.Add(item);
-                DataContext = MyList;
+                    MyList.Add(item);*/
+                DataContext = PLLists.Drones;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             }
         }

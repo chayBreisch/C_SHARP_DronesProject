@@ -24,7 +24,7 @@ namespace PL
     {
         BlApi.IBL BLObject;
         Window ParentWindow;
-        ObservableCollection<CustomerToList> MyList = new ObservableCollection<CustomerToList>();
+        //ObservableCollection<CustomerToList> MyList = new ObservableCollection<CustomerToList>();
         CollectionView view;
         internal static PLLists PLLists;
 
@@ -50,7 +50,7 @@ namespace PL
 
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
-            MyList = new ObservableCollection<CustomerToList>();
+            //MyList = new ObservableCollection<CustomerToList>();
             /*foreach (var item in BLObject.GetCustomerToList())
                 MyList.Add(item);*/
             DataContext = PLLists.Customers;
@@ -125,7 +125,7 @@ namespace PL
 
         private void Button_Click_ShowRemovedCustomers(object sender, RoutedEventArgs e)
         {
-            MyList = new ObservableCollection<CustomerToList>();
+            //MyList = new ObservableCollection<CustomerToList>();
             /*foreach (var item in BLObject.GetDeletedCustomerToList())
                 MyList.Add(item);*/
             DataContext = PLLists.Customers;

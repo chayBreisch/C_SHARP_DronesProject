@@ -10,7 +10,7 @@ namespace PL
 {
     class PLLists : DependencyObject
     {
-        private BlApi.Bl BLObject = BL.FactoryBL.factory();
+        private BlApi.IBL BLObject = BL.FactoryBL.factory();
         public ObservableCollection<Drone_> Drones = new ObservableCollection<Drone_>();
 
         public ObservableCollection<Parcel_> Parcels = new ObservableCollection<Parcel_>();
@@ -46,17 +46,17 @@ namespace PL
                 AddDrone(drone);
             }
 
-            foreach (var parcel in BLObject.GetParcelToList())
+            foreach (var parcel in BLObject.GetParcelsToList())
             {
                 AddParcel(parcel);
             }
 
-            foreach (var station in BLObject.GetStationToList())
+            foreach (var station in BLObject.GetStationsToList())
             {
                 AddStation(station);
             }
 
-            foreach (var customer in BLObject.GetCustomerToList())
+            foreach (var customer in BLObject.GetCustomersToList())
             {
                 AddCustomer(customer);
             }
