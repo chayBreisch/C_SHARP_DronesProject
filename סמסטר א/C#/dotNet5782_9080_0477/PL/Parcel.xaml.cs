@@ -26,6 +26,7 @@ namespace PL
         BlApi.IBL BLObject;
         BO.Parcel parcelBL;
         BO.Customer Customer;
+         
         /// <summary>
         /// constructor add parcel
         /// </summary>
