@@ -16,7 +16,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="dalObject"></param>
-        public static void checkUniqeIdStation(int id, IDAL.IDal dalObject)
+        public static void checkUniqeIdStation(int id, DalFacade.IDal dalObject)
         {
             IEnumerable<DO.Station> stations = dalObject.GetStations();
             if (stations.Any(s => s.ID == id))

@@ -213,7 +213,6 @@ namespace PL1
             try
             {
                 blDrone.AddDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
-                MessageBox.Show("you added succefuly");
                 MessageBox.Show("added drone sucssesfully");
                 Close();
             }

@@ -23,7 +23,7 @@ namespace BL
         }
         Random rand = new Random();
         List<BO.Drone> droneBLList = new List<BO.Drone>();
-        IDAL.IDal dalObject;
+        DalFacade.IDal dalObject;
         //############################################################
         //constructor
         //############################################################

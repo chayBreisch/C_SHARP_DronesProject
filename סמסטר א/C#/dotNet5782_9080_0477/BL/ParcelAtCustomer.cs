@@ -8,7 +8,7 @@ namespace BO
 {
     public class ParcelAtCustomer
     {
-        public ParcelAtCustomer(BO.Parcel parcel, ulong myId, IDAL.IDal dal)
+        public ParcelAtCustomer(BO.Parcel parcel, ulong myId, DalFacade.IDal dal)
         {
             ID = parcel.ID;
             Weight = parcel.Weight;

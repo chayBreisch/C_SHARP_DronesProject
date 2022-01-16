@@ -17,7 +17,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="dalObject"></param>
-        public static void checkUniqeIdParcel(int id, IDAL.IDal dalObject)
+        public static void checkUniqeIdParcel(int id, DalFacade.IDal dalObject)
         {
             IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
             if (parcels.Any(p => p.ID == id))

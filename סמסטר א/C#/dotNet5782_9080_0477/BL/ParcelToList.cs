@@ -8,7 +8,7 @@ namespace BO
 {
     public class ParcelToList
     {
-        public ParcelToList(Parcel parcel, IDAL.IDal dalObject)
+        public ParcelToList(Parcel parcel, DalFacade.IDal dalObject)
         {
             ID = parcel.ID;
             NameCustomerSender = dalObject.GetCustomerById(c => c.ID == parcel.Sender.ID).Name;

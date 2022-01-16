@@ -17,7 +17,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="dalObject"></param>
-        public static void checkUniqeIdDrone(int id, IDAL.IDal dalObject)
+        public static void checkUniqeIdDrone(int id, DalFacade.IDal dalObject)
         {
             IEnumerable<DO.Drone> drones = dalObject.GetDrones();
             if (drones.Any(d => d.ID == id))
