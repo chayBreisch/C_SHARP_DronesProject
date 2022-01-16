@@ -9,7 +9,7 @@ namespace BO
 {
     public class ParcelInDelivery
     {
-        public ParcelInDelivery(BO.Parcel parcel, DalFacade.IDal dalObject)
+        public ParcelInDelivery(BO.Parcel parcel, IDAL.IDal dalObject)
         {
             ID = parcel.ID;
             Weight = parcel.Weight;

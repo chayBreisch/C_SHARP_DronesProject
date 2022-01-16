@@ -9,7 +9,7 @@ namespace BO
 {
     public class CustomerToList
     {
-        public CustomerToList(Customer customer, DalFacade.IDal dalObject)
+        public CustomerToList(Customer customer, IDAL.IDal dalObject)
         {
             ID = customer.ID;
             Name = customer.Name;

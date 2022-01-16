@@ -19,7 +19,7 @@ namespace BL
         /// <param name="droneId"></param>
         /// <param name="stationId"></param>
         /// <param name="dalObject"></param>
-        public static void checkUniqeIdDroneCharge(int droneId, int stationId, DalFacade.IDal dalObject)
+        public static void checkUniqeIdDroneCharge(int droneId, int stationId, IDAL.IDal dalObject)
         {
             IEnumerable<DroneCharge> droneCharges = dalObject.GetDroneCharges();
             if (droneCharges.Any(d => d.DroneID == droneId && d.StationID == stationId))

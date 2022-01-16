@@ -17,7 +17,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="dalObject"></param>
-        public static void checkUniqeIdCustomer(ulong id, DalFacade.IDal dalObject)
+        public static void checkUniqeIdCustomer(ulong id, IDAL.IDal dalObject)
         {
             IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
             if (customers.Any(c => c.ID == id))

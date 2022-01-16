@@ -8,7 +8,7 @@ namespace BO
 {
     public class DroneToList
     {
-        public DroneToList(Drone drone, DalFacade.IDal dalObject)
+        public DroneToList(Drone drone, IDAL.IDal dalObject)
         {
             ID = drone.ID;
             Model = drone.Model;

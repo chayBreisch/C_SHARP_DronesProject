@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DALException;
-using DalFacade;
+using IDAL;
 namespace DAL
 {
     public class FactoryDAL
     {
-        public static DalFacade.IDal factory(string obj)
+        public static IDAL.IDal factory(string obj)
         {
             try
             {
