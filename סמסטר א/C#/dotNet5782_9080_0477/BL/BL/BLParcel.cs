@@ -309,7 +309,7 @@ namespace BL
                 Scheduled = parcel.Scheduled,
                 Requested = parcel.Requesed,
                 PickedUp = parcel.PickedUp,
-                Delivered = parcel.PickedUp,
+                Delivered = parcel.Delivered,
                 IsActive = parcel.IsActive
             };
         }

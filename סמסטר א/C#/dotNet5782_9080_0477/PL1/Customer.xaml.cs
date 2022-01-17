@@ -91,17 +91,62 @@ namespace PL1
             customerLatitude.Text = null;
         }
 
+        private ulong getID()
+        {
+            try
+            {
+                return ulong.Parse(customerId.Text);
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("id");
+            }
+        }
+
+        private string getName()
+        {
+            if (customerName.Text == "")
+                throw new InValidInput("name");
+            return nameCustomer.Text;
+        }
+
+        private string getPhone()
+        {
+            if (customerPhone.Text == "")
+                throw new InValidInput("phone");
+            return phoneCustomr.Text;
+        }
+
+        private double getLongitude()
+        {
+            try
+            {
+                return Convert.ToDouble(customerLongitude.Text);
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("longitude");
+            }
+        }
+
+        private double getLatitude()
+        {
+            try
+            {
+                return Convert.ToDouble(customerLatitude.Text);
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("longitude");
+            }
+        }
         private void Button_ClickAddCustomer(object sender, RoutedEventArgs e)
         {
             try
             {
-                ulong id = ulong.Parse(customerId.Text);
-                string name = Convert.ToString(nameCustomer.Text);
-                string phone = Convert.ToString(phoneCustomr.Text);
-                double longitude = Convert.ToDouble(customerLongitude.Text);
-                double latitude = Convert.ToDouble(customerLatitude.Text);
-                blCustomer.AddCustomer(id, name, phone, new BO.LocationBL(longitude, latitude));
+                blCustomer.AddCustomer(getID(), getName(), getPhone(), new BO.LocationBL(getLongitude(), getLatitude()));
                 MessageBox.Show("succesfull add");
+                Close();
             }
             catch (Exception ex)
             {
@@ -109,7 +154,6 @@ namespace PL1
             }
 
         }
-
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
             Close();

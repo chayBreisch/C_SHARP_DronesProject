@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Parcel" Height="450" Width="800">
     <Grid>
-        <Grid Name="actions" Visibility="Visible">
+        <Grid Name="actions" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition  Width="200"/>
@@ -57,7 +57,7 @@
                 <!--Requesed, Scheduled, pickedUp, Delivered-->
             </Grid>
         </Grid>
-        <Grid Name="addStation" Visibility="Hidden" Background="#FF859DA2">
+        <Grid Name="addStation" Visibility="Visible" Background="#FF859DA2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />

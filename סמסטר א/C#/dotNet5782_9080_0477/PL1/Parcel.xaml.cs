@@ -142,7 +142,7 @@ namespace PL1
         {
             try
             {
-                return ulong.Parse(recieveridparcel.Text);
+                return ulong.Parse(recieverIdParcel.Text);
             }
             catch (Exception e)
             {

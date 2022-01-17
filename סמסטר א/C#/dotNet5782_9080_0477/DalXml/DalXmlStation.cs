@@ -94,11 +94,11 @@ namespace Dal
             return station;
         }
 
-/// <summary>
-/// add station
-/// </summary>
-/// <param name="station"></param>
-public void AddStation(Station station)
+        /// <summary>
+        /// add station
+        /// </summary>
+        /// <param name="station"></param>
+        public void AddStation(Station station)
         {
             try
             {
