@@ -12,14 +12,14 @@ namespace BL
     {
         public static BlApi.IBL factory()
         {
-            try
-            {
+           /* try
+            {*/
                 return BL.GetInstance();
-            }
+            /*}
             catch (Exception e)
             {
                 throw new CantReturnBLObject(e);
-            }
+            }*/
         }
     }
 }

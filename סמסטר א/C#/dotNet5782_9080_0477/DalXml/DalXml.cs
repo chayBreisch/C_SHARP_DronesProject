@@ -4,11 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
 using DO;
-namespace DalXml
+using IDAL;
+using DalApi;
+
+namespace Dal
 {
-    public partial class DalXml
+    public partial class DalXml : IDal
     {
         //dir need to be up from bin
         static string dir = @"..\..\..\..\xmlData\";
@@ -17,7 +19,16 @@ namespace DalXml
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
         }
-
+        internal static DalXml Instance;
+        public static DalXml getInstance
+        {
+            get
+            {
+                if (Instance == null)
+                    Instance = new DalXml();
+                return Instance;
+            }
+        }
         string parcelFilePath = @"parcelFile.xml";
         string customerFilePath = @"customerFile.xml";
         string stationFilePath = @"stationFile.xml";
@@ -27,19 +38,25 @@ namespace DalXml
         public DalXml()
         {
             if (!File.Exists(dir + parcelFilePath))
-                XMLTools.SaveListToXMLSerializer<DO.Parcel>(DS.DataSource.parcels, dir + parcelFilePath);
+                XMLTools.SaveListToXMLSerializer<DO.Parcel>(Dal.DataSource.parcels, dir + parcelFilePath);
 
             if (!File.Exists(dir + customerFilePath))
-                XMLTools.SaveListToXMLSerializer<DO.Customer>(DS.DataSource.customers, dir + customerFilePath);
+                XMLTools.SaveListToXMLSerializer<DO.Customer>(Dal.DataSource.customers, dir + customerFilePath);
 
             if (!File.Exists(dir + stationFilePath))
-                XMLTools.SaveListToXMLSerializer<DO.Station>(DS.DataSource.stations, dir + stationFilePath);
+                XMLTools.SaveListToXMLSerializer<DO.Station>(Dal.DataSource.stations, dir + stationFilePath);
 
             if (!File.Exists(dir + droneFilePath))
-                XMLTools.SaveListToXMLSerializer<DO.Drone>(DS.DataSource.drones, dir + droneFilePath);
+                XMLTools.SaveListToXMLSerializer<DO.Drone>(Dal.DataSource.drones, dir + droneFilePath);
 
             if (!File.Exists(dir + droneChargeFilePath))
-                XMLTools.SaveListToXMLSerializer<DO.DroneCharge>(DS.DataSource.droneChargers, dir + droneChargeFilePath);
+                XMLTools.SaveListToXMLSerializer<DO.DroneCharge>(Dal.DataSource.droneChargers, dir + droneChargeFilePath);
+        }
+
+        public double[] RequestElectric()
+        {
+            double[] array = { DataSource.Config.Available, DataSource.Config.LightHeight, DataSource.Config.MidHeight, DataSource.Config.HeavyHeight, DataSource.Config.ChargingRate };
+            return array;
         }
     }
 }

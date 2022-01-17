@@ -1,14 +1,15 @@
 ﻿using DALException;
 using DO;
+using IDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DalXml
+namespace Dal
 {
-    public partial class DalXml
+    public partial class DalXml : IDal
     {
         /// <summary>
         /// check uniqe drone
@@ -43,7 +44,7 @@ namespace DalXml
             {
                 throw new NotExistObjWithID(id, typeof(Drone));
             }
-            Drone drone = GetDroneById(id);
+            Drone drone = GetDroneById(d => d.ID == id);
             drone.IsActive = false;
             UpdateDrone(drone);
         }
@@ -69,20 +70,18 @@ namespace DalXml
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Drone GetDroneById(int id)
+        public Drone GetDroneById(Predicate<Drone> predicat = null)
         {
+            Drone drone1 = new Drone();
             try
             {
                 IEnumerable<Drone> droneList = XMLTools.LoadListFromXMLSerializer<Drone>(dir + droneFilePath);
-                return (from drone in droneList
-                        where drone.ID == id
+                drone1 = (from drone in droneList
+                        where predicat(drone)
                         select drone).First();
             }
-            catch (Exception e)
-            {
-                throw new NotExistObjWithID(id, typeof(Drone), e);
-            }
-
+            catch (Exception e) { }
+            return drone1;
         }
 
         /// <summary>

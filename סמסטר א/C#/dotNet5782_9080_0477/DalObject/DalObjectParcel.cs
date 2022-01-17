@@ -8,9 +8,9 @@ using IDAL;
 using System.Collections.Generic;
 using DALException;
 
-namespace DalObject
+namespace Dal
 {
-    internal partial class DalObject
+    internal partial class DalObject : IDal
     {
         /// <summary>
         /// returns the parcels by list from dal
@@ -25,7 +25,7 @@ namespace DalObject
         /// returns the parcels from dal
         /// </summary>
         /// <returns>DataSource.parcels</returns>
-        public IEnumerable<Parcel> GetParcels()
+        public IEnumerable<Parcel> GetParcels(Predicate<Parcel> predicate = null)
         {
             return from parcel in DataSource.parcels
                    where parcel.IsActive == true

@@ -1,25 +1,26 @@
-﻿using System;
+﻿using IDAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DO;
-using IDAL;
-using DAL;
-namespace DalObject
+namespace Dal
 {
     internal partial class DalObject : IDal
     {
-        static DalObject Instance;
-        public static DalObject getInstance()
-        {
-            if (Instance == null)
-                return new DalObject();
-            return Instance;
-        }
         public DalObject()
         {
             DataSource.Initialize();
+        }
+        internal static DalObject Instance;
+        public static DalObject getInstance
+        {
+            get
+            {
+                if (Instance == null)
+                    Instance = new DalObject();
+                return Instance;
+            }
         }
         //################################################################
         //functions that returns the basic data arrays from dataSource
@@ -187,17 +188,17 @@ namespace DalObject
         }*/
 
 
-       /* public void updateCollectParcialByDrone(int id)
-        {
+        /* public void updateCollectParcialByDrone(int id)
+         {
 
-            Parcel newParcial = getParcelById(p => p.ID == id);
-            if (newParcial.DroneID == 0)
-            {
-                Console.WriteLine("you didnt conect a drone");
-            }
-            newParcial.PickedUp = DateTime.Now;
+             Parcel newParcial = getParcelById(p => p.ID == id);
+             if (newParcial.DroneID == 0)
+             {
+                 Console.WriteLine("you didnt conect a drone");
+             }
+             newParcial.PickedUp = DateTime.Now;
 
-        }*/
+         }*/
 
         /*public void updateSupplyParcialToCustomer(int id)
         {
@@ -257,20 +258,20 @@ namespace DalObject
         //################################################
 
 
-       /* public IEnumerable<Parcel> showParcelsWithoutoutDrone()
-        {
-            //IEnumerable<Parcel> parcels = GetParcel();
-            return from parcel in GetParcel()
-            where parcel.DroneID == 0
-            select parcel;
-        *//*    foreach (var parcel in parcels)
-            {
-                if (parcel.DroneID == 0)
-                {
-                    yield return parcel;
-                }
-            }*//*
-        }*/
+        /* public IEnumerable<Parcel> showParcelsWithoutoutDrone()
+         {
+             //IEnumerable<Parcel> parcels = GetParcel();
+             return from parcel in GetParcel()
+             where parcel.DroneID == 0
+             select parcel;
+         *//*    foreach (var parcel in parcels)
+             {
+                 if (parcel.DroneID == 0)
+                 {
+                     yield return parcel;
+                 }
+             }*//*
+         }*/
 
 
         /*public IEnumerable<Station> showStationWithEmptyChargers()

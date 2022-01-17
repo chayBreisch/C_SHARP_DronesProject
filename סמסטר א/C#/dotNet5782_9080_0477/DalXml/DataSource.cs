@@ -5,13 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 
-namespace DS
+namespace Dal
 {
     static class DataSource
     {
         static DataSource()
         {
             Initialize();
+        }
+        public struct Config
+        {
+            public static double Available = 0.1;
+            public static double LightHeight = 0.2;
+            public static double MidHeight = 0.3;
+            public static double HeavyHeight = 0.4;
+            public static double ChargingRate = 0.5;
         }
         internal static List<Drone> drones = new List<Drone>();
         internal static List<Station> stations = new List<Station>();

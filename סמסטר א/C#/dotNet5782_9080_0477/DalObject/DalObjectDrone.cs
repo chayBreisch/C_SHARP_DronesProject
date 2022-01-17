@@ -7,9 +7,9 @@ using DO;
 using IDAL;
 using DALException;
 
-namespace DalObject
+namespace Dal
 {
-    internal partial class DalObject
+    internal partial class DalObject : IDal
     {
         /// <summary>
         /// returns the drones by list from dal
@@ -25,7 +25,7 @@ namespace DalObject
         /// returns the drones from dal
         /// </summary>
         /// <returns>DataSource.drones</returns>
-        public IEnumerable<Drone> GetDrones()
+        public IEnumerable<Drone> GetDrones(Predicate<Drone> predicate = null)
         {
             return from drone in DataSource.drones
                    where drone.IsActive == true

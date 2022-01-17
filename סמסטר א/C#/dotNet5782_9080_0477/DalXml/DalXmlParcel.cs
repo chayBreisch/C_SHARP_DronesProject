@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DalXml
+namespace Dal
 {
     public partial class DalXml
     {
@@ -43,7 +43,7 @@ namespace DalXml
             {
                 throw new NotExistObjWithID(id, typeof(Parcel));
             }
-            Parcel parcel = GetParcelBy(id);
+            Parcel parcel = GetParcelBy(p => p.ID == id);
             parcel.IsActive = false;
             UpdateParcel(parcel);
         }
@@ -69,19 +69,18 @@ namespace DalXml
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Parcel GetParcelBy(int id)
+        public Parcel GetParcelBy(Predicate<Parcel> predicate)
         {
+            Parcel parcel1 = new Parcel();
             try
             {
                 IEnumerable<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(dir + parcelFilePath);
-                return (from parcel in parcelList
-                        where parcel.ID == id
-                        select parcel).First();
+                parcel1 = (from parcel in parcelList
+                           where predicate(parcel)
+                           select parcel).First();
             }
-            catch (Exception e)
-            {
-                throw new NotExistObjWithID(id, typeof(Parcel), e);
-            }
+            catch (Exception e) { }
+            return parcel1;
 
         }
 
@@ -120,6 +119,17 @@ namespace DalXml
         public int LengthParcel()
         {
             return XMLTools.LoadListFromXMLSerializer<Parcel>(dir + parcelFilePath).ToList().Count;
+        }
+
+        public IEnumerable<Parcel> GetParcelesByCondition(Predicate<Parcel> predicate)
+        {
+            //try todo
+
+            IEnumerable<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(dir + parcelFilePath);
+            return from parcel in parcelList
+                   where predicate(parcel)
+                   orderby parcel.ID
+                   select parcel;
         }
     }
 }

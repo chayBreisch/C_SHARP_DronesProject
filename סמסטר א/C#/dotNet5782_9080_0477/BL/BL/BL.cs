@@ -1,12 +1,11 @@
 ﻿using System;
-using DalObject;
 using BO;
 using BlApi;
 using System.Collections.Generic;
 using DO;
 using System.Linq;
 using DALException;
-using DAL;
+using DalApi;
 
 namespace BL
 {
@@ -36,7 +35,7 @@ namespace BL
             //get all the electric rates
             try
             {
-                dalObject = FactoryDAL.factory("DalObject");
+                dalObject = DalFactory.GetDal();
             }
             catch (DALException.CantReturnDalObject)
             {
@@ -98,7 +97,8 @@ namespace BL
                 if (droneBL.DroneStatus == DroneStatus.Maintenance)
                 {
                     int length = dalObject.LengthStation();
-                    DO.Station station = dalObject.GetStations().ToList()[rand.Next(0, length)];
+                    List<DO.Station> s = dalObject.GetStations().ToList();
+                    DO.Station station = s[rand.Next(0, length)];
                     droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
                     droneBL.BatteryStatus = rand.Next(0, 21);
                     DroneCharge droneCharge = new DroneCharge();

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DalObject;
 using DO;
 namespace IDAL
 {
@@ -22,10 +21,10 @@ namespace IDAL
         //##########################################################
         //get list functions
         //##########################################################
-        public IEnumerable<Drone> GetDrones();
-        public IEnumerable<Station> GetStations();
-        public IEnumerable<Customer> GetCustomers();
-        public IEnumerable<Parcel> GetParcels();
+        public IEnumerable<Drone> GetDrones(Predicate<Drone> predicate = null);
+        public IEnumerable<Station> GetStations(Predicate<Station> predicate = null);
+        public IEnumerable<Customer> GetCustomers(Predicate<Customer> predicate = null);
+        public IEnumerable<Parcel> GetParcels(Predicate<Parcel> predicate = null);
         public IEnumerable<DroneCharge> GetDroneCharges();
         public IEnumerable<Parcel> GetParcelesByCondition(Predicate<Parcel> predicate);
         public IEnumerable<Station> GetDeletedStations();

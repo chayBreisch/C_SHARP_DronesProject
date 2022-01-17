@@ -28,15 +28,15 @@ namespace PL1
         /// </summary>
         public MainWindow()
         {
-            try
-            {
+            /*try
+            {*/
                 bl = BL.FactoryBL.factory();
                 InitializeComponent();
-            }
+            /*}
             catch (ExceptionsBL.CantReturnBLObject e)
             {
                 throw new ExceptionsBL.CantReturnBLObject(e);
-            }
+            }*/
         }
 
         /// <summary>

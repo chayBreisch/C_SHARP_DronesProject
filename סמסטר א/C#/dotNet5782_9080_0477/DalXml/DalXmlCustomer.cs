@@ -1,14 +1,15 @@
 ﻿using DALException;
 using DO;
+using IDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DalXml
+namespace Dal
 {
-    public partial class DalXml
+    public partial class DalXml : IDal
     {
         /// <summary>
         /// check uniqe customer

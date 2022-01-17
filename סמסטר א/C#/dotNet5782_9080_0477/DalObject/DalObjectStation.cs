@@ -7,16 +7,16 @@ using DO;
 using IDAL;
 using DALException;
 
-namespace DalObject
+namespace Dal
 {
 
-    internal partial class DalObject
+    internal partial class DalObject : IDal
     {
         /// <summary>
         /// returns the stations from dal
         /// </summary>
         /// <returns>DataSource.stations</returns>
-        public IEnumerable<Station> GetStations()
+        public IEnumerable<Station> GetStations(Predicate<Station> predicate = null)
         {
             return from station in DataSource.stations
                    where station.IsActive == true

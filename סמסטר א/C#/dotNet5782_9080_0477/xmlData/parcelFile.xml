@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<ArrayOfParcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Parcel>
+    <ID>1</ID>
+    <SenderID>252945303</SenderID>
+    <TargetID>994116359</TargetID>
+    <Weight>Heavy</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2010-02-04T00:00:00</Requested>
+    <DroneID>2</DroneID>
+    <Scheduled>2019-08-05T00:00:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>2</ID>
+    <SenderID>536319530</SenderID>
+    <TargetID>252945303</TargetID>
+    <Weight>Heavy</Weight>
+    <Priority>Emergency</Priority>
+    <Requested>2011-12-21T00:00:00</Requested>
+    <DroneID>2</DroneID>
+    <Scheduled>2020-08-04T00:00:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>3</ID>
+    <SenderID>911522009</SenderID>
+    <TargetID>536319530</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Regular</Priority>
+    <Requested>1995-08-23T00:00:00</Requested>
+    <DroneID>5</DroneID>
+    <Scheduled>2008-01-24T00:00:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>4</ID>
+    <SenderID>487953452</SenderID>
+    <TargetID>159416177</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2021-12-03T00:00:00</Requested>
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>5</ID>
+    <SenderID>487953452</SenderID>
+    <TargetID>252945303</TargetID>
+    <Weight>Heavy</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2004-04-01T00:00:00</Requested>
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>6</ID>
+    <SenderID>199641321</SenderID>
+    <TargetID>994116359</TargetID>
+    <Weight>Heavy</Weight>
+    <Priority>Fast</Priority>
+    <Requested>1998-07-22T00:00:00</Requested>
+    <DroneID>4</DroneID>
+    <Scheduled>2020-02-14T00:00:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>7</ID>
+    <SenderID>159416177</SenderID>
+    <TargetID>536319530</TargetID>
+    <Weight>Heavy</Weight>
+    <Priority>Emergency</Priority>
+    <Requested>2008-09-01T00:00:00</Requested>
+    <DroneID>1</DroneID>
+    <Scheduled>2016-01-10T00:00:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>8</ID>
+    <SenderID>536319530</SenderID>
+    <TargetID>252945303</TargetID>
+    <Weight>Light</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2014-10-17T00:00:00</Requested>
+    <DroneID>1</DroneID>
+    <Scheduled>2015-06-30T00:00:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>9</ID>
+    <SenderID>994116359</SenderID>
+    <TargetID>159416177</TargetID>
+    <Weight>Heavy</Weight>
+    <Priority>Regular</Priority>
+    <Requested>2008-03-23T00:00:00</Requested>
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>10</ID>
+    <SenderID>494525150</SenderID>
+    <TargetID>199641321</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2020-08-04T00:00:00</Requested>
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>11</ID>
+    <SenderID>199641321</SenderID>
+    <TargetID>159416177</TargetID>
+    <Weight>Heavy</Weight>
+    <Priority>Emergency</Priority>
+    <Requested>1995-10-14T00:00:00</Requested>
+    <DroneID>4</DroneID>
+    <Scheduled>2019-07-10T00:00:00</Scheduled>
+    <PickedUp>2022-01-17T19:30:58.3207731+02:00</PickedUp>
+    <Delivered>2022-01-17T19:30:58.3207731+02:00</Delivered>
+    <IsActive>true</IsActive>
+  </Parcel>
+</ArrayOfParcel>

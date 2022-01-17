@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace DalXml
+namespace Dal
 {
     public partial class DalXml
     {
@@ -19,7 +19,7 @@ namespace DalXml
         public IEnumerable<Station> GetStations(Predicate<Station> predicate = null) //predicate = (p => p.IsActive == false); אם רוצים מחוקים לשלוח 
         {
 
-            XElement testRoot = XMLTools.LoadData(dir + stationFilePath);
+            /*XElement testRoot = XMLTools.LoadData(dir + stationFilePath);
             IEnumerable<Station> stations;
             try
             {
@@ -43,6 +43,14 @@ namespace DalXml
                 predicate = (p => p.IsActive == true);
             return from station in stations
                    where station.IsActive == false
+                   select station;*/
+
+
+            IEnumerable<Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath);
+            predicate ??= ((st) => true);
+            return from station in stationList
+                   where predicate(station) && station.IsActive == true
+                   orderby station.ID
                    select station;
         }
 
@@ -51,36 +59,46 @@ namespace DalXml
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Station GetStationById(int id)
+        /*    public Station GetStationById(Predicate<Station> predicate)
+            {
+                XElement stationRoot = XMLTools.LoadData(dir + stationFilePath);
+                Station t = new Station();
+                try
+                {
+                    t = (from p in stationRoot.Elements()
+                         where Convert.ToInt32(p.Element("ID").Value) == 1////////////////////////////////////////
+                         select new Station()
+                         {
+                             ID = Convert.ToInt32(p.Element("ID").Value),
+                             ChargeSlots = Convert.ToInt32(p.Element("ChargeSlots").Value),
+                             Latitude = Convert.ToDouble(p.Element("Latitude").Value),
+                             Longitude = Convert.ToDouble(p.Element("Longitude").Value),
+                             Name = Convert.ToInt32(p.Element("Name").Value),
+                             IsActive = Convert.ToBoolean(p.Element("IsActive").Value)
+                         }).First();
+                }
+                catch (Exception e) { }
+                return t;
+            }*/
+        public Station GetStationById(Predicate<Station> predicate)
         {
-            XElement stationRoot = XMLTools.LoadData(dir + stationFilePath);
-            Station t = new Station();
+            Station station = new Station();
             try
             {
-                t = (from p in stationRoot.Elements()
-                     where Convert.ToInt32(p.Element("ID").Value) == id
-                     select new Station()
-                     {
-                         ID = Convert.ToInt32(p.Element("ID").Value),
-                         ChargeSlots = Convert.ToInt32(p.Element("ChargeSlots").Value),
-                         Latitude = Convert.ToDouble(p.Element("Latitude").Value),
-                         Longitude = Convert.ToDouble(p.Element("Longitude").Value),
-                         Name = Convert.ToInt32(p.Element("Name").Value),
-                         IsActive = Convert.ToBoolean(p.Element("IsActive").Value)
-                     }).First();
+                IEnumerable<Station> stationist = XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath);
+                station = (from statio in stationist
+                           where predicate(statio)
+                           select statio).First();
             }
-            catch (Exception e)
-            {
-                throw new NotExistObjWithID(id, typeof(Station), e);
-            }
-            return t;
+            catch (Exception e) { }
+            return station;
         }
 
-        /// <summary>
-        /// add station
-        /// </summary>
-        /// <param name="station"></param>
-        public void AddStation(Station station)
+/// <summary>
+/// add station
+/// </summary>
+/// <param name="station"></param>
+public void AddStation(Station station)
         {
             try
             {
@@ -110,7 +128,7 @@ namespace DalXml
         /// <param name="id"></param>
         public void RemoveStation(int id)
         {
-            Station station = GetStationById(id);
+            Station station = GetStationById(s => s.ID == id);
             station.IsActive = false;
             UpdateStation(station);
         }
@@ -135,21 +153,21 @@ namespace DalXml
         }
 
 
-        /*
+
         public int LengthStation()
         {
             return XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath).ToList().Count;
         }
-        */
 
-       /* public IEnumerable<Station> GetDeletedStations()
+
+        public IEnumerable<Station> GetDeletedStations()
         {
             IEnumerable<Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath);
             return from station in stationList
                    where station.IsActive == false
                    orderby station.ID
                    select station;
-        }*/
+        }
 
     }
 }

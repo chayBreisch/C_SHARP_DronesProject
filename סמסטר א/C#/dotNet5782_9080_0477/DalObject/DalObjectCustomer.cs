@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using DO;
 using DALException;
+using IDAL;
 
-namespace DalObject
+namespace Dal
 {
-    internal partial class DalObject
+    internal partial class DalObject : IDal
     {
-        public IEnumerable<Customer> GetCustomers()
+        public IEnumerable<Customer> GetCustomers(Predicate<Customer> predicate = null)
         {
             return from customer in DataSource.customers
                    select customer;

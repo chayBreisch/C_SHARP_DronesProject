@@ -7,10 +7,10 @@ using DO;
 using IDAL;
 using DALException;
 
-namespace DalObject
+namespace Dal
 {
 
-    internal partial class DalObject
+    internal partial class DalObject : IDal
     {
         /// <summary>
         /// returns the droneChargers by list from dal

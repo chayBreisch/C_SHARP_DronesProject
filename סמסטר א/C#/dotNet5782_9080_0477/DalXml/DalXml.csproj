@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DAL\DALFacade.csproj" />
+    <ProjectReference Include="..\DAL\DalFacade.csproj" />
   </ItemGroup>
 
 </Project>
