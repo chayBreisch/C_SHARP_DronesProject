@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DO;
-using DAL;
-
+using DALException;
 
 namespace DalObject
 {

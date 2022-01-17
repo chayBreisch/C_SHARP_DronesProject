@@ -1,4 +1,4 @@
-﻿using DAL;
+﻿using DALException;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// remove drone chargers
+        /// remove drone charge
         /// </summary>
         /// <param name="droneCharge"></param>
         public void RemoveDroneCharge(DroneCharge droneCharge)
@@ -60,7 +60,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// update drone charge
+        /// update drone charge details
         /// </summary>
         /// <param name="DroneCharge"></param>
         public void updateDroneCharge(DroneCharge DroneCharge)

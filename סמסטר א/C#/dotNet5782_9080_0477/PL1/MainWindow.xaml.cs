@@ -21,7 +21,7 @@ namespace PL1
     public partial class MainWindow : Window
     {
 
-        BlApi.Bl bl;
+        private BlApi.IBL bl;
 
         /// <summary>
         /// constructor

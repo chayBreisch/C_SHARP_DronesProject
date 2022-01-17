@@ -22,35 +22,38 @@ namespace PL
     /// </summary>
     public partial class CustomerList : Window
     {
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         Window ParentWindow;
-        ObservableCollection<CustomerToList> MyList = new ObservableCollection<CustomerToList>();
+        //ObservableCollection<CustomerToList> MyList = new ObservableCollection<CustomerToList>();
         CollectionView view;
+        internal static PLLists PLLists;
 
 
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public CustomerList(BlApi.Bl bl, Window main)
+        public CustomerList(BlApi.IBL bl, Window main)
         {
             InitializeComponent();
+            PLLists = new PLLists();
+            CustomerListView.ItemsSource = PLLists.Customers;
             ParentWindow = main;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
-            foreach (var item in BLObject.GetCustomerToList())
-                MyList.Add(item);
-            DataContext = MyList;
+            /*foreach (var item in BLObject.GetCustomerToList())
+                MyList.Add(item);*/
+            DataContext = PLLists.Customers;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
 
         }
 
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
-            MyList = new ObservableCollection<CustomerToList>();
-            foreach (var item in BLObject.GetCustomerToList())
-                MyList.Add(item);
-            DataContext = MyList;
+            //MyList = new ObservableCollection<CustomerToList>();
+            /*foreach (var item in BLObject.GetCustomerToList())
+                MyList.Add(item);*/
+            DataContext = PLLists.Customers;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             if (view != null)
             {
@@ -122,10 +125,10 @@ namespace PL
 
         private void Button_Click_ShowRemovedCustomers(object sender, RoutedEventArgs e)
         {
-            MyList = new ObservableCollection<CustomerToList>();
-            foreach (var item in BLObject.GetDeletedCustomerToList())
-                MyList.Add(item);
-            DataContext = MyList;
+            //MyList = new ObservableCollection<CustomerToList>();
+            /*foreach (var item in BLObject.GetDeletedCustomerToList())
+                MyList.Add(item);*/
+            DataContext = PLLists.Customers;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
     }

@@ -1,15 +1,17 @@
 ﻿using System;
 using DalObject;
 using BO;
-using DAL;
 using BlApi;
 using System.Collections.Generic;
 using DO;
 using System.Linq;
+using DALException;
+using DAL;
+
 namespace BL
 {
     //לשים לב מה עם GET SET IN CUSTOMERBL
-    internal sealed partial class BL : Bl
+    internal sealed partial class BL : IBL
     {
         static BL Instance;
         public static BL GetInstance()
@@ -36,7 +38,7 @@ namespace BL
             {
                 dalObject = FactoryDAL.factory("DalObject");
             }
-            catch (DAL.CantReturnDalObject)
+            catch (DALException.CantReturnDalObject)
             {
                 throw new CantReturnDalObject();
             }

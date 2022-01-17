@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlApi
 {
-    public interface Bl
+    public interface IBL
     {
         //##############################################################
         //Add functions
@@ -22,27 +22,26 @@ namespace BlApi
         //##############################################################
         //Get list functions
         //##############################################################
-        public IEnumerable<StationToList> GetStationToList();
+        public IEnumerable<StationToList> GetStationsToList();
         public IEnumerable<DroneToList> GetDronesToList();
         public IEnumerable<StationToList> GetStationsByChargeSlots(int status);
-        public IEnumerable<ParcelToList> GetParcelToList();
-        public IEnumerable<CustomerToList> GetCustomerToList();
-        public IEnumerable<DroneToList> GetDroneToListByCondition(Predicate<DroneToList> predicate);
-        public IEnumerable<ParcelToList> GetParcelToListByCondition(Predicate<ParcelToList> predicate);
+        public IEnumerable<ParcelToList> GetParcelsToList();
+        public IEnumerable<CustomerToList> GetCustomersToList();
+        public IEnumerable<DroneToList> GetDronesToListByCondition(Predicate<DroneToList> predicate);
+        public IEnumerable<ParcelToList> GetParcelsToListByCondition(Predicate<ParcelToList> predicate);
         public IEnumerable<BO.Parcel> GetParcelsByCondition(Predicate<BO.Parcel> predicate);
-        public void updateParecl(BO.ParcelToList parcel);
         public Array GetweightCategoriesEnumItem();
         public Array GetPrioritiesEnumItem();
-        public IEnumerable<StationToList> GetDeletedStationToList();
-        public IEnumerable<DroneToList> GetDeletedDroneToList();
-        public IEnumerable<CustomerToList> GetDeletedCustomerToList();
-        public IEnumerable<ParcelToList> GetDeletedParcelToList();
-        public BO.Drone GetSpecificDroneBLWithDeleted(int id);
+        public IEnumerable<StationToList> GetDeletedStationsToList();
+        public IEnumerable<DroneToList> GetDeletedDronesToList();
+        public IEnumerable<CustomerToList> GetDeletedCustomersToList();
+        public IEnumerable<ParcelToList> GetDeletedParcelsToList();
 
 
         //##############################################################
         //Get specific item functions
         //##############################################################
+        public BO.Drone GetSpecificDroneBLWithDeleted(int id);
         public BO.Customer GetSpecificCustomerBL(Predicate<BO.Customer> predicate);
         public BO.Parcel GetSpecificParcelBL(int id);
         public BO.Station GetSpecificStationBL(int id);
@@ -69,6 +68,7 @@ namespace BlApi
         public void UpdateCollectParcelByDrone(int id);
         public void UpdateSupplyParcelByDrone(int id);
         public BO.Drone UpdateDataDroneModel(int id, string model);
+        public void updateParecl(BO.ParcelToList parcel);
         public void updateParecl(BO.Parcel parcel);
 
 
@@ -85,9 +85,7 @@ namespace BlApi
         //help functions
         //##############################################################
         public ParcelStatus findParcelStatus(BO.Parcel parcel);
-
         public IEnumerable<string> GetCustomerNamesByCondition(Predicate<BO.Customer> predicate);
-
         public IEnumerable<BO.Customer> GetCustomerByCondition(Predicate<BO.Customer> predicate);
 
 

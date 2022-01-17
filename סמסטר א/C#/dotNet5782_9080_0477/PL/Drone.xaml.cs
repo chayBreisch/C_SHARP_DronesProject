@@ -20,7 +20,7 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         BO.Drone droneBL;
         Window ParentWindow;
         BO.Drone drone = new BO.Drone();
@@ -29,7 +29,7 @@ namespace PL
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.Bl bl, Window droneList)
+        public Drone(BlApi.IBL bl, Window droneList)
         {
             ParentWindow = droneList;
             BLObject = bl;
@@ -47,7 +47,7 @@ namespace PL
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.Bl bl, BO.Drone drone, Window droneList)
+        public Drone(BlApi.IBL bl, BO.Drone drone, Window droneList)
         {
             ParentWindow = droneList;
             BLObject = bl;

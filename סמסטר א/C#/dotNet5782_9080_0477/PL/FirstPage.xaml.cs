@@ -19,9 +19,9 @@ namespace PL
     /// </summary>
     public partial class FirstPage : Window
     {
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         Window ParentWindow;
-        public FirstPage(BlApi.Bl blobject, Window parentWindow)
+        public FirstPage(BlApi.IBL blobject, Window parentWindow)
         {
             InitializeComponent();
             BLObject = blobject;

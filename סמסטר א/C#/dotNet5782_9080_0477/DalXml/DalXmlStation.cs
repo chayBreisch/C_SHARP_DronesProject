@@ -1,4 +1,4 @@
-﻿using DAL;
+﻿using DALException;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace DalXml
     public partial class DalXml
     {
         /// <summary>
-        /// get all stations
+        /// get stations
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
@@ -77,7 +77,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// add stations
+        /// add station
         /// </summary>
         /// <param name="station"></param>
         public void AddStation(Station station)
@@ -105,7 +105,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// remo
+        /// remove station
         /// </summary>
         /// <param name="id"></param>
         public void RemoveStation(int id)
@@ -116,7 +116,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// update statoin
+        /// update station details
         /// </summary>
         /// <param name="station"></param>
         public void UpdateStation(Station station)

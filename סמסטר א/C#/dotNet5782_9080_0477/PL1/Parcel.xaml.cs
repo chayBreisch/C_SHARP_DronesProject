@@ -22,14 +22,14 @@ namespace PL1
 
     public partial class Parcel : Window
     {
-        BlApi.Bl blparcel;
+        BlApi.IBL blparcel;
         BO.Parcel parcelBL;
         /// <summary>
         /// constructor add parcel
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Parcel(BlApi.Bl bl)
+        public Parcel(BlApi.IBL bl)
         {
             blparcel = bl;
             InitializeComponent();
@@ -47,7 +47,7 @@ namespace PL1
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="parentWindow"></param>
-        public Parcel(BlApi.Bl bl, BO.Parcel parcel)
+        public Parcel(BlApi.IBL bl, BO.Parcel parcel)
         {
             InitializeComponent();
             actions.Visibility = Visibility.Visible;
@@ -211,6 +211,7 @@ namespace PL1
                     blparcel.RemoveParcel(parcelBL.ID);
                     Button_ClickCloseParcel(sender, e);
                     //Close();
+                    MessageBox.Show("parcel removed sucssesfully");
                 }
             }
             catch (Exception ex)
@@ -233,8 +234,8 @@ namespace PL1
                 Visibility = Visibility.Hidden;
                 win.ShowDialog();
                 Visibility = Visibility.Visible;
-              /*  new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), this).Show();
-                Hide();*/
+                /*  new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), this).Show();
+                  Hide();*/
             }
         }
 

@@ -1,4 +1,4 @@
-﻿using DAL;
+﻿using DALException;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// add drone 
+        /// add drone
         /// </summary>
         /// <param name="drone"></param>
         public void AddDrone(Drone drone)
@@ -49,7 +49,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// update drone
+        /// update drone details
         /// </summary>
         /// <param name="drone"></param>
         public void UpdateDrone(Drone drone)
@@ -86,7 +86,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// get all drones
+        /// get drones
         /// </summary>
         /// <param name="predicat"></param>
         /// <returns></returns>

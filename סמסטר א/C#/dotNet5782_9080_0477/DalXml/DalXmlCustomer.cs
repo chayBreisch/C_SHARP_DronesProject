@@ -1,4 +1,4 @@
-﻿using DAL;
+﻿using DALException;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -49,7 +49,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// update customer
+        /// update customer details
         /// </summary>
         /// <param name="customer"></param>
         public void UpdateCustomer(Customer customer)
@@ -84,7 +84,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// get all customers
+        /// get customers
         /// </summary>
         /// <param name="predicat"></param>
         /// <returns></returns>

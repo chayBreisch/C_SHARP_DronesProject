@@ -25,23 +25,25 @@ namespace PL
 
     public partial class DroneList : Window
     {
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         Window ParentWindow;
-        ObservableCollection<DroneToList> MyList = new ObservableCollection<DroneToList>();
+        //ObservableCollection<DroneToList> MyList = new ObservableCollection<DroneToList>();
+        internal static PLLists PLLists;
         CollectionView view;
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public DroneList(BlApi.Bl bl, Window main)
+        public DroneList(BlApi.IBL bl, Window main)
         {
             InitializeComponent();
+            PLLists = new PLLists();
             ParentWindow = main;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
-            foreach (var item in BLObject.GetDronesToList())
-                MyList.Add(item);
-            DataContext = MyList;
+            /*foreach (var item in BLObject.GetDronesToList())
+                MyList.Add(item);*/
+            DataContext = PLLists.Drones;
             statusFilter.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             weightFilter.ItemsSource = BLObject.GetweightCategoriesEnumItem();
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
@@ -61,10 +63,10 @@ namespace PL
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
-                MyList = new ObservableCollection<DroneToList>();
+                /*MyList = new ObservableCollection<DroneToList>();
                 foreach (var item in BLObject.GetDronesToList())
-                    MyList.Add(item);
-                DataContext = MyList;
+                    MyList.Add(item);*/
+                DataContext = PLLists.Drones;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             }
         }
@@ -79,16 +81,16 @@ namespace PL
             IEnumerable<DroneToList> drones = new List<DroneToList>();
             ComboBox options = sender as ComboBox;
             if(weightFilter.SelectedItem == null)
-                drones = BLObject.GetDroneToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
+                drones = BLObject.GetDronesToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             else if(statusFilter.SelectedItem == null)
-                drones = BLObject.GetDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
+                drones = BLObject.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
             else
-                drones = BLObject.GetDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
+                drones = BLObject.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             //DroneListView.ItemsSource = drones;
-            MyList = new ObservableCollection<DroneToList>();
+            /*MyList = new ObservableCollection<DroneToList>();
             foreach (var item in drones)
-                MyList.Add(item);
-            DataContext = MyList;
+                MyList.Add(item);*/
+            DataContext = PLLists.Drones;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
 
@@ -179,18 +181,18 @@ namespace PL
         {
             IEnumerable<DroneToList> drones = new List<DroneToList>();
             if (weightFilter.SelectedItem != null && statusFilter.SelectedItem != null)
-                drones = BLObject.GetDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
+                drones = BLObject.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             else if (statusFilter.SelectedItem != null)
-                drones = BLObject.GetDroneToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
+                drones = BLObject.GetDronesToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             else if (weightFilter.SelectedItem != null)
-                drones = BLObject.GetDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
+                drones = BLObject.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
             else
                 drones = BLObject.GetDronesToList();
             //DroneListView.ItemsSource = drones;
-            MyList = new ObservableCollection<DroneToList>();
+           /* MyList = new ObservableCollection<DroneToList>();
             foreach (var item in drones)
-                MyList.Add(item);
-            DataContext = MyList;
+                MyList.Add(item);*/
+            DataContext = PLLists.Drones;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
 
@@ -203,10 +205,10 @@ namespace PL
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
-                MyList = new ObservableCollection<DroneToList>();
-                foreach (var item in BLObject.GetDeletedDroneToList())
-                    MyList.Add(item);
-                DataContext = MyList;
+               /* MyList = new ObservableCollection<DroneToList>();
+                foreach (var item in BLObject.GetDeletedDronesToList())
+                    MyList.Add(item);*/
+                DataContext = PLLists.Drones;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             }
         }

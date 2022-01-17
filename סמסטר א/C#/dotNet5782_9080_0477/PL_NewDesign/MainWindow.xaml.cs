@@ -20,7 +20,7 @@ namespace PL_NewDesign
     /// </summary>
     public partial class MainWindow : Window
     {
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         public MainWindow()
         {
             InitializeComponent();

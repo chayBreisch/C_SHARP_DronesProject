@@ -23,15 +23,16 @@ namespace PL
     public partial class Parcel : Window
     {
         Window ParentWindow;
-        BlApi.Bl BLObject;
+        BlApi.IBL BLObject;
         BO.Parcel parcelBL;
         BO.Customer Customer;
+         
         /// <summary>
         /// constructor add parcel
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Parcel(BlApi.Bl bl, Window parentWindow)
+        public Parcel(BlApi.IBL bl, Window parentWindow)
         {
             ParentWindow = parentWindow;
             BLObject = bl;
@@ -51,7 +52,7 @@ namespace PL
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="parentWindow"></param>
-        public Parcel(BlApi.Bl bl, BO.Parcel parcel, Window parentWindow)
+        public Parcel(BlApi.IBL bl, BO.Parcel parcel, Window parentWindow)
         {
             InitializeComponent();
             CustomerSendParcel.Visibility = Visibility.Hidden;
@@ -99,7 +100,7 @@ namespace PL
 
 
 
-        public Parcel(BlApi.Bl blobject, BO.Customer customer)
+        public Parcel(BlApi.IBL blobject, BO.Customer customer)
         {
             BLObject = blobject;
             Customer = customer;

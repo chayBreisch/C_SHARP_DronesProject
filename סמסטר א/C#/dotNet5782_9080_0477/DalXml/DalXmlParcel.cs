@@ -1,4 +1,4 @@
-﻿using DAL;
+﻿using DALException;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// add parcel
+        /// add parcel to xml
         /// </summary>
         /// <param name="parcel"></param>
         public void AddParcel(Parcel parcel)
@@ -33,7 +33,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// remove parcel
+        /// remove parcel from xml (isActive = false)
         /// </summary>
         /// <param name="id"></param>
         public void RemoveParcel(int id)
@@ -49,7 +49,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// update parcel
+        /// update details parcel
         /// </summary>
         /// <param name="parcel"></param>
         public void UpdateParcel(Parcel parcel)
@@ -86,7 +86,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// get all parcels
+        /// get all parcels from xml
         /// </summary>
         /// <param name="predicat"></param>
         /// <returns></returns>
@@ -114,7 +114,7 @@ namespace DalXml
         }
 
         /// <summary>
-        /// get count parcels
+        /// get count of parcels
         /// </summary>
         /// <returns></returns>
         public int LengthParcel()
