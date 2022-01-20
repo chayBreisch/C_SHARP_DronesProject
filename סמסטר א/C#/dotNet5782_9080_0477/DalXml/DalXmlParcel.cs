@@ -121,6 +121,11 @@ namespace Dal
             return XMLTools.LoadListFromXMLSerializer<Parcel>(dir + parcelFilePath).ToList().Count;
         }
 
+        /// <summary>
+        /// get drones by condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<Parcel> GetParcelesByCondition(Predicate<Parcel> predicate)
         {
             //try todo

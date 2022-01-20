@@ -11,6 +11,12 @@ namespace Dal
     public class XMLTools
     {
         #region SaveLoadWithXMLSerializer
+        /// <summary>
+        /// save data of XML
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="filePath"></param>
         public static void SaveListToXMLSerializer<T>(IEnumerable<T> list, string filePath)
         {
             try
@@ -27,6 +33,12 @@ namespace Dal
             }
         }
 
+        /// <summary>
+        /// load data 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static IEnumerable<T> LoadListFromXMLSerializer<T>(string filePath)
         {
             try
@@ -51,6 +63,11 @@ namespace Dal
         }
         #endregion
 
+        /// <summary>
+        /// load data
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static XElement LoadData(string filePath)
         {
             try

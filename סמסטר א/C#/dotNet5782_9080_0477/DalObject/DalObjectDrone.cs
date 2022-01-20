@@ -36,11 +36,11 @@ namespace Dal
             }*/
         }
 
-        /// <summary>
+        /*/// <summary>
         /// return a specific drone by id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>Drone</returns>
+        /// <returns>Drone</returns>*/
         /*public Drone GetSpecificDrone(int id)
         {
             try
@@ -51,9 +51,13 @@ namespace Dal
             {
                 throw new Exceptions(id);
             }
-        }
-*/
+        }*/
 
+        /// <summary>
+        /// get drone by id
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public Drone GetDroneById(Predicate<Drone> predicate)
         {
             Drone drone1 = new Drone();
@@ -121,7 +125,10 @@ namespace Dal
             }
         }
 
-
+        /// <summary>
+        /// remove drone
+        /// </summary>
+        /// <param name="idRemove"></param>
         public void RemoveDrone(int idRemove)
         {
             Drone drone = DataSource.drones[getIndexOfDrone(idRemove)];

@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace PL
 {
-    internal class Customer_: DependencyObject
+    internal class Customer_ : DependencyObject
     {
         public ulong ID { get; set; }
         public string Name { get; set; }
@@ -40,17 +40,16 @@ namespace PL
 
 
 
-        public Customer_(BO.CustomerToList customer)
+        public Customer_(CustomerToList customer)
         {
-            this.ID = customer.ID;
-            this.Name = customer.Name;
-            this.Phone = customer.Phone;
-            this.SumOfParcelsSendedAndProvided = customer.SumOfParcelsSendedAndProvided;
-            this.SumOfParcelsSendedAndNotProvided = customer.SumOfParcelsSendedAndNotProvided;
-            this.SumOfParcelsRecieved = customer.SumOfParcelsRecieved;
-            this.SumOfParcelsOnTheWay = customer.SumOfParcelsOnTheWay;
+            ID = customer.ID;
+            Name = customer.Name;
+            Phone = customer.Phone;
+            SumOfParcelsSendedAndProvided = customer.SumOfParcelsSendedAndProvided;
+            SumOfParcelsSendedAndNotProvided = customer.SumOfParcelsSendedAndNotProvided;
+            SumOfParcelsRecieved = customer.SumOfParcelsRecieved;
+            SumOfParcelsOnTheWay = customer.SumOfParcelsOnTheWay;
 
+        }
     }
-
-}
 }

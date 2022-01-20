@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-
+using BO;
 namespace PL
 {
     class PLLists : DependencyObject
@@ -19,22 +19,22 @@ namespace PL
 
         public ObservableCollection<Customer_> Customers = new ObservableCollection<Customer_>();
 
-        public void AddDrone(BO.DroneToList bl)
+        public void AddDrone(DroneToList bl)
         {
             Drones.Add(new Drone_(bl));
         }
 
-        public void AddParcel(BO.ParcelToList bl)
+        public void AddParcel(ParcelToList bl)
         {
             Parcels.Add(new Parcel_(bl));
         }
 
-        public void AddStation(BO.StationToList bl)
+        public void AddStation(StationToList bl)
         {
             Stations.Add(new Station_(bl));
         }
 
-        public void AddCustomer(BO.CustomerToList bl)
+        public void AddCustomer(CustomerToList bl)
         {
             Customers.Add(new Customer_(bl));
         }

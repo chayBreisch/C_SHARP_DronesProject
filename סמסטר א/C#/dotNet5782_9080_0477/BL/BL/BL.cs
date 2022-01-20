@@ -209,10 +209,10 @@ namespace BL
             return id > 100000000 && id < 1000000000;
         }
 
-        /// <summary>
+        /*/// <summary>
         /// return parcels that are not connected to a drone
         /// </summary>
-        /// <returns>List<ParcelBL></returns>
+        /// <returns>List<ParcelBL></returns>*/
         /*public IEnumerable<BO.Parcel> GetParcelsWithoutoutDrone()
         {
             IEnumerable<BO.Parcel> parcels = GetParcelsBL();
@@ -227,10 +227,10 @@ namespace BL
             return parcelsWithOutDrone;
         }*/
 
-        /// <summary>
+        /*/// <summary>
         /// return station with epty chargers
         /// </summary>
-        /// <returns>List<StationBL></returns>
+        /// <returns>List<StationBL></returns>*/
         /*public IEnumerable<BO.Station> GetStationWithEmptyChargers()
         {
             int numOfChargers = 0;
@@ -250,10 +250,19 @@ namespace BL
             return stationsWithEmptyChargers;
         }*/
 
+        /// <summary>
+        /// return values of weightCatagories enum
+        /// </summary>
+        /// <returns></returns>
         public Array GetweightCategoriesEnumItem()
         {
             return Enum.GetValues(typeof(WeightCatagories));
         }
+
+        /// <summary>
+        /// return values of priorities enum
+        /// </summary>
+        /// <returns></returns>
         public Array GetPrioritiesEnumItem()
         {
             return Enum.GetValues(typeof(Priorities));

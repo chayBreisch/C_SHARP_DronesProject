@@ -179,11 +179,11 @@ namespace BL
             return GetSpecificParcelBL(parcelToList.ID);
         }
 
-        /// <summary>
+        /*/// <summary>
         /// get parcels by priority
         /// </summary>
         /// <param name="status"></param>
-        /// <returns></returns>
+        /// <returns></returns*/>
        /* public List<ParcelToList> getParcelsByPriority(int status)
         {
             List<ParcelToList> parcelToList = new List<ParcelToList>();
@@ -217,7 +217,11 @@ namespace BL
             return parcelToList;
         }*/
 
-
+        /// <summary>
+        /// get parcelToList by condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<ParcelToList> GetParcelsToListByCondition(Predicate<ParcelToList> predicate)
         {
             //try todo
@@ -226,7 +230,11 @@ namespace BL
                     select parcel);
         }
 
-
+        /// <summary>
+        /// get parcels by condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<BO.Parcel> GetParcelsByCondition(Predicate<BO.Parcel> predicate)
         {
             return (from parcel in getParcelsBL()
@@ -286,16 +294,29 @@ namespace BL
             dalObject.RemoveParcel(id);
         }
 
+        /// <summary>
+        /// update parcel
+        /// </summary>
+        /// <param name="parcel"></param>
         public void updateParecl(BO.Parcel parcel)
         {
             dalObject.UpdateParcel(convertParcelBlToDal(parcel));
         }
 
-        public void updateParecl(BO.ParcelToList parcel)
+        /// <summary>
+        /// update parcel
+        /// </summary>
+        /// <param name="parcel"></param>
+        public void updateParecl(ParcelToList parcel)
         {
             dalObject.UpdateParcel(convertParcelBlToDal(ConvertParcelToListToParcelBL(parcel)));
         }
 
+        /// <summary>
+        /// convert parcel bl to dal
+        /// </summary>
+        /// <param name="parcel"></param>
+        /// <returns></returns>
         public DO.Parcel convertParcelBlToDal(BO.Parcel parcel)
         {
             return new DO.Parcel

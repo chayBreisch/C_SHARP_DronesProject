@@ -44,7 +44,7 @@ namespace Dal
         public void AddDroneCharge(DroneCharge droneCharge)
         {
             List<DroneCharge> droneList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(dir + droneChargeFilePath).ToList();
-            checkUniqeIdDroneChargeBL(droneCharge.DroneID);
+            //checkUniqeIdDroneChargeBL(droneCharge.DroneID);
             droneList.Add(droneCharge);
             XMLTools.SaveListToXMLSerializer<DroneCharge>(droneList, dir + droneChargeFilePath);
         }
@@ -52,11 +52,11 @@ namespace Dal
         /// <summary>
         /// check uniqe drone charge
         /// </summary>
-        /// <param name="id"></param>
-        private void checkUniqeIdDroneChargeBL(int id)
+        /// <param name="idDrone"></param>
+        private void checkUniqeIdDroneChargeBL(int idDrone)
         {
-            if (GetDroneCharges().Any(drone => drone.DroneID == id))
-                throw new NotUniqeID(id, typeof(DroneCharge));
+            if (GetDroneCharges().Any(drone => drone.DroneID == idDrone))
+                throw new NotUniqeID(idDrone, typeof(DroneCharge));
         }
 
         /// <summary>

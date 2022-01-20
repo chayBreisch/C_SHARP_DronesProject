@@ -9,11 +9,21 @@ namespace Dal
 {
     internal partial class DalObject : IDal
     {
+        /// <summary>
+        /// get customers
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<Customer> GetCustomers(Predicate<Customer> predicate = null)
         {
             return from customer in DataSource.customers
                    select customer;
         }
+
+        /// <summary>
+        /// check uniqe customer
+        /// </summary>
+        /// <param name="id"></param>
         private void checkUniqeCustomer(ulong id)
         {
             foreach (var customer in DataSource.customers)
@@ -39,7 +49,6 @@ namespace Dal
         /// get a customer by the id
         /// </summary>
         /// <param name="newCustomer"></param>
-
         public Customer GetCustomerById(Predicate<Customer> predicate)
         {
             Customer customer1 = new Customer();
@@ -56,11 +65,11 @@ namespace Dal
             return customer1;
         }
 
-        /// <summary>
+        /*/// <summary>
         /// get the customers with a specific condition
         /// </summary>
         /// <param name="predicate"></param>
-        /// <returns></returns>
+        /// <returns></returns>*/
         /*public IEnumerable<Customer> getCustomersByCondition(Predicate<Customer> predicate)
         {
             //try todo
@@ -68,6 +77,10 @@ namespace Dal
                     where predicate(customer)
                     select customer);
         }*/
+        /// <summary>
+        /// add customer
+        /// </summary>
+        /// <param name="newCustomer"></param>
         public void AddCustomer(Customer newCustomer)
         {
             checkUniqeCustomer(newCustomer.ID);
@@ -78,6 +91,10 @@ namespace Dal
             int index = DataSource.customers.FindIndex(d => d.ID == customer.ID);
             DataSource.customers[index] = customer;
         }*/
+        /// <summary>
+        /// remove customer
+        /// </summary>
+        /// <param name="idRemove"></param>
         public void RemoveCustomer(ulong idRemove)
         {
             Customer customer = DataSource.customers[getIndexOfCustomer(idRemove)];
@@ -101,6 +118,11 @@ namespace Dal
                 throw new NotExistObjWithID(id, typeof(Parcel), e);
             }
         }
+
+        /// <summary>
+        /// update customer
+        /// </summary>
+        /// <param name="customer"></param>
         public void UpdateCustomer(Customer customer)
         {
             int index = getIndexOfCustomer(customer.ID);

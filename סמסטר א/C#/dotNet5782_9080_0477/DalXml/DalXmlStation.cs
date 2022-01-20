@@ -105,7 +105,8 @@ namespace Dal
                 XElement stationRoot = XMLTools.LoadData(dir + stationFilePath);
                 XElement stationElement;
                 stationElement = (from p in stationRoot.Elements()
-                                  where Convert.ToInt32(p.Element("ID").Value) == station.ID
+                                  //where Convert.ToInt32(p.Element("ID").Value) == station.ID
+                                  where stationRoot.LastNode == p
                                   select p).First();
                 XElement ID = new XElement("ID", station.ID);
                 XElement ChargeSlots = new XElement("ChargeSlots", station.ChargeSlots);
@@ -152,14 +153,19 @@ namespace Dal
             stationRoot.Save(dir + stationFilePath);
         }
 
-
-
+        /// <summary>
+        /// return count of stations
+        /// </summary>
+        /// <returns></returns>
         public int LengthStation()
         {
             return XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath).ToList().Count;
         }
 
-
+        /// <summary>
+        /// get deleted stations
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Station> GetDeletedStations()
         {
             IEnumerable<Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath);
