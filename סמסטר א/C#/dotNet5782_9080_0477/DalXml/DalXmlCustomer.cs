@@ -27,9 +27,9 @@ namespace Dal
         /// <param name="customer"></param>
         public void AddCustomer(Customer customer)
         {
-            IEnumerable<Customer> customerList = XMLTools.LoadListFromXMLSerializer<Customer>(dir + customerFilePath);
+            List<Customer> customerList = XMLTools.LoadListFromXMLSerializer<Customer>(dir + customerFilePath).ToList();
             checkUniqeCustomer(customer.ID);
-            customerList.ToList().Add(customer);
+            customerList.Add(customer);
             XMLTools.SaveListToXMLSerializer<Customer>(customerList, dir + customerFilePath);
         }
 

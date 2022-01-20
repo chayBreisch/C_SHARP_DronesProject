@@ -143,4 +143,30 @@
     <Delivered>2022-01-17T19:30:58.3207731+02:00</Delivered>
     <IsActive>true</IsActive>
   </Parcel>
+  <Parcel>
+    <ID>12</ID>
+    <SenderID>911522009</SenderID>
+    <TargetID>536319530</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Regular</Priority>
+    <Requested xsi:nil="true" />
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>13</ID>
+    <SenderID>200273812</SenderID>
+    <TargetID>494525150</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Regular</Priority>
+    <Requested xsi:nil="true" />
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
 </ArrayOfParcel>

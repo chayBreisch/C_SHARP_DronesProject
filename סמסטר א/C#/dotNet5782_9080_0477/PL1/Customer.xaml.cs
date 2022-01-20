@@ -107,14 +107,14 @@ namespace PL1
         {
             if (customerName.Text == "")
                 throw new InValidInput("name");
-            return nameCustomer.Text;
+            return customerName.Text;
         }
 
         private string getPhone()
         {
             if (customerPhone.Text == "")
                 throw new InValidInput("phone");
-            return phoneCustomr.Text;
+            return customerPhone.Text;
         }
 
         private double getLongitude()

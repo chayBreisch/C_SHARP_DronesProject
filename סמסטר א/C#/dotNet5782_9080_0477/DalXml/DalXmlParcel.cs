@@ -26,9 +26,9 @@ namespace Dal
         /// <param name="parcel"></param>
         public void AddParcel(Parcel parcel)
         {
-            IEnumerable<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(dir + parcelFilePath);
+            List<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(dir + parcelFilePath).ToList();
             checkUniqeParcel(parcel.ID);
-            parcelList.ToList().Add(parcel);
+            parcelList.Add(parcel);
             XMLTools.SaveListToXMLSerializer<Parcel>(parcelList, dir + parcelFilePath);
         }
 

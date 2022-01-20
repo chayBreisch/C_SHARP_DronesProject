@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Xml.Linq;
 using System.IO;
+using static Dal.XmlExceptions;
 
 namespace Dal
 {
@@ -21,8 +22,8 @@ namespace Dal
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                //throw new DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {filePath}", ex);
+                //Console.WriteLine(ex.Message);
+                throw new XMLFileLoadCreateException(filePath, ex);
             }
         }
 
@@ -43,7 +44,8 @@ namespace Dal
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);  // DO.XMLFileLoadCreateException(filePath, $"fail to load xml file: {filePath}", ex);
+                //Console.WriteLine(ex.Message);  
+                throw new XMLFileLoadCreateException(filePath, ex);
             }
             throw new Exception();
         }
@@ -57,8 +59,9 @@ namespace Dal
             }
             catch
             {
-                Console.WriteLine("File upload problem");
-                return null;
+                //Console.WriteLine("File upload problem");
+                //return null;
+                throw new XMLFileLoadFail(filePath);
             }
         }
     }
