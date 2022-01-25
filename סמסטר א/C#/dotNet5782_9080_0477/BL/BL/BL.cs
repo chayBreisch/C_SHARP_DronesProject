@@ -258,5 +258,23 @@ namespace BL
         {
             return Enum.GetValues(typeof(Priorities));
         }
+
+
+
+
+
+
+
+
+
+
+
+
+        public void StartSimulation(BO.Drone drone, Action<Student_bl, int> updateStudent, Func<bool> needToStop)
+        {
+            var sim = new Simulation(this);
+            sim.start(drone, updateStudent, needToStop);
+
+        }
     }
 }
