@@ -22,8 +22,8 @@
     <Requested>1998-10-29T00:00:00</Requested>
     <DroneID>7</DroneID>
     <Scheduled>2009-09-11T00:00:00</Scheduled>
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
+    <PickedUp>2022-01-25T16:19:37.1244339+02:00</PickedUp>
+    <Delivered>2022-01-25T16:19:38.2135484+02:00</Delivered>
     <IsActive>true</IsActive>
   </Parcel>
   <Parcel>
