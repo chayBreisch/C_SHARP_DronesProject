@@ -1,6 +1,7 @@
 ﻿using BO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,6 @@ namespace PL1
     {
         BlApi.IBL blDrone;
         BO.Drone droneBL;
-        BO.Drone drone = new BO.Drone();
         /// <summary>
         /// constructor
         /// </summary>
@@ -430,6 +430,59 @@ namespace PL1
             {
                 MessageBox.Show("can't remove parcel because it's connected to a drone");
             }
+        }
+
+        BackgroundWorker worker = new BackgroundWorker();
+        private void StartSimulation_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            if(SimulationBtn.Content == "start manual")
+            {
+                SimulationBtn.Content = "start simulation";
+                worker.CancelAsync();
+                Supply.IsEnabled = true;
+                UnCharge.IsEnabled = true;
+                return;
+            }
+
+
+            SimulationBtn.Content = "start manual";
+            Supply.IsEnabled = false;
+            UnCharge.IsEnabled = false;
+
+
+            worker.DoWork += (object? sender, DoWorkEventArgs e) =>
+            {
+                blDrone.StartSimulation(
+                   droneBL,
+                   worker,
+                   (drone, i) => { blDrone.UpdateDataDrone(droneBL); worker.ReportProgress(i); },
+                   () => worker.CancellationPending);
+
+            };
+            worker.WorkerReportsProgress = true;
+            worker.ProgressChanged += (object? sender, ProgressChangedEventArgs e) =>
+            {
+                /*Student.MyAge++;
+                Student.Name = updatDrone.FirstName;
+                progress.Content = e.ProgressPercentage;*/
+            };
+
+            worker.RunWorkerCompleted += (object? sender, RunWorkerCompletedEventArgs e) =>
+            {
+                SimulationBtn.Content = "start simulation";
+                worker.CancelAsync();
+                Supply.IsEnabled = true;
+                UnCharge.IsEnabled = true;
+            };
+            worker.WorkerSupportsCancellation = true;
+            worker.RunWorkerAsync();
+
+
+
+
+
         }
     }
 }

@@ -163,6 +163,31 @@ namespace BL
             return droneBl;
         }
 
+
+
+        public BO.Drone UpdateDataDrone(BO.Drone drone)
+        {
+            return new BO.Drone
+            {
+                ID = drone.ID,
+                Model = drone.Model,
+                Location = drone.Location,
+                Weight = drone.Weight,
+                DroneStatus = drone.DroneStatus,
+                BatteryStatus = drone.BatteryStatus,
+                IsActive = drone.IsActive,
+                parcelInDelivery = drone.parcelInDelivery
+            };
+            /*BO.Drone droneBl = GetSpecificDroneBL(id);
+            droneBl.Model = model;
+            updateDrone(droneBl);
+
+            DO.Drone drone = dalObject.GetDroneById(d => d.ID == id && d.IsActive == true);
+            drone.Model = model;
+            dalObject.UpdateDrone(drone);
+            return droneBl;*/
+        }
+
         /// <summary>
         /// get drones with this droneStatus
         /// </summary>
@@ -206,7 +231,7 @@ namespace BL
         /// return all droneToList
         /// </summary>
         /// <returns></returns>
-        public IEnumerable <DroneToList> GetDronesToList()
+        public IEnumerable<DroneToList> GetDronesToList()
         {
             List<BO.Drone> drones = droneBLList;
             List<DroneToList> drone1 = new List<DroneToList>();

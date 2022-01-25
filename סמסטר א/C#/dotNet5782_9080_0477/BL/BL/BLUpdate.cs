@@ -98,6 +98,7 @@ namespace BL
         /// <param name="id"></param>
         public void UpdateConnectParcelToDrone(int id)
         {
+            int count = 0;
             BO.Drone droneBL = GetSpecificDroneBL(id);
             if (droneBL.DroneStatus != DroneStatus.Available)
             {
@@ -109,6 +110,8 @@ namespace BL
             currentParcel = new DO.Parcel() { Weight = 0 };
             foreach (var parcel in parcels)
             {
+                if (parcel.Weight == droneBL.Weight)
+                    count++;
                 if (parcel.Requested == null)
                     break;
                 if (parcel.Scheduled != null)
@@ -146,11 +149,12 @@ namespace BL
                 }
             }
             //if did not find a good parcel
+            if (count == 0)
+                throw new NoParcelsToDeliver();
             if (currentParcel.Weight == 0)
-            {
                 throw new CanNotUpdateDrone(id, "didn't find a parcel for your drone");
-            }
             droneBL.DroneStatus = DroneStatus.Delivery;
+            droneBL.parcelInDelivery = new ParcelInDelivery(GetSpecificParcelBL(currentParcel.ID), dalObject);
             updateDrone(droneBL);
             currentParcel.DroneID = id;
             currentParcel.Scheduled = DateTime.Now;
@@ -181,6 +185,7 @@ namespace BL
             droneBL.BatteryStatus -= calcElectry(droneBL.Location, new LocationBL(customerSender.Longitude, customerSender.Latitude), (int)parcel.Weight);
             droneBL.Location = new LocationBL(customerSender.Longitude, customerSender.Latitude);
             droneBL.DroneStatus = DroneStatus.Delivery;//////////////////////////////////////
+            droneBL.parcelInDelivery.isWaiting = false;
             updateDrone(droneBL);
             parcel.PickedUp = DateTime.Now;
             dalObject.UpdateParcel(parcel);

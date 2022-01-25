@@ -183,7 +183,7 @@ namespace BL
         /// get parcels by priority
         /// </summary>
         /// <param name="status"></param>
-        /// <returns></returns*/>
+        /// <returns></returns>
        /* public List<ParcelToList> getParcelsByPriority(int status)
         {
             List<ParcelToList> parcelToList = new List<ParcelToList>();
