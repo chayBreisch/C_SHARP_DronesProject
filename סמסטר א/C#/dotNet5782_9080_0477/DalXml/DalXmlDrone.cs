@@ -27,9 +27,9 @@ namespace Dal
         /// <param name="drone"></param>
         public void AddDrone(Drone drone)
         {
-            IEnumerable<Drone> droneList = XMLTools.LoadListFromXMLSerializer<Drone>(dir + droneFilePath);
+            List<Drone> droneList = XMLTools.LoadListFromXMLSerializer<Drone>(dir + droneFilePath).ToList();
             checkUniqeDrone(drone.ID);
-            droneList.ToList().Add(drone);
+            droneList.Add(drone);
             XMLTools.SaveListToXMLSerializer<Drone>(droneList, dir + droneFilePath);
         }
 

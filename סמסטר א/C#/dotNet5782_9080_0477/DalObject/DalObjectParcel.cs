@@ -12,10 +12,10 @@ namespace Dal
 {
     internal partial class DalObject : IDal
     {
-        /// <summary>
+        /*/// <summary>
         /// returns the parcels by list from dal
         /// </summary>
-        /// <returns>DataSource.parcels</returns>
+        /// <returns>DataSource.parcels</returns>*/
         /*public List<Parcel> GetParcelByList()
         {
             return DataSource.parcels;
@@ -42,7 +42,6 @@ namespace Dal
                    where parcel.IsActive == false
                    select parcel;
         }
-        ///
         /* public Parcel GetSpecificParcel(int id)
          {
              try
@@ -55,7 +54,11 @@ namespace Dal
              }
          }
  */
-
+        /// <summary>
+        /// get parcel by predicate
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public Parcel GetParcelBy(Predicate<Parcel> predicate)
         {
             Parcel parcel1 = new Parcel();
@@ -166,6 +169,5 @@ namespace Dal
                 throw new NotExistObjWithID(id, typeof(Parcel), e);
             }
         }
-
     }
 }

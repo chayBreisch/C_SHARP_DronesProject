@@ -109,6 +109,11 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// get specific drone bl
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public BO.Drone GetSpecificDroneBLWithDeleted(int id)
         {
             try
@@ -235,6 +240,10 @@ namespace BL
                     select drone);
         }
 
+        /// <summary>
+        /// get deleted droneToList
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DroneToList> GetDeletedDronesToList()
         {
             //try todo
@@ -243,6 +252,10 @@ namespace BL
                     select drone);
         }
 
+        /// <summary>
+        /// remove drone
+        /// </summary>
+        /// <param name="id"></param>
         public void RemoveDrone(int id)
         {
             dalObject.RemoveDrone(id);

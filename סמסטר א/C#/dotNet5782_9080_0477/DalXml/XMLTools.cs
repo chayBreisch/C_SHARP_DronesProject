@@ -4,12 +4,19 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Xml.Linq;
 using System.IO;
+using static Dal.XmlExceptions;
 
 namespace Dal
 {
     public class XMLTools
     {
         #region SaveLoadWithXMLSerializer
+        /// <summary>
+        /// save data of XML
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="filePath"></param>
         public static void SaveListToXMLSerializer<T>(IEnumerable<T> list, string filePath)
         {
             try
@@ -21,11 +28,17 @@ namespace Dal
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                //throw new DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {filePath}", ex);
+                //Console.WriteLine(ex.Message);
+                throw new XMLFileLoadCreateException(filePath, ex);
             }
         }
 
+        /// <summary>
+        /// load data 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static IEnumerable<T> LoadListFromXMLSerializer<T>(string filePath)
         {
             try
@@ -43,12 +56,18 @@ namespace Dal
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);  // DO.XMLFileLoadCreateException(filePath, $"fail to load xml file: {filePath}", ex);
+                //Console.WriteLine(ex.Message);  
+                throw new XMLFileLoadCreateException(filePath, ex);
             }
             throw new Exception();
         }
         #endregion
 
+        /// <summary>
+        /// load data
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static XElement LoadData(string filePath)
         {
             try
@@ -57,8 +76,9 @@ namespace Dal
             }
             catch
             {
-                Console.WriteLine("File upload problem");
-                return null;
+                //Console.WriteLine("File upload problem");
+                //return null;
+                throw new XMLFileLoadFail(filePath);
             }
         }
     }

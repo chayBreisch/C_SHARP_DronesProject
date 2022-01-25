@@ -227,16 +227,17 @@ namespace BL
                     select customer.Name);
         }
 
-
-        
+        /// <summary>
+        /// get customer by condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<BO.Customer> GetCustomerByCondition(Predicate<BO.Customer> predicate)
         {
             return (from customer in getCustomersBL()
                     where predicate(customer)
                     select customer);
         }
-
-
 
         /// <summary>
         /// convert customerToList to customerBL
@@ -280,6 +281,10 @@ namespace BL
             return false;
         }
 
+        /// <summary>
+        /// remove customer
+        /// </summary>
+        /// <param name="id"></param>
         public void RemoveCustomer(ulong id)
         {
             dalObject.RemoveCustomer(id);

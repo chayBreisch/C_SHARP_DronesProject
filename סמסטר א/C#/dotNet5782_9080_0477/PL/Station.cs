@@ -17,15 +17,12 @@ namespace PL
         public int ChargeSlotsBusy { get; set; }
 
 
-        public Station_(BO.StationToList station)
+        public Station_(StationToList station)
         {
-
-            this.ID = station.ID;
-            this.Name = station.Name;
-            this.ChargeSlotsFree = station.ChargeSlotsFree;
-            this.ChargeSlotsBusy = station.ChargeSlotsBusy;
-            
-
-    }
+            ID = station.ID;
+            Name = station.Name;
+            ChargeSlotsFree = station.ChargeSlotsFree;
+            ChargeSlotsBusy = station.ChargeSlotsBusy;
+        }
     }
 }

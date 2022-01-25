@@ -43,5 +43,4 @@ namespace BL
             dalObject.AddDroneCharge(droneCharge);
         }
     }
-
 }

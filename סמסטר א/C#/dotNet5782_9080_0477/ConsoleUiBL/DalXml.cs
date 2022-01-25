@@ -20,9 +20,6 @@ namespace Dal
                 Directory.CreateDirectory(dir);
         }
         internal static DalXml Instance;
-        /// <summary>
-        /// return object of DalXml
-        /// </summary>
         public static DalXml getInstance
         {
             get
@@ -38,9 +35,6 @@ namespace Dal
         string droneFilePath = @"droneFile.xml";
         string droneChargeFilePath = @"droneChargeFile.xml";
 
-        /// <summary>
-        /// constructor
-        /// </summary>
         public DalXml()
         {
             if (!File.Exists(dir + parcelFilePath))
@@ -59,10 +53,6 @@ namespace Dal
                 XMLTools.SaveListToXMLSerializer<DO.DroneCharge>(Dal.DataSource.droneChargers, dir + droneChargeFilePath);
         }
 
-        /// <summary>
-        /// return electricity use
-        /// </summary>
-        /// <returns></returns>
         public double[] RequestElectric()
         {
             double[] array = { DataSource.Config.Available, DataSource.Config.LightHeight, DataSource.Config.MidHeight, DataSource.Config.HeavyHeight, DataSource.Config.ChargingRate };

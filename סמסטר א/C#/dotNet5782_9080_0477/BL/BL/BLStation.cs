@@ -160,7 +160,6 @@ namespace BL
             return convertDalStationToBl(station);
         }
 
-
         /// <summary>
         /// get stations by charge slots
         /// </summary>
@@ -216,6 +215,11 @@ namespace BL
                 throw new CantRemoveItem(typeof(BO.Station));*/
             dalObject.RemoveStation(id);
         }
+
+        /// <summary>
+        /// get deleted stations
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<BO.Station> getDeletedStationsBL()
         {
 
@@ -228,6 +232,10 @@ namespace BL
             return stations1;
         }
 
+        /// <summary>
+        /// get deleted stationToList
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<StationToList> GetDeletedStationsToList()
         {
             IEnumerable<BO.Station> stations = getDeletedStationsBL();

@@ -142,6 +142,11 @@ namespace Dal
                 throw new NotExistObjWithID(id, typeof(Station), e);
             }
         }
+
+        /// <summary>
+        /// get deleted stations
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Station> GetDeletedStations()
         {
             return from station in DataSource.stations
