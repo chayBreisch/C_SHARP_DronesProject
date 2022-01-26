@@ -6,6 +6,8 @@ using DO;
 using System.Linq;
 using DALException;
 using DalApi;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
@@ -22,7 +24,12 @@ namespace BL
         }
         Random rand = new Random();
         List<BO.Drone> droneBLList = new List<BO.Drone>();
-        IDAL.IDal dalObject;
+        internal IDAL.IDal dalObject;
+        double electricAvailable;
+        double electricLightHeight;
+        double electricMidHeight;
+        double electricHeavyHeight;
+        double electricChargingRate;
         //############################################################
         //constructor
         //############################################################
@@ -42,11 +49,11 @@ namespace BL
                 throw new CantReturnDalObject();
             }
             double[] arrayEletric = dalObject.RequestElectric();
-            double electricAvailable = arrayEletric[0];
-            double electricLightHeight = arrayEletric[1];
-            double electricMidHeight = arrayEletric[2];
-            double electricHeavyHeight = arrayEletric[3];
-            double electricChargingRate = arrayEletric[4];
+            electricAvailable = arrayEletric[0];
+            electricLightHeight = arrayEletric[1];
+            electricMidHeight = arrayEletric[2];
+            electricHeavyHeight = arrayEletric[3];
+            electricChargingRate = arrayEletric[4];
             //for each drone we check what is the status and reboot in entries
             foreach (var drone in dalObject.GetDrones())
             {
@@ -254,6 +261,7 @@ namespace BL
         /// return values of weightCatagories enum
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Array GetweightCategoriesEnumItem()
         {
             return Enum.GetValues(typeof(WeightCatagories));
@@ -263,9 +271,33 @@ namespace BL
         /// return values of priorities enum
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Array GetPrioritiesEnumItem()
         {
             return Enum.GetValues(typeof(Priorities));
+        }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public double getRateOfCharging()
+        {
+            return this.electricChargingRate;
+        }
+
+
+
+
+
+
+
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void StartSimulation(BO.Drone drone, BackgroundWorker worker, Action<BO.Drone, int> updateDrone, Func<bool> needToStop)
+        {
+            new Simulation(this, drone, worker, updateDrone, needToStop);
+            //var sim = new Simulation(this, drone, worker, updateDrone, needToStop);
+            //sim.start(drone, worker, updateDrone, needToStop);
+
         }
     }
 }

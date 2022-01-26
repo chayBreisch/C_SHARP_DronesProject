@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static BL.ExceptionsBL;
 using DALException;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
@@ -17,11 +18,15 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="dalObject"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static void checkUniqeIdCustomer(ulong id, IDAL.IDal dalObject)
         {
-            IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
-            if (customers.Any(c => c.ID == id))
-                throw new NotUniqeID(id, typeof(DO.Customer));
+            lock (dalObject)
+            {
+                IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
+                if (customers.Any(c => c.ID == id))
+                    throw new NotUniqeID(id, typeof(DO.Customer));
+            }
         }
 
         /// <summary>
@@ -48,15 +53,19 @@ namespace BL
         /// <param name="name"></param>
         /// <param name="phone"></param>
         /// <param name="location"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(ulong id, string name, string phone, LocationBL location)
         {
-            checkUniqeIdCustomer(id, dalObject);
-            /*            BO.Customer customer = new BO.Customer();
-                        customer.ID = id;
-                        customer.Name = name;
-                        customer.Phone = phone;
-                        customer.Location = new LocationBL(location.Longitude, location.Latitude);*/
-            addCustomerToDal(id, name, phone, location);
+            lock (dalObject)
+            {
+                checkUniqeIdCustomer(id, dalObject);
+                /*            BO.Customer customer = new BO.Customer();
+                            customer.ID = id;
+                            customer.Name = name;
+                            customer.Phone = phone;
+                            customer.Location = new LocationBL(location.Longitude, location.Latitude);*/
+                addCustomerToDal(id, name, phone, location);
+            }
         }
 
         /// <summary>
@@ -84,13 +93,16 @@ namespace BL
         /// <returns> List<CustomerBL> </returns>
         private IEnumerable<BO.Customer> getCustomersBL()
         {
-            IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
-            List<BO.Customer> customers1 = new List<BO.Customer>();
-            foreach (var customer in customers)
+            lock (dalObject)
             {
-                customers1.Add(convertDalCustomerToBl(customer));
+                IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
+                List<BO.Customer> customers1 = new List<BO.Customer>();
+                foreach (var customer in customers)
+                {
+                    customers1.Add(convertDalCustomerToBl(customer));
+                }
+                return customers1;
             }
-            return customers1;
         }
 
         /// <summary>
@@ -98,13 +110,17 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>customerbl</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Customer GetSpecificCustomerBL(Predicate<BO.Customer> predicate)
         {
             try
             {
-                return (from customer in getCustomersBL()
-                        where predicate(customer)
-                        select customer).First();
+                lock (dalObject)
+                {
+                    return (from customer in getCustomersBL()
+                            where predicate(customer)
+                            select customer).First();
+                }
             }
             catch (ArgumentNullException e)
             {
@@ -170,49 +186,60 @@ namespace BL
         /// <param name="id"></param>
         private void checkIfCustomerWithThisID(ulong id)
         {
-            bool check = false;
-            IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
-            foreach (var customer in customers)
+            lock (dalObject)
             {
-                if (customer.ID == id)
+                bool check = false;
+                IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
+                foreach (var customer in customers)
                 {
-                    check = true;
+                    if (customer.ID == id)
+                    {
+                        check = true;
+                    }
                 }
+                if (!check)
+                    throw new NotExistObjWithID(id, typeof(DO.Customer));
             }
-            if (!check)
-                throw new NotExistObjWithID(id, typeof(DO.Customer));
         }
 
         /// <summary>
         /// return active customerToList
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<CustomerToList> GetCustomersToList()
         {
-            IEnumerable<BO.Customer> customers = getCustomersBL();
-            List<CustomerToList> customers1 = new List<CustomerToList>();
-            foreach (var customer in customers)
+            lock (dalObject)
             {
-                if (customer.IsActive)
-                    customers1.Add(new CustomerToList(customer, dalObject));
+                IEnumerable<BO.Customer> customers = getCustomersBL();
+                List<CustomerToList> customers1 = new List<CustomerToList>();
+                foreach (var customer in customers)
+                {
+                    if (customer.IsActive)
+                        customers1.Add(new CustomerToList(customer, dalObject));
+                }
+                return customers1;
             }
-            return customers1;
         }
 
         /// <summary>
         /// return not active customerToList
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<CustomerToList> GetDeletedCustomersToList()
         {
-            IEnumerable<BO.Customer> customers = getCustomersBL();
-            List<CustomerToList> customers1 = new List<CustomerToList>();
-            foreach (var customer in customers)
+            lock (dalObject)
             {
-                if (!customer.IsActive)
-                    customers1.Add(new CustomerToList(customer, dalObject));
+                IEnumerable<BO.Customer> customers = getCustomersBL();
+                List<CustomerToList> customers1 = new List<CustomerToList>();
+                foreach (var customer in customers)
+                {
+                    if (!customer.IsActive)
+                        customers1.Add(new CustomerToList(customer, dalObject));
+                }
+                return customers1;
             }
-            return customers1;
         }
 
         /// <summary>
@@ -220,11 +247,15 @@ namespace BL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<string> GetCustomerNamesByCondition(Predicate<BO.Customer> predicate)
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public IEnumerable<string> GetCustomersNamesByCondition(Predicate<BO.Customer> predicate)
         {
-            return (from customer in getCustomersBL()
-                    where predicate(customer)
-                    select customer.Name);
+            lock (dalObject)
+            {
+                return (from customer in getCustomersBL()
+                        where predicate(customer)
+                        select customer.Name);
+            }
         }
 
         /// <summary>
@@ -232,11 +263,15 @@ namespace BL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<BO.Customer> GetCustomerByCondition(Predicate<BO.Customer> predicate)
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public IEnumerable<BO.Customer> GetCustomersByCondition(Predicate<BO.Customer> predicate)
         {
-            return (from customer in getCustomersBL()
-                    where predicate(customer)
-                    select customer);
+            lock (dalObject)
+            {
+                return (from customer in getCustomersBL()
+                        where predicate(customer)
+                        select customer);
+            }
         }
 
         /// <summary>
@@ -244,6 +279,7 @@ namespace BL
         /// </summary>
         /// <param name="customerToList"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Customer ConvertCustomerToListToCustomerlBL(CustomerToList customerToList)
         {
             return GetSpecificCustomerBL(c => c.ID == customerToList.ID);
@@ -285,9 +321,13 @@ namespace BL
         /// remove customer
         /// </summary>
         /// <param name="id"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RemoveCustomer(ulong id)
         {
-            dalObject.RemoveCustomer(id);
+            lock (dalObject)
+            {
+                dalObject.RemoveCustomer(id);
+            }
         }
     }
 }

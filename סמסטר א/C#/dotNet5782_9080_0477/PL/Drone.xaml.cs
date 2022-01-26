@@ -1,6 +1,7 @@
 ﻿using BO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,16 +23,13 @@ namespace PL
     {
         BlApi.IBL BLObject;
         BO.Drone droneBL;
-        Window ParentWindow;
-        BO.Drone drone = new BO.Drone();
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.IBL bl, Window droneList)
+        public Drone(BlApi.IBL bl)
         {
-            ParentWindow = droneList;
             BLObject = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -47,9 +45,8 @@ namespace PL
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.IBL bl, BO.Drone drone, Window droneList)
+        public Drone(BlApi.IBL bl, BO.Drone drone)
         {
-            ParentWindow = droneList;
             BLObject = bl;
             droneBL = drone;
             InitializeComponent();
@@ -212,12 +209,10 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 BLObject.AddDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
                 MessageBox.Show("you added succefuly");
-                ParentWindow.Show();
                 Close();
             }
             catch (Exception exce)
@@ -252,7 +247,15 @@ namespace PL
         /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            droneBL = BLObject.UpdateDataDroneModel(droneBL.ID, modelDrone.Text);
+            try
+            {
+                droneBL = BLObject.UpdateDataDroneModel(droneBL.ID, modelDrone.Text);
+                MessageBox.Show("you updated sucssesfully");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("can not update drone");
+            }
         }
 
         /// <summary>
@@ -262,20 +265,27 @@ namespace PL
         /// <param name="e"></param>
         private void Charge_Click(object sender, RoutedEventArgs e)
         {
-            droneBL = BLObject.UpdateSendDroneToCharge(droneBL.ID);
+            try
+            {
+                droneBL = BLObject.UpdateSendDroneToCharge(droneBL.ID);
+                TimeChargerBlock.Visibility = Visibility.Visible;
+                MessageBox.Show("the drone is sended to charge succesfully");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("can not charge drone");
+            }
             statusDrone.Text = droneBL.DroneStatus.ToString();
             /*visible.Visibility = Visibility.Hidden;
             hidden.Visibility = Visibility.Visible;*/
             Supply.IsEnabled = false;
             UnCharge.IsEnabled = true;
-
             /*Charge.IsEnabled = false;
             Connect.IsEnabled = false;
             Collect.IsEnabled = false;
             Supply.IsEnabled = false;
             UnCharge.IsEnabled = true;*/
             //TimeCharger.Visibility = Visibility.Visible;
-            TimeChargerBlock.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -309,10 +319,11 @@ namespace PL
                     statusDrone.Text = droneBL.DroneStatus.ToString();
                     batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
                     TimeCharger.Text = "";
+                    MessageBox.Show("the drone is uncharged sucssesfully");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("can not uncharge drone");
                 }
             }
         }
@@ -332,7 +343,7 @@ namespace PL
             catch (Exception ex)
             {
                 check = false;
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show("can not connect drone");
             }
             if (check)
                 MessageBox.Show("connected succesfully");
@@ -353,7 +364,7 @@ namespace PL
             catch (Exception ex)
             {
                 check = false;
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show("can not collect drone");
             }
             if (check)
                 MessageBox.Show("collected succesfully");
@@ -387,12 +398,6 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            if (ParentWindow != null)
-                ParentWindow.Show();
-            else if (ParentWindow != null)
-                ParentWindow.Show();
-            else if (ParentWindow != null)
-                ParentWindow.Show();
             Close();
         }
 
@@ -404,9 +409,14 @@ namespace PL
         private void Button_openParcel(object sender, RoutedEventArgs e)
         {
             if (droneBL.parcelInDelivery != null)
-                new Parcel(BLObject, BLObject.GetSpecificParcelBL(droneBL.parcelInDelivery.ID), this).Show();
+                new Parcel(BLObject, BLObject.GetSpecificParcelBL(droneBL.parcelInDelivery.ID)).Show();
         }
 
+        /// <summary>
+        /// delete drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_DeleteDrone(object sender, RoutedEventArgs e)
         {
             try
@@ -418,12 +428,66 @@ namespace PL
                     Button_ClickClose(sender, e);
                     /* ParentWindow.Show();
                      Close();*/
+                    MessageBox.Show("drone removed sucssesfully");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("can't remove parcel because it's connected to a drone");
             }
+        }
+        BackgroundWorker worker = new BackgroundWorker();
+
+        /// <summary>
+        /// start simulation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartSimulation_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            if (SimulationBtn.Content == "start manual")
+            {
+                SimulationBtn.Content = "start simulation";
+                worker.CancelAsync();
+                Supply.IsEnabled = true;
+                UnCharge.IsEnabled = true;
+                return;
+            }
+
+
+            SimulationBtn.Content = "start manual";
+            Supply.IsEnabled = false;
+            UnCharge.IsEnabled = false;
+
+
+            worker.DoWork += (object? sender, DoWorkEventArgs e) =>
+            {
+                BLObject.StartSimulation(
+                   droneBL,
+                   worker,
+                   (drone, i) => { BLObject.UpdateDataDrone(droneBL); worker.ReportProgress(i); },
+                   () => worker.CancellationPending);
+
+            };
+            worker.WorkerReportsProgress = true;
+            worker.ProgressChanged += (object? sender, ProgressChangedEventArgs e) =>
+            {
+                /*Student.MyAge++;
+                Student.Name = updatDrone.FirstName;
+                progress.Content = e.ProgressPercentage;*/
+            };
+
+            worker.RunWorkerCompleted += (object? sender, RunWorkerCompletedEventArgs e) =>
+            {
+                SimulationBtn.Content = "start simulation";
+                worker.CancelAsync();
+                Supply.IsEnabled = true;
+                UnCharge.IsEnabled = true;
+            };
+            worker.WorkerSupportsCancellation = true;
+            worker.RunWorkerAsync();
         }
     }
 }

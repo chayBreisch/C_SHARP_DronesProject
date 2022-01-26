@@ -14,7 +14,7 @@ namespace BO
             ID = parcel.ID;
             Weight = parcel.Weight;
             Priority = parcel.Priorities;
-            isPickedUp = parcel.PickedUp != null;
+            isWaiting = parcel.PickedUp == null;
             CustomerInDeliverySender = parcel.Sender;
             CustomerInDeliveryReciever = parcel.Reciever;
             DO.Customer customer = dalObject.GetCustomerById(c => c.ID == parcel.Sender.ID);
@@ -26,7 +26,7 @@ namespace BO
         public int ID { get; set; }
         public DO.WeightCatagories Weight { get; set; }
         public DO.Priorities Priority { get; set; }
-        public bool isPickedUp { get; set; }
+        public bool isWaiting { get; set; }
         public CustomerAtParcel CustomerInDeliverySender { get; set; }
         public CustomerAtParcel CustomerInDeliveryReciever { get; set; }
         public LocationBL CollectLocation { get; set; }
@@ -35,7 +35,7 @@ namespace BO
 
         public override string ToString()
         {
-            return $"ID: {ID}, Weight: {Weight}, Priority: {Priority}, ParcelStatus: {isPickedUp}" +
+            return $"ID: {ID}, Weight: {Weight}, Priority: {Priority}, ParcelStatus: {isWaiting}" +
                 $", CollectLocation: {CollectLocation}, CollectLocation: {CollectLocation}, DeliveryDestinationLocation: {DeliveryDestinationLocation}" +
                 $"TransportDistance: {Math.Floor(TransportDistance)}";
         }

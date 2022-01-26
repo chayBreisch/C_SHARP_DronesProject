@@ -7,6 +7,7 @@ using DO;
 using BO;
 using static BL.ExceptionsBL;
 using DALException;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
@@ -17,11 +18,15 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="dalObject"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static void checkUniqeIdParcel(int id, IDAL.IDal dalObject)
         {
-            IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
-            if (parcels.Any(p => p.ID == id))
-                throw new NotUniqeID(id, typeof(DO.Parcel));
+            lock (dalObject)
+            {
+                IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
+                if (parcels.Any(p => p.ID == id))
+                    throw new NotUniqeID(id, typeof(DO.Parcel));
+            }
         }
 
         /// <summary>
@@ -31,23 +36,27 @@ namespace BL
         /// <param name="target"></param>
         /// <param name="Weight"></param>
         /// <param name="priority"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddParcel(ulong sender, ulong target, int Weight, int priority)
         {
-            checkIfCustomerWithThisID(sender);
-            checkIfCustomerWithThisID(target);
-            //BO.Parcel parcel = new BO.Parcel();
-            /*BO.Customer customer = GetSpecificCustomerBL(sender);
-            parcel.Sender = new CustomerAtParcel(customer.ID, customer.Name);
-            customer = GetSpecificCustomerBL(target);
-            parcel.Reciever = new CustomerAtParcel(customer.ID, customer.Name);
-            parcel.Weight = (DO.WeightCatagories)Weight;
-            parcel.Priorities = (DO.Priorities)priority;
-            parcel.Requesed = DateTime.Now;
-            parcel.Scheduled = null;
-            parcel.PickedUp = null;
-            parcel.Delivered = null;
-            parcel.Drone = null;*/
-            addParcelToDal(sender, target, Weight, priority);
+            lock (dalObject)
+            {
+                checkIfCustomerWithThisID(sender);
+                checkIfCustomerWithThisID(target);
+                //BO.Parcel parcel = new BO.Parcel();
+                /*BO.Customer customer = GetSpecificCustomerBL(sender);
+                parcel.Sender = new CustomerAtParcel(customer.ID, customer.Name);
+                customer = GetSpecificCustomerBL(target);
+                parcel.Reciever = new CustomerAtParcel(customer.ID, customer.Name);
+                parcel.Weight = (DO.WeightCatagories)Weight;
+                parcel.Priorities = (DO.Priorities)priority;
+                parcel.Requesed = DateTime.Now;
+                parcel.Scheduled = null;
+                parcel.PickedUp = null;
+                parcel.Delivered = null;
+                parcel.Drone = null;*/
+                addParcelToDal(sender, target, Weight, priority);
+            }
 
         }
 
@@ -92,11 +101,15 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Parcel</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Parcel GetSpecificParcelBL(int id)
         {
             try
             {
-                return convertDalToParcelBL(dalObject.GetParcelBy(p => p.ID == id));
+                lock (dalObject)
+                {
+                    return convertDalToParcelBL(dalObject.GetParcelBy(p => p.ID == id));
+                }
             }
             catch (ArgumentNullException e)
             {
@@ -143,30 +156,38 @@ namespace BL
         /// return active ParcelToList
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelToList> GetParcelsToList()
         {
-            IEnumerable<BO.Parcel> parcels = getParcelsBL();
-            List<ParcelToList> parcels1 = new List<ParcelToList>();
-            foreach (var parcel in parcels)
+            lock (dalObject)
             {
-                parcels1.Add(new ParcelToList(parcel, dalObject));
+                IEnumerable<BO.Parcel> parcels = getParcelsBL();
+                List<ParcelToList> parcels1 = new List<ParcelToList>();
+                foreach (var parcel in parcels)
+                {
+                    parcels1.Add(new ParcelToList(parcel, dalObject));
+                }
+                return parcels1;
             }
-            return parcels1;
         }
 
         /// <summary>
         /// return all ParcelToList
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelToList> GetDeletedParcelsToList()
         {
-            IEnumerable<DO.Parcel> parcels = dalObject.GetDeletedParcels();
-            List<ParcelToList> parcels1 = new List<ParcelToList>();
-            foreach (var parcel in parcels)
+            lock (dalObject)
             {
-                parcels1.Add(new ParcelToList(convertDalToParcelBL(parcel), dalObject));
+                IEnumerable<DO.Parcel> parcels = dalObject.GetDeletedParcels();
+                List<ParcelToList> parcels1 = new List<ParcelToList>();
+                foreach (var parcel in parcels)
+                {
+                    parcels1.Add(new ParcelToList(convertDalToParcelBL(parcel), dalObject));
+                }
+                return parcels1;
             }
-            return parcels1;
         }
 
         /// <summary>
@@ -174,6 +195,7 @@ namespace BL
         /// </summary>
         /// <param name="parcelToList"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Parcel ConvertParcelToListToParcelBL(ParcelToList parcelToList)
         {
             return GetSpecificParcelBL(parcelToList.ID);
@@ -183,7 +205,7 @@ namespace BL
         /// get parcels by priority
         /// </summary>
         /// <param name="status"></param>
-        /// <returns></returns*/>
+        /// <returns></returns>
        /* public List<ParcelToList> getParcelsByPriority(int status)
         {
             List<ParcelToList> parcelToList = new List<ParcelToList>();
@@ -222,12 +244,16 @@ namespace BL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelToList> GetParcelsToListByCondition(Predicate<ParcelToList> predicate)
         {
             //try todo
-            return (from parcel in GetParcelsToList()
-                    where predicate(parcel)
-                    select parcel);
+            lock (dalObject)
+            {
+                return (from parcel in GetParcelsToList()
+                        where predicate(parcel)
+                        select parcel);
+            }
         }
 
         /// <summary>
@@ -235,11 +261,15 @@ namespace BL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.Parcel> GetParcelsByCondition(Predicate<BO.Parcel> predicate)
         {
-            return (from parcel in getParcelsBL()
-                    where predicate(parcel)
-                    select parcel);
+            lock (dalObject)
+            {
+                return (from parcel in getParcelsBL()
+                        where predicate(parcel)
+                        select parcel);
+            }
         }
 
 
@@ -266,50 +296,66 @@ namespace BL
         /// </summary>
         /// <param name="parcel"></param>
         /// <returns>ParcelStatus</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public ParcelStatus findParcelStatus(BO.Parcel parcel)
         {
-            if (parcel.Delivered != null)
-                return (ParcelStatus)3;
-            else if (parcel.PickedUp != null)
-                return (ParcelStatus)2;
-            else if (parcel.Scheduled != null)
-                return (ParcelStatus)1;
-            return (ParcelStatus)0;
+            lock (dalObject)
+            {
+                if (parcel.Delivered != null)
+                    return (ParcelStatus)3;
+                else if (parcel.PickedUp != null)
+                    return (ParcelStatus)2;
+                else if (parcel.Scheduled != null)
+                    return (ParcelStatus)1;
+                return (ParcelStatus)0;
+            }
         }
 
         /// <summary>
         /// remove a parcel from dataSource list
         /// </summary>
         /// <param name="parcel"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RemoveParcel(int id)
         {
-            BO.Drone drone = GetSpecificDroneBLWithDeleted(dalObject.GetParcelBy(p => p.ID == id).DroneID);
-            if (drone != null)
+            lock (dalObject)
             {
-                /*drone.parcelInDelivery = null;
-                drone.DroneStatus = DroneStatus.Available;
-                updateDrone(drone);*/
-                throw new CantRemoveItem(typeof(BO.Parcel));
+                BO.Drone drone = GetSpecificDroneBLWithDeleted(dalObject.GetParcelBy(p => p.ID == id).DroneID);
+                if (drone != null)
+                {
+                    /*drone.parcelInDelivery = null;
+                    drone.DroneStatus = DroneStatus.Available;
+                    updateDrone(drone);*/
+                    throw new CantRemoveItem(typeof(BO.Parcel));
+                }
+                dalObject.RemoveParcel(id);
             }
-            dalObject.RemoveParcel(id);
         }
 
         /// <summary>
         /// update parcel
         /// </summary>
         /// <param name="parcel"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void updateParecl(BO.Parcel parcel)
         {
-            dalObject.UpdateParcel(convertParcelBlToDal(parcel));
+            lock (dalObject)
+            {
+                dalObject.UpdateParcel(convertParcelBlToDal(parcel));
+            }
         }
 
         /// <summary>
         /// update parcel
         /// </summary>
         /// <param name="parcel"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void updateParecl(ParcelToList parcel)
         {
-            dalObject.UpdateParcel(convertParcelBlToDal(ConvertParcelToListToParcelBL(parcel)));
+            lock (dalObject)
+            {
+                dalObject.UpdateParcel(convertParcelBlToDal(ConvertParcelToListToParcelBL(parcel)));
+            }
         }
 
         /// <summary>
@@ -317,6 +363,7 @@ namespace BL
         /// </summary>
         /// <param name="parcel"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Parcel convertParcelBlToDal(BO.Parcel parcel)
         {
             return new DO.Parcel

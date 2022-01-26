@@ -60,9 +60,6 @@ namespace PL
             {
                 AddCustomer(customer);
             }
-
-
         }
-
     }
 }

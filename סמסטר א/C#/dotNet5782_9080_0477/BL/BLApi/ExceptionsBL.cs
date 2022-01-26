@@ -60,5 +60,12 @@ namespace BL
 
             }
         }
+        public class NoParcelsToDeliver : Exception
+        {
+            public NoParcelsToDeliver() : base($"no parcel matched")
+            {
+
+            }
+        }
     }
 }

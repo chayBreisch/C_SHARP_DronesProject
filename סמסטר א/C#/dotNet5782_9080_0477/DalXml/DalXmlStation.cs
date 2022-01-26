@@ -102,7 +102,11 @@ namespace Dal
         {
             try
             {
-                XElement stationRoot = XMLTools.LoadData(dir + stationFilePath);
+                List<Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath).ToList();
+                //checkuniqeStation(station.ID);
+                stationList.Add(station);
+                XMLTools.SaveListToXMLSerializer<Station>(stationList, dir + stationFilePath);
+                /*XElement stationRoot = XMLTools.LoadData(dir + stationFilePath);
                 XElement stationElement;
                 stationElement = (from p in stationRoot.Elements()
                                   //where Convert.ToInt32(p.Element("ID").Value) == station.ID
@@ -114,7 +118,7 @@ namespace Dal
                 XElement Longitude = new XElement("Longitude", station.Longitude);
                 XElement Name = new XElement("Name", station.Name);
                 XElement IsActive = new XElement("IsActive", station.IsActive);
-                stationRoot.Add(new XElement("station", ID, ChargeSlots, Latitude, Longitude, Name, IsActive));
+                stationRoot.Add(new XElement("station", ID, ChargeSlots, Latitude, Longitude, Name, IsActive));*/
             }
 
             catch (Exception)
@@ -140,7 +144,7 @@ namespace Dal
         /// <param name="station"></param>
         public void UpdateStation(Station station)
         {
-            XElement stationRoot = XMLTools.LoadData(dir + stationFilePath);
+            /*XElement stationRoot = XMLTools.LoadData(dir + stationFilePath);
             XElement stationElement = (from p in stationRoot.Elements()
                                        where Convert.ToInt32(p.Element("ID").Value) == station.ID
                                        select p).FirstOrDefault();
@@ -150,7 +154,15 @@ namespace Dal
             stationElement.Element("Longitude").Value = station.Longitude.ToString();
             stationElement.Element("Name").Value = station.Name.ToString();
             stationElement.Element("IsActive").Value = station.IsActive.ToString();
-            stationRoot.Save(dir + stationFilePath);
+            stationRoot.Save(dir + stationFilePath);*/
+            List<Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(dir + stationFilePath).ToList();
+
+            int index = stationList.FindIndex(s => s.ID == station.ID);
+
+            if (index == -1)
+                throw new NotExistObjWithID(station.ID, typeof(Station));
+            stationList[index] = station;
+            XMLTools.SaveListToXMLSerializer<Station>(stationList, dir + stationFilePath);
         }
 
         /// <summary>

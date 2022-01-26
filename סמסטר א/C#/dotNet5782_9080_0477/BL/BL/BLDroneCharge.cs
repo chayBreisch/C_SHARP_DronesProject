@@ -7,6 +7,7 @@ using DO;
 using BO;
 using static BL.ExceptionsBL;
 using DALException;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
@@ -19,11 +20,15 @@ namespace BL
         /// <param name="droneId"></param>
         /// <param name="stationId"></param>
         /// <param name="dalObject"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static void checkUniqeIdDroneCharge(int droneId, int stationId, IDAL.IDal dalObject)
         {
-            IEnumerable<DroneCharge> droneCharges = dalObject.GetDroneCharges();
-            if (droneCharges.Any(d => d.DroneID == droneId && d.StationID == stationId))
-                throw new NotUniqeID(droneId, stationId, typeof(DroneCharge));
+            lock (dalObject)
+            {
+                IEnumerable<DroneCharge> droneCharges = dalObject.GetDroneCharges();
+                if (droneCharges.Any(d => d.DroneID == droneId && d.StationID == stationId))
+                    throw new NotUniqeID(droneId, stationId, typeof(DroneCharge));
+            }
         }
 
         /// <summary>
@@ -31,16 +36,20 @@ namespace BL
         /// </summary>
         /// <param name="stationID"></param>
         /// <param name="droneID"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void addDroneCharge(int stationID, int droneID)
         {
-            DO.Station station = dalObject.GetStationById(s => s.ID == stationID &&s.IsActive == true);
-            if (!checkStationIfEmptyChargers(station))
-                throw new NotEmptyChargeSlots(stationID);
-            checkUniqeIdDroneCharge(droneID, stationID, dalObject);
-            DroneCharge droneCharge = new DroneCharge();
-            droneCharge.DroneID = droneID;
-            droneCharge.StationID = stationID;
-            dalObject.AddDroneCharge(droneCharge);
+            lock (dalObject)
+            {
+                DO.Station station = dalObject.GetStationById(s => s.ID == stationID && s.IsActive == true);
+                if (!checkStationIfEmptyChargers(station))
+                    throw new NotEmptyChargeSlots(stationID);
+                checkUniqeIdDroneCharge(droneID, stationID, dalObject);
+                DroneCharge droneCharge = new DroneCharge();
+                droneCharge.DroneID = droneID;
+                droneCharge.StationID = stationID;
+                dalObject.AddDroneCharge(droneCharge);
+            }
         }
     }
 }

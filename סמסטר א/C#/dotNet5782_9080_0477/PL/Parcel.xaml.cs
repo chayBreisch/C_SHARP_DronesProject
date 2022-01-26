@@ -22,7 +22,6 @@ namespace PL
 
     public partial class Parcel : Window
     {
-        Window ParentWindow;
         BlApi.IBL BLObject;
         BO.Parcel parcelBL;
         BO.Customer Customer;
@@ -32,9 +31,8 @@ namespace PL
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Parcel(BlApi.IBL bl, Window parentWindow)
+        public Parcel(BlApi.IBL bl)
         {
-            ParentWindow = parentWindow;
             BLObject = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -52,14 +50,13 @@ namespace PL
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="parentWindow"></param>
-        public Parcel(BlApi.IBL bl, BO.Parcel parcel, Window parentWindow)
+        public Parcel(BlApi.IBL bl, BO.Parcel parcel)
         {
             InitializeComponent();
             CustomerSendParcel.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
             addParcel.Visibility = Visibility.Hidden;
             WindowStyle = WindowStyle.None;
-            ParentWindow = parentWindow;
             BLObject = bl;
             parcelBL = parcel;
             idparcel.Text = parcelBL.ID.ToString();
@@ -190,7 +187,6 @@ namespace PL
                 }
                 BLObject.AddParcel(getSenderId(), getRecieverId(), weightParcel.SelectedIndex + 1, priorityParcel.SelectedIndex);
                 MessageBox.Show("you added succefuly");
-                ParentWindow.Show();
                 Close();
             }
             catch (Exception exce)
@@ -209,7 +205,6 @@ namespace PL
             //ParentWindow.Refresh();
             //refreshList(this.parcelBL);
             //ParentWindow.ParcelListView.Items.Refresh();
-            ParentWindow.Show();
             Close();
         }
 
@@ -242,6 +237,7 @@ namespace PL
                     Button_ClickCloseParcel(sender, e);
                     /* ParentWindow.Show();
                      Close();*/
+                    MessageBox.Show("parcel removed sucssesfully");
                 }
             }
             catch (Exception ex)
@@ -259,8 +255,11 @@ namespace PL
         {
             if (BLObject.findParcelStatus(parcelBL) == BO.ParcelStatus.Scheduled || BLObject.findParcelStatus(parcelBL) == BO.ParcelStatus.PickedUp)
             {
-                new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), this, 'w').Show();
-                Hide();
+
+                var win = new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), 'w');
+                Visibility = Visibility.Hidden;
+                win.ShowDialog();
+                Visibility = Visibility.Visible;
             }
         }
 
@@ -273,8 +272,12 @@ namespace PL
         {
             if (BLObject.findParcelStatus(parcelBL) == BO.ParcelStatus.Scheduled || BLObject.findParcelStatus(parcelBL) == BO.ParcelStatus.PickedUp)
             {
-                new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID), this, 'w').Show();
-                Hide();
+                var win = new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID), 'w');
+                Visibility = Visibility.Hidden;
+                win.ShowDialog();
+                Visibility = Visibility.Visible;
+                /*new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID), this).Show();
+                Hide();*/
             }
         }
 
@@ -287,8 +290,13 @@ namespace PL
         {
             if (parcelBL.Drone.ID != 0)
             {
-                new Drone(BLObject, parcelBL.Drone, this).Show();
-                Hide();
+                var win = new Drone(BLObject, parcelBL.Drone);
+                Visibility = Visibility.Hidden;
+                win.ShowDialog();
+
+                Visibility = Visibility.Visible;
+                /*new Drone(blparcel, parcelBL.Drone, this).Show();
+                Hide();*/
             }
         }
 
@@ -368,7 +376,7 @@ namespace PL
         {
             string firsts = targetName.Text;
             customers.Visibility = Visibility.Visible;
-            customers.ItemsSource = BLObject.GetCustomerNamesByCondition(C => { return C.Name.IndexOf(firsts) == 0; });
+            customers.ItemsSource = BLObject.GetCustomersNamesByCondition(C => { return C.Name.IndexOf(firsts) == 0; });
         }
 
 

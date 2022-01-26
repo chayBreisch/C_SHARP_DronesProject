@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using IDAL;
+using System.Runtime.CompilerServices;
 using DALException;
 
 namespace Dal
@@ -25,6 +26,7 @@ namespace Dal
         /// returns the drones from dal
         /// </summary>
         /// <returns>DataSource.drones</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Drone> GetDrones(Predicate<Drone> predicate = null)
         {
             return from drone in DataSource.drones
@@ -58,6 +60,7 @@ namespace Dal
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone GetDroneById(Predicate<Drone> predicate)
         {
             Drone drone1 = new Drone();
@@ -85,6 +88,7 @@ namespace Dal
         /// add drone to dal
         /// </summary>
         /// <param name="drone"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(Drone drone)
         {
             checkUniqeDrone(drone.ID);
@@ -95,6 +99,7 @@ namespace Dal
         /// update the drone in dal
         /// </summary>
         /// <param name="drone"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateDrone(Drone drone)
         {
             int index = DataSource.drones.FindIndex(d => d.ID == drone.ID);
@@ -129,6 +134,7 @@ namespace Dal
         /// remove drone
         /// </summary>
         /// <param name="idRemove"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RemoveDrone(int idRemove)
         {
             Drone drone = DataSource.drones[getIndexOfDrone(idRemove)];

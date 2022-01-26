@@ -26,7 +26,6 @@ namespace PL
     public partial class DroneList : Window
     {
         BlApi.IBL BLObject;
-        Window ParentWindow;
         //ObservableCollection<DroneToList> MyList = new ObservableCollection<DroneToList>();
         internal static PLLists PLLists;
         CollectionView view;
@@ -34,11 +33,10 @@ namespace PL
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public DroneList(BlApi.IBL bl, Window main)
+        public DroneList(BlApi.IBL bl)
         {
             InitializeComponent();
             PLLists = new PLLists();
-            ParentWindow = main;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
             /*foreach (var item in BLObject.GetDronesToList())
@@ -118,8 +116,12 @@ namespace PL
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
             //this.Visibility = Visibility.Hidden;
-            new Drone(BLObject, this).Show();
-            Hide();
+            /*new Drone(BLObject, this).Show();
+            Hide();*/
+            var win = new Drone(BLObject);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
 
         }
 
@@ -134,8 +136,12 @@ namespace PL
             DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
             BO.Drone drone = BLObject.ConvertDroneToListToDroneBL(droneToList);
             //this.Visibility = Visibility.Hidden;
-            new Drone(BLObject, drone, this).Show();
-            Hide();
+            /*new Drone(BLObject, drone, this).Show();
+            Hide();*/
+            var win = new Drone(BLObject, drone);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -145,7 +151,6 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            ParentWindow.Show();
             Close();
         }
 

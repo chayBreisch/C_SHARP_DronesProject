@@ -2,6 +2,7 @@
 using DO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +47,7 @@ namespace BlApi
         public BO.Parcel GetSpecificParcelBL(int id);
         public BO.Station GetSpecificStationBL(int id);
         public BO.Drone GetSpecificDroneBL(int id);
+        public double getRateOfCharging();
 
 
         //##############################################################
@@ -70,6 +72,7 @@ namespace BlApi
         public BO.Drone UpdateDataDroneModel(int id, string model);
         public void updateParecl(BO.ParcelToList parcel);
         public void updateParecl(BO.Parcel parcel);
+        public BO.Drone UpdateDataDrone(BO.Drone drone);
 
 
         //##############################################################
@@ -85,8 +88,8 @@ namespace BlApi
         //help functions
         //##############################################################
         public ParcelStatus findParcelStatus(BO.Parcel parcel);
-        public IEnumerable<string> GetCustomerNamesByCondition(Predicate<BO.Customer> predicate);
-        public IEnumerable<BO.Customer> GetCustomerByCondition(Predicate<BO.Customer> predicate);
+        public IEnumerable<string> GetCustomersNamesByCondition(Predicate<BO.Customer> predicate);
+        public IEnumerable<BO.Customer> GetCustomersByCondition(Predicate<BO.Customer> predicate);
 
 
 
@@ -97,6 +100,7 @@ namespace BlApi
 
 
 
+        public void StartSimulation(BO.Drone drone, BackgroundWorker worker, Action<BO.Drone, int> updateDrone, Func<bool> needToStop);
 
         //public static void checkUniqeIdCustomer(ulong id, IDAL.IDal dalObject);
         //public static void checkUniqeIdParcel(int id, IDAL.IDal dalObject);
