@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static BL.ExceptionsBL;
 using DALException;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
@@ -17,11 +18,15 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="dalObject"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static void checkUniqeIdDrone(int id, IDAL.IDal dalObject)
         {
-            IEnumerable<DO.Drone> drones = dalObject.GetDrones();
-            if (drones.Any(d => d.ID == id))
-                throw new NotUniqeID(id, typeof(DO.Drone));
+            lock (dalObject)
+            {
+                IEnumerable<DO.Drone> drones = dalObject.GetDrones();
+                if (drones.Any(d => d.ID == id))
+                    throw new NotUniqeID(id, typeof(DO.Drone));
+            }
         }
 
         /// <summary>
@@ -31,32 +36,34 @@ namespace BL
         /// <param name="model"></param>
         /// <param name="maxWeight"></param>
         /// <param name="stationID"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(int id, string model, int maxWeight, int stationID)
         {
-            checkUniqeIdDrone(id, dalObject);
-            if (maxWeight < 1 || maxWeight > 3)
+            lock (dalObject)
             {
-                throw new OutOfRange("weight");
+                checkUniqeIdDrone(id, dalObject);
+                if (maxWeight < 1 || maxWeight > 3)
+                {
+                    throw new OutOfRange("weight");
+                }
+                BO.Drone droneBL = new BO.Drone();
+                DO.Station station = dalObject.GetStationById(s => s.ID == stationID && s.IsActive == true);
+                if (station.ID != 0)
+                {
+                    droneBL.Model = model;
+                    droneBL.ID = id;
+                    droneBL.Weight = (DO.WeightCatagories)maxWeight;
+                    droneBL.BatteryStatus = rand.Next(20, 40);
+                    droneBL.DroneStatus = DroneStatus.Maintenance;
+                    droneBL.Location = new LocationBL(station.Longitude, station.Latitude);
+                    droneBL.IsActive = true;
+                    addDroneToDal(id, model, maxWeight);
+                    addDroneCharge(stationID, id);
+                    droneBLList.Add(droneBL);
+                }
+                else
+                    throw new NoItemWithThisID(stationID, typeof(DO.Station));
             }
-            BO.Drone droneBL = new BO.Drone();
-            DO.Station station = dalObject.GetStationById(s => s.ID == stationID && s.IsActive == true);
-            if (station.ID != 0)
-            {
-                droneBL.Model = model;
-                droneBL.ID = id;
-                droneBL.Weight = (DO.WeightCatagories)maxWeight;
-                droneBL.BatteryStatus = rand.Next(20, 40);
-                droneBL.DroneStatus = DroneStatus.Maintenance;
-                droneBL.Location = new LocationBL(station.Longitude, station.Latitude);
-                droneBL.IsActive = true;
-
-
-                addDroneToDal(id, model, maxWeight);
-                addDroneCharge(stationID, id);
-                droneBLList.Add(droneBL);
-            }
-            else
-                throw new NoItemWithThisID(stationID, typeof(DO.Station));
         }
 
         /// <summary>
@@ -97,11 +104,15 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>DroneBL</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Drone GetSpecificDroneBL(int id)
         {
             try
             {
-                return droneBLList.Find(drone => drone.ID == id && drone.IsActive == true);
+                lock (dalObject)
+                {
+                    return droneBLList.Find(drone => drone.ID == id && drone.IsActive == true);
+                }
             }
             catch (ArgumentNullException e)
             {
@@ -114,11 +125,15 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Drone GetSpecificDroneBLWithDeleted(int id)
         {
             try
             {
-                return droneBLList.Find(drone => drone.ID == id);
+                lock (dalObject)
+                {
+                    return droneBLList.Find(drone => drone.ID == id);
+                }
             }
             catch (ArgumentNullException e)
             {
@@ -142,8 +157,11 @@ namespace BL
         /// <param name="drone"></param>
         private void updateDrone(BO.Drone drone)
         {
-            int index = droneBLList.FindIndex(d => d.ID == drone.ID);
-            droneBLList[index] = drone;
+            lock (dalObject)
+            {
+                int index = droneBLList.FindIndex(d => d.ID == drone.ID);
+                droneBLList[index] = drone;
+            }
         }
 
         /// <summary>
@@ -151,33 +169,41 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Drone UpdateDataDroneModel(int id, string model)
         {
-            BO.Drone droneBl = GetSpecificDroneBL(id);
-            droneBl.Model = model;
-            updateDrone(droneBl);
+            lock (dalObject)
+            {
+                BO.Drone droneBl = GetSpecificDroneBL(id);
+                droneBl.Model = model;
+                updateDrone(droneBl);
 
-            DO.Drone drone = dalObject.GetDroneById(d => d.ID == id && d.IsActive == true);
-            drone.Model = model;
-            dalObject.UpdateDrone(drone);
-            return droneBl;
+                DO.Drone drone = dalObject.GetDroneById(d => d.ID == id && d.IsActive == true);
+                drone.Model = model;
+                dalObject.UpdateDrone(drone);
+                return droneBl;
+            }
         }
 
 
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Drone UpdateDataDrone(BO.Drone drone)
         {
-            return new BO.Drone
+            lock (dalObject)
             {
-                ID = drone.ID,
-                Model = drone.Model,
-                Location = drone.Location,
-                Weight = drone.Weight,
-                DroneStatus = drone.DroneStatus,
-                BatteryStatus = drone.BatteryStatus,
-                IsActive = drone.IsActive,
-                parcelInDelivery = drone.parcelInDelivery
-            };
+                return new BO.Drone
+                {
+                    ID = drone.ID,
+                    Model = drone.Model,
+                    Location = drone.Location,
+                    Weight = drone.Weight,
+                    DroneStatus = drone.DroneStatus,
+                    BatteryStatus = drone.BatteryStatus,
+                    IsActive = drone.IsActive,
+                    parcelInDelivery = drone.parcelInDelivery
+                };
+            }
             /*BO.Drone droneBl = GetSpecificDroneBL(id);
             droneBl.Model = model;
             updateDrone(droneBl);
@@ -231,15 +257,19 @@ namespace BL
         /// return all droneToList
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneToList> GetDronesToList()
         {
-            List<BO.Drone> drones = droneBLList;
-            List<DroneToList> drone1 = new List<DroneToList>();
-            foreach (var drone in drones)
+            lock (dalObject)
             {
-                drone1.Add(new DroneToList(drone, dalObject));
+                List<BO.Drone> drones = droneBLList;
+                List<DroneToList> drone1 = new List<DroneToList>();
+                foreach (var drone in drones)
+                {
+                    drone1.Add(new DroneToList(drone, dalObject));
+                }
+                return drone1;
             }
-            return drone1;
         }
 
         /// <summary>
@@ -247,6 +277,7 @@ namespace BL
         /// </summary>
         /// <param name="droneToList"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Drone ConvertDroneToListToDroneBL(DroneToList droneToList)
         {
             return GetSpecificDroneBLWithDeleted(droneToList.ID);
@@ -257,33 +288,45 @@ namespace BL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneToList> GetDronesToListByCondition(Predicate<DroneToList> predicate)
         {
             //try todo
-            return (from drone in GetDronesToList()
-                    where predicate(drone)
-                    select drone);
+            lock (dalObject)
+            {
+                return (from drone in GetDronesToList()
+                        where predicate(drone)
+                        select drone);
+            }
         }
 
         /// <summary>
         /// get deleted droneToList
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneToList> GetDeletedDronesToList()
         {
             //try todo
-            return (from drone in GetDronesToList()
-                    where GetSpecificDroneBL(drone.ID) == null
-                    select drone);
+            lock (dalObject)
+            {
+                return (from drone in GetDronesToList()
+                        where GetSpecificDroneBL(drone.ID) == null
+                        select drone);
+            }
         }
 
         /// <summary>
         /// remove drone
         /// </summary>
         /// <param name="id"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RemoveDrone(int id)
         {
-            dalObject.RemoveDrone(id);
+            lock (dalObject)
+            {
+                dalObject.RemoveDrone(id);
+            }
             droneBLList[id - 1].IsActive = false;
         }
     }

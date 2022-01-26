@@ -376,7 +376,7 @@ namespace PL
         {
             string firsts = targetName.Text;
             customers.Visibility = Visibility.Visible;
-            customers.ItemsSource = BLObject.GetCustomerNamesByCondition(C => { return C.Name.IndexOf(firsts) == 0; });
+            customers.ItemsSource = BLObject.GetCustomersNamesByCondition(C => { return C.Name.IndexOf(firsts) == 0; });
         }
 
 
