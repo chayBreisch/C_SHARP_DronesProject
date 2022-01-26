@@ -19,7 +19,6 @@ namespace PL
     /// </summary>
     public partial class Station : Window
     {
-        Window ParentWindow;
         BlApi.IBL BLObject;
         BO.Station stationBL;
         BO.Drone droneBL;
@@ -28,9 +27,8 @@ namespace PL
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Station(BlApi.IBL bl, Window parentWindow)
+        public Station(BlApi.IBL bl)
         {
-            ParentWindow = parentWindow;
             BLObject = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -44,13 +42,12 @@ namespace PL
         /// <param name="bl"></param>
         /// <param name="station"></param>
         /// <param name="parentWindow"></param>
-        public Station(BlApi.IBL bl, BO.Station station, Window parentWindow)
+        public Station(BlApi.IBL bl, BO.Station station)
         {
             InitializeComponent();
             actions.Visibility = Visibility.Visible;
             addStation.Visibility = Visibility.Hidden;
             WindowStyle = WindowStyle.None;
-            ParentWindow = parentWindow;
             BLObject = bl;
             stationBL = station;
             idstation.Text = stationBL.ID.ToString();
@@ -136,7 +133,6 @@ namespace PL
             {
                 BLObject.AddStation(getID(), getModel(), getLocation(), getchargeSlots());
                 MessageBox.Show("you added succefuly");
-                ParentWindow.Show();
                 Close();
             }
             catch (Exception exce)
@@ -157,7 +153,15 @@ namespace PL
         /// <param name="e"></param>
         private void Update_ClickStation(object sender, RoutedEventArgs e)
         {
-            stationBL = BLObject.UpdateDataStation(stationBL.ID, int.Parse(nameStation.Text), int.Parse(ChargeSlotsStation.Text));
+            try
+            {
+                stationBL = BLObject.UpdateDataStation(stationBL.ID, int.Parse(nameStation.Text), int.Parse(ChargeSlotsStation.Text));
+                MessageBox.Show("station updated sucssesfully");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("can not update station");
+            }
         }
 
         /// <summary>
@@ -167,8 +171,6 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            ParentWindow.Show();
-            //StationList.Show();
             Close();
         }
 
@@ -197,8 +199,12 @@ namespace PL
             BO.DroneInCharger droneInCharger = (sender as ListView).SelectedValue as BO.DroneInCharger;
             BO.Drone droneBL = BLObject.GetSpecificDroneBL(droneInCharger.ID);
             //this.Visibility = Visibility.Hidden;
-            new Drone(BLObject, droneBL, this).Show();
-            Hide();
+            /*new Drone(BLObject, droneBL, this).Show();
+            Hide();*/
+            var win = new Drone(BLObject, droneBL);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -214,7 +220,8 @@ namespace PL
                 if (result == MessageBoxResult.OK)
                 {
                     BLObject.RemoveStation(stationBL.ID);
-                    ParentWindow.Show();
+                    //ParentWindow.Show();
+                    MessageBox.Show("station deleted sucssesully");
                     Close();
                 }
             }
