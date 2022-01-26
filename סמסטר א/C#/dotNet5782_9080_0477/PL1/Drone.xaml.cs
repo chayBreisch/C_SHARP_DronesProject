@@ -209,7 +209,6 @@ namespace PL1
         /// <param name="e"></param>
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 blDrone.AddDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
@@ -251,7 +250,6 @@ namespace PL1
             {
                 droneBL = blDrone.UpdateDataDroneModel(droneBL.ID, modelDrone.Text);
                 MessageBox.Show("you updated sucssesfully");
-
             }
             catch (Exception ex)
             {
@@ -281,7 +279,6 @@ namespace PL1
             hidden.Visibility = Visibility.Visible;*/
             Supply.IsEnabled = false;
             UnCharge.IsEnabled = true;
-
             /*Charge.IsEnabled = false;
             Connect.IsEnabled = false;
             Collect.IsEnabled = false;
@@ -478,11 +475,6 @@ namespace PL1
             };
             worker.WorkerSupportsCancellation = true;
             worker.RunWorkerAsync();
-
-
-
-
-
         }
     }
 }

@@ -22,7 +22,6 @@ namespace PL
 
         BlApi.IBL BLObject;
         BO.Customer customeBL;
-        Window ParentWindow;
         BO.Customer customer = new BO.Customer();
         char CheckIdentity;
         /// <summary>
@@ -30,9 +29,8 @@ namespace PL
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="customerList"></param>
-        public Customer(BlApi.IBL bl, Window parentWindow)
+        public Customer(BlApi.IBL bl)
         {
-            this.ParentWindow = parentWindow;
             BLObject = bl;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -42,16 +40,15 @@ namespace PL
         }
 
 
-        public Customer(BlApi.IBL blobject, Window parentWindow, char c)
+        /*public Customer(BlApi.IBL blobject, char c)
         {
-            ParentWindow = parentWindow;
             BLObject = blobject;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
             CustomerPage.Visibility = Visibility.Hidden;
             addCustomer.Visibility = Visibility.Visible;
-        }
+        }*/
 
         /// <summary>
         /// constructor
@@ -59,10 +56,9 @@ namespace PL
         /// <param name="bl"></param>
         /// <param name="customer"></param>
         /// <param name="customerList"></param>
-        public Customer(BlApi.IBL bl, BO.Customer customer, Window parentWindow, char c)
+        public Customer(BlApi.IBL bl, BO.Customer customer, char c)
         {
             CheckIdentity = c;
-            this.ParentWindow = parentWindow;
             BLObject = bl;
             customeBL = customer;
             InitializeComponent();
@@ -120,18 +116,62 @@ namespace PL
             customerLatitude.Text = null;
         }
 
+        private ulong getID()
+        {
+            try
+            {
+                return ulong.Parse(customerId.Text);
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("id");
+            }
+        }
+
+        private string getName()
+        {
+            if (customerName.Text == "")
+                throw new InValidInput("name");
+            return customerName.Text;
+        }
+
+        private string getPhone()
+        {
+            if (customerPhone.Text == "")
+                throw new InValidInput("phone");
+            return customerPhone.Text;
+        }
+
+        private double getLongitude()
+        {
+            try
+            {
+                return Convert.ToDouble(customerLongitude.Text);
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("longitude");
+            }
+        }
+
+        private double getLatitude()
+        {
+            try
+            {
+                return Convert.ToDouble(customerLatitude.Text);
+            }
+            catch (Exception e)
+            {
+                throw new InValidInput("longitude");
+            }
+        }
         private void Button_ClickAddCustomer(object sender, RoutedEventArgs e)
         {
             try
             {
-                ulong id = ulong.Parse(customerId.Text);
-                string name = Convert.ToString(customerName.Text);
-                string phone = Convert.ToString(phoneCustomr.Text);
-                double longitude = Convert.ToDouble(customerLongitude.Text);
-                double latitude = Convert.ToDouble(customerLatitude.Text);
-                BLObject.AddCustomer(id, name, phone, new BO.LocationBL(longitude, latitude));
+                BLObject.AddCustomer(getID(), getName(), getPhone(), new BO.LocationBL(getLongitude(), getLatitude()));
                 MessageBox.Show("succesfull add");
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
@@ -142,11 +182,7 @@ namespace PL
 
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            if (ParentWindow != null)
-                ParentWindow.Show();
-            else if (ParentWindow != null)
-                ParentWindow.Show();
-            this.Close();
+            Close();
         }
 
 
@@ -156,9 +192,14 @@ namespace PL
             BO.ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as BO.ParcelAtCustomer;
             BO.Parcel parcelBL = BLObject.GetSpecificParcelBL(parcelAtCustomer.ID);
             BO.Drone drone = BLObject.GetSpecificDroneBLWithDeleted(parcelBL.Drone.ID);
-            new Parcel(BLObject, parcelBL, new Drone(BLObject, drone, new DroneList(BLObject, new MainWindow()))).Show();
-            Hide();
+            /*new Parcel(BLObject, parcelBL, new Drone(BLObject, drone, new DroneList(BLObject, new MainWindow()))).Show();
+            Hide();*/
+            var win = new Parcel(BLObject, parcelBL);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
+
 
         private void Button_Click_DeleteCustomer(object sender, RoutedEventArgs e)
         {
@@ -171,6 +212,7 @@ namespace PL
                     Button_ClickClose(sender, e);
                     /* ParentWindow.Show();
                      Close();*/
+                    MessageBox.Show("customer removed sucssesfully");
                 }
             }
             catch (Exception ex)
@@ -218,7 +260,6 @@ namespace PL
             BLObject.updateParecl(parcel);
         }
 
-
         private void checkBox_Checked(object sender, RoutedEventArgs e)
         {
             MessageBox.Show($"{sender.ToString().Substring(sender.ToString().IndexOf(':') + 1, "Collected".Length)}");
@@ -229,7 +270,5 @@ namespace PL
         {
             c.IsEnabled = false;
         }
-
-       
     }
 }

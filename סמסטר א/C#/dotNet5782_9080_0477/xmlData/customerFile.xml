@@ -96,4 +96,12 @@
     <Latitude>24</Latitude>
     <IsActive>true</IsActive>
   </Customer>
+  <Customer>
+    <ID>111111111</ID>
+    <Name>1</Name>
+    <Phone />
+    <Longitude>1</Longitude>
+    <Latitude>1</Latitude>
+    <IsActive>true</IsActive>
+  </Customer>
 </ArrayOfCustomer>
