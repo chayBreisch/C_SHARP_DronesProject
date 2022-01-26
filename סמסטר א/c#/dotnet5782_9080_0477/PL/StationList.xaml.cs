@@ -22,7 +22,6 @@ namespace PL
     public partial class StationList : Window
     {
         BlApi.IBL BLObject;
-        Window ParentWindow;
         //ObservableCollection<StationToList> MyList = new ObservableCollection<StationToList>();
         internal static PLLists PLLists;
         CollectionView view;
@@ -31,10 +30,9 @@ namespace PL
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public StationList(BlApi.IBL bl, Window main)
+        public StationList(BlApi.IBL bl)
         {
             InitializeComponent();
-            ParentWindow = main;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
            /* foreach (var item in BLObject.GetStationsToList())
@@ -76,7 +74,6 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
-            ParentWindow.Show();
             Close();
         }
 
@@ -91,8 +88,12 @@ namespace PL
             StationToList stationList = (sender as ListView).SelectedValue as StationToList;
             BO.Station station = BLObject.ConvertStationToListToStationBL(stationList);
             //this.Visibility = Visibility.Hidden;
-            new Station(BLObject, station, this).Show();
-            Hide();
+            /*new Station(blstationList, station, this).Show();
+            Hide();*/
+            var win = new Station(BLObject, station);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -102,8 +103,12 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickAddStation(object sender, RoutedEventArgs e)
         {
-            new Station(BLObject, this).Show();
-            Hide();
+            /*new Station(blstationList, this).Show();
+            Hide();*/
+            var win = new Station(BLObject);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
 
