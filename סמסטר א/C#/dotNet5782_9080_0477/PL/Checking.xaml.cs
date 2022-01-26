@@ -44,7 +44,7 @@ namespace PL
                 }
                 else
                 {
-                    new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == ID), new MainWindow(), CheckIdentity).Show();
+                    new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == ID), CheckIdentity).Show();
                     this.Close();
                 }
             }

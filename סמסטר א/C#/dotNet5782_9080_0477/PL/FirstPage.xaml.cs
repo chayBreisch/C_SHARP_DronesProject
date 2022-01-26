@@ -30,7 +30,7 @@ namespace PL
 
         private void Button_ClickNewCustomer(object sender, RoutedEventArgs e)
         {
-            new Customer(BLObject, new MainWindow(), 'c').Show();
+            new Customer(BLObject).Show();
                     this.Close();
         }
 

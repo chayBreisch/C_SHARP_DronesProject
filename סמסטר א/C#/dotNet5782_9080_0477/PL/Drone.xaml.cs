@@ -409,7 +409,7 @@ namespace PL
         private void Button_openParcel(object sender, RoutedEventArgs e)
         {
             if (droneBL.parcelInDelivery != null)
-                new Parcel(BLObject, BLObject.GetSpecificParcelBL(droneBL.parcelInDelivery.ID), this).Show();
+                new Parcel(BLObject, BLObject.GetSpecificParcelBL(droneBL.parcelInDelivery.ID)).Show();
         }
 
         /// <summary>

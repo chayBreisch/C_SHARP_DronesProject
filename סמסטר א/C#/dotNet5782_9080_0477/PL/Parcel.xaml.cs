@@ -256,7 +256,7 @@ namespace PL
             if (BLObject.findParcelStatus(parcelBL) == BO.ParcelStatus.Scheduled || BLObject.findParcelStatus(parcelBL) == BO.ParcelStatus.PickedUp)
             {
 
-                var win = new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID));
+                var win = new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), 'w');
                 Visibility = Visibility.Hidden;
                 win.ShowDialog();
                 Visibility = Visibility.Visible;
@@ -272,7 +272,7 @@ namespace PL
         {
             if (BLObject.findParcelStatus(parcelBL) == BO.ParcelStatus.Scheduled || BLObject.findParcelStatus(parcelBL) == BO.ParcelStatus.PickedUp)
             {
-                var win = new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID));
+                var win = new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID), 'w');
                 Visibility = Visibility.Hidden;
                 win.ShowDialog();
                 Visibility = Visibility.Visible;
