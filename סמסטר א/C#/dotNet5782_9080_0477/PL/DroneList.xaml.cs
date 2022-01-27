@@ -133,8 +133,8 @@ namespace PL
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             sender.ToString();
-            DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
-            BO.Drone drone = BLObject.ConvertDroneToListToDroneBL(droneToList);
+            Drone_ droneToList = (sender as ListView).SelectedValue as Drone_;
+            BO.Drone drone = BLObject.GetSpecificDroneBL(droneToList.ID);
             //this.Visibility = Visibility.Hidden;
             /*new Drone(BLObject, drone, this).Show();
             Hide();*/

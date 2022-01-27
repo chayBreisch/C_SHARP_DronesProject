@@ -33,6 +33,7 @@ namespace PL
         public StationList(BlApi.IBL bl)
         {
             InitializeComponent();
+            PLLists = new PLLists();
             WindowStyle = WindowStyle.None;
             BLObject = bl;
            /* foreach (var item in BLObject.GetStationsToList())
@@ -85,8 +86,8 @@ namespace PL
         private void StationListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             sender.ToString();
-            StationToList stationList = (sender as ListView).SelectedValue as StationToList;
-            BO.Station station = BLObject.ConvertStationToListToStationBL(stationList);
+            Station_ stationList = (sender as ListView).SelectedValue as Station_;
+            BO.Station station = BLObject.GetSpecificStationBL(stationList.ID);
             //this.Visibility = Visibility.Hidden;
             /*new Station(blstationList, station, this).Show();
             Hide();*/
