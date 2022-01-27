@@ -104,7 +104,7 @@
             <Button Content="X" Grid.Column="1" Background="Red" Margin="350,0,0,89" Click="Button_ClickClose" HorizontalAlignment="Left" Width="50" Height="20" VerticalAlignment="Bottom"/>
 
         </Grid>
-        <Button Content="start simulation" x:Name="SimulationBtn" Margin="348,386,348,17" Click="StartSimulation_Click"/>
+        <Button Content="start simulation" x:Name="SimulationBtn" Margin="348,386,348,17" Click="SimulationBtn_Click" />
     </Grid>
     <!--<Grid>
         <Grid>

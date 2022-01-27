@@ -111,15 +111,13 @@ namespace PL1
             Visibility = Visibility.Visible;
         }
 
-
-
-        private void txtFilter_TextChanged()
+        /*private void txtFilter_TextChanged()
         {
             // List<BO.Station> stations = blstationList.getStationToList().ChargeSlotsFree >= 0
 
-        }
+        }*/
 
-        public void Refresh()
+        /*public void Refresh()
         {
             IEnumerable<StationToList> stations;
             if (chargeSlotsFilter.SelectedItem != null)
@@ -127,8 +125,12 @@ namespace PL1
             else
                 stations = blstationList.GetStationsToList();
             StationListView.ItemsSource = stations;
-        }
-
+        }*/
+        /// <summary>
+        /// show deleted stations
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_ShowDeletedStations(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();

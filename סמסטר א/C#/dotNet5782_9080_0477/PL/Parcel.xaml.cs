@@ -95,8 +95,6 @@ namespace PL
             }
         }
 
-
-
         public Parcel(BlApi.IBL blobject, BO.Customer customer)
         {
             BLObject = blobject;
@@ -108,9 +106,6 @@ namespace PL
             priorityCombo.ItemsSource = BLObject.GetPrioritiesEnumItem();
             customers.Visibility = Visibility.Hidden;
         }
-
-
-
 
 
         /// <summary>
@@ -300,6 +295,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// update picked up parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkBoxPicked_Checked(object sender, RoutedEventArgs e)
         {
             checkBoxPicked.Visibility = Visibility.Hidden;
@@ -309,6 +309,11 @@ namespace PL
             BLObject.updateParecl(parcelBL);
         }
 
+        /// <summary>
+        /// update deliverd parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkBoxDelivered_Checked(object sender, RoutedEventArgs e)
         {
             checkBoxDelivered.Visibility = Visibility.Hidden;
@@ -401,7 +406,5 @@ namespace PL
                 MessageBox.Show(E.Message);
             }
         }
-
-
     }
 }

@@ -85,8 +85,8 @@ namespace PL
             }
         }
 
-        /*  public Customer(BlApi.Bl bl, BO.Customer customer, Window ParentWindow)
-          {
+        /*public Customer(BlApi.Bl bl, BO.Customer customer, Window ParentWindow)
+         {
               parentWindow = ParentWindow;
               blCustomer = bl;
               customeBL = customer;
@@ -102,11 +102,15 @@ namespace PL
               sendedBy.ItemsSource = customeBL.parcelSendedByCustomer;
               sendedTo.ItemsSource = customeBL.parcelSendedToCustomer;
 
-  *//*            SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
+              SumOfparcelSendedByCustomer.Text = customeBL.parcelSendedByCustomer.Count.ToString();
               SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();*//*
-          }*/
+        }*/
 
-
+        /// <summary>
+        /// reset details of customer to add
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickResetAddCustomer(object sender, RoutedEventArgs e)
         {
             customerId.Text = null;
@@ -116,6 +120,10 @@ namespace PL
             customerLatitude.Text = null;
         }
 
+        /// <summary>
+        /// get id of customer
+        /// </summary>
+        /// <returns></returns>
         private ulong getID()
         {
             try
@@ -128,6 +136,10 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// get name of customer
+        /// </summary>
+        /// <returns></returns>
         private string getName()
         {
             if (customerName.Text == "")
@@ -135,6 +147,10 @@ namespace PL
             return customerName.Text;
         }
 
+        /// <summary>
+        /// get phone of customer
+        /// </summary>
+        /// <returns></returns>
         private string getPhone()
         {
             if (customerPhone.Text == "")
@@ -142,6 +158,10 @@ namespace PL
             return customerPhone.Text;
         }
 
+        /// <summary>
+        /// get longitude of customer
+        /// </summary>
+        /// <returns></returns>
         private double getLongitude()
         {
             try
@@ -154,6 +174,10 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// get latitude of customer
+        /// </summary>
+        /// <returns></returns>
         private double getLatitude()
         {
             try
@@ -165,6 +189,12 @@ namespace PL
                 throw new InValidInput("longitude");
             }
         }
+
+        /// <summary>
+        /// add customer to list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickAddCustomer(object sender, RoutedEventArgs e)
         {
             try
@@ -180,12 +210,21 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// close window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MouseDoubleClick_Sended(object sender, RoutedEventArgs e)
         {
             sender.ToString();
@@ -200,7 +239,11 @@ namespace PL
             Visibility = Visibility.Visible;
         }
 
-
+        /// <summary>
+        /// delete customer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_DeleteCustomer(object sender, RoutedEventArgs e)
         {
             try
@@ -221,6 +264,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// show my parcels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickMyParcels(object sender, RoutedEventArgs e)
         {
             List<BO.Parcel> parcels = new List<BO.Parcel>(BLObject.GetParcelsByCondition(P => { return customeBL.ID == P.Reciever.ID || customeBL.ID == P.Sender.ID; }));
@@ -231,17 +279,31 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// send parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickSendParcel(object sender, RoutedEventArgs e)
         {
             new Parcel(BLObject, customeBL).Show();
-
         }
 
+        /// <summary>
+        /// show all parcels that customer sended
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickISend(object sender, RoutedEventArgs e)
         {
             theList.ItemsSource = BLObject.GetParcelsToListByCondition(P => { return customeBL.Name == P.NameCustomerSender; });
         }
 
+        /// <summary>
+        /// show all parcels that customer got
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickIGot(object sender, RoutedEventArgs e)
         {
             theList.ItemsSource = BLObject.GetParcelsToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver; });

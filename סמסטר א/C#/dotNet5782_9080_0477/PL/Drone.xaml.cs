@@ -89,13 +89,13 @@ namespace PL
 
         }
 
-        /// <summary>
+        /*/// <summary>
         /// constructor actions
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="parcel"></param>
-       /* public Drone(BlApi.Bl bl, BO.Drone drone, Window parcel)
+        public Drone(BlApi.Bl bl, BO.Drone drone, Window parcel)
         {
             ParentWindow = parcel;
             blDrone = bl;
@@ -129,13 +129,13 @@ namespace PL
 
         }*/
 
-        /// <summary>
+        /*/// <summary>
         /// constructor actions
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="station"></param>
-       /* public Drone(BlApi.Bl bl, BO.Drone drone, Window station)
+        public Drone(BlApi.Bl bl, BO.Drone drone, Window station)
         {
             stationWindow = station;
             blDrone = bl;
@@ -171,6 +171,10 @@ namespace PL
         //###############################################################################
         //add Drone
         //###############################################################################
+        /// <summary>
+        /// get id of drone
+        /// </summary>
+        /// <returns></returns>
         private int getID()
         {
             try
@@ -184,6 +188,10 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// get station to charge drone
+        /// </summary>
+        /// <returns></returns>
         private int getStation()
         {
             try
@@ -196,12 +204,17 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// get model
+        /// </summary>
+        /// <returns></returns>
         private string getModel()
         {
             if (droneMdel.Text == "")
                 throw new InValidInput("model");
             return droneMdel.Text;
         }
+
         /// <summary>
         /// add drone to the list of drones
         /// </summary>
@@ -443,10 +456,8 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void StartSimulation_Click(object sender, RoutedEventArgs e)
+        private void SimulationBtn_Click(object sender, RoutedEventArgs e)
         {
-
-
             if (SimulationBtn.Content == "start manual")
             {
                 SimulationBtn.Content = "start simulation";

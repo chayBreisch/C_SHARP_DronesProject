@@ -45,7 +45,12 @@ namespace PL
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
 
         }
-
+        
+        /// <summary>
+        /// show list customers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             //MyList = new ObservableCollection<CustomerToList>();
@@ -59,11 +64,21 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// close window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// open clicked customer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MouseDoubleClick_customerList(object sender, RoutedEventArgs e)
         {
             sender.ToString();
@@ -78,6 +93,11 @@ namespace PL
             Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// group customers by name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickGroupByName(object sender, RoutedEventArgs e)
         {
             if (view != null && view.CanGroup == true)
@@ -89,6 +109,11 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// group customers by phone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickGroupByPhone(object sender, RoutedEventArgs e)
         {
             if (view != null && view.CanGroup == true)
@@ -99,6 +124,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// order customers by phone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickOrderByPhone(object sender, RoutedEventArgs e)
         {
             if (view != null && view.CanSort == true)
@@ -108,6 +138,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// order customers by name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickOrderByName(object sender, RoutedEventArgs e)
         {
             if (view != null && view.CanSort == true)
@@ -117,6 +152,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// add customers to list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickAddCustomer(object sender, RoutedEventArgs e)
         {
             /*new Customer(BLObject, this).Show();
@@ -127,6 +167,11 @@ namespace PL
             Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// show removed customers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_ShowRemovedCustomers(object sender, RoutedEventArgs e)
         {
             //MyList = new ObservableCollection<CustomerToList>();
