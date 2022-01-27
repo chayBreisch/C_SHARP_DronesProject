@@ -176,7 +176,7 @@ namespace PL1
             }
         }
 
-        /// <summary>
+        /*/// <summary>
         /// refresh the list
         /// </summary>
         public void Refresh()
@@ -197,7 +197,7 @@ namespace PL1
                 MyList.Add(item);
             DataContext = MyList;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-        }
+        }*/
 
         /// <summary>
         /// show deleted parcels

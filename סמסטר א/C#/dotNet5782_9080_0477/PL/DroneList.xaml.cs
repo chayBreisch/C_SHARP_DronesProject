@@ -182,7 +182,7 @@ namespace PL
             }
         }
 
-        public void Refresh()
+        /*public void Refresh()
         {
             IEnumerable<DroneToList> drones = new List<DroneToList>();
             if (weightFilter.SelectedItem != null && statusFilter.SelectedItem != null)
@@ -194,13 +194,18 @@ namespace PL
             else
                 drones = BLObject.GetDronesToList();
             //DroneListView.ItemsSource = drones;
-           /* MyList = new ObservableCollection<DroneToList>();
+           *//* MyList = new ObservableCollection<DroneToList>();
             foreach (var item in drones)
-                MyList.Add(item);*/
+                MyList.Add(item);*//*
             DataContext = PLLists.Drones;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-        }
+        }*/
 
+        /// <summary>
+        /// show deleted customers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_ShowDeletedCustomers(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();

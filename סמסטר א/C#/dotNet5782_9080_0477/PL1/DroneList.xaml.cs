@@ -180,7 +180,7 @@ namespace PL1
             }
         }
 
-        public void Refresh()
+        /*public void Refresh()
         {
             IEnumerable<DroneToList> drones = new List<DroneToList>();
             if (weightFilter.SelectedItem != null && statusFilter.SelectedItem != null)
@@ -197,8 +197,12 @@ namespace PL1
                 MyList.Add(item);
             DataContext = MyList;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-        }
-
+        }*/
+        /// <summary>
+        /// show deleted customers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_ShowDeletedCustomers(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();

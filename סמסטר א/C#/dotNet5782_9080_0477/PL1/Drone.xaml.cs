@@ -89,12 +89,12 @@ namespace PL1
 
         }
 
-        /// <summary>
+        /*/// <summary>
         /// constructor actions
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="drone"></param>
-        /// <param name="parcel"></param>
+        /// <param name="parcel"></param>*/
        /* public Drone(BlApi.Bl bl, BO.Drone drone, Window parcel)
         {
             ParentWindow = parcel;
@@ -129,12 +129,12 @@ namespace PL1
 
         }*/
 
-        /// <summary>
+        /*/// <summary>
         /// constructor actions
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="drone"></param>
-        /// <param name="station"></param>
+        /// <param name="station"></param>*/
        /* public Drone(BlApi.Bl bl, BO.Drone drone, Window station)
         {
             stationWindow = station;
@@ -171,6 +171,10 @@ namespace PL1
         //###############################################################################
         //add Drone
         //###############################################################################
+        /// <summary>
+        /// get id of drone
+        /// </summary>
+        /// <returns></returns>
         private int getID()
         {
             try
@@ -184,6 +188,10 @@ namespace PL1
 
         }
 
+        /// <summary>
+        /// get station to charge drone
+        /// </summary>
+        /// <returns></returns>
         private int getStation()
         {
             try
@@ -196,6 +204,10 @@ namespace PL1
             }
         }
 
+        /// <summary>
+        /// get model of drone
+        /// </summary>
+        /// <returns></returns>
         private string getModel()
         {
             if (droneMdel.Text == "")
@@ -430,10 +442,8 @@ namespace PL1
         }
 
         BackgroundWorker worker = new BackgroundWorker();
-        private void StartSimulation_Click(object sender, RoutedEventArgs e)
+        private void SimulationBtn_Click(object sender, RoutedEventArgs e)
         {
-
-
             if(SimulationBtn.Content == "start manual")
             {
                 SimulationBtn.Content = "start simulation";
@@ -443,11 +453,9 @@ namespace PL1
                 return;
             }
 
-
             SimulationBtn.Content = "start manual";
             Supply.IsEnabled = false;
             UnCharge.IsEnabled = false;
-
 
             worker.DoWork += (object? sender, DoWorkEventArgs e) =>
             {

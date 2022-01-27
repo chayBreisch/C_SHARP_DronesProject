@@ -13,8 +13,8 @@ namespace BL
 {
     class Simulation
     {
-        private int DELAY = 1000;
-        private double SPEED = 60;
+        const int DELAY = 1000;
+        const double SPEED = 60;
         IBL bl;
         public Simulation(IBL bl, BO.Drone drone, BackgroundWorker worker, Action<BO.Drone, int> updateDrone, Func<bool> needToStop)
         {
