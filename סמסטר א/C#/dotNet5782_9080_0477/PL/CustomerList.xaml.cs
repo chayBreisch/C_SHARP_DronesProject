@@ -67,8 +67,8 @@ namespace PL
         private void MouseDoubleClick_customerList(object sender, RoutedEventArgs e)
         {
             sender.ToString();
-            CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
-            BO.Customer customer = BLObject.ConvertCustomerToListToCustomerlBL(customerToList);
+            Customer_ customerToList = (sender as ListView).SelectedValue as Customer_;
+            BO.Customer customer = BLObject.GetSpecificCustomerBL(customer => customer.ID == customerToList.ID );
             //this.Visibility = Visibility.Hidden;
             /*new Customer(BLObject, customer, this, 'w').Show();
             Hide();*/
