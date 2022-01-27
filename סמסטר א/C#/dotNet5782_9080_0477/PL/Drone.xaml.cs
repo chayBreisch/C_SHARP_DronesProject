@@ -23,6 +23,7 @@ namespace PL
     {
         BlApi.IBL BLObject;
         BO.Drone droneBL;
+        Drone_ DronePL;
         /// <summary>
         /// constructor
         /// </summary>
@@ -50,19 +51,21 @@ namespace PL
             BLObject = bl;
             droneBL = drone;
             InitializeComponent();
+            DronePL = new Drone_(BLObject.ConvertDroneBLToDroneToList(droneBL));
+            maimGrid.DataContext = DronePL;
             WindowStyle = WindowStyle.None;
             addDrone.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
-            idDrone.Text = droneBL.ID.ToString();
-            modelDrone.DataContext = droneBL;
-            batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
-            weightDrone.Text = droneBL.Weight.ToString();
-            statusDrone.Text = droneBL.DroneStatus.ToString();
+            //idDrone.Text = droneBL.ID.ToString();
+            //modelDrone.DataContext = droneBL;
+            //batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
+            //weightDrone.Text = droneBL.Weight.ToString();
+            //statusDrone.Text = droneBL.DroneStatus.ToString();
             if (droneBL.parcelInDelivery != null)
                 parcelInDeliveryDrone.Text = droneBL.parcelInDelivery.ToString();
             else
                 parcelInDeliveryDrone.Text = "no parcel";
-            locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
+            //locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
             if (droneBL.DroneStatus != DroneStatus.Available)
             {
                 Supply.IsEnabled = false;

@@ -54,6 +54,7 @@ namespace BlApi
         //convert functions
         //##############################################################
         public BO.Drone ConvertDroneToListToDroneBL(DroneToList droneToList);
+        public BO.DroneToList ConvertDroneBLToDroneToList(BO.Drone drone);
         public BO.Station ConvertStationToListToStationBL(StationToList stationToList);
         public BO.Parcel ConvertParcelToListToParcelBL(ParcelToList parcelToList);
         public BO.Customer ConvertCustomerToListToCustomerlBL(CustomerToList customerToList);

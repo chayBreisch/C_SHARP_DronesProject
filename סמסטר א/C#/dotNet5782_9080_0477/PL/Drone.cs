@@ -15,11 +15,31 @@ namespace PL
 
 
         public int ID { get; set; }
-        public string Model { get; set; }
+        //public string Model { get; set; }
         public DO.WeightCatagories Weight { get; set; }
         public double BatteryStatus { get; set; }
         public DroneStatus DroneStatus { get; set; }
         public LocationBL Location { get; set; }
+
+
+        public static readonly DependencyProperty ModelProperty =
+        DependencyProperty.Register("Model",
+                                   typeof(object),
+                                   typeof(Drone_),
+                                   new UIPropertyMetadata(0));
+
+        public string Model
+        {
+            get
+            {
+                return (string)GetValue(ModelProperty);
+            }
+            set
+            {
+                SetValue(ModelProperty, value);
+            }
+        }
+
 
 
         public Drone_(DroneToList drone)

@@ -283,6 +283,11 @@ namespace BL
             return GetSpecificDroneBLWithDeleted(droneToList.ID);
         }
 
+        public BO.DroneToList ConvertDroneBLToDroneToList(BO.Drone drone)
+        {
+            return new DroneToList(drone, dalObject);
+        }
+
         /// <summary>
         /// get DroneToList By Condition
         /// </summary>
