@@ -113,8 +113,8 @@ namespace PL
         private void ParcelListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             sender.ToString();
-            ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
-            BO.Parcel parcel = BLObject.ConvertParcelToListToParcelBL(parcelToList);
+            Parcel_ parcelToList = (sender as ListView).SelectedValue as Parcel_;
+            BO.Parcel parcel = BLObject.GetSpecificParcelBL(parcelToList.ID);
             var win = new Parcel(BLObject, parcel);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
