@@ -33,10 +33,10 @@ namespace PL
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public DroneList(BlApi.IBL bl)
+        public DroneList(BlApi.IBL bl, PLLists plLists)
         {
             InitializeComponent();
-            PLLists = new PLLists();
+            PLLists = plLists;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
             /*foreach (var item in BLObject.GetDronesToList())
@@ -118,7 +118,7 @@ namespace PL
             //this.Visibility = Visibility.Hidden;
             /*new Drone(BLObject, this).Show();
             Hide();*/
-            var win = new Drone(BLObject);
+            var win = new Drone(BLObject, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
             Visibility = Visibility.Visible;
@@ -138,7 +138,7 @@ namespace PL
             //this.Visibility = Visibility.Hidden;
             /*new Drone(BLObject, drone, this).Show();
             Hide();*/
-            var win = new Drone(BLObject, drone);
+            var win = new Drone(BLObject, drone, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
             Visibility = Visibility.Visible;

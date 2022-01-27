@@ -22,6 +22,7 @@ namespace PL
     {
         BlApi.IBL BLObject;
         Window ParentWindow;
+        PLLists PLLists;
 
         /// <summary>
         /// constructor
@@ -33,6 +34,7 @@ namespace PL
                 InitializeComponent();
                 BLObject = blobject;
                 ParentWindow = parentWindow;
+                PLLists = new PLLists();
             }
             catch (ExceptionsBL.CantReturnBLObject e)
             {
@@ -47,7 +49,7 @@ namespace PL
         /// <param name="e"></param>
         private void Button_Click_DroneList(object sender, RoutedEventArgs e)
         {
-            new DroneList(BLObject).Show();
+            new DroneList(BLObject, PLLists).Show();
             Hide();
         }
 

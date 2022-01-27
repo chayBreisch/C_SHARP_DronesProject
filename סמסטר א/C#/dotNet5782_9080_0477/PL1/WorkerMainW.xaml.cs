@@ -25,6 +25,7 @@ namespace PL1
             BlApi.IBL BLObject;
             Window ParentWindow;
 
+
             /// <summary>
             /// constructor
             /// </summary>
@@ -87,3 +88,4 @@ namespace PL1
             }
         }
     }
+}

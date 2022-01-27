@@ -10,7 +10,7 @@ using BL;
 
 namespace PL
 {
-    class Drone_ : DependencyObject
+    public class Drone_ : DependencyObject
     {
 
 
