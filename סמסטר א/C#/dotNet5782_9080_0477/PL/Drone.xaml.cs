@@ -332,8 +332,8 @@ namespace PL
                 try
                 {
                     droneBL = BLObject.UpdateUnchargeDrone(droneBL.ID, time);
-                    statusDrone.Text = droneBL.DroneStatus.ToString();
-                    batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
+                    //statusDrone.Text = droneBL.DroneStatus.ToString();
+                    //batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
                     TimeCharger.Text = "";
                     MessageBox.Show("the drone is uncharged sucssesfully");
                 }

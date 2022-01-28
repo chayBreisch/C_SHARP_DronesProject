@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<ArrayOfParcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Parcel>
+    <ID>1</ID>
+    <SenderID>199024170</SenderID>
+    <TargetID>935433255</TargetID>
+    <Weight>Light</Weight>
+    <Priority>Fast</Priority>
+    <Requested>1995-04-20T00:00:00</Requested>
+    <DroneID>1</DroneID>
+    <Scheduled>1999-11-25T00:00:00</Scheduled>
+    <PickedUp>2017-05-06T00:00:00</PickedUp>
+    <Delivered>2020-03-25T00:00:00</Delivered>
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>2</ID>
+    <SenderID>994030095</SenderID>
+    <TargetID>749763843</TargetID>
+    <Weight>Light</Weight>
+    <Priority>Regular</Priority>
+    <Requested>2011-10-14T00:00:00</Requested>
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>3</ID>
+    <SenderID>935433255</SenderID>
+    <TargetID>722632261</TargetID>
+    <Weight>Heavy</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2000-11-17T00:00:00</Requested>
+    <DroneID>6</DroneID>
+    <Scheduled>2010-12-20T00:00:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>4</ID>
+    <SenderID>199024170</SenderID>
+    <TargetID>642601719</TargetID>
+    <Weight>Heavy</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2016-12-27T00:00:00</Requested>
+    <DroneID>1</DroneID>
+    <Scheduled>2022-01-28T13:31:44.1997364+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>5</ID>
+    <SenderID>199024170</SenderID>
+    <TargetID>642601719</TargetID>
+    <Weight>Light</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2019-11-20T00:00:00</Requested>
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>6</ID>
+    <SenderID>749763843</SenderID>
+    <TargetID>935433255</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Emergency</Priority>
+    <Requested>2001-09-14T00:00:00</Requested>
+    <DroneID>3</DroneID>
+    <Scheduled>2012-07-07T00:00:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>7</ID>
+    <SenderID>749763843</SenderID>
+    <TargetID>994030095</TargetID>
+    <Weight>Heavy</Weight>
+    <Priority>Regular</Priority>
+    <Requested>2020-04-27T00:00:00</Requested>
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>8</ID>
+    <SenderID>178366818</SenderID>
+    <TargetID>489225529</TargetID>
+    <Weight>Light</Weight>
+    <Priority>Regular</Priority>
+    <Requested>1997-07-10T00:00:00</Requested>
+    <DroneID>5</DroneID>
+    <Scheduled>2011-10-10T00:00:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>9</ID>
+    <SenderID>749763843</SenderID>
+    <TargetID>698740979</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Emergency</Priority>
+    <Requested>2000-07-22T00:00:00</Requested>
+    <DroneID>5</DroneID>
+    <Scheduled>2008-04-13T00:00:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>10</ID>
+    <SenderID>749763843</SenderID>
+    <TargetID>722632261</TargetID>
+    <Weight>Heavy</Weight>
+    <Priority>Regular</Priority>
+    <Requested>2020-01-10T00:00:00</Requested>
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+</ArrayOfParcel>
