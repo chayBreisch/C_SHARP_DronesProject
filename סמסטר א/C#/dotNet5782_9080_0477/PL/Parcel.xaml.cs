@@ -285,9 +285,9 @@ namespace PL
         {
             if (parcelBL.Drone.ID != 0)
             {
-                var win = new Drone(BLObject, parcelBL.Drone);
+                //var win = new Drone(BLObject, parcelBL.Drone, );
                 Visibility = Visibility.Hidden;
-                win.ShowDialog();
+                //win.ShowDialog();
 
                 Visibility = Visibility.Visible;
                 /*new Drone(blparcel, parcelBL.Drone, this).Show();

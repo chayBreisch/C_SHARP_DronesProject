@@ -8,9 +8,10 @@ using System.Windows;
 using BO;
 namespace PL
 {
-    class PLLists : DependencyObject
+    public class PLLists : DependencyObject
     {
         private BlApi.IBL BLObject = BL.FactoryBL.factory();
+
         public ObservableCollection<Drone_> Drones = new ObservableCollection<Drone_>();
 
         public ObservableCollection<Parcel_> Parcels = new ObservableCollection<Parcel_>();
@@ -37,6 +38,12 @@ namespace PL
         public void AddCustomer(CustomerToList bl)
         {
             Customers.Add(new Customer_(bl));
+        }
+
+        public void UpdateDrone(Drone_ drone)
+        {
+            int index = Drones.IndexOf(Drones.Where(C => C.ID == drone.ID).FirstOrDefault());
+            Drones[index] = drone;
         }
 
         public PLLists()

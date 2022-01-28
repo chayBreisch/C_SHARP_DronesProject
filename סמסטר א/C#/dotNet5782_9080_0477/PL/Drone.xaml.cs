@@ -23,15 +23,18 @@ namespace PL
     {
         BlApi.IBL BLObject;
         BO.Drone droneBL;
+        Drone_ DronePL;
+        PLLists PLLists;
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.IBL bl)
+        public Drone(BlApi.IBL bl, PLLists plLists)
         {
             BLObject = bl;
             InitializeComponent();
+            PLLists = plLists;
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
             addDrone.Visibility = Visibility.Visible;
@@ -45,24 +48,22 @@ namespace PL
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.IBL bl, BO.Drone drone)
+        public Drone(BlApi.IBL bl, BO.Drone drone, PLLists plLists)
         {
             BLObject = bl;
             droneBL = drone;
             InitializeComponent();
+            PLLists = plLists;
+            DronePL = new Drone_(BLObject.ConvertDroneBLToDroneToList(droneBL));
+            maimGrid.DataContext = DronePL;
             WindowStyle = WindowStyle.None;
             addDrone.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
-            idDrone.Text = droneBL.ID.ToString();
-            modelDrone.DataContext = droneBL;
-            batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
-            weightDrone.Text = droneBL.Weight.ToString();
-            statusDrone.Text = droneBL.DroneStatus.ToString();
             if (droneBL.parcelInDelivery != null)
                 parcelInDeliveryDrone.Text = droneBL.parcelInDelivery.ToString();
             else
                 parcelInDeliveryDrone.Text = "no parcel";
-            locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
+            //locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
             if (droneBL.DroneStatus != DroneStatus.Available)
             {
                 Supply.IsEnabled = false;
@@ -225,6 +226,7 @@ namespace PL
             try
             {
                 BLObject.AddDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
+                PLLists.AddDrone(BLObject.ConvertDroneBLToDroneToList(BLObject.GetSpecificDroneBL(getID())));
                 MessageBox.Show("you added succefuly");
                 Close();
             }
@@ -264,6 +266,7 @@ namespace PL
             {
                 droneBL = BLObject.UpdateDataDroneModel(droneBL.ID, modelDrone.Text);
                 MessageBox.Show("you updated sucssesfully");
+                PLLists.UpdateDrone(DronePL);
             }
             catch (Exception ex)
             {
