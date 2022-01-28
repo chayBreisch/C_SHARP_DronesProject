@@ -21,7 +21,7 @@ namespace BL
         /// <param name="stationId"></param>
         /// <param name="dalObject"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void checkUniqeIdDroneCharge(int droneId, int stationId, IDAL.IDal dalObject)
+        private static void checkUniqeIdDroneCharge(int droneId, int stationId, IDAL.IDal dalObject)
         {
             lock (dalObject)
             {

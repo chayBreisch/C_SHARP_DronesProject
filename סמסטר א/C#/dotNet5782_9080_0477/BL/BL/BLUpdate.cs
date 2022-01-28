@@ -50,8 +50,8 @@ namespace BL
                     DroneCharge droneCharge = new DroneCharge();
                     droneCharge.DroneID = id;
                     droneCharge.StationID = station.ID;
-                    dalObject.AddDroneCharge(droneCharge);
-
+                    //dalObject.AddDroneCharge(droneCharge);
+                    addDroneCharge(station.ID, id);
                 }
                 return droneBL;
             }
