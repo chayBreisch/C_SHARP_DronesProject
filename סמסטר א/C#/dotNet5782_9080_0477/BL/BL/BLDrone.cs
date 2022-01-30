@@ -161,9 +161,14 @@ namespace BL
             {
                 int index = droneBLList.FindIndex(d => d.ID == drone.ID);
                 droneBLList[index] = drone;
+                dalObject.UpdateDrone(convertDroneBlToDal(drone));
             }
         }
 
+        private DO.Drone convertDroneBlToDal(BO.Drone drone)
+        {
+            return new DO.Drone { ID = drone.ID, IsActive = drone.IsActive, MaxWeight = drone.Weight, Model = drone.Model };
+        }
         /// <summary>
         /// update the drone model
         /// </summary>
@@ -185,8 +190,11 @@ namespace BL
             }
         }
 
-
-
+        /// <summary>
+        /// update drone
+        /// </summary>
+        /// <param name="drone"></param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Drone UpdateDataDrone(BO.Drone drone)
         {
