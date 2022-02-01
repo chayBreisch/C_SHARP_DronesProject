@@ -22,11 +22,13 @@ namespace PL
     public partial class MainWindow : Window
     {
         BlApi.IBL BLObject;
+        PLLists PLLists; 
         public MainWindow()
         {
             try {
                 InitializeComponent();
                 BLObject = BL.FactoryBL.factory();
+                PLLists = new PLLists();
             }
             catch (ExceptionsBL.CantReturnBLObject e)
             {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using static BL.ExceptionsBL;
 using DALException;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
@@ -16,11 +17,15 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="dalObject"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static void checkUniqeIdStation(int id, IDAL.IDal dalObject)
         {
-            IEnumerable<DO.Station> stations = dalObject.GetStations();
-            if (stations.Any(s => s.ID == id))
-                throw new NotUniqeID(id, typeof(DO.Station));
+            lock (dalObject)
+            {
+                IEnumerable<DO.Station> stations = dalObject.GetStations();
+                if (stations.Any(s => s.ID == id))
+                    throw new NotUniqeID(id, typeof(DO.Station));
+            }
         }
 
         /// <summary>
@@ -30,15 +35,19 @@ namespace BL
         /// <param name="name"></param>
         /// <param name="location"></param>
         /// <param name="ChargeSlots"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(int id, int name, LocationBL location, int ChargeSlots)
         {
-            checkUniqeIdStation(id, dalObject);
-            /*IEnumerable<DroneCharge> droneChargers = dalObject.GetDroneCharges();
-            droneChargers = droneChargers.Where(d => d.StationID == id);
-            List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
-            droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(GetSpecificDroneBL(d.DroneID))));*/
-            //BO.Station station = new BO.Station(id, name, ChargeSlots, new LocationBL(location.Longitude, location.Latitude), dronesInCharges);
-            addStationToDal(id, name, location, ChargeSlots);
+            lock (dalObject)
+            {
+                checkUniqeIdStation(id, dalObject);
+                /*IEnumerable<DroneCharge> droneChargers = dalObject.GetDroneCharges();
+                droneChargers = droneChargers.Where(d => d.StationID == id);
+                List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();
+                droneChargers.ForEach(d => dronesInCharges.Add(new DroneInCharger(GetSpecificDroneBL(d.DroneID))));*/
+                //BO.Station station = new BO.Station(id, name, ChargeSlots, new LocationBL(location.Longitude, location.Latitude), dronesInCharges);
+                addStationToDal(id, name, location, ChargeSlots);
+            }
         }
 
         /// <summary>
@@ -81,11 +90,15 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Station</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Station GetSpecificStationBL(int id)
         {
             try
             {
-                return convertDalStationToBl(dalObject.GetStationById(s => s.ID == id && s.IsActive == true));
+                lock (dalObject)
+                {
+                    return convertDalStationToBl(dalObject.GetStationById(s => s.ID == id && s.IsActive == true));
+                }
             }
             catch (ArgumentNullException e)
             {
@@ -149,15 +162,19 @@ namespace BL
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="chargeSlots"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Station UpdateDataStation(int id, int name = 0, int chargeSlots = -1)
         {
-            DO.Station station = dalObject.GetStationById(s => s.ID == id);
-            if (name != 0)
-                station.Name = name;
-            if (chargeSlots != -1)
-                station.ChargeSlots = chargeSlots;
-            dalObject.UpdateStation(station);
-            return convertDalStationToBl(station);
+            lock (dalObject)
+            {
+                DO.Station station = dalObject.GetStationById(s => s.ID == id);
+                if (name != 0)
+                    station.Name = name;
+                if (chargeSlots != -1)
+                    station.ChargeSlots = chargeSlots;
+                dalObject.UpdateStation(station);
+                return convertDalStationToBl(station);
+            }
         }
 
         /// <summary>
@@ -165,33 +182,41 @@ namespace BL
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<StationToList> GetStationsByChargeSlots(int status)
         {
-            if (status == 0)
-                return (
+            lock (dalObject)
+            {
+                if (status == 0)
+                    return (
+                    from station in GetStationsToList()
+                    where station.ChargeSlotsFree == (int)status
+                    select station);
+                else
+                    return (
                 from station in GetStationsToList()
-                where station.ChargeSlotsFree == (int)status
+                where station.ChargeSlotsFree != 0
                 select station);
-            else
-                return (
-            from station in GetStationsToList()
-            where station.ChargeSlotsFree != 0
-            select station);
+            }
         }
 
         /// <summary>
         /// return list of stationToList
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<StationToList> GetStationsToList()
         {
-            IEnumerable<BO.Station> stations = getStationsBL();
-            List<StationToList> stations1 = new List<StationToList>();
-            foreach (var station in stations)
+            lock (dalObject)
             {
-                stations1.Add(new StationToList(station));
+                IEnumerable<BO.Station> stations = getStationsBL();
+                List<StationToList> stations1 = new List<StationToList>();
+                foreach (var station in stations)
+                {
+                    stations1.Add(new StationToList(station));
+                }
+                return stations1;
             }
-            return stations1;
         }
 
         /// <summary>
@@ -199,6 +224,7 @@ namespace BL
         /// </summary>
         /// <param name="stationToList"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Station ConvertStationToListToStationBL(StationToList stationToList)
         {
             return GetSpecificStationBL(stationToList.ID);
@@ -208,12 +234,16 @@ namespace BL
         /// remove a station from dataSource list
         /// </summary>
         /// <param name="parcel"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RemoveStation(int id)
         {
-            List<DroneInCharger> droneInCharger = GetSpecificStationBL(id).DronesInCharge;
-            /*if (droneInCharger.Count > 0)
-                throw new CantRemoveItem(typeof(BO.Station));*/
-            dalObject.RemoveStation(id);
+            lock (dalObject)
+            {
+                List<DroneInCharger> droneInCharger = GetSpecificStationBL(id).DronesInCharge;
+                /*if (droneInCharger.Count > 0)
+                    throw new CantRemoveItem(typeof(BO.Station));*/
+                dalObject.RemoveStation(id);
+            }
         }
 
         /// <summary>
@@ -236,15 +266,19 @@ namespace BL
         /// get deleted stationToList
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<StationToList> GetDeletedStationsToList()
         {
-            IEnumerable<BO.Station> stations = getDeletedStationsBL();
-            List<StationToList> stations1 = new List<StationToList>();
-            foreach (var station in stations)
+            lock (dalObject)
             {
-                stations1.Add(new StationToList(station));
+                IEnumerable<BO.Station> stations = getDeletedStationsBL();
+                List<StationToList> stations1 = new List<StationToList>();
+                foreach (var station in stations)
+                {
+                    stations1.Add(new StationToList(station));
+                }
+                return stations1;
             }
-            return stations1;
         }
     }
 }

@@ -15,7 +15,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid Name="maimGrid">
         <Grid Name="actions" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -63,12 +63,12 @@
                 <Label FontSize="16" Content="weight:" Grid.Row="4" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="status:" Grid.Row="5" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="location:" Grid.Row="6" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="200,0,0,0" Name="idDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="220"/>
-                <TextBox FontSize="16" Text="{Binding Path=Model}" Grid.Row="2" HorizontalAlignment="Left" Margin="231,0,0,0" Name="modelDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Name="batteryDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="240,0,0,0"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="weightDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="240,0,0,0"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Margin="231,0,0,0" Name="statusDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="6" HorizontalAlignment="Left" Margin="260,0,0,0" Name="locationDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="160"/>
+                <TextBox FontSize="16" Text="{Binding ID, Mode=OneWay}" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="200,0,0,0" Name="idDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="220"/>
+                <TextBox FontSize="16" Text="{Binding Model, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" HorizontalAlignment="Left" Margin="231,0,0,0" Name="modelDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
+                <TextBox FontSize="16" Text="{Binding BatteryStatus, Mode=OneWay}" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Name="batteryDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="240,0,0,0"/>
+                <TextBox FontSize="16" Text="{Binding Weight, Mode=OneWay}" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="weightDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="240,0,0,0"/>
+                <TextBox FontSize="16" Text="{Binding DroneStatus, Mode=OneWay}" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Margin="231,0,0,0" Name="statusDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
+                <TextBox FontSize="16" Text="{Binding Location, Mode=OneWay}" IsReadOnly="True" Grid.Row="6" HorizontalAlignment="Left" Margin="260,0,0,0" Name="locationDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="160"/>
                 <TextBox FontSize="16" IsReadOnly="True" Grid.Row="7" HorizontalAlignment="Left" Margin="300,0,0,0" Name="parcelInDeliveryDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
                 <Label Content="Drone" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
                 <Button Content="parcelInDelivery" FontSize="16" HorizontalAlignment="Left" Margin="168,0,0,13" Grid.Row="7" VerticalAlignment="Bottom" Height="23" Width="127" Click="Button_openParcel"/>
@@ -104,7 +104,7 @@
             <Button Content="X" Grid.Column="1" Background="Red" Margin="350,0,0,89" Click="Button_ClickClose" HorizontalAlignment="Left" Width="50" Height="20" VerticalAlignment="Bottom"/>
 
         </Grid>
-        <Button Content="start simulation" x:Name="SimulationBtn" Margin="348,386,348,17" Click="StartSimulation_Click"/>
+        <Button Content="start simulation" x:Name="SimulationBtn" Margin="348,386,348,17" Click="SimulationBtn_Click" />
     </Grid>
     <!--<Grid>
         <Grid>

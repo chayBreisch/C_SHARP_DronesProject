@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DO;
 using DALException;
+using System.Runtime.CompilerServices;
 using IDAL;
 
 namespace Dal
@@ -14,6 +15,7 @@ namespace Dal
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Customer> GetCustomers(Predicate<Customer> predicate = null)
         {
             return from customer in DataSource.customers
@@ -49,6 +51,7 @@ namespace Dal
         /// get a customer by the id
         /// </summary>
         /// <param name="newCustomer"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer GetCustomerById(Predicate<Customer> predicate)
         {
             Customer customer1 = new Customer();
@@ -81,6 +84,7 @@ namespace Dal
         /// add customer
         /// </summary>
         /// <param name="newCustomer"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(Customer newCustomer)
         {
             checkUniqeCustomer(newCustomer.ID);
@@ -95,6 +99,7 @@ namespace Dal
         /// remove customer
         /// </summary>
         /// <param name="idRemove"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RemoveCustomer(ulong idRemove)
         {
             Customer customer = DataSource.customers[getIndexOfCustomer(idRemove)];
@@ -123,6 +128,7 @@ namespace Dal
         /// update customer
         /// </summary>
         /// <param name="customer"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCustomer(Customer customer)
         {
             int index = getIndexOfCustomer(customer.ID);

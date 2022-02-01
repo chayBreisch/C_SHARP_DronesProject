@@ -33,10 +33,10 @@ namespace PL
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public DroneList(BlApi.IBL bl)
+        public DroneList(BlApi.IBL bl, PLLists plLists)
         {
             InitializeComponent();
-            PLLists = new PLLists();
+            PLLists = plLists;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
             /*foreach (var item in BLObject.GetDronesToList())
@@ -118,7 +118,7 @@ namespace PL
             //this.Visibility = Visibility.Hidden;
             /*new Drone(BLObject, this).Show();
             Hide();*/
-            var win = new Drone(BLObject);
+            var win = new Drone(BLObject, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
             Visibility = Visibility.Visible;
@@ -133,12 +133,12 @@ namespace PL
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             sender.ToString();
-            DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
-            BO.Drone drone = BLObject.ConvertDroneToListToDroneBL(droneToList);
+            Drone_ droneToList = (sender as ListView).SelectedValue as Drone_;
+            BO.Drone drone = BLObject.GetSpecificDroneBL(droneToList.ID);
             //this.Visibility = Visibility.Hidden;
             /*new Drone(BLObject, drone, this).Show();
             Hide();*/
-            var win = new Drone(BLObject, drone);
+            var win = new Drone(BLObject, drone, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
             Visibility = Visibility.Visible;
@@ -182,7 +182,7 @@ namespace PL
             }
         }
 
-        public void Refresh()
+        /*public void Refresh()
         {
             IEnumerable<DroneToList> drones = new List<DroneToList>();
             if (weightFilter.SelectedItem != null && statusFilter.SelectedItem != null)
@@ -194,13 +194,18 @@ namespace PL
             else
                 drones = BLObject.GetDronesToList();
             //DroneListView.ItemsSource = drones;
-           /* MyList = new ObservableCollection<DroneToList>();
+           *//* MyList = new ObservableCollection<DroneToList>();
             foreach (var item in drones)
-                MyList.Add(item);*/
+                MyList.Add(item);*//*
             DataContext = PLLists.Drones;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-        }
+        }*/
 
+        /// <summary>
+        /// show deleted customers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_ShowDeletedCustomers(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();

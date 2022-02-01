@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using IDAL;
+using System.Runtime.CompilerServices;
 using DALException;
 
 namespace Dal
@@ -25,6 +26,7 @@ namespace Dal
         /// returns the droneChargers from dal
         /// </summary>
         /// <returns>DataSource.droneChargers</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneCharge> GetDroneCharges()
         {
             return from droneCharge in DataSource.droneChargers
@@ -75,6 +77,7 @@ namespace Dal
         /// remove a drone charge from dal
         /// </summary>
         /// <param name="droneCharge"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RemoveDroneCharge(DroneCharge droneCharge)
         {
             DataSource.droneChargers.RemoveAt(getIndexOfDroneChargeByStationID(droneCharge.StationID));
@@ -101,6 +104,7 @@ namespace Dal
         /// add drone charge to dal
         /// </summary>
         /// <param name="droneCharge"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDroneCharge(DroneCharge droneCharge)
         {
             checkUniqeIdDroneChargeBL(droneCharge.DroneID, droneCharge.StationID);
@@ -133,6 +137,7 @@ namespace Dal
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DroneCharge GetDroneChargeById(Predicate<DroneCharge> predicate)
         {
             DroneCharge droneCharge1 = new DroneCharge();

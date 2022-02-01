@@ -122,7 +122,7 @@ namespace Dal
         }
 
         /// <summary>
-        /// get drones by condition
+        /// get parcels by condition
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>

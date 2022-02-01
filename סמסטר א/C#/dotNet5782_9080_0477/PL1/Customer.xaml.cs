@@ -81,7 +81,11 @@ namespace PL1
               SumOfparcelSendedToCustomer.Text = customeBL.parcelSendedToCustomer.Count.ToString();*//*
           }*/
 
-
+        /// <summary>
+        /// reset details of customer to add
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickResetAddCustomer(object sender, RoutedEventArgs e)
         {
             customerId.Text = null;
@@ -91,6 +95,10 @@ namespace PL1
             customerLatitude.Text = null;
         }
 
+        /// <summary>
+        /// get id of customer
+        /// </summary>
+        /// <returns></returns>
         private ulong getID()
         {
             try
@@ -103,6 +111,10 @@ namespace PL1
             }
         }
 
+        /// <summary>
+        /// get name of customer
+        /// </summary>
+        /// <returns></returns>
         private string getName()
         {
             if (customerName.Text == "")
@@ -110,6 +122,10 @@ namespace PL1
             return customerName.Text;
         }
 
+        /// <summary>
+        /// get phone of customer
+        /// </summary>
+        /// <returns></returns>
         private string getPhone()
         {
             if (customerPhone.Text == "")
@@ -117,6 +133,10 @@ namespace PL1
             return customerPhone.Text;
         }
 
+        /// <summary>
+        /// get longitude of customer
+        /// </summary>
+        /// <returns></returns>
         private double getLongitude()
         {
             try
@@ -129,6 +149,10 @@ namespace PL1
             }
         }
 
+        /// <summary>
+        /// get latitude of customer
+        /// </summary>
+        /// <returns></returns>
         private double getLatitude()
         {
             try
@@ -140,6 +164,12 @@ namespace PL1
                 throw new InValidInput("longitude");
             }
         }
+
+        /// <summary>
+        /// add customer to the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickAddCustomer(object sender, RoutedEventArgs e)
         {
             try
@@ -154,12 +184,22 @@ namespace PL1
             }
 
         }
+
+        /// <summary>
+        /// close window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MouseDoubleClick_Sended(object sender, RoutedEventArgs e)
         {
             sender.ToString();
@@ -174,6 +214,11 @@ namespace PL1
             Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// delete customer from list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_DeleteCustomer(object sender, RoutedEventArgs e)
         {
             try
