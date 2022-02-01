@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using IDAL;
+using System.Runtime.CompilerServices;
 using DALException;
 
 namespace Dal
@@ -16,6 +17,7 @@ namespace Dal
         /// returns the stations from dal
         /// </summary>
         /// <returns>DataSource.stations</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Station> GetStations(Predicate<Station> predicate = null)
         {
             return from station in DataSource.stations
@@ -45,6 +47,7 @@ namespace Dal
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Station GetStationById(Predicate<Station> predicate)
         {
             //try todo
@@ -80,6 +83,7 @@ namespace Dal
         /// add station to dal
         /// </summary>
         /// <param name="station"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(Station station)
         {
             checkUniqestation(station.ID);
@@ -90,6 +94,7 @@ namespace Dal
         /// update station in dal
         /// </summary>
         /// <param name="station"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateStation(Station station)
         {
             int index = getIndexOfStation(station.ID);
@@ -110,6 +115,7 @@ namespace Dal
         /// return length of station in dal
         /// </summary>
         /// <returns>int</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public int LengthStation()
         {
             return DataSource.stations.Count;
@@ -119,6 +125,7 @@ namespace Dal
         /// remove station fron dataSource
         /// </summary>
         /// <param name="idRemove"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RemoveStation(int idRemove)
         {
             Station station = DataSource.stations[getIndexOfStation(idRemove)];
@@ -147,6 +154,7 @@ namespace Dal
         /// get deleted stations
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Station> GetDeletedStations()
         {
             return from station in DataSource.stations

@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace PL
 {
-    internal class Customer_ : DependencyObject
+    public class Customer_ : DependencyObject
     {
         public ulong ID { get; set; }
         public string Name { get; set; }

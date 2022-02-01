@@ -60,7 +60,7 @@ namespace Dal
             int index = customerList.FindIndex(d => d.ID == customer.ID);
 
             if (index == -1)
-                throw new NotExistObjWithID(customer.ID, typeof(Drone));
+                throw new NotExistObjWithID(customer.ID, typeof(Customer));
             customerList[index] = customer;
             XMLTools.SaveListToXMLSerializer<Customer>(customerList, dir + customerFilePath);
         }
@@ -91,9 +91,9 @@ namespace Dal
         /// <returns></returns>
         public IEnumerable<Customer> GetCustomers(Predicate<Customer> predicat = null)
         {
-            IEnumerable<Customer> droneList = XMLTools.LoadListFromXMLSerializer<Customer>(dir + customerFilePath);
+            IEnumerable<Customer> customerList = XMLTools.LoadListFromXMLSerializer<Customer>(dir + customerFilePath);
             predicat ??= ((st) => true);
-            return from customer in droneList
+            return from customer in customerList
                    where predicat(customer)
                    orderby customer.ID
                    select customer;

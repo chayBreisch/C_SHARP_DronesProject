@@ -201,9 +201,9 @@ namespace PL
             //this.Visibility = Visibility.Hidden;
             /*new Drone(BLObject, droneBL, this).Show();
             Hide();*/
-            var win = new Drone(BLObject, droneBL);
+            //var win = new Drone(BLObject, droneBL);
             Visibility = Visibility.Hidden;
-            win.ShowDialog();
+            //win.ShowDialog();
             Visibility = Visibility.Visible;
         }
 

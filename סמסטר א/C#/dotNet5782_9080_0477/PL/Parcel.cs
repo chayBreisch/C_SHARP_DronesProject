@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace PL
 {
-    internal class Parcel_: DependencyObject
+    public class Parcel_: DependencyObject
     {
         public int ID { get; set; }
         public string NameCustomerSender { get; set; }

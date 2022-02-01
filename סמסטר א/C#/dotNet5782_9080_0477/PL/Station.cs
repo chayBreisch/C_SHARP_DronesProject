@@ -9,7 +9,7 @@ using BO;
 
 namespace PL
 {
-    class Station_ : DependencyObject
+    public class Station_ : DependencyObject
     {
         public int ID { get; set; }
         public int Name { get; set; }

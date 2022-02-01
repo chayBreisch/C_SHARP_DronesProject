@@ -7,6 +7,7 @@ using System.Linq;
 using DALException;
 using DalApi;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
@@ -23,7 +24,7 @@ namespace BL
         }
         Random rand = new Random();
         List<BO.Drone> droneBLList = new List<BO.Drone>();
-        IDAL.IDal dalObject;
+        internal IDAL.IDal dalObject;
         double electricAvailable;
         double electricLightHeight;
         double electricMidHeight;
@@ -260,6 +261,7 @@ namespace BL
         /// return values of weightCatagories enum
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Array GetweightCategoriesEnumItem()
         {
             return Enum.GetValues(typeof(WeightCatagories));
@@ -269,11 +271,13 @@ namespace BL
         /// return values of priorities enum
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Array GetPrioritiesEnumItem()
         {
             return Enum.GetValues(typeof(Priorities));
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public double getRateOfCharging()
         {
             return this.electricChargingRate;
@@ -287,11 +291,12 @@ namespace BL
 
 
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void StartSimulation(BO.Drone drone, BackgroundWorker worker, Action<BO.Drone, int> updateDrone, Func<bool> needToStop)
         {
-            var sim = new Simulation(this);
-            sim.start(drone, worker, updateDrone, needToStop);
+            new Simulation(this, drone, worker, updateDrone, needToStop);
+            //var sim = new Simulation(this, drone, worker, updateDrone, needToStop);
+            //sim.start(drone, worker, updateDrone, needToStop);
 
         }
     }

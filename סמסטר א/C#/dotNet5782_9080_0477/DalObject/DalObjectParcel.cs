@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DO;
 using IDAL;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using DALException;
 
 namespace Dal
@@ -25,6 +26,7 @@ namespace Dal
         /// returns the parcels from dal
         /// </summary>
         /// <returns>DataSource.parcels</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Parcel> GetParcels(Predicate<Parcel> predicate = null)
         {
             return from parcel in DataSource.parcels
@@ -36,6 +38,7 @@ namespace Dal
         /// get deleted parcels
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Parcel> GetDeletedParcels()
         {
             return from parcel in DataSource.parcels
@@ -59,6 +62,7 @@ namespace Dal
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Parcel GetParcelBy(Predicate<Parcel> predicate)
         {
             Parcel parcel1 = new Parcel();
@@ -78,6 +82,7 @@ namespace Dal
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Parcel> GetParcelesByCondition(Predicate<Parcel> predicate)
         {
             //try todo
@@ -106,6 +111,7 @@ namespace Dal
         /// return length of parcel list
         /// </summary>
         /// <returns>int</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public int LengthParcel()
         {
             return DataSource.parcels.Count;
@@ -135,6 +141,7 @@ namespace Dal
         /// update parcel in dal
         /// </summary>
         /// <param name="parcel"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateParcel(Parcel parcel)
         {
             int index = getIndexOfParcel(parcel.ID);
@@ -146,6 +153,7 @@ namespace Dal
         /// remove parcel from dataSource
         /// </summary>
         /// <param name="idRemove"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RemoveParcel(int idRemove)
         {
             Parcel parcel = DataSource.parcels[getIndexOfParcel(idRemove)];

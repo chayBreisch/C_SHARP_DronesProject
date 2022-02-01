@@ -23,15 +23,18 @@ namespace PL
     {
         BlApi.IBL BLObject;
         BO.Drone droneBL;
+        Drone_ DronePL;
+        PLLists PLLists;
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.IBL bl)
+        public Drone(BlApi.IBL bl, PLLists plLists)
         {
             BLObject = bl;
             InitializeComponent();
+            PLLists = plLists;
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
             addDrone.Visibility = Visibility.Visible;
@@ -45,24 +48,22 @@ namespace PL
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="droneList"></param>
-        public Drone(BlApi.IBL bl, BO.Drone drone)
+        public Drone(BlApi.IBL bl, BO.Drone drone, PLLists plLists)
         {
             BLObject = bl;
             droneBL = drone;
             InitializeComponent();
+            PLLists = plLists;
+            DronePL = new Drone_(BLObject.ConvertDroneBLToDroneToList(droneBL));
+            maimGrid.DataContext = DronePL;
             WindowStyle = WindowStyle.None;
             addDrone.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
-            idDrone.Text = droneBL.ID.ToString();
-            modelDrone.DataContext = droneBL;
-            batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
-            weightDrone.Text = droneBL.Weight.ToString();
-            statusDrone.Text = droneBL.DroneStatus.ToString();
             if (droneBL.parcelInDelivery != null)
                 parcelInDeliveryDrone.Text = droneBL.parcelInDelivery.ToString();
             else
                 parcelInDeliveryDrone.Text = "no parcel";
-            locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
+            //locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
             if (droneBL.DroneStatus != DroneStatus.Available)
             {
                 Supply.IsEnabled = false;
@@ -89,13 +90,13 @@ namespace PL
 
         }
 
-        /// <summary>
+        /*/// <summary>
         /// constructor actions
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="parcel"></param>
-       /* public Drone(BlApi.Bl bl, BO.Drone drone, Window parcel)
+        public Drone(BlApi.Bl bl, BO.Drone drone, Window parcel)
         {
             ParentWindow = parcel;
             blDrone = bl;
@@ -129,13 +130,13 @@ namespace PL
 
         }*/
 
-        /// <summary>
+        /*/// <summary>
         /// constructor actions
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="station"></param>
-       /* public Drone(BlApi.Bl bl, BO.Drone drone, Window station)
+        public Drone(BlApi.Bl bl, BO.Drone drone, Window station)
         {
             stationWindow = station;
             blDrone = bl;
@@ -171,6 +172,10 @@ namespace PL
         //###############################################################################
         //add Drone
         //###############################################################################
+        /// <summary>
+        /// get id of drone
+        /// </summary>
+        /// <returns></returns>
         private int getID()
         {
             try
@@ -184,6 +189,10 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// get station to charge drone
+        /// </summary>
+        /// <returns></returns>
         private int getStation()
         {
             try
@@ -196,12 +205,17 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// get model
+        /// </summary>
+        /// <returns></returns>
         private string getModel()
         {
             if (droneMdel.Text == "")
                 throw new InValidInput("model");
             return droneMdel.Text;
         }
+
         /// <summary>
         /// add drone to the list of drones
         /// </summary>
@@ -212,6 +226,7 @@ namespace PL
             try
             {
                 BLObject.AddDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
+                PLLists.AddDrone(BLObject.ConvertDroneBLToDroneToList(BLObject.GetSpecificDroneBL(getID())));
                 MessageBox.Show("you added succefuly");
                 Close();
             }
@@ -251,6 +266,7 @@ namespace PL
             {
                 droneBL = BLObject.UpdateDataDroneModel(droneBL.ID, modelDrone.Text);
                 MessageBox.Show("you updated sucssesfully");
+                PLLists.UpdateDrone(DronePL);
             }
             catch (Exception ex)
             {
@@ -316,8 +332,8 @@ namespace PL
                 try
                 {
                     droneBL = BLObject.UpdateUnchargeDrone(droneBL.ID, time);
-                    statusDrone.Text = droneBL.DroneStatus.ToString();
-                    batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
+                    //statusDrone.Text = droneBL.DroneStatus.ToString();
+                    //batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
                     TimeCharger.Text = "";
                     MessageBox.Show("the drone is uncharged sucssesfully");
                 }
@@ -443,10 +459,8 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void StartSimulation_Click(object sender, RoutedEventArgs e)
+        private void SimulationBtn_Click(object sender, RoutedEventArgs e)
         {
-
-
             if (SimulationBtn.Content == "start manual")
             {
                 SimulationBtn.Content = "start simulation";

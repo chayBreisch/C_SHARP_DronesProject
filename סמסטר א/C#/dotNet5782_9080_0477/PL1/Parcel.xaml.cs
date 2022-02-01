@@ -276,6 +276,11 @@ namespace PL1
             }
         }
 
+        /// <summary>
+        /// update picked up parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkBoxPicked_Checked(object sender, RoutedEventArgs e)
         {
             checkBoxPicked.Visibility = Visibility.Hidden;
@@ -285,6 +290,11 @@ namespace PL1
             blparcel.updateParecl(parcelBL);
         }
 
+        /// <summary>
+        /// update delivered parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkBoxDelivered_Checked(object sender, RoutedEventArgs e)
         {
             checkBoxDelivered.Visibility = Visibility.Hidden;
