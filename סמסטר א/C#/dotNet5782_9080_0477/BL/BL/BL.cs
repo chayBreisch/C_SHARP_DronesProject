@@ -40,14 +40,7 @@ namespace BL
         {
 
             //get all the electric rates
-            try
-            {
-                dalObject = DalFactory.GetDal();
-            }
-            catch (DALException.CantReturnDalObject)
-            {
-                throw new CantReturnDalObject();
-            }
+            dalObject = DalFactory.GetDal();
             double[] arrayEletric = dalObject.RequestElectric();
             electricAvailable = arrayEletric[0];
             electricLightHeight = arrayEletric[1];
@@ -59,7 +52,7 @@ namespace BL
             {
                 BO.Drone droneBL = new BO.Drone { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight, IsActive = drone.IsActive };
                 DO.Parcel parcel = dalObject.GetParcelBy(p => p.DroneID == drone.ID);
-                DO.Customer customerSender = dalObject.GetCustomerById(c => c.ID == parcel.SenderID);
+                BO.Customer customerSender = GetSpecificCustomerBL(c => c.ID == parcel.SenderID);
                 //check if the drone has a parcel
                 if (parcel.SenderID != 10000000)
                 //if (!parcel.Equals(null))
@@ -73,7 +66,7 @@ namespace BL
                         //check if the parcel of the drone is scheduled and not delivered and not picked up
                         if (parcel.PickedUp != null)
                         {
-                            DO.Station station = findClosestStation(new LocationBL(customerSender.Latitude, customerSender.Longitude));
+                            DO.Station station = findClosestStation(customerSender.Location);
                             droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
                         }
 
@@ -81,14 +74,12 @@ namespace BL
                         //לבדוק מה בנות עשו
                         else
                         {
-                            droneBL.Location = new LocationBL(customerSender.Latitude, customerSender.Longitude);
+                            droneBL.Location = customerSender.Location;
                         }
-                        DO.Customer customerReciever = dalObject.GetCustomerById(c => c.ID == parcel.TargetID);
-                        double electricitySenderToReciever = calcElectry(new LocationBL(customerSender.Longitude, customerSender.Latitude), new LocationBL
-                            (customerReciever.Longitude, customerReciever.Latitude), (int)parcel.Weight);
-                        DO.Station station1 = stationWithMinDisAndEmptySlots(new LocationBL(customerReciever.Latitude, customerReciever.Longitude));
-                        double electricityRecieverToCharger = calcElectry(new LocationBL(customerReciever.Longitude, customerReciever.Latitude), new LocationBL
-                            (station1.Longitude, station1.Latitude), 0);
+                        BO.Customer customerReciever = GetSpecificCustomerBL(c => c.ID == parcel.TargetID);
+                        double electricitySenderToReciever = calcElectry(customerSender.Location, customerReciever.Location, (int)parcel.Weight);
+                        BO.Station station1 = stationWithMinDisAndEmptySlots(customerReciever.Location);
+                        double electricityRecieverToCharger = calcElectry(customerReciever.Location, station1.Location, 0);
                         int minEle = (int)Math.Round(electricitySenderToReciever + electricityRecieverToCharger);
                         droneBL.BatteryStatus = rand.Next(minEle, 100);
                     }
@@ -121,10 +112,10 @@ namespace BL
                     if (parcelBLsWithSuppliedParcel.Count > 0)
                     {
                         BO.Parcel parcelBL = convertDalToParcelBL(parcelBLsWithSuppliedParcel[rand.Next(0, parcelBLsWithSuppliedParcel.Count)]);
-                        DO.Customer customer = dalObject.GetCustomerById(c => c.ID == parcelBL.Sender.ID);
-                        droneBL.Location = new LocationBL(customer.Latitude, customer.Longitude);
-                        DO.Station station1 = stationWithMinDisAndEmptySlots(droneBL.Location);
-                        double electry = calcElectry(new LocationBL(station1.Longitude, station1.Latitude), droneBL.Location, 0);
+                        BO.Customer customer = GetSpecificCustomerBL(c => c.ID == parcelBL.Sender.ID);
+                        droneBL.Location = customer.Location;
+                        BO.Station station1 = stationWithMinDisAndEmptySlots(droneBL.Location);
+                        double electry = calcElectry(station1.Location, droneBL.Location, 0);
                         int minElectric = (int)Math.Round(electry);
                         droneBL.BatteryStatus = rand.Next(minElectric, 100);
                     }
@@ -152,15 +143,15 @@ namespace BL
         /// <param name="location"></param>
         /// <returns>Station</returns>
         //return the stations with the minimum distance from the location and with empty slots
-        private DO.Station stationWithMinDisAndEmptySlots(LocationBL location)////////////////////////////
+        private BO.Station stationWithMinDisAndEmptySlots(LocationBL location)////////////////////////////
         {
             double minDis = -1;
             double dis2 = 0;
-            IEnumerable<DO.Station> stations = dalObject.GetStations();
-            DO.Station sendStation = new DO.Station();
+            IEnumerable<BO.Station> stations = getStationsBL();
+            BO.Station sendStation = new BO.Station();
             foreach (var station in stations)
             {
-                dis2 = distance(location, new LocationBL(station.Latitude, station.Longitude));
+                dis2 = distance(location, station.Location);
                 if (dis2 < minDis || minDis == -1 && station.ChargeSlots != 0)
                 {
                     minDis = dis2;

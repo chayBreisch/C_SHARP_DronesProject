@@ -64,7 +64,7 @@ namespace BlApi
         //##############################################################
         //update functions
         //##############################################################
-        public BO.Station UpdateDataStation(int id, int name = 0, int chargeSlots = -1);
+        public BO.Station UpdateStation(BO.Station station);
         public BO.Drone UpdateSendDroneToCharge(int id);
         public BO.Drone UpdateUnchargeDrone(int id, double timeInCharge);
         public void UpdateConnectParcelToDrone(int id);

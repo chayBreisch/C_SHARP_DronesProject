@@ -121,7 +121,7 @@ namespace BL
         /// return parcels that are not connected to a drone
         /// </summary>
         /// <returns> List<Parcel></returns>
-        private IEnumerable<DO.Parcel> getParcelsWithoutoutDrone()
+        /*private IEnumerable<DO.Parcel> getParcelsWithoutoutDrone()
         {
             IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
             List<DO.Parcel> parcels1 = new List<DO.Parcel>();
@@ -133,7 +133,7 @@ namespace BL
                 }
             }
             return parcels1;
-        }
+        }*/
 
         /// <summary>
         /// convert a parcel from dal to bl

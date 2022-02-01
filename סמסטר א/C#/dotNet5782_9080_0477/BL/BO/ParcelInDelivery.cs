@@ -20,8 +20,8 @@ namespace BO
             DO.Customer customer = dalObject.GetCustomerById(c => c.ID == parcel.Sender.ID);
             CollectLocation = new LocationBL(customer.Longitude, customer.Latitude);
             customer = dalObject.GetCustomerById(c => c.ID == parcel.Reciever.ID);
-            DeliveryDestinationLocation = new LocationBL(customer.Longitude, customer.Latitude);
-            TransportDistance = BL.BL.distance(CollectLocation, DeliveryDestinationLocation);
+            TargetLocation = new LocationBL(customer.Longitude, customer.Latitude);
+            TransportDistance = BL.BL.distance(CollectLocation, TargetLocation);
         }
         public int ID { get; set; }
         public DO.WeightCatagories Weight { get; set; }
@@ -30,13 +30,13 @@ namespace BO
         public CustomerAtParcel CustomerInDeliverySender { get; set; }
         public CustomerAtParcel CustomerInDeliveryReciever { get; set; }
         public LocationBL CollectLocation { get; set; }
-        public LocationBL DeliveryDestinationLocation { get; set; }
+        public LocationBL TargetLocation { get; set; }
         public double TransportDistance { get; set; }
 
         public override string ToString()
         {
             return $"ID: {ID}, Weight: {Weight}, Priority: {Priority}, ParcelStatus: {isWaiting}" +
-                $", CollectLocation: {CollectLocation}, CollectLocation: {CollectLocation}, DeliveryDestinationLocation: {DeliveryDestinationLocation}" +
+                $", CollectLocation: {CollectLocation}, CollectLocation: {CollectLocation}, DeliveryDestinationLocation: {TargetLocation}" +
                 $"TransportDistance: {Math.Floor(TransportDistance)}";
         }
     }
