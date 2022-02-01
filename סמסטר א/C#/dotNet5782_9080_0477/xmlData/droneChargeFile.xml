@@ -188,4 +188,32 @@
     <DroneID>6</DroneID>
     <StationID>2</StationID>
   </DroneCharge>
+  <DroneCharge>
+    <DroneID>2</DroneID>
+    <StationID>2</StationID>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>3</DroneID>
+    <StationID>2</StationID>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>6</DroneID>
+    <StationID>3</StationID>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>7</DroneID>
+    <StationID>2</StationID>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>1</DroneID>
+    <StationID>1</StationID>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>2</DroneID>
+    <StationID>2</StationID>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>7</DroneID>
+    <StationID>1</StationID>
+  </DroneCharge>
 </ArrayOfDroneCharge>

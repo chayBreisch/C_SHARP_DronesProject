@@ -112,4 +112,20 @@
     <Latitude>1</Latitude>
     <IsActive>true</IsActive>
   </Customer>
+  <Customer>
+    <ID>23456789</ID>
+    <Name>zipi</Name>
+    <Phone>1</Phone>
+    <Longitude>1</Longitude>
+    <Latitude>1</Latitude>
+    <IsActive>true</IsActive>
+  </Customer>
+  <Customer>
+    <ID>123456789</ID>
+    <Name>1</Name>
+    <Phone>23567890</Phone>
+    <Longitude>12</Longitude>
+    <Latitude>12</Latitude>
+    <IsActive>true</IsActive>
+  </Customer>
 </ArrayOfCustomer>
