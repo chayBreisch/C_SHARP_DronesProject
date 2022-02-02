@@ -9,11 +9,11 @@ namespace Dal
 {
     internal sealed partial class DalObject : IDal
     {
-        public DalObject()
+        private DalObject()
         {
             DataSource.Initialize();
         }
-        internal static DalObject Instance;
+        private static DalObject Instance;
         public static DalObject getInstance
         {
             get

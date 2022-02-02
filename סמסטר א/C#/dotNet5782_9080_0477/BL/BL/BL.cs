@@ -14,7 +14,7 @@ namespace BL
     //לשים לב מה עם GET SET IN CUSTOMERBL
     internal sealed partial class BL : IBL
     {
-        static BL Instance;
+        private static BL Instance;
         public static BL GetInstance()
         {
             if (Instance == null)
@@ -36,7 +36,7 @@ namespace BL
         /// <summary>
         /// constructor of class BL
         /// </summary>
-        public BL()
+        private BL()
         {
 
             //get all the electric rates
