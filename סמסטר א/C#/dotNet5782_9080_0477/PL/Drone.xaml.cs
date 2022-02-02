@@ -488,6 +488,8 @@ namespace PL
             worker.WorkerReportsProgress = true;
             worker.ProgressChanged += (object? sender, ProgressChangedEventArgs e) =>
             {
+                //PLLists.UpdateDrone(DronePL);
+
                 /*Student.MyAge++;
                 Student.Name = updatDrone.FirstName;
                 progress.Content = e.ProgressPercentage;*/
