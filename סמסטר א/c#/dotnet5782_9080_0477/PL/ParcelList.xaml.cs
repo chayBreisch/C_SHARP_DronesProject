@@ -99,7 +99,7 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickAddParcel(object sender, RoutedEventArgs e)
         {
-            var win = new Parcel(BLObject);
+            var win = new Parcel(BLObject, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
             Visibility = Visibility.Visible;
@@ -115,7 +115,7 @@ namespace PL
             sender.ToString();
             Parcel_ parcelToList = (sender as ListView).SelectedValue as Parcel_;
             BO.Parcel parcel = BLObject.GetSpecificParcelBL(parcelToList.ID);
-            var win = new Parcel(BLObject, parcel);
+            var win = new Parcel(BLObject, parcel, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
             Visibility = Visibility.Visible;

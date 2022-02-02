@@ -88,7 +88,7 @@ namespace PL
             /*MyList = new ObservableCollection<DroneToList>();
             foreach (var item in drones)
                 MyList.Add(item);*/
-            DataContext = PLLists.Drones;
+            DataContext = PLLists.Drones;//fix
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
 

@@ -44,6 +44,7 @@ namespace BlApi
         //##############################################################
         public BO.Drone GetSpecificDroneBLWithDeleted(int id);
         public BO.Customer GetSpecificCustomerBL(Predicate<BO.Customer> predicate);
+        public CustomerToList GetSpecificCustomerToList(ulong id);
         public BO.Parcel GetSpecificParcelBL(int id);
         public BO.Station GetSpecificStationBL(int id);
         public BO.Drone GetSpecificDroneBL(int id);

@@ -25,15 +25,17 @@ namespace PL
         BlApi.IBL BLObject;
         BO.Parcel parcelBL;
         BO.Customer Customer;
+        PLLists PLLists;
          
         /// <summary>
         /// constructor add parcel
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Parcel(BlApi.IBL bl)
+        public Parcel(BlApi.IBL bl, PLLists pllists)
         {
             BLObject = bl;
+            PLLists = pllists;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
@@ -50,9 +52,10 @@ namespace PL
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="parentWindow"></param>
-        public Parcel(BlApi.IBL bl, BO.Parcel parcel)
+        public Parcel(BlApi.IBL bl, BO.Parcel parcel, PLLists pllists)
         {
             InitializeComponent();
+            PLLists = pllists;
             CustomerSendParcel.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
             addParcel.Visibility = Visibility.Hidden;
@@ -95,10 +98,11 @@ namespace PL
             }
         }
 
-        public Parcel(BlApi.IBL blobject, BO.Customer customer)
+        public Parcel(BlApi.IBL blobject, BO.Customer customer, PLLists pllists)
         {
             BLObject = blobject;
             Customer = customer;
+            PLLists = pllists;
             InitializeComponent();
             actions.Visibility = Visibility.Hidden;
             addParcel.Visibility = Visibility.Hidden;
@@ -182,6 +186,7 @@ namespace PL
                 }
                 BLObject.AddParcel(getSenderId(), getRecieverId(), weightParcel.SelectedIndex + 1, priorityParcel.SelectedIndex);
                 MessageBox.Show("you added succefuly");
+                //PLLists.AddParcel()
                 Close();
             }
             catch (Exception exce)
@@ -251,7 +256,7 @@ namespace PL
             if (BLObject.findParcelStatus(parcelBL) == BO.ParcelStatus.Scheduled || BLObject.findParcelStatus(parcelBL) == BO.ParcelStatus.PickedUp)
             {
 
-                var win = new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), 'w');
+                var win = new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == parcelBL.Sender.ID), 'w', PLLists);
                 Visibility = Visibility.Hidden;
                 win.ShowDialog();
                 Visibility = Visibility.Visible;
@@ -267,7 +272,7 @@ namespace PL
         {
             if (BLObject.findParcelStatus(parcelBL) == BO.ParcelStatus.Scheduled || BLObject.findParcelStatus(parcelBL) == BO.ParcelStatus.PickedUp)
             {
-                var win = new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID), 'w');
+                var win = new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID), 'w', PLLists);
                 Visibility = Visibility.Hidden;
                 win.ShowDialog();
                 Visibility = Visibility.Visible;

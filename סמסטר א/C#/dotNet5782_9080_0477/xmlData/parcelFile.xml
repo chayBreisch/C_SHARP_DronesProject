@@ -36,7 +36,7 @@
     <DroneID>7</DroneID>
     <Scheduled>2008-11-04T00:00:00</Scheduled>
     <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
+    <Delivered>2022-02-02T16:17:11.6676033+02:00</Delivered>
     <IsActive>true</IsActive>
   </Parcel>
   <Parcel>
@@ -75,7 +75,7 @@
     <DroneID>4</DroneID>
     <Scheduled>2022-02-02T19:50:44.2806988+02:00</Scheduled>
     <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
+    <Delivered>2022-02-02T14:07:32.674974+02:00</Delivered>
     <IsActive>true</IsActive>
   </Parcel>
   <Parcel>

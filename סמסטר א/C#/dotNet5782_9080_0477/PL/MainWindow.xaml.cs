@@ -38,7 +38,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new FirstPage(BLObject, this).Show();
+            new FirstPage(BLObject, this, PLLists).Show();
         }
     }
 }

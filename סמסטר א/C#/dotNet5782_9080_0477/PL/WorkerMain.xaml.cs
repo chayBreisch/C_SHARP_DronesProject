@@ -82,7 +82,7 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickCustomerList(object sender, RoutedEventArgs e)
         {
-            new CustomerList(BLObject).Show();
+            new CustomerList(BLObject, PLLists).Show();
             Hide();
         }
     }
