@@ -104,4 +104,28 @@
     <Latitude>1</Latitude>
     <IsActive>true</IsActive>
   </Customer>
+  <Customer>
+    <ID>213456789</ID>
+    <Name>zipi</Name>
+    <Phone>0533148661</Phone>
+    <Longitude>1</Longitude>
+    <Latitude>1</Latitude>
+    <IsActive>true</IsActive>
+  </Customer>
+  <Customer>
+    <ID>312456789</ID>
+    <Name>zipi</Name>
+    <Phone>1</Phone>
+    <Longitude>1</Longitude>
+    <Latitude>1</Latitude>
+    <IsActive>true</IsActive>
+  </Customer>
+  <Customer>
+    <ID>876543219</ID>
+    <Name>chaya</Name>
+    <Phone>1</Phone>
+    <Longitude>1</Longitude>
+    <Latitude>1</Latitude>
+    <IsActive>true</IsActive>
+  </Customer>
 </ArrayOfCustomer>

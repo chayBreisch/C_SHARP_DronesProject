@@ -40,10 +40,30 @@ namespace PL
             Customers.Add(new Customer_(bl));
         }
 
-        public void UpdateDrone(Drone_ drone)
+
+
+        public void UpdateDrone(BO.Drone drone)
         {
-            int index = Drones.IndexOf(Drones.Where(C => C.ID == drone.ID).FirstOrDefault());
-            Drones[index] = drone;
+            int index = Drones.IndexOf(Drones.Where(D => D.ID == drone.ID).FirstOrDefault());
+            Drones[index] = new Drone_(BLObject.ConvertDroneBLToDroneToList(drone));
+        }
+
+        public void UpdateParcel(Parcel_ parcel)
+        {
+            int index = Parcels.IndexOf(Parcels.Where(P => P.ID == parcel.ID).FirstOrDefault());
+            Parcels[index] = parcel;
+        }
+
+        public void UpdateStation(Station_ station)
+        {
+            int index = Stations.IndexOf(Stations.Where(S => S.ID == station.ID).FirstOrDefault());
+            Stations[index] = station;
+        }
+
+        public void UpdateCustomer(Customer_ customer)
+        {
+            int index = Customers.IndexOf(Customers.Where(C => C.ID == customer.ID).FirstOrDefault());
+            Customers[index] = customer;
         }
 
         public PLLists()

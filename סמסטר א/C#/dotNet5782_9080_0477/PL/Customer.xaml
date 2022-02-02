@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Customer" Height="450" Width="800">
-    <Grid>
+    <Grid Name="mainGrid">
 
-        <Grid Name="actions" Visibility="Hidden">
+        <Grid Name="actions" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition  Width="200"/>
@@ -33,9 +33,9 @@
                 <Label FontSize="16" Content="Name" Grid.Row="1" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center" Height="31" Width="52"/>
                 <Label FontSize="16" Content="Phone" Grid.Row="2" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Height="32" Width="55"/>
 
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="77,0,0,0" Name="idcustomer" TextWrapping="Wrap" VerticalAlignment="Center" Width="197" Height="23"/>
+                <TextBox Text="{Binding ID, Mode=OneWay}" FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="77,0,0,0" Name="idcustomer" TextWrapping="Wrap" VerticalAlignment="Center" Width="197" Height="23"/>
                 <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="1" HorizontalAlignment="Left" Margin="397,26,0,0" Name="nameCustomer" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Height="23"/>
-                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="2" HorizontalAlignment="Left" Name="phoneCustomr" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Margin="127,24,0,0" Height="23"/>
+                <TextBox Text="{Binding Phone, Mode=OneWay}" FontSize="16" IsReadOnly="True"  Grid.Row="2" HorizontalAlignment="Left" Name="phoneCustomr" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Margin="127,24,0,0" Height="23"/>
 
                 <Label Content="Customer" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Height="35" Width="100"/>
                 <Label  FontSize="16" Content="parcel Sended By Customer" Grid.Row="3" HorizontalAlignment="Left" Margin="39,12,0,0" VerticalAlignment="Top" Height="31" Width="204"/>
@@ -94,7 +94,7 @@
 
         </Grid>
 
-        <Grid Name="CustomerPage" Visibility="Visible">
+        <Grid Name="CustomerPage" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="9*"/>
                 <ColumnDefinition Width="791*"/>

@@ -129,6 +129,11 @@ namespace BL
             }
         }
 
+        public CustomerToList GetSpecificCustomerToList(ulong id)
+        {
+            return new CustomerToList(GetSpecificCustomerBL(C => C.ID == id), dalObject);
+        }
+
         /// <summary>
         /// convert a customer from dal to bl
         /// </summary>

@@ -32,10 +32,10 @@ namespace PL
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
-        public CustomerList(BlApi.IBL bl)
+        public CustomerList(BlApi.IBL bl, PLLists plLists)
         {
             InitializeComponent();
-            PLLists = new PLLists();
+            PLLists = plLists;
             CustomerListView.ItemsSource = PLLists.Customers;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
@@ -87,7 +87,7 @@ namespace PL
             //this.Visibility = Visibility.Hidden;
             /*new Customer(BLObject, customer, this, 'w').Show();
             Hide();*/
-            var win = new Customer(BLObject, customer, 'w');
+            var win = new Customer(BLObject, customer, 'w', PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
             Visibility = Visibility.Visible;
@@ -161,7 +161,7 @@ namespace PL
         {
             /*new Customer(BLObject, this).Show();
             Hide();*/
-            var win = new Customer(BLObject);
+            var win = new Customer(BLObject, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
             Visibility = Visibility.Visible;

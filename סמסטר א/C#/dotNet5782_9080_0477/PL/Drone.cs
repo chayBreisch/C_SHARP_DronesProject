@@ -18,7 +18,6 @@ namespace PL
         //public string Model { get; set; }
         public DO.WeightCatagories Weight { get; set; }
         public double BatteryStatus { get; set; }
-        public DroneStatus DroneStatus { get; set; }
         public LocationBL Location { get; set; }
 
 
@@ -37,6 +36,26 @@ namespace PL
             set
             {
                 SetValue(ModelProperty, value);
+            }
+        }
+
+
+        public static readonly DependencyProperty DroneStatusProperty =
+        DependencyProperty.Register("DroneStatus",
+                                    typeof(object),
+                                    typeof(Drone_),
+                                    new UIPropertyMetadata(0));
+
+
+        public DroneStatus DroneStatus
+    {
+            get
+            {
+                return (DroneStatus)GetValue(DroneStatusProperty);
+            }
+            set
+            {
+                SetValue(DroneStatusProperty, value);
             }
         }
 

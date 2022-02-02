@@ -21,11 +21,13 @@ namespace PL
     {
         BlApi.IBL BLObject;
         char CheckIdentity;
-        public Checking(BlApi.IBL Blobject, char c)
+        PLLists PLLists;
+        public Checking(BlApi.IBL Blobject, char c, PLLists pllist)
         {
             InitializeComponent();
             BLObject = Blobject;
             CheckIdentity = c;
+            PLLists = pllist;
         }
 
         private void Button_ClickComeIn(object sender, RoutedEventArgs e)
@@ -44,7 +46,7 @@ namespace PL
                 }
                 else
                 {
-                    new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == ID), CheckIdentity).Show();
+                    new Customer(BLObject, BLObject.GetSpecificCustomerBL(p => p.ID == ID), CheckIdentity, PLLists).Show();
                     this.Close();
                 }
             }
