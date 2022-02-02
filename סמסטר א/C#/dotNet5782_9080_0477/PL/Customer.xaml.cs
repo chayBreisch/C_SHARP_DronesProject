@@ -36,7 +36,7 @@ namespace PL
             BLObject = bl;
             InitializeComponent();
             PLLists = pllists;
-            customerPL = new Customer_(BLObject.GetSpecificCustomerToList(customeBL.ID));
+            //customerPL = new Customer_(BLObject.GetSpecificCustomerToList(customeBL.ID));
             mainGrid.DataContext = customerPL;
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
