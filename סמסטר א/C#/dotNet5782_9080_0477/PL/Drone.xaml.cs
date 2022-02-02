@@ -332,12 +332,12 @@ namespace PL
                 TimeChargerBlock.Visibility = Visibility.Hidden;
                 try
                 {
-                    droneBL = BLObject.UpdateUnchargeDrone(droneBL.ID, time);
+                    BLObject.UpdateUnchargeDrone(droneBL.ID, time);
                     //statusDrone.Text = droneBL.DroneStatus.ToString();
                     //batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
                     TimeCharger.Text = "";
                     MessageBox.Show("the drone is uncharged sucssesfully");
-                    DronePL.DroneStatus = droneBL.DroneStatus;
+                    DronePL = new Drone_(BLObject.ConvertDroneBLToDroneToList(droneBL));
                     //PLLists.UpdateDrone(droneBL);
                 }
                 catch (Exception ex)
