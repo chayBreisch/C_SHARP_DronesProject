@@ -14,7 +14,7 @@ namespace BL
     //לשים לב מה עם GET SET IN CUSTOMERBL
     internal sealed partial class BL : IBL
     {
-        static BL Instance;
+        private static BL Instance;
         public static BL GetInstance()
         {
             if (Instance == null)
@@ -36,7 +36,7 @@ namespace BL
         /// <summary>
         /// constructor of class BL
         /// </summary>
-        public BL()
+        private BL()
         {
 
             //get all the electric rates
@@ -52,11 +52,11 @@ namespace BL
             {
                 BO.Drone droneBL = new BO.Drone { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight, IsActive = drone.IsActive };
                 DO.Parcel parcel = dalObject.GetParcelBy(p => p.DroneID == drone.ID);
-                BO.Customer customerSender = GetSpecificCustomerBL(c => c.ID == parcel.SenderID);
                 //check if the drone has a parcel
-                if (parcel.SenderID != 10000000)
+                if (parcel.SenderID != 10000000 && parcel.SenderID != 0)
                 //if (!parcel.Equals(null))
                 {
+                    BO.Customer customerSender = GetSpecificCustomerBL(c => c.ID == parcel.SenderID);
                     //check if the parcel of the drone is scheduled and not delivered
                     if (parcel.Scheduled != null && parcel.Delivered == null)
                     {

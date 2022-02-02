@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 namespace Dal
 {
-    internal partial class DalObject : IDal
+    internal sealed partial class DalObject : IDal
     {
-        public DalObject()
+        private DalObject()
         {
             DataSource.Initialize();
         }
-        internal static DalObject Instance;
+        private static DalObject Instance;
         public static DalObject getInstance
         {
             get
