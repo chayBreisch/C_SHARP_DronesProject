@@ -38,13 +38,7 @@
   </Drone>
   <Drone>
     <ID>7</ID>
-    <Model>7</Model>
-    <MaxWeight>Light</MaxWeight>
-    <IsActive>true</IsActive>
-  </Drone>
-  <Drone>
-    <ID>8</ID>
-    <Model>hello</Model>
+    <Model>Hello World</Model>
     <MaxWeight>Light</MaxWeight>
     <IsActive>true</IsActive>
   </Drone>
@@ -52,18 +46,6 @@
     <ID>8</ID>
     <Model>Hello World</Model>
     <MaxWeight>Medium</MaxWeight>
-    <IsActive>true</IsActive>
-  </Drone>
-  <Drone>
-    <ID>9</ID>
-    <Model>Hello World</Model>
-    <MaxWeight>Heavy</MaxWeight>
-    <IsActive>true</IsActive>
-  </Drone>
-  <Drone>
-    <ID>123</ID>
-    <Model>Naama</Model>
-    <MaxWeight>Light</MaxWeight>
     <IsActive>true</IsActive>
   </Drone>
 </ArrayOfDrone>

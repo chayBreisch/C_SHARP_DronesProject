@@ -7,9 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using static BL.ExceptionsBL;
 using System.Runtime.CompilerServices;
-/// <summary>
-/// //////////////////////////////////////////////add commands//////////////////////////////
-/// </summary>
 namespace BL
 {
     internal partial class BL
@@ -23,34 +20,23 @@ namespace BL
         {
             lock (dalObject)
             {
-                //check this function////////////////////////////////
-                DO.Station station = new DO.Station();
+                BO.Station station = new BO.Station();
                 BO.Drone droneBL = GetSpecificDroneBL(id);
                 //find a station to charge
                 if (droneBL.DroneStatus == DroneStatus.Available)
                 {
                     station = stationWithMinDisAndEmptySlots(droneBL.Location);
-                    double electric = calcElectry(droneBL.Location, new LocationBL(station.Latitude, station.Longitude), 0);
+                    double electric = calcElectry(droneBL.Location, station.Location, 0);
                     //check if enough electricity to reach the station
                     if (electric > droneBL.BatteryStatus)
-                    {
                         throw new CanNotUpdateDrone(droneBL.ID, "dont have enough battery");
-                    }
-                    /* if (droneBL.DroneStatus == DroneStatus.Available)//////////////////יש פה טעןת///////////////////////////////
-                     {
-                         throw new Exception("there is no a station with empty charge slots");
-                     }*/
                     droneBL.BatteryStatus -= electric;
-                    droneBL.Location.Latitude = station.Latitude;
-                    droneBL.Location.Longitude = station.Longitude;
+                    droneBL.Location = station.Location;
                     droneBL.DroneStatus = DroneStatus.Maintenance;
                     updateDrone(droneBL);
                     station.ChargeSlots -= 1;
-                    dalObject.UpdateStation(station);
-                    DroneCharge droneCharge = new DroneCharge();
-                    droneCharge.DroneID = id;
-                    droneCharge.StationID = station.ID;
-                    //dalObject.AddDroneCharge(droneCharge);
+                    UpdateStation(station);
+                    DroneCharge droneCharge = new DroneCharge { DroneID = id, StationID = station.ID };
                     addDroneCharge(station.ID, id);
                 }
                 return droneBL;
@@ -86,16 +72,9 @@ namespace BL
                 droneBL.DroneStatus = DroneStatus.Available;
                 updateDrone(droneBL);
                 DroneCharge droneCharge = dalObject.GetDroneChargeById(d => d.DroneID == droneBL.ID);
-                /*try/////////////////////לכאורה מיותר כי כבר בדקתי שהרחפן בהטענה אז חייב להיות מטען ותחנה
-                {*/
                 DO.Station station = dalObject.GetStationById(s => s.ID == droneCharge.StationID);
                 station.ChargeSlots += 1;
                 dalObject.UpdateStation(station);
-                /*}
-                catch (ArgumentNullException e)
-                {
-                    throw new Exception($"{e} can not find station ");
-                }*/
                 dalObject.RemoveDroneCharge(droneCharge);
                 return droneBL;
             }
@@ -117,25 +96,20 @@ namespace BL
                     throw new CanNotUpdateDrone(id, "the drone is not free");
                 }
                 DO.Customer customerSender, customerCurrent, customerReciever;
-                DO.Parcel currentParcel = new DO.Parcel();
-                IEnumerable<DO.Parcel> parcels = getParcelsWithoutoutDrone();
-                currentParcel = new DO.Parcel() { Weight = 0 };
+                IEnumerable<DO.Parcel> parcels = dalObject.GetParcelesByCondition(p => p.Scheduled == null && p.Requested != null);
+                DO.Parcel currentParcel = new DO.Parcel() { Weight = 0 };
                 foreach (var parcel in parcels)
                 {
-                    if (parcel.Weight == droneBL.Weight)
+                    if (parcel.Weight <= droneBL.Weight)
                         count++;
-                    if (parcel.Requested == null)
-                        break;
-                    if (parcel.Scheduled != null)
-                        break;
                     customerSender = dalObject.GetCustomerById(p => p.ID == parcel.SenderID);
                     customerCurrent = dalObject.GetCustomerById(c => c.ID == currentParcel.SenderID);
                     customerReciever = dalObject.GetCustomerById(c => c.ID == parcel.TargetID);
                     double disDroneToSenderParcel = distance(droneBL.Location, new LocationBL(customerSender.Longitude, customerSender.Latitude));
                     double electricity = dalObject.RequestElectric()[(int)parcel.Weight];
-                    DO.Station station = stationWithMinDisAndEmptySlots(new LocationBL(customerReciever.Latitude, customerReciever.Longitude));
+                    BO.Station station = stationWithMinDisAndEmptySlots(new LocationBL(customerReciever.Latitude, customerReciever.Longitude));
                     double electricSenderToReciever = calcElectry(new LocationBL(customerSender.Longitude, customerSender.Latitude), new LocationBL(customerReciever.Longitude, customerReciever.Latitude), (int)parcel.Weight);
-                    double electricRecieverToCharger = calcElectry(new LocationBL(customerReciever.Longitude, customerReciever.Latitude), new LocationBL(station.Longitude, station.Latitude), 0);
+                    double electricRecieverToCharger = calcElectry(new LocationBL(customerReciever.Longitude, customerReciever.Latitude), station.Location, 0);
                     //check if the drone has enough battery to reach the reciever
                     if (((droneBL.BatteryStatus - (electricity * disDroneToSenderParcel + electricSenderToReciever + electricRecieverToCharger)) > 0) || (parcel.Weight < droneBL.Weight))
                     {
@@ -184,23 +158,15 @@ namespace BL
             lock (dalObject)
             {
                 BO.Drone droneBL = GetSpecificDroneBLWithDeleted(id);
-                DO.Parcel parcel = new DO.Parcel();
-                parcel = dalObject.GetParcelBy(p => p.DroneID == droneBL.ID);
+                DO.Parcel parcel = dalObject.GetParcelBy(p => p.DroneID == droneBL.ID);
                 if (parcel.DroneID == 0)
                     throw new CanNotUpdateDrone(id, "drone is didn't connect to a parcel");
-                if (droneBL.DroneStatus == DroneStatus.Delivery)
-                {
-                    //check if can collect the parcel
-                    if (parcel.PickedUp != null)
-                    {
-                        throw new CanNotUpdateDrone(id, "can't collect parcel because parcel is picked up");
-                    }
-
-                }
-                DO.Customer customerSender = dalObject.GetCustomerById(c => c.ID == parcel.SenderID);
-                droneBL.BatteryStatus -= calcElectry(droneBL.Location, new LocationBL(customerSender.Longitude, customerSender.Latitude), (int)parcel.Weight);
-                droneBL.Location = new LocationBL(customerSender.Longitude, customerSender.Latitude);
-                droneBL.DroneStatus = DroneStatus.Delivery;//////////////////////////////////////
+                if (droneBL.DroneStatus != DroneStatus.Delivery && parcel.PickedUp != null)
+                    throw new CanNotUpdateDrone(id, "can't collect parcel because parcel is picked up");
+                LocationBL customerSenderLocation = droneBL.parcelInDelivery.CollectLocation;
+                droneBL.BatteryStatus -= calcElectry(droneBL.Location, customerSenderLocation, (int)parcel.Weight);
+                droneBL.Location = customerSenderLocation;
+                droneBL.DroneStatus = DroneStatus.Delivery;
                 droneBL.parcelInDelivery.isWaiting = false;
                 updateDrone(droneBL);
                 parcel.PickedUp = DateTime.Now;
@@ -219,21 +185,15 @@ namespace BL
             {
                 BO.Drone droneBL = GetSpecificDroneBLWithDeleted(id);
                 DO.Parcel parcel = dalObject.GetParcelBy(p => p.DroneID == id);
-                //check if can supply the parcel
-                if (parcel.Delivered != null)
-                    throw new CanNotUpdateDrone(id, "parcel is delivered already");
                 if (parcel.PickedUp == null && parcel.Delivered != null)
-                {
                     throw new CanNotUpdateDrone(id, "can't supply parcel because didn't picked up or delieverd");
-                }
-                DO.Customer customerSender = dalObject.GetCustomerById(c => c.ID == parcel.SenderID);
-                DO.Customer customerReciever = dalObject.GetCustomerById(c => c.ID == parcel.TargetID);
-                ParcelInDelivery parcelInDelivery = new ParcelInDelivery(convertDalToParcelBL(parcel), dalObject);
-                droneBL.parcelInDelivery = parcelInDelivery;
-                double electricSenderToReciever = calcElectry(new LocationBL(customerSender.Longitude, customerSender.Latitude), new LocationBL(customerReciever.Longitude, customerReciever.Latitude), (int)parcel.Weight);
+                LocationBL customerSenderLocation = droneBL.parcelInDelivery.CollectLocation;
+                LocationBL customerRecieverReciever = droneBL.parcelInDelivery.TargetLocation;
+                double electricSenderToReciever = calcElectry(customerSenderLocation, customerRecieverReciever, (int)parcel.Weight);
                 droneBL.BatteryStatus -= electricSenderToReciever;
-                droneBL.Location = new LocationBL(customerReciever.Longitude, customerReciever.Latitude);
+                droneBL.Location = customerRecieverReciever;
                 droneBL.DroneStatus = DroneStatus.Available;
+                droneBL.parcelInDelivery = null;
                 updateDrone(droneBL);
                 parcel.Delivered = DateTime.Now;
                 dalObject.UpdateParcel(parcel);

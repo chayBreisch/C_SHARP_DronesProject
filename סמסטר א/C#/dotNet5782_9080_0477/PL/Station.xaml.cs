@@ -155,7 +155,9 @@ namespace PL
         {
             try
             {
-                stationBL = BLObject.UpdateDataStation(stationBL.ID, int.Parse(nameStation.Text), int.Parse(ChargeSlotsStation.Text));
+                stationBL.Name = int.Parse(nameStation.Text);
+                stationBL.ChargeSlots = int.Parse(ChargeSlotsStation.Text);
+                stationBL = BLObject.UpdateStation(stationBL);
                 MessageBox.Show("station updated sucssesfully");
             }
             catch (Exception ex)

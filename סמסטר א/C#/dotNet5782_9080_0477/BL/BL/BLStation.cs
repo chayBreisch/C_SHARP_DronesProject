@@ -163,15 +163,15 @@ namespace BL
         /// <param name="name"></param>
         /// <param name="chargeSlots"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public BO.Station UpdateDataStation(int id, int name = 0, int chargeSlots = -1)
+        public BO.Station UpdateStation(BO.Station stationBL)
         {
             lock (dalObject)
             {
-                DO.Station station = dalObject.GetStationById(s => s.ID == id);
-                if (name != 0)
+                DO.Station station = dalObject.GetStationById(s => s.ID == stationBL.ID);
+                /*if (name != 0)
                     station.Name = name;
                 if (chargeSlots != -1)
-                    station.ChargeSlots = chargeSlots;
+                    station.ChargeSlots = chargeSlots;*/
                 dalObject.UpdateStation(station);
                 return convertDalStationToBl(station);
             }
