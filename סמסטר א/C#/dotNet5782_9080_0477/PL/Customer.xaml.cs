@@ -68,7 +68,7 @@ namespace PL
             customeBL = customer;
             PLLists = pllists;
             InitializeComponent();
-            customerPL = new Customer_(BLObject.GetSpecificCustomerToList(customeBL.ID));
+            customerPL = new Customer_(BLObject.GetSpecificCustomerBL(C=>C.ID == customeBL.ID));
             mainGrid.DataContext = customerPL;
             if (CheckIdentity == 'c')
             {
@@ -209,7 +209,7 @@ namespace PL
             {
                 BLObject.AddCustomer(getID(), getName(), getPhone(), new BO.LocationBL(getLongitude(), getLatitude()));
                 MessageBox.Show("succesfull add");
-                PLLists.AddCustomer(BLObject.GetSpecificCustomerToList(getID()));
+                PLLists.AddCustomer(BLObject.GetSpecificCustomerBL(C=>C.ID==getID()));
                 Close();
             }
             catch (Exception ex)

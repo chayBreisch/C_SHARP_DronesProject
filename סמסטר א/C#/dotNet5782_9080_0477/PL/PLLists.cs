@@ -35,7 +35,7 @@ namespace PL
             Stations.Add(new Station_(bl));
         }
 
-        public void AddCustomer(CustomerToList bl)
+        public void AddCustomer(BO.Customer bl)
         {
             Customers.Add(new Customer_(bl));
         }
@@ -83,7 +83,7 @@ namespace PL
                 AddStation(station);
             }
 
-            foreach (var customer in BLObject.GetCustomersToList())
+            foreach (var customer in BLObject.GetCustomersByCondition(C=>C.ID != 0))
             {
                 AddCustomer(customer);
             }

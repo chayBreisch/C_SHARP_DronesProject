@@ -140,9 +140,9 @@ namespace PL
             Weight = drone.Weight;
             BatteryStatus = drone.BatteryStatus;
             DroneStatus = drone.DroneStatus;
-            Location = drone.Location;
+            //Location = new LocationBL() { Longitude = drone.Location.Longitude, Latitude = drone.Location.Latitude };
 
-        }
+            }
 
 
         public void updateDrone(DroneToList drone)

@@ -292,7 +292,6 @@ namespace PL
                 UnCharge.IsEnabled = true;
                 DronePL.updateDrone(BLObject.ConvertDroneBLToDroneToList(droneBL));
                 PLLists.UpdateDrone(droneBL);
-                //PLLists.UpdateDrone(droneBL);
             }
             catch (Exception ex)
             {

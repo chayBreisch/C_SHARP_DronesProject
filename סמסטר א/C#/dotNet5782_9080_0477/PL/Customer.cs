@@ -14,10 +14,10 @@ namespace PL
         public ulong ID { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
-        public int SumOfParcelsSendedAndProvided { get; set; }
-        public int SumOfParcelsSendedAndNotProvided { get; set; }
-        public int SumOfParcelsRecieved { get; set; }
-        public int SumOfParcelsOnTheWay { get; set; }
+        public LocationBL Location { get; set; }
+        public List<ParcelAtCustomer> parcelSendedByCustomer { get; set; }
+        public List<ParcelAtCustomer> parcelSendedToCustomer { get; set; }
+        public bool IsActive { get; set; }
 
 
 
@@ -40,16 +40,15 @@ namespace PL
 
 
 
-        public Customer_(CustomerToList customer)
+        public Customer_(BO.Customer customer)
         {
-            ID = customer.ID;
-            Name = customer.Name;
-            Phone = customer.Phone;
-            SumOfParcelsSendedAndProvided = customer.SumOfParcelsSendedAndProvided;
-            SumOfParcelsSendedAndNotProvided = customer.SumOfParcelsSendedAndNotProvided;
-            SumOfParcelsRecieved = customer.SumOfParcelsRecieved;
-            SumOfParcelsOnTheWay = customer.SumOfParcelsOnTheWay;
-
+            this.ID = customer.ID;
+            this.Name = customer.Name;
+            this.Phone = customer.Phone;
+            this.Location = new LocationBL() { Longitude = customer.Location.Longitude, Latitude = customer.Location.Latitude };
+            this.parcelSendedByCustomer = new List<ParcelAtCustomer>(customer.parcelSendedByCustomer);
+            this.parcelSendedToCustomer = new List<ParcelAtCustomer>(customer.parcelSendedToCustomer);
+            this.IsActive = customer.IsActive;
         }
     }
 }
