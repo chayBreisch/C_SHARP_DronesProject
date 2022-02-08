@@ -56,7 +56,9 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-
+                <Viewbox Width="115" Height="30" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" Visibility="{Binding ElementName=visibleUpdateForm, Path=Visibility}" Margin="0,9,0,11" >
+                    <StackPanel Orientation="Horizontal"/>
+                </Viewbox>
                 <Label  FontSize="16" Content="id:" Grid.Row="1" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="Model:" Grid.Row="2" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="battery:" Grid.Row="3" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
@@ -65,7 +67,7 @@
                 <Label FontSize="16" Content="location:" Grid.Row="6" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <TextBox FontSize="16" Text="{Binding ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="200,0,0,0" Name="idDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="220"/>
                 <TextBox FontSize="16" Text="{Binding Model, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" HorizontalAlignment="Left" Margin="231,0,0,0" Name="modelDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
-                <TextBox FontSize="16" Text="{Binding BatteryStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Name="batteryDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="240,0,0,0"/>
+                <!--<TextBox FontSize="16" Text="{Binding BatteryStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Name="batteryDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="240,0,0,0"/>-->
                 <TextBox FontSize="16" Text="{Binding Weight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="weightDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="240,0,0,0"/>
                 <TextBox FontSize="16" Text="{Binding DroneStatus }" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Margin="231,0,0,0" Name="statusDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
                 <TextBox FontSize="16" Text="{Binding Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="6" HorizontalAlignment="Left" Margin="260,0,0,0" Name="locationDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="160"/>
@@ -105,6 +107,19 @@
 
         </Grid>
         <Button Content="start simulation" x:Name="SimulationBtn" Margin="348,386,348,17" Click="SimulationBtn_Click" />
+        <ProgressBar Minimum="0" Maximum="100" Value="{Binding BatteryStatus}" Name="pbStatus" Margin="239,147,377,264"/>
+        <TextBlock Text="{Binding ElementName=pbStatus, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,151,0,0" />
+        <!--<Border BorderBrush="#00c000" BorderThickness="2" CornerRadius="5" Padding="2,2,2,2" Margin="239,145,372,261">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="300*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border x:Name="BatteryFill" Width="{Binding BatteryStatus}" Background="#00c000" CornerRadius="2" Padding="0,2,3,2" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,2,0"  />
+            </Grid>
+        </Border>-->
+
     </Grid>
     <!--<Grid>
         <Grid>
