@@ -9,16 +9,24 @@ namespace BO
 {
     public class DroneInCharger
     {
-        public DroneInCharger(BO.Drone drone)
+        public DroneInCharger(BO.Drone drone = null)
         {
-            ID = drone.ID;
-            BatteryStatus = drone.BatteryStatus;
+            if (drone != null)
+            {
+                ID = drone.ID;
+                BatteryStatus = drone.BatteryStatus;
+            }
+            else
+            {
+                ID = 0;
+                BatteryStatus = -1;
+            }
         }
-        public DroneInCharger()
+        /*public DroneInCharger()
         {
             ID = 0;
             BatteryStatus = -1;
-        }
+        }*/
         public int ID { get; set; }
         public double BatteryStatus { get; set; }
         public double TimeInCharge { get; set; }
