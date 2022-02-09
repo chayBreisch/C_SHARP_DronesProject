@@ -23,7 +23,7 @@ namespace BO
         public DO.WeightCatagories Weight { get; set; }
         public double BatteryStatus { get; set; }
         public DroneStatus DroneStatus { get; set; }
-        public LocationBL Location { get; set; }
+        public Location Location { get; set; }
         public int NumOfParcelTrans { get; set; }
 
         public override string ToString()

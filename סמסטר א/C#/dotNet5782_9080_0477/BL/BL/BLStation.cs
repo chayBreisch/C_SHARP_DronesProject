@@ -21,7 +21,7 @@ namespace BL
         /// <param name="location"></param>
         /// <param name="ChargeSlots"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddStation(int id, int name, LocationBL location, int ChargeSlots)
+        public void AddStation(int id, int name, Location location, int ChargeSlots)
         {
             lock (dalObject)
             {
@@ -37,7 +37,7 @@ namespace BL
         /// <param name="name"></param>
         /// <param name="location"></param>
         /// <param name="ChargeSlots"></param>
-        private void addStationToDal(int id, int name, LocationBL location, int ChargeSlots)
+        private void addStationToDal(int id, int name, Location location, int ChargeSlots)
         {
             DO.Station station = new DO.Station();
             station.ID = id;

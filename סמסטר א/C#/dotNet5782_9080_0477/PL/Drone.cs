@@ -78,11 +78,11 @@ namespace PL
                                  typeof(Drone_),
                                  new UIPropertyMetadata(0));
 
-        public LocationBL Location
+        public Location Location
         {
             get
             {
-                return (LocationBL)GetValue(LocationProperty);
+                return (Location)GetValue(LocationProperty);
             }
             set
             {
@@ -140,7 +140,7 @@ namespace PL
             Weight = drone.Weight;
             BatteryStatus = drone.BatteryStatus;
             DroneStatus = drone.DroneStatus;
-            //Location = new LocationBL() { Longitude = drone.Location.Longitude, Latitude = drone.Location.Latitude };
+            //Location = new Location(drone.Location);
 
         }
 
@@ -152,7 +152,7 @@ namespace PL
             this.Weight = drone.Weight;
             this.BatteryStatus = Math.Round(drone.BatteryStatus);
             this.DroneStatus = drone.DroneStatus;
-            this.Location = drone.Location;
+            //this.Location = new Location(drone.Location);
 
         }
     }

@@ -24,7 +24,7 @@ namespace BL
         /// <param name="phone"></param>
         /// <param name="location"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddCustomer(ulong id, string name, string phone, LocationBL location)
+        public void AddCustomer(ulong id, string name, string phone, Location location)
         {
             lock (dalObject)
             {
@@ -40,7 +40,7 @@ namespace BL
         /// <param name="name"></param>
         /// <param name="phone"></param>
         /// <param name="location"></param>
-        private void addCustomerToDal(ulong id, string name, string phone, LocationBL location)
+        private void addCustomerToDal(ulong id, string name, string phone, Location location)
         {
             DO.Customer customer = new DO.Customer();
             customer.ID = id;
@@ -118,6 +118,37 @@ namespace BL
 
         /// <summary>
         /// get specific customerToList
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns>CustomerBL</returns>
+        private BO.Customer convertDalCustomerToBl(DO.Customer c)
+        {
+            List<ParcelAtCustomer> parcelSendedByCustomers = new List<ParcelAtCustomer>();
+            List<ParcelAtCustomer> parcelSendedToCustomers = new List<ParcelAtCustomer>();
+            IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
+            foreach (var p in parcels)
+            {
+                if (p.SenderID == c.ID)
+                    parcelSendedByCustomers.Add(new ParcelAtCustomer(convertDalToParcelBL(p), c.ID, dalObject));
+                if (p.TargetID == c.ID)
+                    parcelSendedToCustomers.Add(new ParcelAtCustomer(convertDalToParcelBL(p), c.ID, dalObject));
+
+            };
+
+            return new BO.Customer
+            {
+                ID = c.ID,
+                Name = c.Name,
+                Phone = c.Phone,
+                Location = new LocationBL() { Longitude = c.Longitude, Latitude = c.Latitude },
+                parcelSendedByCustomer = parcelSendedByCustomers,
+                parcelSendedToCustomer = parcelSendedToCustomers,
+                IsActive = c.IsActive
+            };
+        }
+
+        /// <summary>
+        /// update the customer
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

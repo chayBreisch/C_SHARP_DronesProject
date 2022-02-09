@@ -105,11 +105,11 @@ namespace BL
                     customerSender = dalObject.GetCustomerById(p => p.ID == parcel.SenderID);
                     customerCurrent = dalObject.GetCustomerById(c => c.ID == currentParcel.SenderID);
                     customerReciever = dalObject.GetCustomerById(c => c.ID == parcel.TargetID);
-                    double disDroneToSenderParcel = distance(droneBL.Location, new LocationBL(customerSender.Longitude, customerSender.Latitude));
+                    double disDroneToSenderParcel = distance(droneBL.Location, new Location(customerSender.Longitude, customerSender.Latitude));
                     double electricity = dalObject.RequestElectric()[(int)parcel.Weight];
-                    BO.Station station = stationWithMinDisAndEmptySlots(new LocationBL(customerReciever.Latitude, customerReciever.Longitude));
-                    double electricSenderToReciever = calcElectry(new LocationBL(customerSender.Longitude, customerSender.Latitude), new LocationBL(customerReciever.Longitude, customerReciever.Latitude), (int)parcel.Weight);
-                    double electricRecieverToCharger = calcElectry(new LocationBL(customerReciever.Longitude, customerReciever.Latitude), station.Location, 0);
+                    BO.Station station = stationWithMinDisAndEmptySlots(new Location(customerReciever.Latitude, customerReciever.Longitude));
+                    double electricSenderToReciever = calcElectry(new Location(customerSender.Longitude, customerSender.Latitude), new Location(customerReciever.Longitude, customerReciever.Latitude), (int)parcel.Weight);
+                    double electricRecieverToCharger = calcElectry(new Location(customerReciever.Longitude, customerReciever.Latitude), station.Location, 0);
                     //check if the drone has enough battery to reach the reciever
                     if (((droneBL.BatteryStatus - (electricity * disDroneToSenderParcel + electricSenderToReciever + electricRecieverToCharger)) > 0) || (parcel.Weight < droneBL.Weight))
                     {
@@ -126,7 +126,7 @@ namespace BL
                             }
                             else if (parcel.Weight == currentParcel.Weight)
                             {
-                                if (disDroneToSenderParcel < distance(droneBL.Location, new LocationBL(customerCurrent.Longitude, customerCurrent.Latitude)))
+                                if (disDroneToSenderParcel < distance(droneBL.Location, new Location(customerCurrent.Longitude, customerCurrent.Latitude)))
                                 {
                                     currentParcel = parcel;
                                 }
@@ -163,7 +163,7 @@ namespace BL
                     throw new CanNotUpdateDrone(id, "drone is didn't connect to a parcel");
                 if (droneBL.DroneStatus != DroneStatus.Delivery && parcel.PickedUp != null)
                     throw new CanNotUpdateDrone(id, "can't collect parcel because parcel is picked up");
-                LocationBL customerSenderLocation = droneBL.parcelInDelivery.CollectLocation;
+                Location customerSenderLocation = droneBL.parcelInDelivery.CollectLocation;
                 droneBL.BatteryStatus -= calcElectry(droneBL.Location, customerSenderLocation, (int)parcel.Weight);
                 droneBL.Location = customerSenderLocation;
                 droneBL.DroneStatus = DroneStatus.Delivery;
@@ -187,8 +187,8 @@ namespace BL
                 DO.Parcel parcel = dalObject.GetParcelBy(p => p.DroneID == id);
                 if (parcel.PickedUp == null && parcel.Delivered != null)
                     throw new CanNotUpdateDrone(id, "can't supply parcel because didn't picked up or delieverd");
-                LocationBL customerSenderLocation = droneBL.parcelInDelivery.CollectLocation;
-                LocationBL customerRecieverReciever = droneBL.parcelInDelivery.TargetLocation;
+                Location customerSenderLocation = droneBL.parcelInDelivery.CollectLocation;
+                Location customerRecieverReciever = droneBL.parcelInDelivery.TargetLocation;
                 double electricSenderToReciever = calcElectry(customerSenderLocation, customerRecieverReciever, (int)parcel.Weight);
                 droneBL.BatteryStatus -= electricSenderToReciever;
                 droneBL.Location = customerRecieverReciever;

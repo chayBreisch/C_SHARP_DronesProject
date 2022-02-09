@@ -17,7 +17,7 @@ namespace BO
         }
         public int ID { get; set; }
         public double BatteryStatus { get; set; }
-        public LocationBL CurrentLocation { get; set; }
+        public Location CurrentLocation { get; set; }
 
         public override string ToString()
         {

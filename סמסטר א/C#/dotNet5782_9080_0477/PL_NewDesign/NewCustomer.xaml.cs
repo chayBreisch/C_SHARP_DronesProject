@@ -46,7 +46,7 @@ namespace PL_NewDesign
                 string phone = Convert.ToString(newPhone.Text);
                 double longit = Convert.ToDouble(newLong.Text);
                 double lat = Convert.ToDouble(newLat.Text);
-                BLObject.AddCustomer(id, name, phone, new BO.LocationBL(longit, lat));
+                BLObject.AddCustomer(id, name, phone, new BO.Location(longit, lat));
                 new CustomerWindow(BLObject, new MainWindow(), BLObject.GetSpecificCustomerBL(p => p.ID == id)).Show();
                 this.Close();
             }
