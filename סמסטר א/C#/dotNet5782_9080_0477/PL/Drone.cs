@@ -120,7 +120,7 @@ namespace PL
 
 
         public DroneStatus DroneStatus
-    {
+        {
             get
             {
                 return (DroneStatus)GetValue(DroneStatusProperty);
@@ -142,7 +142,7 @@ namespace PL
             DroneStatus = drone.DroneStatus;
             Location = new Location(drone.Location);
 
-            }
+        }
 
 
         public void updateDrone(DroneToList drone)
@@ -150,7 +150,7 @@ namespace PL
             this.ID = drone.ID;
             this.Model = drone.Model;
             this.Weight = drone.Weight;
-            this.BatteryStatus = drone.BatteryStatus;
+            this.BatteryStatus = Math.Round(drone.BatteryStatus);
             this.DroneStatus = drone.DroneStatus;
             this.Location = new Location(drone.Location);
 

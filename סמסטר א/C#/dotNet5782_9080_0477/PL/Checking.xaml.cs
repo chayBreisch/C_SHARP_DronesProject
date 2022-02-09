@@ -37,7 +37,7 @@ namespace PL
                 ulong ID = (ulong)Convert.ToInt32(checkID.Text);
                 string name = Convert.ToString(chechName.Text);
                 BO.Customer customer = BLObject.GetSpecificCustomerBL(p => p.ID == ID);
-                if (customer.Name != name) { throw new Exception(); }
+                //if (customer.Name != name) { throw new Exception(); }
                 if (CheckIdentity == 'w')
                 {
                     if (Convert.ToInt32(Microsoft.VisualBasic.Interaction.InputBox("enter worker password")) != 12345) { throw new Exception("wrong password"); }

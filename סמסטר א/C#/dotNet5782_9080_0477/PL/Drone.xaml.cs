@@ -503,7 +503,8 @@ namespace PL
             worker.WorkerReportsProgress = true;
             worker.ProgressChanged += (object? sender, ProgressChangedEventArgs e) =>
             {
-                //PLLists.UpdateDrone(DronePL);
+                DronePL.updateDrone(BLObject.ConvertDroneBLToDroneToList(droneBL));
+                PLLists.UpdateDrone(droneBL);
 
                 /*Student.MyAge++;
                 Student.Name = updatDrone.FirstName;
