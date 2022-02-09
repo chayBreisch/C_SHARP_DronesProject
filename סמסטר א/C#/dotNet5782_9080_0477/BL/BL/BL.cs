@@ -134,7 +134,7 @@ namespace BL
         private double calcElectry(Location locatin1, Location location2, int weight)
         {
             double distance1 = distance(locatin1, location2);
-            return distance1 * dalObject.RequestElectric()[weight];
+            return Math.Round(distance1 * dalObject.RequestElectric()[weight]);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace BL
         /// </summary>
         /// <param name="location"></param>
         /// <returns>Station</returns>
-        private BO.Station stationWithMinDisAndEmptySlots(LocationBL location)////////////////////////////
+        private BO.Station stationWithMinDisAndEmptySlots(Location location)////////////////////////////
         {
             double minDis = -1;
             double dis2 = 0;

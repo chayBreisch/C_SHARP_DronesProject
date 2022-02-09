@@ -140,7 +140,7 @@ namespace PL
             Weight = drone.Weight;
             BatteryStatus = drone.BatteryStatus;
             DroneStatus = drone.DroneStatus;
-            Location = new Location(drone.Location);
+            //Location = new Location(drone.Location);
 
         }
 
@@ -152,7 +152,7 @@ namespace PL
             this.Weight = drone.Weight;
             this.BatteryStatus = Math.Round(drone.BatteryStatus);
             this.DroneStatus = drone.DroneStatus;
-            this.Location = new Location(drone.Location);
+            //this.Location = new Location(drone.Location);
 
         }
     }
