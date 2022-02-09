@@ -179,7 +179,7 @@ namespace BL
             foreach (var d in dalObject.GetDroneCharges())
                 if (d.StationID == s.ID)
                     dronesInCharges.Add(new DroneInCharger(GetSpecificDroneBLWithDeleted(d.DroneID)));
-            return new BO.Station(s.ID, s.Name, s.ChargeSlots, new LocationBL(s.Longitude, s.Latitude), s.IsActive, dronesInCharges);
+            return new BO.Station(s.ID, s.Name, s.ChargeSlots, new Location(s.Longitude, s.Latitude), s.IsActive, dronesInCharges);
         }
 
         /// <summary>

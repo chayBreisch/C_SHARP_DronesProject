@@ -117,37 +117,6 @@ namespace BL
         }
 
         /// <summary>
-        /// get specific customerToList
-        /// </summary>
-        /// <param name="c"></param>
-        /// <returns>CustomerBL</returns>
-        private BO.Customer convertDalCustomerToBl(DO.Customer c)
-        {
-            List<ParcelAtCustomer> parcelSendedByCustomers = new List<ParcelAtCustomer>();
-            List<ParcelAtCustomer> parcelSendedToCustomers = new List<ParcelAtCustomer>();
-            IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
-            foreach (var p in parcels)
-            {
-                if (p.SenderID == c.ID)
-                    parcelSendedByCustomers.Add(new ParcelAtCustomer(convertDalToParcelBL(p), c.ID, dalObject));
-                if (p.TargetID == c.ID)
-                    parcelSendedToCustomers.Add(new ParcelAtCustomer(convertDalToParcelBL(p), c.ID, dalObject));
-
-            };
-
-            return new BO.Customer
-            {
-                ID = c.ID,
-                Name = c.Name,
-                Phone = c.Phone,
-                Location = new LocationBL() { Longitude = c.Longitude, Latitude = c.Latitude },
-                parcelSendedByCustomer = parcelSendedByCustomers,
-                parcelSendedToCustomer = parcelSendedToCustomers,
-                IsActive = c.IsActive
-            };
-        }
-
-        /// <summary>
         /// update the customer
         /// </summary>
         /// <param name="id"></param>
@@ -224,7 +193,7 @@ namespace BL
         }
 
         /// <summary>
-        /// convert a customer from dal to bl
+        /// get specific customerToList
         /// </summary>
         /// <param name="c"></param>
         /// <returns>CustomerBL</returns>
@@ -247,12 +216,13 @@ namespace BL
                 ID = c.ID,
                 Name = c.Name,
                 Phone = c.Phone,
-                Location = new LocationBL() { Longitude = c.Longitude, Latitude = c.Latitude },
+                Location = new Location() { Longitude = c.Longitude, Latitude = c.Latitude },
                 parcelSendedByCustomer = parcelSendedByCustomers,
                 parcelSendedToCustomer = parcelSendedToCustomers,
                 IsActive = c.IsActive
             };
         }
+
         #endregion
 
         #region check customer id functions
@@ -295,7 +265,7 @@ namespace BL
             }
         }
         #endregion
-        
+
         /// <summary>
         /// remove customer
         /// </summary>
