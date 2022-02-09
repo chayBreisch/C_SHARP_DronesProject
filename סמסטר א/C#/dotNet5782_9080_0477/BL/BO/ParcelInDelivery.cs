@@ -18,9 +18,9 @@ namespace BO
             CustomerInDeliverySender = parcel.Sender;
             CustomerInDeliveryReciever = parcel.Reciever;
             DO.Customer customer = dalObject.GetCustomerById(c => c.ID == parcel.Sender.ID);
-            CollectLocation = new LocationBL(customer.Longitude, customer.Latitude);
+            CollectLocation = new Location(customer.Longitude, customer.Latitude);
             customer = dalObject.GetCustomerById(c => c.ID == parcel.Reciever.ID);
-            TargetLocation = new LocationBL(customer.Longitude, customer.Latitude);
+            TargetLocation = new Location(customer.Longitude, customer.Latitude);
             TransportDistance = BL.BL.distance(CollectLocation, TargetLocation);
         }
         public int ID { get; set; }
@@ -29,8 +29,8 @@ namespace BO
         public bool isWaiting { get; set; }
         public CustomerAtParcel CustomerInDeliverySender { get; set; }
         public CustomerAtParcel CustomerInDeliveryReciever { get; set; }
-        public LocationBL CollectLocation { get; set; }
-        public LocationBL TargetLocation { get; set; }
+        public Location CollectLocation { get; set; }
+        public Location TargetLocation { get; set; }
         public double TransportDistance { get; set; }
 
         public override string ToString()

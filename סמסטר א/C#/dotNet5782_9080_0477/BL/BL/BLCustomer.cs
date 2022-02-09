@@ -54,7 +54,7 @@ namespace BL
         /// <param name="phone"></param>
         /// <param name="location"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddCustomer(ulong id, string name, string phone, LocationBL location)
+        public void AddCustomer(ulong id, string name, string phone, Location location)
         {
             lock (dalObject)
             {
@@ -75,7 +75,7 @@ namespace BL
         /// <param name="name"></param>
         /// <param name="phone"></param>
         /// <param name="location"></param>
-        private void addCustomerToDal(ulong id, string name, string phone, LocationBL location)
+        private void addCustomerToDal(ulong id, string name, string phone, Location location)
         {
             DO.Customer customer = new DO.Customer();
             customer.ID = id;
@@ -158,7 +158,7 @@ namespace BL
                 ID = c.ID,
                 Name = c.Name,
                 Phone = c.Phone,
-                Location = new LocationBL() { Longitude = c.Longitude, Latitude = c.Latitude },
+                Location = new Location() { Longitude = c.Longitude, Latitude = c.Latitude },
                 parcelSendedByCustomer = parcelSendedByCustomers,
                 parcelSendedToCustomer = parcelSendedToCustomers,
                 IsActive = c.IsActive

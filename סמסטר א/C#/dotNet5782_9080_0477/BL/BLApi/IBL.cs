@@ -14,9 +14,9 @@ namespace BlApi
         //##############################################################
         //Add functions
         //##############################################################
-        public void AddCustomer(ulong id, string name, string phone, LocationBL location);
+        public void AddCustomer(ulong id, string name, string phone, Location location);
         public void AddParcel(ulong sender, ulong target, int Weight, int priority);
-        public void AddStation(int id, int name, LocationBL location, int ChargeSlots);
+        public void AddStation(int id, int name, Location location, int ChargeSlots);
         public void AddDrone(int id, string model, int maxWeight, int stationID);
 
 

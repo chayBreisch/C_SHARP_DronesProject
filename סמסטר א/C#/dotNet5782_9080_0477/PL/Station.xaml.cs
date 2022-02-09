@@ -82,11 +82,11 @@ namespace PL
         /// get location of the station
         /// </summary>
         /// <returns></returns>
-        private BO.LocationBL getLocation()
+        private BO.Location getLocation()
         {
             try
             {
-                return new BO.LocationBL(int.Parse(longitudeStation.Text), int.Parse(latitudeStation.Text));
+                return new BO.Location(int.Parse(longitudeStation.Text), int.Parse(latitudeStation.Text));
             }
             catch (Exception e)
             {

@@ -207,7 +207,7 @@ namespace PL
         {
             try
             {
-                BLObject.AddCustomer(getID(), getName(), getPhone(), new BO.LocationBL(getLongitude(), getLatitude()));
+                BLObject.AddCustomer(getID(), getName(), getPhone(), new BO.Location(getLongitude(), getLatitude()));
                 MessageBox.Show("succesfull add");
                 PLLists.AddCustomer(BLObject.GetSpecificCustomerBL(C=>C.ID==getID()));
                 Close();
