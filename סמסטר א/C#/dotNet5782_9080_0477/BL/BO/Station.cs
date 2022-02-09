@@ -9,7 +9,7 @@ namespace BO
 {
     public class Station
     {
-        public Station(int id, int name, int chargeslots, LocationBL location, bool isActive, List<DroneInCharger> droneInCharger)
+        public Station(int id, int name, int chargeslots, Location location, bool isActive, List<DroneInCharger> droneInCharger)
         {
             ID = id;
             Name = name;
@@ -23,7 +23,7 @@ namespace BO
             ID = 0;
             Name = 0;
             chargeSlots = 0;
-            Location = new LocationBL(-1, -1);
+            Location = new Location(-1, -1);
             DronesInCharge = new List<DroneInCharger>();
             IsActive = true;
         }
@@ -58,7 +58,7 @@ namespace BO
                 chargeSlots = value;
             }
         }
-        public LocationBL Location { get; set; }
+        public Location Location { get; set; }
         public List<DroneInCharger> DronesInCharge { get; set; }
         public bool IsActive { get; set; }
         public override string ToString()

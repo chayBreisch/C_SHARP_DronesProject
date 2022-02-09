@@ -67,7 +67,7 @@ namespace BL
                         if (parcel.PickedUp != null)
                         {
                             DO.Station station = findClosestStation(customerSender.Location);
-                            droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
+                            droneBL.Location = new Location(station.Latitude, station.Longitude);
                         }
 
                         //check if the parcel of the drone is scheduled and not delivered and picked up
@@ -97,7 +97,7 @@ namespace BL
                     int length = dalObject.LengthStation();
                     List<DO.Station> s = dalObject.GetStations().ToList();
                     DO.Station station = s[rand.Next(0, length)];
-                    droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
+                    droneBL.Location = new Location(station.Latitude, station.Longitude);
                     droneBL.BatteryStatus = rand.Next(0, 21);
                     DroneCharge droneCharge = new DroneCharge();
                     droneCharge.DroneID = drone.ID;
@@ -131,7 +131,7 @@ namespace BL
         /// <param name="location2"></param>
         /// <param name="weight"></param>
         /// <returns>double</returns>
-        private double calcElectry(LocationBL locatin1, LocationBL location2, int weight)
+        private double calcElectry(Location locatin1, Location location2, int weight)
         {
             double distance1 = distance(locatin1, location2);
             return distance1 * dalObject.RequestElectric()[weight];
@@ -143,7 +143,7 @@ namespace BL
         /// <param name="location"></param>
         /// <returns>Station</returns>
         //return the stations with the minimum distance from the location and with empty slots
-        private BO.Station stationWithMinDisAndEmptySlots(LocationBL location)////////////////////////////
+        private BO.Station stationWithMinDisAndEmptySlots(Location location)////////////////////////////
         {
             double minDis = -1;
             double dis2 = 0;
@@ -166,7 +166,7 @@ namespace BL
         /// </summary>
         /// <param name="location"></param>
         /// <returns>Station</returns>
-        private DO.Station findClosestStation(LocationBL location)
+        private DO.Station findClosestStation(Location location)
         {
             double minDis = -1;
             double dis2 = 0;
@@ -174,7 +174,7 @@ namespace BL
             DO.Station sendStation = new DO.Station();
             foreach (var station in stations)
             {
-                dis2 = distance(location, new LocationBL(station.Latitude, station.Longitude));
+                dis2 = distance(location, new Location(station.Latitude, station.Longitude));
                 if (dis2 < minDis || minDis == -1)
                 {
                     minDis = dis2;
@@ -190,7 +190,7 @@ namespace BL
         /// <param name="location1"></param>
         /// <param name="location2"></param>
         /// <returns>double</returns>
-        public static double distance(LocationBL location1, LocationBL location2)
+        public static double distance(Location location1, Location location2)
         {
             return Math.Sqrt(Math.Pow(location2.Longitude - location1.Longitude, 2) +
             Math.Pow(location2.Latitude - location1.Latitude, 2) * 1.0);

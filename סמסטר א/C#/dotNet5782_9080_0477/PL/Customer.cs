@@ -14,7 +14,7 @@ namespace PL
         public ulong ID { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
-        public LocationBL Location { get; set; }
+        public Location Location { get; set; }
         public List<ParcelAtCustomer> parcelSendedByCustomer { get; set; }
         public List<ParcelAtCustomer> parcelSendedToCustomer { get; set; }
         public bool IsActive { get; set; }
@@ -45,7 +45,7 @@ namespace PL
             this.ID = customer.ID;
             this.Name = customer.Name;
             this.Phone = customer.Phone;
-            this.Location = new LocationBL() { Longitude = customer.Location.Longitude, Latitude = customer.Location.Latitude };
+            this.Location = new Location() { Longitude = customer.Location.Longitude, Latitude = customer.Location.Latitude };
             this.parcelSendedByCustomer = new List<ParcelAtCustomer>(customer.parcelSendedByCustomer);
             this.parcelSendedToCustomer = new List<ParcelAtCustomer>(customer.parcelSendedToCustomer);
             this.IsActive = customer.IsActive;

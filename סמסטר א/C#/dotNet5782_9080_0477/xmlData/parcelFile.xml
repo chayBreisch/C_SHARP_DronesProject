@@ -7,8 +7,8 @@
     <Weight>Medium</Weight>
     <Priority>Emergency</Priority>
     <Requested>2007-05-07T00:00:00</Requested>
-    <DroneID>0</DroneID>
-    <Scheduled xsi:nil="true" />
+    <DroneID>1</DroneID>
+    <Scheduled>2022-02-09T11:04:04.4451904+02:00</Scheduled>
     <PickedUp xsi:nil="true" />
     <Delivered xsi:nil="true" />
     <IsActive>true</IsActive>

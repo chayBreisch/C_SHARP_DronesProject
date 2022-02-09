@@ -55,7 +55,7 @@ namespace BL
                     droneBL.Weight = (DO.WeightCatagories)maxWeight;
                     droneBL.BatteryStatus = rand.Next(20, 40);
                     droneBL.DroneStatus = DroneStatus.Maintenance;
-                    droneBL.Location = new LocationBL(station.Longitude, station.Latitude);
+                    droneBL.Location = new Location(station.Longitude, station.Latitude);
                     droneBL.IsActive = true;
                     addDroneToDal(id, model, maxWeight);
                     addDroneCharge(stationID, id);
