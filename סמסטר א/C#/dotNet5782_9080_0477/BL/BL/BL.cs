@@ -142,7 +142,6 @@ namespace BL
         /// </summary>
         /// <param name="location"></param>
         /// <returns>Station</returns>
-        //return the stations with the minimum distance from the location and with empty slots
         private BO.Station stationWithMinDisAndEmptySlots(LocationBL location)////////////////////////////
         {
             double minDis = -1;
