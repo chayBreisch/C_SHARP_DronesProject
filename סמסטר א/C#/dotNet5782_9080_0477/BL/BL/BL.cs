@@ -39,7 +39,7 @@ namespace BL
         private BL()
         {
 
-            //get all the electric rates
+            #region get all the electric rates
             dalObject = DalFactory.GetDal();
             double[] arrayEletric = dalObject.RequestElectric();
             electricAvailable = arrayEletric[0];
@@ -47,6 +47,8 @@ namespace BL
             electricMidHeight = arrayEletric[2];
             electricHeavyHeight = arrayEletric[3];
             electricChargingRate = arrayEletric[4];
+            #endregion
+
             //for each drone we check what is the status and reboot in entries
             foreach (var drone in dalObject.GetDrones())
             {
@@ -85,13 +87,15 @@ namespace BL
                     }
                 }
 
-                //check if drone is not in delivery
+                #region check if drone is not in delivery
                 if (droneBL.DroneStatus != DroneStatus.Delivery)
                 {
                     droneBL.DroneStatus = (DroneStatus)rand.Next(0, 2);
                 }
+                #endregion
 
-                //check if drone is in maintenance
+                #region check if drone is in maintenance
+
                 if (droneBL.DroneStatus == DroneStatus.Maintenance)
                 {
                     int length = dalObject.LengthStation();
@@ -104,8 +108,10 @@ namespace BL
                     droneCharge.StationID = station.ID;
                     dalObject.AddDroneCharge(droneCharge);
                 }
+                #endregion
 
-                //check if drone is in available
+                #region check if drone is in available
+
                 else if (droneBL.DroneStatus == DroneStatus.Available)
                 {
                     List<DO.Parcel> parcelBLsWithSuppliedParcel = dalObject.GetParcels().ToList().FindAll(p => p.Delivered != null);
@@ -120,10 +126,13 @@ namespace BL
                         droneBL.BatteryStatus = rand.Next(minElectric, 100);
                     }
                 }
+                #endregion
+
                 droneBLList.Add(droneBL);
             }
         }
 
+        #region help functions
 
         /// <summary>
         ///calsulate the electricity that a drone needs to get from one location to another
@@ -134,7 +143,7 @@ namespace BL
         private double calcElectry(Location locatin1, Location location2, int weight)
         {
             double distance1 = distance(locatin1, location2);
-            return distance1 * dalObject.RequestElectric()[weight];
+            return Math.Round(distance1 * dalObject.RequestElectric()[weight]);
         }
 
         /// <summary>
@@ -142,7 +151,6 @@ namespace BL
         /// </summary>
         /// <param name="location"></param>
         /// <returns>Station</returns>
-        //return the stations with the minimum distance from the location and with empty slots
         private BO.Station stationWithMinDisAndEmptySlots(Location location)////////////////////////////
         {
             double minDis = -1;
@@ -196,58 +204,6 @@ namespace BL
             Math.Pow(location2.Latitude - location1.Latitude, 2) * 1.0);
         }
 
-
-        /// <summary>
-        /// check the range of the id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>bool</returns>
-        public static bool CheckLongIdIsValid(ulong id)
-        {
-            return id > 100000000 && id < 1000000000;
-        }
-
-        /*/// <summary>
-        /// return parcels that are not connected to a drone
-        /// </summary>
-        /// <returns>List<ParcelBL></returns>*/
-        /*public IEnumerable<BO.Parcel> GetParcelsWithoutoutDrone()
-        {
-            IEnumerable<BO.Parcel> parcels = GetParcelsBL();
-            List<BO.Parcel> parcelsWithOutDrone = new List<BO.Parcel>();
-            foreach (var parcel in parcels)
-            {
-                if (parcel.Drone == null)
-                {
-                    parcelsWithOutDrone.Add(parcel);
-                }
-            }
-            return parcelsWithOutDrone;
-        }*/
-
-        /*/// <summary>
-        /// return station with epty chargers
-        /// </summary>
-        /// <returns>List<StationBL></returns>*/
-        /*public IEnumerable<BO.Station> GetStationWithEmptyChargers()
-        {
-            int numOfChargers = 0;
-            IEnumerable<BO.Station> stations = GetStationsBL();
-            List<BO.Station> stationsWithEmptyChargers = new List<BO.Station>();
-            List<DroneCharge> droneChargers = dalObject.GetDroneCharges().ToList();
-            foreach (var station in stations)
-            {
-                foreach (var droneCharger in droneChargers)
-                {
-                    if (station.ID == droneCharger.StationID)
-                        numOfChargers++;
-                }
-                if (numOfChargers < station.ChargeSlots)
-                    stationsWithEmptyChargers.Add(station);
-            }
-            return stationsWithEmptyChargers;
-        }*/
-
         /// <summary>
         /// return values of weightCatagories enum
         /// </summary>
@@ -268,27 +224,28 @@ namespace BL
             return Enum.GetValues(typeof(Priorities));
         }
 
+        /// <summary>
+        /// get rate of charging
+        /// </summary>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public double getRateOfCharging()
         {
             return this.electricChargingRate;
         }
+        #endregion
 
-
-
-
-
-
-
-
-
+        /// <summary>
+        /// start simularion
+        /// </summary>
+        /// <param name="drone"></param>
+        /// <param name="worker"></param>
+        /// <param name="updateDrone"></param>
+        /// <param name="needToStop"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void StartSimulation(BO.Drone drone, BackgroundWorker worker, Action<BO.Drone, int> updateDrone, Func<bool> needToStop)
         {
             new Simulation(this, drone, worker, updateDrone, needToStop);
-            //var sim = new Simulation(this, drone, worker, updateDrone, needToStop);
-            //sim.start(drone, worker, updateDrone, needToStop);
-
         }
     }
 }

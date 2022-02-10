@@ -34,8 +34,8 @@ namespace BL
                     droneBL.Location = station.Location;
                     droneBL.DroneStatus = DroneStatus.Maintenance;
                     updateDrone(droneBL);
-                    station.ChargeSlots -= 1;
-                    UpdateStation(station);
+                    //station.ChargeSlots -= 1;
+                    //UpdateStation(station);
                     DroneCharge droneCharge = new DroneCharge { DroneID = id, StationID = station.ID };
                     addDroneCharge(station.ID, id);
                 }
@@ -72,9 +72,9 @@ namespace BL
                 droneBL.DroneStatus = DroneStatus.Available;
                 updateDrone(droneBL);
                 DroneCharge droneCharge = dalObject.GetDroneChargeById(d => d.DroneID == droneBL.ID);
-                DO.Station station = dalObject.GetStationById(s => s.ID == droneCharge.StationID);
-                station.ChargeSlots += 1;
-                dalObject.UpdateStation(station);
+                //DO.Station station = dalObject.GetStationById(s => s.ID == droneCharge.StationID);
+                //station.ChargeSlots += 1;
+                //dalObject.UpdateStation(station);
                 dalObject.RemoveDroneCharge(droneCharge);
                 return droneBL;
             }

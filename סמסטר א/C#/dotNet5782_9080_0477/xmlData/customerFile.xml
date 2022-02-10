@@ -109,7 +109,7 @@
     <Name>1</Name>
     <Phone>1</Phone>
     <Longitude>1</Longitude>
-    <Latitude>1</Latitude>
+    <Latitude>2</Latitude>
     <IsActive>true</IsActive>
   </Customer>
 </ArrayOfCustomer>

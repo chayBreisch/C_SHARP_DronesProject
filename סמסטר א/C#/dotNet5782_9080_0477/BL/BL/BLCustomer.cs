@@ -13,38 +13,8 @@ namespace BL
 {
     internal partial class BL
     {
-        /// <summary>
-        /// check if the id is uniqe
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="dalObject"></param>
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void checkUniqeIdCustomer(ulong id, IDAL.IDal dalObject)
-        {
-            lock (dalObject)
-            {
-                IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
-                if (customers.Any(c => c.ID == id))
-                    throw new NotUniqeID(id, typeof(DO.Customer));
-            }
-        }
 
-        /// <summary>
-        /// check if the id is uniqe
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="dalObject"></param>
-        /*public void checkUniqeIDCustomer(ulong id)
-        {
-            IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
-            foreach (var customer in customers)
-            {
-                if (customer.ID == id)
-                {
-                    throw new NotUniqeID(id, typeof(DO.Customer));
-                }
-            }
-        }*/
+        #region add customer functions
 
         /// <summary>
         /// add a customer to the bl
@@ -59,11 +29,6 @@ namespace BL
             lock (dalObject)
             {
                 checkUniqeIdCustomer(id, dalObject);
-                /*            BO.Customer customer = new BO.Customer();
-                            customer.ID = id;
-                            customer.Name = name;
-                            customer.Phone = phone;
-                            customer.Location = new LocationBL(location.Longitude, location.Latitude);*/
                 addCustomerToDal(id, name, phone, location);
             }
         }
@@ -86,7 +51,29 @@ namespace BL
             customer.IsActive = true;
             dalObject.AddCustomer(customer);
         }
+        #endregion
 
+        #region get customer/s functions
+
+        /// <summary>
+        /// return active customerToList
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public IEnumerable<CustomerToList> GetCustomersToList()
+        {
+            lock (dalObject)
+            {
+                IEnumerable<BO.Customer> customers = getCustomersBL();
+                List<CustomerToList> customers1 = new List<CustomerToList>();
+                foreach (var customer in customers)
+                {
+                    if (customer.IsActive)
+                        customers1.Add(new CustomerToList(customer, dalObject));
+                }
+                return customers1;
+            }
+        }
         /// <summary>
         /// return all the customers from the dal converted to bl
         /// </summary>
@@ -129,102 +116,14 @@ namespace BL
             }
         }
 
-        public CustomerToList GetSpecificCustomerToList(ulong id)
-        {
-            return new CustomerToList(GetSpecificCustomerBL(C => C.ID == id), dalObject);
-        }
-
-        /// <summary>
-        /// convert a customer from dal to bl
-        /// </summary>
-        /// <param name="c"></param>
-        /// <returns>CustomerBL</returns>
-        private BO.Customer convertDalCustomerToBl(DO.Customer c)
-        {
-            List<ParcelAtCustomer> parcelSendedByCustomers = new List<ParcelAtCustomer>();
-            List<ParcelAtCustomer> parcelSendedToCustomers = new List<ParcelAtCustomer>();
-            IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
-            foreach (var p in parcels)
-            {
-                if (p.SenderID == c.ID)
-                    parcelSendedByCustomers.Add(new ParcelAtCustomer(convertDalToParcelBL(p), c.ID, dalObject));
-                if (p.TargetID == c.ID)
-                    parcelSendedToCustomers.Add(new ParcelAtCustomer(convertDalToParcelBL(p), c.ID, dalObject));
-
-            };
-
-            return new BO.Customer
-            {
-                ID = c.ID,
-                Name = c.Name,
-                Phone = c.Phone,
-                Location = new Location() { Longitude = c.Longitude, Latitude = c.Latitude },
-                parcelSendedByCustomer = parcelSendedByCustomers,
-                parcelSendedToCustomer = parcelSendedToCustomers,
-                IsActive = c.IsActive
-            };
-        }
-
         /// <summary>
         /// update the customer
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="phone"></param>
-        /*public void updateDataCustomer(ulong id, string name = null, string phone = null)
-        {
-            DO.Customer customer = dalObject.getCustomerById( c => c.ID == id);
-            if (name != null)
-            {
-                customer.Name = name;
-            }
-            if (phone != null)
-            {
-                customer.Phone = phone;
-            }
-            dalObject.updateCustomer(customer);
-        }*/
-
-        /// <summary>
-        /// check if there is a customer with the id
-        /// </summary>
-        /// <param name="id"></param>
-        private void checkIfCustomerWithThisID(ulong id)
-        {
-            lock (dalObject)
-            {
-                bool check = false;
-                IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
-                foreach (var customer in customers)
-                {
-                    if (customer.ID == id)
-                    {
-                        check = true;
-                    }
-                }
-                if (!check)
-                    throw new NotExistObjWithID(id, typeof(DO.Customer));
-            }
-        }
-
-        /// <summary>
-        /// return active customerToList
-        /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public IEnumerable<CustomerToList> GetCustomersToList()
+        public CustomerToList GetSpecificCustomerToList(ulong id)
         {
-            lock (dalObject)
-            {
-                IEnumerable<BO.Customer> customers = getCustomersBL();
-                List<CustomerToList> customers1 = new List<CustomerToList>();
-                foreach (var customer in customers)
-                {
-                    if (customer.IsActive)
-                        customers1.Add(new CustomerToList(customer, dalObject));
-                }
-                return customers1;
-            }
+            return new CustomerToList(GetSpecificCustomerBL(C => C.ID == id), dalObject);
         }
 
         /// <summary>
@@ -278,6 +177,9 @@ namespace BL
                         select customer);
             }
         }
+        #endregion 
+
+        #region convert customer functions
 
         /// <summary>
         /// convert customerToList to customerBL
@@ -291,36 +193,78 @@ namespace BL
         }
 
         /// <summary>
-        /// check if the check digit is good
+        /// get specific customerToList
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns>CustomerBL</returns>
+        private BO.Customer convertDalCustomerToBl(DO.Customer c)
+        {
+            List<ParcelAtCustomer> parcelSendedByCustomers = new List<ParcelAtCustomer>();
+            List<ParcelAtCustomer> parcelSendedToCustomers = new List<ParcelAtCustomer>();
+            IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
+            foreach (var p in parcels)
+            {
+                if (p.SenderID == c.ID)
+                    parcelSendedByCustomers.Add(new ParcelAtCustomer(convertDalToParcelBL(p), c.ID, dalObject));
+                if (p.TargetID == c.ID)
+                    parcelSendedToCustomers.Add(new ParcelAtCustomer(convertDalToParcelBL(p), c.ID, dalObject));
+
+            };
+
+            return new BO.Customer
+            {
+                ID = c.ID,
+                Name = c.Name,
+                Phone = c.Phone,
+                Location = new Location() { Longitude = c.Longitude, Latitude = c.Latitude },
+                parcelSendedByCustomer = parcelSendedByCustomers,
+                parcelSendedToCustomer = parcelSendedToCustomers,
+                IsActive = c.IsActive
+            };
+        }
+
+        #endregion
+
+        #region check customer id functions
+
+        /// <summary>
+        /// check if the id is uniqe
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
-        public static bool CheckValidIdCustomer(ulong id)///////////////////לבדוק אם גדול מעשר אחרי הכפלה
+        /// <param name="dalObject"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public static void checkUniqeIdCustomer(ulong id, IDAL.IDal dalObject)
         {
-            int sum = 0, digit, digit2 = 0;
-            for (int i = 0; i < 9; i++)
+            lock (dalObject)
             {
-                digit = (int)(id % 10);
-                if ((i % 2) == 0)
-                {
-                    digit *= 2;
-                    if (digit > 10)
-                    {
-                        digit2 = digit % 10;
-                        digit /= 10;
-                        digit2 += digit;
-                    }
-                    digit = digit2;
-                }
-                sum += digit;
-                id /= 10;
+                IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
+                if (customers.Any(c => c.ID == id))
+                    throw new NotUniqeID(id, typeof(DO.Customer));
             }
-            if ((sum % 10) == 0)
-            {
-                return true;
-            }
-            return false;
         }
+
+        /// <summary>
+        /// check if there is a customer with the id
+        /// </summary>
+        /// <param name="id"></param>
+        private void checkIfCustomerWithThisID(ulong id)
+        {
+            lock (dalObject)
+            {
+                bool check = false;
+                IEnumerable<DO.Customer> customers = dalObject.GetCustomers();
+                foreach (var customer in customers)
+                {
+                    if (customer.ID == id)
+                    {
+                        check = true;
+                    }
+                }
+                if (!check)
+                    throw new NotExistObjWithID(id, typeof(DO.Customer));
+            }
+        }
+        #endregion
 
         /// <summary>
         /// remove customer

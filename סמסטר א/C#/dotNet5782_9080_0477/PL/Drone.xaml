@@ -68,6 +68,8 @@
                 <TextBox FontSize="16" Text="{Binding ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="200,0,0,0" Name="idDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="220"/>
                 <TextBox FontSize="16" Text="{Binding Model, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" HorizontalAlignment="Left" Margin="231,0,0,0" Name="modelDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
                 <!--<TextBox FontSize="16" Text="{Binding BatteryStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Name="batteryDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="240,0,0,0"/>-->
+                <!--<Border BorderBrush="#00c000" BorderThickness="3" Height="25" Width="180" CornerRadius="5" Padding="2,2,2,2" Margin="239,145,369,261"/>-->
+                <ProgressBar Minimum="0" Maximum="100" Height="23" Width="179" Value="{Binding BatteryStatus}" Grid.Row="3" Name="pbStatus" Margin="72,0,0,0"/>
                 <TextBox FontSize="16" Text="{Binding Weight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="weightDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="240,0,0,0"/>
                 <TextBox FontSize="16" Text="{Binding DroneStatus }" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Margin="231,0,0,0" Name="statusDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
                 <TextBox FontSize="16" Text="{Binding Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="6" HorizontalAlignment="Left" Margin="260,0,0,0" Name="locationDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="160"/>
@@ -107,7 +109,6 @@
 
         </Grid>
         <Button Content="start simulation" x:Name="SimulationBtn" Margin="348,386,348,17" Click="SimulationBtn_Click" />
-        <ProgressBar Minimum="0" Maximum="100" Value="{Binding BatteryStatus}" Name="pbStatus" Margin="239,147,377,264"/>
         <TextBlock Text="{Binding ElementName=pbStatus, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,151,0,0" />
         <!--<Border BorderBrush="#00c000" BorderThickness="2" CornerRadius="5" Padding="2,2,2,2" Margin="239,145,372,261">
             <Grid>

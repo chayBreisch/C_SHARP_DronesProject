@@ -40,7 +40,7 @@ namespace PL
         {
         }
 
-        public Location(BO.Location location)
+        public Location(Location location)
         {
             Longitude = location.Longitude;
             Latitude = location.Latitude;
