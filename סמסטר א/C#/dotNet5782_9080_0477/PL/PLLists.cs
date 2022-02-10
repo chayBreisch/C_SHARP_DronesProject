@@ -25,7 +25,7 @@ namespace PL
             Drones.Add(new Drone_(bl));
         }
 
-        public void AddParcel(ParcelToList bl)
+        public void AddParcel(BO.Parcel bl)
         {
             Parcels.Add(new Parcel_(bl));
         }
@@ -73,7 +73,7 @@ namespace PL
                 AddDrone(BLObject.ConvertDroneToListToDroneBL(drone));
             }
 
-            foreach (var parcel in BLObject.GetParcelsToList())
+            foreach (var parcel in BLObject.GetParcelsByCondition(P=>P.ID != 0))
             {
                 AddParcel(parcel);
             }

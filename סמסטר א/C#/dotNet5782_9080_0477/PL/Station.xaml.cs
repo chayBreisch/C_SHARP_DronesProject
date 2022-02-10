@@ -163,7 +163,9 @@ namespace PL
                 stationBL.Name = int.Parse(nameStation.Text);
                 stationBL.ChargeSlots = int.Parse(ChargeSlotsStation.Text);
                 stationBL = BLObject.UpdateStation(stationBL);
+                stationPL = new Station_(stationBL);
                 MessageBox.Show("station updated sucssesfully");
+                PLLists.UpdateStation(stationPL);
             }
             catch (Exception ex)
             {

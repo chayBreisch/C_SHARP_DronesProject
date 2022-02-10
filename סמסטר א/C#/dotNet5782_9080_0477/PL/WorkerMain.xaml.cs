@@ -71,7 +71,7 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickParcelList(object sender, RoutedEventArgs e)
         {
-            new ParcelList(BLObject).Show();
+            new ParcelList(BLObject, PLLists).Show();
             Hide();
         }
 

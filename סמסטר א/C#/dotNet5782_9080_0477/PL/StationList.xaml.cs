@@ -51,7 +51,14 @@ namespace PL
         {
             ComboBox options = sender as ComboBox;
             //IEnumerable<StationToList> stations = BLObject.GetStationsByChargeSlots(options.SelectedIndex);
-            StationListView.DataContext = PLLists.Stations.Where(S => S.ChargeSlotsFree == options.SelectedIndex);
+            if (options.SelectedIndex == 0)
+            {
+                StationListView.DataContext = PLLists.Stations.Where(S => S.ChargeSlotsFree == 0);
+            }
+            else
+            {
+                StationListView.DataContext = PLLists.Stations.Where(S => S.ChargeSlotsFree > 0);
+            }
         }
 
         /// <summary>
