@@ -57,7 +57,7 @@ namespace PL
             ListBox listBox1 = new ListBox();
             statusFilter.SelectedItem = null;
             weightFilter.SelectedItem = null;
-            //DroneListView.ItemsSource = drones;
+            DroneListView.DataContext = PLLists.Drones;
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
@@ -78,12 +78,15 @@ namespace PL
         {
             IEnumerable<DroneToList> drones = new List<DroneToList>();
             ComboBox options = sender as ComboBox;
-            if(weightFilter.SelectedItem == null)
-                drones = BLObject.GetDronesToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
+            if (weightFilter.SelectedItem == null)
+                DroneListView.DataContext = PLLists.Drones.Where(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
+                //drones = BLObject.GetDronesToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             else if(statusFilter.SelectedItem == null)
-                drones = BLObject.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
+                DroneListView.DataContext = PLLists.Drones.Where(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
+            //drones = BLObject.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
             else
-                drones = BLObject.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
+                DroneListView.DataContext = PLLists.Drones.Where(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
+            //drones = BLObject.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             //DroneListView.ItemsSource = drones;
             /*MyList = new ObservableCollection<DroneToList>();
             foreach (var item in drones)
@@ -211,7 +214,7 @@ namespace PL
             ListBox listBox1 = new ListBox();
             statusFilter.SelectedItem = null;
             weightFilter.SelectedItem = null;
-            //DroneListView.ItemsSource = drones;
+            DroneListView.DataContext = PLLists.Drones.Where(D => D.IsActiv == false);
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
