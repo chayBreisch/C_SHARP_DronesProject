@@ -36,7 +36,14 @@ namespace BL
                         }
                         catch (CanNotUpdateDrone e)
                         {
-                            bl.UpdateSendDroneToCharge(drone.ID);
+                            try
+                            {
+                                bl.UpdateSendDroneToCharge(drone.ID);
+                            }
+                            catch(CanNotUpdateDrone es)
+                            {
+                                Thread.Sleep(DELAY);
+                            }
                         }
                         updateDrone(drone, 1);
                         Thread.Sleep(DELAY);

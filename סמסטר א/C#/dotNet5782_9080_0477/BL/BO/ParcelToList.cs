@@ -8,6 +8,17 @@ namespace BO
 {
     public class ParcelToList
     {
+        public ParcelToList(DO.Parcel parcel, IDAL.IDal dalObject) {
+            ID = parcel.ID;
+            NameCustomerSender = dalObject.GetCustomerById(c => c.ID == parcel.SenderID).Name;
+            NameCustomerReciver = dalObject.GetCustomerById(c => c.ID == parcel.TargetID).Name;
+            Weight = parcel.Weight;
+            Priority = parcel.Priority;
+            ParcelStatus = parcel.Delivered != null ? ParcelStatus.Delivered :
+            parcel.PickedUp != null ? ParcelStatus.PickedUp :
+            parcel.Scheduled != null ? ParcelStatus.Scheduled : ParcelStatus.Requesed;
+        }
+
         public ParcelToList(Parcel parcel, IDAL.IDal dalObject)
         {
             ID = parcel.ID;
@@ -19,6 +30,7 @@ namespace BO
             parcel.PickedUp != null ? ParcelStatus.PickedUp :
             parcel.Scheduled != null ? ParcelStatus.Scheduled : ParcelStatus.Requesed;
         }
+
         public int ID { get; set; }
         public string NameCustomerSender { get; set; }
         public string NameCustomerReciver { get; set; }

@@ -138,10 +138,11 @@ namespace PL
             //this.Visibility = Visibility.Hidden;
             /*new Drone(BLObject, drone, this).Show();
             Hide();*/
-            var win = new Drone(BLObject, drone, PLLists);
+            /*var win = new Drone(BLObject, drone, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
-            Visibility = Visibility.Visible;
+            Visibility = Visibility.Visible;*/
+            new Drone(BLObject, drone, PLLists).Show();
         }
 
         /// <summary>
@@ -181,25 +182,6 @@ namespace PL
                 view.GroupDescriptions.Add(property);
             }
         }
-
-        /*public void Refresh()
-        {
-            IEnumerable<DroneToList> drones = new List<DroneToList>();
-            if (weightFilter.SelectedItem != null && statusFilter.SelectedItem != null)
-                drones = BLObject.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
-            else if (statusFilter.SelectedItem != null)
-                drones = BLObject.GetDronesToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
-            else if (weightFilter.SelectedItem != null)
-                drones = BLObject.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
-            else
-                drones = BLObject.GetDronesToList();
-            //DroneListView.ItemsSource = drones;
-           *//* MyList = new ObservableCollection<DroneToList>();
-            foreach (var item in drones)
-                MyList.Add(item);*//*
-            DataContext = PLLists.Drones;
-            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-        }*/
 
         /// <summary>
         /// show deleted customers

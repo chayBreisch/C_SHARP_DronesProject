@@ -148,6 +148,18 @@ namespace BL
             }
         }
 
+        //public IEnumerable<ParcelToList> GetParcelsToListByCondition(Predicate<DO.Parcel> predicate)
+        //{
+        //    //try todo
+        //    lock (dalObject)
+        //    {
+        //        return (from parcel in dalObject.GetParcels()
+        //                where predicate(parcel)
+        //                select new ParcelToList(parcel , dalObject));
+        //    }
+        //}
+
+
         /// <summary>
         /// get parcels by condition
         /// </summary>

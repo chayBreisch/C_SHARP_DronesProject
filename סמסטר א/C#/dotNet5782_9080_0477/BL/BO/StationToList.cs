@@ -15,6 +15,16 @@ namespace BO
             ChargeSlotsFree = station.ChargeSlots - station.DronesInCharge.Count;
             ChargeSlotsBusy = station.DronesInCharge.Count;
         }
+
+        public StationToList(DO.Station s , IDAL.IDal dalObject)
+        {
+            ID = s.ID;
+            Name = s.Name;
+            int amountBusyChargeSlots = dalObject.GetDroneCharges().Where(d => d.StationID == s.ID).Count();
+            ChargeSlotsFree = s.ChargeSlots - amountBusyChargeSlots;
+            ChargeSlotsBusy = amountBusyChargeSlots;
+        }
+        
         public int ID { get; set; }
         public int Name { get; set; }
         public int ChargeSlotsFree { get; set; }

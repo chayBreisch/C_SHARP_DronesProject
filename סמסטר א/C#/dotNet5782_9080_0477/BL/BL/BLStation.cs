@@ -111,20 +111,21 @@ namespace BL
                 select station);
             }
         }
-        /// <summary>
-        /// get deleted stations
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerable<BO.Station> getDeletedStationsBL()
-        {
-            IEnumerable<DO.Station> stations = dalObject.GetDeletedStations();
-            List<BO.Station> stations1 = new List<BO.Station>();
-            foreach (var station in stations)
-            {
-                stations1.Add(convertDalStationToBl(station));
-            }
-            return stations1;
-        }
+
+        ///// <summary>
+        ///// get deleted stations
+        ///// </summary>
+        ///// <returns></returns>
+        //private IEnumerable<BO.Station> getDeletedStationsBL()
+        //{
+        //    IEnumerable<DO.Station> stations = dalObject.GetDeletedStations();
+        //    List<BO.Station> stations1 = new List<BO.Station>();
+        //    foreach (var station in stations)
+        //    {
+        //        stations1.Add(convertDalStationToBl(station));
+        //    }
+        //    return stations1;
+        //}
 
         /// <summary>
         /// get deleted stationToList
@@ -135,13 +136,16 @@ namespace BL
         {
             lock (dalObject)
             {
-                IEnumerable<BO.Station> stations = getDeletedStationsBL();
-                List<StationToList> stations1 = new List<StationToList>();
-                foreach (var station in stations)
-                {
-                    stations1.Add(new StationToList(station));
-                }
-                return stations1;
+                //IEnumerable<BO.Station> stations = getDeletedStationsBL();
+                //List<StationToList> stations1 = new List<StationToList>();
+                //foreach (var station in stations)
+                //{
+                //    stations1.Add(new StationToList(station));
+                //}
+                //return stations1;
+
+                return from s in dalObject.GetDeletedStations()
+                       select new StationToList(s , dalObject);
             }
         }
 
@@ -173,6 +177,7 @@ namespace BL
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private BO.Station convertDalStationToBl(DO.Station s)
         {
             List<DroneInCharger> dronesInCharges = new List<DroneInCharger>();

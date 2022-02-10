@@ -24,11 +24,12 @@ namespace BlApi
         //Get list functions
         //##############################################################
         public IEnumerable<StationToList> GetStationsToList();
-        public IEnumerable<DroneToList> GetDronesToList();
         public IEnumerable<StationToList> GetStationsByChargeSlots(int status);
-        public IEnumerable<ParcelToList> GetParcelsToList();
-        public IEnumerable<CustomerToList> GetCustomersToList();
         public IEnumerable<DroneToList> GetDronesToListByCondition(Predicate<DroneToList> predicate);
+        public IEnumerable<DroneToList> GetDronesToList();
+        public IEnumerable<CustomerToList> GetCustomersToList();
+        public IEnumerable<BO.Customer> GetCustomersByCondition(Predicate<BO.Customer> predicate);
+        public IEnumerable<ParcelToList> GetParcelsToList();
         public IEnumerable<ParcelToList> GetParcelsToListByCondition(Predicate<ParcelToList> predicate);
         public IEnumerable<BO.Parcel> GetParcelsByCondition(Predicate<BO.Parcel> predicate);
         public Array GetweightCategoriesEnumItem();
@@ -91,7 +92,6 @@ namespace BlApi
         //##############################################################
         public ParcelStatus findParcelStatus(BO.Parcel parcel);
         public IEnumerable<string> GetCustomersNamesByCondition(Predicate<BO.Customer> predicate);
-        public IEnumerable<BO.Customer> GetCustomersByCondition(Predicate<BO.Customer> predicate);
 
 
 

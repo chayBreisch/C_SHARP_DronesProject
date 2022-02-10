@@ -64,14 +64,16 @@ namespace BL
         {
             lock (dalObject)
             {
-                IEnumerable<BO.Customer> customers = getCustomersBL();
+                /*IEnumerable<BO.Customer> customers = getCustomersBL();
                 List<CustomerToList> customers1 = new List<CustomerToList>();
                 foreach (var customer in customers)
                 {
                     if (customer.IsActive)
                         customers1.Add(new CustomerToList(customer, dalObject));
                 }
-                return customers1;
+                return customers1;*/
+                return from c in dalObject.GetCustomers()
+                       select new CustomerToList(c, dalObject);
             }
         }
         /// <summary>
@@ -135,14 +137,17 @@ namespace BL
         {
             lock (dalObject)
             {
-                IEnumerable<BO.Customer> customers = getCustomersBL();
-                List<CustomerToList> customers1 = new List<CustomerToList>();
-                foreach (var customer in customers)
-                {
-                    if (!customer.IsActive)
-                        customers1.Add(new CustomerToList(customer, dalObject));
-                }
-                return customers1;
+                //IEnumerable<BO.Customer> customers = getCustomersBL();
+                //List<CustomerToList> customers1 = new List<CustomerToList>();
+                //foreach (var customer in customers)
+                //{
+                //    if (!customer.IsActive)
+                //        customers1.Add(new CustomerToList(customer, dalObject));
+                //}
+                //return customers1;
+                return from c in dalObject.GetCustomers()
+                       where !c.IsActive
+                       select new CustomerToList(c, dalObject);
             }
         }
 
