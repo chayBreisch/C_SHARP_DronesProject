@@ -11,33 +11,133 @@ namespace PL
 {
     public class Customer_ : DependencyObject
     {
-        public ulong ID { get; set; }
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public Location Location { get; set; }
-        public List<ParcelAtCustomer> parcelSendedByCustomer { get; set; }
-        public List<ParcelAtCustomer> parcelSendedToCustomer { get; set; }
-        public bool IsActive { get; set; }
 
 
-
-        /*public static readonly DependencyProperty FirstNameProperty =
-        DependencyProperty.Register("FirstName",
+        public static readonly DependencyProperty IDProperty =
+        DependencyProperty.Register("ID",
                                     typeof(object),
                                     typeof(Customer_),
                                     new UIPropertyMetadata(0));
-        public string Name
+        public ulong ID
         {
             get
             {
-                return (string)GetValue(FirstNameProperty);
+                return (ulong)GetValue(IDProperty);
             }
             set
             {
-                SetValue(FirstNameProperty, value);
+                SetValue(IDProperty, value);
             }
-        }*/
+        }
 
+
+        public static readonly DependencyProperty NameProperty =
+       DependencyProperty.Register("Name",
+                                   typeof(object),
+                                   typeof(Customer_),
+                                   new UIPropertyMetadata(0));
+       public string Name
+       {
+           get
+           {
+               return (string)GetValue(NameProperty);
+           }
+           set
+           {
+               SetValue(NameProperty, value);
+           }
+       }
+
+
+
+        public static readonly DependencyProperty PhoneProperty =
+       DependencyProperty.Register("Phone",
+                                   typeof(object),
+                                   typeof(Customer_),
+                                   new UIPropertyMetadata(0));
+       public string Phone
+       {
+           get
+           {
+               return (string)GetValue(PhoneProperty);
+           }
+           set
+           {
+               SetValue(PhoneProperty, value);
+           }
+       }
+
+
+        public static readonly DependencyProperty LocationProperty =
+       DependencyProperty.Register("Location",
+                                   typeof(object),
+                                   typeof(Customer_),
+                                   new UIPropertyMetadata(0));
+       public Location Location
+        {
+           get
+           {
+               return (Location)GetValue(LocationProperty);
+           }
+           set
+           {
+               SetValue(LocationProperty, value);
+           }
+       }
+
+
+        public static readonly DependencyProperty parcelSendedByCustomerProperty =
+       DependencyProperty.Register("parcelSendedByCustomer",
+                                   typeof(object),
+                                   typeof(Customer_),
+                                   new UIPropertyMetadata(0));
+       public List<ParcelAtCustomer> parcelSendedByCustomer
+        {
+           get
+           {
+               return (List<ParcelAtCustomer>)GetValue(parcelSendedByCustomerProperty);
+           }
+           set
+           {
+               SetValue(parcelSendedByCustomerProperty, value);
+           }
+       }
+
+
+        public static readonly DependencyProperty parcelSendedToCustomerProperty =
+       DependencyProperty.Register("parcelSendedToCustomer",
+                                   typeof(object),
+                                   typeof(Customer_),
+                                   new UIPropertyMetadata(0));
+        public List<ParcelAtCustomer> parcelSendedToCustomer
+        {
+           get
+           {
+               return (List<ParcelAtCustomer>)GetValue(parcelSendedToCustomerProperty);
+           }
+           set
+           {
+               SetValue(parcelSendedToCustomerProperty, value);
+           }
+       }
+
+
+        public static readonly DependencyProperty IsActiveProperty =
+       DependencyProperty.Register("IsActive",
+                                   typeof(object),
+                                   typeof(Customer_),
+                                   new UIPropertyMetadata(0));
+       public bool IsActive
+        {
+           get
+           {
+               return (bool)GetValue(IsActiveProperty);
+           }
+           set
+           {
+               SetValue(IsActiveProperty, value);
+           }
+       }
 
 
         public Customer_(BO.Customer customer)

@@ -21,15 +21,18 @@ namespace PL
     {
         BlApi.IBL BLObject;
         BO.Station stationBL;
+        Station_ stationPL;
         BO.Drone droneBL;
+        PLLists PLLists;
         /// <summary>
         /// constructor add statoin
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="droneList"></param>
-        public Station(BlApi.IBL bl)
+        public Station(BlApi.IBL bl, PLLists pLLists)
         {
             BLObject = bl;
+            PLLists = pLLists;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
@@ -50,11 +53,13 @@ namespace PL
             WindowStyle = WindowStyle.None;
             BLObject = bl;
             stationBL = station;
-            idstation.Text = stationBL.ID.ToString();
-            nameStation.DataContext = stationBL;
-            ChargeSlotsStation.DataContext = stationBL;
-            LocationStation.Text = $"{stationBL.Location.Latitude}, {stationBL.Location.Longitude}";
-            DroneInStation.ItemsSource = stationBL.DronesInCharge;
+            stationPL = new Station_(stationBL);
+            DataContext = stationPL;
+            //idstation.Text = stationBL.ID.ToString();
+            //nameStation.DataContext = stationBL;
+            //ChargeSlotsStation.DataContext = stationBL;
+            //LocationStation.Text = $"{stationBL.Location.Latitude}, {stationBL.Location.Longitude}";
+            //DroneInStation.ItemsSource = stationBL.DronesInCharge;
         }
 
         //######################################################
@@ -203,9 +208,9 @@ namespace PL
             //this.Visibility = Visibility.Hidden;
             /*new Drone(BLObject, droneBL, this).Show();
             Hide();*/
-            //var win = new Drone(BLObject, droneBL);
+            var win = new Drone(BLObject, droneBL, PLLists);
             Visibility = Visibility.Hidden;
-            //win.ShowDialog();
+            win.ShowDialog();
             Visibility = Visibility.Visible;
         }
 

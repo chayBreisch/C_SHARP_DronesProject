@@ -30,7 +30,7 @@ namespace PL
             Parcels.Add(new Parcel_(bl));
         }
 
-        public void AddStation(StationToList bl)
+        public void AddStation(BO.Station bl)
         {
             Stations.Add(new Station_(bl));
         }
@@ -80,7 +80,7 @@ namespace PL
 
             foreach (var station in BLObject.GetStationsToList())
             {
-                AddStation(station);
+                AddStation(BLObject.ConvertStationToListToStationBL(station));
             }
 
             foreach (var customer in BLObject.GetCustomersByCondition(C=>C.ID != 0))

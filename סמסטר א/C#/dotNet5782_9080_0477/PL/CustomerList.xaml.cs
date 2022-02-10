@@ -36,12 +36,12 @@ namespace PL
         {
             InitializeComponent();
             PLLists = plLists;
-            CustomerListView.ItemsSource = PLLists.Customers;
+            //CustomerListView.ItemsSource = PLLists.Customers;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
             /*foreach (var item in BLObject.GetCustomerToList())
                 MyList.Add(item);*/
-            DataContext = PLLists.Customers;
+            MainGrid.DataContext = PLLists.Customers;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
 
         }
@@ -56,7 +56,7 @@ namespace PL
             //MyList = new ObservableCollection<CustomerToList>();
             /*foreach (var item in BLObject.GetCustomerToList())
                 MyList.Add(item);*/
-            DataContext = PLLists.Customers;
+            CustomerListView.DataContext = PLLists.Customers;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             if (view != null)
             {
@@ -177,7 +177,7 @@ namespace PL
             //MyList = new ObservableCollection<CustomerToList>();
             /*foreach (var item in BLObject.GetDeletedCustomerToList())
                 MyList.Add(item);*/
-            DataContext = PLLists.Customers;
+            CustomerListView.DataContext = PLLists.Customers.Where(C => C.IsActive == false);
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
     }

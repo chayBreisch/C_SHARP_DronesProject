@@ -112,4 +112,12 @@
     <Latitude>2</Latitude>
     <IsActive>true</IsActive>
   </Customer>
+  <Customer>
+    <ID>807654321</ID>
+    <Name>chaya</Name>
+    <Phone>1</Phone>
+    <Longitude>1</Longitude>
+    <Latitude>1</Latitude>
+    <IsActive>true</IsActive>
+  </Customer>
 </ArrayOfCustomer>

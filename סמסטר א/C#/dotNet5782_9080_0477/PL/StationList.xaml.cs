@@ -50,8 +50,8 @@ namespace PL
         private void chargeSlotsFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox options = sender as ComboBox;
-            IEnumerable<StationToList> stations = BLObject.GetStationsByChargeSlots(options.SelectedIndex);
-            StationListView.ItemsSource = stations;
+            //IEnumerable<StationToList> stations = BLObject.GetStationsByChargeSlots(options.SelectedIndex);
+            StationListView.DataContext = PLLists.Stations.Where(S => S.ChargeSlotsFree == options.SelectedIndex);
         }
 
         /// <summary>
@@ -62,10 +62,10 @@ namespace PL
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            IEnumerable<StationToList> stations = BLObject.GetStationsToList();
+            //IEnumerable<StationToList> stations = BLObject.GetStationsToList();
             chargeSlotsFilter.SelectedItem = null;
             //weightFilter.SelectedItem = null;
-            StationListView.ItemsSource = PLLists.Stations;
+            StationListView.DataContext = PLLists.Stations;
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace PL
         {
             /*new Station(blstationList, this).Show();
             Hide();*/
-            var win = new Station(BLObject);
+            var win = new Station(BLObject, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
             Visibility = Visibility.Visible;
@@ -138,9 +138,9 @@ namespace PL
         private void Button_Click_ShowDeletedStations(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            IEnumerable<StationToList> stations = BLObject.GetDeletedStationsToList();
+            //IEnumerable<StationToList> stations = BLObject.GetDeletedStationsToList();
             chargeSlotsFilter.SelectedItem = null;
-            StationListView.ItemsSource = stations;
+            StationListView.DataContext = PLLists.Stations.Where(S => S.IsActive == false);
         }
     }
 }
