@@ -10,21 +10,8 @@ namespace BO
 {
     public class Customer
     {
-        private ulong Id;
-        public ulong ID
-        {
-            get
-            { return Id; }
-            set
-            {
-               /* if (value >= 100000000 && value < 1000000000)
-                    Id = value;
-                else
-                {
-                    throw new OutOfRange("customer id");
-                }*/
-            }
-        }
+        public ulong ID { get; set; }
+
         public string Name { get; set; }
         public string Phone { get; set; }
         public Location Location { get; set; }
