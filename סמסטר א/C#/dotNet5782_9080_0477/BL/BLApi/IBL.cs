@@ -14,9 +14,9 @@ namespace BlApi
         //##############################################################
         //Add functions
         //##############################################################
-        public void AddCustomer(ulong id, string name, string phone, LocationBL location);
+        public void AddCustomer(ulong id, string name, string phone, Location location);
         public void AddParcel(ulong sender, ulong target, int Weight, int priority);
-        public void AddStation(int id, int name, LocationBL location, int ChargeSlots);
+        public void AddStation(int id, int name, Location location, int ChargeSlots);
         public void AddDrone(int id, string model, int maxWeight, int stationID);
 
 
@@ -44,6 +44,7 @@ namespace BlApi
         //##############################################################
         public BO.Drone GetSpecificDroneBLWithDeleted(int id);
         public BO.Customer GetSpecificCustomerBL(Predicate<BO.Customer> predicate);
+        public CustomerToList GetSpecificCustomerToList(ulong id);
         public BO.Parcel GetSpecificParcelBL(int id);
         public BO.Station GetSpecificStationBL(int id);
         public BO.Drone GetSpecificDroneBL(int id);
@@ -64,7 +65,7 @@ namespace BlApi
         //##############################################################
         //update functions
         //##############################################################
-        public BO.Station UpdateDataStation(int id, int name = 0, int chargeSlots = -1);
+        public BO.Station UpdateStation(BO.Station station);
         public BO.Drone UpdateSendDroneToCharge(int id);
         public BO.Drone UpdateUnchargeDrone(int id, double timeInCharge);
         public void UpdateConnectParcelToDrone(int id);

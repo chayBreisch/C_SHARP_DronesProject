@@ -13,21 +13,7 @@ namespace BL
 {
     internal partial class BL
     {
-        /// <summary>
-        /// check if the id is uniqe
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="dalObject"></param>
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void checkUniqeIdDrone(int id, IDAL.IDal dalObject)
-        {
-            lock (dalObject)
-            {
-                IEnumerable<DO.Drone> drones = dalObject.GetDrones();
-                if (drones.Any(d => d.ID == id))
-                    throw new NotUniqeID(id, typeof(DO.Drone));
-            }
-        }
+        #region add drone functions
 
         /// <summary>
         /// add a drone to the bl
@@ -55,7 +41,7 @@ namespace BL
                     droneBL.Weight = (DO.WeightCatagories)maxWeight;
                     droneBL.BatteryStatus = rand.Next(20, 40);
                     droneBL.DroneStatus = DroneStatus.Maintenance;
-                    droneBL.Location = new LocationBL(station.Longitude, station.Latitude);
+                    droneBL.Location = new Location(station.Longitude, station.Latitude);
                     droneBL.IsActive = true;
                     addDroneToDal(id, model, maxWeight);
                     addDroneCharge(stationID, id);
@@ -82,22 +68,9 @@ namespace BL
             drone.IsActive = true;
             dalObject.AddDrone(drone);
         }
+        #endregion
 
-        /// <summary>
-        /// return all the drones from the dal converted to bl
-        /// </summary>
-        /// <returns>List<DroneBL>returns>
-        /*public IEnumerable<BO.Drone> GetDronesBL()
-        {
-
-            IEnumerable<DO.Drone> drones = dalObject.GetDrones();
-            List<BO.Drone> drone1 = new List<BO.Drone>();
-            foreach (var drone in drones)
-            {
-                drone1.Add(convertDalDroneToBl(drone));
-            }
-            return drone1;
-        }*/
+        #region get drone/s functions
 
         /// <summary>
         /// returns a specific drone by id from dal converted to bl
@@ -140,16 +113,61 @@ namespace BL
                 throw new NotExistObjWithID(id, typeof(DO.Drone), e);
             }
         }
+
         /// <summary>
-        /// convert a drone from dal to bl
+        /// return all droneToList
         /// </summary>
-        /// <param name="d"></param>
-        /// <returns>DroneBL</returns>
-        private BO.Drone convertDalDroneToBl(DO.Drone d)
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public IEnumerable<DroneToList> GetDronesToList()
         {
-            //לבדוק מה עם parcellattransfor
-            return GetSpecificDroneBLWithDeleted(d.ID);
+            lock (dalObject)
+            {
+                List<BO.Drone> drones = droneBLList;
+                List<DroneToList> drone1 = new List<DroneToList>();
+                foreach (var drone in drones)
+                {
+                    drone1.Add(new DroneToList(drone, dalObject));
+                }
+                return drone1;
+            }
         }
+
+        /// <summary>
+        /// get DroneToList By Condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public IEnumerable<DroneToList> GetDronesToListByCondition(Predicate<DroneToList> predicate)
+        {
+            //try todo
+            lock (dalObject)
+            {
+                return (from drone in GetDronesToList()
+                        where predicate(drone)
+                        select drone);
+            }
+        }
+
+        /// <summary>
+        /// get deleted droneToList
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public IEnumerable<DroneToList> GetDeletedDronesToList()
+        {
+            //try todo
+            lock (dalObject)
+            {
+                return (from drone in GetDronesToList()
+                        where GetSpecificDroneBL(drone.ID) == null
+                        select drone);
+            }
+        }
+        #endregion
+
+        #region update drone functions
 
         /// <summary>
         /// update the drone
@@ -165,10 +183,6 @@ namespace BL
             }
         }
 
-        private DO.Drone convertDroneBlToDal(BO.Drone drone)
-        {
-            return new DO.Drone { ID = drone.ID, IsActive = drone.IsActive, MaxWeight = drone.Weight, Model = drone.Model };
-        }
         /// <summary>
         /// update the drone model
         /// </summary>
@@ -212,72 +226,30 @@ namespace BL
                     parcelInDelivery = drone.parcelInDelivery
                 };
             }
-            /*BO.Drone droneBl = GetSpecificDroneBL(id);
-            droneBl.Model = model;
-            updateDrone(droneBl);
+        }
+        #endregion
 
-            DO.Drone drone = dalObject.GetDroneById(d => d.ID == id && d.IsActive == true);
-            drone.Model = model;
-            dalObject.UpdateDrone(drone);
-            return droneBl;*/
+        #region convert drone functions
+
+        /// <summary>
+        /// convert a drone from dal to bl
+        /// </summary>
+        /// <param name="d"></param>
+        /// <returns>DroneBL</returns>
+        private BO.Drone convertDalDroneToBl(DO.Drone d)
+        {
+            //לבדוק מה עם parcellattransfor
+            return GetSpecificDroneBLWithDeleted(d.ID);
         }
 
         /// <summary>
-        /// get drones with this droneStatus
+        /// convert droneBl to dal
         /// </summary>
-        /// <param name="status"></param>
+        /// <param name="drone"></param>
         /// <returns></returns>
-/*        public List<DroneToList> getDronesByDroneStatus(int status)
+        private DO.Drone convertDroneBlToDal(BO.Drone drone)
         {
-            List<DroneToList> droneToLists = new List<DroneToList>();
-            IEnumerable<BO.Drone> droneQuery =
-            from drone in GetDronesBL()
-            where drone.DroneStatus == (DroneStatus)status
-            select drone;
-            foreach (var drone in droneQuery)
-            {
-                droneToLists.Add(new DroneToList(drone, dalObject));
-            }
-            return droneToLists;
-        }
-
-        /// <summary>
-        /// get drones with this weight
-        /// </summary>
-        /// <param name="status"></param>
-        /// <returns></returns>
-        public List<DroneToList> getDronesByDroneWeight(int status)
-        {
-            List<DroneToList> droneToLists = new List<DroneToList>();
-            IEnumerable<BO.Drone> droneQuery =
-            from drone in GetDronesBL()
-            where drone.Weight == (DO.WeightCatagories)status
-            select drone;
-            foreach (var drone in droneQuery)
-            {
-                droneToLists.Add(new DroneToList(drone, dalObject));
-            }
-            return droneToLists;
-        }*/
-
-
-        /// <summary>
-        /// return all droneToList
-        /// </summary>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public IEnumerable<DroneToList> GetDronesToList()
-        {
-            lock (dalObject)
-            {
-                List<BO.Drone> drones = droneBLList;
-                List<DroneToList> drone1 = new List<DroneToList>();
-                foreach (var drone in drones)
-                {
-                    drone1.Add(new DroneToList(drone, dalObject));
-                }
-                return drone1;
-            }
+            return new DO.Drone { ID = drone.ID, IsActive = drone.IsActive, MaxWeight = drone.Weight, Model = drone.Model };
         }
 
         /// <summary>
@@ -291,41 +263,30 @@ namespace BL
             return GetSpecificDroneBLWithDeleted(droneToList.ID);
         }
 
+        /// <summary>
+        /// convert droneBL to droneToList
+        /// </summary>
+        /// <param name="drone"></param>
+        /// <returns></returns>
         public BO.DroneToList ConvertDroneBLToDroneToList(BO.Drone drone)
         {
             return new DroneToList(drone, dalObject);
         }
+        #endregion
 
         /// <summary>
-        /// get DroneToList By Condition
+        /// check if the id is uniqe
         /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
+        /// <param name="id"></param>
+        /// <param name="dalObject"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public IEnumerable<DroneToList> GetDronesToListByCondition(Predicate<DroneToList> predicate)
+        public static void checkUniqeIdDrone(int id, IDAL.IDal dalObject)
         {
-            //try todo
             lock (dalObject)
             {
-                return (from drone in GetDronesToList()
-                        where predicate(drone)
-                        select drone);
-            }
-        }
-
-        /// <summary>
-        /// get deleted droneToList
-        /// </summary>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public IEnumerable<DroneToList> GetDeletedDronesToList()
-        {
-            //try todo
-            lock (dalObject)
-            {
-                return (from drone in GetDronesToList()
-                        where GetSpecificDroneBL(drone.ID) == null
-                        select drone);
+                IEnumerable<DO.Drone> drones = dalObject.GetDrones();
+                if (drones.Any(d => d.ID == id))
+                    throw new NotUniqeID(id, typeof(DO.Drone));
             }
         }
 

@@ -13,21 +13,8 @@ namespace BL
 {
     internal partial class BL
     {
-        /// <summary>
-        /// check if the id is uniqe
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="dalObject"></param>
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void checkUniqeIdParcel(int id, IDAL.IDal dalObject)
-        {
-            lock (dalObject)
-            {
-                IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
-                if (parcels.Any(p => p.ID == id))
-                    throw new NotUniqeID(id, typeof(DO.Parcel));
-            }
-        }
+
+        #region add parcel functions
 
         /// <summary>
         /// add a parcel to the bl
@@ -43,21 +30,8 @@ namespace BL
             {
                 checkIfCustomerWithThisID(sender);
                 checkIfCustomerWithThisID(target);
-                //BO.Parcel parcel = new BO.Parcel();
-                /*BO.Customer customer = GetSpecificCustomerBL(sender);
-                parcel.Sender = new CustomerAtParcel(customer.ID, customer.Name);
-                customer = GetSpecificCustomerBL(target);
-                parcel.Reciever = new CustomerAtParcel(customer.ID, customer.Name);
-                parcel.Weight = (DO.WeightCatagories)Weight;
-                parcel.Priorities = (DO.Priorities)priority;
-                parcel.Requesed = DateTime.Now;
-                parcel.Scheduled = null;
-                parcel.PickedUp = null;
-                parcel.Delivered = null;
-                parcel.Drone = null;*/
                 addParcelToDal(sender, target, Weight, priority);
             }
-
         }
 
         /// <summary>
@@ -67,7 +41,7 @@ namespace BL
         /// <param name="target"></param>
         /// <param name="Weight"></param>
         /// <param name="priority"></param>
-        private void addParcelToDal(/*ulong id,*/ ulong sender, ulong target, int Weight, int priority)
+        private void addParcelToDal(ulong sender, ulong target, int Weight, int priority)
         {
             DO.Parcel parcel = new DO.Parcel();
             parcel.ID = dalObject.LengthParcel() + 1;
@@ -79,6 +53,9 @@ namespace BL
             parcel.IsActive = true;
             dalObject.AddParcel(parcel);
         }
+        #endregion
+
+        #region get parcel/s functions
 
         /// <summary>
         /// return all the parcels from the dal converted to bl
@@ -86,7 +63,6 @@ namespace BL
         /// <returns>List<ParcelBL> </returns>
         private IEnumerable<BO.Parcel> getParcelsBL()
         {
-
             IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
             List<BO.Parcel> parcel1 = new List<BO.Parcel>();
             foreach (var parcel in parcels)
@@ -115,41 +91,6 @@ namespace BL
             {
                 throw new NotExistObjWithID(id, typeof(DO.Parcel), e);
             }
-        }
-
-        /// <summary>
-        /// return parcels that are not connected to a drone
-        /// </summary>
-        /// <returns> List<Parcel></returns>
-        private IEnumerable<DO.Parcel> getParcelsWithoutoutDrone()
-        {
-            IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
-            List<DO.Parcel> parcels1 = new List<DO.Parcel>();
-            foreach (var parcel in parcels)
-            {
-                if (parcel.DroneID == 0)
-                {
-                    parcels1.Add(parcel);
-                }
-            }
-            return parcels1;
-        }
-
-        /// <summary>
-        /// convert a parcel from dal to bl
-        /// </summary>
-        /// <param name="p"></param>
-        /// <returns>ParcelBL</returns>
-        private BO.Parcel convertDalToParcelBL(DO.Parcel p)
-        {
-            DO.Customer sender = dalObject.GetCustomerById(c => c.ID == p.SenderID);
-            DO.Customer target = dalObject.GetCustomerById(c => c.ID == p.TargetID);
-            BO.Drone drone = new BO.Drone();
-
-            if (p.DroneID != 0)
-                drone = convertDalDroneToBl(dalObject.GetDroneById(d => d.ID == p.DroneID));
-            return new BO.Parcel(p.ID, p.Weight, p.Priority, p.Requested, p.Scheduled, p.Delivered, p.PickedUp, drone, sender.ID, target.ID, p.IsActive, dalObject);
-
         }
 
         /// <summary>
@@ -191,55 +132,6 @@ namespace BL
         }
 
         /// <summary>
-        /// convert ParcelToList to ParcelBL
-        /// </summary>
-        /// <param name="parcelToList"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public BO.Parcel ConvertParcelToListToParcelBL(ParcelToList parcelToList)
-        {
-            return GetSpecificParcelBL(parcelToList.ID);
-        }
-
-        /*/// <summary>
-        /// get parcels by priority
-        /// </summary>
-        /// <param name="status"></param>
-        /// <returns></returns>
-       /* public List<ParcelToList> getParcelsByPriority(int status)
-        {
-            List<ParcelToList> parcelToList = new List<ParcelToList>();
-            IEnumerable<BO.Parcel> parcelQuery =
-            from parcel in GetParcelsBL()
-            where parcel.Priorities == (DO.Priorities)status
-            select parcel;
-            foreach (var parcel in parcelQuery)
-            {
-                parcelToList.Add(new ParcelToList(parcel, dalObject));
-            }
-            return parcelToList;
-        }
-
-        /// <summary>
-        /// get parcels by parcel weight
-        /// </summary>
-        /// <param name="status"></param>
-        /// <returns></returns>
-        public List<ParcelToList> getParcelsByparcelWeight(int status)
-        {
-            List<ParcelToList> parcelToList = new List<ParcelToList>();
-            IEnumerable<BO.Parcel> parcelQuery =
-            from parcel in GetParcelsBL()
-            where parcel.Weight == (DO.WeightCatagories)status
-            select parcel;
-            foreach (var parcel in parcelQuery)
-            {
-                parcelToList.Add(new ParcelToList(parcel, dalObject));
-            }
-            return parcelToList;
-        }*/
-
-        /// <summary>
         /// get parcelToList by condition
         /// </summary>
         /// <param name="predicate"></param>
@@ -271,26 +163,91 @@ namespace BL
                         select parcel);
             }
         }
+        #endregion
 
+        #region update parcel functions
 
-        /*public IEnumerable<ParcelToList> getParcelToListWithFilter(int weight, int prioritty)
+        /// <summary>
+        /// update parcel
+        /// </summary>
+        /// <param name="parcel"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void updateParecl(BO.Parcel parcel)
         {
+            lock (dalObject)
+            {
+                dalObject.UpdateParcel(convertParcelBlToDal(parcel));
+            }
+        }
 
-            if (prioritty == -1)
-                return getParcelToListByCondition(parcel => parcel.Weight == (WeightCatagories)prioritty);
-            else if (weight == -1)
-                return getParcelToListByCondition(parcel => parcel.Priority == (Priorities)weight);
-            return getParcelToListByCondition(parcel => parcel.Priority == (Priorities)prioritty && parcel.Weight == (WeightCatagories)weight);
-        }*/
-
-
-        /*public IEnumerable<ParcelToList> getPrcelToListByCondition(Predicate<ParcelToList> predicate)
+        /// <summary>
+        /// update parcel
+        /// </summary>
+        /// <param name="parcel"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void updateParecl(ParcelToList parcel)
         {
-            //try todo
-            return (from parcel in getParcelToList()
-                    where predicate(parcel)
-                    select parcel);
-        }*/
+            lock (dalObject)
+            {
+                dalObject.UpdateParcel(convertParcelBlToDal(ConvertParcelToListToParcelBL(parcel)));
+            }
+        }
+        #endregion
+
+        #region convert parcel functions
+
+        /// <summary>
+        /// convert a parcel from dal to bl
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns>ParcelBL</returns>
+        private BO.Parcel convertDalToParcelBL(DO.Parcel p)
+        {
+            DO.Customer sender = dalObject.GetCustomerById(c => c.ID == p.SenderID);
+            DO.Customer target = dalObject.GetCustomerById(c => c.ID == p.TargetID);
+            BO.Drone drone = new BO.Drone();
+
+            if (p.DroneID != 0)
+                drone = convertDalDroneToBl(dalObject.GetDroneById(d => d.ID == p.DroneID));
+            return new BO.Parcel(p.ID, p.Weight, p.Priority, p.Requested, p.Scheduled, p.Delivered, p.PickedUp, drone, sender.ID, target.ID, p.IsActive, dalObject);
+        }
+
+        /// <summary>
+        /// convert parcel bl to dal
+        /// </summary>
+        /// <param name="parcel"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public DO.Parcel convertParcelBlToDal(BO.Parcel parcel)
+        {
+            return new DO.Parcel
+            {
+                ID = parcel.ID,
+                Weight = parcel.Weight,
+                SenderID = parcel.Sender.ID,
+                TargetID = parcel.Reciever.ID,
+                Priority = parcel.Priorities,
+                DroneID = parcel.Drone.ID,
+                Scheduled = parcel.Scheduled,
+                Requested = parcel.Requesed,
+                PickedUp = parcel.PickedUp,
+                Delivered = parcel.Delivered,
+                IsActive = parcel.IsActive
+            };
+        }
+
+        /// <summary>
+        /// convert ParcelToList to ParcelBL
+        /// </summary>
+        /// <param name="parcelToList"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public BO.Parcel ConvertParcelToListToParcelBL(ParcelToList parcelToList)
+        {
+            return GetSpecificParcelBL(parcelToList.ID);
+        }
+        #endregion
+
         /// <summary>
         /// returns the status of the parcel
         /// </summary>
@@ -322,64 +279,25 @@ namespace BL
             {
                 BO.Drone drone = GetSpecificDroneBLWithDeleted(dalObject.GetParcelBy(p => p.ID == id).DroneID);
                 if (drone != null)
-                {
-                    /*drone.parcelInDelivery = null;
-                    drone.DroneStatus = DroneStatus.Available;
-                    updateDrone(drone);*/
                     throw new CantRemoveItem(typeof(BO.Parcel));
-                }
                 dalObject.RemoveParcel(id);
             }
         }
 
         /// <summary>
-        /// update parcel
+        /// check if the id is uniqe
         /// </summary>
-        /// <param name="parcel"></param>
+        /// <param name="id"></param>
+        /// <param name="dalObject"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void updateParecl(BO.Parcel parcel)
+        public static void checkUniqeIdParcel(int id, IDAL.IDal dalObject)
         {
             lock (dalObject)
             {
-                dalObject.UpdateParcel(convertParcelBlToDal(parcel));
+                IEnumerable<DO.Parcel> parcels = dalObject.GetParcels();
+                if (parcels.Any(p => p.ID == id))
+                    throw new NotUniqeID(id, typeof(DO.Parcel));
             }
-        }
-
-        /// <summary>
-        /// update parcel
-        /// </summary>
-        /// <param name="parcel"></param>
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public void updateParecl(ParcelToList parcel)
-        {
-            lock (dalObject)
-            {
-                dalObject.UpdateParcel(convertParcelBlToDal(ConvertParcelToListToParcelBL(parcel)));
-            }
-        }
-
-        /// <summary>
-        /// convert parcel bl to dal
-        /// </summary>
-        /// <param name="parcel"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public DO.Parcel convertParcelBlToDal(BO.Parcel parcel)
-        {
-            return new DO.Parcel
-            {
-                ID = parcel.ID,
-                Weight = parcel.Weight,
-                SenderID = parcel.Sender.ID,
-                TargetID = parcel.Reciever.ID,
-                Priority = parcel.Priorities,
-                DroneID = parcel.Drone.ID,
-                Scheduled = parcel.Scheduled,
-                Requested = parcel.Requesed,
-                PickedUp = parcel.PickedUp,
-                Delivered = parcel.Delivered,
-                IsActive = parcel.IsActive
-            };
         }
     }
 }

@@ -7,9 +7,9 @@ using static BL.ExceptionsBL;
 
 namespace BO
 {
-    public class LocationBL
+    public class Location
     {
-        public LocationBL(double longitude1, double latitude1)
+        public Location(double longitude1, double latitude1)
         {
             longitude = longitude1;
             latitude = latitude1;
@@ -47,7 +47,7 @@ namespace BO
             }
         }
 
-        public LocationBL()
+        public Location()
         {
             longitude = 0;
             Latitude = 0;

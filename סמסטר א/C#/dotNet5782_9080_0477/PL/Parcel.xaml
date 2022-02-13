@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Parcel" Height="450" Width="800">
     <Grid>
-        <Grid Name="actions" Visibility="Hidden">
+        <Grid Name="actions" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition  Width="200"/>
@@ -34,21 +34,21 @@
                 <Button FontSize="16" Content="reciever id" Grid.Row="3" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Center" Click="Button_ClickOpenReciever" Width="83"/>
                 <Label FontSize="16" Content="weight" Grid.Row="4" HorizontalAlignment="Left" Margin="45,21,0,0" VerticalAlignment="Top"/>
 
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="77,0,0,0" Name="idparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="197"/>
-                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="2" HorizontalAlignment="Left" Margin="125,0,0,0" Name="senderidparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="149"/>
-                <TextBox FontSize="16" IsReadOnly="True"  Grid.Row="3" HorizontalAlignment="Left" Name="recieveridparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="141" Margin="133,0,0,0"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="weightparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="166" Margin="108,0,0,0"/>
+                <TextBox Text="{Binding ID}" FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="77,0,0,0" Name="idparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="197"/>
+                <TextBox Text="{Binding NameCustomerSender}" FontSize="16" IsReadOnly="True"  Grid.Row="2" HorizontalAlignment="Left" Margin="125,0,0,0" Name="senderidparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="149"/>
+                <TextBox Text="{Binding NameCustomerReciver}" FontSize="16" IsReadOnly="True"  Grid.Row="3" HorizontalAlignment="Left" Name="recieveridparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="141" Margin="133,0,0,0"/>
+                <TextBox Text="{Binding Weight}" FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="weightparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="166" Margin="108,0,0,0"/>
 
                 <Label Content="Parcel" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
                 <Label  FontSize="16" Content="priority" Grid.Row="1" HorizontalAlignment="Left" Margin="325,20,0,0" VerticalAlignment="Top"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="391,0,0,0" x:Name="priorityparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="163"/>
+                <TextBox Text="{Binding Priority}" FontSize="16" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" Margin="391,0,0,0" x:Name="priorityparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="163"/>
                 <Button FontSize="16" Content="drone" Grid.Row="2" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center" Click="Button_ClickOpenDrone" Width="52"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="2" HorizontalAlignment="Left" Margin="382,0,0,0" x:Name="droneparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="172"/>
+                <TextBox Text="{Binding droneId}" FontSize="16" IsReadOnly="True" Grid.Row="2" HorizontalAlignment="Left" Margin="382,0,0,0" x:Name="droneparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="172"/>
                 <Label  FontSize="16" Content="Requesed" Grid.Row="3" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="409,0,0,0" x:Name="RequesedParcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="145"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Margin="409,17,0,0" x:Name="DeliveredParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Margin="409,47,0,0" x:Name="pickedUpParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
-                <TextBox FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="413,79,0,0" x:Name="ScheduledParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Grid.RowSpan="2"/>
+                <TextBox Text="{Binding Requesed}" FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="409,0,0,0" x:Name="RequesedParcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="145"/>
+                <TextBox Text="{Binding Delivered}" FontSize="16" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Margin="409,17,0,0" x:Name="DeliveredParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                <TextBox Text="{Binding PickedUp}" FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Margin="409,47,0,0" x:Name="pickedUpParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                <TextBox Text="{Binding Scheduled}" FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="413,79,0,0" x:Name="ScheduledParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Grid.RowSpan="2"/>
                 <Label  FontSize="16" Content="Delivered" Grid.Row="5" HorizontalAlignment="Left" Margin="325,7,0,0" VerticalAlignment="Top"/>
                 <Label  FontSize="16" Content="PickedUp" Grid.Row="4" HorizontalAlignment="Left" Margin="325,43,0,0" VerticalAlignment="Top"/>
                 <Label  FontSize="16" Content="Scheduled" Grid.Row="3" HorizontalAlignment="Left" Margin="325,71,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
@@ -87,7 +87,7 @@
 
         </Grid>
 
-        <Grid Name="CustomerSendParcel" Visibility="Visible">
+        <Grid Name="CustomerSendParcel" Visibility="Hidden">
             <Label Content="Enter parcel details" HorizontalAlignment="Left" Margin="286,66,0,0" VerticalAlignment="Top" Height="52" Width="232" FontSize="20">
                 <Label.RenderTransform>
                     <TransformGroup>

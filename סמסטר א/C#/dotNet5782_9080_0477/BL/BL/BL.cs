@@ -14,7 +14,7 @@ namespace BL
     //לשים לב מה עם GET SET IN CUSTOMERBL
     internal sealed partial class BL : IBL
     {
-        static BL Instance;
+        private static BL Instance;
         public static BL GetInstance()
         {
             if (Instance == null)
@@ -36,34 +36,29 @@ namespace BL
         /// <summary>
         /// constructor of class BL
         /// </summary>
-        public BL()
+        private BL()
         {
 
-            //get all the electric rates
-            try
-            {
-                dalObject = DalFactory.GetDal();
-            }
-            catch (DALException.CantReturnDalObject)
-            {
-                throw new CantReturnDalObject();
-            }
+            #region get all the electric rates
+            dalObject = DalFactory.GetDal();
             double[] arrayEletric = dalObject.RequestElectric();
             electricAvailable = arrayEletric[0];
             electricLightHeight = arrayEletric[1];
             electricMidHeight = arrayEletric[2];
             electricHeavyHeight = arrayEletric[3];
             electricChargingRate = arrayEletric[4];
+            #endregion
+
             //for each drone we check what is the status and reboot in entries
             foreach (var drone in dalObject.GetDrones())
             {
                 BO.Drone droneBL = new BO.Drone { ID = drone.ID, Model = drone.Model, Weight = drone.MaxWeight, IsActive = drone.IsActive };
                 DO.Parcel parcel = dalObject.GetParcelBy(p => p.DroneID == drone.ID);
-                DO.Customer customerSender = dalObject.GetCustomerById(c => c.ID == parcel.SenderID);
                 //check if the drone has a parcel
-                if (parcel.SenderID != 10000000)
+                if (parcel.SenderID != 10000000 && parcel.SenderID != 0)
                 //if (!parcel.Equals(null))
                 {
+                    BO.Customer customerSender = GetSpecificCustomerBL(c => c.ID == parcel.SenderID);
                     //check if the parcel of the drone is scheduled and not delivered
                     if (parcel.Scheduled != null && parcel.Delivered == null)
                     {
@@ -73,66 +68,71 @@ namespace BL
                         //check if the parcel of the drone is scheduled and not delivered and not picked up
                         if (parcel.PickedUp != null)
                         {
-                            DO.Station station = findClosestStation(new LocationBL(customerSender.Latitude, customerSender.Longitude));
-                            droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
+                            DO.Station station = findClosestStation(customerSender.Location);
+                            droneBL.Location = new Location(station.Latitude, station.Longitude);
                         }
 
                         //check if the parcel of the drone is scheduled and not delivered and picked up
                         //לבדוק מה בנות עשו
                         else
                         {
-                            droneBL.Location = new LocationBL(customerSender.Latitude, customerSender.Longitude);
+                            droneBL.Location = customerSender.Location;
                         }
-                        DO.Customer customerReciever = dalObject.GetCustomerById(c => c.ID == parcel.TargetID);
-                        double electricitySenderToReciever = calcElectry(new LocationBL(customerSender.Longitude, customerSender.Latitude), new LocationBL
-                            (customerReciever.Longitude, customerReciever.Latitude), (int)parcel.Weight);
-                        DO.Station station1 = stationWithMinDisAndEmptySlots(new LocationBL(customerReciever.Latitude, customerReciever.Longitude));
-                        double electricityRecieverToCharger = calcElectry(new LocationBL(customerReciever.Longitude, customerReciever.Latitude), new LocationBL
-                            (station1.Longitude, station1.Latitude), 0);
+                        BO.Customer customerReciever = GetSpecificCustomerBL(c => c.ID == parcel.TargetID);
+                        double electricitySenderToReciever = calcElectry(customerSender.Location, customerReciever.Location, (int)parcel.Weight);
+                        BO.Station station1 = stationWithMinDisAndEmptySlots(customerReciever.Location);
+                        double electricityRecieverToCharger = calcElectry(customerReciever.Location, station1.Location, 0);
                         int minEle = (int)Math.Round(electricitySenderToReciever + electricityRecieverToCharger);
                         droneBL.BatteryStatus = rand.Next(minEle, 100);
                     }
                 }
 
-                //check if drone is not in delivery
+                #region check if drone is not in delivery
                 if (droneBL.DroneStatus != DroneStatus.Delivery)
                 {
                     droneBL.DroneStatus = (DroneStatus)rand.Next(0, 2);
                 }
+                #endregion
 
-                //check if drone is in maintenance
+                #region check if drone is in maintenance
+
                 if (droneBL.DroneStatus == DroneStatus.Maintenance)
                 {
                     int length = dalObject.LengthStation();
                     List<DO.Station> s = dalObject.GetStations().ToList();
                     DO.Station station = s[rand.Next(0, length)];
-                    droneBL.Location = new LocationBL(station.Latitude, station.Longitude);
+                    droneBL.Location = new Location(station.Latitude, station.Longitude);
                     droneBL.BatteryStatus = rand.Next(0, 21);
                     DroneCharge droneCharge = new DroneCharge();
                     droneCharge.DroneID = drone.ID;
                     droneCharge.StationID = station.ID;
                     dalObject.AddDroneCharge(droneCharge);
                 }
+                #endregion
 
-                //check if drone is in available
+                #region check if drone is in available
+
                 else if (droneBL.DroneStatus == DroneStatus.Available)
                 {
                     List<DO.Parcel> parcelBLsWithSuppliedParcel = dalObject.GetParcels().ToList().FindAll(p => p.Delivered != null);
                     if (parcelBLsWithSuppliedParcel.Count > 0)
                     {
                         BO.Parcel parcelBL = convertDalToParcelBL(parcelBLsWithSuppliedParcel[rand.Next(0, parcelBLsWithSuppliedParcel.Count)]);
-                        DO.Customer customer = dalObject.GetCustomerById(c => c.ID == parcelBL.Sender.ID);
-                        droneBL.Location = new LocationBL(customer.Latitude, customer.Longitude);
-                        DO.Station station1 = stationWithMinDisAndEmptySlots(droneBL.Location);
-                        double electry = calcElectry(new LocationBL(station1.Longitude, station1.Latitude), droneBL.Location, 0);
+                        BO.Customer customer = GetSpecificCustomerBL(c => c.ID == parcelBL.Sender.ID);
+                        droneBL.Location = customer.Location;
+                        BO.Station station1 = stationWithMinDisAndEmptySlots(droneBL.Location);
+                        double electry = calcElectry(station1.Location, droneBL.Location, 0);
                         int minElectric = (int)Math.Round(electry);
                         droneBL.BatteryStatus = rand.Next(minElectric, 100);
                     }
                 }
+                #endregion
+
                 droneBLList.Add(droneBL);
             }
         }
 
+        #region help functions
 
         /// <summary>
         ///calsulate the electricity that a drone needs to get from one location to another
@@ -140,10 +140,10 @@ namespace BL
         /// <param name="location2"></param>
         /// <param name="weight"></param>
         /// <returns>double</returns>
-        private double calcElectry(LocationBL locatin1, LocationBL location2, int weight)
+        private double calcElectry(Location locatin1, Location location2, int weight)
         {
             double distance1 = distance(locatin1, location2);
-            return distance1 * dalObject.RequestElectric()[weight];
+            return Math.Round(distance1 * dalObject.RequestElectric()[weight]);
         }
 
         /// <summary>
@@ -151,16 +151,15 @@ namespace BL
         /// </summary>
         /// <param name="location"></param>
         /// <returns>Station</returns>
-        //return the stations with the minimum distance from the location and with empty slots
-        private DO.Station stationWithMinDisAndEmptySlots(LocationBL location)////////////////////////////
+        private BO.Station stationWithMinDisAndEmptySlots(Location location)////////////////////////////
         {
             double minDis = -1;
             double dis2 = 0;
-            IEnumerable<DO.Station> stations = dalObject.GetStations();
-            DO.Station sendStation = new DO.Station();
+            IEnumerable<BO.Station> stations = getStationsBL();
+            BO.Station sendStation = new BO.Station();
             foreach (var station in stations)
             {
-                dis2 = distance(location, new LocationBL(station.Latitude, station.Longitude));
+                dis2 = distance(location, station.Location);
                 if (dis2 < minDis || minDis == -1 && station.ChargeSlots != 0)
                 {
                     minDis = dis2;
@@ -175,7 +174,7 @@ namespace BL
         /// </summary>
         /// <param name="location"></param>
         /// <returns>Station</returns>
-        private DO.Station findClosestStation(LocationBL location)
+        private DO.Station findClosestStation(Location location)
         {
             double minDis = -1;
             double dis2 = 0;
@@ -183,7 +182,7 @@ namespace BL
             DO.Station sendStation = new DO.Station();
             foreach (var station in stations)
             {
-                dis2 = distance(location, new LocationBL(station.Latitude, station.Longitude));
+                dis2 = distance(location, new Location(station.Latitude, station.Longitude));
                 if (dis2 < minDis || minDis == -1)
                 {
                     minDis = dis2;
@@ -199,63 +198,11 @@ namespace BL
         /// <param name="location1"></param>
         /// <param name="location2"></param>
         /// <returns>double</returns>
-        public static double distance(LocationBL location1, LocationBL location2)
+        public static double distance(Location location1, Location location2)
         {
             return Math.Sqrt(Math.Pow(location2.Longitude - location1.Longitude, 2) +
             Math.Pow(location2.Latitude - location1.Latitude, 2) * 1.0);
         }
-
-
-        /// <summary>
-        /// check the range of the id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>bool</returns>
-        public static bool CheckLongIdIsValid(ulong id)
-        {
-            return id > 100000000 && id < 1000000000;
-        }
-
-        /*/// <summary>
-        /// return parcels that are not connected to a drone
-        /// </summary>
-        /// <returns>List<ParcelBL></returns>*/
-        /*public IEnumerable<BO.Parcel> GetParcelsWithoutoutDrone()
-        {
-            IEnumerable<BO.Parcel> parcels = GetParcelsBL();
-            List<BO.Parcel> parcelsWithOutDrone = new List<BO.Parcel>();
-            foreach (var parcel in parcels)
-            {
-                if (parcel.Drone == null)
-                {
-                    parcelsWithOutDrone.Add(parcel);
-                }
-            }
-            return parcelsWithOutDrone;
-        }*/
-
-        /*/// <summary>
-        /// return station with epty chargers
-        /// </summary>
-        /// <returns>List<StationBL></returns>*/
-        /*public IEnumerable<BO.Station> GetStationWithEmptyChargers()
-        {
-            int numOfChargers = 0;
-            IEnumerable<BO.Station> stations = GetStationsBL();
-            List<BO.Station> stationsWithEmptyChargers = new List<BO.Station>();
-            List<DroneCharge> droneChargers = dalObject.GetDroneCharges().ToList();
-            foreach (var station in stations)
-            {
-                foreach (var droneCharger in droneChargers)
-                {
-                    if (station.ID == droneCharger.StationID)
-                        numOfChargers++;
-                }
-                if (numOfChargers < station.ChargeSlots)
-                    stationsWithEmptyChargers.Add(station);
-            }
-            return stationsWithEmptyChargers;
-        }*/
 
         /// <summary>
         /// return values of weightCatagories enum
@@ -277,27 +224,28 @@ namespace BL
             return Enum.GetValues(typeof(Priorities));
         }
 
+        /// <summary>
+        /// get rate of charging
+        /// </summary>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public double getRateOfCharging()
         {
             return this.electricChargingRate;
         }
+        #endregion
 
-
-
-
-
-
-
-
-
+        /// <summary>
+        /// start simularion
+        /// </summary>
+        /// <param name="drone"></param>
+        /// <param name="worker"></param>
+        /// <param name="updateDrone"></param>
+        /// <param name="needToStop"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void StartSimulation(BO.Drone drone, BackgroundWorker worker, Action<BO.Drone, int> updateDrone, Func<bool> needToStop)
         {
             new Simulation(this, drone, worker, updateDrone, needToStop);
-            //var sim = new Simulation(this, drone, worker, updateDrone, needToStop);
-            //sim.start(drone, worker, updateDrone, needToStop);
-
         }
     }
 }

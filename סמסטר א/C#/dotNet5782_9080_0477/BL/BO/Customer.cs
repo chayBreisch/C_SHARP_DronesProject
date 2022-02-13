@@ -27,7 +27,7 @@ namespace BO
         }
         public string Name { get; set; }
         public string Phone { get; set; }
-        public LocationBL Location { get; set; }
+        public Location Location { get; set; }
         public List<ParcelAtCustomer> parcelSendedByCustomer { get; set; }
         public List<ParcelAtCustomer> parcelSendedToCustomer { get; set; }
         public bool IsActive { get; set; }

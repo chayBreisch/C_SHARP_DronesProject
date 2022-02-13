@@ -21,18 +21,23 @@ namespace PL
     {
 
         BlApi.IBL BLObject;
+        Customer_ customerPL;
         BO.Customer customeBL;
         BO.Customer customer = new BO.Customer();
         char CheckIdentity;
+        PLLists PLLists;
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="customerList"></param>
-        public Customer(BlApi.IBL bl)
+        public Customer(BlApi.IBL bl, PLLists pllists)
         {
             BLObject = bl;
             InitializeComponent();
+            PLLists = pllists;
+            //customerPL = new Customer_(BLObject.GetSpecificCustomerToList(customeBL.ID));
+            mainGrid.DataContext = customerPL;
             WindowStyle = WindowStyle.None;
             actions.Visibility = Visibility.Hidden;
             CustomerPage.Visibility = Visibility.Hidden;
@@ -56,12 +61,15 @@ namespace PL
         /// <param name="bl"></param>
         /// <param name="customer"></param>
         /// <param name="customerList"></param>
-        public Customer(BlApi.IBL bl, BO.Customer customer, char c)
+        public Customer(BlApi.IBL bl, BO.Customer customer, char c, PLLists pllists)
         {
             CheckIdentity = c;
             BLObject = bl;
             customeBL = customer;
+            PLLists = pllists;
             InitializeComponent();
+            customerPL = new Customer_(BLObject.GetSpecificCustomerBL(C=>C.ID == customeBL.ID));
+            mainGrid.DataContext = customerPL;
             if (CheckIdentity == 'c')
             {
                 actions.Visibility = Visibility.Hidden;
@@ -75,7 +83,7 @@ namespace PL
                 addCustomer.Visibility = Visibility.Hidden;
                 CustomerPage.Visibility = Visibility.Hidden;
                 actions.Visibility = Visibility.Visible;
-                idcustomer.Text = customeBL.ID.ToString();
+                //idcustomer.Text = customeBL.ID.ToString();
                 nameCustomer.Text = customeBL.Name.ToString();
                 phoneCustomr.Text = customeBL.Phone.ToString();
                 longCustomer.Text = customeBL.Location.Longitude.ToString();
@@ -199,8 +207,9 @@ namespace PL
         {
             try
             {
-                BLObject.AddCustomer(getID(), getName(), getPhone(), new BO.LocationBL(getLongitude(), getLatitude()));
+                BLObject.AddCustomer(getID(), getName(), getPhone(), new BO.Location(getLongitude(), getLatitude()));
                 MessageBox.Show("succesfull add");
+                PLLists.AddCustomer(BLObject.GetSpecificCustomerBL(C=>C.ID==getID()));
                 Close();
             }
             catch (Exception ex)
@@ -233,7 +242,7 @@ namespace PL
             BO.Drone drone = BLObject.GetSpecificDroneBLWithDeleted(parcelBL.Drone.ID);
             /*new Parcel(BLObject, parcelBL, new Drone(BLObject, drone, new DroneList(BLObject, new MainWindow()))).Show();
             Hide();*/
-            var win = new Parcel(BLObject, parcelBL);
+            var win = new Parcel(BLObject, parcelBL, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
             Visibility = Visibility.Visible;
@@ -286,7 +295,7 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickSendParcel(object sender, RoutedEventArgs e)
         {
-            new Parcel(BLObject, customeBL).Show();
+            new Parcel(BLObject, customeBL, PLLists).Show();
         }
 
         /// <summary>

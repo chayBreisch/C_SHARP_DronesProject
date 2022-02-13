@@ -21,16 +21,18 @@ namespace PL
     {
         BlApi.IBL BLObject;
         Window ParentWindow;
-        public FirstPage(BlApi.IBL blobject, Window parentWindow)
+        PLLists PLLists;
+        public FirstPage(BlApi.IBL blobject, Window parentWindow, PLLists pllists)
         {
             InitializeComponent();
             BLObject = blobject;
             ParentWindow = parentWindow;
+            PLLists = pllists;
         }
 
         private void Button_ClickNewCustomer(object sender, RoutedEventArgs e)
         {
-            new Customer(BLObject).Show();
+            new Customer(BLObject, PLLists).Show();
                     this.Close();
         }
 
@@ -38,7 +40,7 @@ namespace PL
         {
             try
             {
-                new Checking(BLObject, 'c').Show();
+                new Checking(BLObject, 'c', PLLists).Show();
                     this.Close();
             }
             catch
@@ -51,7 +53,7 @@ namespace PL
         {
             try
             {
-                new Checking(BLObject, 'w').Show();
+                new Checking(BLObject, 'w', PLLists).Show();
                 this.Close();
 
             }

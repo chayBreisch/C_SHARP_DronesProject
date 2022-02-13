@@ -35,7 +35,7 @@ namespace BO
 
         public DroneStatus DroneStatus { get; set; }
         public ParcelInDelivery parcelInDelivery { get; set; }
-        public LocationBL Location { get; set; }
+        public Location Location { get; set; }
         public DO.WeightCatagories Weight
         {
             get { return weight; }

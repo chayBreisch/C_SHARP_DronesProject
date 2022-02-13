@@ -54,7 +54,7 @@ namespace PL
             droneBL = drone;
             InitializeComponent();
             PLLists = plLists;
-            DronePL = new Drone_(BLObject.ConvertDroneBLToDroneToList(droneBL));
+            DronePL = new Drone_(droneBL);
             maimGrid.DataContext = DronePL;
             WindowStyle = WindowStyle.None;
             addDrone.Visibility = Visibility.Hidden;
@@ -226,7 +226,7 @@ namespace PL
             try
             {
                 BLObject.AddDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
-                PLLists.AddDrone(BLObject.ConvertDroneBLToDroneToList(BLObject.GetSpecificDroneBL(getID())));
+                PLLists.AddDrone(BLObject.GetSpecificDroneBL(getID()));
                 MessageBox.Show("you added succefuly");
                 Close();
             }
@@ -257,7 +257,7 @@ namespace PL
 
         /// <summary>
         /// update the drone model
-        /// </summary>
+        /// </summary
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
@@ -266,7 +266,9 @@ namespace PL
             {
                 droneBL = BLObject.UpdateDataDroneModel(droneBL.ID, modelDrone.Text);
                 MessageBox.Show("you updated sucssesfully");
-                PLLists.UpdateDrone(DronePL);
+                DronePL.updateDrone(droneBL);
+
+                PLLists.UpdateDrone(droneBL);
             }
             catch (Exception ex)
             {
@@ -286,16 +288,18 @@ namespace PL
                 droneBL = BLObject.UpdateSendDroneToCharge(droneBL.ID);
                 TimeChargerBlock.Visibility = Visibility.Visible;
                 MessageBox.Show("the drone is sended to charge succesfully");
+                Supply.IsEnabled = false;
+                UnCharge.IsEnabled = true;
+                DronePL.updateDrone(droneBL);
+                PLLists.UpdateDrone(droneBL);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("can not charge drone");
             }
-            statusDrone.Text = droneBL.DroneStatus.ToString();
+            //statusDrone.Text = droneBL.DroneStatus.ToString();
             /*visible.Visibility = Visibility.Hidden;
             hidden.Visibility = Visibility.Visible;*/
-            Supply.IsEnabled = false;
-            UnCharge.IsEnabled = true;
             /*Charge.IsEnabled = false;
             Connect.IsEnabled = false;
             Collect.IsEnabled = false;
@@ -336,6 +340,9 @@ namespace PL
                     //batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
                     TimeCharger.Text = "";
                     MessageBox.Show("the drone is uncharged sucssesfully");
+                    //DronePL.DroneStatus = droneBL.DroneStatus;
+                    DronePL.updateDrone(droneBL);
+                    PLLists.UpdateDrone(droneBL);
                 }
                 catch (Exception ex)
                 {
@@ -355,6 +362,9 @@ namespace PL
             try
             {
                 BLObject.UpdateConnectParcelToDrone(droneBL.ID);
+                DronePL.updateDrone(droneBL);
+                PLLists.UpdateDrone(droneBL);
+                //PLLists.UpdateDrone(droneBL);
             }
             catch (Exception ex)
             {
@@ -376,6 +386,9 @@ namespace PL
             try
             {
                 BLObject.UpdateCollectParcelByDrone(droneBL.ID);
+                DronePL.updateDrone(droneBL);
+                PLLists.UpdateDrone(droneBL);
+                //PLLists.UpdateDrone(droneBL);
             }
             catch (Exception ex)
             {
@@ -397,6 +410,8 @@ namespace PL
             try
             {
                 BLObject.UpdateSupplyParcelByDrone(droneBL.ID);
+                DronePL.updateDrone(droneBL);
+                PLLists.UpdateDrone(droneBL);
             }
             catch (Exception ex)
             {
@@ -425,7 +440,7 @@ namespace PL
         private void Button_openParcel(object sender, RoutedEventArgs e)
         {
             if (droneBL.parcelInDelivery != null)
-                new Parcel(BLObject, BLObject.GetSpecificParcelBL(droneBL.parcelInDelivery.ID)).Show();
+                new Parcel(BLObject, BLObject.GetSpecificParcelBL(droneBL.parcelInDelivery.ID), PLLists).Show();
         }
 
         /// <summary>
@@ -488,6 +503,9 @@ namespace PL
             worker.WorkerReportsProgress = true;
             worker.ProgressChanged += (object? sender, ProgressChangedEventArgs e) =>
             {
+                DronePL.updateDrone(droneBL);
+                PLLists.UpdateDrone(droneBL);
+
                 /*Student.MyAge++;
                 Student.Name = updatDrone.FirstName;
                 progress.Content = e.ProgressPercentage;*/

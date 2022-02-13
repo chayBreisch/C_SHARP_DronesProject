@@ -20,50 +20,70 @@ namespace PL
 
         public ObservableCollection<Customer_> Customers = new ObservableCollection<Customer_>();
 
-        public void AddDrone(DroneToList bl)
+        public void AddDrone(BO.Drone bl)
         {
             Drones.Add(new Drone_(bl));
         }
 
-        public void AddParcel(ParcelToList bl)
+        public void AddParcel(BO.Parcel bl)
         {
             Parcels.Add(new Parcel_(bl));
         }
 
-        public void AddStation(StationToList bl)
+        public void AddStation(BO.Station bl)
         {
             Stations.Add(new Station_(bl));
         }
 
-        public void AddCustomer(CustomerToList bl)
+        public void AddCustomer(BO.Customer bl)
         {
             Customers.Add(new Customer_(bl));
         }
 
-        public void UpdateDrone(Drone_ drone)
+
+
+        public void UpdateDrone(BO.Drone drone)
         {
-            int index = Drones.IndexOf(Drones.Where(C => C.ID == drone.ID).FirstOrDefault());
-            Drones[index] = drone;
+            int index = Drones.IndexOf(Drones.Where(D => D.ID == drone.ID).FirstOrDefault());
+            Drones[index] = new Drone_(drone);
+        }
+
+        public void UpdateParcel(Parcel_ parcel)
+        {
+            int index = Parcels.IndexOf(Parcels.Where(P => P.ID == parcel.ID).FirstOrDefault());
+            Parcels[index] = parcel;
+        }
+
+        public void UpdateStation(Station_ station)
+        {
+            int index = Stations.IndexOf(Stations.Where(S => S.ID == station.ID).FirstOrDefault());
+            Stations[index] = station;
+        }
+
+        public void UpdateCustomer(Customer_ customer)
+        {
+            int index = Customers.IndexOf(Customers.Where(C => C.ID == customer.ID).FirstOrDefault());
+            Customers[index] = customer;
         }
 
         public PLLists()
         {
             foreach (var drone in BLObject.GetDronesToList())
             {
-                AddDrone(drone);
+                AddDrone(BLObject.ConvertDroneToListToDroneBL(drone));
             }
 
-            foreach (var parcel in BLObject.GetParcelsToList())
+            foreach (var parcel in BLObject.GetParcelsByCondition(P=>P.ID != 0))
             {
                 AddParcel(parcel);
             }
 
             foreach (var station in BLObject.GetStationsToList())
             {
-                AddStation(station);
+                AddStation(BLObject.ConvertStationToListToStationBL(station));
             }
 
-            foreach (var customer in BLObject.GetCustomersToList())
+            foreach (var customer in BLObject.GetCustomersByCondition(C=>C.ID != 0))
             {
                 AddCustomer(customer);
             }
