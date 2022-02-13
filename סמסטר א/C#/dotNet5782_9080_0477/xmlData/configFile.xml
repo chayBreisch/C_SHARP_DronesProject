@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<Available>.1</Available>
+	<LightHeight>.2</LightHeight>
+	<MidHeight>.3</MidHeight>
+	<HeavyHeight>.4</HeavyHeight>
+	<ChargingRate>.5</ChargingRate>
+</config>
