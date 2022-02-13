@@ -34,13 +34,12 @@
         <ListView ItemsSource="{Binding}" Foreground="Black" Background="#FF8D8C7A" Grid.Row="1" x:Name="DroneListView"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick="DroneListView_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="ID" Width="120" DisplayMemberBinding="{Binding ID}" />
                     <GridViewColumn Header="Model" Width="150" DisplayMemberBinding="{Binding Model}" />
                     <GridViewColumn Header="Weight" Width="120" DisplayMemberBinding="{Binding Weight}" />
                     <GridViewColumn Header="BatteryStatus" Width="120" DisplayMemberBinding="{Binding BatteryStatus}" />
-                    <GridViewColumn Header="DroneStatus" Width="120" DisplayMemberBinding="{Binding DroneStatus}" />
+                    <GridViewColumn Header="DroneStatus" Width="150" DisplayMemberBinding="{Binding DroneStatus}" />
                     <GridViewColumn Header="Location" Width="120" DisplayMemberBinding="{Binding Location}" />
-                    <GridViewColumn Header="num of parcel" Width="100" DisplayMemberBinding="{Binding NumOfParcelTrans}" />
                 </GridView>
             </ListView.View>
             <ListView.GroupStyle>
