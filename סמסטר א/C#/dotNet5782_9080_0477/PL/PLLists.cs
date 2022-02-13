@@ -20,17 +20,17 @@ namespace PL
 
         public ObservableCollection<Customer_> Customers = new ObservableCollection<Customer_>();
 
-        public void AddDrone(DroneToList bl)
+        public void AddDrone(BO.Drone bl)
         {
             Drones.Add(new Drone_(bl));
         }
 
-        public void AddParcel(ParcelToList bl)
+        public void AddParcel(BO.Parcel bl)
         {
             Parcels.Add(new Parcel_(bl));
         }
 
-        public void AddStation(StationToList bl)
+        public void AddStation(BO.Station bl)
         {
             Stations.Add(new Station_(bl));
         }
@@ -45,7 +45,7 @@ namespace PL
         public void UpdateDrone(BO.Drone drone)
         {
             int index = Drones.IndexOf(Drones.Where(D => D.ID == drone.ID).FirstOrDefault());
-            Drones[index] = new Drone_(BLObject.ConvertDroneBLToDroneToList(drone));
+            Drones[index] = new Drone_(drone);
         }
 
         public void UpdateParcel(Parcel_ parcel)
@@ -70,17 +70,17 @@ namespace PL
         {
             foreach (var drone in BLObject.GetDronesToList())
             {
-                AddDrone(drone);
+                AddDrone(BLObject.ConvertDroneToListToDroneBL(drone));
             }
 
-            foreach (var parcel in BLObject.GetParcelsToList())
+            foreach (var parcel in BLObject.GetParcelsByCondition(P=>P.ID != 0))
             {
                 AddParcel(parcel);
             }
 
             foreach (var station in BLObject.GetStationsToList())
             {
-                AddStation(station);
+                AddStation(BLObject.ConvertStationToListToStationBL(station));
             }
 
             foreach (var customer in BLObject.GetCustomersByCondition(C=>C.ID != 0))

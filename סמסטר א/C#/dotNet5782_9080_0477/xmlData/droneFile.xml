@@ -37,9 +37,27 @@
     <IsActive>true</IsActive>
   </Drone>
   <Drone>
-    <ID>111</ID>
-    <Model>1</Model>
+    <ID>123456789</ID>
+    <Model>zipi</Model>
     <MaxWeight>Light</MaxWeight>
     <IsActive>true</IsActive>
+  </Drone>
+  <Drone>
+    <ID>234567891</ID>
+    <Model>ch</Model>
+    <MaxWeight>Light</MaxWeight>
+    <IsActive>true</IsActive>
+  </Drone>
+  <Drone>
+    <ID>90</ID>
+    <Model>a</Model>
+    <MaxWeight>Light</MaxWeight>
+    <IsActive>false</IsActive>
+  </Drone>
+  <Drone>
+    <ID>70</ID>
+    <Model>must</Model>
+    <MaxWeight>Light</MaxWeight>
+    <IsActive>false</IsActive>
   </Drone>
 </ArrayOfDrone>

@@ -54,7 +54,7 @@ namespace PL
             droneBL = drone;
             InitializeComponent();
             PLLists = plLists;
-            DronePL = new Drone_(BLObject.ConvertDroneBLToDroneToList(droneBL));
+            DronePL = new Drone_(droneBL);
             maimGrid.DataContext = DronePL;
             WindowStyle = WindowStyle.None;
             addDrone.Visibility = Visibility.Hidden;
@@ -226,7 +226,7 @@ namespace PL
             try
             {
                 BLObject.AddDrone(getID(), getModel(), droneWeight.SelectedIndex, getStation());
-                PLLists.AddDrone(BLObject.ConvertDroneBLToDroneToList(BLObject.GetSpecificDroneBL(getID())));
+                PLLists.AddDrone(BLObject.GetSpecificDroneBL(getID()));
                 MessageBox.Show("you added succefuly");
                 Close();
             }
@@ -266,7 +266,7 @@ namespace PL
             {
                 droneBL = BLObject.UpdateDataDroneModel(droneBL.ID, modelDrone.Text);
                 MessageBox.Show("you updated sucssesfully");
-                DronePL.updateDrone(BLObject.ConvertDroneBLToDroneToList(droneBL));
+                DronePL.updateDrone(droneBL);
 
                 PLLists.UpdateDrone(droneBL);
             }
@@ -290,7 +290,7 @@ namespace PL
                 MessageBox.Show("the drone is sended to charge succesfully");
                 Supply.IsEnabled = false;
                 UnCharge.IsEnabled = true;
-                DronePL.updateDrone(BLObject.ConvertDroneBLToDroneToList(droneBL));
+                DronePL.updateDrone(droneBL);
                 PLLists.UpdateDrone(droneBL);
             }
             catch (Exception ex)
@@ -341,7 +341,7 @@ namespace PL
                     TimeCharger.Text = "";
                     MessageBox.Show("the drone is uncharged sucssesfully");
                     //DronePL.DroneStatus = droneBL.DroneStatus;
-                    DronePL.updateDrone(BLObject.ConvertDroneBLToDroneToList(droneBL));
+                    DronePL.updateDrone(droneBL);
                     PLLists.UpdateDrone(droneBL);
                 }
                 catch (Exception ex)
@@ -362,7 +362,7 @@ namespace PL
             try
             {
                 BLObject.UpdateConnectParcelToDrone(droneBL.ID);
-                DronePL.updateDrone(BLObject.ConvertDroneBLToDroneToList(droneBL));
+                DronePL.updateDrone(droneBL);
                 PLLists.UpdateDrone(droneBL);
                 //PLLists.UpdateDrone(droneBL);
             }
@@ -386,7 +386,7 @@ namespace PL
             try
             {
                 BLObject.UpdateCollectParcelByDrone(droneBL.ID);
-                DronePL.updateDrone(BLObject.ConvertDroneBLToDroneToList(droneBL));
+                DronePL.updateDrone(droneBL);
                 PLLists.UpdateDrone(droneBL);
                 //PLLists.UpdateDrone(droneBL);
             }
@@ -410,7 +410,7 @@ namespace PL
             try
             {
                 BLObject.UpdateSupplyParcelByDrone(droneBL.ID);
-                DronePL.updateDrone(BLObject.ConvertDroneBLToDroneToList(droneBL));
+                DronePL.updateDrone(droneBL);
                 PLLists.UpdateDrone(droneBL);
             }
             catch (Exception ex)
@@ -503,7 +503,7 @@ namespace PL
             worker.WorkerReportsProgress = true;
             worker.ProgressChanged += (object? sender, ProgressChangedEventArgs e) =>
             {
-                DronePL.updateDrone(BLObject.ConvertDroneBLToDroneToList(droneBL));
+                DronePL.updateDrone(droneBL);
                 PLLists.UpdateDrone(droneBL);
 
                 /*Student.MyAge++;

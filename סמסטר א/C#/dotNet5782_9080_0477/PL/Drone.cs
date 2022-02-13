@@ -133,27 +133,109 @@ namespace PL
 
 
 
-        public Drone_(DroneToList drone)
+        public static readonly DependencyProperty parcelInDeliveryProperty =
+        DependencyProperty.Register("parcelInDelivery",
+                                    typeof(object),
+                                    typeof(Drone_),
+                                    new UIPropertyMetadata(0));
+
+
+        public ParcelInDelivery parcelInDelivery
+        {
+            get
+            {
+                return (ParcelInDelivery)GetValue(parcelInDeliveryProperty);
+            }
+            set
+            {
+                SetValue(parcelInDeliveryProperty, value);
+            }
+        }
+
+
+
+        public static readonly DependencyProperty IsActivProperty =
+       DependencyProperty.Register("IsActiv",
+                                   typeof(object),
+                                   typeof(Drone_),
+                                   new UIPropertyMetadata(0));
+
+
+        public bool IsActiv
+        {
+            get
+            {
+                return (bool)GetValue(IsActivProperty);
+            }
+            set
+            {
+                SetValue(IsActivProperty, value);
+            }
+        }
+
+
+        public static readonly DependencyProperty NumOfParcelTransProperty =
+            DependencyProperty.Register("NumOfParcelTrans",
+                typeof(object),
+                typeof(Drone_),
+                new UIPropertyMetadata(0));
+
+
+        public int NumOfParcelTrans
+        {
+            get
+            {
+                return (int)GetValue(NumOfParcelTransProperty);
+            }
+            set
+            {
+                SetValue(NumOfParcelTransProperty, value);
+            }
+        }
+
+
+        public Drone_(BO.Drone drone)
         {
             ID = drone.ID;
             Model = drone.Model;
             Weight = drone.Weight;
             BatteryStatus = drone.BatteryStatus;
             DroneStatus = drone.DroneStatus;
-            //Location = new Location(drone.Location);
+            Location = new Location(drone.Location);
+            parcelInDelivery = drone.parcelInDelivery;
+            IsActiv = drone.IsActive;
+            NumOfParcelTrans = parcelInDelivery == null ? 0 : 1;
 
         }
 
 
-        public void updateDrone(DroneToList drone)
+        public void updateDrone(BO.Drone drone)
         {
             this.ID = drone.ID;
             this.Model = drone.Model;
             this.Weight = drone.Weight;
             this.BatteryStatus = Math.Round(drone.BatteryStatus);
             this.DroneStatus = drone.DroneStatus;
-            //this.Location = new Location(drone.Location);
+            this.Location = new Location(drone.Location);
+            this.parcelInDelivery = drone.parcelInDelivery;
+            this.IsActiv = drone.IsActive;
+            NumOfParcelTrans = parcelInDelivery == null ? 0 : 1;
 
         }
+
+
+        /*
+                 private double battery { get; set; }
+       
+
+        public ParcelInDelivery parcelInDelivery { get; set; }
+        
+        
+
+        public bool IsActive { get; set; }
+         
+         */
+
+
     }
 }

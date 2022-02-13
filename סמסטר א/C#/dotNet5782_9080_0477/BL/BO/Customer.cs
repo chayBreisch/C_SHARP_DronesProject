@@ -17,12 +17,12 @@ namespace BO
             { return Id; }
             set
             {
-                if (value >= 100000000 && value < 1000000000)
+               /* if (value >= 100000000 && value < 1000000000)
                     Id = value;
                 else
                 {
                     throw new OutOfRange("customer id");
-                }
+                }*/
             }
         }
         public string Name { get; set; }

@@ -26,6 +26,7 @@ namespace PL
         BO.Parcel parcelBL;
         BO.Customer Customer;
         PLLists PLLists;
+        Parcel_ parcelPL;
          
         /// <summary>
         /// constructor add parcel
@@ -62,18 +63,20 @@ namespace PL
             WindowStyle = WindowStyle.None;
             BLObject = bl;
             parcelBL = parcel;
-            idparcel.Text = parcelBL.ID.ToString();
-            senderidparcel.Text = parcelBL.Sender.ID.ToString();
-            recieveridparcel.Text = parcelBL.Reciever.ID.ToString();
-            weightparcel.Text = parcelBL.Weight.ToString();
-            priorityparcel.Text = parcelBL.Priorities.ToString();
-            droneparcel.Text = parcelBL.Drone.ToString();
+            parcelPL = new Parcel_(parcelBL);
+            DataContext = parcelPL;
+            //idparcel.Text = parcelBL.ID.ToString();
+            //senderidparcel.Text = parcelBL.Sender.ID.ToString();
+            //recieveridparcel.Text = parcelBL.Reciever.ID.ToString();
+            //weightparcel.Text = parcelBL.Weight.ToString();
+            //priorityparcel.Text = parcelBL.Priorities.ToString();
+            //droneparcel.Text = parcelBL.Drone.ToString();
             if (parcelBL.Drone.ID == 0)
                 droneparcel.Text = "no drone";
-            RequesedParcel.Text = parcelBL.Requesed.ToString();
-            ScheduledParcel.Text = parcelBL.Scheduled.ToString();
-            pickedUpParcel.Text = parcelBL.PickedUp.ToString();
-            DeliveredParcel.Text = parcelBL.Delivered.ToString();
+            //RequesedParcel.Text = parcelBL.Requesed.ToString();
+            //ScheduledParcel.Text = parcelBL.Scheduled.ToString();
+            //pickedUpParcel.Text = parcelBL.PickedUp.ToString();
+            //DeliveredParcel.Text = parcelBL.Delivered.ToString();
             if (parcelBL.Scheduled == null)
             {
                 checkBoxPicked.Visibility = Visibility.Hidden;
@@ -310,8 +313,9 @@ namespace PL
             checkBoxPicked.Visibility = Visibility.Hidden;
             checkBoxDelivered.Visibility = Visibility.Visible;
             parcelBL.PickedUp = DateTime.Now;
-            pickedUpParcel.Text = parcelBL.PickedUp.ToString();
             BLObject.updateParecl(parcelBL);
+            parcelPL = new Parcel_(parcelBL);
+            PLLists.UpdateParcel(parcelPL);
         }
 
         /// <summary>
@@ -323,8 +327,9 @@ namespace PL
         {
             checkBoxDelivered.Visibility = Visibility.Hidden;
             parcelBL.Delivered = DateTime.Now;
-            DeliveredParcel.Text = parcelBL.Delivered.ToString();
             BLObject.updateParecl(parcelBL);
+            parcelPL = new Parcel_(parcelBL);
+            PLLists.UpdateParcel(parcelPL);
         }
 
         /// <summary>
