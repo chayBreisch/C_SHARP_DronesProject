@@ -42,6 +42,11 @@ namespace PL
 
         public Location(BO.Location location)
         {
+            if(location == null)
+            {
+                Longitude = 2;
+                Latitude = 17;
+            }
             Longitude = location.Longitude;
             Latitude = location.Latitude;
         }

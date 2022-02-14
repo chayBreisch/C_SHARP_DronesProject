@@ -23,7 +23,7 @@
             <Label Content="parcel's priority" HorizontalAlignment="Left" Margin="198,215,0,0" VerticalAlignment="Top" Height="28" Width="128"/>
             <ComboBox Name="priorityCombo" HorizontalAlignment="Left" Margin="198,237,0,0" VerticalAlignment="Top" Width="128" Height="25"/>
             <Label Content="send to" HorizontalAlignment="Left" Margin="424,134,0,0" VerticalAlignment="Top" Width="103" Height="24"/>
-            <TextBox Name="targetName" HorizontalAlignment="Left" Margin="426,157,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Height="25" TextChanged="TextBox_TextChanged"/>
+            <TextBox Name="targetName" HorizontalAlignment="Left" Margin="424,157,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Height="25" TextChanged="TextBox_TextChanged"/>
             <ListView Name="customers" Margin="424,187,215,153" MouseDoubleClick="MouseDoubleClick_chose">
                 <ListView.View>
                     <GridView>
@@ -31,7 +31,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Content="Send" HorizontalAlignment="Left" Margin="655,363,0,0" VerticalAlignment="Top" Height="43" Width="149" Click="Button_ClickSend"/>
+            <Button Content="Send" HorizontalAlignment="Left" Margin="617,360,0,0" VerticalAlignment="Top" Height="43" Width="149" Click="Button_ClickSend"/>
         </Grid>
 
     </Grid>

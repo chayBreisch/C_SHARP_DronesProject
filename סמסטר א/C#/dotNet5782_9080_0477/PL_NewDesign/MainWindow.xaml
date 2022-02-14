@@ -13,9 +13,9 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Content="Worker" HorizontalAlignment="Left" Margin="668,44,0,0" VerticalAlignment="Top" Height="40" Width="132" Grid.Row="1" Click="Button_ClickWorker" />
-            <Button Content="Customer" HorizontalAlignment="Left" Margin="668,134,0,0" VerticalAlignment="Top" Height="40" Width="132" Grid.Row="1" Grid.RowSpan="2" Click="Button_ClickCustomer"/>
-            <Button Content="New Customer" HorizontalAlignment="Left" Margin="668,75,0,0" VerticalAlignment="Top" Height="43" Width="132" Grid.Row="2" Click="Button_ClickNewCustomer"/>
+            <Button Content="Worker" HorizontalAlignment="Left" Margin="639,134,0,0" VerticalAlignment="Top" Height="40" Width="132" Click="Button_ClickWorker" Grid.RowSpan="2" />
+            <Button Content="Customer" HorizontalAlignment="Left" Margin="639,94,0,0" VerticalAlignment="Top" Height="40" Width="132" Grid.Row="1" Click="Button_ClickCustomer"/>
+            <Button Content="New Customer" HorizontalAlignment="Left" Margin="639,0,0,0" VerticalAlignment="Center" Height="43" Width="132" Grid.Row="2" Click="Button_ClickNewCustomer" RenderTransformOrigin="0.488,0.198"/>
         </Grid>
     </Grid>
 </Window>

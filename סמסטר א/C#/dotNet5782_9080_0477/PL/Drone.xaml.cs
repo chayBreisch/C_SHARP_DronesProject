@@ -429,6 +429,8 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e)
         {
+            if (worker != null)
+                worker.CancelAsync();
             Close();
         }
 

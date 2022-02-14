@@ -32,7 +32,10 @@ namespace BL
                             if (drone.BatteryStatus != 100)
                                 bl.UpdateSendDroneToCharge(drone.ID);
                             else
+                            {
+                                //Thread.Sleep(DELAY);
                                 worker.CancelAsync();
+                            }
                         }
                         catch (CanNotUpdateDrone e)
                         {

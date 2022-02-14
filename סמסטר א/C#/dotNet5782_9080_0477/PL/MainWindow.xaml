@@ -10,7 +10,7 @@
         <ImageBrush ImageSource="/images/drone2.jpg" ></ImageBrush>
     </Window.Background>
     <Grid>
-        <Button Content="Come in" HorizontalAlignment="Left" Margin="647,348,0,0" VerticalAlignment="Top" Height="54" Width="153" Click="Button_Click"/>
+        <Button Content="Come in" HorizontalAlignment="Left" Margin="617,350,0,0" VerticalAlignment="Top" Height="54" Width="153" Click="Button_Click"/>
 
     </Grid>
 </Window>

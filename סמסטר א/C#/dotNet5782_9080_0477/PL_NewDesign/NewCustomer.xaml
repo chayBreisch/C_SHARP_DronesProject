@@ -8,7 +8,7 @@
         Title="NewCustomer" Height="450" Width="800">
 
     <Grid RenderTransformOrigin="0.538,0.53">
-        <Grid Margin="88,105,161,7">
+        <Grid Margin="61,40,188,72" RenderTransformOrigin="0.517,0.347">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -29,9 +29,9 @@
             <TextBox Name="newLat" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" Height="48" Grid.Column="1" Margin="96,32,0,0" RenderTransformOrigin="-0.773,-0.339"/>
             <Label Content="Enter your details" HorizontalAlignment="Left" Margin="186,25,0,0" FontSize="17" VerticalAlignment="Top" Height="46" Width="146" Grid.ColumnSpan="2" Grid.Row="1"/>
         </Grid>
-        <Button Content="Join Us" HorizontalAlignment="Left" FontSize="17" Margin="672,371,0,0" VerticalAlignment="Top" Height="35" Width="130" Click="Button_ClickJoin"/>
+        <Button Content="Join Us" HorizontalAlignment="Left" FontSize="17" Margin="644,364,0,0" VerticalAlignment="Top" Height="35" Width="130" Click="Button_ClickJoin"/>
 
-        <Button Content="Reset" HorizontalAlignment="Left" FontSize="17" Margin="672,291,0,0" VerticalAlignment="Top" Height="35" Width="130" Click="Button_ClickReset"/>
+        <Button Content="Reset" HorizontalAlignment="Left" FontSize="17" Margin="644,292,0,0" VerticalAlignment="Top" Height="35" Width="130" Click="Button_ClickReset"/>
         <Button Content="X" Background="Red" HorizontalAlignment="Left" Margin="749,2,0,0" VerticalAlignment="Top" Width="49" Click="Button_ClickClose"/>
 
     </Grid>

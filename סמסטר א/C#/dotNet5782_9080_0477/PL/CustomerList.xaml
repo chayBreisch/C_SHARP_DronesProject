@@ -24,8 +24,8 @@
 
 
         </Grid>
-        <Button Content="add customer" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="419,475,0,0"  Grid.Row="1" Click="Button_ClickAddCustomer"/>
-        <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="230,475,0,0" Grid.Row="1" Click="Button_ClickShowList"/>
+        <Button Content="add customer" HorizontalAlignment="Center" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="0,475,0,0"  Grid.Row="1" Click="Button_ClickAddCustomer"/>
+        <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="45" Width="146" Margin="60,475,0,0" Grid.Row="1" Click="Button_ClickShowList"/>
         <!-- return $"customer ID: {ID}, Name : {Name}, Phone: {Phone}, Location : {Location}," +
                     $"parcelsSentedByCustomer: {parcelSentedByCustomer}, parcelsSentedToCustomer: {parcelSentedToCustomer} "; -->
         <ListView Name="CustomerListView" ItemsSource="{Binding}" Background="#FF8D8C7A" Grid.Row="1"  Height="412" VerticalAlignment="Top" Margin="0,39,0,0" MouseDoubleClick ="MouseDoubleClick_customerList" Foreground="black">
