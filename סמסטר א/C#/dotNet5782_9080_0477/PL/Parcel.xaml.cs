@@ -111,7 +111,7 @@ namespace PL
             addParcel.Visibility = Visibility.Hidden;
             weightCombo.ItemsSource = BLObject.GetweightCategoriesEnumItem();
             priorityCombo.ItemsSource = BLObject.GetPrioritiesEnumItem();
-            customers.Visibility = Visibility.Hidden;
+            CustomerSendParcel.Visibility = Visibility.Visible;
         }
 
 

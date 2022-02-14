@@ -306,6 +306,10 @@ namespace PL
         private void Button_ClickISend(object sender, RoutedEventArgs e)
         {
             theList.ItemsSource = BLObject.GetParcelsToListByCondition(P => { return customeBL.Name == P.NameCustomerSender; });
+            foreach (var item in theList.Items)
+            {
+                getContent((BO.ParcelToList)item);
+            }
         }
 
         /// <summary>
@@ -316,6 +320,10 @@ namespace PL
         private void Button_ClickIGot(object sender, RoutedEventArgs e)
         {
             theList.ItemsSource = BLObject.GetParcelsToListByCondition(P => { return customeBL.Name == P.NameCustomerReciver; });
+            foreach (var item in theList.Items)
+            {
+                getContent((BO.ParcelToList)item);
+            }
         }
 
         private void getContent(BO.ParcelToList parcel)

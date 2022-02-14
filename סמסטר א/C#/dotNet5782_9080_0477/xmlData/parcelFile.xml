@@ -260,4 +260,17 @@
     <Delivered>2022-02-14T13:12:48.7856662+02:00</Delivered>
     <IsActive>true</IsActive>
   </Parcel>
+  <Parcel>
+    <ID>21</ID>
+    <SenderID>123456789</SenderID>
+    <TargetID>112233445</TargetID>
+    <Weight>Light</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2022-02-14T14:56:26.9670998+02:00</Requested>
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
 </ArrayOfParcel>
