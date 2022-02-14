@@ -242,7 +242,7 @@ namespace BL
         /// <param name="worker"></param>
         /// <param name="updateDrone"></param>
         /// <param name="needToStop"></param>
-        public void StartSimulation(BO.Drone drone, BackgroundWorker worker, Action<BO.Drone, int> updateDrone, Func<bool> needToStop)
+        public void StartSimulation(BO.Drone drone, BackgroundWorker worker, Action<BO.Drone> updateDrone, Func<bool> needToStop)
         {
             new Simulation(this, drone, worker, updateDrone, needToStop);
         }

@@ -16,7 +16,7 @@ namespace BL
         const int DELAY = 1000;
         const int SPEED = 60;
         //IBL bl;
-        public Simulation(IBL bl, Drone drone, BackgroundWorker worker, Action<Drone, int> updateDrone, Func<bool> needToStop)
+        public Simulation(IBL bl, Drone drone, BackgroundWorker worker, Action<Drone> updateDrone, Func<bool> needToStop)
         {
             while (!needToStop())
             {
@@ -48,7 +48,7 @@ namespace BL
                                 Thread.Sleep(DELAY);
                             }
                         }
-                        updateDrone(drone, 1);
+                        updateDrone(drone);
                         Thread.Sleep(DELAY);
                         break;
                     case DroneStatus.Delivery:
@@ -56,20 +56,20 @@ namespace BL
                             bl.UpdateCollectParcelByDrone(drone.ID);
                         else
                             bl.UpdateSupplyParcelByDrone(drone.ID);
-                        updateDrone(drone, 1);
+                        updateDrone(drone);
                         Thread.Sleep(DELAY);
                         break;
                     case DroneStatus.Maintenance:
                         //double needToFill = (100 - drone.BatteryStatus) / bl.getRateOfCharging();
                         while((drone.BatteryStatus) <= 98)
                         {
-                            updateDrone(drone, 1);
+                            updateDrone(drone);
                             Thread.Sleep(SPEED);
                             drone.BatteryStatus += 2;
                         }
                         drone.BatteryStatus = 100;
                         bl.UpdateUnchargeDrone(drone.ID, (100 - drone.BatteryStatus) / bl.getRateOfCharging());
-                        updateDrone(drone, 1);
+                        updateDrone(drone);
                         Thread.Sleep(DELAY);
                         break;
                 }

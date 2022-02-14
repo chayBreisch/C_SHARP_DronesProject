@@ -465,7 +465,7 @@ namespace PL
                 BLObject.StartSimulation(
                    droneBL,
                    worker,
-                   (drone, i) => { BLObject.UpdateDataDrone(droneBL); worker.ReportProgress(i); },
+                   (drone) => { BLObject.UpdateDataDrone(droneBL); worker.ReportProgress(1); },
                    () => worker.CancellationPending);
 
             };

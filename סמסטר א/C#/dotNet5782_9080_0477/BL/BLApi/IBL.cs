@@ -92,6 +92,6 @@ namespace BlApi
         //##############################################################
         public ParcelStatus findParcelStatus(BO.Parcel parcel);
         public IEnumerable<string> GetCustomersNamesByCondition(Predicate<BO.Customer> predicate);
-        public void StartSimulation(BO.Drone drone, BackgroundWorker worker, Action<BO.Drone, int> updateDrone, Func<bool> needToStop);
+        public void StartSimulation(BO.Drone drone, BackgroundWorker worker, Action<BO.Drone> updateDrone, Func<bool> needToStop);
     }
 }
