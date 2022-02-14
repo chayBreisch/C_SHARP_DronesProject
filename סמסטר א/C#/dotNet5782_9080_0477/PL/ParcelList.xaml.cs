@@ -219,7 +219,7 @@ namespace PL
                 /* MyList = new ObservableCollection<ParcelToList>();
                  foreach (var item in BLObject.GetDeletedParcelsToList())
                      MyList.Add(item);*/
-                ParcelListView.DataContext = PLLists.Parcels;
+                ParcelListView.DataContext = PLLists.Parcels.Where(P => P.IsActive == false);
                 view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.DataContext);
             }
         }

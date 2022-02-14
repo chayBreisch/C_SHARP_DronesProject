@@ -51,6 +51,7 @@ namespace BL
             parcel.TargetID = target;
             parcel.Weight = (DO.WeightCatagories)Weight;
             parcel.Priority = (DO.Priorities)priority;
+            parcel.Requested = DateTime.Now;
             parcel.IsActive = true;
             int id = dalObject.AddParcel(parcel);
             return id;

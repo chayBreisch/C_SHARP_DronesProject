@@ -185,6 +185,25 @@ namespace PL
                 SetValue(DeliveredProperty, value);
             }
         }
+
+
+        public static readonly DependencyProperty IsActiveProperty =
+           DependencyProperty.Register("IsActive",
+               typeof(object),
+               typeof(Parcel_),
+               new UIPropertyMetadata(0));
+
+        public bool IsActive
+        {
+            get
+            {
+                return (bool)GetValue(IsActiveProperty);
+            }
+            set
+            {
+                SetValue(IsActiveProperty, value);
+            }
+        }
         public string content { get; set; }
         public string pathTo { get; set; }
         public Parcel_(BO.Parcel parcel)
@@ -201,7 +220,7 @@ namespace PL
             PickedUp = parcel.PickedUp;
             Delivered = parcel.Delivered;
             ParcelStatus = Scheduled == null ? ParcelStatus.Requesed : PickedUp == null ? ParcelStatus.Scheduled : Delivered == null ? ParcelStatus.PickedUp : ParcelStatus.Delivered;
-
+            IsActive = parcel.IsActive;
         }
     }
 }

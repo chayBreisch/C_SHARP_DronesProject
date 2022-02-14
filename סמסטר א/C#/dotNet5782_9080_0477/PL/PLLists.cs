@@ -81,8 +81,8 @@ namespace PL
             foreach (var station in BLObject.GetStationsToList())
             {
                 AddStation(BLObject.ConvertStationToListToStationBL(station));
-            }
 
+            }
             foreach (var customer in BLObject.GetCustomersByCondition(C=>C.ID != 0))
             {
                 AddCustomer(customer);
