@@ -121,10 +121,11 @@ namespace Dal
         /// add parcel to dal
         /// </summary>
         /// <param name="parcel"></param>
-        public void AddParcel(Parcel parcel)
+        public int AddParcel(Parcel parcel)
         {
             checkUniqeParcel(parcel.ID);
             DataSource.parcels.Add(parcel);
+            return parcel.ID;
         }
 
         /// <summary>

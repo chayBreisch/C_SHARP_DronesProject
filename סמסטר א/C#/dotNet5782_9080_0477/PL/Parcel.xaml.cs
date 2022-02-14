@@ -27,7 +27,7 @@ namespace PL
         BO.Customer Customer;
         PLLists PLLists;
         Parcel_ parcelPL;
-         
+
         /// <summary>
         /// constructor add parcel
         /// </summary>
@@ -166,7 +166,7 @@ namespace PL
         {
             try
             {
-                return ulong.Parse(recieveridparcel.Text);
+                return ulong.Parse(recieverIdParcel.Text);
             }
             catch (Exception e)
             {
@@ -187,9 +187,9 @@ namespace PL
                 {
                     MessageBox.Show("sender id and reciever id can't be the same");
                 }
-                BLObject.AddParcel(getSenderId(), getRecieverId(), weightParcel.SelectedIndex + 1, priorityParcel.SelectedIndex);
+               int id = BLObject.AddParcel(getSenderId(), getRecieverId(), weightParcel.SelectedIndex + 1, priorityParcel.SelectedIndex);
                 MessageBox.Show("you added succefuly");
-                //PLLists.AddParcel()
+                PLLists.AddParcel(BLObject.GetParcelsByCondition(P=>P.ID == id).FirstOrDefault());
                 Close();
             }
             catch (Exception exce)

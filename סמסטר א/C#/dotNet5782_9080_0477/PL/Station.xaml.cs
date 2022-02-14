@@ -138,6 +138,7 @@ namespace PL
             {
                 BLObject.AddStation(getID(), getModel(), getLocation(), getchargeSlots());
                 MessageBox.Show("you added succefuly");
+                PLLists.AddStation(BLObject.GetSpecificStationBL(getID()));
                 Close();
             }
             catch (Exception exce)

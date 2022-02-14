@@ -24,13 +24,14 @@ namespace BL
         /// <param name="Weight"></param>
         /// <param name="priority"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddParcel(ulong sender, ulong target, int Weight, int priority)
+        public int AddParcel(ulong sender, ulong target, int Weight, int priority)
         {
             lock (dalObject)
             {
                 checkIfCustomerWithThisID(sender);
                 checkIfCustomerWithThisID(target);
-                addParcelToDal(sender, target, Weight, priority);
+                int id = addParcelToDal(sender, target, Weight, priority);
+                return id;
             }
         }
 
@@ -41,7 +42,7 @@ namespace BL
         /// <param name="target"></param>
         /// <param name="Weight"></param>
         /// <param name="priority"></param>
-        private void addParcelToDal(ulong sender, ulong target, int Weight, int priority)
+        private int addParcelToDal(ulong sender, ulong target, int Weight, int priority)
         {
             DO.Parcel parcel = new DO.Parcel();
             parcel.ID = dalObject.LengthParcel() + 1;
@@ -51,7 +52,8 @@ namespace BL
             parcel.Weight = (DO.WeightCatagories)Weight;
             parcel.Priority = (DO.Priorities)priority;
             parcel.IsActive = true;
-            dalObject.AddParcel(parcel);
+            int id = dalObject.AddParcel(parcel);
+            return id;
         }
         #endregion
 

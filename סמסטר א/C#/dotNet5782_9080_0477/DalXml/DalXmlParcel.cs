@@ -24,12 +24,13 @@ namespace Dal
         /// add parcel to xml
         /// </summary>
         /// <param name="parcel"></param>
-        public void AddParcel(Parcel parcel)
+        public int AddParcel(Parcel parcel)
         {
             List<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(dir + parcelFilePath).ToList();
             checkUniqeParcel(parcel.ID);
             parcelList.Add(parcel);
             XMLTools.SaveListToXMLSerializer<Parcel>(parcelList, dir + parcelFilePath);
+            return parcel.ID;
         }
 
         /// <summary>

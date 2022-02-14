@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Parcel" Height="450" Width="800">
     <Grid>
-        <Grid Name="actions" Visibility="Visible">
+        <Grid Name="actions" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition  Width="200"/>
@@ -45,7 +45,7 @@
                 <Button FontSize="16" Content="drone" Grid.Row="2" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center" Click="Button_ClickOpenDrone" Width="52"/>
                 <TextBox Text="{Binding droneId}" FontSize="16" IsReadOnly="True" Grid.Row="2" HorizontalAlignment="Left" Margin="382,0,0,0" x:Name="droneparcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="172"/>
                 <Label  FontSize="16" Content="Requesed" Grid.Row="3" HorizontalAlignment="Left" Margin="325,0,0,0" VerticalAlignment="Center"/>
-                <TextBox Text="{Binding Requesed}" FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="409,0,0,0" x:Name="RequesedParcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="145"/>
+                <TextBox Text="{Binding Requested}" FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="409,0,0,0" x:Name="RequesedParcel" TextWrapping="Wrap" VerticalAlignment="Center" Width="145"/>
                 <TextBox Text="{Binding Delivered}" FontSize="16" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Margin="409,17,0,0" x:Name="DeliveredParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
                 <TextBox Text="{Binding PickedUp}" FontSize="16" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Margin="409,47,0,0" x:Name="pickedUpParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
                 <TextBox Text="{Binding Scheduled}" FontSize="16" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Margin="413,79,0,0" x:Name="ScheduledParcel" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Grid.RowSpan="2"/>
@@ -57,7 +57,7 @@
                 <!--Requesed, Scheduled, pickedUp, Delivered-->
             </Grid>
         </Grid>
-        <Grid Name="addParcel" Visibility="Hidden" Background="#FF859DA2">
+        <Grid Name="addParcel" Visibility="Visible" Background="#FF859DA2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -77,7 +77,7 @@
             <TextBlock HorizontalAlignment="Left" Margin="41,101,0,0" Grid.Row="1" Text="enter reciever id:" TextWrapping="Wrap" VerticalAlignment="Top" Width="249" Height="27" FontSize="20" Grid.RowSpan="2"/>
             <TextBox  Background="#FFFFE9ED" Margin="34,25,18,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="46" Name="recieverIdParcel" Grid.Row="2"/>
 
-            <Button Content="add parcel" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" RenderTransformOrigin="-0.207,0.023" Width="120" Height="40" Grid.Column="1"  Margin="129,0,0,0" Click="Button_ClickAddParcel"/>
+            <Button Content="add parcel" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" RenderTransformOrigin="-0.207,0.023" Width="120" Height="40" Grid.Column="1"  Margin="130,0,0,0" Click="Button_ClickAddParcel"/>
             <Button Content="reset" Grid.Column="0" HorizontalAlignment="Left" Margin="148,0,0,0" Grid.Row="3" VerticalAlignment="Center" Width="120" Height="40" Click="Button_ClickResetParcel" />
             <Button Content="X" Width="50" Grid.Column="1" Background="Red" HorizontalAlignment="Left" Margin="350,0,0,89" Height="20" VerticalAlignment="Bottom" Click="Button_ClickCloseParcel"/>
             <TextBlock HorizontalAlignment="Left" Margin="15,4,0,0" Text="enter weight parcel:" TextWrapping="Wrap" VerticalAlignment="Top" Width="249" Height="27" FontSize="20" Grid.Column="1" Grid.Row="1"/>

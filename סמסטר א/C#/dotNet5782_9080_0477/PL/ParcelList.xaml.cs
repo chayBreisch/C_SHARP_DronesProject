@@ -36,10 +36,10 @@ namespace PL
             PLLists = pllists;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
-          /*  foreach (var item in BLObject.GetParcelsToList())
-                MyList.Add(item);*/
-            DataContext = PLLists.Parcels;
-            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+            /*  foreach (var item in BLObject.GetParcelsToList())
+                  MyList.Add(item);*/
+            ParcelListView.DataContext = PLLists.Parcels;
+            view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.DataContext);
             //view.SortDescriptions.Add(new SortDescription("Weight", ListSortDirection.Ascending));
 
             // view.SortDescriptions.Add(new SortDescription(null, ListSortDirection.Ascending));
@@ -87,8 +87,8 @@ namespace PL
                 /*MyList = new ObservableCollection<ParcelToList>();
                 foreach (var item in BLObject.GetParcelsToList())
                     MyList.Add(item);*/
-                DataContext = PLLists.Parcels;
-                view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+                ParcelListView.DataContext = PLLists.Parcels;
+                view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.DataContext);
             }
         }
 
@@ -131,13 +131,13 @@ namespace PL
             IEnumerable<ParcelToList> parcels = new List<ParcelToList>();
             ComboBox options = sender as ComboBox;
             if (parcelWeight.SelectedItem == null)
-                DataContext = PLLists.Parcels.Where(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
+                ParcelListView.DataContext = PLLists.Parcels.Where(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             //parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             else if (parcelPriority.SelectedItem == null)
-                DataContext = PLLists.Parcels.Where(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
+                ParcelListView.DataContext = PLLists.Parcels.Where(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
             //parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
             else
-                DataContext = PLLists.Parcels.Where(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
+                ParcelListView.DataContext = PLLists.Parcels.Where(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             //parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             view.GroupDescriptions.Clear();
 
@@ -145,7 +145,7 @@ namespace PL
             foreach (var item in parcels)
                 MyList.Add(item);*/
             //DataContext = PLLists.Parcels;
-            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+            //view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             //ParcelListView.ItemsSource = drones;
         }
 
@@ -216,11 +216,11 @@ namespace PL
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
-               /* MyList = new ObservableCollection<ParcelToList>();
-                foreach (var item in BLObject.GetDeletedParcelsToList())
-                    MyList.Add(item);*/
-                DataContext = PLLists.Parcels;
-                view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+                /* MyList = new ObservableCollection<ParcelToList>();
+                 foreach (var item in BLObject.GetDeletedParcelsToList())
+                     MyList.Add(item);*/
+                ParcelListView.DataContext = PLLists.Parcels;
+                view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.DataContext);
             }
         }
     }
