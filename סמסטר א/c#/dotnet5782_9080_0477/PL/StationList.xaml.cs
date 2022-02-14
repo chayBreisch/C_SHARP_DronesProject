@@ -22,7 +22,6 @@ namespace PL
     public partial class StationList : Window
     {
         BlApi.IBL BLObject;
-        //ObservableCollection<StationToList> MyList = new ObservableCollection<StationToList>();
         internal static PLLists PLLists;
         CollectionView view;
 
@@ -36,10 +35,7 @@ namespace PL
             PLLists = new PLLists();
             WindowStyle = WindowStyle.None;
             BLObject = bl;
-           /* foreach (var item in BLObject.GetStationsToList())
-                MyList.Add(item);*/
             DataContext = PLLists.Stations;
-            //DroneListView.ItemsSource = bl.GetDronesBL();
         }
 
         /// <summary>
@@ -50,7 +46,6 @@ namespace PL
         private void chargeSlotsFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox options = sender as ComboBox;
-            //IEnumerable<StationToList> stations = BLObject.GetStationsByChargeSlots(options.SelectedIndex);
             if (options.SelectedIndex == 0)
             {
                 StationListView.DataContext = PLLists.Stations.Where(S => S.ChargeSlotsFree == 0);
@@ -69,9 +64,7 @@ namespace PL
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            //IEnumerable<StationToList> stations = BLObject.GetStationsToList();
             chargeSlotsFilter.SelectedItem = null;
-            //weightFilter.SelectedItem = null;
             StationListView.DataContext = PLLists.Stations;
         }
 
@@ -95,9 +88,6 @@ namespace PL
             sender.ToString();
             Station_ stationList = (sender as ListView).SelectedValue as Station_;
             BO.Station station = BLObject.GetSpecificStationBL(stationList.ID);
-            //this.Visibility = Visibility.Hidden;
-            /*new Station(blstationList, station, this).Show();
-            Hide();*/
             var win = new Station(BLObject, station, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
@@ -111,31 +101,11 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickAddStation(object sender, RoutedEventArgs e)
         {
-            /*new Station(blstationList, this).Show();
-            Hide();*/
             var win = new Station(BLObject, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
             Visibility = Visibility.Visible;
         }
-
-
-
-        /*private void txtFilter_TextChanged()
-        {
-            // List<BO.Station> stations = blstationList.getStationToList().ChargeSlotsFree >= 0
-
-        }
-
-        public void Refresh()
-        {
-            IEnumerable<StationToList> stations;
-            if (chargeSlotsFilter.SelectedItem != null)
-                stations = BLObject.GetStationsByChargeSlots(chargeSlotsFilter.SelectedIndex);
-            else
-                stations = BLObject.GetStationsToList();
-            StationListView.ItemsSource = stations;
-        }*/
 
         /// <summary>
         /// show deleted stations
@@ -145,7 +115,6 @@ namespace PL
         private void Button_Click_ShowDeletedStations(object sender, RoutedEventArgs e)
         {
             ListBox listBox1 = new ListBox();
-            //IEnumerable<StationToList> stations = BLObject.GetDeletedStationsToList();
             chargeSlotsFilter.SelectedItem = null;
             StationListView.DataContext = PLLists.Stations.Where(S => S.IsActive == false);
         }
