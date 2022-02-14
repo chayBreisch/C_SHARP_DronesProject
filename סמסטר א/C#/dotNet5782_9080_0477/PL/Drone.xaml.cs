@@ -443,6 +443,61 @@ namespace PL
                 new Parcel(BLObject, BLObject.GetSpecificParcelBL(droneBL.parcelInDelivery.ID), PLLists).Show();
         }
 
+
+       /* private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string s = $"{sender.ToString().Substring(sender.ToString().LastIndexOf(':') + 2)}";
+                switch (s)
+                {
+                    case "Update":
+                        Update_Click(sender, e);
+                        break;
+                    case "Send to charge":
+                        Charge_Click(sender, e);
+                        break;
+                    case "Release from charge":
+                        UnCharge_Click(sender, e);
+                        break;
+                    case "send to shipping":
+                        sendToShippingB_Click(sender, e);
+                        break;
+                    case "Pick up parcel":
+                        PickUpParcelB_Click(sender, e);
+                        break;
+                    case "Parcel delivery":
+                        ParcelDeliveryB_Click(sender, e);
+                        break;
+                    case "To add":
+                        AddNewDroneB_Click(sender, e);
+                        break;
+                    default:
+                        break;
+                }
+                BO.Drone drone = BLObject.getDroneById(Convert.ToInt32(IDText.Text));
+                new DisplayDrone(BLObject, drone, ParentWindow).Show();
+                refreshList(drone);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+
+
+
+
+        }*/
+
+
+
+
+
+
+
         /// <summary>
         /// delete drone
         /// </summary>

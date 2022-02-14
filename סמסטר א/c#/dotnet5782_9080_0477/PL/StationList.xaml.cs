@@ -98,7 +98,7 @@ namespace PL
             //this.Visibility = Visibility.Hidden;
             /*new Station(blstationList, station, this).Show();
             Hide();*/
-            var win = new Station(BLObject, station);
+            var win = new Station(BLObject, station, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
             Visibility = Visibility.Visible;
