@@ -96,7 +96,7 @@ namespace BL
                     throw new CanNotUpdateDrone(id, "the drone is not free");
                 }
                 DO.Customer customerSender, customerCurrent, customerReciever;
-                IEnumerable<DO.Parcel> parcels = dalObject.GetParcelesByCondition(p => p.Scheduled == null && p.Requested != null);
+                IEnumerable<DO.Parcel> parcels = dalObject.GetParcelesByCondition(p => p.Scheduled == null);
                 DO.Parcel currentParcel = new DO.Parcel() { Weight = 0 };
                 foreach (var parcel in parcels)
                 {
@@ -158,13 +158,16 @@ namespace BL
             lock (dalObject)
             {
                 BO.Drone droneBL = GetSpecificDroneBLWithDeleted(id);
-                DO.Parcel parcel = dalObject.GetParcelBy(p => p.DroneID == droneBL.ID);
+                DO.Parcel parcel = dalObject.GetParcelBy(p => p.ID == droneBL.parcelInDelivery.ID);
+                //DO.Parcel parcel = dalObject.GetParcelBy(p => p.DroneID == droneBL.ID);
                 if (parcel.DroneID == 0)
                     throw new CanNotUpdateDrone(id, "drone is didn't connect to a parcel");
                 if (droneBL.DroneStatus != DroneStatus.Delivery && parcel.PickedUp != null)
                     throw new CanNotUpdateDrone(id, "can't collect parcel because parcel is picked up");
                 Location customerSenderLocation = droneBL.parcelInDelivery.CollectLocation;
-                droneBL.BatteryStatus -= calcElectry(droneBL.Location, customerSenderLocation, (int)parcel.Weight);
+                double electric = calcElectry(droneBL.Location, customerSenderLocation, (int)parcel.Weight);
+                if (droneBL.BatteryStatus >= electric)
+                    droneBL.BatteryStatus -= electric;
                 droneBL.Location = customerSenderLocation;
                 droneBL.DroneStatus = DroneStatus.Delivery;
                 droneBL.parcelInDelivery.isWaiting = false;
@@ -189,14 +192,17 @@ namespace BL
                     throw new CanNotUpdateDrone(id, "can't supply parcel because didn't picked up or delieverd");
                 Location customerSenderLocation = droneBL.parcelInDelivery.CollectLocation;
                 Location customerRecieverReciever = droneBL.parcelInDelivery.TargetLocation;
-                double electricSenderToReciever = calcElectry(customerSenderLocation, customerRecieverReciever, (int)parcel.Weight);
-                droneBL.BatteryStatus -= electricSenderToReciever;
-                droneBL.Location = customerRecieverReciever;
-                droneBL.DroneStatus = DroneStatus.Available;
-                droneBL.parcelInDelivery = null;
-                updateDrone(droneBL);
-                parcel.Delivered = DateTime.Now;
-                dalObject.UpdateParcel(parcel);
+                double electric = calcElectry(customerSenderLocation, customerRecieverReciever, (int)parcel.Weight);
+                if (droneBL.BatteryStatus > electric)
+                {
+                    droneBL.BatteryStatus -= electric;
+                    droneBL.Location = customerRecieverReciever;
+                    droneBL.DroneStatus = DroneStatus.Available;
+                    droneBL.parcelInDelivery = null;
+                    updateDrone(droneBL);
+                    parcel.Delivered = DateTime.Now;
+                    dalObject.UpdateParcel(parcel);
+                }
             }
         }
     }

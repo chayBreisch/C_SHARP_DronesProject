@@ -68,10 +68,10 @@
             </ListView.GroupStyle>
         </ListView>
         <Button Content="add drone" HorizontalAlignment="Center" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="2,475,0,0"  Grid.Row="1" Click="Button_ClickAddDrone" />
-        <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click_ShowListDrones" Height="45" Width="146" Margin="164,475,0,0" Grid.Row="1"/>
-        <Button Content="group by status" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="146" Margin="0,475,0,0" Grid.Row="1" Click="Button_Click_GroupingStatus"/>
+        <Button Content="show list" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click_ShowListDrones" Height="45" Width="146" Margin="168,475,0,0" Grid.Row="1"/>
+        <Button Content="group by status" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="146" Margin="10,475,0,0" Grid.Row="1" Click="Button_Click_GroupingStatus" RenderTransformOrigin="0.6,0.565"/>
         <Button Content="group by weight" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="488,475,0,0"  Grid.Row="1" Click="Button_ClickGroupingWeight"  />
-        <Button Content="show deleted drones" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="654,475,0,0"  Grid.Row="1" Click="Button_Click_ShowDeletedCustomers" />
+        <Button Content="show deleted drones" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Height="45" RenderTransformOrigin="0.495,0.148" Margin="644,475,0,0"  Grid.Row="1" Click="Button_Click_ShowDeletedCustomers" />
 
 
     </Grid>

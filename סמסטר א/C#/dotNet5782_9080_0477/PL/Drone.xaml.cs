@@ -59,12 +59,13 @@ namespace PL
             WindowStyle = WindowStyle.None;
             addDrone.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
+            createButtons(droneBL);
             if (droneBL.parcelInDelivery != null)
                 parcelInDeliveryDrone.Text = droneBL.parcelInDelivery.ToString();
             else
                 parcelInDeliveryDrone.Text = "no parcel";
             //locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
-            if (droneBL.DroneStatus != DroneStatus.Available)
+            /*if (droneBL.DroneStatus != DroneStatus.Available)
             {
                 Supply.IsEnabled = false;
                 UnCharge.IsEnabled = true;
@@ -81,7 +82,7 @@ namespace PL
                 Connect.IsEnabled = false;
                 Charge.IsEnabled = false;
                 Update.IsEnabled = false;
-            }
+            }*/
             //get the time inn charge
             /* if(droneBL.DroneStatus == DroneStatus.Maintenance)
              {
@@ -288,10 +289,9 @@ namespace PL
                 droneBL = BLObject.UpdateSendDroneToCharge(droneBL.ID);
                 TimeChargerBlock.Visibility = Visibility.Visible;
                 MessageBox.Show("the drone is sended to charge succesfully");
-                Supply.IsEnabled = false;
-                UnCharge.IsEnabled = true;
                 DronePL.updateDrone(droneBL);
                 PLLists.UpdateDrone(droneBL);
+                createButtons(droneBL);
             }
             catch (Exception ex)
             {
@@ -323,8 +323,8 @@ namespace PL
             {
                 /*visible.Visibility = Visibility.Visible;
                 hidden.Visibility = Visibility.Hidden;*/
-                Supply.IsEnabled = true;
-                UnCharge.IsEnabled = false;
+                /*Supply.IsEnabled = true;
+                UnCharge.IsEnabled = false;*/
 
                 /*Charge.IsEnabled = true;
                 Connect.IsEnabled = true;
@@ -343,6 +343,7 @@ namespace PL
                     //DronePL.DroneStatus = droneBL.DroneStatus;
                     DronePL.updateDrone(droneBL);
                     PLLists.UpdateDrone(droneBL);
+                    createButtons(droneBL);
                 }
                 catch (Exception ex)
                 {
@@ -364,6 +365,7 @@ namespace PL
                 BLObject.UpdateConnectParcelToDrone(droneBL.ID);
                 DronePL.updateDrone(droneBL);
                 PLLists.UpdateDrone(droneBL);
+                createButtons(droneBL);
                 //PLLists.UpdateDrone(droneBL);
             }
             catch (Exception ex)
@@ -388,6 +390,7 @@ namespace PL
                 BLObject.UpdateCollectParcelByDrone(droneBL.ID);
                 DronePL.updateDrone(droneBL);
                 PLLists.UpdateDrone(droneBL);
+                createButtons(droneBL);
                 //PLLists.UpdateDrone(droneBL);
             }
             catch (Exception ex)
@@ -412,6 +415,7 @@ namespace PL
                 BLObject.UpdateSupplyParcelByDrone(droneBL.ID);
                 DronePL.updateDrone(droneBL);
                 PLLists.UpdateDrone(droneBL);
+                createButtons(droneBL);
             }
             catch (Exception ex)
             {
@@ -445,60 +449,95 @@ namespace PL
                 new Parcel(BLObject, BLObject.GetSpecificParcelBL(droneBL.parcelInDelivery.ID), PLLists).Show();
         }
 
-
-       /* private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// call the right function
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 string s = $"{sender.ToString().Substring(sender.ToString().LastIndexOf(':') + 2)}";
                 switch (s)
                 {
-                    case "Update":
+                    case "update":
                         Update_Click(sender, e);
                         break;
-                    case "Send to charge":
+                    case "send to charge":
                         Charge_Click(sender, e);
                         break;
-                    case "Release from charge":
+                    case "uncharge drone":
                         UnCharge_Click(sender, e);
                         break;
-                    case "send to shipping":
-                        sendToShippingB_Click(sender, e);
+                    case "send to parcel":
+                        Connect_Click(sender, e);
                         break;
-                    case "Pick up parcel":
-                        PickUpParcelB_Click(sender, e);
+                    case "pick up parcel":
+                        Collect_Click(sender, e);
                         break;
-                    case "Parcel delivery":
-                        ParcelDeliveryB_Click(sender, e);
-                        break;
-                    case "To add":
-                        AddNewDroneB_Click(sender, e);
+                    case "parcel delivery":
+                        Supply_Click(sender, e);
                         break;
                     default:
                         break;
                 }
-                BO.Drone drone = BLObject.getDroneById(Convert.ToInt32(IDText.Text));
-                new DisplayDrone(BLObject, drone, ParentWindow).Show();
-                refreshList(drone);
-                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
 
+        /// <summary>
+        /// create the buttons by the status
+        /// </summary>
+        /// <param name="drone"></param>
+        private void createButtons(BO.Drone drone)
+        {
+            if (droneBL.BatteryStatus < 10) battery.Foreground = new SolidColorBrush(Colors.Red);
+            else if (droneBL.BatteryStatus < 50) battery.Foreground = new SolidColorBrush(Colors.Yellow);
+            else if (droneBL.BatteryStatus < 80) battery.Foreground = new SolidColorBrush(Colors.BlueViolet);
+            else battery.Foreground = new SolidColorBrush(Colors.Green);
+            if (drone.DroneStatus == DroneStatus.Available)
+            {
+                button1.Content = "send to charge";
+                button2.Content = "send to parcel";
+                placewTheButtons(2);
+            }
+            else if (drone.DroneStatus == DroneStatus.Maintenance)
+            {
+                button1.Content = "uncharge drone";
+                placewTheButtons(1);
+            }
+            else if (BLObject.GetSpecificParcelBL(drone.parcelInDelivery.ID).PickedUp == null)
+            {
+                button1.Content = "pick up parcel";
+                placewTheButtons(1);
+            }
+            else
+            {
+                button1.Content = "parcel delivery";
+                placewTheButtons(1);
+            }
 
+        }
 
-
-
-
-        }*/
-
-
-
-
-
-
+        /// <summary>
+        /// place the buttons
+        /// </summary>
+        /// <param name="count"></param>
+        private void placewTheButtons(int count)
+        {
+            if (count == 1)
+            {
+                button2.Visibility = Visibility.Hidden;
+            }
+            if (count == 2)
+            {
+                button2.Visibility = Visibility.Visible;
+            }
+        }
 
         /// <summary>
         /// delete drone
@@ -524,7 +563,7 @@ namespace PL
                 MessageBox.Show("can't remove parcel because it's connected to a drone");
             }
         }
-        BackgroundWorker worker = new BackgroundWorker();
+        BackgroundWorker worker;
 
         /// <summary>
         /// start simulation
@@ -533,20 +572,22 @@ namespace PL
         /// <param name="e"></param>
         private void SimulationBtn_Click(object sender, RoutedEventArgs e)
         {
+            worker = new BackgroundWorker();
             if (SimulationBtn.Content == "start manual")
             {
                 SimulationBtn.Content = "start simulation";
                 worker.CancelAsync();
-                Supply.IsEnabled = true;
-                UnCharge.IsEnabled = true;
+                /*Supply.IsEnabled = true;
+                UnCharge.IsEnabled = true;*/
+                createButtons(droneBL);
                 return;
             }
 
 
             SimulationBtn.Content = "start manual";
-            Supply.IsEnabled = false;
-            UnCharge.IsEnabled = false;
-
+            /*Supply.IsEnabled = false;
+            UnCharge.IsEnabled = false;*/
+            createButtons(droneBL);
 
             worker.DoWork += (object? sender, DoWorkEventArgs e) =>
             {
@@ -562,18 +603,16 @@ namespace PL
             {
                 DronePL.updateDrone(droneBL);
                 PLLists.UpdateDrone(droneBL);
-
-                /*Student.MyAge++;
-                Student.Name = updatDrone.FirstName;
-                progress.Content = e.ProgressPercentage;*/
+                createButtons(droneBL);
             };
 
             worker.RunWorkerCompleted += (object? sender, RunWorkerCompletedEventArgs e) =>
             {
                 SimulationBtn.Content = "start simulation";
                 worker.CancelAsync();
-                Supply.IsEnabled = true;
-                UnCharge.IsEnabled = true;
+                /*Supply.IsEnabled = true;
+                UnCharge.IsEnabled = true;*/
+                createButtons(droneBL);
             };
             worker.WorkerSupportsCancellation = true;
             worker.RunWorkerAsync();

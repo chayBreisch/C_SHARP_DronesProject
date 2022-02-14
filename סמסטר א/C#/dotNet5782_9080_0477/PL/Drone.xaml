@@ -34,14 +34,16 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Button Content="update" Name="Update" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.202,-0.618" Height="33" Width="104" Grid.Row="1" Click="Update_Click" Margin="0,16,0,0"/>
-                <Button IsEnabled="{Binding ElementName=Supply, Path=IsEnabled}" Content="charge a drone"  Name="Charge" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Click="Charge_Click"  Grid.Row="5"/>
+                <!--<Button IsEnabled="{Binding ElementName=Supply, Path=IsEnabled}" Content="charge a drone"  Name="Charge" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Click="Charge_Click"  Grid.Row="5"/>
                 <Button  Content="uncharge a drone" Name="UnCharge" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105"  Grid.Row="6" Click="UnCharge_Click"/>
                 <Button IsEnabled="{Binding ElementName=Supply, Path=IsEnabled}" Content="send to parcel" Name="Connect" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105"  Grid.Row="2" Click="Connect_Click"/>
                 <Button IsEnabled="{Binding ElementName=Supply, Path=IsEnabled}" Content="collect parcel" Name="Collect" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="105" Grid.Row="3"  Click="Collect_Click"/>
-                <Button  Content="supply parcel" Name="Supply" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="104" Grid.Row="4" Click="Supply_Click" />
+                <Button  Content="supply parcel" Name="Supply" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.202,-0.618" Height="33" Width="104" Grid.Row="4" Click="Supply_Click" />-->
                 <Button Content="X" Width="50" Background="Red" HorizontalAlignment="Left"  Grid.Row="0" Click="Button_ClickClose" Margin="150,0,0,0" Height="20" VerticalAlignment="Top"  />
                 <TextBlock Visibility="Visible" Name="TimeChargerBlock" HorizontalAlignment="Left" Grid.Row="7" Text="time in charger:" TextWrapping="Wrap" VerticalAlignment="Center" Height="33" Width="85" Margin="53,0,0,0"/>
                 <TextBox Visibility="{Binding ElementName=TimeChargerBlock, Path=Visibility}" Name="TimeCharger" Background="#FF8D8C7A" BorderThickness="0" HorizontalAlignment="Left" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" Height="14" Margin="139,14,0,0" />
+                <Button Content="" x:Name="button1" HorizontalAlignment="Left" Margin="37,0,0,0" Grid.Row="3" VerticalAlignment="Center" Height="37" Width="118" Click="Button_Click"/>
+                <Button Content="" x:Name="button2" HorizontalAlignment="Left" Margin="37,0,0,0" Grid.Row="4" VerticalAlignment="Center" Height="37" Width="118" Click="Button_Click"/>
             </Grid>
 
             <Grid x:Name="DroneGrid" Grid.Column="0" Background="#FF8D8C7A">
@@ -56,9 +58,9 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Viewbox Width="115" Height="30" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" Visibility="{Binding ElementName=visibleUpdateForm, Path=Visibility}" Margin="0,9,0,11" >
-                    <StackPanel Orientation="Horizontal"/>
-                </Viewbox>
+                <!--<viewbox width="115" height="30" grid.column="3" grid.row="3" horizontalalignment="center" visibility="{binding elementname=visibleupdateform, path=visibility}" margin="0,9,0,11" >
+                    <stackpanel orientation="horizontal"/>
+                </viewbox>-->
                 <Label  FontSize="16" Content="id:" Grid.Row="1" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="Model:" Grid.Row="2" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
                 <Label FontSize="16" Content="battery:" Grid.Row="3" HorizontalAlignment="Left" Margin="168,0,0,0" VerticalAlignment="Center"/>
@@ -69,7 +71,7 @@
                 <TextBox FontSize="16" Text="{Binding Model, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" HorizontalAlignment="Left" Margin="231,0,0,0" Name="modelDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
                 <!--<TextBox FontSize="16" Text="{Binding BatteryStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="3" HorizontalAlignment="Left" Name="batteryDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="240,0,0,0"/>-->
                 <!--<Border BorderBrush="#00c000" BorderThickness="3" Height="25" Width="180" CornerRadius="5" Padding="2,2,2,2" Margin="239,145,369,261"/>-->
-                <ProgressBar Minimum="0" Maximum="100" Height="23" Width="179" Value="{Binding BatteryStatus}" Grid.Row="3" Name="pbStatus" Margin="72,0,0,0"/>
+                <ProgressBar x:Name="battery" Minimum="0" Maximum="100" Height="23" Width="179" Value="{Binding BatteryStatus}" Grid.Row="3" Margin="72,0,0,0"/>
                 <TextBox FontSize="16" Text="{Binding Weight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="weightDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="240,0,0,0"/>
                 <TextBox FontSize="16" Text="{Binding DroneStatus }" IsReadOnly="True" Grid.Row="5" HorizontalAlignment="Left" Margin="231,0,0,0" Name="statusDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="189"/>
                 <TextBox FontSize="16" Text="{Binding Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="6" HorizontalAlignment="Left" Margin="260,0,0,0" Name="locationDrone" TextWrapping="Wrap" VerticalAlignment="Center" Width="160"/>

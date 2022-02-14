@@ -44,8 +44,8 @@ namespace PL
         {
             if(location == null)
             {
-                Longitude = 2;
-                Latitude = 17;
+                location.Longitude = 2;
+                location.Latitude = 17;
             }
             Longitude = location.Longitude;
             Latitude = location.Latitude;

@@ -28,8 +28,7 @@ namespace Dal
             }
             catch (Exception ex)
             {
-                //Console.WriteLine(ex.Message);
-                throw new XMLFileLoadCreateException(filePath, ex);
+                //throw new XMLFileLoadCreateException(filePath, ex);
             }
         }
 
