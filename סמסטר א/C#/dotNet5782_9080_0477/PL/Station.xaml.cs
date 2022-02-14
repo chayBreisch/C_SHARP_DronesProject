@@ -48,6 +48,7 @@ namespace PL
         public Station(BlApi.IBL bl, BO.Station station, PLLists pLLists)
         {
             InitializeComponent();
+            PLLists = pLLists;
             actions.Visibility = Visibility.Visible;
             addStation.Visibility = Visibility.Hidden;
             WindowStyle = WindowStyle.None;
@@ -139,6 +140,7 @@ namespace PL
             {
                 BLObject.AddStation(getID(), getModel(), getLocation(), getchargeSlots());
                 MessageBox.Show("you added succefuly");
+                PLLists.AddStation(BLObject.GetSpecificStationBL(getID()));
                 Close();
             }
             catch (Exception exce)

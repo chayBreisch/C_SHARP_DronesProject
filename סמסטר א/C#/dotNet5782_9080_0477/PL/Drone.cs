@@ -174,25 +174,6 @@ namespace PL
         }
 
 
-        public static readonly DependencyProperty NumOfParcelTransProperty =
-            DependencyProperty.Register("NumOfParcelTrans",
-                typeof(object),
-                typeof(Drone_),
-                new UIPropertyMetadata(0));
-
-
-        public int NumOfParcelTrans
-        {
-            get
-            {
-                return (int)GetValue(NumOfParcelTransProperty);
-            }
-            set
-            {
-                SetValue(NumOfParcelTransProperty, value);
-            }
-        }
-
 
         public Drone_(BO.Drone drone)
         {
@@ -204,7 +185,6 @@ namespace PL
             Location = new Location(drone.Location);
             parcelInDelivery = drone.parcelInDelivery;
             IsActiv = drone.IsActive;
-            NumOfParcelTrans = parcelInDelivery == null ? 0 : 1;
 
         }
 
@@ -219,7 +199,6 @@ namespace PL
             this.Location = new Location(drone.Location);
             this.parcelInDelivery = drone.parcelInDelivery;
             this.IsActiv = drone.IsActive;
-            NumOfParcelTrans = parcelInDelivery == null ? 0 : 1;
 
         }
 

@@ -40,4 +40,20 @@
     <ChargeSlots>500</ChargeSlots>
     <IsActive>true</IsActive>
   </Station>
+  <Station>
+    <ID>80</ID>
+    <Name>8</Name>
+    <Longitude>8</Longitude>
+    <Latitude>8</Latitude>
+    <ChargeSlots>500</ChargeSlots>
+    <IsActive>true</IsActive>
+  </Station>
+  <Station>
+    <ID>30</ID>
+    <Name>3</Name>
+    <Longitude>3</Longitude>
+    <Latitude>3</Latitude>
+    <ChargeSlots>300</ChargeSlots>
+    <IsActive>true</IsActive>
+  </Station>
 </ArrayOfStation>

@@ -49,8 +49,12 @@ namespace PL
         /// <param name="e"></param>
         private void Button_Click_DroneList(object sender, RoutedEventArgs e)
         {
-            new DroneList(BLObject, PLLists).Show();
-            Hide();
+            /*new DroneList(BLObject, PLLists).Show();
+            Hide();*/
+            var win = new DroneList(BLObject, PLLists);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -60,8 +64,13 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickStationList(object sender, RoutedEventArgs e)
         {
-            new StationList(BLObject).Show();
-            Hide();
+            /*            new StationList(BLObject).Show();
+                        Hide();*/
+
+            var win = new StationList(BLObject);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -71,8 +80,13 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickParcelList(object sender, RoutedEventArgs e)
         {
-            new ParcelList(BLObject, PLLists).Show();
-            Hide();
+            /*new ParcelList(BLObject, PLLists).Show();
+            Hide();*/
+
+            var win = new ParcelList(BLObject, PLLists);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -82,8 +96,13 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickCustomerList(object sender, RoutedEventArgs e)
         {
-            new CustomerList(BLObject, PLLists).Show();
-            Hide();
+            /*new CustomerList(BLObject, PLLists).Show();
+            Hide();*/
+
+            var win = new CustomerList(BLObject, PLLists);
+            Visibility = Visibility.Hidden;
+            win.ShowDialog();
+            Visibility = Visibility.Visible;
         }
     }
 }

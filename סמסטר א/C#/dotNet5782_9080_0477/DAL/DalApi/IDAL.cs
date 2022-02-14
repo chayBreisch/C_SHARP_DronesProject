@@ -14,7 +14,7 @@ namespace IDAL
         public void AddDrone(Drone drone);
         public void AddStation(Station station);
         public void AddCustomer(Customer customer);
-        public void AddParcel(Parcel parcel);
+        public int AddParcel(Parcel parcel);
         public void AddDroneCharge(DroneCharge droneCharge);
   
 

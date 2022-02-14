@@ -113,8 +113,8 @@
     <Requested>2010-01-14T00:00:00</Requested>
     <DroneID>4</DroneID>
     <Scheduled>2022-02-09T02:26:14.6745492+02:00</Scheduled>
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
+    <PickedUp>2022-02-14T11:37:02.1352258+02:00</PickedUp>
+    <Delivered>2022-02-14T11:37:04.5814415+02:00</Delivered>
     <IsActive>true</IsActive>
   </Parcel>
   <Parcel>
@@ -128,6 +128,97 @@
     <Scheduled>2021-02-19T00:00:00</Scheduled>
     <PickedUp>2022-02-10T17:12:25.1885077+02:00</PickedUp>
     <Delivered>2022-02-10T17:17:29.2794613+02:00</Delivered>
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>11</ID>
+    <SenderID>123456789</SenderID>
+    <TargetID>804724105</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Regular</Priority>
+    <Requested xsi:nil="true" />
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>12</ID>
+    <SenderID>123456789</SenderID>
+    <TargetID>804724105</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Fast</Priority>
+    <Requested xsi:nil="true" />
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>13</ID>
+    <SenderID>123456789</SenderID>
+    <TargetID>804724105</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Regular</Priority>
+    <Requested xsi:nil="true" />
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>14</ID>
+    <SenderID>123456789</SenderID>
+    <TargetID>804724105</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Regular</Priority>
+    <Requested xsi:nil="true" />
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>15</ID>
+    <SenderID>123456789</SenderID>
+    <TargetID>804724105</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Regular</Priority>
+    <Requested xsi:nil="true" />
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>16</ID>
+    <SenderID>123456789</SenderID>
+    <TargetID>804724105</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Regular</Priority>
+    <Requested xsi:nil="true" />
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <ID>17</ID>
+    <SenderID>123456789</SenderID>
+    <TargetID>804724105</TargetID>
+    <Weight>Medium</Weight>
+    <Priority>Fast</Priority>
+    <Requested xsi:nil="true" />
+    <DroneID>0</DroneID>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
     <IsActive>true</IsActive>
   </Parcel>
 </ArrayOfParcel>
