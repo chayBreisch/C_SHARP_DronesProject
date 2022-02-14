@@ -38,7 +38,7 @@ namespace BO
         public DO.Priorities Priority { get; set; }
         public ParcelStatus ParcelStatus { get; set; }
         public string content { get; set; }
-        public string pathTo { get; set; }
+        public bool IsChecked { get; set; }
 
         public override string ToString()
         {

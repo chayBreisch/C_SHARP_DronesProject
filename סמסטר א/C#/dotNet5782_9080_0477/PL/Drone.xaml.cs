@@ -64,112 +64,9 @@ namespace PL
                 parcelInDeliveryDrone.Text = droneBL.parcelInDelivery.ToString();
             else
                 parcelInDeliveryDrone.Text = "no parcel";
-            //locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
-            /*if (droneBL.DroneStatus != DroneStatus.Available)
-            {
-                Supply.IsEnabled = false;
-                UnCharge.IsEnabled = true;
-            }
-            if (droneBL.DroneStatus != DroneStatus.Maintenance)
-            {
-                Supply.IsEnabled = true;
-                UnCharge.IsEnabled = false;
-                TimeChargerBlock.Visibility = Visibility.Hidden;
-
-            }
-            if (droneBL.IsActive == false)
-            {
-                Connect.IsEnabled = false;
-                Charge.IsEnabled = false;
-                Update.IsEnabled = false;
-            }*/
-            //get the time inn charge
-            /* if(droneBL.DroneStatus == DroneStatus.Maintenance)
-             {
-                 //TimeChargerBlock.Text+= 
-             }*/
-
         }
 
-        /*/// <summary>
-        /// constructor actions
-        /// </summary>
-        /// <param name="bl"></param>
-        /// <param name="drone"></param>
-        /// <param name="parcel"></param>
-        public Drone(BlApi.Bl bl, BO.Drone drone, Window parcel)
-        {
-            ParentWindow = parcel;
-            blDrone = bl;
-            droneBL = drone;
-            InitializeComponent();
-            WindowStyle = WindowStyle.None;
-            addDrone.Visibility = Visibility.Hidden;
-            actions.Visibility = Visibility.Visible;
-            idDrone.Text = droneBL.ID.ToString();
-            modelDrone.DataContext = droneBL;
-            batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
-            weightDrone.Text = droneBL.Weight.ToString();
-            statusDrone.Text = droneBL.DroneStatus.ToString();
-            if (droneBL.parcelInDelivery != null)
-                parcelInDeliveryDrone.Text = droneBL.parcelInDelivery.ToString();
-            else
-                parcelInDeliveryDrone.Text = "no parcel";
-            locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
-            if (droneBL.DroneStatus != DroneStatus.Available)
-            {
-                Charge.IsEnabled = false;
-                UnCharge.IsEnabled = true;
-            }
-            if (droneBL.DroneStatus != DroneStatus.Maintenance)
-            {
-                Charge.IsEnabled = true;
-                UnCharge.IsEnabled = false;
-                TimeChargerBlock.Visibility = Visibility.Hidden;
-
-            }
-
-        }*/
-
-        /*/// <summary>
-        /// constructor actions
-        /// </summary>
-        /// <param name="bl"></param>
-        /// <param name="drone"></param>
-        /// <param name="station"></param>
-        public Drone(BlApi.Bl bl, BO.Drone drone, Window station)
-        {
-            stationWindow = station;
-            blDrone = bl;
-            droneBL = drone;
-            InitializeComponent();
-            WindowStyle = WindowStyle.None;
-            addDrone.Visibility = Visibility.Hidden;
-            actions.Visibility = Visibility.Visible;
-            idDrone.Text = droneBL.ID.ToString();
-            modelDrone.DataContext = droneBL;
-            batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
-            weightDrone.Text = droneBL.Weight.ToString();
-            statusDrone.Text = droneBL.DroneStatus.ToString();
-            if (droneBL.parcelInDelivery != null)
-                parcelInDeliveryDrone.Text = droneBL.parcelInDelivery.ToString();
-            else
-                parcelInDeliveryDrone.Text = "no parcel";
-            locationDrone.Text = $"{droneBL.Location.Latitude}, {droneBL.Location.Longitude}";
-            if (droneBL.DroneStatus != DroneStatus.Available)
-            {
-                Charge.IsEnabled = false;
-                UnCharge.IsEnabled = true;
-            }
-            if (droneBL.DroneStatus != DroneStatus.Maintenance)
-            {
-                Charge.IsEnabled = true;
-                UnCharge.IsEnabled = false;
-                TimeChargerBlock.Visibility = Visibility.Hidden;
-
-            }
-
-        }*/
+        
         //###############################################################################
         //add Drone
         //###############################################################################
@@ -297,15 +194,6 @@ namespace PL
             {
                 MessageBox.Show("can not charge drone");
             }
-            //statusDrone.Text = droneBL.DroneStatus.ToString();
-            /*visible.Visibility = Visibility.Hidden;
-            hidden.Visibility = Visibility.Visible;*/
-            /*Charge.IsEnabled = false;
-            Connect.IsEnabled = false;
-            Collect.IsEnabled = false;
-            Supply.IsEnabled = false;
-            UnCharge.IsEnabled = true;*/
-            //TimeCharger.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -321,29 +209,16 @@ namespace PL
                 MessageBox.Show("invalid time");
             else
             {
-                /*visible.Visibility = Visibility.Visible;
-                hidden.Visibility = Visibility.Hidden;*/
-                /*Supply.IsEnabled = true;
-                UnCharge.IsEnabled = false;*/
-
-                /*Charge.IsEnabled = true;
-                Connect.IsEnabled = true;
-                Collect.IsEnabled = true;
-                Supply.IsEnabled = true;
-                UnCharge.IsEnabled = false;*/
-                //TimeCharger.Visibility = Visibility.Hidden;
                 TimeChargerBlock.Visibility = Visibility.Hidden;
                 try
                 {
                     droneBL = BLObject.UpdateUnchargeDrone(droneBL.ID, time);
-                    //statusDrone.Text = droneBL.DroneStatus.ToString();
-                    //batteryDrone.Text = $"{Math.Round(droneBL.BatteryStatus).ToString()}%";
                     TimeCharger.Text = "";
                     MessageBox.Show("the drone is uncharged sucssesfully");
-                    //DronePL.DroneStatus = droneBL.DroneStatus;
                     DronePL.updateDrone(droneBL);
                     PLLists.UpdateDrone(droneBL);
                     createButtons(droneBL);
+
                 }
                 catch (Exception ex)
                 {
@@ -365,6 +240,8 @@ namespace PL
                 BLObject.UpdateConnectParcelToDrone(droneBL.ID);
                 DronePL.updateDrone(droneBL);
                 PLLists.UpdateDrone(droneBL);
+                maimGrid.DataContext = DronePL;
+
                 createButtons(droneBL);
                 //PLLists.UpdateDrone(droneBL);
             }
@@ -553,8 +430,6 @@ namespace PL
                 {
                     BLObject.RemoveDrone(droneBL.ID);
                     Button_ClickClose(sender, e);
-                    /* ParentWindow.Show();
-                     Close();*/
                     MessageBox.Show("drone removed sucssesfully");
                 }
             }
@@ -577,16 +452,12 @@ namespace PL
             {
                 SimulationBtn.Content = "start simulation";
                 worker.CancelAsync();
-                /*Supply.IsEnabled = true;
-                UnCharge.IsEnabled = true;*/
                 createButtons(droneBL);
                 return;
             }
 
 
             SimulationBtn.Content = "start manual";
-            /*Supply.IsEnabled = false;
-            UnCharge.IsEnabled = false;*/
             createButtons(droneBL);
 
             worker.DoWork += (object? sender, DoWorkEventArgs e) =>
@@ -610,8 +481,6 @@ namespace PL
             {
                 SimulationBtn.Content = "start simulation";
                 worker.CancelAsync();
-                /*Supply.IsEnabled = true;
-                UnCharge.IsEnabled = true;*/
                 createButtons(droneBL);
             };
             worker.WorkerSupportsCancellation = true;

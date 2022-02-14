@@ -66,30 +66,5 @@ namespace IDAL
         public double[] RequestElectric();
         public int LengthStation();
         public int LengthParcel();
-
-
-
-
-
-
-
-
-
-        //public IEnumerable<Parcel> showParcelsWithoutoutDrone();
-        //public IEnumerable<Station> showStationWithEmptyChargers();
-        //public List<Drone> GetDronesByList();
-        //public List<DroneCharge> GetDroneChargeByList();
-        //public List<Parcel> GetParcelByList();
-        //public void updateConectDroneToParcial(int id);
-        //public void updateCollectParcialByDrone(int id);
-        //public void updateSupplyParcialToCustomer(int id);
-        //public void updateSendDroneToCharge(int droneId, int statoinId);
-        //public void updateUnChargeDrone(int id);
-        //public void updateDroneCharge(DroneCharge droneCharge);
-        //public IEnumerable<Drone> getDronesByCondition(Predicate<Drone> predicate);
-        //public IEnumerable<Station> getStationsByCondition(Predicate<Station> predicate);
-        //public IEnumerable<Customer> getCustomersByCondition(Predicate<Customer> predicate);
-        //public IEnumerable<DroneCharge> getDroneChargesByCondition(Predicate<DroneCharge> predicate);
-        //public void updateCustomer(Customer customer);
     }
 }

@@ -23,7 +23,6 @@ namespace PL
     public partial class CustomerList : Window
     {
         BlApi.IBL BLObject;
-        //ObservableCollection<CustomerToList> MyList = new ObservableCollection<CustomerToList>();
         CollectionView view;
         internal static PLLists PLLists;
 
@@ -36,13 +35,10 @@ namespace PL
         {
             InitializeComponent();
             PLLists = plLists;
-            //CustomerListView.ItemsSource = PLLists.Customers;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
-            /*foreach (var item in BLObject.GetCustomerToList())
-                MyList.Add(item);*/
             MainGrid.DataContext = PLLists.Customers;
-            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+            view = (CollectionView)CollectionViewSource.GetDefaultView(MainGrid.DataContext);
 
         }
         
@@ -53,11 +49,8 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickShowList(object sender, RoutedEventArgs e)
         {
-            //MyList = new ObservableCollection<CustomerToList>();
-            /*foreach (var item in BLObject.GetCustomerToList())
-                MyList.Add(item);*/
             CustomerListView.DataContext = PLLists.Customers;
-            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+            view = (CollectionView)CollectionViewSource.GetDefaultView(CustomerListView.DataContext);
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
@@ -84,9 +77,6 @@ namespace PL
             sender.ToString();
             Customer_ customerToList = (sender as ListView).SelectedValue as Customer_;
             BO.Customer customer = BLObject.GetSpecificCustomerBL(customer => customer.ID == customerToList.ID );
-            //this.Visibility = Visibility.Hidden;
-            /*new Customer(BLObject, customer, this, 'w').Show();
-            Hide();*/
             var win = new Customer(BLObject, customer, 'w', PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
@@ -174,9 +164,6 @@ namespace PL
         /// <param name="e"></param>
         private void Button_Click_ShowRemovedCustomers(object sender, RoutedEventArgs e)
         {
-            //MyList = new ObservableCollection<CustomerToList>();
-            /*foreach (var item in BLObject.GetDeletedCustomerToList())
-                MyList.Add(item);*/
             CustomerListView.DataContext = PLLists.Customers.Where(C => C.IsActive == false);
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }

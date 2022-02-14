@@ -13,16 +13,6 @@ namespace Dal
     internal partial class DalObject : IDal
     {
         /// <summary>
-        /// returns the drones by list from dal
-        /// </summary>
-        /// <returns>DataSource.drones</returns>
-
-        /*public List<Drone> GetDronesByList()
-        {
-            return DataSource.drones;
-        }*/
-
-        /// <summary>
         /// returns the drones from dal
         /// </summary>
         /// <returns>DataSource.drones</returns>
@@ -32,28 +22,7 @@ namespace Dal
             return from drone in DataSource.drones
                    where drone.IsActive == true
                    select drone;
-            /*foreach (var drone in DataSource.drones)
-            {
-                yield return drone;
-            }*/
         }
-
-        /*/// <summary>
-        /// return a specific drone by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Drone</returns>*/
-        /*public Drone GetSpecificDrone(int id)
-        {
-            try
-            {
-                return DataSource.drones.Find(drone => drone.ID == id);
-            }
-            catch (ArgumentNullException e)
-            {
-                throw new Exceptions(id);
-            }
-        }*/
 
         /// <summary>
         /// get drone by id
@@ -111,13 +80,6 @@ namespace Dal
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        /*public IEnumerable<Drone> getDronesByCondition(Predicate<Drone> predicate)
-        {
-            //try todo
-            return (from drone in DataSource.drones
-                    where predicate(drone)
-                    select drone);
-        }*/
         private int getIndexOfDrone(int id)
         {
             try

@@ -33,7 +33,7 @@ namespace PL
         private void Button_ClickNewCustomer(object sender, RoutedEventArgs e)
         {
             new Customer(BLObject, PLLists).Show();
-                    this.Close();
+            this.Close();
         }
 
         private void Button_ClickCustomer(object sender, RoutedEventArgs e)
@@ -41,7 +41,7 @@ namespace PL
             try
             {
                 new Checking(BLObject, 'c', PLLists).Show();
-                    this.Close();
+                this.Close();
             }
             catch
             {
@@ -55,7 +55,6 @@ namespace PL
             {
                 new Checking(BLObject, 'w', PLLists).Show();
                 this.Close();
-
             }
             catch
             {

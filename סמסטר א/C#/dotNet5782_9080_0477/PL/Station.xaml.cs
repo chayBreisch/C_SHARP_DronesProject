@@ -57,11 +57,6 @@ namespace PL
             stationBL = station;
             stationPL = new Station_(stationBL);
             DataContext = stationPL;
-            //idstation.Text = stationBL.ID.ToString();
-            //nameStation.DataContext = stationBL;
-            //ChargeSlotsStation.DataContext = stationBL;
-            //LocationStation.Text = $"{stationBL.Location.Latitude}, {stationBL.Location.Longitude}";
-            //DroneInStation.ItemsSource = stationBL.DronesInCharge;
         }
 
         //######################################################
@@ -210,9 +205,6 @@ namespace PL
             sender.ToString();
             BO.DroneInCharger droneInCharger = (sender as ListView).SelectedValue as BO.DroneInCharger;
             BO.Drone droneBL = BLObject.GetSpecificDroneBL(droneInCharger.ID);
-            //this.Visibility = Visibility.Hidden;
-            /*new Drone(BLObject, droneBL, this).Show();
-            Hide();*/
             var win = new Drone(BLObject, droneBL, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
@@ -232,7 +224,6 @@ namespace PL
                 if (result == MessageBoxResult.OK)
                 {
                     BLObject.RemoveStation(stationBL.ID);
-                    //ParentWindow.Show();
                     MessageBox.Show("station deleted sucssesully");
                     Close();
                 }

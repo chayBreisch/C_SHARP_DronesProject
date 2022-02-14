@@ -103,14 +103,14 @@
             </Grid.ColumnDefinitions>
             <Grid Margin="48,50,58,44" Grid.Column="1">
                 <Grid Margin="10,72,163,-21">
-                    <ListView ItemsSource="{Binding}" Margin="155,4,35,-4" Name="theList">
+                    <ListView ItemsSource="{Binding}" Margin="155,4,35,-4" Name="theList" Foreground="Black">
                         <ListView.View>
                             <GridView>
 
                                 <GridViewColumn Header="Check" Width="100">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <CheckBox Content="{Binding content}" Checked="checkBox_Checked" />
+                                            <CheckBox Content="{Binding content}" IsChecked="{Binding IsChecked}" Checked="checkBox_Checked" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

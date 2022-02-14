@@ -205,7 +205,7 @@ namespace PL
             }
         }
         public string content { get; set; }
-        public string pathTo { get; set; }
+        public bool isChecked { get; set; }
         public Parcel_(BO.Parcel parcel)
         {
 

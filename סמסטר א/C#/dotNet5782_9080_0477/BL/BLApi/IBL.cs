@@ -92,33 +92,6 @@ namespace BlApi
         //##############################################################
         public ParcelStatus findParcelStatus(BO.Parcel parcel);
         public IEnumerable<string> GetCustomersNamesByCondition(Predicate<BO.Customer> predicate);
-
-
-
-
-
-
-
-
-
-
         public void StartSimulation(BO.Drone drone, BackgroundWorker worker, Action<BO.Drone, int> updateDrone, Func<bool> needToStop);
-
-        //public static void checkUniqeIdCustomer(ulong id, IDAL.IDal dalObject);
-        //public static void checkUniqeIdParcel(int id, IDAL.IDal dalObject);
-        //public static void checkUniqeIdStation(int id, IDAL.IDal dalObject);
-        // public List<BO.Station> getStationWithEmptyChargers();
-        // public static void checkUniqeIdDrone(int id, IDAL.IDal dalObject);
-        //public List<DroneToList> getDronesByDroneStatus(int status);
-        //public List<DroneToList> getDronesByDroneWeight(int status);
-        //public List<ParcelToList> getParcelsByPriority(int status);
-        //public List<ParcelToList> getParcelsByparcelWeight(int status);
-        //public IEnumerable<BO.Parcel> GetParcelsWithoutoutDrone();
-        //public IEnumerable<BO.Station> GetStationWithEmptyChargers();
-        //public IEnumerable<BO.Drone> GetDronesBL();
-        //public IEnumerable<ParcelToList> getParcelToListWithFilter(int weight, int prioritty);
-        //public IEnumerable<ParcelToList> getPrcelToListByCondition(Predicate<ParcelToList> predicate);
-        //public void updateDataCustomer(ulong id, string name = null, string phone = null);
-
     }
 }

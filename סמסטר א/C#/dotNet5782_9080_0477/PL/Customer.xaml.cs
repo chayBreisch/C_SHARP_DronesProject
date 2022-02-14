@@ -68,7 +68,7 @@ namespace PL
             customeBL = customer;
             PLLists = pllists;
             InitializeComponent();
-            customerPL = new Customer_(BLObject.GetSpecificCustomerBL(C=>C.ID == customeBL.ID));
+            customerPL = new Customer_(BLObject.GetSpecificCustomerBL(C => C.ID == customeBL.ID));
             mainGrid.DataContext = customerPL;
             if (CheckIdentity == 'c')
             {
@@ -209,7 +209,7 @@ namespace PL
             {
                 BLObject.AddCustomer(getID(), getName(), getPhone(), new BO.Location(getLongitude(), getLatitude()));
                 MessageBox.Show("succesfull add");
-                PLLists.AddCustomer(BLObject.GetSpecificCustomerBL(C=>C.ID==getID()));
+                PLLists.AddCustomer(BLObject.GetSpecificCustomerBL(C => C.ID == getID()));
                 Close();
             }
             catch (Exception ex)
@@ -240,8 +240,6 @@ namespace PL
             BO.ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as BO.ParcelAtCustomer;
             BO.Parcel parcelBL = BLObject.GetSpecificParcelBL(parcelAtCustomer.ID);
             BO.Drone drone = BLObject.GetSpecificDroneBLWithDeleted(parcelBL.Drone.ID);
-            /*new Parcel(BLObject, parcelBL, new Drone(BLObject, drone, new DroneList(BLObject, new MainWindow()))).Show();
-            Hide();*/
             var win = new Parcel(BLObject, parcelBL, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
@@ -262,8 +260,6 @@ namespace PL
                 {
                     BLObject.RemoveCustomer(customeBL.ID);
                     Button_ClickClose(sender, e);
-                    /* ParentWindow.Show();
-                     Close();*/
                     MessageBox.Show("customer removed sucssesfully");
                 }
             }
@@ -328,6 +324,7 @@ namespace PL
 
         private void getContent(BO.ParcelToList parcel)
         {
+            parcel.IsChecked = parcel.ParcelStatus == BO.ParcelStatus.Delivered ? true : false;
             if (parcel.NameCustomerReciver == customeBL.Name)
             {
                 parcel.content = "Goted";
@@ -341,6 +338,7 @@ namespace PL
 
         private void checkBox_Checked(object sender, RoutedEventArgs e)
         {
+
             MessageBox.Show($"{sender.ToString().Substring(sender.ToString().IndexOf(':') + 1, "Collected".Length)}");
             cl((CheckBox)sender);
         }

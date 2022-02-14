@@ -18,7 +18,6 @@
                 <Button Content="delete this station" Name="deleteStation" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.202,-0.618" Height="33" Width="104"  Margin="0,123,0,0" Click="deleteStation_Click"/>
 
                 <Button Content="X" Width="50" Background="Red" HorizontalAlignment="Left"  Grid.Row="0" Click="Button_ClickClose" Margin="150,0,0,0" Height="20" VerticalAlignment="Top"  />
-                <!--<button content="remove this station" x:name="deletestation" horizontalalignment="center" verticalalignment="top" rendertransformorigin="0.202,-0.618" height="33" width="104"  margin="0,137,0,0" click="deletestation_click" />-->
 
             </Grid>
 
@@ -43,7 +42,6 @@
                 <TextBox FontSize="16" Text="{Binding chargeSlots}" Grid.Row="3" HorizontalAlignment="Left" Name="ChargeSlotsStation" TextWrapping="Wrap" VerticalAlignment="Center" Width="137" Margin="283,0,0,0"/>
                 <TextBox FontSize="16" Text="{Binding Location}" IsReadOnly="True" Grid.Row="4" HorizontalAlignment="Left" Name="LocationStation" TextWrapping="Wrap" VerticalAlignment="Center" Width="172" Margin="248,0,0,0"/>
                 <ListView FontSize="16" ItemsSource="{Binding DronesInCharge}" Grid.Row="5" HorizontalAlignment="Left" Name="DroneInStation" Foreground="Black" VerticalAlignment="Top" Width="172" Height="100" Margin="248,13,0,0" Grid.RowSpan="2" MouseDoubleClick="MouseDoubleClick_OpenDrone" >
-                    <!--<ListView Name="lvUsers">-->
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding ID}" />

@@ -13,15 +13,6 @@ namespace Dal
 {
     internal partial class DalObject : IDal
     {
-        /*/// <summary>
-        /// returns the parcels by list from dal
-        /// </summary>
-        /// <returns>DataSource.parcels</returns>*/
-        /*public List<Parcel> GetParcelByList()
-        {
-            return DataSource.parcels;
-        }*/
-
         /// <summary>
         /// returns the parcels from dal
         /// </summary>
@@ -45,18 +36,7 @@ namespace Dal
                    where parcel.IsActive == false
                    select parcel;
         }
-        /* public Parcel GetSpecificParcel(int id)
-         {
-             try
-             {
-                 return DataSource.parcels.Find(parcel => parcel.ID == id);
-             }
-             catch (ArgumentNullException e)
-             {
-                 throw new Exceptions(id);
-             }
-         }
- */
+
         /// <summary>
         /// get parcel by predicate
         /// </summary>
@@ -90,22 +70,6 @@ namespace Dal
                     where predicate(parcel) && parcel.IsActive == true
                     select parcel);
         }
-        /// <summary>
-        /// return a specific parcel by drone id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Parcel</returns>
-       /* public Parcel GetSpecificParcelByDroneID(int id)
-        {
-            try
-            {
-                return DataSource.parcels.Find(parcel => parcel.DroneID == id);
-            }
-            catch (ArgumentNullException e)
-            {
-                throw new Exceptions(id);
-            }
-        }*/
 
         /// <summary>
         /// return length of parcel list

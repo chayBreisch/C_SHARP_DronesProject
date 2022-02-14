@@ -23,24 +23,7 @@ namespace Dal
             return from station in DataSource.stations
                    where station.IsActive == true
                    select station;
-         /*   foreach (var station in DataSource.stations)
-            {
-                yield return station;
-            }*/
         }
-
-        
-        /*public Station GetSpecificStation(int id)
-        {
-            try
-            {
-                return DataSource.stations.Find(station => station.ID == id);
-            }
-            catch (ArgumentNullException e)
-            {
-                throw new Exceptions(id);
-            }
-        }*/
 
         /// <summary>
         /// get spscific station by the id
@@ -64,19 +47,6 @@ namespace Dal
             }
             return station1;
         }
-
-        /// <summary>
-        /// get the stations with a specific condition
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        /*public IEnumerable<Station> getStationsByCondition(Predicate<Station> predicate)
-        {
-            //try todo
-            return (from station in DataSource.stations
-                    where predicate(station)
-                    select station);
-        }*/
 
 
         /// <summary>
@@ -160,10 +130,6 @@ namespace Dal
             return from station in DataSource.stations
                    where station.IsActive == false
                    select station;
-         /*   foreach (var station in DataSource.stations)
-            {
-                yield return station;
-            }*/
         }
     }
 }

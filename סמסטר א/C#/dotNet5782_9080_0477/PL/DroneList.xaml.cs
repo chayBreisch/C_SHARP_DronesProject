@@ -26,7 +26,6 @@ namespace PL
     public partial class DroneList : Window
     {
         BlApi.IBL BLObject;
-        //ObservableCollection<DroneToList> MyList = new ObservableCollection<DroneToList>();
         internal static PLLists PLLists;
         CollectionView view;
         /// <summary>
@@ -39,8 +38,6 @@ namespace PL
             PLLists = plLists;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
-            /*foreach (var item in BLObject.GetDronesToList())
-                MyList.Add(item);*/
             DataContext = PLLists.Drones;
             statusFilter.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             weightFilter.ItemsSource = BLObject.GetweightCategoriesEnumItem();
@@ -61,9 +58,6 @@ namespace PL
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
-                /*MyList = new ObservableCollection<DroneToList>();
-                foreach (var item in BLObject.GetDronesToList())
-                    MyList.Add(item);*/
                 DataContext = PLLists.Drones;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             }
@@ -80,36 +74,13 @@ namespace PL
             ComboBox options = sender as ComboBox;
             if (weightFilter.SelectedItem == null)
                 DroneListView.DataContext = PLLists.Drones.Where(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
-                //drones = BLObject.GetDronesToListByCondition(drone => drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
             else if(statusFilter.SelectedItem == null)
                 DroneListView.DataContext = PLLists.Drones.Where(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
-            //drones = BLObject.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1));
             else
                 DroneListView.DataContext = PLLists.Drones.Where(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
-            //drones = BLObject.GetDronesToListByCondition(drone => drone.Weight == (WeightCatagories)(weightFilter.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(statusFilter.SelectedIndex));
-            //DroneListView.ItemsSource = drones;
-            /*MyList = new ObservableCollection<DroneToList>();
-            foreach (var item in drones)
-                MyList.Add(item);*/
             DataContext = PLLists.Drones;//fix
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
-
-    /*    /// <summary>
-        /// show drones with selected weight
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ComboBox_SelectionDroneByWeight(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox options = sender as ComboBox;
-            List<DroneToList> drones = new List<DroneToList>();
-            if (statusFilter == null)
-                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(options.SelectedIndex + 1)).ToList();
-            else
-                drones = blDroneList.getDroneToListByCondition(drone => drone.Weight == (WeightCatagories)(options.SelectedIndex + 1) && drone.DroneStatus == (DroneStatus)(options.SelectedIndex)).ToList();
-            DroneListView.ItemsSource = drones;
-        }*/
 
         /// <summary>
         /// open the addDrone window
@@ -118,9 +89,6 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickAddDrone(object sender, RoutedEventArgs e)
         {
-            //this.Visibility = Visibility.Hidden;
-            /*new Drone(BLObject, this).Show();
-            Hide();*/
             var win = new Drone(BLObject, PLLists);
             Visibility = Visibility.Hidden;
             win.ShowDialog();
@@ -138,13 +106,6 @@ namespace PL
             sender.ToString();
             Drone_ droneToList = (sender as ListView).SelectedValue as Drone_;
             BO.Drone drone = BLObject.GetSpecificDroneBL(droneToList.ID);
-            //this.Visibility = Visibility.Hidden;
-            /*new Drone(BLObject, drone, this).Show();
-            Hide();*/
-            /*var win = new Drone(BLObject, drone, PLLists);
-            Visibility = Visibility.Hidden;
-            win.ShowDialog();
-            Visibility = Visibility.Visible;*/
             new Drone(BLObject, drone, PLLists).Show();
         }
 
@@ -200,9 +161,6 @@ namespace PL
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
-               /* MyList = new ObservableCollection<DroneToList>();
-                foreach (var item in BLObject.GetDeletedDronesToList())
-                    MyList.Add(item);*/
                 DataContext = PLLists.Drones;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             }

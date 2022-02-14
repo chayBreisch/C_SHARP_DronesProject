@@ -23,7 +23,6 @@ namespace PL
     public partial class ParcelList : Window
     {
         BlApi.IBL BLObject;
-        //public ObservableCollection<ParcelToList> MyList = new ObservableCollection<ParcelToList>();
         CollectionView view;
         internal static PLLists PLLists;
         /// <summary>
@@ -36,13 +35,8 @@ namespace PL
             PLLists = pllists;
             WindowStyle = WindowStyle.None;
             BLObject = bl;
-            /*  foreach (var item in BLObject.GetParcelsToList())
-                  MyList.Add(item);*/
             ParcelListView.DataContext = PLLists.Parcels;
             view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.DataContext);
-            //view.SortDescriptions.Add(new SortDescription("Weight", ListSortDirection.Ascending));
-
-            // view.SortDescriptions.Add(new SortDescription(null, ListSortDirection.Ascending));
             parcelWeight.ItemsSource = BLObject.GetweightCategoriesEnumItem();
             parcelPriority.ItemsSource = BLObject.GetPrioritiesEnumItem();
         }
@@ -57,20 +51,6 @@ namespace PL
             Close();
         }
 
-        /* private void parcelPriority_SelectionChanged(object sender, SelectionChangedEventArgs e)
-         {
-             ComboBox options = sender as ComboBox;
-             List<ParcelToList> stations = blParcelList.getParcelsByPriority(options.SelectedIndex);
-             ParcelListView.ItemsSource = stations;
-         }
-
-         private void parcelWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
-         {
-             ComboBox options = sender as ComboBox;
-             List<ParcelToList> stations = blParcelList.getParcelsByparcelWeight(options.SelectedIndex + 1);
-             ParcelListView.ItemsSource = stations;
-         }*/
-
         /// <summary>
         /// show the all list of parcels
         /// </summary>
@@ -84,9 +64,6 @@ namespace PL
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
-                /*MyList = new ObservableCollection<ParcelToList>();
-                foreach (var item in BLObject.GetParcelsToList())
-                    MyList.Add(item);*/
                 ParcelListView.DataContext = PLLists.Parcels;
                 view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.DataContext);
             }
@@ -132,21 +109,11 @@ namespace PL
             ComboBox options = sender as ComboBox;
             if (parcelWeight.SelectedItem == null)
                 ParcelListView.DataContext = PLLists.Parcels.Where(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
-            //parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             else if (parcelPriority.SelectedItem == null)
                 ParcelListView.DataContext = PLLists.Parcels.Where(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
-            //parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
             else
                 ParcelListView.DataContext = PLLists.Parcels.Where(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
-            //parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
             view.GroupDescriptions.Clear();
-
-            /*MyList = new ObservableCollection<ParcelToList>();
-            foreach (var item in parcels)
-                MyList.Add(item);*/
-            //DataContext = PLLists.Parcels;
-            //view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-            //ParcelListView.ItemsSource = drones;
         }
 
         /// <summary>
@@ -181,29 +148,6 @@ namespace PL
         }
 
         /// <summary>
-        /// refresh the list
-        /// </summary>
-       /* public void Refresh()
-        {
-            IEnumerable<ParcelToList> parcels = new List<ParcelToList>();
-            if (parcelWeight.SelectedItem != null && parcelPriority.SelectedItem != null)
-                parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1) && parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
-            else if (parcelPriority.SelectedItem != null)
-                parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Priority == (DO.Priorities)(parcelPriority.SelectedIndex));
-            else if (parcelWeight.SelectedItem != null)
-                parcels = BLObject.GetParcelsToListByCondition(parcel => parcel.Weight == (DO.WeightCatagories)(parcelWeight.SelectedIndex + 1));
-            else
-                parcels = BLObject.GetParcelsToList();
-            view.GroupDescriptions.Clear();
-
-            *//*MyList = new ObservableCollection<ParcelToList>();
-            foreach (var item in parcels)
-                MyList.Add(item);*//*
-            DataContext = PLLists.Parcels;
-            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-        }*/
-
-        /// <summary>
         /// show deleted parcels
         /// </summary>
         /// <param name="sender"></param>
@@ -216,9 +160,6 @@ namespace PL
             if (view != null)
             {
                 view.GroupDescriptions.Clear();
-                /* MyList = new ObservableCollection<ParcelToList>();
-                 foreach (var item in BLObject.GetDeletedParcelsToList())
-                     MyList.Add(item);*/
                 ParcelListView.DataContext = PLLists.Parcels.Where(P => P.IsActive == false);
                 view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.DataContext);
             }

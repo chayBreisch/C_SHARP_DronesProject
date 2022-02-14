@@ -26,7 +26,7 @@
   </Drone>
   <Drone>
     <ID>5</ID>
-    <Model>Hello World</Model>
+    <Model>Hello </Model>
     <MaxWeight>Medium</MaxWeight>
     <IsActive>true</IsActive>
   </Drone>

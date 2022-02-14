@@ -65,18 +65,8 @@ namespace PL
             parcelBL = parcel;
             parcelPL = new Parcel_(parcelBL);
             DataContext = parcelPL;
-            //idparcel.Text = parcelBL.ID.ToString();
-            //senderidparcel.Text = parcelBL.Sender.ID.ToString();
-            //recieveridparcel.Text = parcelBL.Reciever.ID.ToString();
-            //weightparcel.Text = parcelBL.Weight.ToString();
-            //priorityparcel.Text = parcelBL.Priorities.ToString();
-            //droneparcel.Text = parcelBL.Drone.ToString();
             if (parcelBL.Drone.ID == 0)
                 droneparcel.Text = "no drone";
-            //RequesedParcel.Text = parcelBL.Requesed.ToString();
-            //ScheduledParcel.Text = parcelBL.Scheduled.ToString();
-            //pickedUpParcel.Text = parcelBL.PickedUp.ToString();
-            //DeliveredParcel.Text = parcelBL.Delivered.ToString();
             if (parcelBL.Scheduled == null)
             {
                 checkBoxPicked.Visibility = Visibility.Hidden;
@@ -90,7 +80,6 @@ namespace PL
             }
             else if (parcelBL.Delivered == null)
             {
-                //pickedUpParcel.Text = parcelBL.PickedUp.ToString();
                 checkBoxDelivered.Visibility = Visibility.Visible;
                 checkBoxPicked.Visibility = Visibility.Hidden;
             }
@@ -113,34 +102,6 @@ namespace PL
             priorityCombo.ItemsSource = BLObject.GetPrioritiesEnumItem();
             CustomerSendParcel.Visibility = Visibility.Visible;
         }
-
-
-        /// <summary>
-        /// constructor actions parcel
-        /// </summary>
-        /// <param name="bl"></param>
-        /// <param name="parcel"></param>
-        /// <param name="parentWindow"></param>
-        /*public Parcel(BlApi.Bl bl, BO.Parcel parcel, Window parentWindow)
-        {
-            InitializeComponent();
-            actions.Visibility = Visibility.Visible;
-            addStation.Visibility = Visibility.Hidden;
-            WindowStyle = WindowStyle.None;
-            ParentWindow = parentWindow;
-            blparcel = bl;
-            parcelBL = parcel;
-            idparcel.Text = parcelBL.ID.ToString();
-            senderidparcel.Text = parcelBL.Sender.ID.ToString();
-            recieveridparcel.Text = parcelBL.Reciever.ID.ToString();
-            weightparcel.Text = parcelBL.Weight.ToString();
-            priorityparcel.Text = parcelBL.Priorities.ToString();
-            if (parcelBL.Drone != null)
-                droneparcel.Text = parcelBL.Drone.ID.ToString();
-            statusparcel.Text = blparcel.findParcelStatus(parcelBL).ToString();
-        }*/
-
-
 
         /// <summary>
         /// returns the sender id
@@ -205,9 +166,6 @@ namespace PL
         /// <param name="e"></param>
         private void Button_ClickCloseParcel(object sender, RoutedEventArgs e)
         {
-            //ParentWindow.Refresh();
-            //refreshList(this.parcelBL);
-            //ParentWindow.ParcelListView.Items.Refresh();
             Close();
         }
 
@@ -281,8 +239,6 @@ namespace PL
                 Visibility = Visibility.Hidden;
                 win.ShowDialog();
                 Visibility = Visibility.Visible;
-                /*new Customer(blparcel, blparcel.GetSpecificCustomerBL(p => p.ID == parcelBL.Reciever.ID), this).Show();
-                Hide();*/
             }
         }
 
@@ -295,13 +251,8 @@ namespace PL
         {
             if (parcelBL.Drone.ID != 0)
             {
-                //var win = new Drone(BLObject, parcelBL.Drone, );
                 Visibility = Visibility.Hidden;
-                //win.ShowDialog();
-
                 Visibility = Visibility.Visible;
-                /*new Drone(blparcel, parcelBL.Drone, this).Show();
-                Hide();*/
             }
         }
 
@@ -333,61 +284,6 @@ namespace PL
             parcelPL.Delivered = parcelBL.PickedUp;
             PLLists.UpdateParcel(parcelPL);
         }
-
-        /// <summary>
-        /// refrsh the listView in the window
-        /// </summary>
-        /// <param name="parcel"></param>
-        /*private void refreshList(BO.Parcel parcel)
-         {
-             // view.GroupDescriptions.Clear();
-
-          /*   if (ParentWindow.parcelPriority.SelectedItem != null)
-             {
-                 if ((ParentWindow.parcelPriority.SelectedItem.ToString() == parcel.Priorities.ToString()))
-                 {
-                     {
-                         ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
-
-                         foreach (var item in blparcel.getParcelToListByCondition((P) => P.Priority == parcel.Priorities))
-                             MyList.Add(item);
-                         DataContext = MyList;
-                         ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-
-                         //ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToListByCondition((P) => P.Priority == parcel.Priorities);
-                     }
-                 }
-             }
-             else if (ParentWindow.parcelWeight.SelectedItem != null)
-             {
-                 if (ParentWindow.parcelWeight.SelectedItem.ToString() == parcel.Weight.ToString())
-                 {
-                     ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
-
-                     foreach (var item in blparcel.getParcelToListByCondition((P) => P.Weight == parcel.Weight))
-                         MyList.Add(item);
-                     DataContext = MyList;
-                     ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-
-                     //ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToListByCondition((p) => p.Weight == parcel.Weight);
-                 }
-
-             }
-             else
-             {
-                 ObservableCollection<BO.ParcelToList> MyList = new ObservableCollection<BO.ParcelToList>();
-                 IEnumerable<BO.ParcelToList> p = blparcel.getParcelToList();
-                 ParentWindow.view.GroupDescriptions.Clear();
-
-                 foreach (var item in p)
-                     MyList.Add(item);
-                 DataContext = MyList;
-                 ParentWindow.view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-
-                 //ParentWindow.ParcelListView.ItemsSource = blparcel.getParcelToList();
-             }
-        }*/
-
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {

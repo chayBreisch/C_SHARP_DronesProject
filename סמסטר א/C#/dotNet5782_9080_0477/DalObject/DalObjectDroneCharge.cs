@@ -14,15 +14,6 @@ namespace Dal
     internal partial class DalObject : IDal
     {
         /// <summary>
-        /// returns the droneChargers by list from dal
-        /// </summary>
-        /// <returns>DataSource.droneChargers</returns>
-        /*public List<DroneCharge> GetDroneChargeByList()
-        {
-            return DataSource.droneChargers;
-        }*/
-
-        /// <summary>
         /// returns the droneChargers from dal
         /// </summary>
         /// <returns>DataSource.droneChargers</returns>
@@ -31,47 +22,7 @@ namespace Dal
         {
             return from droneCharge in DataSource.droneChargers
             select droneCharge;
-            /*foreach (var droneCharge in DataSource.droneChargers)
-            {
-                yield return droneCharge;
-            }*/
         }
-/*
-        /// <summary>
-        /// return specific drone charge by station id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>droneCharge</returns>
-        public DroneCharge getSpecificDroneChargeByStationID(int id)
-        {
-            try
-            {
-                return DataSource.droneChargers.Find(droneCharge => droneCharge.StationID == id);
-            }
-
-            catch (ArgumentNullException e)
-            {
-                throw new Exceptions(id);
-            }
-
-        }
-
-        /// <summary>
-        /// return specific drone charge by drone id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>droneCharge</returns>
-        public DroneCharge getSpecificDroneChargeByDroneID(int id)
-        {
-            try
-            {
-                return DataSource.droneChargers.Find(droneCharge => droneCharge.DroneID == id);
-            }
-            catch (ArgumentNullException e)
-            {
-                throw new Exceptions(id);
-            }
-        }*/
 
         /// <summary>
         /// remove a drone charge from dal
@@ -123,16 +74,6 @@ namespace Dal
         }
 
         /// <summary>
-        /// update the drone charge in dal
-        /// </summary>
-        /// <param name="droneCharge"></param>
-       /* public void updateDroneCharge(DroneCharge droneCharge)
-        {
-            int index = DataSource.droneChargers.FindIndex(d => d.StationID == droneCharge.StationID);
-            DataSource.droneChargers[index] = droneCharge;
-        }*/
-
-        /// <summary>
         /// get a droneCharge by the id
         /// </summary>
         /// <param name="predicate"></param>
@@ -151,18 +92,5 @@ namespace Dal
             return droneCharge1;
 
         }
-
-        /// <summary>
-        /// get the dronechargers with a specific condition
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        /*public IEnumerable<DroneCharge> getDroneChargesByCondition(Predicate<DroneCharge> predicate)
-        {
-            //try todo
-            return (from droneCharge in DataSource.droneChargers
-                    where predicate(droneCharge)
-                    select droneCharge);
-        }*/
     }
 }

@@ -185,7 +185,6 @@ namespace PL
             Location = new Location(drone.Location);
             parcelInDelivery = drone.parcelInDelivery;
             IsActiv = drone.IsActive;
-
         }
 
 
@@ -199,22 +198,6 @@ namespace PL
             this.Location = new Location(drone.Location);
             this.parcelInDelivery = drone.parcelInDelivery;
             this.IsActiv = drone.IsActive;
-
         }
-
-
-        /*
-                 private double battery { get; set; }
-       
-
-        public ParcelInDelivery parcelInDelivery { get; set; }
-        
-        
-
-        public bool IsActive { get; set; }
-         
-         */
-
-
     }
 }
