@@ -111,7 +111,7 @@ namespace PL
             addParcel.Visibility = Visibility.Hidden;
             weightCombo.ItemsSource = BLObject.GetweightCategoriesEnumItem();
             priorityCombo.ItemsSource = BLObject.GetPrioritiesEnumItem();
-            customers.Visibility = Visibility.Hidden;
+            CustomerSendParcel.Visibility = Visibility.Visible;
         }
 
 
@@ -238,6 +238,8 @@ namespace PL
                 {
                     BLObject.RemoveParcel(parcelBL.ID);
                     Button_ClickCloseParcel(sender, e);
+                    parcelPL.IsActive = false;
+                    PLLists.UpdateParcel(parcelPL);
                     /* ParentWindow.Show();
                      Close();*/
                     MessageBox.Show("parcel removed sucssesfully");
@@ -314,7 +316,7 @@ namespace PL
             checkBoxDelivered.Visibility = Visibility.Visible;
             parcelBL.PickedUp = DateTime.Now;
             BLObject.updateParecl(parcelBL);
-            parcelPL = new Parcel_(parcelBL);
+            parcelPL.PickedUp = parcelBL.PickedUp;
             PLLists.UpdateParcel(parcelPL);
         }
 
@@ -328,7 +330,7 @@ namespace PL
             checkBoxDelivered.Visibility = Visibility.Hidden;
             parcelBL.Delivered = DateTime.Now;
             BLObject.updateParecl(parcelBL);
-            parcelPL = new Parcel_(parcelBL);
+            parcelPL.Delivered = parcelBL.PickedUp;
             PLLists.UpdateParcel(parcelPL);
         }
 

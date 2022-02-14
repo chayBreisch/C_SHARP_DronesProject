@@ -10,6 +10,6 @@
   </DroneCharge>
   <DroneCharge>
     <DroneID>234567891</DroneID>
-    <StationID>90</StationID>
+    <StationID>2</StationID>
   </DroneCharge>
 </ArrayOfDroneCharge>
