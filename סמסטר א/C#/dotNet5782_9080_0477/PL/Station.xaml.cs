@@ -45,12 +45,13 @@ namespace PL
         /// <param name="bl"></param>
         /// <param name="station"></param>
         /// <param name="parentWindow"></param>
-        public Station(BlApi.IBL bl, BO.Station station)
+        public Station(BlApi.IBL bl, BO.Station station, PLLists pLLists)
         {
             InitializeComponent();
             actions.Visibility = Visibility.Visible;
             addStation.Visibility = Visibility.Hidden;
             WindowStyle = WindowStyle.None;
+            PLLists = pLLists;
             BLObject = bl;
             stationBL = station;
             stationPL = new Station_(stationBL);

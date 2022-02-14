@@ -160,7 +160,7 @@ namespace BL
             foreach (var station in stations)
             {
                 dis2 = distance(location, station.Location);
-                if (dis2 < minDis || minDis == -1 && station.ChargeSlots != 0)
+                if (dis2 < minDis || minDis == -1 && station.ChargeSlots > 0)
                 {
                     minDis = dis2;
                     sendStation = station;
